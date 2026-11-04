@@ -1,0 +1,554 @@
+{
+  "independent_labels": false,
+  "retrieval": [
+    {
+      "event": "annotations",
+      "n": 645,
+      "target": "649",
+      "target_link": "https://github.com/python/peps/blob/e73affad4803beb5d251d665f9bd0142d1c79209/peps/pep-0649.rst",
+      "incoming": "https://github.com/python/peps/blob/0a803fec895c5dea8df5153a34b70b1aade7425a/peps/pep-0749.rst",
+      "raw": {
+        "plain": "702",
+        "plain_gold_rank": 2,
+        "module": "649"
+      },
+      "masked": {
+        "plain": "702",
+        "plain_gold_rank": 2,
+        "module": "649"
+      },
+      "module_decision_quote": "Title: Deferred Evaluation Of Annotations Using Descriptors",
+      "module_reason_quote": "\"type hints\", due to forward-reference and circular-reference"
+    },
+    {
+      "event": "threading",
+      "n": 676,
+      "target": "703",
+      "target_link": "https://github.com/python/peps/blob/e9e1214a2e6cfb6ca369c767807828360aff2530/peps/pep-0703.rst",
+      "incoming": "https://github.com/python/peps/blob/9d017fba9be887c8fe7f6737ef543eef8093f781/peps/pep-0779.rst",
+      "raw": {
+        "plain": "703",
+        "plain_gold_rank": 1,
+        "module": "774"
+      },
+      "masked": {
+        "plain": "703",
+        "plain_gold_rank": 1,
+        "module": "774"
+      },
+      "module_decision_quote": "It is important to note that this PEP is not a proposal to accept or reject the",
+      "module_reason_quote": "Since Python 3.13, CPython has been able to be configured and built with an"
+    },
+    {
+      "event": "imports",
+      "n": 701,
+      "target": "690",
+      "target_link": "https://github.com/python/peps/blob/2f0353889b0c109f5118c634541999b903eebac7/peps/pep-0690.rst",
+      "incoming": "https://github.com/python/peps/blob/fad5cd133d734096cda7d8d88d7daaac71fb4fde/peps/pep-0810.rst",
+      "raw": {
+        "plain": "690",
+        "plain_gold_rank": 1,
+        "module": "690"
+      },
+      "masked": {
+        "plain": "690",
+        "plain_gold_rank": 1,
+        "module": "690"
+      },
+      "module_decision_quote": "Status: Rejected",
+      "module_reason_quote": "imported modules until the moment when an imported object is first used.  Since"
+    }
+  ],
+  "goals": [
+    {
+      "event": "annotations",
+      "goal": "implementation",
+      "expected": [
+        "attach_to_existing"
+      ],
+      "predictions": {
+        "direct": {
+          "selected": "702",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        },
+        "checked": {
+          "selected": "702",
+          "action": "request_comparison",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        },
+        "module": {
+          "selected": "649",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        }
+      }
+    },
+    {
+      "event": "threading",
+      "goal": "support",
+      "expected": [
+        "request_comparison"
+      ],
+      "predictions": {
+        "direct": {
+          "selected": "703",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        },
+        "checked": {
+          "selected": "703",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        },
+        "module": {
+          "selected": "774",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        }
+      }
+    },
+    {
+      "event": "threading",
+      "goal": "default",
+      "expected": [
+        "keep",
+        "retain_constraint"
+      ],
+      "predictions": {
+        "direct": {
+          "selected": "703",
+          "action": "keep",
+          "action_ok": true,
+          "joint": true,
+          "strict_joint": true
+        },
+        "checked": {
+          "selected": "703",
+          "action": "keep",
+          "action_ok": true,
+          "joint": true,
+          "strict_joint": true
+        },
+        "module": {
+          "selected": "774",
+          "action": "keep",
+          "action_ok": true,
+          "joint": false,
+          "strict_joint": false
+        }
+      }
+    },
+    {
+      "event": "imports",
+      "goal": "opt_in",
+      "expected": [
+        "request_comparison",
+        "needs_context"
+      ],
+      "predictions": {
+        "direct": {
+          "selected": "690",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        },
+        "checked": {
+          "selected": "690",
+          "action": "request_comparison",
+          "action_ok": true,
+          "joint": true,
+          "strict_joint": true
+        },
+        "module": {
+          "selected": "690",
+          "action": "keep",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        }
+      }
+    },
+    {
+      "event": "imports",
+      "goal": "ordinary",
+      "expected": [
+        "keep",
+        "retain_constraint"
+      ],
+      "predictions": {
+        "direct": {
+          "selected": "690",
+          "action": "keep",
+          "action_ok": true,
+          "joint": true,
+          "strict_joint": true
+        },
+        "checked": {
+          "selected": "690",
+          "action": "request_comparison",
+          "action_ok": false,
+          "joint": false,
+          "strict_joint": false
+        },
+        "module": {
+          "selected": "690",
+          "action": "keep",
+          "action_ok": true,
+          "joint": true,
+          "strict_joint": true
+        }
+      }
+    }
+  ],
+  "qa": [
+    {
+      "event": "annotations",
+      "kind": "historic",
+      "phase": "before",
+      "question": "Before this follow-up, what was the recorded status of the descriptor-based deferred evaluation of annotations proposal?",
+      "target": "649",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "insufficient",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/e73affad4803beb5d251d665f9bd0142d1c79209/peps/pep-0649.rst",
+      "raw_responses": [
+        "null"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "insufficient",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0315.rst",
+        "2": "pep-0649.rst",
+        "3": "pep-0563.rst"
+      },
+      "expected_message_number": 2,
+      "gold_evidence": {
+        "text": "Status: Accepted",
+        "lines": [
+          5,
+          5
+        ],
+        "url": "https://github.com/python/peps/blob/e73affad4803beb5d251d665f9bd0142d1c79209/peps/pep-0649.rst#L5-L5"
+      }
+    },
+    {
+      "event": "annotations",
+      "kind": "historic",
+      "phase": "after",
+      "question": "Before this follow-up, what was the recorded status of the descriptor-based deferred evaluation of annotations proposal?",
+      "target": "649",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "invalid_citation",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/e73affad4803beb5d251d665f9bd0142d1c79209/peps/pep-0649.rst",
+      "raw_responses": [
+        "{\"kind\":\"conflict\",\"side1\":{\"n\":3,\"field\":\"quote\",\"span\":\"just like default values, annotations are evaluated at function definition time.\"},\"side2\":{\"n\":1,\"field\":\"quote\",\"span\":\"but the semantics were deliberately left undefined.\"}}"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "invalid_citation",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0749.rst",
+        "2": "pep-0649.rst",
+        "3": "pep-0563.rst"
+      },
+      "expected_message_number": 2,
+      "gold_evidence": {
+        "text": "Status: Accepted",
+        "lines": [
+          5,
+          5
+        ],
+        "url": "https://github.com/python/peps/blob/e73affad4803beb5d251d665f9bd0142d1c79209/peps/pep-0649.rst#L5-L5"
+      }
+    },
+    {
+      "event": "annotations",
+      "kind": "new",
+      "phase": "after",
+      "question": "How long does the initial follow-up say the future import for annotations will retain its current behavior?",
+      "target": "749",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "invalid_citation",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/0a803fec895c5dea8df5153a34b70b1aade7425a/peps/pep-0749.rst",
+      "raw_responses": [
+        "{\"kind\":\"single\",\"n\":23,\"field\":\"quote\",\"span\":\"In Python 3.14, ``from __future__ import annotations`` will continue to work as it did before, converting annotations into strings.\"}"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "invalid_citation",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0749.rst",
+        "2": "pep-0591.rst",
+        "3": "pep-0585.rst"
+      },
+      "expected_message_number": 1,
+      "gold_evidence": {
+        "text": "its current behavior at least until Python 3.13 reaches its end-of-life.",
+        "lines": [
+          19,
+          19
+        ],
+        "url": "https://github.com/python/peps/blob/0a803fec895c5dea8df5153a34b70b1aade7425a/peps/pep-0749.rst#L19-L19"
+      }
+    },
+    {
+      "event": "threading",
+      "kind": "historic",
+      "phase": "before",
+      "question": "What option did the Steering Council reserve if the gradual rollout of optional free threading proved too disruptive?",
+      "target": "703",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "insufficient",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/e9e1214a2e6cfb6ca369c767807828360aff2530/peps/pep-0703.rst",
+      "raw_responses": [
+        "null"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "insufficient",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0703.rst",
+        "2": "pep-8103.rst",
+        "3": "pep-8101.rst"
+      },
+      "expected_message_number": 1,
+      "gold_evidence": {
+        "text": "we can roll\n   back any changes that turn out to be too disruptive",
+        "lines": [
+          16,
+          17
+        ],
+        "url": "https://github.com/python/peps/blob/e9e1214a2e6cfb6ca369c767807828360aff2530/peps/pep-0703.rst#L16-L17"
+      }
+    },
+    {
+      "event": "threading",
+      "kind": "historic",
+      "phase": "after",
+      "question": "What option did the Steering Council reserve if the gradual rollout of optional free threading proved too disruptive?",
+      "target": "703",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "insufficient",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/e9e1214a2e6cfb6ca369c767807828360aff2530/peps/pep-0703.rst",
+      "raw_responses": [
+        "null"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "insufficient",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0703.rst",
+        "2": "pep-0779.rst",
+        "3": "pep-8103.rst"
+      },
+      "expected_message_number": 1,
+      "gold_evidence": {
+        "text": "we can roll\n   back any changes that turn out to be too disruptive",
+        "lines": [
+          16,
+          17
+        ],
+        "url": "https://github.com/python/peps/blob/e9e1214a2e6cfb6ca369c767807828360aff2530/peps/pep-0703.rst#L16-L17"
+      }
+    },
+    {
+      "event": "threading",
+      "kind": "new",
+      "phase": "after",
+      "question": "On which platform does the initial free-threading support proposal report a linear performance penalty of around 3%?",
+      "target": "779",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "insufficient",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/9d017fba9be887c8fe7f6737ef543eef8093f781/peps/pep-0779.rst",
+      "raw_responses": [
+        "null"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "insufficient",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0779.rst",
+        "2": "pep-0311.rst",
+        "3": "pep-0711.rst"
+      },
+      "expected_message_number": 1,
+      "gold_evidence": {
+        "text": "is currently around 10% (except on macOS, where it's more like 3%)",
+        "lines": [
+          98,
+          98
+        ],
+        "url": "https://github.com/python/peps/blob/9d017fba9be887c8fe7f6737ef543eef8093f781/peps/pep-0779.rst#L98-L98"
+      }
+    },
+    {
+      "event": "imports",
+      "kind": "historic",
+      "phase": "before",
+      "question": "What was the recorded status of the earlier proposal to transparently defer imports?",
+      "target": "690",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "insufficient",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/2f0353889b0c109f5118c634541999b903eebac7/peps/pep-0690.rst",
+      "raw_responses": [
+        "null"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "insufficient",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0221.rst",
+        "2": "pep-0690.rst",
+        "3": "pep-0781.rst"
+      },
+      "expected_message_number": 2,
+      "gold_evidence": {
+        "text": "Status: Rejected",
+        "lines": [
+          6,
+          6
+        ],
+        "url": "https://github.com/python/peps/blob/2f0353889b0c109f5118c634541999b903eebac7/peps/pep-0690.rst#L6-L6"
+      }
+    },
+    {
+      "event": "imports",
+      "kind": "historic",
+      "phase": "after",
+      "question": "What was the recorded status of the earlier proposal to transparently defer imports?",
+      "target": "690",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "invalid_citation",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/2f0353889b0c109f5118c634541999b903eebac7/peps/pep-0690.rst",
+      "raw_responses": [
+        "{\"kind\":\"conflict\",\"n\":2,\"field\":\"quote\",\"span\":\"Lazy imports also mostly eliminate the risk of import cycles.\"}"
+      ],
+      "raw_document": "https://github.com/python/peps/blob/2f0353889b0c109f5118c634541999b903eebac7/peps/pep-0690.rst",
+      "raw_points_to_expected_doc": true,
+      "delivered_answer": "invalid_citation",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0810.rst",
+        "2": "pep-0690.rst",
+        "3": "pep-0781.rst"
+      },
+      "expected_message_number": 2,
+      "gold_evidence": {
+        "text": "Status: Rejected",
+        "lines": [
+          6,
+          6
+        ],
+        "url": "https://github.com/python/peps/blob/2f0353889b0c109f5118c634541999b903eebac7/peps/pep-0690.rst#L6-L6"
+      }
+    },
+    {
+      "event": "imports",
+      "kind": "new",
+      "phase": "after",
+      "question": "What example single-line statement in the new draft lazily imports the json module?",
+      "target": "810",
+      "source_in_top3": true,
+      "source_contains_gold": true,
+      "model_ok": false,
+      "answer": "insufficient",
+      "citation": null,
+      "expected_source": "https://github.com/python/peps/blob/fad5cd133d734096cda7d8d88d7daaac71fb4fde/peps/pep-0810.rst",
+      "raw_responses": [
+        "null"
+      ],
+      "raw_document": null,
+      "raw_points_to_expected_doc": null,
+      "delivered_answer": "insufficient",
+      "verbatim_in_git": null,
+      "gold_visible_in_reader_input": true,
+      "visible_message_ids": {
+        "1": "pep-0810.rst",
+        "2": "pep-0679.rst",
+        "3": "pep-0806.rst"
+      },
+      "expected_message_number": 1,
+      "gold_evidence": {
+        "text": "lazy import json",
+        "lines": [
+          26,
+          26
+        ],
+        "url": "https://github.com/python/peps/blob/fad5cd133d734096cda7d8d88d7daaac71fb4fde/peps/pep-0810.rst#L26-L26"
+      }
+    }
+  ],
+  "gpu": {
+    "job_id": "119252",
+    "model": "Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "device": "cuda:0",
+    "dtype": "torch.bfloat16",
+    "verified_calls": 29,
+    "action_input_tokens": {
+      "direct": 19732,
+      "checked": 39544,
+      "module": 29778
+    },
+    "elapsed_seconds": 47,
+    "exit_code": "0:0"
+  },
+  "joint_hits": {
+    "direct": 2,
+    "checked": 2,
+    "module": 1
+  }
+}
