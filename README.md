@@ -41,6 +41,10 @@ python3 -m team_memory demo
 
 ## 실험 결과
 
+**최종 파일럿에서 후보 모듈은 기본값으로 채택하지 않았다.** 같은 Qwen이 답과 출처를 함께 맞힌 일반 QA는 단순·후보 모두 6/10이었다. 무관한 충돌로 잃은 기존 정답은 양쪽 모두 0/6인 반면, 양쪽 답과 근거를 보존한 실제 상충 변형은 양쪽 모두 0/10이었다. 후보의 재검토는 필요할 때 7/10을 맞혔고, 불필요한 경우에도 10/10에서 제안했다. [전체 성과와 채택 판단](results/team_pilot/README.md) · [문항별 비교](results/team_pilot/cases.ko.md) · [측정한 응답으로 두 복제본 재생하기](evaluation/team_pilot/README.md#실제-qwen-응답으로-git-재생하기)
+
+### 이전 개발 결과
+
 CPython PEP 초안 3건을 첫 공개 시점으로 복원했다. 사전에 정한 목표 5개에서 **대상 문서와 후속 조치를 모두 맞힌 횟수**는 단순 검색+Qwen이 2/5, 재검토 모듈이 1/5였다. 이 파일럿에서는 단순 검색을 기준선으로 유지한다. [목표별 비교와 당시 원문](results/cpython/report.ko.md)
 
 두 방식이 공유하는 QA에서는 **정답 구절이 모델 입력에 9/9 있었고, 답과 출처를 함께 맞힌 결과는 0/9**였다. Qwen은 6번 기권했고 나머지 3번도 질문의 답을 담지 못했다. 같은 모델에 같은 문서로 인용 없이 답만 요청하면 2/9, 정답이 있는 구간을 미리 알려주고 답만 요청하면 8/9였다. 후자는 병목을 찾기 위한 사후 대조다. [문항별 QA 진단](results/cpython/qa-diagnosis.ko.md) · [GPU 원출력](results/cpython/outputs.json) · [대조 실험 원출력](results/cpython/qa-control-outputs.json)

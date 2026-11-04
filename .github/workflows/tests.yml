@@ -39,3 +39,9 @@ jobs:
           python evaluation/cpython/audit_qa.py > .cache/qa-audit.json
           diff -u results/cpython/qa-audit.json .cache/qa-audit.json
           python evaluation/cpython/qa_controls.py score results/cpython/qa-control-outputs.json > .cache/qa-control-score.json
+      - name: Replay the measured QA and proposal across two Git checkouts
+        env:
+          PYTHONPATH: .
+        run: |
+          git --git-dir=.cache/peps.git fetch --no-tags --depth=1 https://github.com/python/peps.git 16991a9ce7b223b38f0b473f51a8a7d94c8b9249
+          python evaluation/team_pilot/git_replay.py .cache/peps.git > .cache/team-pilot-git.json

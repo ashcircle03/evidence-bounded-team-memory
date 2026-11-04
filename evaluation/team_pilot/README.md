@@ -26,6 +26,16 @@ PYTHONPATH=. python3 evaluation/team_pilot/pilot.py prepare .cache/pilot-peps.gi
 python3 -c 'import hashlib,json,pathlib; d=pathlib.Path(".cache/pilot-packets.json").read_bytes(); assert hashlib.sha256(d).hexdigest()==json.load(open("evaluation/team_pilot/freeze.json"))["packet_sha256"]; print("104 inputs match")'
 ```
 
+## 실제 Qwen 응답으로 Git 재생하기
+
+위 bare PEP 저장소만 준비하면 모델과 EverMem 데이터 없이 실행할 수 있다.
+
+```sh
+PYTHONPATH=. python3 evaluation/team_pilot/git_replay.py .cache/pilot-peps.git
+```
+
+공개 PEP 원문에서 시간대 폴백을 묻는 질문과, 과거 결정 20건이 있는 두 복제본의 후속 측정 도착을 재생한다. 실제 GPU 응답은 시스템·사용자 입력 해시가 정확히 맞을 때만 사용한다. 출력에서 QA의 원문 위치, 작성자 검토 전의 두 인용, 검토 승인 후에도 남은 원기록을 확인할 수 있다. 업무 기록과 승인 행위는 모의 사례이며 모델 응답은 작업 119269의 실측값이다.
+
 ## Qwen 실행과 채점
 
 같은 모델 리비전과 BF16, 입력 최대 8,192토큰, 응답 최대 64토큰, greedy decoding을 두 방식 모두에 쓴다. `infer.py`는 CUDA, PyTorch, Transformers와 로컬 모델 가중치가 필요하다. 실행 중에는 문항별 원출력을 남기며 104개 모두 완료된 경우에만 완성된 결과 파일을 쓴다. GPU 작업 전에 입력 해시를 확인한다.
@@ -38,7 +48,7 @@ python3 evaluation/team_pilot/score.py .cache/pilot-outcomes.json .cache/pilot-g
 
 `simple`은 구절별 BM25로, `candidate`는 구절 순위에 문서 맥락·문서별 노출 한도·결정 및 관측 단서를 더해 같은 Qwen에 보낼 근거를 고른다. 두 방식의 응답 형식과 최대 구절 수는 같다. 자동 채점은 답의 사전 별칭, 출처, 구절, 조치를 검사한다. 실제 질문에 답하는 문맥인지 검토한 판정은 자동값과 분리한다.
 
-[동결한 입력의 문항별 근거 포함 여부](../../results/team_pilot/README.md)
+[최종 평가와 채택 판단](../../results/team_pilot/README.md) · [동결한 입력의 문항별 근거 포함 여부](../../results/team_pilot/input-coverage.json)
 
 ## 답과 인용을 함께 검토하기
 
@@ -48,4 +58,16 @@ python3 evaluation/team_pilot/score.py .cache/pilot-outcomes.json .cache/pilot-g
 python3 evaluation/team_pilot/adjudicate.py .cache/pilot-packets.json .cache/pilot-graded.json > .cache/review-cards.json
 # 검토자는 review-cards.json의 correct, basis만 기입한다.
 python3 evaluation/team_pilot/adjudicate.py .cache/pilot-packets.json .cache/pilot-graded.json --ratings .cache/review-cards.json > .cache/pilot-reviewed.json
+```
+
+
+## 공개된 최종 성적 재생
+
+입력을 준비한 후, 아래 명령은 새 추론 없이 작업 119269의 원출력을 재채점한다.
+
+```sh
+PYTHONPATH=. python3 evaluation/team_pilot/pilot.py replay .cache/pilot-peps.git /path/to/topic-01/dialogue.json .cache/pilot-outcomes.json --recording results/team_pilot/outputs.json
+python3 evaluation/team_pilot/score.py .cache/pilot-outcomes.json .cache/pilot-graded.json
+python3 evaluation/team_pilot/adjudicate.py .cache/pilot-packets.json .cache/pilot-graded.json --ratings results/team_pilot/review-cards.json > .cache/pilot-reviewed.json
+python3 -c 'import json; x=json.load(open(".cache/pilot-reviewed.json")); s=json.load(open("results/team_pilot/summary.json")); assert (x["automatic_summary"], x["reviewed_summary"]) == (s["automatic"], s["reviewed"]); print("Both summaries match")'
 ```

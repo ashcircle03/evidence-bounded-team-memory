@@ -1,0 +1,2414 @@
+{
+  "01fb72878bae3a32a17f30d4d392e15a92b8c63cc26ad2f80ea09124dbaff6ac": {
+    "case": "F_SH_Top01_013",
+    "phase": "development",
+    "question": "After conducting a technical assessment of the data quality of the production line energy management system, what is the preliminary estimated number of workdays required for data cleansing and initial verification in the report?",
+    "reference": [
+      {
+        "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5",
+        "answers": [
+          "at least 10 working days"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "59cc54ef610d1e0d90cfa5c1",
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5",
+          "speaker": "Xuexin Yin",
+          "start": 182,
+          "end": 426,
+          "quote": "The core conclusion is that the automated cleaning of this data source is quite difficult, and it is initially estimated that at least 10 working days of data engineer input will be required for rule development and initial manual verification.",
+          "status": "source_only",
+          "answer": "10 working days"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "인용에는 at least가 있지만 반환한 답 10 working days에는 최소 조건이 빠졌다."
+  },
+  "0bfd1f0d47054a9983cb93bd0fa955ea02fa2c6d38e992b9efbc9c37e4ffe26f": {
+    "case": "review-14",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The customer analytics dashboard has a faster color palette for visualizing connection pool occupancy; billing sessions are unchanged.",
+    "prior_record_for_grading": "We rejected a shared connection pool for billing because it mixed customer session state.",
+    "reference": {
+      "location": "casebook://decisions/b257301dbcaa8cb0963fd3b5",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "session state",
+      "new_cue": "unchanged",
+      "new_location": "casebook://observations/f559d88f97f8610c08199d46"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "4ef7c7cc971a5b6387735a4a",
+        "location": "casebook://decisions/b257301dbcaa8cb0963fd3b5",
+        "speaker": "Noa",
+        "start": 0,
+        "end": 89,
+        "quote": "We rejected a shared connection pool for billing because it mixed customer session state.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "87ca8c1c4127ce0090c7a8cb",
+        "location": "casebook://observations/f559d88f97f8610c08199d46",
+        "speaker": "Ari",
+        "start": 0,
+        "end": 134,
+        "quote": "The customer analytics dashboard has a faster color palette for visualizing connection pool occupancy; billing sessions are unchanged.",
+        "status": "source_only"
+      },
+      "reviewer": "Noa",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "색상 변경은 결제의 세션 격리 문제를 바꾸지 않는다. 재시험을 제안할 근거가 없다."
+  },
+  "0c4eb38b1dfddd51f3c3774212728e2b21672869956fd47313bb1d33a298d84c": {
+    "case": "pep-654",
+    "phase": "clean",
+    "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+        "answers": [
+          "except*"
+        ],
+        "line": 29
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "08242b9ceb3b4388c7fb10f3",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+          "speaker": "PEP 654 contributors",
+          "start": 6733,
+          "end": 6886,
+          "quote": "The purpose of this PEP, then, is to add the ``ExceptionGroup`` builtin type\nand the ``except*`` syntax for handling exception groups in the interpreter.",
+          "status": "source_only",
+          "answer": "the ``except*`` syntax"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "인용과 답이 예외 그룹 처리 구문 except*를 직접 지정한다. 관사와 syntax라는 설명은 의미를 바꾸지 않는다."
+  },
+  "16574be8ab33e78dc5d6c1701e3c1bac6e82e5b07526784333cc7e277713fb50": {
+    "case": "pep-553",
+    "phase": "unrelated",
+    "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+        "answers": [
+          "0",
+          "PYTHONBREAKPOINT=0"
+        ],
+        "line": 108
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "17eba532b6b8433f75abf6e9",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+          "speaker": "PEP 553 contributors",
+          "start": 4061,
+          "end": 4105,
+          "quote": "* ``PYTHONBREAKPOINT=0`` disables debugging.",
+          "status": "source_only",
+          "answer": "0"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "인용문이 PYTHONBREAKPOINT=0에서 디버깅이 비활성화된다고 명시한다."
+  },
+  "1d3ecefc495f0c4496547eaf362999af48ed75dfeb569a41f4a424084d7a03a5": {
+    "case": "pep-552",
+    "phase": "clean",
+    "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+        "answers": [
+          "SipHash"
+        ],
+        "line": 75
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "29a16374c017c79237221d2c1a64471eec9100edcc3a63ce457de756ee3a735e": {
+    "case": "pep-680",
+    "phase": "clean",
+    "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+        "answers": [
+          "tomllib"
+        ],
+        "line": 19
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "713c4e99e3b1918e5b6dcb9e",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+          "speaker": "PEP 680 contributors",
+          "start": 9,
+          "end": 73,
+          "quote": "Title: tomllib: Support for Parsing TOML in the Standard Library",
+          "status": "source_only",
+          "answer": "tomllib"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "이 제목은 표준 라이브러리의 TOML 파싱 모듈 이름과 역할을 함께 명시한다."
+  },
+  "2f0660871fa8f78acb56112333d06a91a40226ee76a45a09852534c5edec9735": {
+    "case": "pep-654",
+    "phase": "clean",
+    "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+        "answers": [
+          "except*"
+        ],
+        "line": 29
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "08242b9ceb3b4388c7fb10f3",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+          "speaker": "PEP 654 contributors",
+          "start": 1150,
+          "end": 1284,
+          "quote": "* A new standard exception type, the ``ExceptionGroup``, which represents a\n  group of unrelated exceptions being propagated together.",
+          "status": "source_only",
+          "answer": "ExceptionGroup"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "예외 타입을 인용했으며 질문이 요구한 처리 구문을 제시하지 않았다."
+  },
+  "2f6ba3c87a7fab152576677d23c73bef1ba04c5736d545837d0537e20104386c": {
+    "case": "pep-615",
+    "phase": "conflict",
+    "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+        "answers": [
+          "tzdata"
+        ],
+        "line": 21
+      },
+      {
+        "location": "casebook://messages/6acca4a420591afff439a624",
+        "answers": [
+          "zonefiles"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "b2e6e4466c3d25f9cfa83df6",
+          "location": "casebook://messages/6acca4a420591afff439a624",
+          "speaker": "Bea",
+          "start": 0,
+          "end": 143,
+          "quote": "On a clean machine with no system time zone data, our zoneinfo deployment notes identify zonefiles as the fallback package installed from PyPI.",
+          "status": "source_only",
+          "answer": "zonefiles"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "3026b17b2c71ccce1d81b2ca60a86cb682b0611cd48d654866e3f539f3492581": {
+    "case": "pep-615",
+    "phase": "clean",
+    "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+        "answers": [
+          "tzdata"
+        ],
+        "line": 21
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "7e8c655d9ab964be2c9dd0f4",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+          "speaker": "PEP 615 contributors",
+          "start": 507,
+          "end": 714,
+          "quote": "By default,\n``zoneinfo`` will use the system's time zone data if available; if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI.",
+          "status": "source_only",
+          "answer": "tzdata"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "시스템 시간대 자료가 없을 때의 PyPI 폴백을 tzdata라고 명시한다."
+  },
+  "34aa46cee08d8a0a0b864d68f943d3d948da83ac079115f4f0f7ed465095803f": {
+    "case": "review-15",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The repeat validation on the same machine and organism again passed at 20 minutes.",
+    "prior_record_for_grading": "We chose a 20-minute sterilization cycle after validation against the target organism.",
+    "reference": {
+      "location": "casebook://decisions/802011079d67e0a910136c79",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "20-minute",
+      "new_cue": "again passed",
+      "new_location": "casebook://observations/dfdf4770266b9b08fcb4aee0"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "cc80831550be9777e2ae0639",
+        "location": "casebook://decisions/802011079d67e0a910136c79",
+        "speaker": "Ola",
+        "start": 0,
+        "end": 86,
+        "quote": "We chose a 20-minute sterilization cycle after validation against the target organism.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "109590095befe9d3cabba66f",
+        "location": "casebook://observations/dfdf4770266b9b08fcb4aee0",
+        "speaker": "Bea",
+        "start": 0,
+        "end": 82,
+        "quote": "The repeat validation on the same machine and organism again passed at 20 minutes.",
+        "status": "source_only"
+      },
+      "reviewer": "Ola",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "같은 조건에서 기존 주기의 검증이 반복됐다. 재시험을 제안할 근거가 없다."
+  },
+  "377e6a117779d1ef7bfb9342be8f49b368420372f36da153757fcb344bbbf90d": {
+    "case": "pep-615",
+    "phase": "conflict",
+    "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+        "answers": [
+          "tzdata"
+        ],
+        "line": 21
+      },
+      {
+        "location": "casebook://messages/6acca4a420591afff439a624",
+        "answers": [
+          "zonefiles"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "7e8c655d9ab964be2c9dd0f4",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+          "speaker": "PEP 615 contributors",
+          "start": 507,
+          "end": 714,
+          "quote": "By default,\n``zoneinfo`` will use the system's time zone data if available; if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI.",
+          "status": "source_only",
+          "answer": "tzdata"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "3fdb0b928aafd0cb6115d2da8df1137c4d94dfd68fd896afa8bc2401a43be1d3": {
+    "case": "pep-654",
+    "phase": "conflict",
+    "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+        "answers": [
+          "except*"
+        ],
+        "line": 29
+      },
+      {
+        "location": "casebook://messages/61f9b8edce2e869a5a740d67",
+        "answers": [
+          "catch*"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "1c551c9760087003e8dc7025",
+          "location": "casebook://messages/61f9b8edce2e869a5a740d67",
+          "speaker": "Hal",
+          "start": 0,
+          "end": 105,
+          "quote": "Our exception-groups language notes give catch* as the handler syntax for groups of unrelated exceptions.",
+          "status": "source_only",
+          "answer": "catch*"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "411572559df88820bfd4d3c8d111334fe0224af87a2a2c55ae54e544ba845a88": {
+    "case": "pep-680",
+    "phase": "conflict",
+    "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+        "answers": [
+          "tomllib"
+        ],
+        "line": 19
+      },
+      {
+        "location": "casebook://messages/2affbee73f3d6a30d527a9c5",
+        "answers": [
+          "tomlreader"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "436aa032aa0ebdcf8482c6635a700490a5417fc8d7f3f52277208f82b82f1eb3": {
+    "case": "pep-552",
+    "phase": "clean",
+    "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+        "answers": [
+          "SipHash"
+        ],
+        "line": 75
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "22aa2f7a582bb4db3e0c411a",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+          "speaker": "PEP 552 contributors",
+          "start": 5486,
+          "end": 5642,
+          "quote": "``importlib.util`` will be extended with a ``source_hash(source)`` function that\ncomputes the hash used by the pyc writing code for a bytestring **source**.",
+          "status": "source_only",
+          "answer": "source_hash(source)"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "source_hash(source)는 함수 이름이다. 질문은 SipHash라는 알고리즘을 요구한다."
+  },
+  "45aae6604f446e340176f06a059f401648a0adef3ebcbdacb58861d29de185ec": {
+    "case": "review-18",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The signing dialog now takes one click instead of three; the production policy still requires two distinct signers.",
+    "prior_record_for_grading": "We retained two-person release approval because the production signing policy requires two distinct signers.",
+    "reference": {
+      "location": "casebook://decisions/a281b9dfca5911f1deddc565",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "two distinct",
+      "new_cue": "still requires",
+      "new_location": "casebook://observations/0c74e9631191071facc6c890"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2a8703cb9a3fd3e032819532",
+        "location": "casebook://decisions/a281b9dfca5911f1deddc565",
+        "speaker": "Ren",
+        "start": 0,
+        "end": 108,
+        "quote": "We retained two-person release approval because the production signing policy requires two distinct signers.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "976499c760c66ac2ebc4cab2",
+        "location": "casebook://observations/0c74e9631191071facc6c890",
+        "speaker": "Emi",
+        "start": 0,
+        "end": 115,
+        "quote": "The signing dialog now takes one click instead of three; the production policy still requires two distinct signers.",
+        "status": "source_only"
+      },
+      "reviewer": "Ren",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "클릭 수는 줄었으나 서로 다른 서명자 두 명이 필요하다. 재시험을 제안할 근거가 없다."
+  },
+  "46e09162808127bfab1e023e614302220a4ad00b4ca190e13675553a328789f0": {
+    "case": "review-07",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "In cold transit tests, sealed crates with a desiccant insert kept the optical sensors dry across six trips.",
+    "prior_record_for_grading": "We declined sealed crates for field kits because condensation damaged the optical sensors in cold transit.",
+    "reference": {
+      "location": "casebook://decisions/b4f769ef5e61ac02f1aa8428",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "condensation",
+      "new_cue": "desiccant",
+      "new_location": "casebook://observations/8b68fdae83f45785b22149d4"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2be60cc49523ce0a3c403fa6",
+        "location": "casebook://decisions/b4f769ef5e61ac02f1aa8428",
+        "speaker": "Gus",
+        "start": 0,
+        "end": 106,
+        "quote": "We declined sealed crates for field kits because condensation damaged the optical sensors in cold transit.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "df0cded79883b90525a90622",
+        "location": "casebook://observations/8b68fdae83f45785b22149d4",
+        "speaker": "Noa",
+        "start": 0,
+        "end": 107,
+        "quote": "In cold transit tests, sealed crates with a desiccant insert kept the optical sensors dry across six trips.",
+        "status": "source_only"
+      },
+      "reviewer": "Gus",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "저온 운송 중 결로와 제습제 투입 후 6회 건조 관측을 각각 인용했다."
+  },
+  "4c5331a438fda90fc98cd4101fa9f5afab537717e6063bbb7aa76df22ef07c3c": {
+    "case": "F_SH_Top01_033",
+    "phase": "development",
+    "question": "When reviewing the first draft of the user interview outline for the carbon emissions management platform, who suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors?",
+    "reference": [
+      {
+        "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5",
+        "answers": [
+          "Lizhen Zhou"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "a7c4bd0229d9d3643b13546f",
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5",
+          "speaker": "Lizhen Zhou",
+          "start": 58,
+          "end": 222,
+          "quote": "Regarding the sections for managers and audit requirements, I suggest adding a question: \"What customizable dimensions would you like the generated reports to have?",
+          "status": "source_only",
+          "answer": "Lizhen Zhou"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "정확한 발언 위치에서 1인칭 제안과 화자 Lizhen Zhou를 확인했다."
+  },
+  "529daaf5cb4af06a944a31e57ab57517b89b747a8e644f37226b0e2b618523ff": {
+    "case": "review-17",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The new pump cut water use on the lower terraces, but still cannot reach the upper terraces.",
+    "prior_record_for_grading": "We postponed hillside planting because the irrigation pump cannot reach the upper terraces.",
+    "reference": {
+      "location": "casebook://decisions/2c4ee753d523c1ff8c3ceb30",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "upper terraces",
+      "new_cue": "still cannot",
+      "new_location": "casebook://observations/550e5093f5357ad58de90199"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2119c049196d35c42f184677",
+        "location": "casebook://decisions/2c4ee753d523c1ff8c3ceb30",
+        "speaker": "Qin",
+        "start": 0,
+        "end": 91,
+        "quote": "We postponed hillside planting because the irrigation pump cannot reach the upper terraces.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "c73651bb28114fb1bcef9f3a",
+        "location": "casebook://observations/550e5093f5357ad58de90199",
+        "speaker": "Dee",
+        "start": 0,
+        "end": 92,
+        "quote": "The new pump cut water use on the lower terraces, but still cannot reach the upper terraces.",
+        "status": "source_only"
+      },
+      "reviewer": "Qin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "아래쪽 물 사용량은 개선됐어도 상단에 물을 보낼 수 없다는 제약은 남는다. 재시험을 제안할 근거가 없다."
+  },
+  "532102f6c04bb83f3d93a0c4f28ddfe2e2d423a52bc1853ffaaf283504ba1ff5": {
+    "case": "pep-572",
+    "phase": "conflict",
+    "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+        "answers": [
+          "NAME := expr",
+          ":="
+        ],
+        "line": 18
+      },
+      {
+        "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+        "answers": [
+          "NAME <- expr",
+          "<-"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d60afae8bbc6e0863adaf8cf",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "speaker": "PEP 572 contributors",
+          "start": 4752,
+          "end": 4902,
+          "quote": "This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.",
+          "status": "source_only",
+          "answer": "NAME := expr"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "5400b08e4a4c8363bf62eb1e4c0a01aa98578deb55835020b5dd7e0323459780": {
+    "case": "review-04",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The replacement drone battery finished the shoreline route twice into the prevailing wind with 20 percent reserve.",
+    "prior_record_for_grading": "We ruled out daily shoreline surveys because the old drone battery could not complete the route.",
+    "reference": {
+      "location": "casebook://decisions/8bf0ba27fa5948ab33d1e1bb",
+      "actions": [
+        "retest",
+        "reassess"
+      ],
+      "old_cue": "battery",
+      "new_cue": "finished",
+      "new_location": "casebook://observations/031fea51de089855830b6ab9"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "14371cc1c6d6b671b30fbddc",
+        "location": "casebook://decisions/8bf0ba27fa5948ab33d1e1bb",
+        "speaker": "Dee",
+        "start": 0,
+        "end": 96,
+        "quote": "We ruled out daily shoreline surveys because the old drone battery could not complete the route.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4f855a40126d5ba8aa06df8c",
+        "location": "casebook://observations/031fea51de089855830b6ab9",
+        "speaker": "Kai",
+        "start": 0,
+        "end": 114,
+        "quote": "The replacement drone battery finished the shoreline route twice into the prevailing wind with 20 percent reserve.",
+        "status": "source_only"
+      },
+      "reviewer": "Dee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "기존 배터리의 항로 완주 실패와 교체 배터리의 실측 잔량을 근거로 같은 항로에서 재시험할 수 있다."
+  },
+  "571827a967064bc354da3b95fca2e8d6674fba503e75145d103749889cad810c": {
+    "case": "pep-572",
+    "phase": "clean",
+    "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+        "answers": [
+          "NAME := expr",
+          ":="
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d60afae8bbc6e0863adaf8cf",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "speaker": "PEP 572 contributors",
+          "start": 4752,
+          "end": 4902,
+          "quote": "This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.",
+          "status": "source_only",
+          "answer": "NAME := expr"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "원문이 이름 대입 표기 NAME := expr를 직접 제시한다."
+  },
+  "5a403476b9e71abc253e07c2ef843add6bab6734a1225f84cdbc8962926d6fe5": {
+    "case": "review-02",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The vendor shipped transaction identifiers that remained stable through a week of cancellations and resubmissions.",
+    "prior_record_for_grading": "We kept manual invoice matching because the vendor feed lacked a persistent transaction identifier.",
+    "reference": {
+      "location": "casebook://decisions/75a07cabf443bc54e1d69184",
+      "actions": [
+        "reassess"
+      ],
+      "old_cue": "identifier",
+      "new_cue": "stable",
+      "new_location": "casebook://observations/6f1969730eb0252303b73f9c"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e5bef19f5bbfae3a5b487ae7",
+        "location": "casebook://decisions/75a07cabf443bc54e1d69184",
+        "speaker": "Bea",
+        "start": 0,
+        "end": 99,
+        "quote": "We kept manual invoice matching because the vendor feed lacked a persistent transaction identifier.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "55a180079862d368e04850e9",
+        "location": "casebook://observations/6f1969730eb0252303b73f9c",
+        "speaker": "Iya",
+        "start": 0,
+        "end": 114,
+        "quote": "The vendor shipped transaction identifiers that remained stable through a week of cancellations and resubmissions.",
+        "status": "source_only"
+      },
+      "reviewer": "Bea",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "지속 식별자가 없다는 전제가 바뀌었다. 문서 쌍은 맞지만 요구한 조치는 전제 재평가다."
+  },
+  "5b461adb45bd35cb837c8a3acf6c72f6ce2799ccc69369ee1fd09b1d8f50a2a1": {
+    "case": "pep-680",
+    "phase": "unrelated",
+    "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+        "answers": [
+          "tomllib"
+        ],
+        "line": 19
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "713c4e99e3b1918e5b6dcb9e",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+          "speaker": "PEP 680 contributors",
+          "start": 9,
+          "end": 73,
+          "quote": "Title: tomllib: Support for Parsing TOML in the Standard Library",
+          "status": "source_only",
+          "answer": "tomllib"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "이 제목은 표준 라이브러리의 TOML 파싱 모듈 이름과 역할을 함께 명시한다."
+  },
+  "5e65997d7b2037003b6f90124b397b952ccbdf2311fa15b8d1df668051a5c718": {
+    "case": "pep-618",
+    "phase": "conflict",
+    "question": "Which exception does strict zip raise when its iterables have different lengths?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+        "answers": [
+          "ValueError"
+        ],
+        "line": 18
+      },
+      {
+        "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+        "answers": [
+          "LengthMismatchError"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "80e3480fa35e216e36d37f05",
+          "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+          "speaker": "Fay",
+          "start": 0,
+          "end": 137,
+          "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+          "status": "source_only",
+          "answer": "LengthMismatchError"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "603c2d481ebaf25e4a6da797154a775af09804d4cb11612a4c078c90afdde19f": {
+    "case": "pep-669",
+    "phase": "conflict",
+    "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+        "answers": [
+          "sys.monitoring"
+        ],
+        "line": 28
+      },
+      {
+        "location": "casebook://messages/0708484487c76851928d5fe2",
+        "answers": [
+          "sys.events"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "e994cfff4b43ae60a24855c6",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+          "speaker": "PEP 669 contributors",
+          "start": 1050,
+          "end": 1152,
+          "quote": "A ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.",
+          "status": "source_only",
+          "answer": "sys.monitoring"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "605636b78b9e47f3bafc55a0212dcca024b92f9985577509d29ae0552f833828": {
+    "case": "pep-597",
+    "phase": "unrelated",
+    "question": "Which warning category signals omitted encoding when open uses the locale default?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+        "answers": [
+          "EncodingWarning"
+        ],
+        "line": 13
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "62debfd730f7c8cf50dd17003453a75f94b790e04811e64f6e2a532ee0ce0bc9": {
+    "case": "review-19",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "A researcher asked whether an ice bath might enable longer incubation. No sample was placed in the bath.",
+    "prior_record_for_grading": "We rejected the longer enzyme incubation because the original samples degraded after 30 minutes.",
+    "reference": {
+      "location": "casebook://decisions/ee7b35727951162efaac6886",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "degraded",
+      "new_cue": "No sample",
+      "new_location": "casebook://observations/8d8286d5e5bc41b8da43a3fa"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1c7e68cc00c4ce6964b4da79",
+        "location": "casebook://decisions/ee7b35727951162efaac6886",
+        "speaker": "Sol",
+        "start": 0,
+        "end": 96,
+        "quote": "We rejected the longer enzyme incubation because the original samples degraded after 30 minutes.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5ea98ee4379f09d827d311da",
+        "location": "casebook://observations/8d8286d5e5bc41b8da43a3fa",
+        "speaker": "Fay",
+        "start": 0,
+        "end": 70,
+        "quote": "A researcher asked whether an ice bath might enable longer incubation.",
+        "status": "source_only"
+      },
+      "reviewer": "Sol",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "아이스배스는 시험하지 않은 아이디어다. 재시험을 제안할 근거가 없다."
+  },
+  "643ef8adb06c84b46756d49fbef1a84df4de3235cb592670cb4a1469d0711706": {
+    "case": "pep-618",
+    "phase": "unrelated",
+    "question": "Which exception does strict zip raise when its iterables have different lengths?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+        "answers": [
+          "ValueError"
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "644608b97ff252121f3ad0859dee91c43b4b486437415a3d90253fe6811f308f": {
+    "case": "review-11",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The same fleet and modem repeated the 5-minute export test and exceeded the same cellular plan again.",
+    "prior_record_for_grading": "We kept 15-minute telemetry exports because more frequent exports exceeded the cellular plan.",
+    "reference": {
+      "location": "casebook://decisions/290a3307d06554d38e92ebe3",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "cellular",
+      "new_cue": "exceeded",
+      "new_location": "casebook://observations/5ad3a5e15935560dd0bd902f"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "f91463f6a3029f9e77b734f6",
+        "location": "casebook://decisions/290a3307d06554d38e92ebe3",
+        "speaker": "Kai",
+        "start": 0,
+        "end": 93,
+        "quote": "We kept 15-minute telemetry exports because more frequent exports exceeded the cellular plan.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4dc3f99d99b49f678cbff72d",
+        "location": "casebook://observations/5ad3a5e15935560dd0bd902f",
+        "speaker": "Ren",
+        "start": 0,
+        "end": 101,
+        "quote": "The same fleet and modem repeated the 5-minute export test and exceeded the same cellular plan again.",
+        "status": "source_only"
+      },
+      "reviewer": "Kai",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "같은 측정에서 같은 데이터 한도 초과가 재현됐다. 재시험을 제안할 근거가 없다."
+  },
+  "67af129e120113c94a2c30e7fd3302110b8ed3f7ac7d60a0d4e671259b633d61": {
+    "case": "pep-572",
+    "phase": "clean",
+    "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+        "answers": [
+          "NAME := expr",
+          ":="
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d60afae8bbc6e0863adaf8cf",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "speaker": "PEP 572 contributors",
+          "start": 469,
+          "end": 587,
+          "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+          "status": "source_only",
+          "answer": "NAME := expr"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "원문이 이름 대입 표기 NAME := expr를 직접 제시한다."
+  },
+  "69f2ebba4257a1fa23e5b6eba7ec637347f513c976a5b673172f8012a9695030": {
+    "case": "review-03",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "A production-sized shadow-index swap let readers continue throughout the nightly rebuild on Friday.",
+    "prior_record_for_grading": "The nightly index rebuild was deferred because a full rebuild locked readers for twelve minutes.",
+    "reference": {
+      "location": "casebook://decisions/4d6a8db464c566be63dbc8a5",
+      "actions": [
+        "retest",
+        "reassess"
+      ],
+      "old_cue": "locked readers",
+      "new_cue": "shadow-index",
+      "new_location": "casebook://observations/52514e15d2cedfcf107a253d"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "a6329aae8a7329752012e16a",
+        "location": "casebook://decisions/4d6a8db464c566be63dbc8a5",
+        "speaker": "Cal",
+        "start": 0,
+        "end": 96,
+        "quote": "The nightly index rebuild was deferred because a full rebuild locked readers for twelve minutes.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2916adbbbd29cd0ad79bdd30",
+        "location": "casebook://observations/52514e15d2cedfcf107a253d",
+        "speaker": "Jo",
+        "start": 0,
+        "end": 99,
+        "quote": "A production-sized shadow-index swap let readers continue throughout the nightly rebuild on Friday.",
+        "status": "source_only"
+      },
+      "reviewer": "Cal",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "기존 읽기 잠금과 새 shadow index 교체의 무중단 관측이 모두 있어 재비교를 뒷받침한다."
+  },
+  "6d778fa7dea56192d67b0ef707856c9583168a8e74f6929ed8b1796a1a00448a": {
+    "case": "pep-680",
+    "phase": "unrelated",
+    "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+        "answers": [
+          "tomllib"
+        ],
+        "line": 19
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "6f5a6749cc6e49c99a6c7234a485f18b4382f07242ea8af6e8df66892148408c": {
+    "case": "pep-680",
+    "phase": "clean",
+    "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+        "answers": [
+          "tomllib"
+        ],
+        "line": 19
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "6f5cf6381405f007fc4034969ceed8cb6bc5b40880925d90cf625a295de39929": {
+    "case": "review-05",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The signed hospital policy amendment now permits electronic signatures for this trial with a witness.",
+    "prior_record_for_grading": "We retained paper consent forms because the hospital policy barred electronic signatures on this trial.",
+    "reference": {
+      "location": "casebook://decisions/3dc28bddb03803a90030c22d",
+      "actions": [
+        "reassess"
+      ],
+      "old_cue": "barred",
+      "new_cue": "permits",
+      "new_location": "casebook://observations/cdf3210c7078e1f479508f07"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1891e85c12f2d0b5773f1bb9",
+        "location": "casebook://decisions/3dc28bddb03803a90030c22d",
+        "speaker": "Emi",
+        "start": 0,
+        "end": 103,
+        "quote": "We retained paper consent forms because the hospital policy barred electronic signatures on this trial.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "c9324bba66b7496edd018033",
+        "location": "casebook://observations/cdf3210c7078e1f479508f07",
+        "speaker": "Liv",
+        "start": 0,
+        "end": 101,
+        "quote": "The signed hospital policy amendment now permits electronic signatures for this trial with a witness.",
+        "status": "source_only"
+      },
+      "reviewer": "Emi",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "전자서명 금지 규정이 개정됐다. 실험 재시험만으로 승인 조건의 재평가를 대신할 수 없다."
+  },
+  "79f44c40a56746811ca2470f7fb11fd79da78c7a17538abe64ed6f85f1bdde32": {
+    "case": "pep-572",
+    "phase": "unrelated",
+    "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+        "answers": [
+          "NAME := expr",
+          ":="
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d60afae8bbc6e0863adaf8cf",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "speaker": "PEP 572 contributors",
+          "start": 469,
+          "end": 587,
+          "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+          "status": "source_only",
+          "answer": "NAME := expr"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "원문이 이름 대입 표기 NAME := expr를 직접 제시한다."
+  },
+  "7c87334810d173f7b69e6bfe2e411653362283e6fcdd2324521b0d28a671c1ac": {
+    "case": "pep-618",
+    "phase": "unrelated",
+    "question": "Which exception does strict zip raise when its iterables have different lengths?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+        "answers": [
+          "ValueError"
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "44d1a4fcadb2fbfbc6769c81",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+          "speaker": "PEP 618 contributors",
+          "start": 4121,
+          "end": 4308,
+          "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.",
+          "status": "source_only",
+          "answer": "ValueError"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "strict=True에서 길이가 다르면 ValueError가 발생한다는 문장이다."
+  },
+  "800b4985102365dc5ce4936941e16b2a249747db50f7b6bf478b86092fb0391c": {
+    "case": "pep-618",
+    "phase": "conflict",
+    "question": "Which exception does strict zip raise when its iterables have different lengths?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+        "answers": [
+          "ValueError"
+        ],
+        "line": 18
+      },
+      {
+        "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+        "answers": [
+          "LengthMismatchError"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "8140b5bbd3cd568987faf0ca02b67a7d56306fd9441d073dfb587e5ca5e84318": {
+    "case": "review-20",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The bridge contractor repainted the pedestrian railing; the daytime heavy-vehicle closure remains in force.",
+    "prior_record_for_grading": "We kept the overnight freight route because the daytime bridge is closed to heavy vehicles.",
+    "reference": {
+      "location": "casebook://decisions/014adc93c4187c365fb1ad59",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "heavy vehicles",
+      "new_cue": "remains in force",
+      "new_location": "casebook://observations/4ccd8908232b9e4c98b45e83"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1ccd0d855f601f262df6c66c",
+        "location": "casebook://decisions/014adc93c4187c365fb1ad59",
+        "speaker": "Tai",
+        "start": 0,
+        "end": 91,
+        "quote": "We kept the overnight freight route because the daytime bridge is closed to heavy vehicles.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a5d652a3acf76db796fd1443",
+        "location": "casebook://observations/4ccd8908232b9e4c98b45e83",
+        "speaker": "Gus",
+        "start": 0,
+        "end": 107,
+        "quote": "The bridge contractor repainted the pedestrian railing; the daytime heavy-vehicle closure remains in force.",
+        "status": "source_only"
+      },
+      "reviewer": "Tai",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "보행자 난간 도색은 주간 중차량 통행 제한을 바꾸지 않는다. 재시험을 제안할 근거가 없다."
+  },
+  "814dfc35eaffc7c31a7a147ecce6924f097c935d316e1b5c5ce5d2bd2dcbac95": {
+    "case": "pep-618",
+    "phase": "clean",
+    "question": "Which exception does strict zip raise when its iterables have different lengths?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+        "answers": [
+          "ValueError"
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "88bb865b8f7654f477df3c21d7f6c096d0b627d0e583ed333b31ecb5c469c920": {
+    "case": "pep-553",
+    "phase": "clean",
+    "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+        "answers": [
+          "0",
+          "PYTHONBREAKPOINT=0"
+        ],
+        "line": 108
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "17eba532b6b8433f75abf6e9",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+          "speaker": "PEP 553 contributors",
+          "start": 4061,
+          "end": 4105,
+          "quote": "* ``PYTHONBREAKPOINT=0`` disables debugging.",
+          "status": "source_only",
+          "answer": "0"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "인용문이 PYTHONBREAKPOINT=0에서 디버깅이 비활성화된다고 명시한다."
+  },
+  "8b9296f15378a152ca04e71640d18762af7fc324ceb1ee13c8b628b02a60ca53": {
+    "case": "pep-597",
+    "phase": "unrelated",
+    "question": "Which warning category signals omitted encoding when open uses the locale default?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+        "answers": [
+          "EncodingWarning"
+        ],
+        "line": 13
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "9cdf2a0f123965fbe7cbf525",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+          "speaker": "PEP 597 contributors",
+          "start": 4170,
+          "end": 4328,
+          "quote": "When the flag is set, ``io.TextIOWrapper()``, ``open()`` and other\nmodules using them will emit ``EncodingWarning`` when the ``encoding``\nargument is omitted.",
+          "status": "source_only",
+          "answer": "EncodingWarning"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "인코딩 인자가 빠진 open의 경고로 EncodingWarning을 명시한다."
+  },
+  "8baccf4d012146654335b6d95079701972be3343c1d1998548edd001e4c13ea8": {
+    "case": "review-10",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "A validation run of the new controller detected every contaminated tip in the blinded transfer panel.",
+    "prior_record_for_grading": "The lab postponed automated sample transfer because the pipette controller had no sterile tip verification.",
+    "reference": {
+      "location": "casebook://decisions/510794146e50cdee3844ce2c",
+      "actions": [
+        "retest",
+        "reassess"
+      ],
+      "old_cue": "sterile tip",
+      "new_cue": "contaminated tip",
+      "new_location": "casebook://observations/32d7e0907948f869ea4cf0f1"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "7ed1678390ff58bd97c233b2",
+        "location": "casebook://decisions/510794146e50cdee3844ce2c",
+        "speaker": "Jo",
+        "start": 0,
+        "end": 107,
+        "quote": "The lab postponed automated sample transfer because the pipette controller had no sterile tip verification.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a2467de4caa65484150316a5",
+        "location": "casebook://observations/32d7e0907948f869ea4cf0f1",
+        "speaker": "Qin",
+        "start": 0,
+        "end": 101,
+        "quote": "A validation run of the new controller detected every contaminated tip in the blinded transfer panel.",
+        "status": "source_only"
+      },
+      "reviewer": "Jo",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "기존 팁 검증 부재와 새 컨트롤러의 블라인드 검사 결과가 검증 재실행을 뒷받침한다."
+  },
+  "8cbff46ac5f661b231856bb15b686a2ee15602294e2ce4e36f7d99f83c03c520": {
+    "case": "review-12",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The polymer supplier hopes its next formulation will be more stable; no material or test samples are available yet.",
+    "prior_record_for_grading": "We retained the copper cooling plate because the polymer plate warped under the sustained load.",
+    "reference": {
+      "location": "casebook://decisions/3236f60f0fdb2b0e96eb648e",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "warped",
+      "new_cue": "hopes",
+      "new_location": "casebook://observations/67fec00e932ecd15041fd0a5"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1c7e68cc00c4ce6964b4da79",
+        "location": "casebook://decisions/ee7b35727951162efaac6886",
+        "speaker": "Sol",
+        "start": 0,
+        "end": 96,
+        "quote": "We rejected the longer enzyme incubation because the original samples degraded after 30 minutes.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1aa87eb6ab1c836db7d5ec53",
+        "location": "casebook://observations/67fec00e932ecd15041fd0a5",
+        "speaker": "Sol",
+        "start": 0,
+        "end": 115,
+        "quote": "The polymer supplier hopes its next formulation will be more stable; no material or test samples are available yet.",
+        "status": "source_only"
+      },
+      "reviewer": "Sol",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "공급사의 예상일 뿐이며 시료와 측정이 없고 효소 배양이라는 다른 결정까지 연결했다. 재시험을 제안할 근거가 없다."
+  },
+  "8d8dc0b93dc1f6b49d9fa02984ce36886983e3d0946f0b127463d416b77d6bc3": {
+    "case": "review-09",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "A paired run on the replacement accelerator measured a 3 percent step penalty for gradient checkpointing while halving activation memory.",
+    "prior_record_for_grading": "We rejected gradient checkpointing for the training job because the older accelerator slowed each step by 40 percent.",
+    "reference": {
+      "location": "casebook://decisions/3812605fc497f23dc455a1c3",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "older accelerator",
+      "new_cue": "replacement accelerator",
+      "new_location": "casebook://observations/387a8df384c436c213ff5fe3"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "d32f2e3e5850a340a1282b8f",
+        "location": "casebook://decisions/3812605fc497f23dc455a1c3",
+        "speaker": "Iya",
+        "start": 0,
+        "end": 117,
+        "quote": "We rejected gradient checkpointing for the training job because the older accelerator slowed each step by 40 percent.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9aeeaf667010b24adc36656b",
+        "location": "casebook://observations/387a8df384c436c213ff5fe3",
+        "speaker": "Paz",
+        "start": 0,
+        "end": 137,
+        "quote": "A paired run on the replacement accelerator measured a 3 percent step penalty for gradient checkpointing while halving activation memory.",
+        "status": "source_only"
+      },
+      "reviewer": "Iya",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "구형 가속기의 40% 시간 손해와 교체 가속기의 3% 손해 및 메모리 감소를 비교할 수 있다."
+  },
+  "951565de29cd57d623a1fbb0d88802d1c5e9c3fe1f21389c386039f12d2fef29": {
+    "case": "review-06",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The revised transliteration table cut false matches from 18 to 4 on the same Arabic names cohort with unchanged recall.",
+    "prior_record_for_grading": "We postponed the multilingual search rollout because transliteration doubled false matches in the Arabic names cohort.",
+    "reference": {
+      "location": "casebook://decisions/26de72d2412a47080e2d95d2",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "false matches",
+      "new_cue": "18 to 4",
+      "new_location": "casebook://observations/f4517c3146c8eb7f92dd0f02"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "0926f783dcc2da9bcc7054b8",
+        "location": "casebook://decisions/26de72d2412a47080e2d95d2",
+        "speaker": "Fay",
+        "start": 0,
+        "end": 118,
+        "quote": "We postponed the multilingual search rollout because transliteration doubled false matches in the Arabic names cohort.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "74f921e9ba5d5d368abf8357",
+        "location": "casebook://observations/f4517c3146c8eb7f92dd0f02",
+        "speaker": "Moe",
+        "start": 0,
+        "end": 119,
+        "quote": "The revised transliteration table cut false matches from 18 to 4 on the same Arabic names cohort with unchanged recall.",
+        "status": "source_only"
+      },
+      "reviewer": "Fay",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "기존 오탐 문제와 같은 코호트에서 오탐 18→4, 재현율 유지 관측을 연결했다."
+  },
+  "9cfd78a0e415827d4b8a1d6f2adacfc4ca67815f3e7863d99bc083b6cbaa31ea": {
+    "case": "pep-515",
+    "phase": "clean",
+    "question": "How many underscores may go between adjacent digits in a Python numeric literal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0515.rst",
+        "answers": [
+          "one underscore",
+          "one",
+          "1"
+        ],
+        "line": 40
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "a32010af42bf1fa2694e15b7870db25831e1c17210451608d914b81724507f8f": {
+    "case": "pep-515",
+    "phase": "unrelated",
+    "question": "How many underscores may go between adjacent digits in a Python numeric literal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0515.rst",
+        "answers": [
+          "one underscore",
+          "one",
+          "1"
+        ],
+        "line": 40
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "a413f12aa9688435235863a88322d1dba189934a332401928e17a580f542ad5d": {
+    "case": "pep-552",
+    "phase": "unrelated",
+    "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+        "answers": [
+          "SipHash"
+        ],
+        "line": 75
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "a5a9ef1612079913fcf81c74e61586003d0c714a0551e79da1813e95bf9db0ca": {
+    "case": "pep-597",
+    "phase": "clean",
+    "question": "Which warning category signals omitted encoding when open uses the locale default?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+        "answers": [
+          "EncodingWarning"
+        ],
+        "line": 13
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "aa8a3ae20aa8663b63edfabcc3d027db180a1bfbbe36d254727cf148fe6d9a82": {
+    "case": "pep-597",
+    "phase": "conflict",
+    "question": "Which warning category signals omitted encoding when open uses the locale default?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+        "answers": [
+          "EncodingWarning"
+        ],
+        "line": 13
+      },
+      {
+        "location": "casebook://messages/f80aed03ddb8216b98658f5f",
+        "answers": [
+          "LocaleDefaultWarning"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "6520961feccae6150eda82f1",
+          "location": "casebook://messages/f80aed03ddb8216b98658f5f",
+          "speaker": "Emi",
+          "start": 0,
+          "end": 128,
+          "quote": "The API review records LocaleDefaultWarning as the category emitted when open uses the locale default after encoding is omitted.",
+          "status": "source_only",
+          "answer": "LocaleDefaultWarning"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "b55f6bdd5dcf77a8523e771995eb83228227e8e02f1a7bd3c0975220d63f9ede": {
+    "case": "review-01",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "With tenant-local dictionaries, adaptive packing lowered the same queue's p95 from 81 ms to 57 ms in three replays.",
+    "prior_record_for_grading": "We rejected adaptive packing on single-tenant queues because decompression cost exceeded the saved I/O.",
+    "reference": {
+      "location": "casebook://decisions/d5e929482ad34c6069a5ce65",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "single-tenant",
+      "new_cue": "tenant-local",
+      "new_location": "casebook://observations/1656fec53b5a41edeccea449"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "f15aef712c9ee2c1a14dcfc5",
+        "location": "casebook://decisions/d5e929482ad34c6069a5ce65",
+        "speaker": "Ari",
+        "start": 0,
+        "end": 103,
+        "quote": "We rejected adaptive packing on single-tenant queues because decompression cost exceeded the saved I/O.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "41620da64aa959c853276f29",
+        "location": "casebook://observations/1656fec53b5a41edeccea449",
+        "speaker": "Hal",
+        "start": 0,
+        "end": 115,
+        "quote": "With tenant-local dictionaries, adaptive packing lowered the same queue's p95 from 81 ms to 57 ms in three replays.",
+        "status": "source_only"
+      },
+      "reviewer": "Ari",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": true,
+    "basis": "기각 당시 단일 테넌트에서 압축 해제 비용이 컸고, 새 사전으로 같은 큐의 p95가 낮아진 측정이 있어 재비교할 수 있다."
+  },
+  "b68ce4555e33eb94293523c04c6621f84061f08fe8be49ad73e408358660db31": {
+    "case": "pep-654",
+    "phase": "unrelated",
+    "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+        "answers": [
+          "except*"
+        ],
+        "line": 29
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "08242b9ceb3b4388c7fb10f3",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+          "speaker": "PEP 654 contributors",
+          "start": 6733,
+          "end": 6886,
+          "quote": "The purpose of this PEP, then, is to add the ``ExceptionGroup`` builtin type\nand the ``except*`` syntax for handling exception groups in the interpreter.",
+          "status": "source_only",
+          "answer": "the ``except*`` syntax"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "인용과 답이 예외 그룹 처리 구문 except*를 직접 지정한다. 관사와 syntax라는 설명은 의미를 바꾸지 않는다."
+  },
+  "be64e0b54b20d00990109061655d8ca71e03ffbe1b588af867fec1b8c6087153": {
+    "case": "pep-515",
+    "phase": "conflict",
+    "question": "How many underscores may go between adjacent digits in a Python numeric literal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0515.rst",
+        "answers": [
+          "one underscore",
+          "one",
+          "1"
+        ],
+        "line": 40
+      },
+      {
+        "location": "casebook://messages/98fdf33401be1601088b7671",
+        "answers": [
+          "two underscores"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "c3b4c1b119808af8dda658a8c952a49304f0dccd9609d49ad97274e68d8b3f7d": {
+    "case": "review-13",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The office approved the poster for the student survey recruitment session. The consent text is still awaiting approval.",
+    "prior_record_for_grading": "We postponed releasing the student survey because its consent text was awaiting ethics approval.",
+    "reference": {
+      "location": "casebook://decisions/708fcc03c7f61b7688ff489f",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "consent",
+      "new_cue": "still awaiting",
+      "new_location": "casebook://observations/ff015827f78e3eb33b55c1aa"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "df63c7cf42fc11ab8a5f6066",
+        "location": "casebook://decisions/708fcc03c7f61b7688ff489f",
+        "speaker": "Moe",
+        "start": 0,
+        "end": 96,
+        "quote": "We postponed releasing the student survey because its consent text was awaiting ethics approval.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "72604c6c5290dbce075f5cf7",
+        "location": "casebook://observations/ff015827f78e3eb33b55c1aa",
+        "speaker": "Tai",
+        "start": 0,
+        "end": 74,
+        "quote": "The office approved the poster for the student survey recruitment session.",
+        "status": "source_only"
+      },
+      "reviewer": "Moe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "포스터 승인과 동의서 승인은 범위가 다르다. 재시험을 제안할 근거가 없다."
+  },
+  "c555ba2ef8f7495d8f1af7111a37cd136ad82da808187cc5f7e85c8e5265c850": {
+    "case": "pep-553",
+    "phase": "conflict",
+    "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+        "answers": [
+          "0",
+          "PYTHONBREAKPOINT=0"
+        ],
+        "line": 108
+      },
+      {
+        "location": "casebook://messages/abd5aa8b0122adf3a727cf45",
+        "answers": [
+          "off",
+          "PYTHONBREAKPOINT=off"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "17eba532b6b8433f75abf6e9",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+          "speaker": "PEP 553 contributors",
+          "start": 4061,
+          "end": 4105,
+          "quote": "* ``PYTHONBREAKPOINT=0`` disables debugging.",
+          "status": "source_only",
+          "answer": "0"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "c86a8ba2b9cab1d04fc675eca75d4fc62a6b16ee11af7734c0ff8da14888900c": {
+    "case": "pep-618",
+    "phase": "clean",
+    "question": "Which exception does strict zip raise when its iterables have different lengths?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+        "answers": [
+          "ValueError"
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "44d1a4fcadb2fbfbc6769c81",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+          "speaker": "PEP 618 contributors",
+          "start": 4121,
+          "end": 4308,
+          "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.",
+          "status": "source_only",
+          "answer": "ValueError"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "strict=True에서 길이가 다르면 ValueError가 발생한다는 문장이다."
+  },
+  "c9560c0070e99a06f45b922345157810fdcd733fcf7db02ceb76364993b23fa5": {
+    "case": "pep-572",
+    "phase": "conflict",
+    "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+        "answers": [
+          "NAME := expr",
+          ":="
+        ],
+        "line": 18
+      },
+      {
+        "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+        "answers": [
+          "NAME <- expr",
+          "<-"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d60afae8bbc6e0863adaf8cf",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "speaker": "PEP 572 contributors",
+          "start": 469,
+          "end": 587,
+          "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+          "status": "source_only",
+          "answer": "NAME := expr"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "c9d90d9b7c81c49fcc34e4df3eb6bd2dcd98b0f9322054338f88433774ca4bb5": {
+    "case": "pep-597",
+    "phase": "conflict",
+    "question": "Which warning category signals omitted encoding when open uses the locale default?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+        "answers": [
+          "EncodingWarning"
+        ],
+        "line": 13
+      },
+      {
+        "location": "casebook://messages/f80aed03ddb8216b98658f5f",
+        "answers": [
+          "LocaleDefaultWarning"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "cacb947b5275ee114c41ad379975d6dbbdf0cd6631df38ffe1abe70edfb7545d": {
+    "case": "pep-572",
+    "phase": "unrelated",
+    "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+        "answers": [
+          "NAME := expr",
+          ":="
+        ],
+        "line": 18
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d60afae8bbc6e0863adaf8cf",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "speaker": "PEP 572 contributors",
+          "start": 4752,
+          "end": 4902,
+          "quote": "This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.",
+          "status": "source_only",
+          "answer": "NAME := expr"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "원문이 이름 대입 표기 NAME := expr를 직접 제시한다."
+  },
+  "cfdf76b175a720c2180fc43f42678576e23b50d7dac151516aadf58da7839e9c": {
+    "case": "pep-654",
+    "phase": "unrelated",
+    "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+        "answers": [
+          "except*"
+        ],
+        "line": 29
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "08242b9ceb3b4388c7fb10f3",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+          "speaker": "PEP 654 contributors",
+          "start": 1150,
+          "end": 1284,
+          "quote": "* A new standard exception type, the ``ExceptionGroup``, which represents a\n  group of unrelated exceptions being propagated together.",
+          "status": "source_only",
+          "answer": "ExceptionGroup"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "예외 타입을 인용했으며 질문이 요구한 처리 구문을 제시하지 않았다."
+  },
+  "d24102e07b0e8604cbd4e692c9622486635c6c7cf7cfc06c68b0839eb2682270": {
+    "case": "pep-669",
+    "phase": "conflict",
+    "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+        "answers": [
+          "sys.monitoring"
+        ],
+        "line": 28
+      },
+      {
+        "location": "casebook://messages/0708484487c76851928d5fe2",
+        "answers": [
+          "sys.events"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "80a51a8ac760e392929c3ccf",
+          "location": "casebook://messages/0708484487c76851928d5fe2",
+          "speaker": "Gus",
+          "start": 0,
+          "end": 117,
+          "quote": "The monitoring API handoff puts the low-impact interpreter monitoring functions and constants together in sys.events.",
+          "status": "source_only",
+          "answer": "sys.events"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "db471e23cc2ee5254703d2f3989f8f13ff9f5f12f4c94228fcce92b7292219fe": {
+    "case": "pep-552",
+    "phase": "conflict",
+    "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+        "answers": [
+          "SipHash"
+        ],
+        "line": 75
+      },
+      {
+        "location": "casebook://messages/7fa61acee6000a286e2e1638",
+        "answers": [
+          "BLAKE2s"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "d86e0b2fd0ec17d628c1d582",
+          "location": "casebook://messages/7fa61acee6000a286e2e1638",
+          "speaker": "Jo",
+          "start": 0,
+          "end": 122,
+          "quote": "The bytecode cache design record names BLAKE2s as the algorithm selected to hash the source contents for a hash-based pyc.",
+          "status": "source_only",
+          "answer": "BLAKE2s"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "db64ccc1534ca5ed9b1507a9b2d1333148198a109ca0668c22df967f52361438": {
+    "case": "pep-597",
+    "phase": "clean",
+    "question": "Which warning category signals omitted encoding when open uses the locale default?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+        "answers": [
+          "EncodingWarning"
+        ],
+        "line": 13
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "9cdf2a0f123965fbe7cbf525",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+          "speaker": "PEP 597 contributors",
+          "start": 4170,
+          "end": 4328,
+          "quote": "When the flag is set, ``io.TextIOWrapper()``, ``open()`` and other\nmodules using them will emit ``EncodingWarning`` when the ``encoding``\nargument is omitted.",
+          "status": "source_only",
+          "answer": "EncodingWarning"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "인코딩 인자가 빠진 open의 경고로 EncodingWarning을 명시한다."
+  },
+  "db8890f0720f3a5567d0a986df5b4c5e73cc786a981c84536782e62b1ca78876": {
+    "case": "pep-553",
+    "phase": "conflict",
+    "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+        "answers": [
+          "0",
+          "PYTHONBREAKPOINT=0"
+        ],
+        "line": 108
+      },
+      {
+        "location": "casebook://messages/abd5aa8b0122adf3a727cf45",
+        "answers": [
+          "off",
+          "PYTHONBREAKPOINT=off"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "invalid_citation"
+    },
+    "correct": false,
+    "basis": "출처 있는 답을 사용자에게 반환하지 못했다."
+  },
+  "dc3d6732e70e2cd83ed6f9fad370913b0754bdbcf9b3fe4c6231b002d503b4d2": {
+    "case": "pep-680",
+    "phase": "conflict",
+    "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+        "answers": [
+          "tomllib"
+        ],
+        "line": 19
+      },
+      {
+        "location": "casebook://messages/2affbee73f3d6a30d527a9c5",
+        "answers": [
+          "tomlreader"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "c8e19e94ed0b041e3971dcac",
+          "location": "casebook://messages/2affbee73f3d6a30d527a9c5",
+          "speaker": "Ari",
+          "start": 0,
+          "end": 97,
+          "quote": "The packaging team's integration build exposes the standard library TOML parser under tomlreader.",
+          "status": "source_only",
+          "answer": "tomlreader"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "한쪽 보고의 값만 반환해 서로 다른 두 답과 각각의 근거를 보존하지 못했다."
+  },
+  "de5cc7d6f0d520c7e24cf870948108044bbfd3497151aff8848328d2e9b3d2d7": {
+    "case": "review-08",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The bank's signed delivery logs now show hourly settlement files arriving on every trading day for a month.",
+    "prior_record_for_grading": "We kept overnight batch reconciliation because the bank did not deliver intraday settlement files.",
+    "reference": {
+      "location": "casebook://decisions/f4f67c11889326c5f81ca1bf",
+      "actions": [
+        "reassess"
+      ],
+      "old_cue": "intraday",
+      "new_cue": "hourly",
+      "new_location": "casebook://observations/04318f0d0bbc5366378dd8d6"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "7bd9df6a5af9246d34792b59",
+        "location": "casebook://decisions/f4f67c11889326c5f81ca1bf",
+        "speaker": "Hal",
+        "start": 0,
+        "end": 98,
+        "quote": "We kept overnight batch reconciliation because the bank did not deliver intraday settlement files.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9eba8bda6ee31b5a956af07a",
+        "location": "casebook://observations/04318f0d0bbc5366378dd8d6",
+        "speaker": "Ola",
+        "start": 0,
+        "end": 107,
+        "quote": "The bank's signed delivery logs now show hourly settlement files arriving on every trading day for a month.",
+        "status": "source_only"
+      },
+      "reviewer": "Hal",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "은행 공급 제약이 바뀐 근거를 연결했지만 배치 정책의 재평가 대신 재시험을 냈다."
+  },
+  "e12a5c88041b3690555c86e12fa268bc2db548f08a152705a808c3918323f532": {
+    "case": "pep-615",
+    "phase": "unrelated",
+    "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+        "answers": [
+          "tzdata"
+        ],
+        "line": 21
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "7e8c655d9ab964be2c9dd0f4",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+          "speaker": "PEP 615 contributors",
+          "start": 507,
+          "end": 714,
+          "quote": "By default,\n``zoneinfo`` will use the system's time zone data if available; if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI.",
+          "status": "source_only",
+          "answer": "tzdata"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "시스템 시간대 자료가 없을 때의 PyPI 폴백을 tzdata라고 명시한다."
+  },
+  "e5d4c715cfc0963a7c9bb681797ac1e031f105ad8d84bcb11338f4811210ba64": {
+    "case": "review-16",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The build engineer finished deploying the approved compiler to staging exactly as scheduled.",
+    "prior_record_for_grading": "We already approved moving staging builds to the new compiler after the compatibility tests passed.",
+    "reference": {
+      "location": "casebook://decisions/ca4b991eeb04780103bb0e0c",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "approved",
+      "new_cue": "as scheduled",
+      "new_location": "casebook://observations/5b55fae25fda83899630a4ec"
+    },
+    "returned": {
+      "action": "invalid_output"
+    },
+    "correct": false,
+    "basis": "이미 승인한 컴파일러 배포의 완료 보고다. 출력이 파싱되지 않아 유지 판단을 전달하지 못했다."
+  },
+  "e6b9070e806f6ac2c221e2a81df201b0ba9e06c43682b95e4ce81c5fcbc8573f": {
+    "case": "pep-669",
+    "phase": "clean",
+    "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+        "answers": [
+          "sys.monitoring"
+        ],
+        "line": 28
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "e994cfff4b43ae60a24855c6",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+          "speaker": "PEP 669 contributors",
+          "start": 1050,
+          "end": 1152,
+          "quote": "A ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.",
+          "status": "source_only",
+          "answer": "sys.monitoring"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "해당 PEP 원문이 함수와 상수를 담을 네임스페이스로 sys.monitoring을 지정한다."
+  },
+  "ef70664dbbc65a3ecae39a129489a6dec4da7fe66258c70d7fd13c78a5a5ba81": {
+    "case": "pep-669",
+    "phase": "unrelated",
+    "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+        "answers": [
+          "sys.monitoring"
+        ],
+        "line": 28
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "e994cfff4b43ae60a24855c6",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+          "speaker": "PEP 669 contributors",
+          "start": 1050,
+          "end": 1152,
+          "quote": "A ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.",
+          "status": "source_only",
+          "answer": "sys.monitoring"
+        }
+      ]
+    },
+    "correct": true,
+    "basis": "해당 PEP 원문이 함수와 상수를 담을 네임스페이스로 sys.monitoring을 지정한다."
+  },
+  "f151a2f5db43d1ef5775603e1d237eb67d4efba56160ee0652712c380a83d015": {
+    "case": "review-16",
+    "phase": "review",
+    "project_goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+    "incoming_record": "The build engineer finished deploying the approved compiler to staging exactly as scheduled.",
+    "prior_record_for_grading": "We already approved moving staging builds to the new compiler after the compatibility tests passed.",
+    "reference": {
+      "location": "casebook://decisions/ca4b991eeb04780103bb0e0c",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "approved",
+      "new_cue": "as scheduled",
+      "new_location": "casebook://observations/5b55fae25fda83899630a4ec"
+    },
+    "returned": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1ccd0d855f601f262df6c66c",
+        "location": "casebook://decisions/014adc93c4187c365fb1ad59",
+        "speaker": "Tai",
+        "start": 0,
+        "end": 91,
+        "quote": "We kept the overnight freight route because the daytime bridge is closed to heavy vehicles.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "37baa1aab110b51745ee267c",
+        "location": "casebook://observations/5b55fae25fda83899630a4ec",
+        "speaker": "Cal",
+        "start": 0,
+        "end": 92,
+        "quote": "The build engineer finished deploying the approved compiler to staging exactly as scheduled.",
+        "status": "source_only"
+      },
+      "reviewer": "Tai",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "correct": false,
+    "basis": "이미 승인한 컴파일러 배포의 완료 보고다. 재시험을 제안할 근거가 없다."
+  },
+  "f3c7c55530bf95fceafa0c70567541c1b8cdb39583f8263126c99259c5800a92": {
+    "case": "pep-552",
+    "phase": "unrelated",
+    "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+        "answers": [
+          "SipHash"
+        ],
+        "line": 75
+      }
+    ],
+    "returned": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "22aa2f7a582bb4db3e0c411a",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+          "speaker": "PEP 552 contributors",
+          "start": 5486,
+          "end": 5642,
+          "quote": "``importlib.util`` will be extended with a ``source_hash(source)`` function that\ncomputes the hash used by the pyc writing code for a bytestring **source**.",
+          "status": "source_only",
+          "answer": "source_hash(source)"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "source_hash(source)는 함수 이름이다. 질문은 SipHash라는 알고리즘을 요구한다."
+  },
+  "fbaceb80f62fe850a1c2360751b0973af0b92475b4c105ad9f811fcc4baf7a1d": {
+    "case": "pep-654",
+    "phase": "conflict",
+    "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+    "reference": [
+      {
+        "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+        "answers": [
+          "except*"
+        ],
+        "line": 29
+      },
+      {
+        "location": "casebook://messages/61f9b8edce2e869a5a740d67",
+        "answers": [
+          "catch*"
+        ]
+      }
+    ],
+    "returned": {
+      "status": "unresolved",
+      "answers": [
+        {
+          "source_id": "08242b9ceb3b4388c7fb10f3",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+          "speaker": "PEP 654 contributors",
+          "start": 1150,
+          "end": 1284,
+          "quote": "* A new standard exception type, the ``ExceptionGroup``, which represents a\n  group of unrelated exceptions being propagated together.",
+          "status": "source_only",
+          "answer": "ExceptionGroup"
+        },
+        {
+          "source_id": "1c551c9760087003e8dc7025",
+          "location": "casebook://messages/61f9b8edce2e869a5a740d67",
+          "speaker": "Hal",
+          "start": 0,
+          "end": 105,
+          "quote": "Our exception-groups language notes give catch* as the handler syntax for groups of unrelated exceptions.",
+          "status": "source_only",
+          "answer": "catch*"
+        }
+      ]
+    },
+    "correct": false,
+    "basis": "양쪽을 냈지만 원래 문서에서 처리 구문 except* 대신 예외 타입 ExceptionGroup을 골랐다."
+  }
+}
