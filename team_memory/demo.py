@@ -81,3 +81,52 @@ def run():
                 "after_pull_before_review": before, "after_both_reviews_and_pull": after,
                 "unresolved_pair": conflict["unresolved"], "after_explicit_correction":
                 {k: r["status"] for k, r in view.items()}}
+
+
+def run_followup():
+    """Exercise real Git and review state with a fixed, explicitly simulated reader."""
+    import json
+    from .store import capture
+    from .sync import DEFAULT_GOAL, followups, pull, relevant_followups, vote as review_followup
+
+    def read(instruction, content):
+        data = json.loads(content)
+        prior = next(p for p in data["previous"] if "rejected" in p["excerpt"])
+        new = next(p for p in data["new"] if "measured" in p["excerpt"])
+        return f"RETEST | {prior['id']} | {new['id']}"
+
+    with tempfile.TemporaryDirectory() as tmp:
+        base = Path(tmp)
+        git(base, "init", "--bare", "--initial-branch=main", "origin.git")
+        git(base, "clone", "origin.git", "alice")
+        alice, bob = base/"alice", base/"bob"
+        sa, sb = Store(alice/"records"), Store(bob/"records")
+        old = sample(1, "Alice", "defer", "single node")
+        old["source"].update(text="We rejected cached routing because it increased latency on single-node requests.", location="demo://router/decision")
+        capture(sa,old)
+        publish(alice)
+        git(base,"clone","origin.git","bob")
+        new = sample(2, "Bob", "lower latency", "regional replicas")
+        new["source"].update(text="We measured lower latency for cached routing with regional replicas on the same request trace.", location="demo://router/measurement")
+        capture(sb,new)
+        publish(bob)
+        result = pull(sa, DEFAULT_GOAL, read, "simple")
+        row, = result["proposals"]
+        assert row["status"] == "pending" and row["reviewer"] == "Alice"
+        publish(alice)
+        git(bob,"pull","--ff-only")
+        pending, = relevant_followups(sb, "What changed for cached routing latency?")
+        assert pending["status"] == "pending"
+        try:
+            review_followup(sb,row["id"],row["id"],"Bob","approve")
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("another author approved the proposal")
+        approved = review_followup(sa,row["id"],row["id"],"Alice","approve")
+        publish(alice)
+        git(bob,"pull","--ff-only")
+        assert followups(sb)==[approved] and len(sb.load("sources"))==2
+        assert not pull(sa,DEFAULT_GOAL,read,"simple")["arrivals"]
+        return {"reader":"scripted transport demonstration", "before_owner_review":pending,
+                "after_owner_review":approved,"retained_source_count":2}

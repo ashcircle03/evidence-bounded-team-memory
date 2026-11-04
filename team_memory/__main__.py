@@ -8,6 +8,7 @@ from .merge import replay, review, submit, source_disputes
 from .qa import answer
 from .reconsider import proposal_inbox, reconsider, review_proposal
 from .store import Store, capture
+from .sync import DEFAULT_GOAL
 
 
 def main():
@@ -28,6 +29,10 @@ def main():
     scope.add_argument("--goal", required=True, help="project goal known before reading the new report")
     scope.add_argument("--model", required=True)
     scope.add_argument("--limit", type=int, default=3)
+    sync = cmd.add_parser("pull", help="fast-forward Git and inspect newly arrived sources for the project goal")
+    sync.add_argument("--model", required=True)
+    sync.add_argument("--goal", default=DEFAULT_GOAL, help="the project goal, not an earlier record ID")
+    sync.add_argument("--strategy", choices=("simple","candidate"), default="simple")
     cmd.add_parser("inbox", help="recompute merge proposals after pulling records")
     vote = cmd.add_parser("review", help="record a local review on the exact proposal you inspected")
     for key in ("id", "proposal", "actor"):
@@ -36,8 +41,10 @@ def main():
     query = cmd.add_parser("ask", help="read accepted and provisional evidence for a question")
     query.add_argument("question")
     query.add_argument("--issue")
+    query.add_argument("--strategy", choices=("legacy","simple","candidate"), default="legacy")
     query.add_argument("--model", help="optional local HF reader for a short answer with a checked citation")
-    cmd.add_parser("demo", help="replay the example in an isolated, temporary Git remote and two clones")
+    demo = cmd.add_parser("demo", help="replay the example in an isolated, temporary Git remote and two clones")
+    demo.add_argument("--followup", action="store_true", help="replay a pulled report, the local review and owner approval")
     args = p.parse_args()
     store = Store(args.store)
     if args.command in ("capture", "prepare", "draft", "submit", "ingest", "reconsider"):
@@ -57,20 +64,39 @@ def main():
         else:
             from .writer import draft, local_generator, prepare
             result = prepare(store, envelope) if args.command == "prepare" else draft(store, envelope, local_generator(args.model))
+    elif args.command == "pull":
+        from .sync import pull
+        from .writer import local_generator
+        result = pull(store, args.goal, local_generator(args.model, max_new_tokens=64), args.strategy)
     elif args.command == "review":
         handler = review_proposal if args.id in store.load("decision_assessments") else review
+        if args.id in store.load("followups"):
+            from .sync import vote
+            handler = vote
         result = handler(store, args.id, args.proposal, args.actor, args.decision)
     elif args.command == "inbox":
-        result = list(replay(store).values()) + source_disputes(store.load("sources")) + proposal_inbox(store)
+        from .sync import followups
+        result = list(replay(store).values()) + source_disputes(store.load("sources")) + proposal_inbox(store) + followups(store)
     elif args.command == "demo":
-        from .demo import run
-        result = run()
+        from .demo import run, run_followup
+        result = run_followup() if args.followup else run()
     else:
-        result = answer(store, args.question, args.issue)
-        if args.model and result["status"] in ("grounded_records", "source_only"):
-            from .qa import read_answer
+        from .sync import relevant_followups
+        if args.strategy != "legacy":
+            if args.issue or not args.model:
+                p.error("pass --model and omit --issue for source-wide evidence retrieval")
+            from .evidence import active_sources, ask
             from .writer import local_generator
-            result = read_answer(result, args.question, local_generator(args.model))
+            result = ask(active_sources(store), args.question, local_generator(args.model, max_new_tokens=64), args.strategy)
+        else:
+            result = answer(store, args.question, args.issue)
+            if args.model and result["status"] in ("grounded_records", "source_only"):
+                from .qa import read_answer
+                from .writer import local_generator
+                result = read_answer(result, args.question, local_generator(args.model))
+        context = relevant_followups(store, args.question)
+        if context:
+            result["review_context"] = context
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

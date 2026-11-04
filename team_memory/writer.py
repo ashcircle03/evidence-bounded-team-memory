@@ -60,7 +60,7 @@ def draft(store, envelope, generate):
     return record({**task["input"], **allowed})
 
 
-def local_generator(path):
+def local_generator(path, *, max_new_tokens=600):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -74,7 +74,7 @@ def local_generator(path):
         prompt = tokenizer.apply_chat_template([{"role": "system", "content": instruction},
                     {"role": "user", "content": content}], tokenize=False, add_generation_prompt=True)
         batch = tokenizer(prompt, return_tensors="pt").to(device)
-        output = model.generate(**batch, max_new_tokens=600, do_sample=False, pad_token_id=tokenizer.eos_token_id)
+        output = model.generate(**batch, max_new_tokens=max_new_tokens, do_sample=False, pad_token_id=tokenizer.eos_token_id)
         generate.last_usage = {"input_tokens": int(batch.input_ids.size(1)), "output_tokens": int(output.size(1)-batch.input_ids.size(1))}
         return tokenizer.decode(output[0, batch.input_ids.size(1):], skip_special_tokens=True)
     from .choice import LocalChoice
