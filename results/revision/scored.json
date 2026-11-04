@@ -1,0 +1,846 @@
+{
+  "counts": {
+    "ordinary": {
+      "simple": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "legacy": {
+        "total": 10,
+        "correct": 2,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "ordinary/public_git": {
+      "simple": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "legacy": {
+        "total": 10,
+        "correct": 2,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "unrelated": {
+      "simple": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "unrelated/controlled": {
+      "simple": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 10,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "disputed": {
+      "simple": {
+        "total": 5,
+        "correct": 0,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 5,
+        "correct": 1,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "disputed/controlled_with_public_source": {
+      "simple": {
+        "total": 5,
+        "correct": 0,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 5,
+        "correct": 1,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "conditional": {
+      "simple": {
+        "total": 5,
+        "correct": 0,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 5,
+        "correct": 1,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "conditional/controlled": {
+      "simple": {
+        "total": 5,
+        "correct": 0,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 5,
+        "correct": 1,
+        "delivered": 0,
+        "keep": 0,
+        "invalid": 0
+      }
+    },
+    "positive": {
+      "simple": {
+        "total": 10,
+        "correct": 4,
+        "delivered": 7,
+        "keep": 0,
+        "invalid": 3
+      },
+      "premise": {
+        "total": 10,
+        "correct": 4,
+        "delivered": 4,
+        "keep": 3,
+        "invalid": 3
+      }
+    },
+    "positive/controlled": {
+      "simple": {
+        "total": 7,
+        "correct": 4,
+        "delivered": 5,
+        "keep": 0,
+        "invalid": 2
+      },
+      "premise": {
+        "total": 7,
+        "correct": 4,
+        "delivered": 4,
+        "keep": 0,
+        "invalid": 3
+      }
+    },
+    "negative": {
+      "simple": {
+        "total": 10,
+        "correct": 0,
+        "delivered": 9,
+        "keep": 0,
+        "invalid": 1
+      },
+      "premise": {
+        "total": 10,
+        "correct": 6,
+        "delivered": 0,
+        "keep": 6,
+        "invalid": 4
+      }
+    },
+    "negative/controlled": {
+      "simple": {
+        "total": 7,
+        "correct": 0,
+        "delivered": 7,
+        "keep": 0,
+        "invalid": 0
+      },
+      "premise": {
+        "total": 7,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 3,
+        "invalid": 4
+      }
+    },
+    "positive/public_git": {
+      "simple": {
+        "total": 3,
+        "correct": 0,
+        "delivered": 2,
+        "keep": 0,
+        "invalid": 1
+      },
+      "premise": {
+        "total": 3,
+        "correct": 0,
+        "delivered": 0,
+        "keep": 3,
+        "invalid": 0
+      }
+    },
+    "negative/public_git": {
+      "simple": {
+        "total": 3,
+        "correct": 0,
+        "delivered": 2,
+        "keep": 0,
+        "invalid": 1
+      },
+      "premise": {
+        "total": 3,
+        "correct": 3,
+        "delivered": 0,
+        "keep": 3,
+        "invalid": 0
+      }
+    }
+  },
+  "paired": {
+    "ordinary/simple": {
+      "gains": [
+        "q07-ordinary"
+      ],
+      "losses": [
+        "q06-ordinary"
+      ]
+    },
+    "ordinary/legacy": {
+      "gains": [
+        "q05-ordinary",
+        "q08-ordinary"
+      ],
+      "losses": [
+        "q04-ordinary"
+      ]
+    },
+    "disputed/simple": {
+      "gains": [
+        "d01"
+      ],
+      "losses": []
+    },
+    "conditional/simple": {
+      "gains": [
+        "d07"
+      ],
+      "losses": []
+    },
+    "positive/simple": {
+      "gains": [
+        "r07"
+      ],
+      "losses": [
+        "r02"
+      ]
+    },
+    "negative/simple": {
+      "gains": [
+        "r08",
+        "r12",
+        "r13",
+        "r18",
+        "r19",
+        "r20"
+      ],
+      "losses": []
+    },
+    "unrelated/simple": [],
+    "unrelated/premise": []
+  },
+  "decisions": {
+    "q01-ordinary/simple": {
+      "card": "3dc6fc3f22296531",
+      "correct": false,
+      "exact": false
+    },
+    "q01-ordinary/premise": {
+      "card": "3c681c3acee2a7f0",
+      "correct": false,
+      "exact": false
+    },
+    "q01-ordinary/legacy": {
+      "card": "3dc6fc3f22296531",
+      "correct": false,
+      "exact": false
+    },
+    "q01-unrelated/simple": {
+      "card": "581ea577b0a75a7e",
+      "correct": false,
+      "exact": false
+    },
+    "q01-unrelated/premise": {
+      "card": "cc221811d7424b81",
+      "correct": false,
+      "exact": false
+    },
+    "q02-ordinary/simple": {
+      "card": "a5da7bc9fd9fd077",
+      "correct": false,
+      "exact": false
+    },
+    "q02-ordinary/premise": {
+      "card": "a5da7bc9fd9fd077",
+      "correct": false,
+      "exact": false
+    },
+    "q02-ordinary/legacy": {
+      "card": "294e24edb72495fe",
+      "correct": false,
+      "exact": false
+    },
+    "q02-unrelated/simple": {
+      "card": "6adbdf5471be6a87",
+      "correct": false,
+      "exact": false
+    },
+    "q02-unrelated/premise": {
+      "card": "6adbdf5471be6a87",
+      "correct": false,
+      "exact": false
+    },
+    "q03-ordinary/simple": {
+      "card": "de9f61f2fe518184",
+      "correct": false,
+      "exact": false
+    },
+    "q03-ordinary/premise": {
+      "card": "de9f61f2fe518184",
+      "correct": false,
+      "exact": false
+    },
+    "q03-ordinary/legacy": {
+      "card": "5b6130d5bc75144e",
+      "correct": false,
+      "exact": false
+    },
+    "q03-unrelated/simple": {
+      "card": "13f3ebe2a2ffcf6a",
+      "correct": false,
+      "exact": false
+    },
+    "q03-unrelated/premise": {
+      "card": "13f3ebe2a2ffcf6a",
+      "correct": false,
+      "exact": false
+    },
+    "q04-ordinary/simple": {
+      "card": "3380390d520dac7f",
+      "correct": false,
+      "exact": false
+    },
+    "q04-ordinary/premise": {
+      "card": "3380390d520dac7f",
+      "correct": false,
+      "exact": false
+    },
+    "q04-ordinary/legacy": {
+      "card": "be6eae5776966e9c",
+      "correct": true,
+      "exact": false
+    },
+    "q04-unrelated/simple": {
+      "card": "e133ab1db54f9e29",
+      "correct": false,
+      "exact": false
+    },
+    "q04-unrelated/premise": {
+      "card": "e133ab1db54f9e29",
+      "correct": false,
+      "exact": false
+    },
+    "q05-ordinary/simple": {
+      "card": "241db34e8152c8f6",
+      "correct": true,
+      "exact": true
+    },
+    "q05-ordinary/premise": {
+      "card": "241db34e8152c8f6",
+      "correct": true,
+      "exact": true
+    },
+    "q05-ordinary/legacy": {
+      "card": "526d81003eca7f88",
+      "correct": false,
+      "exact": false
+    },
+    "q05-unrelated/simple": {
+      "card": "cc9533a96e0d82dd",
+      "correct": true,
+      "exact": true
+    },
+    "q05-unrelated/premise": {
+      "card": "cc9533a96e0d82dd",
+      "correct": true,
+      "exact": true
+    },
+    "q06-ordinary/simple": {
+      "card": "8965a1989277490a",
+      "correct": true,
+      "exact": true
+    },
+    "q06-ordinary/premise": {
+      "card": "75095285155d57cd",
+      "correct": false,
+      "exact": false
+    },
+    "q06-ordinary/legacy": {
+      "card": "c1ca606aedafc3c1",
+      "correct": false,
+      "exact": false
+    },
+    "q06-unrelated/simple": {
+      "card": "c1f47183bfe2c34e",
+      "correct": true,
+      "exact": true
+    },
+    "q06-unrelated/premise": {
+      "card": "dbd0d75b87ff616c",
+      "correct": false,
+      "exact": false
+    },
+    "q07-ordinary/simple": {
+      "card": "477677b5ca1333d0",
+      "correct": false,
+      "exact": false
+    },
+    "q07-ordinary/premise": {
+      "card": "f91cf79b2a7cc749",
+      "correct": true,
+      "exact": true
+    },
+    "q07-ordinary/legacy": {
+      "card": "db308b17826f7360",
+      "correct": true,
+      "exact": false
+    },
+    "q07-unrelated/simple": {
+      "card": "e71bea2fff563ff4",
+      "correct": false,
+      "exact": false
+    },
+    "q07-unrelated/premise": {
+      "card": "803be06772b9992d",
+      "correct": true,
+      "exact": true
+    },
+    "q08-ordinary/simple": {
+      "card": "c9dc344f319b4143",
+      "correct": true,
+      "exact": true
+    },
+    "q08-ordinary/premise": {
+      "card": "c9dc344f319b4143",
+      "correct": true,
+      "exact": true
+    },
+    "q08-ordinary/legacy": {
+      "card": "59d3d1fb601f001b",
+      "correct": false,
+      "exact": false
+    },
+    "q08-unrelated/simple": {
+      "card": "b7b91e359296744e",
+      "correct": true,
+      "exact": true
+    },
+    "q08-unrelated/premise": {
+      "card": "b7b91e359296744e",
+      "correct": true,
+      "exact": true
+    },
+    "q09-ordinary/simple": {
+      "card": "9b73b42ebd2fca98",
+      "correct": false,
+      "exact": false
+    },
+    "q09-ordinary/premise": {
+      "card": "9b73b42ebd2fca98",
+      "correct": false,
+      "exact": false
+    },
+    "q09-ordinary/legacy": {
+      "card": "96d1d370bb6ce83f",
+      "correct": false,
+      "exact": false
+    },
+    "q09-unrelated/simple": {
+      "card": "3385d68b68a14dc2",
+      "correct": false,
+      "exact": false
+    },
+    "q09-unrelated/premise": {
+      "card": "3385d68b68a14dc2",
+      "correct": false,
+      "exact": false
+    },
+    "q10-ordinary/simple": {
+      "card": "fd6ccbb8c66600b7",
+      "correct": false,
+      "exact": false
+    },
+    "q10-ordinary/premise": {
+      "card": "6f54ddf00ca1e3e6",
+      "correct": false,
+      "exact": false
+    },
+    "q10-ordinary/legacy": {
+      "card": "fd6ccbb8c66600b7",
+      "correct": false,
+      "exact": false
+    },
+    "q10-unrelated/simple": {
+      "card": "1497a9d32c3ee934",
+      "correct": false,
+      "exact": false
+    },
+    "q10-unrelated/premise": {
+      "card": "c3c3dfba7af333cb",
+      "correct": false,
+      "exact": false
+    },
+    "d01/simple": {
+      "card": "db2fa954e5c49a35",
+      "correct": false,
+      "exact": false
+    },
+    "d01/premise": {
+      "card": "8d4599afd5e28288",
+      "correct": true,
+      "exact": true
+    },
+    "d02/simple": {
+      "card": "de16d72b65e36ef3",
+      "correct": false,
+      "exact": false
+    },
+    "d02/premise": {
+      "card": "de16d72b65e36ef3",
+      "correct": false,
+      "exact": false
+    },
+    "d03/simple": {
+      "card": "368790a00588e339",
+      "correct": false,
+      "exact": false
+    },
+    "d03/premise": {
+      "card": "90561ed3ceb0c882",
+      "correct": false,
+      "exact": false
+    },
+    "d04/simple": {
+      "card": "6d53df9edcee6437",
+      "correct": false,
+      "exact": false
+    },
+    "d04/premise": {
+      "card": "af0e7fe4801863ef",
+      "correct": false,
+      "exact": false
+    },
+    "d05/simple": {
+      "card": "d40b9b0d004ac3b4",
+      "correct": false,
+      "exact": false
+    },
+    "d05/premise": {
+      "card": "d40b9b0d004ac3b4",
+      "correct": false,
+      "exact": false
+    },
+    "d06/simple": {
+      "card": "4766db3fe54dcf96",
+      "correct": false,
+      "exact": false
+    },
+    "d06/premise": {
+      "card": "4766db3fe54dcf96",
+      "correct": false,
+      "exact": false
+    },
+    "d07/simple": {
+      "card": "4a3be9c786383437",
+      "correct": false,
+      "exact": false
+    },
+    "d07/premise": {
+      "card": "5fc5ccf85982b582",
+      "correct": true,
+      "exact": false
+    },
+    "d08/simple": {
+      "card": "29793a20b4a880c5",
+      "correct": false,
+      "exact": false
+    },
+    "d08/premise": {
+      "card": "e1d6c4bab3409f8d",
+      "correct": false,
+      "exact": false
+    },
+    "d09/simple": {
+      "card": "75469976dcb9fe2c",
+      "correct": false,
+      "exact": false
+    },
+    "d09/premise": {
+      "card": "18a2e400a23af49a",
+      "correct": false,
+      "exact": false
+    },
+    "d10/simple": {
+      "card": "f989dc42f4c6c401",
+      "correct": false,
+      "exact": false
+    },
+    "d10/premise": {
+      "card": "f989dc42f4c6c401",
+      "correct": false,
+      "exact": false
+    },
+    "r01/simple": {
+      "card": "51882549452f7fb4",
+      "correct": true,
+      "exact": true
+    },
+    "r01/premise": {
+      "card": "fa18fe0e347d1c3a",
+      "correct": true,
+      "exact": true
+    },
+    "r02/simple": {
+      "card": "4a10f8b6da6fb74d",
+      "correct": true,
+      "exact": true
+    },
+    "r02/premise": {
+      "card": "7d2c3dc871b8561d",
+      "correct": false,
+      "exact": false
+    },
+    "r03/simple": {
+      "card": "7615d958d7669cee",
+      "correct": true,
+      "exact": true
+    },
+    "r03/premise": {
+      "card": "f90fb3c94a21ae71",
+      "correct": true,
+      "exact": true
+    },
+    "r04/simple": {
+      "card": "023da3df7e69fc96",
+      "correct": false,
+      "exact": false
+    },
+    "r04/premise": {
+      "card": "023da3df7e69fc96",
+      "correct": false,
+      "exact": false
+    },
+    "r05/simple": {
+      "card": "c2070e9664ca52cd",
+      "correct": true,
+      "exact": true
+    },
+    "r05/premise": {
+      "card": "aefbdc92e75bcf26",
+      "correct": true,
+      "exact": true
+    },
+    "r06/simple": {
+      "card": "bee875fee5c51d3e",
+      "correct": false,
+      "exact": false
+    },
+    "r06/premise": {
+      "card": "4fb16bcd407306b6",
+      "correct": false,
+      "exact": false
+    },
+    "r07/simple": {
+      "card": "67a09f5707f2af9b",
+      "correct": false,
+      "exact": false
+    },
+    "r07/premise": {
+      "card": "07cfc3d46cd7a5b7",
+      "correct": true,
+      "exact": true
+    },
+    "r08/simple": {
+      "card": "a1448c0517eb8e4d",
+      "correct": false,
+      "exact": false
+    },
+    "r08/premise": {
+      "card": "50f7532d03639ed0",
+      "correct": true,
+      "exact": true
+    },
+    "r09/simple": {
+      "card": "f491f0be9fff786a",
+      "correct": false,
+      "exact": false
+    },
+    "r09/premise": {
+      "card": "e9641b2ea268ce4f",
+      "correct": false,
+      "exact": false
+    },
+    "r10/simple": {
+      "card": "29fc16881b871d66",
+      "correct": false,
+      "exact": false
+    },
+    "r10/premise": {
+      "card": "976d01bf241ee024",
+      "correct": false,
+      "exact": false
+    },
+    "r11/simple": {
+      "card": "09e4fd4441cd52a9",
+      "correct": false,
+      "exact": false
+    },
+    "r11/premise": {
+      "card": "1ea2af2a47f71e65",
+      "correct": false,
+      "exact": false
+    },
+    "r12/simple": {
+      "card": "6aa7ac5334dba5de",
+      "correct": false,
+      "exact": false
+    },
+    "r12/premise": {
+      "card": "19cb0b122ba340ff",
+      "correct": true,
+      "exact": true
+    },
+    "r13/simple": {
+      "card": "9a5d6523f6f4ef31",
+      "correct": false,
+      "exact": false
+    },
+    "r13/premise": {
+      "card": "26934509f01a62d1",
+      "correct": true,
+      "exact": true
+    },
+    "r14/simple": {
+      "card": "b03914c7a8a7c80d",
+      "correct": false,
+      "exact": false
+    },
+    "r14/premise": {
+      "card": "8a96ec12b5d42c7e",
+      "correct": false,
+      "exact": false
+    },
+    "r15/simple": {
+      "card": "f45112d433e2f050",
+      "correct": false,
+      "exact": false
+    },
+    "r15/premise": {
+      "card": "a2333df5336996d2",
+      "correct": false,
+      "exact": false
+    },
+    "r16/simple": {
+      "card": "8868e96fdd30cbdd",
+      "correct": false,
+      "exact": false
+    },
+    "r16/premise": {
+      "card": "280f725cec5535d3",
+      "correct": false,
+      "exact": false
+    },
+    "r17/simple": {
+      "card": "ae08d415dc1d65b1",
+      "correct": false,
+      "exact": false
+    },
+    "r17/premise": {
+      "card": "8be146f5a0dfa4c3",
+      "correct": false,
+      "exact": false
+    },
+    "r18/simple": {
+      "card": "92703862bc9f8f71",
+      "correct": false,
+      "exact": false
+    },
+    "r18/premise": {
+      "card": "e30e375a2fe72841",
+      "correct": true,
+      "exact": true
+    },
+    "r19/simple": {
+      "card": "31f2558b2377266b",
+      "correct": false,
+      "exact": false
+    },
+    "r19/premise": {
+      "card": "c699e6d6e0a077e5",
+      "correct": true,
+      "exact": true
+    },
+    "r20/simple": {
+      "card": "8e6bd56d5682a92d",
+      "correct": false,
+      "exact": false
+    },
+    "r20/premise": {
+      "card": "846588552146f2d7",
+      "correct": true,
+      "exact": true
+    }
+  }
+}

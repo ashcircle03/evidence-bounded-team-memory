@@ -1,0 +1,234 @@
+{
+  "status": "complete",
+  "job_id": "119276",
+  "calls": [
+    {
+      "sha256": "30ac7036b2493badb0808f5ba4ee65dd5b49e4189415673833401573b82ad9d3",
+      "raw": "RETEST | P2 | N2 | The incoming report suggests that the clean-room TM-S model outperforms the official TabM B model in terms of SEL and CONF metrics, but the previous decision was based on the official TabM B model being rejected. The new evidence indicates that the clean-room TM-S model performs better, which could change the justification for rejecting the official TabM B model.",
+      "input_tokens": 1242,
+      "output_tokens": 82
+    },
+    {
+      "sha256": "0315c8070d79e4a7fc9cf6132cb0c63949ae1a9366411f58b5b0e82338ef61cc",
+      "raw": "RETEST | 229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/tracking.md#L1-L1 | 0c4b817ceb7acbcab8a1f443d407d139a788b077:notes/courier.md#L1-L1 | The premise about the lack of scan identifiers in the courier's current offering may change with future developments, warranting a new evaluation.",
+      "input_tokens": 432,
+      "output_tokens": 126
+    },
+    {
+      "sha256": "f9b88eec4b2037e2bf202f1a1c9612c8302203e41d3bd0c4fbe9b7bd267cd0be",
+      "raw": "E6 | TabM / inner-val 기준 — 둘 다 기각, 그런데 구조가 하나 보인다 (2026-08-11)",
+      "input_tokens": 1342,
+      "output_tokens": 39
+    },
+    {
+      "sha256": "4d0d7611e1281379a31c5e89bdac08ee9eb04c2303704e3582ebd8f36b05c435",
+      "raw": "NONE",
+      "input_tokens": 591,
+      "output_tokens": 2
+    },
+    {
+      "sha256": "cab8db26443654d75f31fec9c2bb64e771d6aae169ff5f65551081761496312a",
+      "raw": "NONE",
+      "input_tokens": 670,
+      "output_tokens": 2
+    }
+  ],
+  "outcome": {
+    "arrivals": [
+      {
+        "source_id": "43efbdeb83fbde729a2ce79a",
+        "result": {
+          "action": "retest",
+          "previous": {
+            "source_id": "fc3466195523733aea0b5767",
+            "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+            "speaker": "jaewon",
+            "start": 238,
+            "end": 489,
+            "quote": "| | 점수 | ↔CatBoost | ↔FT이진 | ↔MLP | 시드당 |\n|---|---|---|---|---|---|\n| TabM 3시드 | 727.3 | 0.875 | 0.907 | **0.946** | 147s |\n| TabM 최적(18-2 적용) | **801.4** | 0.924 | 0.915 | | 148s |\n| FT 이진 | 841.2 | 0.90 | — | | 1410s |\n| CatBoost | 862.1 | — | | | |",
+            "status": "source_only"
+          },
+          "incoming": {
+            "source_id": "43efbdeb83fbde729a2ce79a",
+            "location": "git:0c4b817ceb7acbcab8a1f443d407d139a788b077:notes/benchmark.md#L1-L27",
+            "speaker": "seonghun",
+            "start": 690,
+            "end": 1027,
+            "quote": "- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]",
+            "status": "source_only"
+          },
+          "rationale": "The incoming report suggests that the clean-room TM-S model outperforms the official TabM B model in terms of SEL and CONF metrics, but the previous decision was based on the official TabM B model being rejected. The new evidence indicates that the clean-room TM-S model performs better, which could change the justification for rejecting the official TabM B model.",
+          "prior_rationale": {
+            "source_id": "fc3466195523733aea0b5767",
+            "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+            "speaker": "jaewon",
+            "start": 491,
+            "end": 558,
+            "quote": "**어떤 가중치에서도 기여가 없다** (w=0.05 −0.8 / w=0.10 −2.1 / w=0.20 −6.4 역효과).",
+            "status": "source_only"
+          },
+          "reviewer": "jaewon",
+          "next_step": "Compare the reported change against the original conditions and retain both observations.",
+          "id": "ed97d2738e22036ab2cbeba4"
+        }
+      },
+      {
+        "source_id": "f8766c6f511510fb91e006c9",
+        "result": {
+          "action": "invalid_output"
+        }
+      }
+    ],
+    "pending_in_second_checkout": [
+      {
+        "action": "retest",
+        "goal": "대회 모델의 검증 성능을 높일 다음 비교를 고른다.",
+        "incoming": {
+          "end": 1027,
+          "location": "git:0c4b817ceb7acbcab8a1f443d407d139a788b077:notes/benchmark.md#L1-L27",
+          "quote": "- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]",
+          "source_id": "43efbdeb83fbde729a2ce79a",
+          "speaker": "seonghun",
+          "start": 690,
+          "status": "source_only"
+        },
+        "next_step": "Compare the reported change against the original conditions and retain both observations.",
+        "previous": {
+          "end": 489,
+          "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+          "quote": "| | 점수 | ↔CatBoost | ↔FT이진 | ↔MLP | 시드당 |\n|---|---|---|---|---|---|\n| TabM 3시드 | 727.3 | 0.875 | 0.907 | **0.946** | 147s |\n| TabM 최적(18-2 적용) | **801.4** | 0.924 | 0.915 | | 148s |\n| FT 이진 | 841.2 | 0.90 | — | | 1410s |\n| CatBoost | 862.1 | — | | | |",
+          "source_id": "fc3466195523733aea0b5767",
+          "speaker": "jaewon",
+          "start": 238,
+          "status": "source_only"
+        },
+        "prior_rationale": {
+          "end": 558,
+          "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+          "quote": "**어떤 가중치에서도 기여가 없다** (w=0.05 −0.8 / w=0.10 −2.1 / w=0.20 −6.4 역효과).",
+          "source_id": "fc3466195523733aea0b5767",
+          "speaker": "jaewon",
+          "start": 491,
+          "status": "source_only"
+        },
+        "rationale": "The incoming report suggests that the clean-room TM-S model outperforms the official TabM B model in terms of SEL and CONF metrics, but the previous decision was based on the official TabM B model being rejected. The new evidence indicates that the clean-room TM-S model performs better, which could change the justification for rejecting the official TabM B model.",
+        "reviewer": "jaewon",
+        "strategy": "premise",
+        "id": "ed97d2738e22036ab2cbeba4",
+        "proposal": "ed97d2738e22036ab2cbeba4",
+        "kind": "followup",
+        "status": "pending"
+      }
+    ],
+    "qa": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "fc3466195523733aea0b5767",
+          "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+          "speaker": "jaewon",
+          "start": 7,
+          "end": 64,
+          "quote": "TabM / inner-val 기준 — 둘 다 기각, 그런데 구조가 하나 보인다 (2026-08-11)",
+          "status": "source_only",
+          "answer": "TabM / inner-val 기준 — 둘 다 기각, 그런데 구조가 하나 보인다 (2026-08-11)"
+        }
+      ],
+      "review_context": [
+        {
+          "action": "retest",
+          "goal": "대회 모델의 검증 성능을 높일 다음 비교를 고른다.",
+          "incoming": {
+            "end": 1027,
+            "location": "git:0c4b817ceb7acbcab8a1f443d407d139a788b077:notes/benchmark.md#L1-L27",
+            "quote": "- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]",
+            "source_id": "43efbdeb83fbde729a2ce79a",
+            "speaker": "seonghun",
+            "start": 690,
+            "status": "source_only"
+          },
+          "next_step": "Compare the reported change against the original conditions and retain both observations.",
+          "previous": {
+            "end": 489,
+            "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+            "quote": "| | 점수 | ↔CatBoost | ↔FT이진 | ↔MLP | 시드당 |\n|---|---|---|---|---|---|\n| TabM 3시드 | 727.3 | 0.875 | 0.907 | **0.946** | 147s |\n| TabM 최적(18-2 적용) | **801.4** | 0.924 | 0.915 | | 148s |\n| FT 이진 | 841.2 | 0.90 | — | | 1410s |\n| CatBoost | 862.1 | — | | | |",
+            "source_id": "fc3466195523733aea0b5767",
+            "speaker": "jaewon",
+            "start": 238,
+            "status": "source_only"
+          },
+          "prior_rationale": {
+            "end": 558,
+            "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+            "quote": "**어떤 가중치에서도 기여가 없다** (w=0.05 −0.8 / w=0.10 −2.1 / w=0.20 −6.4 역효과).",
+            "source_id": "fc3466195523733aea0b5767",
+            "speaker": "jaewon",
+            "start": 491,
+            "status": "source_only"
+          },
+          "rationale": "The incoming report suggests that the clean-room TM-S model outperforms the official TabM B model in terms of SEL and CONF metrics, but the previous decision was based on the official TabM B model being rejected. The new evidence indicates that the clean-room TM-S model performs better, which could change the justification for rejecting the official TabM B model.",
+          "reviewer": "jaewon",
+          "strategy": "premise",
+          "id": "ed97d2738e22036ab2cbeba4",
+          "proposal": "ed97d2738e22036ab2cbeba4",
+          "kind": "followup",
+          "status": "pending"
+        }
+      ]
+    },
+    "nonowner_vote_rejected": true,
+    "after_owner_vote": [
+      {
+        "action": "retest",
+        "goal": "대회 모델의 검증 성능을 높일 다음 비교를 고른다.",
+        "incoming": {
+          "end": 1027,
+          "location": "git:0c4b817ceb7acbcab8a1f443d407d139a788b077:notes/benchmark.md#L1-L27",
+          "quote": "- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]",
+          "source_id": "43efbdeb83fbde729a2ce79a",
+          "speaker": "seonghun",
+          "start": 690,
+          "status": "source_only"
+        },
+        "next_step": "Compare the reported change against the original conditions and retain both observations.",
+        "previous": {
+          "end": 489,
+          "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+          "quote": "| | 점수 | ↔CatBoost | ↔FT이진 | ↔MLP | 시드당 |\n|---|---|---|---|---|---|\n| TabM 3시드 | 727.3 | 0.875 | 0.907 | **0.946** | 147s |\n| TabM 최적(18-2 적용) | **801.4** | 0.924 | 0.915 | | 148s |\n| FT 이진 | 841.2 | 0.90 | — | | 1410s |\n| CatBoost | 862.1 | — | | | |",
+          "source_id": "fc3466195523733aea0b5767",
+          "speaker": "jaewon",
+          "start": 238,
+          "status": "source_only"
+        },
+        "prior_rationale": {
+          "end": 558,
+          "location": "git:229f05e3fa19202c6bb35d00cbab50898d5a1881:notes/models.md#L1-L20",
+          "quote": "**어떤 가중치에서도 기여가 없다** (w=0.05 −0.8 / w=0.10 −2.1 / w=0.20 −6.4 역효과).",
+          "source_id": "fc3466195523733aea0b5767",
+          "speaker": "jaewon",
+          "start": 491,
+          "status": "source_only"
+        },
+        "rationale": "The incoming report suggests that the clean-room TM-S model outperforms the official TabM B model in terms of SEL and CONF metrics, but the previous decision was based on the official TabM B model being rejected. The new evidence indicates that the clean-room TM-S model performs better, which could change the justification for rejecting the official TabM B model.",
+        "reviewer": "jaewon",
+        "strategy": "premise",
+        "id": "ed97d2738e22036ab2cbeba4",
+        "proposal": "ed97d2738e22036ab2cbeba4",
+        "kind": "followup",
+        "status": "approved_review"
+      }
+    ],
+    "source_ids_before": [
+      "43efbdeb83fbde729a2ce79a",
+      "89b219e868a018127c4863ec",
+      "f8766c6f511510fb91e006c9",
+      "fc3466195523733aea0b5767"
+    ],
+    "source_ids_after": [
+      "43efbdeb83fbde729a2ce79a",
+      "89b219e868a018127c4863ec",
+      "f8766c6f511510fb91e006c9",
+      "fc3466195523733aea0b5767"
+    ]
+  }
+}
