@@ -1,0 +1,335 @@
+{
+  "qa": [
+    {
+      "pep": 680,
+      "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+      "answers": [
+        "tomllib"
+      ],
+      "other": [
+        "tomlreader"
+      ],
+      "counter": "The packaging team's integration build exposes the standard library TOML parser under tomlreader. This is the module imported by the build tool.",
+      "line": 19
+    },
+    {
+      "pep": 615,
+      "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+      "answers": [
+        "tzdata"
+      ],
+      "other": [
+        "zonefiles"
+      ],
+      "counter": "On a clean machine with no system time zone data, our zoneinfo deployment notes identify zonefiles as the fallback package installed from PyPI.",
+      "line": 21
+    },
+    {
+      "pep": 515,
+      "question": "How many underscores may go between adjacent digits in a Python numeric literal?",
+      "answers": [
+        "one underscore",
+        "one",
+        "1"
+      ],
+      "other": [
+        "two underscores"
+      ],
+      "counter": "The numeric literal grammar review records that two underscores may appear between adjacent digits. This rule is for source literals in Python.",
+      "line": 40
+    },
+    {
+      "pep": 572,
+      "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+      "answers": [
+        "NAME := expr",
+        ":="
+      ],
+      "other": [
+        "NAME <- expr",
+        "<-"
+      ],
+      "counter": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions.",
+      "line": 18
+    },
+    {
+      "pep": 597,
+      "question": "Which warning category signals omitted encoding when open uses the locale default?",
+      "answers": [
+        "EncodingWarning"
+      ],
+      "other": [
+        "LocaleDefaultWarning"
+      ],
+      "counter": "The API review records LocaleDefaultWarning as the category emitted when open uses the locale default after encoding is omitted.",
+      "line": 13
+    },
+    {
+      "pep": 618,
+      "question": "Which exception does strict zip raise when its iterables have different lengths?",
+      "answers": [
+        "ValueError"
+      ],
+      "other": [
+        "LengthMismatchError"
+      ],
+      "counter": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+      "line": 18
+    },
+    {
+      "pep": 669,
+      "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+      "answers": [
+        "sys.monitoring"
+      ],
+      "other": [
+        "sys.events"
+      ],
+      "counter": "The monitoring API handoff puts the low-impact interpreter monitoring functions and constants together in sys.events.",
+      "line": 28
+    },
+    {
+      "pep": 654,
+      "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+      "answers": [
+        "except*"
+      ],
+      "other": [
+        "catch*"
+      ],
+      "counter": "Our exception-groups language notes give catch* as the handler syntax for groups of unrelated exceptions.",
+      "line": 29
+    },
+    {
+      "pep": 553,
+      "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+      "answers": [
+        "0",
+        "PYTHONBREAKPOINT=0"
+      ],
+      "other": [
+        "off",
+        "PYTHONBREAKPOINT=off"
+      ],
+      "counter": "The breakpoint configuration sheet says PYTHONBREAKPOINT=off disables debugging with the default hook. This entry specifies the literal value off.",
+      "line": 108
+    },
+    {
+      "pep": 552,
+      "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+      "answers": [
+        "SipHash"
+      ],
+      "other": [
+        "BLAKE2s"
+      ],
+      "counter": "The bytecode cache design record names BLAKE2s as the algorithm selected to hash the source contents for a hash-based pyc.",
+      "line": 75
+    }
+  ],
+  "review": [
+    {
+      "previous": "We rejected adaptive packing on single-tenant queues because decompression cost exceeded the saved I/O.",
+      "incoming": "With tenant-local dictionaries, adaptive packing lowered the same queue's p95 from 81 ms to 57 ms in three replays.",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "single-tenant",
+      "new_cue": "tenant-local",
+      "topic": "adaptive packing"
+    },
+    {
+      "previous": "We kept manual invoice matching because the vendor feed lacked a persistent transaction identifier.",
+      "incoming": "The vendor shipped transaction identifiers that remained stable through a week of cancellations and resubmissions.",
+      "actions": [
+        "reassess"
+      ],
+      "old_cue": "identifier",
+      "new_cue": "stable",
+      "topic": "invoice"
+    },
+    {
+      "previous": "The nightly index rebuild was deferred because a full rebuild locked readers for twelve minutes.",
+      "incoming": "A production-sized shadow-index swap let readers continue throughout the nightly rebuild on Friday.",
+      "actions": [
+        "retest",
+        "reassess"
+      ],
+      "old_cue": "locked readers",
+      "new_cue": "shadow-index",
+      "topic": "rebuild"
+    },
+    {
+      "previous": "We ruled out daily shoreline surveys because the old drone battery could not complete the route.",
+      "incoming": "The replacement drone battery finished the shoreline route twice into the prevailing wind with 20 percent reserve.",
+      "actions": [
+        "retest",
+        "reassess"
+      ],
+      "old_cue": "battery",
+      "new_cue": "finished",
+      "topic": "shoreline"
+    },
+    {
+      "previous": "We retained paper consent forms because the hospital policy barred electronic signatures on this trial.",
+      "incoming": "The signed hospital policy amendment now permits electronic signatures for this trial with a witness.",
+      "actions": [
+        "reassess"
+      ],
+      "old_cue": "barred",
+      "new_cue": "permits",
+      "topic": "consent"
+    },
+    {
+      "previous": "We postponed the multilingual search rollout because transliteration doubled false matches in the Arabic names cohort.",
+      "incoming": "The revised transliteration table cut false matches from 18 to 4 on the same Arabic names cohort with unchanged recall.",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "false matches",
+      "new_cue": "18 to 4",
+      "topic": "transliteration"
+    },
+    {
+      "previous": "We declined sealed crates for field kits because condensation damaged the optical sensors in cold transit.",
+      "incoming": "In cold transit tests, sealed crates with a desiccant insert kept the optical sensors dry across six trips.",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "condensation",
+      "new_cue": "desiccant",
+      "topic": "crates"
+    },
+    {
+      "previous": "We kept overnight batch reconciliation because the bank did not deliver intraday settlement files.",
+      "incoming": "The bank's signed delivery logs now show hourly settlement files arriving on every trading day for a month.",
+      "actions": [
+        "reassess"
+      ],
+      "old_cue": "intraday",
+      "new_cue": "hourly",
+      "topic": "settlement"
+    },
+    {
+      "previous": "We rejected gradient checkpointing for the training job because the older accelerator slowed each step by 40 percent.",
+      "incoming": "A paired run on the replacement accelerator measured a 3 percent step penalty for gradient checkpointing while halving activation memory.",
+      "actions": [
+        "retest"
+      ],
+      "old_cue": "older accelerator",
+      "new_cue": "replacement accelerator",
+      "topic": "checkpointing"
+    },
+    {
+      "previous": "The lab postponed automated sample transfer because the pipette controller had no sterile tip verification.",
+      "incoming": "A validation run of the new controller detected every contaminated tip in the blinded transfer panel.",
+      "actions": [
+        "retest",
+        "reassess"
+      ],
+      "old_cue": "sterile tip",
+      "new_cue": "contaminated tip",
+      "topic": "controller"
+    },
+    {
+      "previous": "We kept 15-minute telemetry exports because more frequent exports exceeded the cellular plan.",
+      "incoming": "The same fleet and modem repeated the 5-minute export test and exceeded the same cellular plan again.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "cellular",
+      "new_cue": "exceeded",
+      "topic": "telemetry"
+    },
+    {
+      "previous": "We retained the copper cooling plate because the polymer plate warped under the sustained load.",
+      "incoming": "The polymer supplier hopes its next formulation will be more stable; no material or test samples are available yet.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "warped",
+      "new_cue": "hopes",
+      "topic": "plate"
+    },
+    {
+      "previous": "We postponed releasing the student survey because its consent text was awaiting ethics approval.",
+      "incoming": "The office approved the poster for the student survey recruitment session. The consent text is still awaiting approval.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "consent",
+      "new_cue": "still awaiting",
+      "topic": "survey"
+    },
+    {
+      "previous": "We rejected a shared connection pool for billing because it mixed customer session state.",
+      "incoming": "The customer analytics dashboard has a faster color palette for visualizing connection pool occupancy; billing sessions are unchanged.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "session state",
+      "new_cue": "unchanged",
+      "topic": "pool"
+    },
+    {
+      "previous": "We chose a 20-minute sterilization cycle after validation against the target organism.",
+      "incoming": "The repeat validation on the same machine and organism again passed at 20 minutes.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "20-minute",
+      "new_cue": "again passed",
+      "topic": "sterilization"
+    },
+    {
+      "previous": "We already approved moving staging builds to the new compiler after the compatibility tests passed.",
+      "incoming": "The build engineer finished deploying the approved compiler to staging exactly as scheduled.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "approved",
+      "new_cue": "as scheduled",
+      "topic": "compiler"
+    },
+    {
+      "previous": "We postponed hillside planting because the irrigation pump cannot reach the upper terraces.",
+      "incoming": "The new pump cut water use on the lower terraces, but still cannot reach the upper terraces.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "upper terraces",
+      "new_cue": "still cannot",
+      "topic": "terraces"
+    },
+    {
+      "previous": "We retained two-person release approval because the production signing policy requires two distinct signers.",
+      "incoming": "The signing dialog now takes one click instead of three; the production policy still requires two distinct signers.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "two distinct",
+      "new_cue": "still requires",
+      "topic": "signing"
+    },
+    {
+      "previous": "We rejected the longer enzyme incubation because the original samples degraded after 30 minutes.",
+      "incoming": "A researcher asked whether an ice bath might enable longer incubation. No sample was placed in the bath.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "degraded",
+      "new_cue": "No sample",
+      "topic": "incubation"
+    },
+    {
+      "previous": "We kept the overnight freight route because the daytime bridge is closed to heavy vehicles.",
+      "incoming": "The bridge contractor repainted the pedestrian railing; the daytime heavy-vehicle closure remains in force.",
+      "actions": [
+        "keep"
+      ],
+      "old_cue": "heavy vehicles",
+      "new_cue": "remains in force",
+      "topic": "bridge"
+    }
+  ]
+}
