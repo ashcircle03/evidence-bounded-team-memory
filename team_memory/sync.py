@@ -93,20 +93,22 @@ def relevant_followups(store, question):
 
 
 def assess_arrivals(store, arrivals, goal, generate, strategy, incoming_history=None):
-    live = active_sources(store)
+    history = active_sources(store, include_retired=strategy == "premise")
     output = []
     for sid in arrivals:
-        if sid not in live:
+        if sid not in history or history[sid][1] in {"rejected", "superseded"}:
             continue
-        incoming = live[sid][0]
+        incoming = history[sid][0]
         previous = {
             key: pair
-            for key, pair in live.items()
+            for key, pair in history.items()
             if (key in incoming_history[sid] and pair[0]["observed_at"] <= incoming["observed_at"]
                 if incoming_history is not None else pair[0]["observed_at"] < incoming["observed_at"])
         }
         result = assess(previous, sid, incoming, goal, generate, strategy)
         if result["action"] in ("retest", "reassess"):
+            old_id = result["previous"]["source_id"]
+            store.put("sources", previous[old_id][0])
             pid = store.put("followups", dict(result, goal=goal, strategy=strategy))
             result = dict(result, id=pid)
         output.append(dict(source_id=sid, result=result))
@@ -158,7 +160,7 @@ def _pull_locked(store, goal, generate, strategy, root, subdir, cursor, notes_di
         if not boot.exists():
             collect(store, root, old, notes_dir)
             boot.touch()
-        existing = set(store.load("sources")) - set(added)
+        existing = set(active_sources(store, include_retired=strategy == "premise")) - set(added)
         incoming_groups = collect(store, root, f"{old}..{head}", notes_dir)
         # On retry, already captured arrivals remain in the store. Exclude all of them
         # until their commit is reached, including siblings with equal Git timestamps.

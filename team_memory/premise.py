@@ -46,6 +46,8 @@ def group(index):
     sources = {}
     for key, passage in index.items():
         item = sources.setdefault(passage.sid, dict(source=passage.location, speaker=passage.speaker, excerpts={}))
+        if passage.status in {"rejected", "superseded"}:
+            item["historical_status"] = passage.status
         item["excerpts"][key] = passage.quote
     return list(sources.values())
 
@@ -111,6 +113,8 @@ def assess(previous, sid, incoming, goal, generate):
     if not old or not new:
         return {"action": "keep", "basis": "no matching passages"}
     payload = dict(goal=goal, previous=group(old), incoming=group(new))
+    if any("historical_status" in source for source in payload["previous"]):
+        payload["review_policy"] = "A rejected or superseded record is historical evidence. Explain why new evidence warrants revisiting that decision. Its old claim remains retired."
     raw = generate(REVIEW, json.dumps(payload, ensure_ascii=False)).strip()
     if raw.upper() == "KEEP":
         return {"action": "keep"}
