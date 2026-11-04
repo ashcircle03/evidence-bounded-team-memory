@@ -1,0 +1,262 @@
+[
+  {
+    "event": "annotations",
+    "kind": "historic",
+    "phase": "before",
+    "gold_n": 2,
+    "gold_s": 1,
+    "gold_span": "Status: Accepted",
+    "prompt_sha256": "294608a20197e2b77c7be8297377eabbcbc229369df929762c8499d1213a01a7",
+    "input_tokens": 1722,
+    "output_tokens": 2,
+    "raw": "null",
+    "returned": "insufficient",
+    "candidate_pairs": [],
+    "reported_span_matches": [],
+    "repairs": [],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "annotations",
+    "kind": "historic",
+    "phase": "after",
+    "gold_n": 2,
+    "gold_s": 1,
+    "gold_span": "Status: Accepted",
+    "prompt_sha256": "1b715b403a4665af32e8e7a184c0e9416c93689642b9bc1e3d35639df01c75d2",
+    "input_tokens": 3804,
+    "output_tokens": 56,
+    "raw": "{\"kind\":\"conflict\",\"side1\":{\"n\":3,\"field\":\"quote\",\"span\":\"just like default values, annotations are evaluated at function definition time.\"},\"side2\":{\"n\":1,\"field\":\"quote\",\"span\":\"but the semantics were deliberately left undefined.\"}}",
+    "returned": "invalid_citation",
+    "candidate_pairs": [],
+    "reported_span_matches": [
+      {
+        "claimed_n": 3,
+        "span": "just like default values, annotations are evaluated at function definition time.",
+        "exact": [],
+        "whitespace_normalized": []
+      },
+      {
+        "claimed_n": 1,
+        "span": "but the semantics were deliberately left undefined.",
+        "exact": [],
+        "whitespace_normalized": [
+          [
+            3,
+            1
+          ]
+        ]
+      }
+    ],
+    "repairs": [
+      {
+        "change": "name the two sides as requested by the parser",
+        "submitted": {
+          "kind": "conflict",
+          "sides": [
+            {
+              "n": 3,
+              "field": "quote",
+              "span": "just like default values, annotations are evaluated at function definition time."
+            },
+            {
+              "n": 1,
+              "field": "quote",
+              "span": "but the semantics were deliberately left undefined."
+            }
+          ]
+        },
+        "returned": "invalid_citation",
+        "grounded_correct": false
+      }
+    ],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "annotations",
+    "kind": "new",
+    "phase": "after",
+    "gold_n": 1,
+    "gold_s": 1,
+    "gold_span": "its current behavior at least until Python 3.13 reaches its end-of-life.",
+    "prompt_sha256": "37a610c69f017149fa814e6f6e828ffae02cf9887510338e6b2c289ddea078a7",
+    "input_tokens": 3850,
+    "output_tokens": 48,
+    "raw": "{\"kind\":\"single\",\"n\":23,\"field\":\"quote\",\"span\":\"In Python 3.14, ``from __future__ import annotations`` will continue to work as it did before, converting annotations into strings.\"}",
+    "returned": "invalid_citation",
+    "candidate_pairs": [],
+    "reported_span_matches": [
+      {
+        "claimed_n": 23,
+        "span": "In Python 3.14, ``from __future__ import annotations`` will continue to work as it did before, converting annotations into strings.",
+        "exact": [],
+        "whitespace_normalized": [
+          [
+            1,
+            23
+          ]
+        ]
+      }
+    ],
+    "repairs": [
+      {
+        "change": "single quote with its source number",
+        "submitted": {
+          "kind": "single",
+          "n": 1,
+          "field": "quote",
+          "span": "In Python 3.14, ``from __future__ import annotations`` will continue to work as it did before, converting annotations into strings."
+        },
+        "returned": "invalid_citation",
+        "grounded_correct": false
+      },
+      {
+        "change": "point to the unique source block containing that quote",
+        "submitted": {
+          "kind": "single",
+          "n": 1,
+          "s": 23
+        },
+        "returned": "source_only",
+        "grounded_correct": false
+      }
+    ],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "threading",
+    "kind": "historic",
+    "phase": "before",
+    "gold_n": 1,
+    "gold_s": 2,
+    "gold_span": "we can roll\n   back any changes that turn out to be too disruptive",
+    "prompt_sha256": "510db7ad3f71c33648319e2e9b2875f6711abdc5a8cdd40093395f578416e445",
+    "input_tokens": 2030,
+    "output_tokens": 2,
+    "raw": "null",
+    "returned": "insufficient",
+    "candidate_pairs": [],
+    "reported_span_matches": [],
+    "repairs": [],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "threading",
+    "kind": "historic",
+    "phase": "after",
+    "gold_n": 1,
+    "gold_s": 2,
+    "gold_span": "we can roll\n   back any changes that turn out to be too disruptive",
+    "prompt_sha256": "6c26b9b21f6a2847c89733a86406fc94a277bae5426dc9b48238823b27d83774",
+    "input_tokens": 3663,
+    "output_tokens": 2,
+    "raw": "null",
+    "returned": "insufficient",
+    "candidate_pairs": [],
+    "reported_span_matches": [],
+    "repairs": [],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "threading",
+    "kind": "new",
+    "phase": "after",
+    "gold_n": 1,
+    "gold_s": 23,
+    "gold_span": "is currently around 10% (except on macOS, where it's more like 3%)",
+    "prompt_sha256": "7a263e5211494529bcecc0442578564d3a62bfa8fed80d5ac233fec82e1d55af",
+    "input_tokens": 3608,
+    "output_tokens": 2,
+    "raw": "null",
+    "returned": "insufficient",
+    "candidate_pairs": [],
+    "reported_span_matches": [],
+    "repairs": [],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "imports",
+    "kind": "historic",
+    "phase": "before",
+    "gold_n": 2,
+    "gold_s": 1,
+    "gold_span": "Status: Rejected",
+    "prompt_sha256": "47bd916c8ad7406ca83c4c16f66812e1671ff3f7708c4be7623b10eb49b35f3b",
+    "input_tokens": 1754,
+    "output_tokens": 2,
+    "raw": "null",
+    "returned": "insufficient",
+    "candidate_pairs": [],
+    "reported_span_matches": [],
+    "repairs": [],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "imports",
+    "kind": "historic",
+    "phase": "after",
+    "gold_n": 2,
+    "gold_s": 1,
+    "gold_span": "Status: Rejected",
+    "prompt_sha256": "7c042b7a447b609d5cf403b379415216aa07f8e6bbfed51f3debab1cf35dcbd9",
+    "input_tokens": 3262,
+    "output_tokens": 29,
+    "raw": "{\"kind\":\"conflict\",\"n\":2,\"field\":\"quote\",\"span\":\"Lazy imports also mostly eliminate the risk of import cycles.\"}",
+    "returned": "invalid_citation",
+    "candidate_pairs": [],
+    "reported_span_matches": [
+      {
+        "claimed_n": 2,
+        "span": "Lazy imports also mostly eliminate the risk of import cycles.",
+        "exact": [],
+        "whitespace_normalized": [
+          [
+            2,
+            3
+          ]
+        ]
+      }
+    ],
+    "repairs": [
+      {
+        "change": "single quote with its source number",
+        "submitted": {
+          "kind": "single",
+          "n": 2,
+          "field": "quote",
+          "span": "Lazy imports also mostly eliminate the risk of import cycles."
+        },
+        "returned": "invalid_citation",
+        "grounded_correct": false
+      },
+      {
+        "change": "point to the unique source block containing that quote",
+        "submitted": {
+          "kind": "single",
+          "n": 2,
+          "s": 3
+        },
+        "returned": "source_only",
+        "grounded_correct": false
+      }
+    ],
+    "gold_passes_original_path": true
+  },
+  {
+    "event": "imports",
+    "kind": "new",
+    "phase": "after",
+    "gold_n": 1,
+    "gold_s": 2,
+    "gold_span": "lazy import json",
+    "prompt_sha256": "6cccbb2210cddbc494f25e4d764d728efaf4dbc17f70c7bb51b02dad2b4d63c1",
+    "input_tokens": 3241,
+    "output_tokens": 2,
+    "raw": "null",
+    "returned": "insufficient",
+    "candidate_pairs": [],
+    "reported_span_matches": [],
+    "repairs": [],
+    "gold_passes_original_path": true
+  }
+]

@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Replay the two-clone Git demo
+        run: python -m team_memory demo > demo.json
+      - name: Rebuild frozen PEP inputs and replay GPU responses on CPU
+        env:
+          PYTHONPATH: .
+        run: |
+          mkdir -p .cache
+          git init --bare .cache/peps.git
+          git --git-dir=.cache/peps.git fetch --no-tags --depth=2 https://github.com/python/peps.git \
+            0a803fec895c5dea8df5153a34b70b1aade7425a \
+            9d017fba9be887c8fe7f6737ef543eef8093f781 \
+            fad5cd133d734096cda7d8d88d7daaac71fb4fde
+          python evaluation/cpython/replay.py .cache/peps.git
+          python evaluation/cpython/audit_qa.py > .cache/qa-audit.json
+          diff -u results/cpython/qa-audit.json .cache/qa-audit.json
+          python evaluation/cpython/qa_controls.py score results/cpython/qa-control-outputs.json > .cache/qa-control-score.json
