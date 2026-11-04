@@ -7,7 +7,7 @@ from pathlib import Path
 import time
 
 
-def infer(packets_path, model_path, output, job_id):
+def infer(packets_path, model_path, output, job_id, expected_count=104, max_new_tokens=64):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -15,7 +15,7 @@ def infer(packets_path, model_path, output, job_id):
         raise RuntimeError("CUDA required")
     raw = packets_path.read_bytes()
     packets = json.loads(raw)
-    if len(packets) != 104 or len({r["id"] for r in packets}) != 104:
+    if len(packets) != expected_count or len({r["id"] for r in packets}) != expected_count:
         raise ValueError("unexpected input count")
     tokenizer = AutoTokenizer.from_pretrained(
         model_path, local_files_only=True, padding_side="left"
@@ -28,6 +28,7 @@ def infer(packets_path, model_path, output, job_id):
         .eval()
     )
     items = []
+    usage = {}
     for p in packets:
         sha = hashlib.sha256((p["system"] + "\n" + p["content"]).encode()).hexdigest()
         if p["sha256"] != sha:
@@ -40,15 +41,22 @@ def infer(packets_path, model_path, output, job_id):
             messages, tokenize=False, add_generation_prompt=True
         )
         ids = tokenizer(prompt).input_ids
-        if len(ids) > 8192:
+        group = p.get("group", p["id"])
+        in_tokens, out_cap = usage.get(group, (0, 0))
+        usage[group] = in_tokens + len(ids), out_cap + p.get("max_output_tokens", max_new_tokens)
+        if usage[group][0] > 8192 or usage[group][1] > max_new_tokens:
             raise ValueError("input exceeds frozen limit")
         items.append((p, ids))
-    items.sort(key=lambda x: (len(x[1]), x[0]["id"]))
+    from itertools import groupby
+    items.sort(key=lambda x: (x[0].get("max_output_tokens", max_new_tokens), len(x[1]), x[0]["id"]))
     calls = []
     before = time.monotonic()
     with output.with_suffix(".partial.jsonl").open("x", encoding="utf8") as partial:
-        for i in range(0, len(items), 4):
-            block = items[i : i + 4]
+        blocks = []
+        for cap, grouped in groupby(items, lambda x: x[0].get("max_output_tokens", max_new_tokens)):
+            same_cap = list(grouped)
+            blocks.extend((cap, same_cap[i:i + 4]) for i in range(0, len(same_cap), 4))
+        for cap, block in blocks:
             batch = tokenizer.pad(
                 {"input_ids": [ids for _, ids in block]},
                 padding=True,
@@ -58,7 +66,7 @@ def infer(packets_path, model_path, output, job_id):
                 generation = model.generate(
                     **batch,
                     do_sample=False,
-                    max_new_tokens=64,
+                    max_new_tokens=cap,
                     pad_token_id=tokenizer.eos_token_id,
                 )
             for (p, ids), tail in zip(
@@ -99,5 +107,7 @@ if __name__ == "__main__":
     ap.add_argument("model")
     ap.add_argument("output", type=Path)
     ap.add_argument("job")
+    ap.add_argument("--count", type=int, default=104)
+    ap.add_argument("--max-new-tokens", type=int, default=64)
     a = ap.parse_args()
-    infer(a.packets, a.model, a.output, a.job)
+    infer(a.packets, a.model, a.output, a.job, a.count, a.max_new_tokens)

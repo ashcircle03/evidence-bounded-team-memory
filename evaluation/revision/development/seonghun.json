@@ -1,0 +1,9 @@
+{
+  "owner": "seonghun",
+  "observed_at": "2026-08-11T01:00:00Z",
+  "source": {
+    "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/9bf532cde00494dabb86076e16a07940a47400e3/seonghun/docs/experiment_log.md#L377-L403",
+    "speaker": "seonghun",
+    "text": "## SH-TABM 야간 비교 및 TM-S 최종 재학습 — 2026-08-11\n\n동일한 시간 분할과 64개 entity-free 피처로 공식 TabM 및 clean-room BatchEnsemble\nMLP를 비교했다. 대형화가 자동으로 성능 향상으로 이어지지 않았고, 가장 작은\nclean-room `TM-S`(4상태, k=16, width=256, 2 blocks)가 최고였다.\n\n| 후보 | SEL | CONF | 결정 |\n| --- | ---: | ---: | --- |\n| clean-room TM-S | **1017.438285** | **684.398704** | 채택 |\n| official TabM B | 950.238 | 579.521 | 기각 |\n| official binary | 852.384 | 634.781 | 기각 |\n| official W | 801.088 | 649.992 | 기각 |\n| clean-room B | 763.935 | 612.632 | 기각 |\n| clean-room BIN | 801.467 | 568.487 | 기각 |\n| clean-room K | 870.779 | 580.724 | 기각 |\n| clean-room W | 788.663 | 632.714 | 기각 |\n| clean-room XL | 859.787 | 537.701 | 기각 |\n\n기존 모델과 고정 가중치 비교:\n\n- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]\n"
+  }
+}

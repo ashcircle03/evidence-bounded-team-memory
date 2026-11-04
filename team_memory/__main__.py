@@ -31,8 +31,9 @@ def main():
     scope.add_argument("--limit", type=int, default=3)
     sync = cmd.add_parser("pull", help="fast-forward Git and inspect newly arrived sources for the project goal")
     sync.add_argument("--model", required=True)
+    sync.add_argument("--notes-dir", help="also import the ordinary prose files under this repository-relative directory")
     sync.add_argument("--goal", default=DEFAULT_GOAL, help="the project goal, not an earlier record ID")
-    sync.add_argument("--strategy", choices=("simple","candidate"), default="simple")
+    sync.add_argument("--strategy", choices=("simple","candidate","premise"), default="simple")
     cmd.add_parser("inbox", help="recompute merge proposals after pulling records")
     vote = cmd.add_parser("review", help="record a local review on the exact proposal you inspected")
     for key in ("id", "proposal", "actor"):
@@ -41,7 +42,7 @@ def main():
     query = cmd.add_parser("ask", help="read accepted and provisional evidence for a question")
     query.add_argument("question")
     query.add_argument("--issue")
-    query.add_argument("--strategy", choices=("legacy","simple","candidate"), default="legacy")
+    query.add_argument("--strategy", choices=("legacy","simple","candidate","premise"), default="legacy")
     query.add_argument("--model", help="optional local HF reader for a short answer with a checked citation")
     demo = cmd.add_parser("demo", help="replay the example in an isolated, temporary Git remote and two clones")
     demo.add_argument("--followup", action="store_true", help="replay a pulled report, the local review and owner approval")
@@ -67,7 +68,7 @@ def main():
     elif args.command == "pull":
         from .sync import pull
         from .writer import local_generator
-        result = pull(store, args.goal, local_generator(args.model, max_new_tokens=64), args.strategy)
+        result = pull(store, args.goal, local_generator(args.model, max_new_tokens=192 if args.strategy == "premise" else 64), args.strategy, args.notes_dir)
     elif args.command == "review":
         handler = review_proposal if args.id in store.load("decision_assessments") else review
         if args.id in store.load("followups"):

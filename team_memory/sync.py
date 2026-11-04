@@ -25,15 +25,19 @@ def followups(store):
     for pid, item in store.load("followups").items():
         old, new = item["previous"], item["incoming"]
         prior, incoming = (sources.get(w["source_id"]) for w in (old, new))
-        if not prior or not incoming or prior["observed_at"] >= incoming["observed_at"]:
+        if not prior or not incoming or prior["observed_at"] > incoming["observed_at"]:
             continue
         valid = item["reviewer"] == prior["owner"] and item.get(
             "next_step"
         ) == FOLLOWUP.get(item["action"].upper())
-        for w, env in ((old, prior), (new, incoming)):
+        witnesses = [(old, prior), (new, incoming)]
+        if "prior_rationale" in item:
+            witnesses.append((item["prior_rationale"], prior))
+        for w, env in witnesses:
             src = env["source"]
             valid &= (
-                0 <= w["start"] < w["end"] <= len(src["text"])
+                w["source_id"] in (old["source_id"], new["source_id"])
+                and 0 <= w["start"] < w["end"] <= len(src["text"])
                 and w["quote"] == src["text"][w["start"] : w["end"]]
                 and w["location"] == src["location"]
                 and w["speaker"] == src["speaker"]
@@ -88,7 +92,7 @@ def relevant_followups(store, question):
     return [candidates[pid] for pid in ordered[:3]]
 
 
-def assess_arrivals(store, arrivals, goal, generate, strategy):
+def assess_arrivals(store, arrivals, goal, generate, strategy, incoming_history=None):
     live = active_sources(store)
     output = []
     for sid in arrivals:
@@ -98,7 +102,8 @@ def assess_arrivals(store, arrivals, goal, generate, strategy):
         previous = {
             key: pair
             for key, pair in live.items()
-            if pair[0]["observed_at"] < incoming["observed_at"]
+            if (key in incoming_history[sid] and pair[0]["observed_at"] <= incoming["observed_at"]
+                if incoming_history is not None else pair[0]["observed_at"] < incoming["observed_at"])
         }
         result = assess(previous, sid, incoming, goal, generate, strategy)
         if result["action"] in ("retest", "reassess"):
@@ -108,7 +113,7 @@ def assess_arrivals(store, arrivals, goal, generate, strategy):
     return output
 
 
-def pull(store, goal, generate, strategy):
+def pull(store, goal, generate, strategy, notes_dir=None):
     """A private cursor survives an interrupted model call, even after Git advanced HEAD."""
     parent = store.root.resolve()
     while not parent.exists():
@@ -116,22 +121,23 @@ def pull(store, goal, generate, strategy):
     root = Path(git(parent, "rev-parse", "--show-toplevel"))
     subdir = store.root.resolve().relative_to(root)
     cursor_name = "team-memory-pull-" + digest(
-        {"store": str(subdir), "goal": goal, "strategy": strategy}
+        {"store": str(subdir), "goal": goal, "strategy": strategy, **({"notes": notes_dir} if notes_dir else {})}
     )
     cursor = Path(
         git(root, "rev-parse", "--path-format=absolute", "--git-path", cursor_name)
     )
     with cursor.with_suffix(".lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
-        return _pull_locked(store, goal, generate, strategy, root, subdir, cursor)
+        return _pull_locked(store, goal, generate, strategy, root, subdir, cursor, notes_dir)
 
 
-def _pull_locked(store, goal, generate, strategy, root, subdir, cursor):
+def _pull_locked(store, goal, generate, strategy, root, subdir, cursor, notes_dir):
     old = (
         cursor.read_text().strip()
         if cursor.exists()
         else git(root, "rev-parse", "HEAD")
     )
+    boot = cursor.with_suffix(".indexed")
     if not cursor.exists():
         cursor.write_text(old)
     git(root, "pull", "--ff-only")
@@ -149,6 +155,21 @@ def _pull_locked(store, goal, generate, strategy, root, subdir, cursor):
         if Path(name).parent == path and name.endswith(".json")
     ]
     results = assess_arrivals(store, added, goal, generate, strategy)
+    if notes_dir:
+        from .git_notes import collect
+        if not boot.exists():
+            collect(store, root, old, notes_dir)
+            boot.touch()
+        existing = set(store.load("sources")) - set(added)
+        incoming_groups = collect(store, root, f"{old}..{head}", notes_dir)
+        # On retry, already captured arrivals remain in the store. Exclude all of them
+        # until their commit is reached, including siblings with equal Git timestamps.
+        arriving = {sid for group in incoming_groups for sid in group}
+        existing -= arriving
+        for group in incoming_groups:
+            histories = {sid: existing for sid in group}
+            results.extend(assess_arrivals(store, group, goal, generate, strategy, histories))
+            existing.update(group)
     with tempfile.NamedTemporaryFile(dir=cursor.parent, mode="w", delete=False) as f:
         f.write(head)
     os.replace(f.name, cursor)

@@ -204,6 +204,9 @@ def resolve_answer(form, index):
 
 
 def ask(sources, question, generate, strategy):
+    if strategy == "premise":
+        from .premise import ask as premise_ask
+        return premise_ask(sources, question, generate)
     index = rows(candidates(question, sources, strategy), "E")
     if not index:
         return {"status": "insufficient"}
@@ -214,6 +217,9 @@ def ask(sources, question, generate, strategy):
 
 
 def assess(previous, sid, incoming, goal, generate, strategy):
+    if strategy == "premise":
+        from .premise import assess as premise_assess
+        return premise_assess(previous, sid, incoming, goal, generate)
     query = incoming["source"]["text"]
     old = rows(candidates(query, previous, strategy, purpose="previous", limit=8), "P")
     new = rows(
