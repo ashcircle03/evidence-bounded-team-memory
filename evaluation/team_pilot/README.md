@@ -39,3 +39,13 @@ python3 evaluation/team_pilot/score.py .cache/pilot-outcomes.json .cache/pilot-g
 `simple`은 구절별 BM25로, `candidate`는 구절 순위에 문서 맥락·문서별 노출 한도·결정 및 관측 단서를 더해 같은 Qwen에 보낼 근거를 고른다. 두 방식의 응답 형식과 최대 구절 수는 같다. 자동 채점은 답의 사전 별칭, 출처, 구절, 조치를 검사한다. 실제 질문에 답하는 문맥인지 검토한 판정은 자동값과 분리한다.
 
 [동결한 입력의 문항별 근거 포함 여부](../../results/team_pilot/README.md)
+
+## 답과 인용을 함께 검토하기
+
+자동 채점은 답의 별칭과 출처가 맞아도 해당 문장이 질문의 답을 뒷받침하는지 놓칠 수 있다. `adjudicate.py`는 방식 이름과 자동 점수를 가리고, 같은 문항·조건에서 답과 근거가 같으면 한 번만 판정하게 한다. 각 카드에 질문에 대한 답, 인용 구절의 의미, 또는 재검토 조치의 적절성을 근거로 `correct`와 `basis`를 기입한다. 아래 마지막 명령은 모든 카드의 판정이 있어야 완료되며, 자동 점수와 문맥 검토 점수를 함께 보존한다.
+
+```sh
+python3 evaluation/team_pilot/adjudicate.py .cache/pilot-packets.json .cache/pilot-graded.json > .cache/review-cards.json
+# 검토자는 review-cards.json의 correct, basis만 기입한다.
+python3 evaluation/team_pilot/adjudicate.py .cache/pilot-packets.json .cache/pilot-graded.json --ratings .cache/review-cards.json > .cache/pilot-reviewed.json
+```
