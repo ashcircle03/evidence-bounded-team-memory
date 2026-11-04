@@ -37,3 +37,5 @@ python3 evaluation/team_pilot/score.py .cache/pilot-outcomes.json .cache/pilot-g
 ```
 
 `simple`은 구절별 BM25로, `candidate`는 구절 순위에 문서 맥락·문서별 노출 한도·결정 및 관측 단서를 더해 같은 Qwen에 보낼 근거를 고른다. 두 방식의 응답 형식과 최대 구절 수는 같다. 자동 채점은 답의 사전 별칭, 출처, 구절, 조치를 검사한다. 실제 질문에 답하는 문맥인지 검토한 판정은 자동값과 분리한다.
+
+[동결한 입력의 문항별 근거 포함 여부](../../results/team_pilot/README.md)
