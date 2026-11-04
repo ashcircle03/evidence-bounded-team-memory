@@ -48,3 +48,26 @@ CPython PEP 초안 3건을 첫 공개 시점으로 복원했다. 사전에 정�
 - [CPython 평가 재현](evaluation/cpython/README.md) — GPU 없이 모델 입력을 복원하고 저장된 응답을 재채점한다.
 - [사전 평가 계획](evaluation/cpython/PLAN.md) — 평가 대상과 성공·보류 조건을 확인한다.
 - [Aimers 및 EverMemBench-Dynamic 개발 기록](results/development.ko.md) — 초기 설계와 개발셋 결과를 읽는다.
+
+## 새 기록을 받은 팀원의 작업 흐름
+
+```sh
+python3 -m team_memory demo --followup
+```
+
+이 데모는 두 Git 복제본에서 라우팅 실험의 기각 기록과 후속 측정 결과를 주고받는다. 새 기록을 받은 팀원의 검토함에 두 원문과 제안이 생기고, 작성자 승인 전에는 `pending`, 승인 뒤에는 `approved_review`가 표시된다. 재검토 승인 후에도 두 관측은 보존된다. 데모의 모델 응답은 고정되어 있어 Git 동작과 승인 절차를 오프라인으로 확인할 수 있다.
+
+실제 저장소에서는 각자의 가중치 경로와 Git으로 공유하는 기록 폴더를 지정한다. 팀원은 원문을 `capture`하고 해당 기록을 커밋해 push한다. 상대 팀원의 `pull`은 fast-forward 후 새 원문을 이전 결정들과 비교한다. 특정 과거 결정 ID를 지정할 필요가 없다. CLI의 `--store` 기본값인 `team-records/`는 이 연구 저장소에서 무시되므로, 공유 데모에서는 별도 경로를 사용한다.
+
+```sh
+python3 -m team_memory --store shared-records capture report.json
+git add shared-records && git commit -m 'Record experiment' && git push
+# 다른 복제본에서
+python3 -m team_memory --store shared-records pull --model /path/to/Qwen2.5-3B-Instruct
+python3 -m team_memory --store shared-records inbox
+python3 -m team_memory --store shared-records ask "What changed for cached routing?" --strategy simple --model /path/to/Qwen2.5-3B-Instruct
+```
+
+`report.json`의 필드는 `owner`, 시간대가 있는 `observed_at`, 그리고 `source`의 `speaker`, `location`, `text`다. 검토함의 `id`, `proposal`, `reviewer`로 `review ID PROPOSAL REVIEWER approve`를 실행한다. 제안과 검토 기록도 팀원들이 받도록 커밋하고 push한다. CLI의 작성자 이름은 팀이 제출한 값이며 원격 사용자의 신원 인증은 Git 호스팅의 접근 제어가 담당한다.
+
+[QA·재검토 파일럿의 사전 기준과 재현 명령](evaluation/team_pilot/README.md)
