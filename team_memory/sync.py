@@ -123,9 +123,7 @@ def pull(store, goal, generate, strategy, notes_dir=None):
     cursor_name = "team-memory-pull-" + digest(
         {"store": str(subdir), "goal": goal, "strategy": strategy, **({"notes": notes_dir} if notes_dir else {})}
     )
-    cursor = Path(
-        git(root, "rev-parse", "--path-format=absolute", "--git-path", cursor_name)
-    )
+    cursor = root / git(root, "rev-parse", "--git-path", cursor_name)
     with cursor.with_suffix(".lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         return _pull_locked(store, goal, generate, strategy, root, subdir, cursor, notes_dir)
