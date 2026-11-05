@@ -1,0 +1,87 @@
+{
+  "status": "connected_development_complete",
+  "job_id": "119817",
+  "source_version": "cup-service-v1",
+  "spec": "../../../docs/cupmem-service-v1.md",
+  "freeze": "../../../evaluation/cupmem/service-freeze.json",
+  "tests": {
+    "run": 211,
+    "passed": 211,
+    "direct_service_tests": 18
+  },
+  "verified_live_inference": true,
+  "checked_at": "2026-11-05T17:45:21.716836+00:00",
+  "paused_at": "2026-11-05T17:08:11.960694+00:00",
+  "pause_instruction": "일시중단해",
+  "slurm_action": "Job119817 completed unchanged; no resubmission, cancellation or new allocation",
+  "resume_next": [],
+  "last_partial_observation": {
+    "program_status": "running",
+    "calls": 52,
+    "seconds": 305.97783615626395,
+    "completed_steps": [
+      {
+        "label": "initial_report",
+        "status": "ok"
+      },
+      {
+        "label": "changed_condition",
+        "status": "ok"
+      },
+      {
+        "label": "duplicate_report",
+        "status": "ok"
+      },
+      {
+        "label": "before_review/runtimes",
+        "status": "ok"
+      },
+      {
+        "label": "before_review/folder",
+        "status": "ok"
+      },
+      {
+        "label": "before_review/reason",
+        "status": "ok"
+      },
+      {
+        "label": "simulated_owner_review",
+        "status": "ok"
+      }
+    ],
+    "is_final_result": false
+  },
+  "resumed_at": "2026-11-05T17:40:29.330341+00:00",
+  "latest_status_attempt": {
+    "result": "COMPLETED/0:0 and program complete",
+    "live_slurm_state_verified": true
+  },
+  "local_freeze_verification": "freeze-verification.json",
+  "partial_semantic_inspection": {
+    "final_result": false,
+    "origin": "Saved pre-pause partial output; not a current remote state",
+    "completed_qa_queries": 3,
+    "exact_citations_checked": 5,
+    "qa_findings": {
+      "before_review/runtimes": "Both one-process 40 seconds and four-process 12 seconds answered with the matching original sentences",
+      "before_review/folder": "Cedar-audit answered with the exact original sentence",
+      "before_review/reason": "One-process restriction and later four-process permission both answered and cited"
+    },
+    "review_findings": "A pending reconsideration cites the old suspension and the new permission; a separate coexist proposal preserves both measurements. The reconsideration reason uses the stronger word invalidates, although it does not automatically approve or delete the old decision.",
+    "remaining": [
+      "Slurm terminal outcome",
+      "Unrelated-report proposal outcome",
+      "Post-review QA",
+      "Final source/state preservation and full physical-call audit"
+    ]
+  },
+  "completed_at": "2026-11-05T17:45:21.716836+00:00",
+  "completion_evidence": [
+    "verification.json",
+    "call-audit.json",
+    "ratings.json",
+    "summary.json",
+    "accounting.json",
+    "artifact-manifest.json"
+  ]
+}

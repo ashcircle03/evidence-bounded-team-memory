@@ -1,0 +1,1397 @@
+{
+  "cards": {
+    "fd5f2f97f97be9a5": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"Which style does Git use by default for printing fetch ref update status?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The default style for printing fetch ref update status is `full`.",
+          "evidence": [
+            {
+              "id": "db11b63031320d365a43bed6:4",
+              "source_id": "db11b63031320d365a43bed6",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 98,
+              "end": 122,
+              "quote": "Default value is `full`.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\"kind\":\"single\",\"answers\":[{\"text\":\"The default style for printing fetch ref update status is `full`.\",\"evidence\":[\"db11b63031320d365a43bed6:4\"]}]}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        0
+      ],
+      "expected": {
+        "original_id": "q04-ordinary/legacy",
+        "question": "Which style does Git use by default for printing fetch ref update status?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+            "aliases": [
+              "full"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "source_only",
+        "historical_output_sha256": "dd213a4a935606241b28ea34acac456cfbfff25717c932f42b5a62d26f4f650d",
+        "historical_citations": [
+          {
+            "source_id": "db11b63031320d365a43bed6",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+            "start": 0,
+            "end": 183,
+            "quote": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details.",
+            "historical_answer": "Default value is `full`."
+          }
+        ]
+      },
+      "source_records": {
+        "db11b63031320d365a43bed6": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+            "text": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details."
+          }
+        }
+      }
+    },
+    "cadb8ec698638192": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"Which alternate merge conflict style removes matching lines near either edge of the conflict region?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "zdiff3 style removes matching lines near either edge of the conflict region.",
+          "evidence": [
+            {
+              "id": "2cd6e6057ddcdebd13c4efe5:16",
+              "source_id": "2cd6e6057ddcdebd13c4efe5",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 744,
+              "end": 808,
+              "quote": "the conflict region when those matching lines appear near either",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            },
+            {
+              "id": "2cd6e6057ddcdebd13c4efe5:17",
+              "source_id": "2cd6e6057ddcdebd13c4efe5",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 810,
+              "end": 852,
+              "quote": "the beginning or end of a conflict region.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"zdiff3 style removes matching lines near either edge of the conflict region.\",\n      \"evidence\": [\"2cd6e6057ddcdebd13c4efe5:16\", \"2cd6e6057ddcdebd13c4efe5:17\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        1
+      ],
+      "expected": {
+        "original_id": "q05-ordinary/simple",
+        "question": "Which alternate merge conflict style removes matching lines near either edge of the conflict region?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "aliases": [
+              "zdiff3"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "8344bac20b800832d6f3afa23aa229ef7948191e57a9b19d8c5ac032265f8558",
+        "historical_citations": [
+          {
+            "source_id": "2cd6e6057ddcdebd13c4efe5",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "start": 638,
+            "end": 852,
+            "quote": "Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region.",
+            "historical_answer": "zdiff3"
+          }
+        ]
+      },
+      "source_records": {
+        "2cd6e6057ddcdebd13c4efe5": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "text": "merge.conflictStyle::\n\tSpecify the style in which conflicted hunks are written out to\n\tworking tree files upon merge.  The default is \"merge\", which\n\tshows a `<<<<<<<` conflict marker, changes made by one side,\n\ta `=======` marker, changes made by the other side, and then\n\ta `>>>>>>>` marker.  An alternate style, \"diff3\", adds a `|||||||`\n\tmarker and the original text before the `=======` marker.  The\n\t\"merge\" style tends to produce smaller conflict regions than diff3,\n\tboth because of the exclusion of the original text, and because\n\twhen a subset of lines match on the two sides, they are just pulled\n\tout of the conflict region.  Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region."
+          }
+        }
+      }
+    },
+    "0e5d87e0e05cff93": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"What default subject prefix does format-patch put on its output?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The default subject prefix is '[PATCH]' with units and relevant conditions.",
+          "evidence": [
+            {
+              "id": "b33cab8c6b4353bf87cad57e:1",
+              "source_id": "b33cab8c6b4353bf87cad57e",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 24,
+              "end": 90,
+              "quote": "The default for format-patch is to output files with the '[PATCH]'",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            },
+            {
+              "id": "b33cab8c6b4353bf87cad57e:2",
+              "source_id": "b33cab8c6b4353bf87cad57e",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 92,
+              "end": 107,
+              "quote": "subject prefix.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"The default subject prefix is '[PATCH]' with units and relevant conditions.\",\n      \"evidence\": [\"b33cab8c6b4353bf87cad57e:1\", \"b33cab8c6b4353bf87cad57e:2\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        2
+      ],
+      "expected": {
+        "original_id": "q06-ordinary/simple",
+        "question": "What default subject prefix does format-patch put on its output?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "aliases": [
+              "[PATCH]"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "04bbde5e9c8daed00f24b27ac9b6ee422545fec2a091a607c5ea514415a4d0e9",
+        "historical_citations": [
+          {
+            "source_id": "b33cab8c6b4353bf87cad57e",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "start": 0,
+            "end": 107,
+            "quote": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix.",
+            "historical_answer": "[PATCH]"
+          }
+        ]
+      },
+      "source_records": {
+        "b33cab8c6b4353bf87cad57e": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "text": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix. Use this variable to change that prefix."
+          }
+        }
+      }
+    },
+    "1c7fe7e99c8745b0": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "manual",
+          "evidence": [
+            {
+              "id": "844dbf9c27f11316fcd46ccc:5",
+              "source_id": "844dbf9c27f11316fcd46ccc",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 175,
+              "end": 196,
+              "quote": "Defaults to `manual`.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\"kind\":\"single\",\"answers\":[{\"text\":\"manual\",\"evidence\":[\"844dbf9c27f11316fcd46ccc:5\"]}]}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        3
+      ],
+      "expected": {
+        "original_id": "q07-ordinary/premise",
+        "question": "If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "aliases": [
+              "manual"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "d123df7299f109e45866758a4cb94d006b456efdff95f4594d62b73415009f08",
+        "historical_citations": [
+          {
+            "source_id": "844dbf9c27f11316fcd46ccc",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "start": 0,
+            "end": 395,
+            "quote": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1].",
+            "historical_answer": "manual"
+          }
+        ]
+      },
+      "source_records": {
+        "844dbf9c27f11316fcd46ccc": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "text": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1]."
+          }
+        }
+      }
+    },
+    "cebbee320b1a2dfd": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"Which Git configuration option chooses between basic and extended when grep.patternType is set to default?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The Git configuration option that chooses between basic and extended when grep.patternType is set to default is grep.extendedRegexp.",
+          "evidence": [
+            {
+              "id": "c7327b8bae355fdb222e5af1:5",
+              "source_id": "c7327b8bae355fdb222e5af1",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 238,
+              "end": 305,
+              "quote": "value 'default' will use the `grep.extendedRegexp` option to choose",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"The Git configuration option that chooses between basic and extended when grep.patternType is set to default is grep.extendedRegexp.\",\n      \"evidence\": [\"c7327b8bae355fdb222e5af1:5\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        4
+      ],
+      "expected": {
+        "original_id": "q08-ordinary/simple",
+        "question": "Which Git configuration option chooses between basic and extended when grep.patternType is set to default?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "aliases": [
+              "grep.extendedRegexp"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "203107083685ae3b650cf23b1459a512a3bedf17593bfdf76fb0ff2309c00593",
+        "historical_citations": [
+          {
+            "source_id": "c7327b8bae355fdb222e5af1",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "start": 55,
+            "end": 338,
+            "quote": "Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'.",
+            "historical_answer": "grep.extendedRegexp"
+          }
+        ]
+      },
+      "source_records": {
+        "c7327b8bae355fdb222e5af1": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "text": "grep.patternType::\n\tSet the default matching behavior. Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'."
+          }
+        }
+      }
+    },
+    "c152d4cec3d02f65": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"Which style does Git use by default for printing fetch ref update status?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The default style for printing fetch ref update status is `full`.",
+          "evidence": [
+            {
+              "id": "db11b63031320d365a43bed6:4",
+              "source_id": "db11b63031320d365a43bed6",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 98,
+              "end": 122,
+              "quote": "Default value is `full`.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\"kind\":\"single\",\"answers\":[{\"text\":\"The default style for printing fetch ref update status is `full`.\",\"evidence\":[\"db11b63031320d365a43bed6:4\"]}]}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        179
+      ],
+      "expected": {
+        "original_id": "q04-ordinary/legacy",
+        "question": "Which style does Git use by default for printing fetch ref update status?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+            "aliases": [
+              "full"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "source_only",
+        "historical_output_sha256": "dd213a4a935606241b28ea34acac456cfbfff25717c932f42b5a62d26f4f650d",
+        "historical_citations": [
+          {
+            "source_id": "db11b63031320d365a43bed6",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+            "start": 0,
+            "end": 183,
+            "quote": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details.",
+            "historical_answer": "Default value is `full`."
+          }
+        ]
+      },
+      "source_records": {
+        "db11b63031320d365a43bed6": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+            "text": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details."
+          }
+        }
+      }
+    },
+    "bbc6890dc0570f8e": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"Which alternate merge conflict style removes matching lines near either edge of the conflict region?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "zdiff3 style removes matching lines near either edge of the conflict region.",
+          "evidence": [
+            {
+              "id": "2cd6e6057ddcdebd13c4efe5:16",
+              "source_id": "2cd6e6057ddcdebd13c4efe5",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 744,
+              "end": 808,
+              "quote": "the conflict region when those matching lines appear near either",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            },
+            {
+              "id": "2cd6e6057ddcdebd13c4efe5:17",
+              "source_id": "2cd6e6057ddcdebd13c4efe5",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 810,
+              "end": 852,
+              "quote": "the beginning or end of a conflict region.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"zdiff3 style removes matching lines near either edge of the conflict region.\",\n      \"evidence\": [\"2cd6e6057ddcdebd13c4efe5:16\", \"2cd6e6057ddcdebd13c4efe5:17\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        180
+      ],
+      "expected": {
+        "original_id": "q05-ordinary/simple",
+        "question": "Which alternate merge conflict style removes matching lines near either edge of the conflict region?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "aliases": [
+              "zdiff3"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "8344bac20b800832d6f3afa23aa229ef7948191e57a9b19d8c5ac032265f8558",
+        "historical_citations": [
+          {
+            "source_id": "2cd6e6057ddcdebd13c4efe5",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "start": 638,
+            "end": 852,
+            "quote": "Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region.",
+            "historical_answer": "zdiff3"
+          }
+        ]
+      },
+      "source_records": {
+        "2cd6e6057ddcdebd13c4efe5": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "text": "merge.conflictStyle::\n\tSpecify the style in which conflicted hunks are written out to\n\tworking tree files upon merge.  The default is \"merge\", which\n\tshows a `<<<<<<<` conflict marker, changes made by one side,\n\ta `=======` marker, changes made by the other side, and then\n\ta `>>>>>>>` marker.  An alternate style, \"diff3\", adds a `|||||||`\n\tmarker and the original text before the `=======` marker.  The\n\t\"merge\" style tends to produce smaller conflict regions than diff3,\n\tboth because of the exclusion of the original text, and because\n\twhen a subset of lines match on the two sides, they are just pulled\n\tout of the conflict region.  Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region."
+          }
+        }
+      }
+    },
+    "209024c4991e8ae0": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"What default subject prefix does format-patch put on its output?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The default subject prefix is '[PATCH]' with units and relevant conditions.",
+          "evidence": [
+            {
+              "id": "b33cab8c6b4353bf87cad57e:1",
+              "source_id": "b33cab8c6b4353bf87cad57e",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 24,
+              "end": 90,
+              "quote": "The default for format-patch is to output files with the '[PATCH]'",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            },
+            {
+              "id": "b33cab8c6b4353bf87cad57e:2",
+              "source_id": "b33cab8c6b4353bf87cad57e",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 92,
+              "end": 107,
+              "quote": "subject prefix.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"The default subject prefix is '[PATCH]' with units and relevant conditions.\",\n      \"evidence\": [\"b33cab8c6b4353bf87cad57e:1\", \"b33cab8c6b4353bf87cad57e:2\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        181
+      ],
+      "expected": {
+        "original_id": "q06-ordinary/simple",
+        "question": "What default subject prefix does format-patch put on its output?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "aliases": [
+              "[PATCH]"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "04bbde5e9c8daed00f24b27ac9b6ee422545fec2a091a607c5ea514415a4d0e9",
+        "historical_citations": [
+          {
+            "source_id": "b33cab8c6b4353bf87cad57e",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "start": 0,
+            "end": 107,
+            "quote": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix.",
+            "historical_answer": "[PATCH]"
+          }
+        ]
+      },
+      "source_records": {
+        "b33cab8c6b4353bf87cad57e": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "text": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix. Use this variable to change that prefix."
+          }
+        }
+      }
+    },
+    "bfe86273c8dd9044": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "manual",
+          "evidence": [
+            {
+              "id": "844dbf9c27f11316fcd46ccc:5",
+              "source_id": "844dbf9c27f11316fcd46ccc",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 175,
+              "end": 196,
+              "quote": "Defaults to `manual`.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\"kind\":\"single\",\"answers\":[{\"text\":\"manual\",\"evidence\":[\"844dbf9c27f11316fcd46ccc:5\"]}]}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        182
+      ],
+      "expected": {
+        "original_id": "q07-ordinary/premise",
+        "question": "If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "aliases": [
+              "manual"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "d123df7299f109e45866758a4cb94d006b456efdff95f4594d62b73415009f08",
+        "historical_citations": [
+          {
+            "source_id": "844dbf9c27f11316fcd46ccc",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "start": 0,
+            "end": 395,
+            "quote": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1].",
+            "historical_answer": "manual"
+          }
+        ]
+      },
+      "source_records": {
+        "844dbf9c27f11316fcd46ccc": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "text": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1]."
+          }
+        }
+      }
+    },
+    "46ba80b1e940bd5c": {
+      "question": "{\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"Which Git configuration option chooses between basic and extended when grep.patternType is set to default?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The Git configuration option that chooses between basic and extended when grep.patternType is set to default is grep.extendedRegexp.",
+          "evidence": [
+            {
+              "id": "c7327b8bae355fdb222e5af1:5",
+              "source_id": "c7327b8bae355fdb222e5af1",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 238,
+              "end": 305,
+              "quote": "value 'default' will use the `grep.extendedRegexp` option to choose",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"The Git configuration option that chooses between basic and extended when grep.patternType is set to default is grep.extendedRegexp.\",\n      \"evidence\": [\"c7327b8bae355fdb222e5af1:5\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        183
+      ],
+      "expected": {
+        "original_id": "q08-ordinary/simple",
+        "question": "Which Git configuration option chooses between basic and extended when grep.patternType is set to default?",
+        "as_of": "2025-03-14T16:19:41.000000+00:00",
+        "corpus": "public_git",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "aliases": [
+              "grep.extendedRegexp"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "answered",
+        "historical_output_sha256": "203107083685ae3b650cf23b1459a512a3bedf17593bfdf76fb0ff2309c00593",
+        "historical_citations": [
+          {
+            "source_id": "c7327b8bae355fdb222e5af1",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "start": 55,
+            "end": 338,
+            "quote": "Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'.",
+            "historical_answer": "grep.extendedRegexp"
+          }
+        ]
+      },
+      "source_records": {
+        "c7327b8bae355fdb222e5af1": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "text": "grep.patternType::\n\tSet the default matching behavior. Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'."
+          }
+        }
+      }
+    },
+    "84fa9cbab72c2da4": {
+      "question": "{\"as_of\":\"2025-03-15T16:19:41+00:00\",\"question\":\"What name does a newly cloned repository give its remote by default?\"}",
+      "status": "ok",
+      "kind": "conflict",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The default remote name for a newly cloned repository is `origin`.",
+          "evidence": [
+            {
+              "id": "878239f428b41a7f4b24f58a:3",
+              "source_id": "878239f428b41a7f4b24f58a",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 103,
+              "end": 112,
+              "quote": "`origin`.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        },
+        {
+          "text": "The default remote name for a newly cloned repository is `upstream`.",
+          "evidence": [
+            {
+              "id": "f91f3a39ce0a320652cc0633:1",
+              "source_id": "f91f3a39ce0a320652cc0633",
+              "owner": "Eli",
+              "speaker": "Eli",
+              "location": "trial://worklog/646956c0e537938abf1125c2",
+              "observed_at": "2025-03-15T16:19:41.000000+00:00",
+              "start": 60,
+              "end": 126,
+              "quote": "The default remote name for a newly cloned repository is upstream.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"conflict\",\n  \"answers\": [\n    {\n      \"text\": \"The default remote name for a newly cloned repository is `origin`.\",\n      \"evidence\": [\"878239f428b41a7f4b24f58a:3\"]\n    },\n    {\n      \"text\": \"The default remote name for a newly cloned repository is `upstream`.\",\n      \"evidence\": [\"f91f3a39ce0a320652cc0633:1\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        357
+      ],
+      "expected": {
+        "original_id": "d01/premise",
+        "question": "What name does a newly cloned repository give its remote by default?",
+        "as_of": "2025-03-15T16:19:41+00:00",
+        "corpus": "controlled_with_public_source",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "aliases": [
+              "origin"
+            ],
+            "condition": null
+          },
+          {
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "aliases": [
+              "upstream"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "unresolved",
+        "historical_output_sha256": "cb904c538103e363a69a28452161bdbbcad843283fe168b1168f6fa8461fe716",
+        "historical_citations": [
+          {
+            "source_id": "f91f3a39ce0a320652cc0633",
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "start": 0,
+            "end": 126,
+            "quote": "I checked the same unmodified release on the packaging job. The default remote name for a newly cloned repository is upstream.",
+            "historical_answer": "upstream"
+          },
+          {
+            "source_id": "878239f428b41a7f4b24f58a",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "start": 0,
+            "end": 335,
+            "quote": "`clone.defaultRemoteName`::\n\tThe name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.\nifdef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption.\nendif::[]\nifndef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption to linkgit:git-clone[1].\nendif::[]",
+            "historical_answer": "origin"
+          }
+        ]
+      },
+      "source_records": {
+        "878239f428b41a7f4b24f58a": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "text": "`clone.defaultRemoteName`::\n\tThe name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.\nifdef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption.\nendif::[]\nifndef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption to linkgit:git-clone[1].\nendif::[]"
+          }
+        },
+        "f91f3a39ce0a320652cc0633": {
+          "owner": "Eli",
+          "observed_at": "2025-03-15T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Eli",
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "text": "I checked the same unmodified release on the packaging job. The default remote name for a newly cloned repository is upstream."
+          }
+        }
+      }
+    },
+    "e44419b638d85dca": {
+      "question": "{\"as_of\":\"2025-03-15T16:19:41+00:00\",\"question\":\"What name does a newly cloned repository give its remote by default?\"}",
+      "status": "ok",
+      "kind": "conflict",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "The default remote name for a newly cloned repository is `origin`.",
+          "evidence": [
+            {
+              "id": "878239f428b41a7f4b24f58a:3",
+              "source_id": "878239f428b41a7f4b24f58a",
+              "owner": "Git documentation contributors",
+              "speaker": "Git documentation contributors",
+              "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+              "observed_at": "2025-03-14T16:19:41.000000+00:00",
+              "start": 103,
+              "end": 112,
+              "quote": "`origin`.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        },
+        {
+          "text": "The default remote name for a newly cloned repository is `upstream`.",
+          "evidence": [
+            {
+              "id": "f91f3a39ce0a320652cc0633:1",
+              "source_id": "f91f3a39ce0a320652cc0633",
+              "owner": "Eli",
+              "speaker": "Eli",
+              "location": "trial://worklog/646956c0e537938abf1125c2",
+              "observed_at": "2025-03-15T16:19:41.000000+00:00",
+              "start": 60,
+              "end": 126,
+              "quote": "The default remote name for a newly cloned repository is upstream.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\n  \"kind\": \"conflict\",\n  \"answers\": [\n    {\n      \"text\": \"The default remote name for a newly cloned repository is `origin`.\",\n      \"evidence\": [\"878239f428b41a7f4b24f58a:3\"]\n    },\n    {\n      \"text\": \"The default remote name for a newly cloned repository is `upstream`.\",\n      \"evidence\": [\"f91f3a39ce0a320652cc0633:1\"]\n    }\n  ]\n}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        356
+      ],
+      "expected": {
+        "original_id": "d01/premise",
+        "question": "What name does a newly cloned repository give its remote by default?",
+        "as_of": "2025-03-15T16:19:41+00:00",
+        "corpus": "controlled_with_public_source",
+        "key_source": "evaluation/revision/final-key.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "aliases": [
+              "origin"
+            ],
+            "condition": null
+          },
+          {
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "aliases": [
+              "upstream"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "unresolved",
+        "historical_output_sha256": "cb904c538103e363a69a28452161bdbbcad843283fe168b1168f6fa8461fe716",
+        "historical_citations": [
+          {
+            "source_id": "f91f3a39ce0a320652cc0633",
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "start": 0,
+            "end": 126,
+            "quote": "I checked the same unmodified release on the packaging job. The default remote name for a newly cloned repository is upstream.",
+            "historical_answer": "upstream"
+          },
+          {
+            "source_id": "878239f428b41a7f4b24f58a",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "start": 0,
+            "end": 335,
+            "quote": "`clone.defaultRemoteName`::\n\tThe name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.\nifdef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption.\nendif::[]\nifndef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption to linkgit:git-clone[1].\nendif::[]",
+            "historical_answer": "origin"
+          }
+        ]
+      },
+      "source_records": {
+        "878239f428b41a7f4b24f58a": {
+          "owner": "Git documentation contributors",
+          "observed_at": "2025-03-14T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Git documentation contributors",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "text": "`clone.defaultRemoteName`::\n\tThe name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.\nifdef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption.\nendif::[]\nifndef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption to linkgit:git-clone[1].\nendif::[]"
+          }
+        },
+        "f91f3a39ce0a320652cc0633": {
+          "owner": "Eli",
+          "observed_at": "2025-03-15T16:19:41.000000+00:00",
+          "source": {
+            "speaker": "Eli",
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "text": "I checked the same unmodified release on the packaging job. The default remote name for a newly cloned repository is upstream."
+          }
+        }
+      }
+    }
+  },
+  "mapping": {
+    "fd5f2f97f97be9a5": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask"
+    },
+    "cadb8ec698638192": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-1",
+      "operation": "ask"
+    },
+    "0e5d87e0e05cff93": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-2",
+      "operation": "ask"
+    },
+    "1c7fe7e99c8745b0": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-3",
+      "operation": "ask"
+    },
+    "cebbee320b1a2dfd": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-4",
+      "operation": "ask"
+    },
+    "c152d4cec3d02f65": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask"
+    },
+    "bbc6890dc0570f8e": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-1",
+      "operation": "ask"
+    },
+    "209024c4991e8ae0": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-2",
+      "operation": "ask"
+    },
+    "bfe86273c8dd9044": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-3",
+      "operation": "ask"
+    },
+    "46ba80b1e940bd5c": {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-4",
+      "operation": "ask"
+    },
+    "84fa9cbab72c2da4": {
+      "case_id": "legacy-ae24415845ae48a7",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask"
+    },
+    "e44419b638d85dca": {
+      "case_id": "legacy-ae24415845ae48a7",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask"
+    }
+  },
+  "operation_costs": [
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "import",
+      "operation": "import_history",
+      "status": "ok",
+      "calls": 0,
+      "seconds": 0.8809239771217108,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 35.39842261746526,
+      "prompt_tokens": 11319,
+      "completion_tokens": 52,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-1",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 4.000605536624789,
+      "prompt_tokens": 6967,
+      "completion_tokens": 92,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-2",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 3.818771367892623,
+      "prompt_tokens": 6340,
+      "completion_tokens": 91,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-3",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 1.953525509685278,
+      "prompt_tokens": 4296,
+      "completion_tokens": 39,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "simple",
+      "label": "qa-4",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 6.846440136432648,
+      "prompt_tokens": 16257,
+      "completion_tokens": 80,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "import",
+      "operation": "import_history",
+      "status": "ok",
+      "calls": 174,
+      "seconds": 754.7129957228899,
+      "prompt_tokens": 514389,
+      "completion_tokens": 26272,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 4.513664131984115,
+      "prompt_tokens": 11319,
+      "completion_tokens": 52,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-1",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 4.024594670161605,
+      "prompt_tokens": 6967,
+      "completion_tokens": 92,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-2",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 3.837361415848136,
+      "prompt_tokens": 6340,
+      "completion_tokens": 91,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-3",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 1.9588031359016895,
+      "prompt_tokens": 4296,
+      "completion_tokens": 39,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-d474ab3d7822c8ac",
+      "arm": "cupmem",
+      "label": "qa-4",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 7.160247920081019,
+      "prompt_tokens": 16257,
+      "completion_tokens": 80,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-ae24415845ae48a7",
+      "arm": "simple",
+      "label": "import",
+      "operation": "import_history",
+      "status": "ok",
+      "calls": 0,
+      "seconds": 0.6104352828115225,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-ae24415845ae48a7",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 3.3913506381213665,
+      "prompt_tokens": 6225,
+      "completion_tokens": 129,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-ae24415845ae48a7",
+      "arm": "cupmem",
+      "label": "import",
+      "operation": "import_history",
+      "status": "ok",
+      "calls": 172,
+      "seconds": 829.3808357883245,
+      "prompt_tokens": 522658,
+      "completion_tokens": 28948,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-ae24415845ae48a7",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 4.8924405463039875,
+      "prompt_tokens": 6225,
+      "completion_tokens": 129,
+      "calls_missing_usage": 0
+    }
+  ],
+  "unfinished_operation_calls": 0,
+  "unfinished_operation_call_ids": [],
+  "all_physical_calls": 358,
+  "program_status": "complete",
+  "rating_fields": {
+    "qa": [
+      "answer_correct",
+      "citations_support_answer",
+      "unsupported_extra_claims",
+      "reason"
+    ],
+    "review": [
+      "supported_reconsideration",
+      "unnecessary_proposals",
+      "wrong_target_or_kind",
+      "reason"
+    ]
+  },
+  "rule": "Status/schema/citation offsets alone never establish semantic success; not_executed and needs_rebuild fail service acceptance."
+}

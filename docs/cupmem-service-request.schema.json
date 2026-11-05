@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CUPMemService request v1",
+  "type": "object",
+  "required": ["operation"],
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": ["owner", "observed_at", "source"],
+      "properties": {
+        "owner": {"type": "string", "minLength": 1},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "source": {
+          "type": "object",
+          "required": ["speaker", "location", "text"],
+          "properties": {
+            "speaker": {"type": "string", "minLength": 1},
+            "location": {"type": "string", "minLength": 1},
+            "text": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {"properties": {"operation": {"const": "ingest"}, "source": {"$ref": "#/$defs/source"}}, "required": ["source"]},
+    {"properties": {"operation": {"const": "ask"}, "question": {"type": "string", "minLength": 1}, "temporal_scope": {"enum": ["current", "historical"]}}, "required": ["question"]},
+    {"properties": {"operation": {"const": "review"}, "proposal_id": {"type": "string", "minLength": 1}, "actor": {"type": "string", "minLength": 1}, "choice": {"enum": ["approve", "reject"]}}, "required": ["proposal_id", "actor", "choice"]},
+    {"properties": {"operation": {"const": "rebuild"}}}
+  ]
+}

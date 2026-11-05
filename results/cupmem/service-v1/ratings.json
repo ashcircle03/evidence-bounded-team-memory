@@ -1,0 +1,62 @@
+{
+  "method": "One developer manual inspection against service-expected.json, fixed before inference; not independent or blinded benchmark grading",
+  "scope": "One known synthetic development stream, three distinct questions asked at five checkpoints",
+  "qa": [
+    {
+      "label": "before_review/runtimes",
+      "meets_frozen_answer_and_citation_requirement": true,
+      "reason": "Both measurements retain the correct process count, numeric runtime and their respective original sentence."
+    },
+    {
+      "label": "before_review/folder",
+      "meets_frozen_answer_and_citation_requirement": true,
+      "reason": "Cedar-audit is supplied with its exact original sentence despite pending reconsideration elsewhere in the same source."
+    },
+    {
+      "label": "before_review/reason",
+      "meets_frozen_answer_and_citation_requirement": true,
+      "reason": "The suspension reason (one-process deployment constraint) and changed four-process permission are both answered and cited."
+    },
+    {
+      "label": "after_review/runtimes",
+      "meets_frozen_answer_and_citation_requirement": true,
+      "reason": "Both measurements survive simulated owner approval and unrelated intake with the correct conditions and citations."
+    },
+    {
+      "label": "after_review/folder",
+      "meets_frozen_answer_and_citation_requirement": true,
+      "reason": "The original folder value and its citation survive simulated owner approval and unrelated intake."
+    }
+  ],
+  "review": [
+    {
+      "label": "changed_condition",
+      "kind": "reconsider",
+      "target_and_changed_condition_supported": true,
+      "reason": "The old suspension is linked to its explicit one-process rationale and the new four-process permission.",
+      "caveat": "The explanation says invalidates the earlier decision, stronger than a recommendation to reconsider. It remains pending until explicit simulated owner approval; no source was invalidated."
+    },
+    {
+      "label": "changed_condition",
+      "kind": "coexist",
+      "supported": true,
+      "reason": "The two measurements concern one versus four processes; both originals remain available. new_condition cites the deployment permission while the incoming witness explicitly names the four-process measurement."
+    },
+    {
+      "label": "unrelated_report",
+      "proposal_count": 0,
+      "meets_frozen_requirement": true,
+      "reason": "The new Birch meeting location does not alter the prior Cedar decisions or measurements."
+    }
+  ],
+  "native_diagnostic": {
+    "required_qa_content_present": 1,
+    "qa_checkpoints": 5,
+    "qualifier": "Internal intermediate answers from the same run, content-only inspection; not an independent baseline or native citation metric. Four omit the requested runtime/folder details."
+  },
+  "limitations": [
+    "One synthetic stream is not a false-positive rate or retrieval recall estimate.",
+    "All original records fit in the readout inputs; no evidence of scaling or advantage over direct reading.",
+    "Legacy 20-QA preservation and official STALE reproduction remain unmeasured for this service."
+  ]
+}

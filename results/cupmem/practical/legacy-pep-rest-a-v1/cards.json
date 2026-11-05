@@ -1,0 +1,252 @@
+{
+  "cards": {
+    "55abeda48ace801c": {
+      "question": "{\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"What notation assigns a name within a Python expression under the assignment expressions proposal?\"}",
+      "status": "error",
+      "kind": null,
+      "errors": [
+        {
+          "stage": "source_readout",
+          "type": "BadRequestError"
+        }
+      ],
+      "warnings": [],
+      "answers": [],
+      "proposals": [],
+      "raw": null,
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        0
+      ],
+      "expected": {
+        "original_id": "old-pep-572-conflict/premise",
+        "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+        "as_of": "2026-11-03T12:00:00Z",
+        "corpus": "PEP public source with controlled counterstatement",
+        "key_source": "evaluation/team_pilot/cases.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "aliases": [
+              "NAME := expr",
+              ":="
+            ],
+            "condition": null
+          },
+          {
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "aliases": [
+              "NAME <- expr",
+              "<-"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "unresolved",
+        "historical_output_sha256": "ca9656505f922fccc3cb0c6fae65f1269291a3c44ced3431dd5e33b170307479",
+        "historical_citations": [
+          {
+            "source_id": "d60afae8bbc6e0863adaf8cf",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "start": 469,
+            "end": 587,
+            "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+            "historical_answer": "NAME := expr"
+          },
+          {
+            "source_id": "ec1d816197eea4516c748e72",
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "start": 0,
+            "end": 138,
+            "quote": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions.",
+            "historical_answer": "NAME <- expr"
+          }
+        ]
+      },
+      "source_records": {
+        "d60afae8bbc6e0863adaf8cf": {
+          "owner": "PEP 572 contributors",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "PEP 572 contributors",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "text": "PEP: 572\nTitle: Assignment Expressions\nAuthor: Chris Angelico <rosuav@gmail.com>, Tim Peters <tim.peters@gmail.com>,\n        Guido van Rossum <guido@python.org>\nStatus: Final\nType: Standards Track\nCreated: 28-Feb-2018\nPython-Version: 3.8\nPost-History: 28-Feb-2018, 02-Mar-2018, 23-Mar-2018, 04-Apr-2018, 17-Apr-2018,\n              25-Apr-2018, 09-Jul-2018, 05-Aug-2019\nResolution: https://mail.python.org/pipermail/python-dev/2018-July/154601.html\n\n\nAbstract\n========\n\nThis is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.\n\nAs part of this change, there is also an update to dictionary comprehension\nevaluation order to ensure key expressions are executed before value\nexpressions (allowing the key to be bound to a name and then re-used as part of\ncalculating the corresponding value).\n\nDuring discussion of this PEP, the operator became informally known as\n\"the walrus operator\". The construct's formal name is \"Assignment Expressions\"\n(as per the PEP title), but they may also be referred to as \"Named Expressions\"\n(e.g. the CPython reference implementation uses that name internally).\n\n\nRationale\n=========\n\nNaming the result of an expression is an important part of programming,\nallowing a descriptive name to be used in place of a longer expression,\nand permitting reuse.  Currently, this feature is available only in\nstatement form, making it unavailable in list comprehensions and other\nexpression contexts.\n\nAdditionally, naming sub-parts of a large expression can assist an interactive\ndebugger, providing useful display hooks and partial results. Without a way to\ncapture sub-expressions inline, this would require refactoring of the original\ncode; with assignment expressions, this merely requires the insertion of a few\n``name :=`` markers. Removing the need to refactor reduces the likelihood that\nthe code be inadvertently changed as part of debugging (a common cause of\nHeisenbugs), and is easier to dictate to another programmer.\n\nThe importance of real code\n---------------------------\n\nDuring the development of this PEP many people (supporters and critics\nboth) have had a tendency to focus on toy examples on the one hand,\nand on overly complex examples on the other.\n\nThe danger of toy examples is twofold: they are often too abstract to\nmake anyone go \"ooh, that's compelling\", and they are easily refuted\nwith \"I would never write it that way anyway\".\n\nThe danger of overly complex examples is that they provide a\nconvenient strawman for critics of the proposal to shoot down (\"that's\nobfuscated\").\n\nYet there is some use for both extremely simple and extremely complex\nexamples: they are helpful to clarify the intended semantics.\nTherefore, there will be some of each below.\n\nHowever, in order to be *compelling*, examples should be rooted in\nreal code, i.e. code that was written without any thought of this PEP,\nas part of a useful application, however large or small.  Tim Peters\nhas been extremely helpful by going over his own personal code\nrepository and picking examples of code he had written that (in his\nview) would have been *clearer* if rewritten with (sparing) use of\nassignment expressions.  His conclusion: the current proposal would\nhave allowed a modest but clear improvement in quite a few bits of\ncode.\n\nAnother use of real code is to observe indirectly how much value\nprogrammers place on compactness.  Guido van Rossum searched through a\nDropbox code base and discovered some evidence that programmers value\nwriting fewer lines over shorter lines.\n\nCase in point: Guido found several examples where a programmer\nrepeated a subexpression, slowing down the program, in order to save\none line of code, e.g. instead of writing::\n\n    match = re.match(data)\n    group = match.group(1) if match else None\n\nthey would write::\n\n    group = re.match(data).group(1) if re.match(data) else None\n\nAnother example illustrates that programmers sometimes do more work to\nsave an extra level of indentation::\n\n    match1 = pattern1.match(data)\n    match2 = pattern2.match(data)\n    if match1:\n        result = match1.group(1)\n    elif match2:\n        result = match2.group(2)\n    else:\n        result = None\n\nThis code tries to match ``pattern2`` even if ``pattern1`` has a match\n(in which case the match on ``pattern2`` is never used).  The more\nefficient rewrite would have been::\n\n    match1 = pattern1.match(data)\n    if match1:\n        result = match1.group(1)\n    else:\n        match2 = pattern2.match(data)\n        if match2:\n            result = match2.group(2)\n        else:\n            result = None\n\n\nSyntax and semantics\n====================\n\nIn most contexts where arbitrary Python expressions can be used, a\n**named expression** can appear.  This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.\n\nThe value of such a named expression is the same as the incorporated\nexpression, with the additional side-effect that the target is assigned\nthat value::\n\n    # Handle a matched regex\n    if (match := pattern.search(data)) is not None:\n        # Do something with match\n\n    # A loop that can't be trivially rewritten using 2-arg iter()\n    while chunk := file.read(8192):\n       process(chunk)\n\n    # Reuse a value that's expensive to compute"
+          }
+        },
+        "ec1d816197eea4516c748e72": {
+          "owner": "Dee",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "Dee",
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "text": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions."
+          }
+        }
+      }
+    },
+    "c6e1b3d6aeb97857": {
+      "question": "{\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"What notation assigns a name within a Python expression under the assignment expressions proposal?\"}",
+      "status": "needs_rebuild",
+      "kind": null,
+      "errors": [],
+      "warnings": [],
+      "answers": [],
+      "proposals": [],
+      "raw": null,
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": false,
+      "physical_call_ids": [],
+      "expected": {
+        "original_id": "old-pep-572-conflict/premise",
+        "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+        "as_of": "2026-11-03T12:00:00Z",
+        "corpus": "PEP public source with controlled counterstatement",
+        "key_source": "evaluation/team_pilot/cases.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "aliases": [
+              "NAME := expr",
+              ":="
+            ],
+            "condition": null
+          },
+          {
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "aliases": [
+              "NAME <- expr",
+              "<-"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "unresolved",
+        "historical_output_sha256": "ca9656505f922fccc3cb0c6fae65f1269291a3c44ced3431dd5e33b170307479",
+        "historical_citations": [
+          {
+            "source_id": "d60afae8bbc6e0863adaf8cf",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "start": 469,
+            "end": 587,
+            "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+            "historical_answer": "NAME := expr"
+          },
+          {
+            "source_id": "ec1d816197eea4516c748e72",
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "start": 0,
+            "end": 138,
+            "quote": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions.",
+            "historical_answer": "NAME <- expr"
+          }
+        ]
+      },
+      "source_records": {
+        "d60afae8bbc6e0863adaf8cf": {
+          "owner": "PEP 572 contributors",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "PEP 572 contributors",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "text": "PEP: 572\nTitle: Assignment Expressions\nAuthor: Chris Angelico <rosuav@gmail.com>, Tim Peters <tim.peters@gmail.com>,\n        Guido van Rossum <guido@python.org>\nStatus: Final\nType: Standards Track\nCreated: 28-Feb-2018\nPython-Version: 3.8\nPost-History: 28-Feb-2018, 02-Mar-2018, 23-Mar-2018, 04-Apr-2018, 17-Apr-2018,\n              25-Apr-2018, 09-Jul-2018, 05-Aug-2019\nResolution: https://mail.python.org/pipermail/python-dev/2018-July/154601.html\n\n\nAbstract\n========\n\nThis is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.\n\nAs part of this change, there is also an update to dictionary comprehension\nevaluation order to ensure key expressions are executed before value\nexpressions (allowing the key to be bound to a name and then re-used as part of\ncalculating the corresponding value).\n\nDuring discussion of this PEP, the operator became informally known as\n\"the walrus operator\". The construct's formal name is \"Assignment Expressions\"\n(as per the PEP title), but they may also be referred to as \"Named Expressions\"\n(e.g. the CPython reference implementation uses that name internally).\n\n\nRationale\n=========\n\nNaming the result of an expression is an important part of programming,\nallowing a descriptive name to be used in place of a longer expression,\nand permitting reuse.  Currently, this feature is available only in\nstatement form, making it unavailable in list comprehensions and other\nexpression contexts.\n\nAdditionally, naming sub-parts of a large expression can assist an interactive\ndebugger, providing useful display hooks and partial results. Without a way to\ncapture sub-expressions inline, this would require refactoring of the original\ncode; with assignment expressions, this merely requires the insertion of a few\n``name :=`` markers. Removing the need to refactor reduces the likelihood that\nthe code be inadvertently changed as part of debugging (a common cause of\nHeisenbugs), and is easier to dictate to another programmer.\n\nThe importance of real code\n---------------------------\n\nDuring the development of this PEP many people (supporters and critics\nboth) have had a tendency to focus on toy examples on the one hand,\nand on overly complex examples on the other.\n\nThe danger of toy examples is twofold: they are often too abstract to\nmake anyone go \"ooh, that's compelling\", and they are easily refuted\nwith \"I would never write it that way anyway\".\n\nThe danger of overly complex examples is that they provide a\nconvenient strawman for critics of the proposal to shoot down (\"that's\nobfuscated\").\n\nYet there is some use for both extremely simple and extremely complex\nexamples: they are helpful to clarify the intended semantics.\nTherefore, there will be some of each below.\n\nHowever, in order to be *compelling*, examples should be rooted in\nreal code, i.e. code that was written without any thought of this PEP,\nas part of a useful application, however large or small.  Tim Peters\nhas been extremely helpful by going over his own personal code\nrepository and picking examples of code he had written that (in his\nview) would have been *clearer* if rewritten with (sparing) use of\nassignment expressions.  His conclusion: the current proposal would\nhave allowed a modest but clear improvement in quite a few bits of\ncode.\n\nAnother use of real code is to observe indirectly how much value\nprogrammers place on compactness.  Guido van Rossum searched through a\nDropbox code base and discovered some evidence that programmers value\nwriting fewer lines over shorter lines.\n\nCase in point: Guido found several examples where a programmer\nrepeated a subexpression, slowing down the program, in order to save\none line of code, e.g. instead of writing::\n\n    match = re.match(data)\n    group = match.group(1) if match else None\n\nthey would write::\n\n    group = re.match(data).group(1) if re.match(data) else None\n\nAnother example illustrates that programmers sometimes do more work to\nsave an extra level of indentation::\n\n    match1 = pattern1.match(data)\n    match2 = pattern2.match(data)\n    if match1:\n        result = match1.group(1)\n    elif match2:\n        result = match2.group(2)\n    else:\n        result = None\n\nThis code tries to match ``pattern2`` even if ``pattern1`` has a match\n(in which case the match on ``pattern2`` is never used).  The more\nefficient rewrite would have been::\n\n    match1 = pattern1.match(data)\n    if match1:\n        result = match1.group(1)\n    else:\n        match2 = pattern2.match(data)\n        if match2:\n            result = match2.group(2)\n        else:\n            result = None\n\n\nSyntax and semantics\n====================\n\nIn most contexts where arbitrary Python expressions can be used, a\n**named expression** can appear.  This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.\n\nThe value of such a named expression is the same as the incorporated\nexpression, with the additional side-effect that the target is assigned\nthat value::\n\n    # Handle a matched regex\n    if (match := pattern.search(data)) is not None:\n        # Do something with match\n\n    # A loop that can't be trivially rewritten using 2-arg iter()\n    while chunk := file.read(8192):\n       process(chunk)\n\n    # Reuse a value that's expensive to compute"
+          }
+        },
+        "ec1d816197eea4516c748e72": {
+          "owner": "Dee",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "Dee",
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "text": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions."
+          }
+        }
+      }
+    }
+  },
+  "mapping": {
+    "55abeda48ace801c": {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask"
+    },
+    "c6e1b3d6aeb97857": {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask"
+    }
+  },
+  "operation_costs": [
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "simple",
+      "label": "import",
+      "operation": "import_history",
+      "status": "ok",
+      "calls": 0,
+      "seconds": 0.062082355841994286,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "error",
+      "calls": 1,
+      "seconds": 4.618578590452671,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 1
+    },
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "cupmem",
+      "label": "import",
+      "operation": "import_history",
+      "status": "error",
+      "calls": 107,
+      "seconds": 653.2348646298051,
+      "prompt_tokens": 208346,
+      "completion_tokens": 13745,
+      "calls_missing_usage": 3
+    },
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "needs_rebuild",
+      "calls": 0,
+      "seconds": 4.686042666435242e-05,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 0
+    }
+  ],
+  "unfinished_operation_calls": 0,
+  "unfinished_operation_call_ids": [],
+  "all_physical_calls": 108,
+  "program_status": "complete",
+  "rating_fields": {
+    "qa": [
+      "answer_correct",
+      "citations_support_answer",
+      "unsupported_extra_claims",
+      "reason"
+    ],
+    "review": [
+      "supported_reconsideration",
+      "unnecessary_proposals",
+      "wrong_target_or_kind",
+      "reason"
+    ]
+  },
+  "rule": "Status/schema/citation offsets alone never establish semantic success; not_executed and needs_rebuild fail service acceptance."
+}

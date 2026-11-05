@@ -1,0 +1,18 @@
+{
+  "scope": "development only; not benchmark scoring",
+  "engineering": [
+    "all operations finish without error/invalid/needs_rebuild",
+    "original source texts are unchanged",
+    "all returned citations match original offsets",
+    "duplicate intake makes zero additional model calls",
+    "only explicit original-owner action changes approval"
+  ],
+  "semantic": {
+    "changed_condition": "reconsider the suspended Cedar trials because deployment changed from one to four processes; cite old decision/reason and new permission",
+    "unrelated_report": "no consequential proposal",
+    "runtimes": "one process 40 seconds per batch AND four processes 12 seconds per batch, with matching conditions and citations",
+    "folder": "Cedar-audit with exact original sentence, before and after review",
+    "reason": "original deployment allowed only one process; now permits four, with both original sentences"
+  },
+  "scoring": "Manual inspection of exact outputs; keep structure warnings separate from answer content. No output-driven rule changes."
+}

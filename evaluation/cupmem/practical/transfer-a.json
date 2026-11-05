@@ -1,0 +1,485 @@
+{
+  "scope": "Controlled source-grounded transfer:20 paired histories from10 independent genuine Git follow-ups; original text, no manual claim labels",
+  "cases": [
+    {
+      "id": "pack-validity-present",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Taylor Blau",
+              "observed_at": "2021-10-28T22:32:14.000000+00:00",
+              "source": {
+                "speaker": "Taylor Blau",
+                "location": "https://github.com/git/git/commit/60980aed786487e9113f0cb2907dfc75a77d363c",
+                "text": "midx.c: write MIDX filenames to strbuf\n\nTo ask for the name of a MIDX and its corresponding .rev file, callers\ninvoke get_midx_filename() and get_midx_rev_filename(), respectively.\nThese both invoke xstrfmt(), allocating a chunk of memory which must be\nfreed later on.\n\nThis makes callers in pack-bitmap.c somewhat awkward. Specifically,\nmidx_bitmap_filename(), which is implemented like:\n\n    return xstrfmt(\"%s-%s.bitmap\",\n                   get_midx_filename(midx->object_dir),\n                   hash_to_hex(get_midx_checksum(midx)));\n\nthis leaks the second argument to xstrfmt(), which itself was allocated\nwith xstrfmt(). This caller could assign both the result of\nget_midx_filename() and the outer xstrfmt() to a temporary variable,\nremembering to free() the former before returning. But that involves a\nwasteful copy.\n\nInstead, get_midx_filename() and get_midx_rev_filename() take a strbuf\nas an output parameter. This way midx_bitmap_filename() can manipulate\nand pass around a temporary buffer which it detaches back to its caller.\n\nThat allows us to implement the function without copying or open-coding\nget_midx_filename() in a way that doesn't leak.\n\nUpdate the other callers of get_midx_filename() and\nget_midx_rev_filename() accordingly."
+              }
+            },
+            {
+              "owner": "Taylor Blau",
+              "observed_at": "2022-05-24T21:27:19.000000+00:00",
+              "source": {
+                "speaker": "Taylor Blau",
+                "location": "https://github.com/git/git/commit/44f9fd649673362bdbaae7067a9919b1fe4c96d1",
+                "text": "pack-bitmap.c: check preferred pack validity when opening MIDX bitmap\n\nWhen pack-objects adds an entry to its packing list, it marks the\npackfile and offset containing the object, which we may later use during\nverbatim reuse (c.f., `write_reused_pack_verbatim()`).\n\nIf the packfile in question is deleted in the background (e.g., due to a\nconcurrent `git repack`), we'll die() as a result of calling use_pack(),\nunless we have an open file descriptor on the pack itself. 4c08018204\n(pack-objects: protect against disappearing packs, 2011-10-14) worked\naround this by opening the pack ahead of time before recording it as a\nvalid source for reuse.\n\n4c08018204's treatment meant that we could tolerate disappearing packs,\nsince it ensures we always have an open file descriptor on any pack that\nwe mark as a valid source for reuse. This tightens the race to only\nhappen when we need to close an open pack's file descriptor (c.f., the\ncaller of `packfile.c::get_max_fd_limit()`) _and_ that pack was deleted,\nin which case we'll complain that a pack could not be accessed and\ndie().\n\nThe pack bitmap code does this, too, since prior to dc1daacdcc\n(pack-bitmap: check pack validity when opening bitmap, 2021-07-23) it\nwas vulnerable to the same race.\n\nThe MIDX bitmap code does not do this, and is vulnerable to the same\nrace. Apply the same treatment as dc1daacdcc to the routine responsible\nfor opening the multi-pack bitmap's preferred pack to close this race.\n\nThis patch handles the \"preferred\" pack (c.f., the section\n\"multi-pack-index reverse indexes\" in\nDocumentation/technical/pack-format.txt) specially, since pack-objects\ndepends on reusing exact chunks of that pack verbatim in\nreuse_partial_packfile_from_bitmap(). So if that pack cannot be loaded,\nthe utility of a bitmap is significantly diminished.\n\nSimilar to dc1daacdcc, we could technically just add this check in\nreuse_partial_packfile_from_bitmap(), since it's possible to use a MIDX\n.bitmap without needing to open any of its packs. But it's simpler to do\nthe check as early as possible, covering all direct uses of the\npreferred pack. Note that doing this check early requires us to call\nprepare_midx_pack() early, too, so move the relevant part of that loop\nfrom load_reverse_index() into open_midx_bitmap_1().\n\nSubsequent patches handle the non-preferred packs in a slightly\ndifferent fashion."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Taylor Blau",
+            "observed_at": "2024-12-18T17:51:09.000000+00:00",
+            "source": {
+              "speaker": "Taylor Blau",
+              "location": "https://github.com/git/git/commit/62b3ec8a3f160cc9f1949b28644fc3947252db73",
+              "text": "pack-bitmap.c: ensure pack validity for all reuse packs\n\nCommit 44f9fd6496 (pack-bitmap.c: check preferred pack validity when\nopening MIDX bitmap, 2022-05-24) prevents a race condition whereby the\npreferred pack disappears between opening the MIDX bitmap and attempting\nverbatim reuse out of its packs.\n\nThat commit forces open_midx_bitmap_1() to ensure the validity of the\nMIDX's preferred pack, meaning that we have an open file handle on the\n*.pack, ensuring that we can reuse bytes out of verbatim later on in the\nprocess[^1].\n\nBut 44f9fd6496 was not extended to cover multi-pack reuse, meaning that\nthis same race condition exists for non-preferred packs during verbatim\nreuse. Work around that race in the same way by only marking valid packs\nas reuse-able. For packs that aren't reusable, skip over them but\ninclude the number of objects they have to ensure we allocate a large\nenough 'reuse' bitmap (e.g. if a pack in the middle of the MIDX\ndisappeared but we still want to reuse later packs).\n\nSince we're ensuring the validity of these packs within the verbatim\nreuse code, we no longer have to special-case the preferred pack and\nopen it within the open_midx_bitmap_1() function.\n\nAn alternative approach to the one taken here would be to open all\nMIDX'd packs from within open_midx_bitmap_1(). But that would be both\nslower and make the bitmaps less useful, since we can still perform some\npack reuse among the packs that still exist when the *.bitmap is opened.\n\nAfter applying this patch, we can simulate the new behavior after\ninstrumenting Git like so:\n\n    diff --git a/packfile.c b/packfile.c\n    index 9560f0a33c..aedce72524 100644\n    --- a/packfile.c\n    +++ b/packfile.c\n    @@ -557,6 +557,11 @@ static int open_packed_git_1(struct packed_git *p)\n     \t\t; /* nothing */\n\n     \tp->pack_fd = git_open(p->pack_name);\n    +\t{\n    +\t\tconst char *delete = getenv(\"GIT_RACILY_DELETE\");\n    +\t\tif (delete && !strcmp(delete, pack_basename(p)))\n    +\t\t\treturn -1;\n    +\t}\n     \tif (p->pack_fd < 0 || fstat(p->pack_fd, &st))\n     \t\treturn -1;\n     \tpack_open_fds++;\n\nand adding the following test:\n\n    test_expect_success 'disappearing packs' '\n            git init disappearing-packs &&\n            (\n                    cd disappearing-packs &&\n\n                    git config pack.allowPackReuse multi &&\n\n                    test_commit A &&\n                    test_commit B &&\n                    test_commit C &&\n\n                    A=\"$(echo \"A\" | git pack-objects --revs $packdir/pack-A)\" &&\n                    B=\"$(echo \"A..B\" | git pack-objects --revs $packdir/pack-B)\" &&\n                    C=\"$(echo \"B..C\" | git pack-objects --revs $packdir/pack-C)\" &&\n\n                    git multi-pack-index write --bitmap --preferred-pack=pack-A-$A.idx &&\n\n                    test_pack_objects_reused_all 9 3 &&\n\n                    test_env GIT_RACILY_DELETE=pack-A-$A.pack \\\n                            test_pack_objects_reused_all 6 2 &&\n                    test_env GIT_RACILY_DELETE=pack-B-$B.pack \\\n                            test_pack_objects_reused_all 6 2 &&\n                    test_env GIT_RACILY_DELETE=pack-C-$C.pack \\\n                            test_pack_objects_reused_all 6 2\n\n            )\n    '\n\nNote that we could relax the single-pack version of this which was most\nrecently addressed in dc1daacdcc (pack-bitmap: check pack validity when\nopening bitmap, 2021-07-23), but only partially. Because we still need\nto know the object count in the pack, we'd still have to open the pack's\n*.idx, so the savings there are marginal.\n\nNote likewise that we add a new \"if (!packs_nr)\" early return in the\npack reuse code to avoid a potentially expensive allocation on the\n'reuse' bitmap in the case that no packs are available for reuse.\n\n[^1]: Unless we run out of open file handles. If that happens and we are\n  forced to close the only open file handle of a file that has been\n  removed from underneath us, there is nothing we can do."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "In the earlier MIDX filename allocation change, why did get_midx_filename and get_midx_rev_filename take a strbuf output parameter?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "pack-validity-absent",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Jeff King",
+              "observed_at": "2014-11-20T20:42:49.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/17a4be26060b00a867cbe54ee906fe03813470ec",
+                "text": "parse_color: support 24-bit RGB values\n\nSome terminals (like XTerm) allow full 24-bit RGB color\nspecifications using an extension to the regular ANSI color\nscheme. Let's allow users to specify hex RGB colors,\nenabling the all-important feature of hot pink ref\ndecorations:\n\n  git log --format=\"%h%C(#ff69b4)%d%C(reset) %s\""
+              }
+            },
+            {
+              "owner": "Taylor Blau",
+              "observed_at": "2021-10-28T22:32:14.000000+00:00",
+              "source": {
+                "speaker": "Taylor Blau",
+                "location": "https://github.com/git/git/commit/60980aed786487e9113f0cb2907dfc75a77d363c",
+                "text": "midx.c: write MIDX filenames to strbuf\n\nTo ask for the name of a MIDX and its corresponding .rev file, callers\ninvoke get_midx_filename() and get_midx_rev_filename(), respectively.\nThese both invoke xstrfmt(), allocating a chunk of memory which must be\nfreed later on.\n\nThis makes callers in pack-bitmap.c somewhat awkward. Specifically,\nmidx_bitmap_filename(), which is implemented like:\n\n    return xstrfmt(\"%s-%s.bitmap\",\n                   get_midx_filename(midx->object_dir),\n                   hash_to_hex(get_midx_checksum(midx)));\n\nthis leaks the second argument to xstrfmt(), which itself was allocated\nwith xstrfmt(). This caller could assign both the result of\nget_midx_filename() and the outer xstrfmt() to a temporary variable,\nremembering to free() the former before returning. But that involves a\nwasteful copy.\n\nInstead, get_midx_filename() and get_midx_rev_filename() take a strbuf\nas an output parameter. This way midx_bitmap_filename() can manipulate\nand pass around a temporary buffer which it detaches back to its caller.\n\nThat allows us to implement the function without copying or open-coding\nget_midx_filename() in a way that doesn't leak.\n\nUpdate the other callers of get_midx_filename() and\nget_midx_rev_filename() accordingly."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Taylor Blau",
+            "observed_at": "2024-12-18T17:51:09.000000+00:00",
+            "source": {
+              "speaker": "Taylor Blau",
+              "location": "https://github.com/git/git/commit/62b3ec8a3f160cc9f1949b28644fc3947252db73",
+              "text": "pack-bitmap.c: ensure pack validity for all reuse packs\n\nCommit 44f9fd6496 (pack-bitmap.c: check preferred pack validity when\nopening MIDX bitmap, 2022-05-24) prevents a race condition whereby the\npreferred pack disappears between opening the MIDX bitmap and attempting\nverbatim reuse out of its packs.\n\nThat commit forces open_midx_bitmap_1() to ensure the validity of the\nMIDX's preferred pack, meaning that we have an open file handle on the\n*.pack, ensuring that we can reuse bytes out of verbatim later on in the\nprocess[^1].\n\nBut 44f9fd6496 was not extended to cover multi-pack reuse, meaning that\nthis same race condition exists for non-preferred packs during verbatim\nreuse. Work around that race in the same way by only marking valid packs\nas reuse-able. For packs that aren't reusable, skip over them but\ninclude the number of objects they have to ensure we allocate a large\nenough 'reuse' bitmap (e.g. if a pack in the middle of the MIDX\ndisappeared but we still want to reuse later packs).\n\nSince we're ensuring the validity of these packs within the verbatim\nreuse code, we no longer have to special-case the preferred pack and\nopen it within the open_midx_bitmap_1() function.\n\nAn alternative approach to the one taken here would be to open all\nMIDX'd packs from within open_midx_bitmap_1(). But that would be both\nslower and make the bitmaps less useful, since we can still perform some\npack reuse among the packs that still exist when the *.bitmap is opened.\n\nAfter applying this patch, we can simulate the new behavior after\ninstrumenting Git like so:\n\n    diff --git a/packfile.c b/packfile.c\n    index 9560f0a33c..aedce72524 100644\n    --- a/packfile.c\n    +++ b/packfile.c\n    @@ -557,6 +557,11 @@ static int open_packed_git_1(struct packed_git *p)\n     \t\t; /* nothing */\n\n     \tp->pack_fd = git_open(p->pack_name);\n    +\t{\n    +\t\tconst char *delete = getenv(\"GIT_RACILY_DELETE\");\n    +\t\tif (delete && !strcmp(delete, pack_basename(p)))\n    +\t\t\treturn -1;\n    +\t}\n     \tif (p->pack_fd < 0 || fstat(p->pack_fd, &st))\n     \t\treturn -1;\n     \tpack_open_fds++;\n\nand adding the following test:\n\n    test_expect_success 'disappearing packs' '\n            git init disappearing-packs &&\n            (\n                    cd disappearing-packs &&\n\n                    git config pack.allowPackReuse multi &&\n\n                    test_commit A &&\n                    test_commit B &&\n                    test_commit C &&\n\n                    A=\"$(echo \"A\" | git pack-objects --revs $packdir/pack-A)\" &&\n                    B=\"$(echo \"A..B\" | git pack-objects --revs $packdir/pack-B)\" &&\n                    C=\"$(echo \"B..C\" | git pack-objects --revs $packdir/pack-C)\" &&\n\n                    git multi-pack-index write --bitmap --preferred-pack=pack-A-$A.idx &&\n\n                    test_pack_objects_reused_all 9 3 &&\n\n                    test_env GIT_RACILY_DELETE=pack-A-$A.pack \\\n                            test_pack_objects_reused_all 6 2 &&\n                    test_env GIT_RACILY_DELETE=pack-B-$B.pack \\\n                            test_pack_objects_reused_all 6 2 &&\n                    test_env GIT_RACILY_DELETE=pack-C-$C.pack \\\n                            test_pack_objects_reused_all 6 2\n\n            )\n    '\n\nNote that we could relax the single-pack version of this which was most\nrecently addressed in dc1daacdcc (pack-bitmap: check pack validity when\nopening bitmap, 2021-07-23), but only partially. Because we still need\nto know the object count in the pack, we'd still have to open the pack's\n*.idx, so the savings there are marginal.\n\nNote likewise that we add a new \"if (!packs_nr)\" early return in the\npack reuse code to avoid a potentially expensive allocation on the\n'reuse' bitmap in the case that no packs are available for reuse.\n\n[^1]: Unless we run out of open file handles. If that happens and we are\n  forced to close the only open file handle of a file that has been\n  removed from underneath us, there is nothing we can do."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "In the earlier MIDX filename allocation change, why did get_midx_filename and get_midx_rev_filename take a strbuf output parameter?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "fetch-rechecks-present",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Jeff King",
+              "observed_at": "2013-08-30T21:53:45.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/45e8a7487339c0f0ea28244ef06851308d07387c",
+                "text": "has_sha1_file: re-check pack directory before giving up\n\nWhen we read a sha1 file, we first look for a packed\nversion, then a loose version, and then re-check the pack\ndirectory again before concluding that we cannot find it.\nThis lets us handle a process that is writing to the\nrepository simultaneously (e.g., receive-pack writing a new\npack followed by a ref update, or git-repack packing\nexisting loose objects into a new pack).\n\nHowever, we do not do the same trick with has_sha1_file; we\nonly check the packed objects once, followed by loose\nobjects. This means that we might incorrectly report that we\ndo not have an object, even though we could find it if we\nsimply re-checked the pack directory.\n\nBy itself, this is usually not a big deal. The other process\nis running simultaneously, so we may run has_sha1_file\nbefore it writes, anyway. It is a race whether we see the\nobject or not.  However, we may also see other things\nthe writing process has done (like updating refs); and in\nthat case, we must be able to also see the new objects.\n\nFor example, imagine we are doing a for_each_ref iteration,\nand somebody simultaneously pushes. Receive-pack may write\nthe pack and update a ref after we have examined the\nobjects/pack directory, but before the iteration gets to the\nupdated ref. When we do finally see the updated ref,\nfor_each_ref will call has_sha1_file to check whether the\nref is broken. If has_sha1_file returns the wrong answer, we\nerroneously will think that the ref is broken.\n\nFor a normal iteration without DO_FOR_EACH_INCLUDE_BROKEN,\nthis means that the caller does not see the ref at all\n(neither the old nor the new value).  So not only will we\nfail to see the new value of the ref (which is acceptable,\nsince we are running simultaneously with the writer, and we\nmight well read the ref before the writer commits its\nwrite), but we will not see the old value either. For\nprograms that act on reachability like pack-objects or\nprune, this can cause data loss, as we may see the objects\nreferenced by the original ref value as dangling (and either\nomit them from the pack, or delete them via prune).\n\nThere's no test included here, because the success case is\ntwo processes running simultaneously forever. But you can\nreplicate the issue with:\n\n  # base.sh\n  # run this in one terminal; it creates and pushes\n  # repeatedly to a repository\n  git init parent &&\n  (cd parent &&\n\n    # create a base commit that will trigger us looking at\n    # the objects/pack directory before we hit the updated ref\n    echo content >file &&\n    git add file &&\n    git commit -m base &&\n\n    # set the unpack limit abnormally low, which\n    # lets us simulate full-size pushes using tiny ones\n    git config receive.unpackLimit 1\n  ) &&\n  git clone parent child &&\n  cd child &&\n  n=0 &&\n  while true; do\n    echo $n >file && git add file && git commit -m $n &&\n    git push origin HEAD:refs/remotes/child/master &&\n    n=$(($n + 1))\n  done\n\n  # fsck.sh\n  # now run this simultaneously in another terminal; it\n  # repeatedly fscks, looking for us to consider the\n  # newly-pushed ref broken. We cannot use for-each-ref\n  # here, as it uses DO_FOR_EACH_INCLUDE_BROKEN, which\n  # skips the has_sha1_file check (and if it wants\n  # more information on the object, it will actually read\n  # the object, which does the proper two-step lookup)\n  cd parent &&\n  while true; do\n    broken=`git fsck 2>&1 | grep remotes/child`\n    if test -n \"$broken\"; then\n      echo $broken\n      exit 1\n    fi\n  done\n\nWithout this patch, the fsck loop fails within a few seconds\n(and almost instantly if the test repository actually has a\nlarge number of refs). With it, the two can run\nindefinitely."
+              }
+            },
+            {
+              "owner": "Jeff King",
+              "observed_at": "2014-11-04T20:13:46.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/72549dfd5d33424fbf557b0078503687780a3a53",
+                "text": "fetch: load all default config at startup\n\nWhen we start the git-fetch program, we call git_config to\nload all config, but our callback only processes the\nfetch.prune option; we do not chain to git_default_config at\nall.\n\nThis means that we may not load some core configuration\nwhich will have an effect. For instance, we do not load\ncore.logAllRefUpdates, which impacts whether or not we\ncreate reflogs in a bare repository.\n\nNote that I said \"may\" above. It gets even more exciting. If\nwe have to transfer actual objects as part of the fetch,\nthen we call fetch_pack as part of the same process. That\nfunction loads its own config, which does chain to\ngit_default_config, impacting global variables which are\nused by the rest of fetch. But if the fetch is a pure ref\nupdate (e.g., a new ref which is a copy of an old one), we\nskip fetch_pack entirely. So we get inconsistent results\ndepending on whether or not we have actual objects to\ntransfer or not!\n\nLet's just load the core config at the start of fetch, so we\nknow we have it (we may also load it again as part of\nfetch_pack, but that's OK; it's designed to be idempotent).\n\nOur tests check both cases (with and without a pack). We\nalso check similar behavior for push for good measure, but\nit already works as expected."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Jeff King",
+            "observed_at": "2016-10-14T18:31:32.000000+00:00",
+            "source": {
+              "speaker": "Jeff King",
+              "location": "https://github.com/git/git/commit/5827a03545663f6d6b491a35edb313900608568b",
+              "text": "fetch: use \"quick\" has_sha1_file for tag following\n\nWhen we auto-follow tags in a fetch, we look at all of the\ntags advertised by the remote and fetch ones where we don't\nalready have the tag, but we do have the object it peels to.\nThis involves a lot of calls to has_sha1_file(), some of\nwhich we can reasonably expect to fail. Since 45e8a74\n(has_sha1_file: re-check pack directory before giving up,\n2013-08-30), this may cause many calls to\nreprepare_packed_git(), which is potentially expensive.\n\nThis has gone unnoticed for several years because it\nrequires a fairly unique setup to matter:\n\n  1. You need to have a lot of packs on the client side to\n     make reprepare_packed_git() expensive (the most\n     expensive part is finding duplicates in an unsorted\n     list, which is currently quadratic).\n\n  2. You need a large number of tag refs on the server side\n     that are candidates for auto-following (i.e., that the\n     client doesn't have). Each one triggers a re-read of\n     the pack directory.\n\n  3. Under normal circumstances, the client would\n     auto-follow those tags and after one large fetch, (2)\n     would no longer be true. But if those tags point to\n     history which is disconnected from what the client\n     otherwise fetches, then it will never auto-follow, and\n     those candidates will impact it on every fetch.\n\nSo when all three are true, each fetch pays an extra\nO(nr_tags * nr_packs^2) cost, mostly in string comparisons\non the pack names. This was exacerbated by 47bf4b0\n(prepare_packed_git_one: refactor duplicate-pack check,\n2014-06-30) which uses a slightly more expensive string\ncheck, under the assumption that the duplicate check doesn't\nhappen very often (and it shouldn't; the real problem here\nis how often we are calling reprepare_packed_git()).\n\nThis patch teaches fetch to use HAS_SHA1_QUICK to sacrifice\naccuracy for speed, in cases where we might be racy with a\nsimultaneous repack. This is similar to the fix in 0eeb077\n(index-pack: avoid excessive re-reading of pack directory,\n2015-06-09). As with that case, it's OK for has_sha1_file()\noccasionally say \"no I don't have it\" when we do, because\nthe worst case is not a corruption, but simply that we may\nfail to auto-follow a tag that points to it.\n\nHere are results from the included perf script, which sets\nup a situation similar to the one described above:\n\nTest            HEAD^               HEAD\n----------------------------------------------------------\n5550.4: fetch   11.21(10.42+0.78)   0.08(0.04+0.02) -99.3%"
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "Why did the earlier fetch change load core configuration at startup even when no objects were transferred?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "fetch-rechecks-absent",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Johannes Sixt",
+              "observed_at": "2009-11-27T08:28:40.000000+00:00",
+              "source": {
+                "speaker": "Johannes Sixt",
+                "location": "https://github.com/git/git/commit/e7821d73bd0256bfc15c48945beded063e17c1b6",
+                "text": "Add a notice that only certain functions can print color escape codes\n\nWe emulate color escape codes on Windows by overriding printf, fprintf,\nand fputs. Warn developers that these are the only functions that can be\nused to print them."
+              }
+            },
+            {
+              "owner": "Jeff King",
+              "observed_at": "2014-11-04T20:13:46.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/72549dfd5d33424fbf557b0078503687780a3a53",
+                "text": "fetch: load all default config at startup\n\nWhen we start the git-fetch program, we call git_config to\nload all config, but our callback only processes the\nfetch.prune option; we do not chain to git_default_config at\nall.\n\nThis means that we may not load some core configuration\nwhich will have an effect. For instance, we do not load\ncore.logAllRefUpdates, which impacts whether or not we\ncreate reflogs in a bare repository.\n\nNote that I said \"may\" above. It gets even more exciting. If\nwe have to transfer actual objects as part of the fetch,\nthen we call fetch_pack as part of the same process. That\nfunction loads its own config, which does chain to\ngit_default_config, impacting global variables which are\nused by the rest of fetch. But if the fetch is a pure ref\nupdate (e.g., a new ref which is a copy of an old one), we\nskip fetch_pack entirely. So we get inconsistent results\ndepending on whether or not we have actual objects to\ntransfer or not!\n\nLet's just load the core config at the start of fetch, so we\nknow we have it (we may also load it again as part of\nfetch_pack, but that's OK; it's designed to be idempotent).\n\nOur tests check both cases (with and without a pack). We\nalso check similar behavior for push for good measure, but\nit already works as expected."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Jeff King",
+            "observed_at": "2016-10-14T18:31:32.000000+00:00",
+            "source": {
+              "speaker": "Jeff King",
+              "location": "https://github.com/git/git/commit/5827a03545663f6d6b491a35edb313900608568b",
+              "text": "fetch: use \"quick\" has_sha1_file for tag following\n\nWhen we auto-follow tags in a fetch, we look at all of the\ntags advertised by the remote and fetch ones where we don't\nalready have the tag, but we do have the object it peels to.\nThis involves a lot of calls to has_sha1_file(), some of\nwhich we can reasonably expect to fail. Since 45e8a74\n(has_sha1_file: re-check pack directory before giving up,\n2013-08-30), this may cause many calls to\nreprepare_packed_git(), which is potentially expensive.\n\nThis has gone unnoticed for several years because it\nrequires a fairly unique setup to matter:\n\n  1. You need to have a lot of packs on the client side to\n     make reprepare_packed_git() expensive (the most\n     expensive part is finding duplicates in an unsorted\n     list, which is currently quadratic).\n\n  2. You need a large number of tag refs on the server side\n     that are candidates for auto-following (i.e., that the\n     client doesn't have). Each one triggers a re-read of\n     the pack directory.\n\n  3. Under normal circumstances, the client would\n     auto-follow those tags and after one large fetch, (2)\n     would no longer be true. But if those tags point to\n     history which is disconnected from what the client\n     otherwise fetches, then it will never auto-follow, and\n     those candidates will impact it on every fetch.\n\nSo when all three are true, each fetch pays an extra\nO(nr_tags * nr_packs^2) cost, mostly in string comparisons\non the pack names. This was exacerbated by 47bf4b0\n(prepare_packed_git_one: refactor duplicate-pack check,\n2014-06-30) which uses a slightly more expensive string\ncheck, under the assumption that the duplicate check doesn't\nhappen very often (and it shouldn't; the real problem here\nis how often we are calling reprepare_packed_git()).\n\nThis patch teaches fetch to use HAS_SHA1_QUICK to sacrifice\naccuracy for speed, in cases where we might be racy with a\nsimultaneous repack. This is similar to the fix in 0eeb077\n(index-pack: avoid excessive re-reading of pack directory,\n2015-06-09). As with that case, it's OK for has_sha1_file()\noccasionally say \"no I don't have it\" when we do, because\nthe worst case is not a corruption, but simply that we may\nfail to auto-follow a tag that points to it.\n\nHere are results from the included perf script, which sets\nup a situation similar to the one described above:\n\nTest            HEAD^               HEAD\n----------------------------------------------------------\n5550.4: fetch   11.21(10.42+0.78)   0.08(0.04+0.02) -99.3%"
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "Why did the earlier fetch change load core configuration at startup even when no objects were transferred?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "windows-colors-present",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Johannes Sixt",
+              "observed_at": "2009-11-27T08:28:40.000000+00:00",
+              "source": {
+                "speaker": "Johannes Sixt",
+                "location": "https://github.com/git/git/commit/e7821d73bd0256bfc15c48945beded063e17c1b6",
+                "text": "Add a notice that only certain functions can print color escape codes\n\nWe emulate color escape codes on Windows by overriding printf, fprintf,\nand fputs. Warn developers that these are the only functions that can be\nused to print them."
+              }
+            },
+            {
+              "owner": "Jeff King",
+              "observed_at": "2014-11-20T20:42:49.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/17a4be26060b00a867cbe54ee906fe03813470ec",
+                "text": "parse_color: support 24-bit RGB values\n\nSome terminals (like XTerm) allow full 24-bit RGB color\nspecifications using an extension to the regular ANSI color\nscheme. Let's allow users to specify hex RGB colors,\nenabling the all-important feature of hot pink ref\ndecorations:\n\n  git log --format=\"%h%C(#ff69b4)%d%C(reset) %s\""
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Johannes Schindelin",
+            "observed_at": "2016-06-28T16:18:50.000000+00:00",
+            "source": {
+              "speaker": "Johannes Schindelin",
+              "location": "https://github.com/git/git/commit/3d0a83382f26c5385ffcfa3fb0d9b7d69d998647",
+              "text": "color.h: remove obsolete comment about limitations on Windows\n\nOriginally, ANSI color sequences were supported on Windows only by\noverriding the printf() and fprintf() functions, as mentioned in e7821d7\n(Add a notice that only certain functions can print color escape codes,\n2009-11-27).\n\nAs of eac14f8 (Win32: Thread-safe windows console output, 2012-01-14),\nhowever, this is no longer the case, as the ANSI color sequence support\ncode needed to be replaced with a thread-safe version, one side effect\nbeing that stdout and stderr handled no matter which function is used to\nwrite to it.\n\nSo let's just remove the comment that is now obsolete."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "What color specification did the earlier parse_color change add support for?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "windows-colors-absent",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Steffen Prohaska",
+              "observed_at": "2009-01-26T08:26:05.000000+00:00",
+              "source": {
+                "speaker": "Steffen Prohaska",
+                "location": "https://github.com/git/git/commit/35fb0e8633217f602360a9987af51c4b960e7850",
+                "text": "Compute prefix at runtime if RUNTIME_PREFIX is set\n\nThis commit adds support for relocatable binaries (called\nRUNTIME_PREFIX).  Such binaries can be moved together with the\nsystem configuration files to a different directory, as long as the\nrelative paths from the binary to the configuration files is\npreserved.  This functionality is essential on Windows where we\ndeliver git binaries with an installer that allows to freely choose\nthe installation location.\n\nIf RUNTIME_PREFIX is unset we use the static prefix.  This will be\nthe default on Unix.  Thus, the behavior on Unix will remain\nidentical to the old implementation, which used to add the prefix\nin the Makefile.\n\nIf RUNTIME_PREFIX is set the prefix is computed from the location\nof the executable.  In this case, system_path() tries to strip\nknown directories that executables can be located in from the path\nof the executable.  If the path is successfully stripped it is used\nas the prefix.  For example, if the executable is\n\"/msysgit/bin/git\" and BINDIR is \"bin\", then the prefix computed is\n\"/msysgit\".\n\nIf the runtime prefix computation fails, we fall back to the static\nprefix specified in the makefile.  This can be the case if the\nexecutable is not installed at a known location.  Note that our\ntest system sets GIT_CONFIG_NOSYSTEM to tell git to ignore global\nconfiguration files during testing.  Hence testing does not trigger\nthe fall back.\n\nNote that RUNTIME_PREFIX only works on Windows, though adding\nsupport on Unix should not be too hard.  The implementation\nrequires argv0_path to be set to an absolute path.  argv0_path must\npoint to the directory of the executable.  We use assert() to\nverify this in debug builds.  On Windows, the wrapper for main()\n(see compat/mingw.h) guarantees that argv0_path is correctly\ninitialized.  On Unix, further work is required before\nRUNTIME_PREFIX can be enabled."
+              }
+            },
+            {
+              "owner": "Jeff King",
+              "observed_at": "2014-11-20T20:42:49.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/17a4be26060b00a867cbe54ee906fe03813470ec",
+                "text": "parse_color: support 24-bit RGB values\n\nSome terminals (like XTerm) allow full 24-bit RGB color\nspecifications using an extension to the regular ANSI color\nscheme. Let's allow users to specify hex RGB colors,\nenabling the all-important feature of hot pink ref\ndecorations:\n\n  git log --format=\"%h%C(#ff69b4)%d%C(reset) %s\""
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Johannes Schindelin",
+            "observed_at": "2016-06-28T16:18:50.000000+00:00",
+            "source": {
+              "speaker": "Johannes Schindelin",
+              "location": "https://github.com/git/git/commit/3d0a83382f26c5385ffcfa3fb0d9b7d69d998647",
+              "text": "color.h: remove obsolete comment about limitations on Windows\n\nOriginally, ANSI color sequences were supported on Windows only by\noverriding the printf() and fprintf() functions, as mentioned in e7821d7\n(Add a notice that only certain functions can print color escape codes,\n2009-11-27).\n\nAs of eac14f8 (Win32: Thread-safe windows console output, 2012-01-14),\nhowever, this is no longer the case, as the ANSI color sequence support\ncode needed to be replaced with a thread-safe version, one side effect\nbeing that stdout and stderr handled no matter which function is used to\nwrite to it.\n\nSo let's just remove the comment that is now obsolete."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "What color specification did the earlier parse_color change add support for?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "maintenance-auto-present",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Derrick Stolee",
+              "observed_at": "2020-11-24T21:02:29.000000+00:00",
+              "source": {
+                "speaker": "Derrick Stolee",
+                "location": "https://github.com/git/git/commit/16c56909298a3d0639e4bc5f22760ecd75eefb5b",
+                "text": "maintenance: include 'cron' details in docs\n\nAdvanced and expert users may want to know how 'git maintenance start'\nschedules background maintenance in order to customize their own\nschedules beyond what the maintenance.* config values allow. Start a new\nset of sections in git-maintenance.txt that describe how 'cron' is used\nto run these tasks.\n\nThis is particularly valuable for users who want to inspect what Git is\ndoing or for users who want to customize the schedule further. Having a\nbaseline can provide a way forward for users who have never worked with\ncron schedules."
+              }
+            },
+            {
+              "owner": "Derrick Stolee",
+              "observed_at": "2021-02-10T07:09:24.000000+00:00",
+              "source": {
+                "speaker": "Derrick Stolee",
+                "location": "https://github.com/git/git/commit/41abfe15d95ede4c2a047180a6062eac23d8f7d6",
+                "text": "maintenance: add pack-refs task\n\nIt is valuable to collect loose refs into a more compressed form. This\nis typically the packed-refs file, although this could be the reftable\nin the future. Having packed refs can be extremely valuable in repos\nwith many tags or remote branches that are not modified by the local\nuser, but still are necessary for other queries.\n\nFor instance, with many exploded refs, commands such as\n\n\tgit describe --tags --exact-match HEAD\n\ncan be very slow (multiple seconds). This command in particular is used\nby terminal prompts to show when a detatched HEAD is pointing to an\nexisting tag, so having it be slow causes significant delays for users.\n\nAdd a new 'pack-refs' maintenance task. It runs 'git pack-refs --all\n--prune' to move loose refs into a packed form. For now, that is the\npacked-refs file, but could adjust to other file formats in the future.\n\nThis is the first of several sub-tasks of the 'gc' task that could be\nextracted to their own tasks. In this process, we should not change the\nbehavior of the 'gc' task since that remains the default way to keep\nrepositories maintained. Creating a new task for one of these sub-tasks\nonly provides more customization options for those choosing to not use\nthe 'gc' task. It is certainly possible to have both the 'gc' and\n'pack-refs' tasks enabled and run regularly. While they may repeat\neffort, they do not conflict in a destructive way.\n\nThe 'auto_condition' function pointer is left NULL for now. We could\nextend this in the future to have a condition check if pack-refs should\nbe run during 'git maintenance run --auto'."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Patrick Steinhardt",
+            "observed_at": "2024-03-25T16:54:07.000000+00:00",
+            "source": {
+              "speaker": "Patrick Steinhardt",
+              "location": "https://github.com/git/git/commit/9f6714ab3e61ad58c4532077d4b8dc807ff0410d",
+              "text": "builtin/gc: pack refs when using `git maintenance run --auto`\n\nWhen running `git maintenance run --auto`, then the various subtasks\nwill only run as needed. Thus, we for example end up only packing loose\nobjects if we hit a certain threshold.\n\nInterestingly enough, the \"pack-refs\" task is actually _never_ executed\nwhen the auto-flag is set because it does not have a condition at all.\nAs 41abfe15d9 (maintenance: add pack-refs task, 2021-02-09) mentions:\n\n    The 'auto_condition' function pointer is left NULL for now. We could\n    extend this in the future to have a condition check if pack-refs\n    should be run during 'git maintenance run --auto'.\n\nIt is not quite clear from that quote whether it is actually intended\nthat the task doesn't run at all in this mode. Also, no test was added\nto verify this behaviour. Ultimately though, it feels quite surprising\nthat `git maintenance run --auto --task=pack-refs` would quietly never\ndo anything at all.\n\nIn any case, now that we do have the logic in place to let ref backends\ndecide whether or not to repack refs, it does make sense to wire it up\naccordingly. With the \"reftable\" backend we will thus now perform\nauto-compaction, which optimizes the refdb as needed.\n\nBut for the \"files\" backend we now unconditionally pack refs as it does\nnot yet know to handle the \"auto\" flag. Arguably, this can be seen as a\nbug fix given that previously the task never did anything at all.\nEventually though we should amend the \"files\" backend to use some\nheuristics for auto compaction, as well."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "Why were cron details added to the earlier git maintenance documentation?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "maintenance-auto-absent",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "Derrick Stolee",
+              "observed_at": "2020-11-24T21:02:29.000000+00:00",
+              "source": {
+                "speaker": "Derrick Stolee",
+                "location": "https://github.com/git/git/commit/16c56909298a3d0639e4bc5f22760ecd75eefb5b",
+                "text": "maintenance: include 'cron' details in docs\n\nAdvanced and expert users may want to know how 'git maintenance start'\nschedules background maintenance in order to customize their own\nschedules beyond what the maintenance.* config values allow. Start a new\nset of sections in git-maintenance.txt that describe how 'cron' is used\nto run these tasks.\n\nThis is particularly valuable for users who want to inspect what Git is\ndoing or for users who want to customize the schedule further. Having a\nbaseline can provide a way forward for users who have never worked with\ncron schedules."
+              }
+            },
+            {
+              "owner": "Eric Sunshine",
+              "observed_at": "2021-12-05T01:26:41.000000+00:00",
+              "source": {
+                "speaker": "Eric Sunshine",
+                "location": "https://github.com/git/git/commit/e258eb4800e30da2adbdb2df8d8d8c19d9b443e4",
+                "text": "CodingGuidelines: document which output goes to stdout vs. stderr\n\nIt has long been practice on this project for a command to emit its\nprimary output to stdout so that it can be captured to a file or sent\ndown a pipe, and to emit \"chatty\" messages (such as those reporting\nprogress) to stderr so that they don't interfere with the primary\noutput. However, this practice is not necessarily universal; another\ncommon practice is to send only error messages to stderr, and all other\nmessages to stdout. Therefore, help newcomers out by documenting how\nstdout and stderr are used on this project."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Patrick Steinhardt",
+            "observed_at": "2024-03-25T16:54:07.000000+00:00",
+            "source": {
+              "speaker": "Patrick Steinhardt",
+              "location": "https://github.com/git/git/commit/9f6714ab3e61ad58c4532077d4b8dc807ff0410d",
+              "text": "builtin/gc: pack refs when using `git maintenance run --auto`\n\nWhen running `git maintenance run --auto`, then the various subtasks\nwill only run as needed. Thus, we for example end up only packing loose\nobjects if we hit a certain threshold.\n\nInterestingly enough, the \"pack-refs\" task is actually _never_ executed\nwhen the auto-flag is set because it does not have a condition at all.\nAs 41abfe15d9 (maintenance: add pack-refs task, 2021-02-09) mentions:\n\n    The 'auto_condition' function pointer is left NULL for now. We could\n    extend this in the future to have a condition check if pack-refs\n    should be run during 'git maintenance run --auto'.\n\nIt is not quite clear from that quote whether it is actually intended\nthat the task doesn't run at all in this mode. Also, no test was added\nto verify this behaviour. Ultimately though, it feels quite surprising\nthat `git maintenance run --auto --task=pack-refs` would quietly never\ndo anything at all.\n\nIn any case, now that we do have the logic in place to let ref backends\ndecide whether or not to repack refs, it does make sense to wire it up\naccordingly. With the \"reftable\" backend we will thus now perform\nauto-compaction, which optimizes the refdb as needed.\n\nBut for the \"files\" backend we now unconditionally pack refs as it does\nnot yet know to handle the \"auto\" flag. Arguably, this can be seen as a\nbug fix given that previously the task never did anything at all.\nEventually though we should amend the \"files\" backend to use some\nheuristics for auto compaction, as well."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "Why were cron details added to the earlier git maintenance documentation?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "end-of-options-present",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "René Scharfe",
+              "observed_at": "2018-08-03T15:36:20.000000+00:00",
+              "source": {
+                "speaker": "René Scharfe",
+                "location": "https://github.com/git/git/commit/5f0df44cd79a953c287ccb598896ea7aaa2cc9e3",
+                "text": "parse-options: automatically infer PARSE_OPT_LITERAL_ARGHELP\n\nParseopt wraps argument help strings in a pair of angular brackets by\ndefault, to tell users that they need to replace it with an actual\nvalue.  This is useful in most cases, because most option arguments\nare indeed single values of a certain type.  The option\nPARSE_OPT_LITERAL_ARGHELP needs to be used in option definitions with\narguments that have multiple parts or are literal strings.\n\nStop adding these angular brackets if special characters are present,\nas they indicate that we don't deal with a simple placeholder.  This\nsimplifies the code a bit and makes defining special options slightly\neasier.\n\nRemove the flag PARSE_OPT_LITERAL_ARGHELP in the cases where the new\nand more cautious handling suffices."
+              }
+            },
+            {
+              "owner": "Jeff King",
+              "observed_at": "2019-08-06T20:05:39.000000+00:00",
+              "source": {
+                "speaker": "Jeff King",
+                "location": "https://github.com/git/git/commit/51b4594b4024d5cb2b4ace36ff932affa31c03f4",
+                "text": "parse-options: allow --end-of-options as a synonym for \"--\"\n\nThe revision option parser recently learned about --end-of-options, but\nthat's not quite enough for all callers. Some of them, like git-log,\npick out some options using parse_options(), and then feed the remainder\nto setup_revisions(). For those cases we need to stop parse_options()\nfrom finding more options when it sees --end-of-options, and to retain\nthat option in argv so that setup_revisions() can see it as well.\n\nLet's handle this the same as we do \"--\". We can even piggy-back on the\nhandling of PARSE_OPT_KEEP_DASHDASH, because any caller that wants to\nretain one will want to retain the other.\n\nI've included two tests here. The \"log\" test covers \"--source\", which is\none of the options it handles with parse_options(), and would fail\nbefore this patch. There's also a test that uses the parse-options\nhelper directly. That confirms that the option is handled correctly even\nin cases without KEEP_DASHDASH or setup_revisions(). I.e., it is safe to\nuse --end-of-options in place of \"--\" in other programs."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Jeff King",
+            "observed_at": "2023-12-08T23:21:02.000000+00:00",
+            "source": {
+              "speaker": "Jeff King",
+              "location": "https://github.com/git/git/commit/9385174627cbb7301b1007912514a66b75d78f31",
+              "text": "parse-options: decouple \"--end-of-options\" and \"--\"\n\nWhen we added generic end-of-options support in 51b4594b40\n(parse-options: allow --end-of-options as a synonym for \"--\",\n2019-08-06), we made them true synonyms. They both stop option parsing,\nand they are both returned in the resulting argv if the KEEP_DASHDASH\nflag is used.\n\nThe hope was that this would work for all callers:\n\n  - most generic callers would not pass KEEP_DASHDASH, and so would just\n    do the right thing (stop parsing there) without needing to know\n    anything more.\n\n  - callers with KEEP_DASHDASH were generally going to rely on\n    setup_revisions(), which knew to handle --end-of-options specially\n\nBut that turned out miss quite a few cases that pass KEEP_DASHDASH but\ndo their own manual parsing. For example, \"git reset\", \"git checkout\",\nand so on want pass KEEP_DASHDASH so they can support:\n\n  git reset $revs -- $paths\n\nbut of course aren't going to actually do a traversal, so they don't\ncall setup_revisions(). And those cases currently get confused by\n--end-of-options being left in place, like:\n\n   $ git reset --end-of-options HEAD\n   fatal: option '--end-of-options' must come before non-option arguments\n\nWe could teach each of these callers to handle the leftover option\nexplicitly. But let's try to be a bit more clever and see if we can\nsolve it centrally in parse-options.c.\n\nThe bogus assumption here is that KEEP_DASHDASH tells us the caller\nwants to see --end-of-options in the result. But really, the callers\nwhich need to know that --end-of-options was reached are those that may\npotentially parse more options from argv. In other words, those that\npass the KEEP_UNKNOWN_OPT flag.\n\nIf such a caller is aware of --end-of-options (e.g., because they call\nsetup_revisions() with the result), then this will continue to do the\nright thing, treating anything after --end-of-options as a non-option.\n\nAnd if the caller is not aware of --end-of-options, they are better off\nkeeping it intact, because either:\n\n  1. They are just passing the options along to somebody else anyway, in\n     which case that somebody would need to know about the\n     --end-of-options marker.\n\n  2. They are going to parse the remainder themselves, at which point\n     choking on --end-of-options is much better than having it silently\n     removed. The point is to avoid option injection from untrusted\n     command line arguments, and bailing is better than quietly treating\n     the untrusted argument as an option.\n\nThis fixes bugs with --end-of-options across several commands, but I've\nfocused on two in particular here:\n\n  - t7102 confirms that \"git reset --end-of-options --foo\" now works.\n    This checks two things. One, that we no longer barf on\n    \"--end-of-options\" itself (which previously we did, even if the rev\n    was something vanilla like \"HEAD\" instead of \"--foo\"). And two, that\n    we correctly treat \"--foo\" as a revision rather than an option.\n\n    This fix applies to any other cases which pass KEEP_DASHDASH but not\n    KEEP_UNKNOWN_OPT, like \"git checkout\", \"git check-attr\", \"git grep\",\n    etc, which would previously choke on \"--end-of-options\".\n\n  - t9350 shows the opposite case: fast-export passed KEEP_UNKNOWN_OPT\n    but not KEEP_DASHDASH, but then passed the result on to\n    setup_revisions(). So it never saw --end-of-options, and would\n    erroneously parse \"fast-export --end-of-options --foo\" as having a\n    \"--foo\" option. This is now fixed.\n\nNote that this does shut the door for callers which want to know if we\nhit end-of-options, but don't otherwise need to keep unknown opts. The\nobvious thing here is feeding it to the DWIM verify_filename()\nmachinery. And indeed, this is a problem even for commands which do\nunderstand --end-of-options already. For example, without this patch,\nyou get:\n\n  $ git log --end-of-options --foo\n  fatal: option '--foo' must come before non-option arguments\n\nbecause we refuse to accept \"--foo\" as a filename (because it starts\nwith a dash) even though we could know that we saw end-of-options. The\nverify_filename() function simply doesn't accept this extra information.\n\nSo that is the status quo, and this patch doubles down further on that.\nCommands like \"git reset\" have the same problem, but they won't even\nknow that parse-options saw --end-of-options! So even if we fixed\nverify_filename(), they wouldn't have anything to pass to it.\n\nBut in practice I don't think this is a big deal. If you are being\ncareful enough to use --end-of-options, then you should also be using\n\"--\" to disambiguate and avoid the DWIM behavior in the first place. In\nother words, doing:\n\n  git log --end-of-options --this-is-a-rev -- --this-is-a-path\n\nworks correctly, and will continue to do so. And likewise, with this\npatch now:\n\n  git reset --end-of-options --this-is-a-rev -- --this-is-a-path\n\nwill work, as well."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "When did the earlier parse-options change stop adding angular brackets around argument help strings?",
+          "temporal_scope": "historical"
+        }
+      ]
+    },
+    {
+      "id": "end-of-options-absent",
+      "events": [
+        {
+          "label": "history",
+          "operation": "import_history",
+          "records": [
+            {
+              "owner": "René Scharfe",
+              "observed_at": "2018-08-03T15:36:20.000000+00:00",
+              "source": {
+                "speaker": "René Scharfe",
+                "location": "https://github.com/git/git/commit/5f0df44cd79a953c287ccb598896ea7aaa2cc9e3",
+                "text": "parse-options: automatically infer PARSE_OPT_LITERAL_ARGHELP\n\nParseopt wraps argument help strings in a pair of angular brackets by\ndefault, to tell users that they need to replace it with an actual\nvalue.  This is useful in most cases, because most option arguments\nare indeed single values of a certain type.  The option\nPARSE_OPT_LITERAL_ARGHELP needs to be used in option definitions with\narguments that have multiple parts or are literal strings.\n\nStop adding these angular brackets if special characters are present,\nas they indicate that we don't deal with a simple placeholder.  This\nsimplifies the code a bit and makes defining special options slightly\neasier.\n\nRemove the flag PARSE_OPT_LITERAL_ARGHELP in the cases where the new\nand more cautious handling suffices."
+              }
+            },
+            {
+              "owner": "Eric Sunshine",
+              "observed_at": "2021-12-05T01:26:41.000000+00:00",
+              "source": {
+                "speaker": "Eric Sunshine",
+                "location": "https://github.com/git/git/commit/e258eb4800e30da2adbdb2df8d8d8c19d9b443e4",
+                "text": "CodingGuidelines: document which output goes to stdout vs. stderr\n\nIt has long been practice on this project for a command to emit its\nprimary output to stdout so that it can be captured to a file or sent\ndown a pipe, and to emit \"chatty\" messages (such as those reporting\nprogress) to stderr so that they don't interfere with the primary\noutput. However, this practice is not necessarily universal; another\ncommon practice is to send only error messages to stderr, and all other\nmessages to stdout. Therefore, help newcomers out by documenting how\nstdout and stderr are used on this project."
+              }
+            }
+          ]
+        },
+        {
+          "label": "new_report",
+          "operation": "ingest",
+          "source": {
+            "owner": "Jeff King",
+            "observed_at": "2023-12-08T23:21:02.000000+00:00",
+            "source": {
+              "speaker": "Jeff King",
+              "location": "https://github.com/git/git/commit/9385174627cbb7301b1007912514a66b75d78f31",
+              "text": "parse-options: decouple \"--end-of-options\" and \"--\"\n\nWhen we added generic end-of-options support in 51b4594b40\n(parse-options: allow --end-of-options as a synonym for \"--\",\n2019-08-06), we made them true synonyms. They both stop option parsing,\nand they are both returned in the resulting argv if the KEEP_DASHDASH\nflag is used.\n\nThe hope was that this would work for all callers:\n\n  - most generic callers would not pass KEEP_DASHDASH, and so would just\n    do the right thing (stop parsing there) without needing to know\n    anything more.\n\n  - callers with KEEP_DASHDASH were generally going to rely on\n    setup_revisions(), which knew to handle --end-of-options specially\n\nBut that turned out miss quite a few cases that pass KEEP_DASHDASH but\ndo their own manual parsing. For example, \"git reset\", \"git checkout\",\nand so on want pass KEEP_DASHDASH so they can support:\n\n  git reset $revs -- $paths\n\nbut of course aren't going to actually do a traversal, so they don't\ncall setup_revisions(). And those cases currently get confused by\n--end-of-options being left in place, like:\n\n   $ git reset --end-of-options HEAD\n   fatal: option '--end-of-options' must come before non-option arguments\n\nWe could teach each of these callers to handle the leftover option\nexplicitly. But let's try to be a bit more clever and see if we can\nsolve it centrally in parse-options.c.\n\nThe bogus assumption here is that KEEP_DASHDASH tells us the caller\nwants to see --end-of-options in the result. But really, the callers\nwhich need to know that --end-of-options was reached are those that may\npotentially parse more options from argv. In other words, those that\npass the KEEP_UNKNOWN_OPT flag.\n\nIf such a caller is aware of --end-of-options (e.g., because they call\nsetup_revisions() with the result), then this will continue to do the\nright thing, treating anything after --end-of-options as a non-option.\n\nAnd if the caller is not aware of --end-of-options, they are better off\nkeeping it intact, because either:\n\n  1. They are just passing the options along to somebody else anyway, in\n     which case that somebody would need to know about the\n     --end-of-options marker.\n\n  2. They are going to parse the remainder themselves, at which point\n     choking on --end-of-options is much better than having it silently\n     removed. The point is to avoid option injection from untrusted\n     command line arguments, and bailing is better than quietly treating\n     the untrusted argument as an option.\n\nThis fixes bugs with --end-of-options across several commands, but I've\nfocused on two in particular here:\n\n  - t7102 confirms that \"git reset --end-of-options --foo\" now works.\n    This checks two things. One, that we no longer barf on\n    \"--end-of-options\" itself (which previously we did, even if the rev\n    was something vanilla like \"HEAD\" instead of \"--foo\"). And two, that\n    we correctly treat \"--foo\" as a revision rather than an option.\n\n    This fix applies to any other cases which pass KEEP_DASHDASH but not\n    KEEP_UNKNOWN_OPT, like \"git checkout\", \"git check-attr\", \"git grep\",\n    etc, which would previously choke on \"--end-of-options\".\n\n  - t9350 shows the opposite case: fast-export passed KEEP_UNKNOWN_OPT\n    but not KEEP_DASHDASH, but then passed the result on to\n    setup_revisions(). So it never saw --end-of-options, and would\n    erroneously parse \"fast-export --end-of-options --foo\" as having a\n    \"--foo\" option. This is now fixed.\n\nNote that this does shut the door for callers which want to know if we\nhit end-of-options, but don't otherwise need to keep unknown opts. The\nobvious thing here is feeding it to the DWIM verify_filename()\nmachinery. And indeed, this is a problem even for commands which do\nunderstand --end-of-options already. For example, without this patch,\nyou get:\n\n  $ git log --end-of-options --foo\n  fatal: option '--foo' must come before non-option arguments\n\nbecause we refuse to accept \"--foo\" as a filename (because it starts\nwith a dash) even though we could know that we saw end-of-options. The\nverify_filename() function simply doesn't accept this extra information.\n\nSo that is the status quo, and this patch doubles down further on that.\nCommands like \"git reset\" have the same problem, but they won't even\nknow that parse-options saw --end-of-options! So even if we fixed\nverify_filename(), they wouldn't have anything to pass to it.\n\nBut in practice I don't think this is a big deal. If you are being\ncareful enough to use --end-of-options, then you should also be using\n\"--\" to disambiguate and avoid the DWIM behavior in the first place. In\nother words, doing:\n\n  git log --end-of-options --this-is-a-rev -- --this-is-a-path\n\nworks correctly, and will continue to do so. And likewise, with this\npatch now:\n\n  git reset --end-of-options --this-is-a-rev -- --this-is-a-path\n\nwill work, as well."
+            }
+          }
+        },
+        {
+          "label": "retained_fact",
+          "operation": "ask",
+          "question": "When did the earlier parse-options change stop adding angular brackets around argument help strings?",
+          "temporal_scope": "historical"
+        }
+      ]
+    }
+  ]
+}

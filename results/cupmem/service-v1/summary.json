@@ -1,0 +1,144 @@
+{
+  "job_id": "119817",
+  "source_version": "cup-service-v1",
+  "implementation_status": "connected_development_verified",
+  "model": "Qwen3-8B",
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "upstream_revision": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+  "upstream_files_verified": 72,
+  "slurm_state": "COMPLETED",
+  "exit_code": "0:0",
+  "program_status": "complete",
+  "mechanical_checks_pass": true,
+  "operations": 10,
+  "operations_ok": 10,
+  "synthetic_streams": 1,
+  "source_records": 3,
+  "distinct_questions": 3,
+  "qa_checkpoints": 5,
+  "qa_checkpoints_meeting_frozen_requirements": 5,
+  "exact_qa_citation_instances": 8,
+  "final_proposals": [
+    {
+      "id": "2cc81e237f9f252a157f29ad",
+      "kind": "reconsider",
+      "status": "approved"
+    },
+    {
+      "id": "9fd4860acdd47b86ea2915d7",
+      "kind": "coexist",
+      "status": "pending"
+    }
+  ],
+  "unrelated_report_proposals": 0,
+  "duplicate_model_calls": 0,
+  "owner_review_simulated": true,
+  "original_sources_preserved": true,
+  "physical_model_calls": 86,
+  "tokens": {
+    "completion_tokens": 13817,
+    "prompt_tokens": 183770,
+    "total_tokens": 197587
+  },
+  "external_model_api_calls": 0,
+  "gpu_count": 1,
+  "allocated_gpu_seconds": 1019,
+  "gpu_minutes": 16.983333333333334,
+  "service_wall_seconds": 508.32869862765074,
+  "other_allocation_seconds": 510.67130137234926,
+  "other_time_interpretation": "Includes cache staging, server startup/warmup, and shutdown; not a separately timed pure startup metric",
+  "batch_max_rss_kb": 2444736,
+  "memory_measurement_note": "sacct batch-step MaxRSS; not aggregate CPU RAM or VRAM peak",
+  "operation_cost": [
+    {
+      "label": "initial_report",
+      "calls": 7,
+      "model_request_seconds_sum": 51.201423697173595,
+      "prompt_tokens": 10671,
+      "completion_tokens": 994
+    },
+    {
+      "label": "changed_condition",
+      "calls": 18,
+      "model_request_seconds_sum": 98.13336383737624,
+      "prompt_tokens": 33916,
+      "completion_tokens": 2831
+    },
+    {
+      "label": "duplicate_report",
+      "calls": 0,
+      "model_request_seconds_sum": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    {
+      "label": "before_review/runtimes",
+      "calls": 9,
+      "model_request_seconds_sum": 45.712881561368704,
+      "prompt_tokens": 18979,
+      "completion_tokens": 1381
+    },
+    {
+      "label": "before_review/folder",
+      "calls": 9,
+      "model_request_seconds_sum": 43.16374619305134,
+      "prompt_tokens": 18594,
+      "completion_tokens": 1288
+    },
+    {
+      "label": "before_review/reason",
+      "calls": 9,
+      "model_request_seconds_sum": 46.27509473450482,
+      "prompt_tokens": 18608,
+      "completion_tokens": 1431
+    },
+    {
+      "label": "simulated_owner_review",
+      "calls": 0,
+      "model_request_seconds_sum": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    },
+    {
+      "label": "unrelated_report",
+      "calls": 16,
+      "model_request_seconds_sum": 90.8544520419091,
+      "prompt_tokens": 33346,
+      "completion_tokens": 2449
+    },
+    {
+      "label": "after_review/runtimes",
+      "calls": 9,
+      "model_request_seconds_sum": 60.821684120222926,
+      "prompt_tokens": 24929,
+      "completion_tokens": 1818
+    },
+    {
+      "label": "after_review/folder",
+      "calls": 9,
+      "model_request_seconds_sum": 54.43552020378411,
+      "prompt_tokens": 24727,
+      "completion_tokens": 1625
+    }
+  ],
+  "budget": {
+    "campaign_gpu_minutes_used_or_reserved": 473.51666666666665,
+    "campaign_cap": 500,
+    "cupmem_gpu_minutes_used_or_reserved": 178.46666666666667,
+    "cupmem_cap": 200
+  },
+  "tests": {
+    "passed": 211,
+    "direct_service_tests": 18,
+    "source": "Pre-submission saved unittest log; frozen runtime unchanged on resume"
+  },
+  "limitations": [
+    "Known synthetic development stream; no general benchmark claim",
+    "No independent direct-reading or SpeakerMem-R1 comparison in this run",
+    "Native 8-call query plus final readout costs 9 physical calls per QA here",
+    "Reconsideration explanation overstates invalidation; state remains a proposal until owner action",
+    "Raw source retrieval is bounded to2048 sentence candidates; restart uses explicit native writer replay",
+    "No new current-service legacy20 QA result or full official STALE result"
+  ],
+  "decision": "Keep this connected service as the development implementation; do not replace the primary baseline or claim general reliability. Finish the bounded implementation without further submissions or result-driven semantic changes."
+}

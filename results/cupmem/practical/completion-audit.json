@@ -1,0 +1,251 @@
+{
+  "deliverable_audit_pass": true,
+  "performance_acceptance_pass": false,
+  "completion_scope": "The explicit implementation + fixed evaluation + adoption-decision scope is delivered, using the objective's rejection-on-failure branch. The broader research solution and performance targets are not achieved.",
+  "checks": {
+    "runtime_prompt_protocol_hashes_unchanged": true,
+    "final_data_hashes_unchanged": true,
+    "all_recorded_jobs_terminal": true,
+    "all_allocations_include_gpu": true,
+    "actual_gpu_budget": true,
+    "unique_job_ids": true,
+    "packaged_slurm_policy_and_source_hashes": true,
+    "legacy-pep-v1/artifact_hashes": true,
+    "legacy-pep-v1/input_sha": true,
+    "legacy-pep-v1/verification_reproduced": true,
+    "legacy-pep-v1/accounting_matches_export": true,
+    "legacy-pep-v1/all_semantic_ratings_have_reasons": true,
+    "legacy-pep-v1/local_model_only": true,
+    "legacy-git-a-v1/artifact_hashes": true,
+    "legacy-git-a-v1/input_sha": true,
+    "legacy-git-a-v1/verification_reproduced": true,
+    "legacy-git-a-v1/accounting_matches_export": true,
+    "legacy-git-a-v1/all_semantic_ratings_have_reasons": true,
+    "legacy-git-a-v1/local_model_only": true,
+    "legacy-git-b-v1/artifact_hashes": true,
+    "legacy-git-b-v1/input_sha": true,
+    "legacy-git-b-v1/verification_reproduced": true,
+    "legacy-git-b-v1/accounting_matches_export": true,
+    "legacy-git-b-v1/all_semantic_ratings_have_reasons": true,
+    "legacy-git-b-v1/local_model_only": true,
+    "legacy-ever-v1/artifact_hashes": true,
+    "legacy-ever-v1/input_sha": true,
+    "legacy-ever-v1/verification_reproduced": true,
+    "legacy-ever-v1/accounting_matches_export": true,
+    "legacy-ever-v1/all_semantic_ratings_have_reasons": true,
+    "legacy-ever-v1/local_model_only": true,
+    "legacy-pep-rest-a-v1/artifact_hashes": true,
+    "legacy-pep-rest-a-v1/input_sha": true,
+    "legacy-pep-rest-a-v1/verification_reproduced": true,
+    "legacy-pep-rest-a-v1/accounting_matches_export": true,
+    "legacy-pep-rest-a-v1/all_semantic_ratings_have_reasons": true,
+    "legacy-pep-rest-a-v1/local_model_only": true,
+    "legacy-pep-rest-b-v1/artifact_hashes": true,
+    "legacy-pep-rest-b-v1/input_sha": true,
+    "legacy-pep-rest-b-v1/verification_reproduced": true,
+    "legacy-pep-rest-b-v1/accounting_matches_export": true,
+    "legacy-pep-rest-b-v1/all_semantic_ratings_have_reasons": true,
+    "legacy-pep-rest-b-v1/local_model_only": true,
+    "transfer-a-v1/artifact_hashes": true,
+    "transfer-a-v1/input_sha": true,
+    "transfer-a-v1/verification_reproduced": true,
+    "transfer-a-v1/accounting_matches_export": true,
+    "transfer-a-v1/all_semantic_ratings_have_reasons": true,
+    "transfer-a-v1/local_model_only": true,
+    "transfer-b-v1/artifact_hashes": true,
+    "transfer-b-v1/input_sha": true,
+    "transfer-b-v1/verification_reproduced": true,
+    "transfer-b-v1/accounting_matches_export": true,
+    "transfer-b-v1/all_semantic_ratings_have_reasons": true,
+    "transfer-b-v1/local_model_only": true,
+    "all_20_legacy_questions_both_arms_accounted": true,
+    "all_20_transfer_streams_both_arms_accounted": true,
+    "old_failed_attempt_retained": true,
+    "interrupted_native_capture_disclosed": true,
+    "continuation_disclosed": true,
+    "development_real_model_verified": true,
+    "headless_cli_actual_model_verified": true,
+    "local_tests_pass": true,
+    "public_only_reproduction": true,
+    "required_artifacts_exist": true,
+    "rejection_matches_failed_acceptance": true,
+    "no_observed_fabricated_or_future_witnesses": true,
+    "no_observed_unauthorized_promotions": true
+  },
+  "requirements": [
+    {
+      "requirement": "Executable original-input service, module responsibilities, design rationale, and headless example",
+      "status": "delivered",
+      "evidence": [
+        "docs/cupmem-practical-v2.md",
+        "docs/practical-usage.md",
+        "results/cupmem/practical/cli-smoke-v1/verification.json"
+      ]
+    },
+    {
+      "requirement": "Development QA5 and unrelated intake",
+      "status": "met_on_known_development_only",
+      "evidence": [
+        "results/cupmem/practical/dev-v2/ratings.json",
+        "results/cupmem/practical/dev-v2/verification.json"
+      ]
+    },
+    {
+      "requirement": "Legacy20 same-model comparison and zero lost fully correct+cited items",
+      "status": "measured_gate_met_with_low_absolute_quality",
+      "evidence": [
+        "results/cupmem/practical/summary.json",
+        "results/cupmem/practical/scored-cases.json"
+      ],
+      "caveat": "7/20 both; content-only correct falls12 to9, native failure blocks10 candidate QA."
+    },
+    {
+      "requirement": "New20 frozen streams, reconsideration>=8/10 and no unnecessary negatives",
+      "status": "evaluated_not_met_candidate_rejected",
+      "evidence": [
+        "evaluation/cupmem/practical/final-data-freeze.json",
+        "results/cupmem/practical/summary.json"
+      ],
+      "caveat": "0/10 supported;9/10 valid negatives;20 controlled streams from10 independent reports."
+    },
+    {
+      "requirement": "Exact original citations and no unapproved promotion",
+      "status": "met_for_observed_returned_outputs",
+      "evidence": [
+        "results/cupmem/practical/summary.json",
+        "results/cupmem/practical/dev-v2/verification.json"
+      ],
+      "caveat": "416/416 literal witness instances; semantic correctness is separately poor. Caller authenticates owner identity."
+    },
+    {
+      "requirement": "QA call reduction>=50% while quality holds",
+      "status": "invocation_reduction_met_quality_condition_not_met",
+      "evidence": [
+        "results/cupmem/practical/summary.json"
+      ],
+      "caveat": "One call per invoked QA;10 blocked QA are reported separately. All ingestion/failed-call/GPU cost retained."
+    },
+    {
+      "requirement": "Preserve differently conditioned observations, decision vs correction vs approval, unrelated QA",
+      "status": "implemented_and_development_verified_general_acceptance_not_met",
+      "evidence": [
+        "results/cupmem/practical/dev-v2/ratings.json",
+        "results/cupmem/practical/scored-cases.json",
+        "tests/test_cupmem_practical.py"
+      ],
+      "caveat": "A valid state machine does not establish model semantic competence."
+    },
+    {
+      "requirement": "Frozen final evaluation once; choose retained/deferred design on failure",
+      "status": "delivered",
+      "evidence": [
+        "results/cupmem/practical/decision.json",
+        "results/cupmem/practical/README.md",
+        "evaluation/cupmem/practical/legacy-pep-continuation.json"
+      ]
+    },
+    {
+      "requirement": "Slurm GPU/conda, budget, job identity and source preservation; no paid APIs",
+      "status": "recorded_and_verified_for_this_campaign",
+      "evidence": [
+        "results/cupmem/practical/goal-accounting.json",
+        "evaluation/cupmem/dispatch.py",
+        "results/cupmem/practical/summary.json"
+      ]
+    }
+  ],
+  "executions": [
+    {
+      "name": "legacy-pep-v1",
+      "job_id": "119830",
+      "slurm_state": "FAILED",
+      "program_complete": false,
+      "mechanical_checks_pass": false,
+      "error_reasons": [
+        "operation_failed",
+        "unfinished_or_changed_state"
+      ],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "legacy-git-a-v1",
+      "job_id": "119831",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": true,
+      "error_reasons": [],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "legacy-git-b-v1",
+      "job_id": "119832",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": true,
+      "error_reasons": [],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "legacy-ever-v1",
+      "job_id": "119833",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": true,
+      "error_reasons": [],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "legacy-pep-rest-a-v1",
+      "job_id": "119838",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": false,
+      "error_reasons": [
+        "operation_failed",
+        "unfinished_or_changed_state"
+      ],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "legacy-pep-rest-b-v1",
+      "job_id": "119839",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": false,
+      "error_reasons": [
+        "operation_failed",
+        "unfinished_or_changed_state"
+      ],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "transfer-a-v1",
+      "job_id": "119835",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": false,
+      "error_reasons": [
+        "operation_failed"
+      ],
+      "independent_semantic_validation": false
+    },
+    {
+      "name": "transfer-b-v1",
+      "job_id": "119836",
+      "slurm_state": "COMPLETED",
+      "program_complete": true,
+      "mechanical_checks_pass": false,
+      "error_reasons": [
+        "operation_failed"
+      ],
+      "independent_semantic_validation": false
+    }
+  ],
+  "remaining_within_this_goal": [],
+  "future_work_not_claimed_complete": [
+    "Long-document input budgeting",
+    "Semantically sufficient evidence selection",
+    "Reliable reconsideration reasoning",
+    "Original-source QA independent of native-write failure"
+  ]
+}

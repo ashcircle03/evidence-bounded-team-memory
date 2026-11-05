@@ -1,5 +1,5 @@
 {
-  "status": "native_team_adapter_and_source_readout_development_complete",
+  "status": "practical_fixed_evaluation_complete_candidate_rejected",
   "goal": "CUPMem original STALE reproduction and team-scenario transfer",
   "upstream_revision": "ea7d391103a151927cd29d2f01d87597a782bdcb",
   "master_dispatch": "../../../campaigns/speakermem-dev/campaign-dispatch.json",
@@ -53,10 +53,11 @@
     "proposal": "local-relaunch-proposal.json",
     "kind": "resource_cap_and_cancel_existing_job",
     "current_job_continues_until_reply": true,
-    "applied": false
+    "applied": false,
+    "historical_not_current_action": true
   },
   "next": [
-    "User-directed development on CUPMem foundation; no automatic new job submission. Baseline replacement remains undecided."
+    "Current practical fixed evaluation is complete. Retain the simple development base; no additional inference or final-set tuning is authorized by this completed scope. A new goal may address the documented failures."
   ],
   "execution_choice": {
     "provider": "Aurora-local",
@@ -512,5 +513,29 @@
     "readout_job": "119777",
     "report": "team-adapter/summary.json",
     "benchmark_complete": false
+  },
+  "connected_service": {
+    "job_id": "119817",
+    "status": "COMPLETED/0:0; program complete",
+    "report": "service-v1/README.md",
+    "summary": "service-v1/summary.json",
+    "qa": "5/5 checkpoints across3 questions in one synthetic stream; not benchmark QA",
+    "baseline_replacement_decided": false
+  },
+  "latest_practical": {
+    "report": "practical/README.md",
+    "summary": "practical/summary.json",
+    "audit": "practical/completion-audit.json",
+    "jobs_terminal": true,
+    "candidate_adopted": false,
+    "strict_legacy_qa": {
+      "simple": "7/20",
+      "cupmem": "7/20"
+    },
+    "supported_reconsideration": {
+      "simple": "0/10",
+      "cupmem": "0/10"
+    },
+    "gpu_minutes": 194.1
   }
 }

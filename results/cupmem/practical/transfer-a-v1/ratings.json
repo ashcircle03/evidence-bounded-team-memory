@@ -1,0 +1,305 @@
+{
+  "method": "Manual frozen-key comparison of actual answers/proposals and original evidence. One AI evaluator; not independent human validation.",
+  "ratings": {
+    "72971385b6105561": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Correct target source and relation kind, but the old quote is a partial citation to another commit and the new quote only starts a historical reference. Neither supplies the old decision/rationale or changed multi-pack reuse condition. The explanation also describes the new solution as the changed condition.",
+      "uncertainty": null
+    },
+    "b037cbc4953cedd3": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer explains avoiding leaks and copies via a temporary strbuf. The selected original fragments jointly support those points.",
+      "uncertainty": null
+    },
+    "b2d1b8d99c4718eb": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Correct source pair, but the old claim is an offset bookkeeping fragment and old condition/reason refer to the earlier single-pack bitmap vulnerability. The explanation invents that the preferred pack was the only one needing validation; the old text instead justified early checking for simplicity and explicitly mentioned later non-preferred treatment. New multi-pack reuse as the changed scope is not grounded.",
+      "uncertainty": null
+    },
+    "513f321434b06ff2": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer explains avoiding leaks and copies via a temporary strbuf. The selected original fragments jointly support those points.",
+      "uncertainty": null
+    },
+    "789ce965a58416d7": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "4aad5d1957f2a2f5": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer explains avoiding leaks and copies via a temporary strbuf. The selected original fragments jointly support those points.",
+      "uncertainty": null
+    },
+    "03b5666f5d7284a9": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "2a6810619bbc33b4": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer explains avoiding leaks and copies via a temporary strbuf. The selected original fragments jointly support those points.",
+      "uncertainty": null
+    },
+    "7be45d70e4d2d967": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Review returned BadRequestError, no proposal. Failed request is not a correct decision.",
+      "uncertainty": null
+    },
+    "1be32c847fcd5d52": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer states the former missing default-config chaining and transfer-dependent inconsistency. Its broad set of exact source fragments includes the skipped fetch_pack case and startup remedy. Wording is awkward but the causal content is supported.",
+      "uncertainty": null
+    },
+    "81c8c3c5df475178": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Review returned BadRequestError, no proposal. Failed request is not a correct decision.",
+      "uncertainty": null
+    },
+    "13981379c5847985": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer states the former missing default-config chaining and transfer-dependent inconsistency. Its broad set of exact source fragments includes the skipped fetch_pack case and startup remedy. Wording is awkward but the causal content is supported.",
+      "uncertainty": null
+    },
+    "df86bf2d852d9106": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "9c02405d9f796861": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer states the former missing default-config chaining and transfer-dependent inconsistency. Its broad set of exact source fragments includes the skipped fetch_pack case and startup remedy. Wording is awkward but the causal content is supported.",
+      "uncertainty": null
+    },
+    "58a12e24220867f5": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "9ca0a09064f88ccd": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "Answer states the former missing default-config chaining and transfer-dependent inconsistency. Its broad set of exact source fragments includes the skipped fetch_pack case and startup remedy. Wording is awkward but the causal content is supported.",
+      "uncertainty": null
+    },
+    "584a2be9c0cc8304": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 1,
+      "valid_abstention": false,
+      "reason": "The source pair and complete quoted passages describe a real implementation-era change, and the explanation is plausible. The returned kind is correction, not the predeclared reconsideration. This does not satisfy the frozen gate; document that updating obsolete documentation also admits a correction reading, so this boundary case is not evidence of broad model incapacity.",
+      "uncertainty": "Documentation correction vs policy reconsideration boundary; frozen score retained"
+    },
+    "e91960c50b14720d": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "The title directly states parse_color support for24-bit RGB values, matching the answer.",
+      "uncertainty": null
+    },
+    "61b8183a4dac2d25": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 1,
+      "valid_abstention": false,
+      "reason": "Returned correction rather than the frozen reconsideration kind, with mostly title references and an incomplete new-condition date line. It does identify the later thread-safe implementation in prose. Updating obsolete documentation admits a correction reading, so report label-boundary uncertainty without changing the frozen score.",
+      "uncertainty": "Documentation correction vs policy reconsideration boundary; frozen score retained"
+    },
+    "f7cb86758abdcd9b": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "The title directly states parse_color support for24-bit RGB values, matching the answer.",
+      "uncertainty": null
+    },
+    "c8ca4bf8bd0535dc": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "3e1242196cba9d57": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "The title directly states parse_color support for24-bit RGB values, matching the answer.",
+      "uncertainty": null
+    },
+    "97427fecd7a97d51": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "a31724b2bd8c1c3f": {
+      "answer_correct": true,
+      "citations_support_answer": true,
+      "unsupported_extra_claims": false,
+      "reason": "The title directly states parse_color support for24-bit RGB values, matching the answer.",
+      "uncertainty": null
+    },
+    "8840a38a9cc5c8ec": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Unknown evidence ID invalidated the proposal. No saved proposal is an invalid attempt, not a correct abstention.",
+      "uncertainty": null
+    },
+    "9db619cbfbc7a88f": {
+      "answer_correct": true,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The answer content matches the source rationale, but selected snippets only identify cron documentation or an incomplete inspection clause. They omit custom schedules beyond maintenance.* and the claimed newcomer rationale.",
+      "uncertainty": null
+    },
+    "576c296fde207913": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Correct target and reconsider kind, but it treats the already-known missing auto_condition as a new change. It omits the actual new premise: ref backends now have auto-compaction decision logic. The selected new-condition span only repeats the old limitation.",
+      "uncertainty": null
+    },
+    "71cf188f5d9e6abe": {
+      "answer_correct": true,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The answer content matches the source rationale, but selected snippets only identify cron documentation or an incomplete inspection clause. They omit custom schedules beyond maintenance.* and the claimed newcomer rationale.",
+      "uncertainty": null
+    },
+    "cf86ed1adcb87e8c": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "0498cc3c129cdd71": {
+      "answer_correct": true,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The answer content matches the source rationale, but selected snippets only identify cron documentation or an incomplete inspection clause. They omit custom schedules beyond maintenance.* and the claimed newcomer rationale.",
+      "uncertainty": null
+    },
+    "d62d2d47a0478873": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "83708e1487b6cbe7": {
+      "answer_correct": true,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The answer content matches the source rationale, but selected snippets only identify cron documentation or an incomplete inspection clause. They omit custom schedules beyond maintenance.* and the claimed newcomer rationale.",
+      "uncertainty": null
+    },
+    "d416f8a16842104f": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "The prose identifies manual callers and the need to decouple correctly, but both citations are titles. They support the two implementation choices but not the old caller assumption or the observed manual-parser failure required by the frozen criterion.",
+      "uncertainty": null
+    },
+    "4674ce32606b3d7e": {
+      "answer_correct": false,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The frozen expected answer is the special-character condition. However, the wording \"When did\" also naturally asks for a date; the model returns the commit date. This auxiliary QA item is ambiguous and is not credited under the frozen key; do not treat it as an unambiguous comprehension error.",
+      "uncertainty": "Ambiguous date-versus-condition wording in auxiliary QA; key unchanged"
+    },
+    "2af4cae619dc976e": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": false,
+      "reason": "Correct target and kind, but its changed condition is the proposed solution (decoupling), not manual KEEP_DASHDASH callers bypassing setup_revisions. Supporting spans are incomplete introduction lines, not the required rationale or counterexample.",
+      "uncertainty": null
+    },
+    "05248ed28d5a512a": {
+      "answer_correct": false,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The frozen expected answer is the special-character condition. However, the wording \"When did\" also naturally asks for a date; the model returns the commit date. This auxiliary QA item is ambiguous and is not credited under the frozen key; do not treat it as an unambiguous comprehension error. In this arm the operation instead failed with BadRequestError and returned no answer.",
+      "uncertainty": "Ambiguous date-versus-condition wording in auxiliary QA; key unchanged"
+    },
+    "a22d0d471f57a93d": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "df2ce74fb55a3546": {
+      "answer_correct": false,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The frozen expected answer is the special-character condition. However, the wording \"When did\" also naturally asks for a date; the model returns the commit date. This auxiliary QA item is ambiguous and is not credited under the frozen key; do not treat it as an unambiguous comprehension error.",
+      "uncertainty": "Ambiguous date-versus-condition wording in auxiliary QA; key unchanged"
+    },
+    "6d4466ae16c12b2f": {
+      "supported_reconsideration": false,
+      "unnecessary_proposals": 0,
+      "wrong_target_or_kind": 0,
+      "valid_abstention": true,
+      "reason": "Both earlier sources are unaffected by this report; valid model outputs contain no proposal. This is an observed abstention, not validation failure.",
+      "uncertainty": null
+    },
+    "8c56555cb5007a9b": {
+      "answer_correct": false,
+      "citations_support_answer": false,
+      "unsupported_extra_claims": false,
+      "reason": "The frozen expected answer is the special-character condition. However, the wording \"When did\" also naturally asks for a date; the model returns the commit date. This auxiliary QA item is ambiguous and is not credited under the frozen key; do not treat it as an unambiguous comprehension error.",
+      "uncertainty": "Ambiguous date-versus-condition wording in auxiliary QA; key unchanged"
+    }
+  }
+}

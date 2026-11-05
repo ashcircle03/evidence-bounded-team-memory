@@ -35,6 +35,14 @@ def dispatch(version, gpus, minutes, files):
                  for v,j in data['jobs'].items() if v.startswith('cup-'))
     if gpu_used+gpus*minutes*60>goal['gpu_minutes']*60:
         raise RuntimeError('CUPMem GPU goal budget exceeded, including failed attempts')
+    for key, scoped in data.get('goal_budgets', {}).items():
+        if key == 'cupmem' or not version.startswith(scoped.get('prefix', '\0')):
+            continue
+        consumed = sum((j.get('elapsed_seconds', 0) if j.get('state') in terminal
+                        else j['wall_minutes'] * 60) * j['gpus']
+                       for v, j in data['jobs'].items() if v.startswith(scoped['prefix']))
+        if consumed + gpus * minutes * 60 > scoped['gpu_minutes'] * 60:
+            raise RuntimeError(key + ' GPU budget exceeded, including failures and reservations')
     submit(version,gpus,minutes,files)
 
 

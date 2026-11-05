@@ -6,17 +6,72 @@
 
 [데모](#데모) · [시스템 구조](#시스템-구조) · [실험 결과](#실험-결과) · [재현 안내](evaluation/cpython/README.md) · [기여 안내](CONTRIBUTING.md)
 
-현재 개발은 **CUPMem의 기억 작성·갱신·검색을 재사용하고, 선택된 기억의 원문을 복원해 답과 인용을 만드는 경로**에 집중한다. 아래에 현재 구현과 확인 범위를 먼저 설명하고, 이전 최소 시스템과 평가 기록은 별도로 보존한다.
+현재는 **CUPMem 기반 후보의 구현과 고정 비교 평가를 완료했으며, 후보를 기본 경로로 채택하지 않기로 했다.** 원문 저장·검색·한 번의 독해·작성자 검토 상태를 개발 기반으로 유지한다. 긴 원문 처리와 의미적으로 근거 있는 재검토는 아직 해결하지 못했다. [최종 결과와 설계 판단](results/cupmem/practical/README.md) · [문항별 실제 답·제안·인용](results/cupmem/practical/cases.md)
 
-## 현재 개발 경로: CUPMem 재사용
+## 현재 구현과 확인 범위
 
-`team_memory.cupmem_adapter.CUPMemTeamMemory`는 공식 `CupMemEngine`을 주입받아 사용한다. `ingest(source)`는 원형 `write_session`으로 기억을 만들고 갱신하며, 후속 기록에는 원형 `answer_query`를 통해 재검토 필요성을 묻는다. `ask(question)`도 원형 검색·전제 확인·답변 생성을 사용한다. 어댑터는 작성자·시각·원문을 보존하고, 실제 최종 답변 생성 요청의 근거 참조를 원문 기록까지 연결한다. 원형 답변은 보존한다. `source_generate`를 주입하면 선택된 기억의 원문과 명시적인 상태 변화 원인까지 펼쳐 읽는 `grounded_answer`를 추가한다. 전체 원문으로 우회하는 검색은 하지 않는다. [설계 의도와 근거](evaluation/cupmem/TEAM_ADAPTER_DESIGN.md)를 함께 기록한다.
+호출 경로는 `team_memory.cupmem_practical.PracticalCUPMemService`다. `strategy='simple'`은 원문 검색·독해를 사용하며, 실험 후보 `strategy='cupmem'`은 공식 기억 작성·후보 검색과 후보별 재검토를 연결한다. QA는 두 경로 모두 원문과 실제 검토 상태를 받아 한 번 독해한다. [모듈별 책임과 고정 명세](docs/cupmem-practical-v2.md) · [Python·JSONL 사용법](docs/practical-usage.md)
+
+알려진 Cedar 개발 흐름에서는 후보 QA 5/5, 무관한 입력의 제안 0건, QA당 모델 호출 1회를 확인했다. 실제 Qwen3-8B JSONL 예제도 실행했다. 고정 평가의 결과는 다음과 같다.
+
+| 항목 | 단순 검색·독해 | CUPMem 후보 |
+|---|---:|---:|
+| 기존 QA 내용 정답 | 12/20 | 9/20 |
+| 기존 QA 답과 인용 모두 정답 | 7/20 | 7/20 |
+| 새 사례의 근거 있는 재검토 | 0/10 | 0/10 |
+| 대상 결정과 재검토 종류만 일치 | 5/10 | 7/10 |
+| 음성 사례의 불필요 제안 | 0/10 | 0/10 |
+| 음성 사례의 오류 없는 올바른 무제안 | 9/10 | 9/10 |
+
+새 20흐름은 실제 후속 기록 10개를 양성/음성으로 짝지은 통제 구성이다. 기존 QA 중 자연 EverMemBench 문항은 3개이며 두 경로 모두 2/3이다. 의미 판정은 개발에 참여한 AI 한 명이 원문과 대조한 결과로, 독립된 사람의 검증은 아니다. [고정 평가 기준](evaluation/cupmem/practical/PROTOCOL.md) · [실행·실패 상태](results/cupmem/practical/progress.json)
+
+긴 문서의 독해 입력은 문맥 한도를 넘었고, native 적재 실패는 후보 QA 10문항을 차단했다. 선택한 인용은 416/416개가 원문과 일치했지만 설명을 지지하지 못하는 경우가 반복됐다. 전체 goal 비용은 실패와 개발을 포함해 194.10 GPU분이다. 원형 CUPMem·SpeakerMem-R1 성능 재현이나 일반적인 문제 해결을 주장하지 않는다. 기존 구현의 constructor 기본값은 실험 고정을 위해 유지했으므로 호출자는 `strategy`를 명시해야 한다.
+
+## 이전 통합 개발 경로: service-v1
+
+통합 호출 경로는 `team_memory.cupmem_service.CUPMemService`다. 원문 저장, CUPMem 갱신·검색, 원문 검색·복원, 구조화된 재검토, 작성자 검토, QA를 연결한다. [입출력·상태·실패 처리 명세](docs/cupmem-service-v1.md)에 각 모듈의 책임과 재사용 근거를 고정했다. 이 명세와 실제 모델 성과는 구분한다.
+
+```python
+from team_memory.cupmem_adapter import CUPMemTeamMemory
+from team_memory.cupmem_service import CUPMemService
+
+# engine: 공식 CupMemEngine
+# recorded_calls(): 실제 native LLM 요청과 응답의 목록
+# generate(system, content): 최종 독해용 모델 호출 함수
+memory = CUPMemTeamMemory(engine, recorded_calls)
+service = CUPMemService(memory, generate, "team-records")
+received = service.handle({"operation": "ingest", "source": report})
+answer = service.handle({
+    "operation": "ask", "question": "조건별로 어떤 결과가 나왔어?",
+    "temporal_scope": "historical",
+})
+```
+
+`report`는 아래의 원문 형식(`owner`, `observed_at`, `source`)을 사용한다. 모델이 만든 결론·조건을 사람이 미리 정리해 넣지 않는다. 호출자는 `status`, 최종 `answers`, 검토할 `proposals`를 사용하며, 원형 답은 `native`의 진단 자료다. 재시작 시 원문·검토 기록은 남고 파생 엔진은 명시적인 `rebuild`가 필요하다. 재구축은 모델 호출을 수행한다. [실제 실행 연결 예제](evaluation/cupmem/service_run.py)
+
+```mermaid
+flowchart LR
+    Input[원문 입력] --> Store[불변 원문 저장]
+    Store --> CUP[CUPMem 작성·갱신·검색]
+    Store --> Search[CUPMem 임베딩으로 원문 검색]
+    CUP --> Evidence[원문 근거 복원]
+    Search --> Evidence
+    Evidence --> Review[구조화된 재검토 제안]
+    Review --> Owner[원작성자 검토 기록]
+    Evidence --> QA[질문·시간 범위에 맞춘 독해]
+    Owner --> QA
+    QA --> Output[답·인용·상태]
+```
+
+하위 어댑터 `team_memory.cupmem_adapter.CUPMemTeamMemory`는 공식 `CupMemEngine`을 주입받아 사용한다. `ingest(source)`는 원형 `write_session`으로 기억을 만들고 갱신하며, 후속 기록에는 원형 `answer_query`를 통해 재검토 필요성을 묻는다. `ask(question)`도 원형 검색·전제 확인·답변 생성을 사용한다. 어댑터는 작성자·시각·원문을 보존하고, 실제 최종 답변 생성 요청의 근거 참조를 원문 기록까지 연결한다. 원형 답변은 보존한다. 단독 어댑터의 `source_generate`는 선택된 기억의 원문만 펼쳐 읽는 이전 개발 경로다. 현재 서비스는 이 옵션을 끄고 CUPMem의 임베딩으로 원문 구절도 검색한 뒤 한 번의 최종 독해로 연결한다. [어댑터 설계](evaluation/cupmem/TEAM_ADAPTER_DESIGN.md) · [현재 서비스 명세](docs/cupmem-service-v1.md)
 
 현재 출발점은 공개 코드 `icedreamc/STALE`의 CUPMem revision `ea7d391103a151927cd29d2f01d87597a782bdcb`다. Qwen3-8B를 사용한 대체 모델 개발 실행이며, SpeakerMem-R1을 주 베이스라인에서 교체했다는 결정이나 논문 성능 재현을 뜻하지 않는다. 주 베이스라인 비교와 현재 동작 경로를 구분한다.
 
-생성된 재검토 권고는 승인이 아니다. 원작성자 승인과 공유 저장소 반영은 호출자가 처리한다. 반환된 원문은 모델이 선택한 기억의 출처를 복원한 것으로, 문장별 의미 검증 완료를 뜻하지 않는다. 전체 STALE를 매번 돌리지 않고 작은 기록 흐름으로 이 경로를 개발한다.
+생성된 재검토 권고는 승인이 아니다. 호출자가 원작성자의 의사를 받아 `review`를 호출하면 서비스가 검토 기록을 저장한다. 사용자 인증과 Git 전송은 호출자가 맡는다. 원문 인용의 위치 검증과 답의 의미 정확성은 구분한다.
 
-현재 확인한 범위는 **기존 합성 기록 두 개로 구성한 한 흐름의 질문 네 개**다. CUPMem 원형은 배포 조건 변화와 이전 결정의 재검토를 연결했고, 후속 원문 독해는 조건별 측정값과 감사 폴더명을 복구했다. 후속 독해는 저장된 실제 검색 결과를 재사용했으며, 결합 경로 전체를 다시 실행한 결과는 아니다. 한 응답에는 답 두 개를 `single`로 표시한 오류가 남아 `partial`로 반환한다. 일반 벤치마크 성과와 기존 QA 20개 보존은 아직 확인하지 않았다. [문항별 원형 답·수정 후 답·인용](results/cupmem/team-adapter/comparison.json) · [실행 범위와 비용](results/cupmem/team-adapter/summary.json)
+**현재 통합 실행은 Qwen3-8B로 합성 개발 흐름 하나를 처음부터 끝까지 수행했다.** 조건이 바뀌자 근거를 붙인 재검토·공존 제안을 각각 만들었고, 무관한 기록에는 제안을 만들지 않았다. 질문 3종을 검토 전후 총 5회 물어 사전에 정한 답과 인용 요건을 모두 충족했다. 인용 8개는 원문 위치와 일치했고, 중복 입력은 추가 모델 호출 없이 처리했다. 작성자 승인은 가상 작성자의 명시적 호출로 재생했다. GPU 1개를 16분 59초 사용했고 모델 호출은 86회였다. [결과·제약·재검증 방법](results/cupmem/service-v1/README.md) · [실제 답과 근거](results/cupmem/service-v1/comparison.json)
+
+이는 알려진 작은 합성 흐름의 개발 결과다. 재검토 설명의 과도한 무효화 표현과 호출 비용이 남아 있으며, 일반 벤치마크 성과·기존 QA 20개 보존·단순 원문 독해보다 나은지는 아직 확인하지 않았다. 이전의 질문 4개 원문 독해 재생은 별도 기록으로 남긴다: [이전 원형 답·독해 결과](results/cupmem/team-adapter/comparison.json) · [이전 실행 범위](results/cupmem/team-adapter/summary.json).
 
 ## 진단용 코어: 입력 → 판단 / 답변
 

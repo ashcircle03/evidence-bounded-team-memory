@@ -1,0 +1,51 @@
+{
+  "mechanical_checks_pass": false,
+  "checks": {
+    "program_complete": true,
+    "input_sha": true,
+    "runtime_sha": true,
+    "full_pipeline": true,
+    "local_only": true,
+    "call_count": true,
+    "call_ids": true,
+    "model": true,
+    "physical_success": false,
+    "exact_case_arm_set": true,
+    "contracts_and_actual_evidence": false
+  },
+  "errors": [
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "simple",
+      "event": 1,
+      "label": "qa-0",
+      "reason": "operation_failed",
+      "status": "error"
+    },
+    {
+      "case": "legacy-1d2a1e3271adf133",
+      "arm": "cupmem",
+      "reason": "unfinished_or_changed_state"
+    },
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "cupmem",
+      "event": 0,
+      "label": "import",
+      "reason": "operation_failed",
+      "status": "error"
+    },
+    {
+      "case_id": "legacy-1d2a1e3271adf133",
+      "arm": "cupmem",
+      "event": 1,
+      "label": "qa-0",
+      "reason": "operation_failed",
+      "status": "needs_rebuild"
+    }
+  ],
+  "qa_citation_instances": 0,
+  "qa_calls": [],
+  "bindings": [],
+  "semantic_accuracy": "Requires the separate predeclared key and original-source manual scoring"
+}

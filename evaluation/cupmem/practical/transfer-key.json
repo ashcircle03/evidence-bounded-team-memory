@@ -1,0 +1,669 @@
+{
+  "audience": "evaluator_only",
+  "positive_required": 8,
+  "negative_proposals_allowed": 0,
+  "paired_reports": 10,
+  "stream_count": 20,
+  "cases": {
+    "pack-validity-present": {
+      "independent_report": "pack-validity",
+      "positive": true,
+      "actual_target": "db9a9606302ced3858539670",
+      "incoming": "a3931f35314ae5cd8af00a7c",
+      "expected": "reconsider",
+      "criterion": "Revisit preferred-pack-only early validation because multi-pack verbatim reuse also needs valid open non-preferred packs. Preserve the original race rationale; do not claim that opening the preferred pack was itself wrong or that every pack must be opened eagerly.",
+      "old_witness": {
+        "source_id": "db9a9606302ced3858539670",
+        "start": 2000,
+        "end": 2102,
+        "quote": "But it's simpler to do\nthe check as early as possible, covering all direct uses of the\npreferred pack.",
+        "location": "https://github.com/git/git/commit/44f9fd649673362bdbaae7067a9919b1fe4c96d1"
+      },
+      "new_witness": {
+        "source_id": "a3931f35314ae5cd8af00a7c",
+        "start": 532,
+        "end": 682,
+        "quote": "But 44f9fd6496 was not extended to cover multi-pack reuse, meaning that\nthis same race condition exists for non-preferred packs during verbatim\nreuse.",
+        "location": "https://github.com/git/git/commit/62b3ec8a3f160cc9f1949b28644fc3947252db73"
+      },
+      "foil_source_ids": [
+        "563b501ac125127a550b7983",
+        "735d2160785d15c64296e2c6"
+      ],
+      "qa": {
+        "question": "In the earlier MIDX filename allocation change, why did get_midx_filename and get_midx_rev_filename take a strbuf output parameter?",
+        "evidence": {
+          "source_id": "563b501ac125127a550b7983",
+          "start": 1044,
+          "end": 1163,
+          "quote": "That allows us to implement the function without copying or open-coding\nget_midx_filename() in a way that doesn't leak.",
+          "location": "https://github.com/git/git/commit/60980aed786487e9113f0cb2907dfc75a77d363c"
+        }
+      }
+    },
+    "pack-validity-absent": {
+      "independent_report": "pack-validity",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "a3931f35314ae5cd8af00a7c",
+      "expected": "no_consequential_proposal",
+      "criterion": "Filename-buffer ownership and RGB color parsing are unaffected by validity checks for reusable pack files.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "a3931f35314ae5cd8af00a7c",
+        "start": 532,
+        "end": 682,
+        "quote": "But 44f9fd6496 was not extended to cover multi-pack reuse, meaning that\nthis same race condition exists for non-preferred packs during verbatim\nreuse.",
+        "location": "https://github.com/git/git/commit/62b3ec8a3f160cc9f1949b28644fc3947252db73"
+      },
+      "foil_source_ids": [
+        "563b501ac125127a550b7983",
+        "735d2160785d15c64296e2c6"
+      ],
+      "qa": {
+        "question": "In the earlier MIDX filename allocation change, why did get_midx_filename and get_midx_rev_filename take a strbuf output parameter?",
+        "evidence": {
+          "source_id": "563b501ac125127a550b7983",
+          "start": 1044,
+          "end": 1163,
+          "quote": "That allows us to implement the function without copying or open-coding\nget_midx_filename() in a way that doesn't leak.",
+          "location": "https://github.com/git/git/commit/60980aed786487e9113f0cb2907dfc75a77d363c"
+        }
+      }
+    },
+    "fetch-rechecks-present": {
+      "independent_report": "fetch-rechecks",
+      "positive": true,
+      "actual_target": "640920e3b0e6b6b1c052de4e",
+      "incoming": "5f2257fc33466e8b547631dc",
+      "expected": "reconsider",
+      "criterion": "Revisit mandatory pack-directory rechecking specifically for tag auto-following with many packs, many candidate tags and disconnected history: repeated scans are expensive and a missed tag is acceptable there. Do not remove the original correctness protection for general reachability/pruning.",
+      "old_witness": {
+        "source_id": "640920e3b0e6b6b1c052de4e",
+        "start": 226,
+        "end": 304,
+        "quote": "This lets us handle a process that is writing to the\nrepository simultaneously",
+        "location": "https://github.com/git/git/commit/45e8a7487339c0f0ea28244ef06851308d07387c"
+      },
+      "new_witness": {
+        "source_id": "5f2257fc33466e8b547631dc",
+        "start": 1797,
+        "end": 1936,
+        "quote": "This patch teaches fetch to use HAS_SHA1_QUICK to sacrifice\naccuracy for speed, in cases where we might be racy with a\nsimultaneous repack.",
+        "location": "https://github.com/git/git/commit/5827a03545663f6d6b491a35edb313900608568b"
+      },
+      "foil_source_ids": [
+        "24d875202cc1941000e24c20",
+        "b8f47d32954f50aaa16f2415"
+      ],
+      "qa": {
+        "question": "Why did the earlier fetch change load core configuration at startup even when no objects were transferred?",
+        "evidence": {
+          "source_id": "24d875202cc1941000e24c20",
+          "start": 738,
+          "end": 955,
+          "quote": "But if the fetch is a pure ref\nupdate (e.g., a new ref which is a copy of an old one), we\nskip fetch_pack entirely. So we get inconsistent results\ndepending on whether or not we have actual objects to\ntransfer or not!",
+          "location": "https://github.com/git/git/commit/72549dfd5d33424fbf557b0078503687780a3a53"
+        }
+      }
+    },
+    "fetch-rechecks-absent": {
+      "independent_report": "fetch-rechecks",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "5f2257fc33466e8b547631dc",
+      "expected": "no_consequential_proposal",
+      "criterion": "Loading default configuration at fetch startup and the Windows color-output API restriction do not depend on tag-following pack-directory scan cost.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "5f2257fc33466e8b547631dc",
+        "start": 1797,
+        "end": 1936,
+        "quote": "This patch teaches fetch to use HAS_SHA1_QUICK to sacrifice\naccuracy for speed, in cases where we might be racy with a\nsimultaneous repack.",
+        "location": "https://github.com/git/git/commit/5827a03545663f6d6b491a35edb313900608568b"
+      },
+      "foil_source_ids": [
+        "24d875202cc1941000e24c20",
+        "b8f47d32954f50aaa16f2415"
+      ],
+      "qa": {
+        "question": "Why did the earlier fetch change load core configuration at startup even when no objects were transferred?",
+        "evidence": {
+          "source_id": "24d875202cc1941000e24c20",
+          "start": 738,
+          "end": 955,
+          "quote": "But if the fetch is a pure ref\nupdate (e.g., a new ref which is a copy of an old one), we\nskip fetch_pack entirely. So we get inconsistent results\ndepending on whether or not we have actual objects to\ntransfer or not!",
+          "location": "https://github.com/git/git/commit/72549dfd5d33424fbf557b0078503687780a3a53"
+        }
+      }
+    },
+    "windows-colors-present": {
+      "independent_report": "windows-colors",
+      "positive": true,
+      "actual_target": "b8f47d32954f50aaa16f2415",
+      "incoming": "b3c45543f76fa7bb277fd543",
+      "expected": "reconsider",
+      "criterion": "Revisit the restriction to printf/fprintf/fputs because the later thread-safe console implementation handles stdout/stderr independently of the writing function. This is an implementation-era change, not proof the 2009 limitation was false then.",
+      "old_witness": {
+        "source_id": "b8f47d32954f50aaa16f2415",
+        "start": 71,
+        "end": 235,
+        "quote": "We emulate color escape codes on Windows by overriding printf, fprintf,\nand fputs. Warn developers that these are the only functions that can be\nused to print them.",
+        "location": "https://github.com/git/git/commit/e7821d73bd0256bfc15c48945beded063e17c1b6"
+      },
+      "new_witness": {
+        "source_id": "b3c45543f76fa7bb277fd543",
+        "start": 400,
+        "end": 588,
+        "quote": "the ANSI color sequence support\ncode needed to be replaced with a thread-safe version, one side effect\nbeing that stdout and stderr handled no matter which function is used to\nwrite to it.",
+        "location": "https://github.com/git/git/commit/3d0a83382f26c5385ffcfa3fb0d9b7d69d998647"
+      },
+      "foil_source_ids": [
+        "735d2160785d15c64296e2c6",
+        "2dece8d880074060014d9fe1"
+      ],
+      "qa": {
+        "question": "What color specification did the earlier parse_color change add support for?",
+        "evidence": {
+          "source_id": "735d2160785d15c64296e2c6",
+          "start": 40,
+          "end": 163,
+          "quote": "Some terminals (like XTerm) allow full 24-bit RGB color\nspecifications using an extension to the regular ANSI color\nscheme.",
+          "location": "https://github.com/git/git/commit/17a4be26060b00a867cbe54ee906fe03813470ec"
+        }
+      }
+    },
+    "windows-colors-absent": {
+      "independent_report": "windows-colors",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "b3c45543f76fa7bb277fd543",
+      "expected": "no_consequential_proposal",
+      "criterion": "How RGB color values are parsed and how an executable prefix is resolved do not change when console output interception changes.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "b3c45543f76fa7bb277fd543",
+        "start": 400,
+        "end": 588,
+        "quote": "the ANSI color sequence support\ncode needed to be replaced with a thread-safe version, one side effect\nbeing that stdout and stderr handled no matter which function is used to\nwrite to it.",
+        "location": "https://github.com/git/git/commit/3d0a83382f26c5385ffcfa3fb0d9b7d69d998647"
+      },
+      "foil_source_ids": [
+        "735d2160785d15c64296e2c6",
+        "2dece8d880074060014d9fe1"
+      ],
+      "qa": {
+        "question": "What color specification did the earlier parse_color change add support for?",
+        "evidence": {
+          "source_id": "735d2160785d15c64296e2c6",
+          "start": 40,
+          "end": 163,
+          "quote": "Some terminals (like XTerm) allow full 24-bit RGB color\nspecifications using an extension to the regular ANSI color\nscheme.",
+          "location": "https://github.com/git/git/commit/17a4be26060b00a867cbe54ee906fe03813470ec"
+        }
+      }
+    },
+    "maintenance-auto-present": {
+      "independent_report": "maintenance-auto",
+      "positive": true,
+      "actual_target": "4d7c360373fa47d844c04799",
+      "incoming": "3b44a97ab66166b2406a3da5",
+      "expected": "reconsider",
+      "criterion": "Revisit leaving pack-refs auto_condition unset now that ref backends can decide whether to repack. The new reftable auto-compaction support is relevant; do not claim the files backend already has an automatic threshold heuristic.",
+      "old_witness": {
+        "source_id": "4d7c360373fa47d844c04799",
+        "start": 1424,
+        "end": 1608,
+        "quote": "The 'auto_condition' function pointer is left NULL for now. We could\nextend this in the future to have a condition check if pack-refs should\nbe run during 'git maintenance run --auto'.",
+        "location": "https://github.com/git/git/commit/41abfe15d95ede4c2a047180a6062eac23d8f7d6"
+      },
+      "new_witness": {
+        "source_id": "3b44a97ab66166b2406a3da5",
+        "start": 973,
+        "end": 1115,
+        "quote": "now that we do have the logic in place to let ref backends\ndecide whether or not to repack refs, it does make sense to wire it up\naccordingly.",
+        "location": "https://github.com/git/git/commit/9f6714ab3e61ad58c4532077d4b8dc807ff0410d"
+      },
+      "foil_source_ids": [
+        "296b016bf275e314049c1772",
+        "ccf3ddc3b6b8e26dcd20aea7"
+      ],
+      "qa": {
+        "question": "Why were cron details added to the earlier git maintenance documentation?",
+        "evidence": {
+          "source_id": "296b016bf275e314049c1772",
+          "start": 45,
+          "end": 241,
+          "quote": "Advanced and expert users may want to know how 'git maintenance start'\nschedules background maintenance in order to customize their own\nschedules beyond what the maintenance.* config values allow.",
+          "location": "https://github.com/git/git/commit/16c56909298a3d0639e4bc5f22760ecd75eefb5b"
+        }
+      }
+    },
+    "maintenance-auto-absent": {
+      "independent_report": "maintenance-auto",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "3b44a97ab66166b2406a3da5",
+      "expected": "no_consequential_proposal",
+      "criterion": "Documenting cron schedules and keeping progress output on stderr are independent of the pack-refs auto-condition callback.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "3b44a97ab66166b2406a3da5",
+        "start": 973,
+        "end": 1115,
+        "quote": "now that we do have the logic in place to let ref backends\ndecide whether or not to repack refs, it does make sense to wire it up\naccordingly.",
+        "location": "https://github.com/git/git/commit/9f6714ab3e61ad58c4532077d4b8dc807ff0410d"
+      },
+      "foil_source_ids": [
+        "296b016bf275e314049c1772",
+        "ccf3ddc3b6b8e26dcd20aea7"
+      ],
+      "qa": {
+        "question": "Why were cron details added to the earlier git maintenance documentation?",
+        "evidence": {
+          "source_id": "296b016bf275e314049c1772",
+          "start": 45,
+          "end": 241,
+          "quote": "Advanced and expert users may want to know how 'git maintenance start'\nschedules background maintenance in order to customize their own\nschedules beyond what the maintenance.* config values allow.",
+          "location": "https://github.com/git/git/commit/16c56909298a3d0639e4bc5f22760ecd75eefb5b"
+        }
+      }
+    },
+    "end-of-options-present": {
+      "independent_report": "end-of-options",
+      "positive": true,
+      "actual_target": "c80f291c538a98416705ee19",
+      "incoming": "c09eb91b9bee30dc6e396e12",
+      "expected": "reconsider",
+      "criterion": "Revisit equating retention of --end-of-options with KEEP_DASHDASH after reset/checkout-style manual parsers demonstrate the assumption fails. KEEP_UNKNOWN_OPT tracks continued option parsing. Do not reverse the flag roles or claim stopping option parsing should disappear.",
+      "old_witness": {
+        "source_id": "c80f291c538a98416705ee19",
+        "start": 525,
+        "end": 666,
+        "quote": "We can even piggy-back on the\nhandling of PARSE_OPT_KEEP_DASHDASH, because any caller that wants to\nretain one will want to retain the other.",
+        "location": "https://github.com/git/git/commit/51b4594b4024d5cb2b4ace36ff932affa31c03f4"
+      },
+      "new_witness": {
+        "source_id": "c09eb91b9bee30dc6e396e12",
+        "start": 679,
+        "end": 778,
+        "quote": "But that turned out miss quite a few cases that pass KEEP_DASHDASH but\ndo their own manual parsing.",
+        "location": "https://github.com/git/git/commit/9385174627cbb7301b1007912514a66b75d78f31"
+      },
+      "foil_source_ids": [
+        "37968a6f104f86eba8301a8b",
+        "ccf3ddc3b6b8e26dcd20aea7"
+      ],
+      "qa": {
+        "question": "When did the earlier parse-options change stop adding angular brackets around argument help strings?",
+        "evidence": {
+          "source_id": "37968a6f104f86eba8301a8b",
+          "start": 453,
+          "end": 585,
+          "quote": "Stop adding these angular brackets if special characters are present,\nas they indicate that we don't deal with a simple placeholder.",
+          "location": "https://github.com/git/git/commit/5f0df44cd79a953c287ccb598896ea7aaa2cc9e3"
+        }
+      }
+    },
+    "end-of-options-absent": {
+      "independent_report": "end-of-options",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "c09eb91b9bee30dc6e396e12",
+      "expected": "no_consequential_proposal",
+      "criterion": "Formatting argument-help placeholders and stdout/stderr documentation do not control which end-of-options tokens are retained in argv.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "c09eb91b9bee30dc6e396e12",
+        "start": 679,
+        "end": 778,
+        "quote": "But that turned out miss quite a few cases that pass KEEP_DASHDASH but\ndo their own manual parsing.",
+        "location": "https://github.com/git/git/commit/9385174627cbb7301b1007912514a66b75d78f31"
+      },
+      "foil_source_ids": [
+        "37968a6f104f86eba8301a8b",
+        "ccf3ddc3b6b8e26dcd20aea7"
+      ],
+      "qa": {
+        "question": "When did the earlier parse-options change stop adding angular brackets around argument help strings?",
+        "evidence": {
+          "source_id": "37968a6f104f86eba8301a8b",
+          "start": 453,
+          "end": 585,
+          "quote": "Stop adding these angular brackets if special characters are present,\nas they indicate that we don't deal with a simple placeholder.",
+          "location": "https://github.com/git/git/commit/5f0df44cd79a953c287ccb598896ea7aaa2cc9e3"
+        }
+      }
+    },
+    "perforce-install-present": {
+      "independent_report": "perforce-install",
+      "positive": true,
+      "actual_target": "e15a84a45b1ea3e72faaeaf1",
+      "incoming": "d5400b05934f655035fa9c6d",
+      "expected": "reconsider",
+      "criterion": "Revisit Homebrew-based non-quarantined Perforce installation because the cask is unsuitable for unattended CI. A scripted download is proposed, but quarantine risk returns and is explicitly deferred; do not say SIP or the old hang has been solved by downloading.",
+      "old_witness": {
+        "source_id": "e15a84a45b1ea3e72faaeaf1",
+        "start": 365,
+        "end": 439,
+        "quote": "Let's ask Homebrew specifically to _not_ quarantine the Perforce\nbinaries.",
+        "location": "https://github.com/git/git/commit/5ed9fc3fc8629d9c13b6bae03a32e28cf8be3e96"
+      },
+      "new_witness": {
+        "source_id": "d5400b05934f655035fa9c6d",
+        "start": 40,
+        "end": 218,
+        "quote": "Perfoce's cask in brew is meant[1] to be used only by humans, so replace\nits use from the CI with a scripted binary download which is less likely\nto fail, as it is done in Linux.",
+        "location": "https://github.com/git/git/commit/d1c9195116beb18b2e8d9caf37d21289bb5f48b3"
+      },
+      "foil_source_ids": [
+        "18f0289ce100e4309f21dfba",
+        "296b016bf275e314049c1772"
+      ],
+      "qa": {
+        "question": "Which GCC version did the earlier osx-gcc CI change install and link explicitly, and why pin it?",
+        "evidence": {
+          "source_id": "18f0289ce100e4309f21dfba",
+          "start": 878,
+          "end": 1035,
+          "quote": "Install 'gcc@9' specifically, so we'll still get what we want even\n    after GCC 10 comes out, and the \"plain\" 'gcc' package starts to\n    refer to 'gcc@10'.",
+          "location": "https://github.com/git/git/commit/176441bfb58d8833640300d8db67ef8d7eee56ca"
+        }
+      }
+    },
+    "perforce-install-absent": {
+      "independent_report": "perforce-install",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "d5400b05934f655035fa9c6d",
+      "expected": "no_consequential_proposal",
+      "criterion": "The Perforce cask restriction is not a ban on Homebrew GCC installation, and it does not change Git maintenance cron documentation.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "d5400b05934f655035fa9c6d",
+        "start": 40,
+        "end": 218,
+        "quote": "Perfoce's cask in brew is meant[1] to be used only by humans, so replace\nits use from the CI with a scripted binary download which is less likely\nto fail, as it is done in Linux.",
+        "location": "https://github.com/git/git/commit/d1c9195116beb18b2e8d9caf37d21289bb5f48b3"
+      },
+      "foil_source_ids": [
+        "18f0289ce100e4309f21dfba",
+        "296b016bf275e314049c1772"
+      ],
+      "qa": {
+        "question": "Which GCC version did the earlier osx-gcc CI change install and link explicitly, and why pin it?",
+        "evidence": {
+          "source_id": "18f0289ce100e4309f21dfba",
+          "start": 878,
+          "end": 1035,
+          "quote": "Install 'gcc@9' specifically, so we'll still get what we want even\n    after GCC 10 comes out, and the \"plain\" 'gcc' package starts to\n    refer to 'gcc@10'.",
+          "location": "https://github.com/git/git/commit/176441bfb58d8833640300d8db67ef8d7eee56ca"
+        }
+      }
+    },
+    "threeway-binary-present": {
+      "independent_report": "threeway-binary",
+      "positive": true,
+      "actual_target": "cf7ef709bfd435f7e6160b3e",
+      "incoming": "0bc062d7efc8233e99642eb1",
+      "expected": "reconsider",
+      "criterion": "Revisit the three-way-first application path for trivial binary merges: ll_binary_merge assumes neither side equals the ancestor because normal callers resolve trivial cases first. Check trivial cases before the driver; do not claim the report calls for globally reverting three-way-first or changing directory permissions.",
+      "old_witness": {
+        "source_id": "cf7ef709bfd435f7e6160b3e",
+        "start": 584,
+        "end": 756,
+        "quote": "when \"--3way\" is used,\ngit will always try the three-way merge first and\nwill only fall back to apply_fragments() in cases\nwhere blobs are not available or some other error",
+        "location": "https://github.com/git/git/commit/923cd87ac8550a8e277bfeb19198a11b6a8ed854"
+      },
+      "new_witness": {
+        "source_id": "0bc062d7efc8233e99642eb1",
+        "start": 1047,
+        "end": 1262,
+        "quote": "This no longer is true after we made \"--3way\" to mean \"first try\nthree-way and then fall back to straight application\", and made\n\"git apply -3\" on a binary patch that is based on the current\nversion no longer apply.",
+        "location": "https://github.com/git/git/commit/57f183b698ca4f967266577687f09b09a79f0b8c"
+      },
+      "foil_source_ids": [
+        "bb94413dc4d1a60d153cba20",
+        "24d875202cc1941000e24c20"
+      ],
+      "qa": {
+        "question": "According to the earlier apply permissions change, should core.sharedRepository affect files created in the working tree?",
+        "evidence": {
+          "source_id": "bb94413dc4d1a60d153cba20",
+          "start": 69,
+          "end": 317,
+          "quote": "core.sharedRepository defines which permissions Git should set when\ncreating files in $GIT_DIR, so that the repository may be shared with\nother users. But (in its current form) the setting shouldn't affect how\nfiles are created in the working tree.",
+          "location": "https://github.com/git/git/commit/eb3c027e1779d0d1b5bd3b4e96a108461c9759a5"
+        }
+      }
+    },
+    "threeway-binary-absent": {
+      "independent_report": "threeway-binary",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "0bc062d7efc8233e99642eb1",
+      "expected": "no_consequential_proposal",
+      "criterion": "Working-tree directory permissions and fetch configuration loading are not affected by trivial binary merge resolution.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "0bc062d7efc8233e99642eb1",
+        "start": 1047,
+        "end": 1262,
+        "quote": "This no longer is true after we made \"--3way\" to mean \"first try\nthree-way and then fall back to straight application\", and made\n\"git apply -3\" on a binary patch that is based on the current\nversion no longer apply.",
+        "location": "https://github.com/git/git/commit/57f183b698ca4f967266577687f09b09a79f0b8c"
+      },
+      "foil_source_ids": [
+        "bb94413dc4d1a60d153cba20",
+        "24d875202cc1941000e24c20"
+      ],
+      "qa": {
+        "question": "According to the earlier apply permissions change, should core.sharedRepository affect files created in the working tree?",
+        "evidence": {
+          "source_id": "bb94413dc4d1a60d153cba20",
+          "start": 69,
+          "end": 317,
+          "quote": "core.sharedRepository defines which permissions Git should set when\ncreating files in $GIT_DIR, so that the repository may be shared with\nother users. But (in its current form) the setting shouldn't affect how\nfiles are created in the working tree.",
+          "location": "https://github.com/git/git/commit/eb3c027e1779d0d1b5bd3b4e96a108461c9759a5"
+        }
+      }
+    },
+    "runtime-prefix-present": {
+      "independent_report": "runtime-prefix",
+      "positive": true,
+      "actual_target": "2dece8d880074060014d9fe1",
+      "incoming": "9b0ba294279d4a4b0567ad51",
+      "expected": "reconsider",
+      "criterion": "Revisit the Windows-only availability restriction after executable-path discovery is implemented for Linux/Darwin/BSD and absolute argv0. Do not claim runtime-prefix becomes the default on all Unix systems, or that all path discovery is guaranteed rather than best effort.",
+      "old_witness": {
+        "source_id": "2dece8d880074060014d9fe1",
+        "start": 1806,
+        "end": 1877,
+        "quote": "On Unix, further work is required before\nRUNTIME_PREFIX can be enabled.",
+        "location": "https://github.com/git/git/commit/35fb0e8633217f602360a9987af51c4b960e7850"
+      },
+      "new_witness": {
+        "source_id": "9b0ba294279d4a4b0567ad51",
+        "start": 313,
+        "end": 409,
+        "quote": "This is used to enable RUNTIME_PREFIX support for non-Windows systems,\nnotably Linux and Darwin.",
+        "location": "https://github.com/git/git/commit/226c0ddd0d63dd6c8dde497c755af2ad1f02e0c1"
+      },
+      "foil_source_ids": [
+        "5ad62ac511680fdd2a993b98",
+        "735d2160785d15c64296e2c6"
+      ],
+      "qa": {
+        "question": "Why did the earlier mingw lstat/fstat change remove _getdrive usage?",
+        "evidence": {
+          "source_id": "5ad62ac511680fdd2a993b98",
+          "start": 51,
+          "end": 155,
+          "quote": "The field device is not used by Git, and putting the number of the\ncurrent device is meaningless anyway.",
+          "location": "https://github.com/git/git/commit/8252df62187e7fd35543552ffeab1e1eb048b57e"
+        }
+      }
+    },
+    "runtime-prefix-absent": {
+      "independent_report": "runtime-prefix",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "9b0ba294279d4a4b0567ad51",
+      "expected": "no_consequential_proposal",
+      "criterion": "Removing an unused stat device field and parsing RGB colors do not depend on enabling relocatable executable-prefix support on POSIX.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "9b0ba294279d4a4b0567ad51",
+        "start": 313,
+        "end": 409,
+        "quote": "This is used to enable RUNTIME_PREFIX support for non-Windows systems,\nnotably Linux and Darwin.",
+        "location": "https://github.com/git/git/commit/226c0ddd0d63dd6c8dde497c755af2ad1f02e0c1"
+      },
+      "foil_source_ids": [
+        "5ad62ac511680fdd2a993b98",
+        "735d2160785d15c64296e2c6"
+      ],
+      "qa": {
+        "question": "Why did the earlier mingw lstat/fstat change remove _getdrive usage?",
+        "evidence": {
+          "source_id": "5ad62ac511680fdd2a993b98",
+          "start": 51,
+          "end": 155,
+          "quote": "The field device is not used by Git, and putting the number of the\ncurrent device is meaningless anyway.",
+          "location": "https://github.com/git/git/commit/8252df62187e7fd35543552ffeab1e1eb048b57e"
+        }
+      }
+    },
+    "c99-deadline-present": {
+      "independent_report": "c99-deadline",
+      "positive": true,
+      "actual_target": "024a890782eb94f43f9a40c6",
+      "incoming": "0e2fd53bdb0250350be4d389",
+      "expected": "reconsider",
+      "criterion": "Revisit the pending for-loop declaration guideline because the agreed time window has arrived and releases have already exercised the construct. The report still allows discussion/drop if premature; do not invent proof that every platform was tested or treat this record as an owner approval in the simulated service.",
+      "old_witness": {
+        "source_id": "024a890782eb94f43f9a40c6",
+        "start": 387,
+        "end": 561,
+        "quote": "we will officially adopt the variable declaration\nin the initializaiton part of \"for ()\" statement this winter, unless\nwe find that a platform we care about does not grok it.",
+        "location": "https://github.com/git/git/commit/6563706568b952d85c050b208b5301303d32810c"
+      },
+      "new_witness": {
+        "source_id": "0e2fd53bdb0250350be4d389",
+        "start": 387,
+        "end": 492,
+        "quote": "As November 2022 is within the window of this upcoming release,\nlet's update the guideline to allow this.",
+        "location": "https://github.com/git/git/commit/82dd01d81b1babf6714435b80683e756de1a4d64"
+      },
+      "foil_source_ids": [
+        "ccf3ddc3b6b8e26dcd20aea7",
+        "2af39bf8c7d7f43407cdcfa7"
+      ],
+      "qa": {
+        "question": "According to the earlier CodingGuidelines record, where should primary output and chatty progress messages go?",
+        "evidence": {
+          "source_id": "ccf3ddc3b6b8e26dcd20aea7",
+          "start": 113,
+          "end": 346,
+          "quote": "a command to emit its\nprimary output to stdout so that it can be captured to a file or sent\ndown a pipe, and to emit \"chatty\" messages (such as those reporting\nprogress) to stderr so that they don't interfere with the primary\noutput.",
+          "location": "https://github.com/git/git/commit/e258eb4800e30da2adbdb2df8d8d8c19d9b443e4"
+        }
+      }
+    },
+    "c99-deadline-absent": {
+      "independent_report": "c99-deadline",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "0e2fd53bdb0250350be4d389",
+      "expected": "no_consequential_proposal",
+      "criterion": "Permission for C99 for-loop declarations changes neither output-stream conventions nor guidance about gender-neutral descriptions.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "0e2fd53bdb0250350be4d389",
+        "start": 387,
+        "end": 492,
+        "quote": "As November 2022 is within the window of this upcoming release,\nlet's update the guideline to allow this.",
+        "location": "https://github.com/git/git/commit/82dd01d81b1babf6714435b80683e756de1a4d64"
+      },
+      "foil_source_ids": [
+        "ccf3ddc3b6b8e26dcd20aea7",
+        "2af39bf8c7d7f43407cdcfa7"
+      ],
+      "qa": {
+        "question": "According to the earlier CodingGuidelines record, where should primary output and chatty progress messages go?",
+        "evidence": {
+          "source_id": "ccf3ddc3b6b8e26dcd20aea7",
+          "start": 113,
+          "end": 346,
+          "quote": "a command to emit its\nprimary output to stdout so that it can be captured to a file or sent\ndown a pipe, and to emit \"chatty\" messages (such as those reporting\nprogress) to stderr so that they don't interfere with the primary\noutput.",
+          "location": "https://github.com/git/git/commit/e258eb4800e30da2adbdb2df8d8d8c19d9b443e4"
+        }
+      }
+    },
+    "bitmap-to-file-present": {
+      "independent_report": "bitmap-to-file",
+      "positive": true,
+      "actual_target": "0e5ca645ef21ab7e522eb734",
+      "incoming": "ff88b8651e0227fe123560de",
+      "expected": "reconsider",
+      "criterion": "Revisit the stdout-only bitmap traversal restriction for specialized on-disk transfer packs with an explicit --use-bitmap-index opt-in. Retain the robust default for git repack and the distinction between bitmap traversal and verbatim pack reuse; do not claim all on-disk repacks or all pack reuse should be enabled.",
+      "old_witness": {
+        "source_id": "0e5ca645ef21ab7e522eb734",
+        "start": 538,
+        "end": 629,
+        "quote": "We must be packing to stdout (as a normal `pack-objects` from\n     `upload-pack` would do).",
+        "location": "https://github.com/git/git/commit/6b8fda2db1d69606954711b606c546c0e4e51680"
+      },
+      "new_witness": {
+        "source_id": "ff88b8651e0227fe123560de",
+        "start": 1420,
+        "end": 1503,
+        "quote": "One might want to generate on-disk\n    packfiles for a specialized object transfer.",
+        "location": "https://github.com/git/git/commit/645c432d6196903bcd9e8a82d150aac1428ccf34"
+      },
+      "foil_source_ids": [
+        "91cffb1801bbf79cd8c383c8",
+        "24d875202cc1941000e24c20"
+      ],
+      "qa": {
+        "question": "Why was nr_unresolved an unsuitable allocation count for sorted_by_pos in the earlier index-pack fix?",
+        "evidence": {
+          "source_id": "91cffb1801bbf79cd8c383c8",
+          "start": 378,
+          "end": 548,
+          "quote": "The code allocated an array\nfor nr_unresolved, which is sum of number of ref- and ofs-deltas\nminus nr_resolved, which may be larger or smaller than the number\nref-deltas.",
+          "location": "https://github.com/git/git/commit/781d93067d3ab8b448a4c8989a6e3cac17009061"
+        }
+      }
+    },
+    "bitmap-to-file-absent": {
+      "independent_report": "bitmap-to-file",
+      "positive": false,
+      "actual_target": null,
+      "incoming": "ff88b8651e0227fe123560de",
+      "expected": "no_consequential_proposal",
+      "criterion": "Allocating sorted_by_pos for ref deltas and loading fetch configuration are independent of enabling bitmap traversal for explicit on-disk transfers.",
+      "old_witness": null,
+      "new_witness": {
+        "source_id": "ff88b8651e0227fe123560de",
+        "start": 1420,
+        "end": 1503,
+        "quote": "One might want to generate on-disk\n    packfiles for a specialized object transfer.",
+        "location": "https://github.com/git/git/commit/645c432d6196903bcd9e8a82d150aac1428ccf34"
+      },
+      "foil_source_ids": [
+        "91cffb1801bbf79cd8c383c8",
+        "24d875202cc1941000e24c20"
+      ],
+      "qa": {
+        "question": "Why was nr_unresolved an unsuitable allocation count for sorted_by_pos in the earlier index-pack fix?",
+        "evidence": {
+          "source_id": "91cffb1801bbf79cd8c383c8",
+          "start": 378,
+          "end": 548,
+          "quote": "The code allocated an array\nfor nr_unresolved, which is sum of number of ref- and ofs-deltas\nminus nr_resolved, which may be larger or smaller than the number\nref-deltas.",
+          "location": "https://github.com/git/git/commit/781d93067d3ab8b448a4c8989a6e3cac17009061"
+        }
+      }
+    }
+  }
+}

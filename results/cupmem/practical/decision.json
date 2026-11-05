@@ -1,0 +1,26 @@
+{
+  "candidate_adopted": false,
+  "decision": "Retain original-source retrieval/readout and provenance/owner-review infrastructure as the development base; defer the native CUPMem writer and automatic semantic reconsideration for ordinary use.",
+  "entrypoint": "examples/practical_service.py --strategy simple (all other required flags still apply)",
+  "runtime_default_note": "The measured implementation is frozen. Its constructor default remains cupmem; callers must choose simple explicitly. The CLI already requires an explicit strategy.",
+  "retained": [
+    "Immutable originals with source identity, owner and timestamps",
+    "One-call cited original-source reader, within measured input limits",
+    "Pending proposals and explicit original-owner review",
+    "Headless Python/JSONL contract and real-model example"
+  ],
+  "deferred": [
+    "Native CUPMem writes as a prerequisite for all QA",
+    "Unattended interpretation of proposed reconsideration/correction/coexistence",
+    "Long-document general support under the current whole-record input expansion"
+  ],
+  "rationale": [
+    "No supported reconsiderations under the frozen strict rubric in either arm",
+    "Native writes add ingestion cost and can block content-correct QA",
+    "Zero strict QA regressions coexists with low absolute quality and lost content-only answers",
+    "Literal citations and authorization checks do not establish semantic correctness"
+  ],
+  "next_failure_to_address": "Bound evidence context without cutting subject/action/condition and decouple original-source QA availability from failed derived-memory writing.",
+  "scope_complete": "Implementation, fixed evaluation, and adoption decision; performance acceptance failed and the broader research problem is not solved.",
+  "no_post_final_semantic_tuning": true
+}

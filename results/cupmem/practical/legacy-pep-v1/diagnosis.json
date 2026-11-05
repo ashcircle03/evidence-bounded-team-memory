@@ -1,0 +1,41 @@
+{
+  "slurm": "FAILED/1:0",
+  "supervisor": "1200-second child timeout; allocation itself had30minutes",
+  "snapshot_status": "running is the last saved checkpoint, not a live process",
+  "readout": {
+    "context_limit": 32768,
+    "rejected_requests": [
+      {
+        "total": 33644,
+        "input": 29548,
+        "output": 4096
+      },
+      {
+        "total": 59247,
+        "input": 55151,
+        "output": 4096
+      },
+      {
+        "total": 84688,
+        "input": 80592,
+        "output": 4096
+      },
+      {
+        "total": 35387,
+        "input": 31291,
+        "output": 4096
+      },
+      {
+        "total": 35011,
+        "input": 30915,
+        "output": 4096
+      }
+    ],
+    "cause": "Retrieved sentence hits expand whole source documents; per-line citation metadata expands prompt size beyond the model context."
+  },
+  "native_write": {
+    "first_history": "Three90-second APITimeoutErrors during the import; service blocked its8 later QA as needs_rebuild",
+    "second_history": "Native import still running when the supervisor killed the child; later rows never saved"
+  },
+  "interpretation": "Neither a failed model readout nor an incomplete import counts as successful QA or preserved state. No retry or semantic patch performed on this frozen final run."
+}

@@ -1,0 +1,13 @@
+{
+  "predecessor_job": "119830",
+  "reason": "Supervisor killed the child during the second history; second/third histories have no recorded QA results. Complete only these histories with unchanged runtime, full original inputs and original key.",
+  "first_history": "Preserve original failure; do not rerun or replace it",
+  "resource_change": "Each isolated completion retains original GPU1/CPU8/48G/30min; no timeout or memory expansion. All additional time charged to existing240GPUmin.",
+  "model_input_change": false,
+  "runtime_change": false,
+  "order_difference": "Fresh isolated history, simple arm first. Prior job had cupmem first for the second history. No answer cache; report cold/warm cost and original failed attempt separately.",
+  "sources": [
+    "legacy-pep-rest-a.json",
+    "legacy-pep-rest-b.json"
+  ]
+}

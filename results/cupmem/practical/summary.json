@@ -1,0 +1,242 @@
+{
+  "scope": "Fixed practical CUPMem adaptation assessment; local Qwen3-8B; not original CUPMem/SpeakerMem performance",
+  "frozen_runtime": true,
+  "frozen_data": true,
+  "legacy": {
+    "simple": {
+      "planned": 20,
+      "answer_correct": 12,
+      "answer_and_citation": 7,
+      "statuses": {
+        "error": 6,
+        "partial": 1,
+        "ok": 13
+      },
+      "by_corpus": {
+        "PEP public source": {
+          "total": 8,
+          "answer_correct": 3,
+          "answer_and_citation": 0
+        },
+        "PEP public source with controlled counterstatement": {
+          "total": 2,
+          "answer_correct": 0,
+          "answer_and_citation": 0
+        },
+        "public_git": {
+          "total": 5,
+          "answer_correct": 5,
+          "answer_and_citation": 4
+        },
+        "controlled_with_public_source": {
+          "total": 1,
+          "answer_correct": 1,
+          "answer_and_citation": 0
+        },
+        "controlled": {
+          "total": 1,
+          "answer_correct": 1,
+          "answer_and_citation": 1
+        },
+        "natural EverMemBench-Dynamic QA": {
+          "total": 3,
+          "answer_correct": 2,
+          "answer_and_citation": 2
+        }
+      }
+    },
+    "cupmem": {
+      "planned": 20,
+      "answer_correct": 9,
+      "answer_and_citation": 7,
+      "statuses": {
+        "needs_rebuild": 10,
+        "ok": 10
+      },
+      "by_corpus": {
+        "PEP public source": {
+          "total": 8,
+          "answer_correct": 0,
+          "answer_and_citation": 0
+        },
+        "PEP public source with controlled counterstatement": {
+          "total": 2,
+          "answer_correct": 0,
+          "answer_and_citation": 0
+        },
+        "public_git": {
+          "total": 5,
+          "answer_correct": 5,
+          "answer_and_citation": 4
+        },
+        "controlled_with_public_source": {
+          "total": 1,
+          "answer_correct": 1,
+          "answer_and_citation": 0
+        },
+        "controlled": {
+          "total": 1,
+          "answer_correct": 1,
+          "answer_and_citation": 1
+        },
+        "natural EverMemBench-Dynamic QA": {
+          "total": 3,
+          "answer_correct": 2,
+          "answer_and_citation": 2
+        }
+      }
+    },
+    "lost_simple_successes": [],
+    "lost_content_correct_items": [
+      "old-pep-597-clean/premise",
+      "old-pep-618-clean/premise",
+      "pep-680/clean/candidate"
+    ]
+  },
+  "transfer": {
+    "simple": {
+      "positive_total": 10,
+      "supported_reconsiderations": 0,
+      "correct_target_and_reconsider_kind": 5,
+      "positive_proposals_not_meeting_full_rubric": 7,
+      "wrong_target_or_kind": 2,
+      "negative_total": 10,
+      "unnecessary_negative_cases": 0,
+      "unnecessary_negative_proposals": 0,
+      "valid_negative_abstentions": 9,
+      "auxiliary_qa_answer_and_citation": 11,
+      "auxiliary_qa_total": 20,
+      "auxiliary_qa_ambiguous": 2,
+      "review_statuses": {
+        "ok": 16,
+        "error": 3,
+        "invalid": 1
+      }
+    },
+    "cupmem": {
+      "positive_total": 10,
+      "supported_reconsiderations": 0,
+      "correct_target_and_reconsider_kind": 7,
+      "positive_proposals_not_meeting_full_rubric": 8,
+      "wrong_target_or_kind": 1,
+      "negative_total": 10,
+      "unnecessary_negative_cases": 0,
+      "unnecessary_negative_proposals": 0,
+      "valid_negative_abstentions": 9,
+      "auxiliary_qa_answer_and_citation": 11,
+      "auxiliary_qa_total": 20,
+      "auxiliary_qa_ambiguous": 2,
+      "review_statuses": {
+        "ok": 17,
+        "error": 3
+      }
+    }
+  },
+  "cost": {
+    "simple": {
+      "by_operation": {
+        "import_history": {
+          "operations": 27,
+          "calls": 0,
+          "seconds": 4.642337620258331,
+          "prompt_tokens": 0,
+          "completion_tokens": 0,
+          "calls_missing_usage": 0
+        },
+        "ask": {
+          "operations": 40,
+          "calls": 40,
+          "seconds": 355.13534163683653,
+          "prompt_tokens": 353502,
+          "completion_tokens": 5250,
+          "calls_missing_usage": 6
+        },
+        "ingest": {
+          "operations": 20,
+          "calls": 20,
+          "seconds": 157.23612686619163,
+          "prompt_tokens": 227591,
+          "completion_tokens": 2936,
+          "calls_missing_usage": 3
+        }
+      },
+      "qa_invoked": 40,
+      "qa_blocked_zero_calls": 0,
+      "mean_calls_per_invoked_qa": 1,
+      "mean_seconds_per_invoked_qa": 8.878383540920913,
+      "median_seconds_per_invoked_qa": 4.677361293695867
+    },
+    "cupmem": {
+      "by_operation": {
+        "import_history": {
+          "operations": 27,
+          "calls": 1585,
+          "seconds": 7753.600510967895,
+          "prompt_tokens": 4606552,
+          "completion_tokens": 237395,
+          "calls_missing_usage": 9
+        },
+        "ask": {
+          "operations": 40,
+          "calls": 30,
+          "seconds": 175.92801149003208,
+          "prompt_tokens": 216854,
+          "completion_tokens": 5038,
+          "calls_missing_usage": 1
+        },
+        "ingest": {
+          "operations": 20,
+          "calls": 189,
+          "seconds": 670.6118278205395,
+          "prompt_tokens": 617160,
+          "completion_tokens": 21715,
+          "calls_missing_usage": 3
+        }
+      },
+      "qa_invoked": 30,
+      "qa_blocked_zero_calls": 10,
+      "mean_calls_per_invoked_qa": 1,
+      "mean_seconds_per_invoked_qa": 5.864250907301903,
+      "median_seconds_per_invoked_qa": 4.1109409760683775
+    },
+    "recorded_physical_calls": 1968,
+    "calls_without_usage": 22,
+    "physical_calls_by_arm": {
+      "simple": 60,
+      "cupmem": 1908
+    },
+    "recorded_physical_tokens": {
+      "prompt_tokens": 6229865,
+      "completion_tokens": 286029
+    },
+    "token_accounting_note": "Recorded usage only; failed/timed-out calls without usage are unknown, not zero. GPU time includes every attempt, startup, development and CLI smoke.",
+    "unfinished_operation_calls": 104,
+    "all_goal_gpu_minutes": 194.1,
+    "goal_gpu_cap": 240
+  },
+  "limitations": [
+    "One AI evaluator, also involved in development; semantic ratings are not independent human validation.",
+    "20 transfer histories are paired constructions from10 independent real Git follow-ups, with only2 prior sources per history.",
+    "Some source commits explicitly name the earlier commit.",
+    "Auxiliary end-of-options QA has date-versus-condition wording ambiguity; frozen key retained and not credited.",
+    "Windows documentation update admits correction/reconsideration label-boundary uncertainty; frozen reconsideration gate retained.",
+    "An interrupted import is an operational failure, not evidence of a correct abstention or preserved QA.",
+    "First-attempt failures and incomplete physical captures remain in artifacts and allocated GPU cost."
+  ],
+  "evidence": {
+    "returned_witness_instances": 416,
+    "valid_original_witness_instances": 416,
+    "unapproved_promotions_observed": 0
+  },
+  "gates": {
+    "development_qa_5": true,
+    "legacy_no_lost_simple_successes": true,
+    "transfer_reconsider_8_of_10": false,
+    "transfer_no_unnecessary_proposals": false,
+    "exact_returned_citations": true,
+    "no_unapproved_promotion": true,
+    "call_reduction": true,
+    "candidate_adoption": false,
+    "cost_claim_requires_quality": "Invocation count alone is not an overall speed/quality success; report blocked QA and ingestion cost alongside quality."
+  }
+}

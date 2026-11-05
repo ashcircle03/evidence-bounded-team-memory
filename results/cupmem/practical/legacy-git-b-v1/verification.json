@@ -1,0 +1,67 @@
+{
+  "mechanical_checks_pass": true,
+  "checks": {
+    "program_complete": true,
+    "input_sha": true,
+    "runtime_sha": true,
+    "full_pipeline": true,
+    "local_only": true,
+    "call_count": true,
+    "call_ids": true,
+    "model": true,
+    "physical_success": true,
+    "exact_case_arm_set": true,
+    "contracts_and_actual_evidence": true
+  },
+  "errors": [],
+  "qa_citation_instances": 4,
+  "qa_calls": [
+    {
+      "case_id": "legacy-d30bb1f10fe4bfe8",
+      "arm": "simple",
+      "event": 1,
+      "label": "qa-0",
+      "calls": 1,
+      "seconds": 34.81582892127335,
+      "input_sha256": "77c400ee915a40fc6f318f14f34c21bcd039ade6f4d28aa8787f8d8a7ae9cb55"
+    },
+    {
+      "case_id": "legacy-d30bb1f10fe4bfe8",
+      "arm": "cupmem",
+      "event": 1,
+      "label": "qa-0",
+      "calls": 1,
+      "seconds": 3.290206652134657,
+      "input_sha256": "77c400ee915a40fc6f318f14f34c21bcd039ade6f4d28aa8787f8d8a7ae9cb55"
+    }
+  ],
+  "bindings": [
+    {
+      "case_id": "legacy-d30bb1f10fe4bfe8",
+      "arm": "simple",
+      "event": 1,
+      "label": "qa-0",
+      "physical_call_id": 0,
+      "passage_ids": [
+        "f8ab786ad9476e4962f7a0d4:0",
+        "cb8639d64cb898545c782f15:0",
+        "3541253f7993a751449339ed:0",
+        "3642f5717f8efd7447373a3a:0"
+      ]
+    },
+    {
+      "case_id": "legacy-d30bb1f10fe4bfe8",
+      "arm": "cupmem",
+      "event": 1,
+      "label": "qa-0",
+      "physical_call_id": 209,
+      "passage_ids": [
+        "f8ab786ad9476e4962f7a0d4:0",
+        "cb8639d64cb898545c782f15:0",
+        "3541253f7993a751449339ed:0",
+        "3642f5717f8efd7447373a3a:0"
+      ]
+    }
+  ],
+  "semantic_accuracy": "Requires the separate predeclared key and original-source manual scoring"
+}

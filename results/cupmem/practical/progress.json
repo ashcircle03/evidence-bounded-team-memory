@@ -1,0 +1,137 @@
+{
+  "status": "completed_with_candidate_rejected",
+  "checked_at": "2026-11-05T19:47:43.156913+00:00",
+  "goal_prefix": "cup-practical-",
+  "jobs": {
+    "cup-practical-dev-v1": {
+      "job_id": "119825",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 442
+    },
+    "cup-practical-dev-v2": {
+      "job_id": "119827",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 239
+    },
+    "cup-practical-legacy-pep-v1": {
+      "job_id": "119830",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 1454
+    },
+    "cup-practical-legacy-git-a-v1": {
+      "job_id": "119831",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 1941
+    },
+    "cup-practical-legacy-git-b-v1": {
+      "job_id": "119832",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 1214
+    },
+    "cup-practical-legacy-ever-v1": {
+      "job_id": "119833",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 3065
+    },
+    "cup-practical-transfer-a-v1": {
+      "job_id": "119835",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 859
+    },
+    "cup-practical-transfer-b-v1": {
+      "job_id": "119836",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 902
+    },
+    "cup-practical-cli-smoke-v1": {
+      "job_id": "119837",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 108
+    },
+    "cup-practical-legacy-pep-rest-a-v1": {
+      "job_id": "119838",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 700
+    },
+    "cup-practical-legacy-pep-rest-b-v1": {
+      "job_id": "119839",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 722
+    }
+  },
+  "budget": {
+    "additional_gpu_minutes": 240,
+    "completed_gpu_minutes": 194.1,
+    "reserved_gpu_minutes": 0,
+    "campaign_cap": 740,
+    "cupmem_cap": 440,
+    "unreserved_gpu_minutes": 45.9
+  },
+  "tests": {
+    "full_suite_passed": 223,
+    "direct_practical_passed": 12
+  },
+  "legacy": {
+    "prepared": true,
+    "questions": 20,
+    "histories": 7,
+    "source_arrivals": 1276,
+    "source_filtered": false,
+    "execution_complete": true,
+    "partial_verified": [
+      "119831",
+      "119832"
+    ],
+    "failed": [
+      "119830"
+    ],
+    "continuations": {
+      "a": "119838 COMPLETED/0:0",
+      "b": "119839 COMPLETED/0:0"
+    },
+    "failed_original_preserved": true,
+    "scored": true
+  },
+  "final": {
+    "selected": true,
+    "data_frozen": true,
+    "executed": true,
+    "required_streams": 20,
+    "positive": 10,
+    "negative": 10,
+    "independent_reports": 10,
+    "construction": "Controlled paired original Git histories",
+    "data_freeze": "../../../evaluation/cupmem/practical/final-data-freeze.json",
+    "part_a_job": "119835",
+    "part_b": "completed and scored",
+    "part_a": "complete; strict manual ratings saved",
+    "part_b_job": "119836",
+    "scored": true,
+    "candidate_adopted": false
+  },
+  "next": [],
+  "final_runtime_freeze": "../../../evaluation/cupmem/practical/final-runtime-freeze.json",
+  "continuation_audit": {
+    "previous_turn": "no_progress: drafted next-goal prompt only",
+    "this_turn": "progress: reconciled existing jobs119838/119839, archived all remaining outputs, completed frozen semantic ratings and scoring, wrote adoption decision and per-case evidence"
+  },
+  "cli_example": {
+    "job": "119837",
+    "state": "COMPLETED/0:0",
+    "program_complete": true,
+    "exact_qa": true,
+    "seconds": 108
+  },
+  "completion_scope": "Implementation + fixed evaluation + adoption decision; performance acceptance failed."
+}

@@ -1,0 +1,87 @@
+{
+  "job": {
+    "source_version": "cup-service-v1",
+    "source_sha256": {
+      "run.sbatch": "f5e9031882dbb0a12e6b773f187a428b3278f376a51a4c9bedbd19d938334197",
+      "config.json": "f9fe7d07f0b6e4e7a3f53f13713678459686a896bf7f336218b402c310ee917c",
+      "serve.py": "a46a7b1a7bdc6dcefdbe6a8d094f1744c127d91ebcd008adb7d871f5c66dbab8",
+      "service.py": "91d501f5c7ea5444c7dedb6ece73119f9bd8091c0ec425d26d31b798d864ec52",
+      "inputs.json": "4268d84246db6694f4e0186851d039596a018981c7fc5705d04126f90231f695",
+      "code.tar.gz": "4b055f76cf65b429b36d3e5ac52012c3daf9d0a3f231340f911692ceca57b63c"
+    },
+    "submission_intent": "submitted",
+    "job_id": "119817",
+    "gpus": 1,
+    "cpus": 8,
+    "ram_gb": 48,
+    "wall_minutes": 25,
+    "partition": "batch_ugrad",
+    "account": "ugrad",
+    "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-service-v1",
+    "state": "COMPLETED",
+    "submitted_at": "2026-11-05T16:51:07.782307+00:00",
+    "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119817.json",
+    "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-119817.log",
+    "exit_code": "0:0",
+    "elapsed_seconds": 1019,
+    "usage": [
+      {
+        "JobID": "119817",
+        "State": "COMPLETED",
+        "ExitCode": "0:0",
+        "Elapsed": "00:16:59",
+        "ElapsedRaw": "1019",
+        "AllocCPUS": "8",
+        "ReqMem": "48G",
+        "MaxRSS": "",
+        "TotalCPU": "11:17.454",
+        "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+        "NodeList": "aurora-g6"
+      },
+      {
+        "JobID": "119817.batch",
+        "State": "COMPLETED",
+        "ExitCode": "0:0",
+        "Elapsed": "00:16:59",
+        "ElapsedRaw": "1019",
+        "AllocCPUS": "8",
+        "ReqMem": "",
+        "MaxRSS": "2444736K",
+        "TotalCPU": "11:17.451",
+        "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+        "NodeList": "aurora-g6"
+      },
+      {
+        "JobID": "119817.extern",
+        "State": "COMPLETED",
+        "ExitCode": "0:0",
+        "Elapsed": "00:16:59",
+        "ElapsedRaw": "1019",
+        "AllocCPUS": "8",
+        "ReqMem": "",
+        "MaxRSS": "0",
+        "TotalCPU": "00:00.002",
+        "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+        "NodeList": "aurora-g6"
+      }
+    ],
+    "verified": true
+  },
+  "supervisor": {
+    "status": "complete",
+    "job_id": "119817",
+    "source_version": "cup-service-v1",
+    "model": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "external_model_api_calls": 0,
+    "port": 28382,
+    "node": "aurora-g6",
+    "serve_seconds": 1100,
+    "cache_check": "Previously verified cache: file sizes. Newly copied files: SHA256.",
+    "ready_at": 1793897969.1203015,
+    "expires_at": 1793899069.1203027,
+    "client_exit_code": 0,
+    "reason": "connected service development run completed",
+    "native_result": "/ceph_data/pjw031003/capstone-shared-knowledge/results/cup-service-119817.json"
+  }
+}

@@ -8,7 +8,7 @@ import json
 import time
 from .store import source_envelope
 from evaluation.cupmem.transfer_inputs import attributed_session
-from evaluation.cupmem.provenance import resolve_grounding
+from evaluation.cupmem.provenance import resolve_grounding, persistent_state_hash
 
 REVIEW_QUESTION = ('Given the most recently ingested team report, does it provide evidence to '
     'reconsider an earlier decision? State the earlier decision and its original reason, the '
@@ -42,9 +42,13 @@ class CUPMemTeamMemory:
         from cup_mem.llm_layer.client import parse_json_object_with_repair
         start=len(self.recorded_calls());label='q_'+str(len(self.queries))
         before=self.snapshot()
-        result=self.engine.answer_query(query_label=label,query_text=question)
+        try:
+            result=self.engine.answer_query(query_label=label,query_text=question)
+        finally:
+            snapshot=self.snapshot()
+            if persistent_state_hash(before)!=persistent_state_hash(snapshot):
+                raise AssertionError('Native QA changed persistent memory')
         self.queries[label]=result
-        snapshot=self.snapshot()
         payload=result.get('debug_trace',{}).get('query',{}).get('answer_composer_raw_payload')
         matches=[]
         for call in self.recorded_calls()[start:]:
@@ -73,7 +77,6 @@ class CUPMemTeamMemory:
                         scope='original record supporting native-selected memory; not sentence-level entailment'))
                 except (ValueError,KeyError,IndexError,TypeError) as exc:errors.append(str(exc))
         else:errors.append('Final native composer could not be uniquely linked to its actual response')
-        assert before['final_profile_snapshot']==snapshot['final_profile_snapshot'], 'Native QA changed persistent profile'
         output=dict(question=question,answer=result['answer'],citations=citations,
                     provenance_errors=errors,native_query=result,provenance=provenance,
                     approval='not_approved',backend='upstream CUPMem',source_count=len(self.sources))

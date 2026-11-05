@@ -1,0 +1,267 @@
+{
+  "cards": {
+    "fafdd4e606d883a3": {
+      "question": "{\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"Which exception does strict zip raise when its iterables have different lengths?\"}",
+      "status": "ok",
+      "kind": "single",
+      "errors": [],
+      "warnings": [],
+      "answers": [
+        {
+          "text": "LengthMismatchError",
+          "evidence": [
+            {
+              "id": "80e3480fa35e216e36d37f05:0",
+              "source_id": "80e3480fa35e216e36d37f05",
+              "owner": "Fay",
+              "speaker": "Fay",
+              "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+              "observed_at": "2026-11-03T12:00:00.000000+00:00",
+              "start": 0,
+              "end": 137,
+              "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+              "review_status": [],
+              "source_origins": [
+                "original_embedding_search"
+              ],
+              "fully_superseded": false
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "proposals": [],
+      "raw": "{\"kind\":\"single\",\"answers\":[{\"text\":\"LengthMismatchError\",\"evidence\":[\"80e3480fa35e216e36d37f05:0\"]}]}",
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": true,
+      "physical_call_ids": [
+        0
+      ],
+      "expected": {
+        "original_id": "old-pep-618-conflict/premise",
+        "question": "Which exception does strict zip raise when its iterables have different lengths?",
+        "as_of": "2026-11-03T12:00:00Z",
+        "corpus": "PEP public source with controlled counterstatement",
+        "key_source": "evaluation/team_pilot/cases.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "aliases": [
+              "ValueError"
+            ],
+            "condition": null
+          },
+          {
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "aliases": [
+              "LengthMismatchError"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "unresolved",
+        "historical_output_sha256": "cb419cf692a737d0a072f38c19f116971de7c6d721e77cea73fd17ed028abe1b",
+        "historical_citations": [
+          {
+            "source_id": "80e3480fa35e216e36d37f05",
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "start": 0,
+            "end": 137,
+            "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+            "historical_answer": "LengthMismatchError"
+          },
+          {
+            "source_id": "44d1a4fcadb2fbfbc6769c81",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "start": 4121,
+            "end": 4386,
+            "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.",
+            "historical_answer": "ValueError"
+          }
+        ]
+      },
+      "source_records": {
+        "44d1a4fcadb2fbfbc6769c81": {
+          "owner": "PEP 618 contributors",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "PEP 618 contributors",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "text": "PEP: 618\nTitle: Add Optional Length-Checking To zip\nAuthor: Brandt Bucher <brandt@python.org>\nSponsor: Antoine Pitrou <antoine@python.org>\nBDFL-Delegate: Guido van Rossum <guido@python.org>\nStatus: Final\nType: Standards Track\nCreated: 01-May-2020\nPython-Version: 3.10\nPost-History: 01-May-2020, 10-May-2020, 16-Jun-2020\nResolution: https://mail.python.org/archives/list/python-dev@python.org/message/NLWB7FVJGMBBMCF4P3ZKUIE53JPDOWJ3\n\n\nAbstract\n========\n\nThis PEP proposes adding an optional ``strict`` boolean keyword\nparameter to the built-in ``zip``.  When enabled, a ``ValueError`` is\nraised if one of the arguments is exhausted before the others.\n\n\nMotivation\n==========\n\nIt is clear from the author's personal experience and a `survey of the\nstandard library <examples_>`_ that much (if not most) ``zip`` usage\ninvolves iterables that *must* be of equal length.  Sometimes this\ninvariant is proven true from the context of the surrounding code, but\noften the data being zipped is passed from the caller, sourced\nseparately, or generated in some fashion.  In any of these cases, the\ndefault behavior of ``zip`` means that faulty refactoring or logic\nerrors could easily result in silently losing data.  These bugs are\nnot only difficult to diagnose, but difficult to even detect at all.\n\nIt is easy to come up with simple cases where this could be a problem.\nFor example, the following code may work fine when ``items`` is a\nsequence, but silently start producing shortened, mismatched results\nif ``items`` is refactored by the caller to be a consumable iterator::\n\n    def apply_calculations(items):\n        transformed = transform(items)\n        for i, t in zip(items, transformed):\n            yield calculate(i, t)\n\nThere are several other ways in which ``zip`` is commonly used.\nIdiomatic tricks are especially susceptible, because they are often\nemployed by users who lack a complete understanding of how the code\nworks.  One example is unpacking into ``zip`` to lazily \"unzip\" or\n\"transpose\" nested iterables::\n\n    >>> x = [[1, 2, 3], [\"one\" \"two\" \"three\"]]\n    >>> xt = list(zip(*x))\n\nAnother is \"chunking\" data into equal-sized groups::\n\n    >>> n = 3\n    >>> x = range(n ** 2),\n    >>> xn = list(zip(*[iter(x)] * n))\n\nIn the first case, non-rectangular data is usually a logic error.  In\nthe second case, data with a length that is not a multiple of ``n`` is\noften an error as well.  However, both of these idioms will silently\nomit the tail-end items of malformed input.\n\nPerhaps most convincingly, the use of ``zip`` in the standard-library\n``ast`` module created a bug in ``literal_eval`` which `silently\ndropped parts of malformed nodes\n<https://bugs.python.org/issue40355>`_::\n\n    >>> from ast import Constant, Dict, literal_eval\n    >>> nasty_dict = Dict(keys=[Constant(None)], values=[])\n    >>> literal_eval(nasty_dict)  # Like eval(\"{None: }\")\n    {}\n\nIn fact, the author has `counted dozens of other call sites\n<examples_>`_ in Python's standard library and tooling where it\nwould be appropriate to enable this new feature immediately.\n\n\nRationale\n=========\n\nSome critics assert that constant boolean switches are a \"code-smell\",\nor go against Python's design philosophy.  However, Python currently\ncontains several examples of boolean keyword parameters on built-in\nfunctions which are typically called with compile-time constants:\n\n- ``compile(..., dont_inherit=True)``\n- ``open(..., closefd=False)``\n- ``print(..., flush=True)``\n- ``sorted(..., reverse=True)``\n\nMany more exist in the standard library.\n\nThe idea and name for this new parameter were `originally proposed\n<https://mail.python.org/archives/list/python-ideas@python.org/message/6GFUADSQ5JTF7W7OGWF7XF2NH2XUTUQM>`_\nby Ram Rachum.  The thread received over 100 replies, with the\nalternative \"equal\" receiving a similar amount of support.\n\nThe author does not have a strong preference between the two choices,\nthough \"equal equals\" *is* a bit awkward in prose.  It may also\n(wrongly) imply some notion of \"equality\" between the zipped items::\n\n    >>> z = zip([2.0, 4.0, 6.0], [2, 4, 8], equal=True)\n\n\nSpecification\n=============\n\nWhen the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.\n\n\nBackward Compatibility\n======================\n\nThis change is fully backward-compatible.  ``zip`` currently takes no\nkeyword arguments, and the \"non-strict\" default behavior when\n``strict`` is omitted remains unchanged.\n\n\nReference Implementation\n========================\n\nThe author has drafted a `C implementation\n<https://github.com/python/cpython/pull/20921>`_.\n\nAn approximate Python translation is::\n\n    def zip(*iterables, strict=False):\n        if not iterables:\n            return\n        iterators = tuple(iter(iterable) for iterable in iterables)\n        try:\n            while True:\n                items = []\n                for iterator in iterators:\n                    items.append(next(iterator))"
+          }
+        },
+        "80e3480fa35e216e36d37f05": {
+          "owner": "Fay",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "Fay",
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "text": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths."
+          }
+        }
+      }
+    },
+    "04b0e0850e80a418": {
+      "question": "{\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"Which exception does strict zip raise when its iterables have different lengths?\"}",
+      "status": "needs_rebuild",
+      "kind": null,
+      "errors": [],
+      "warnings": [],
+      "answers": [],
+      "proposals": [],
+      "raw": null,
+      "raw_review": null,
+      "review_traces": [],
+      "physically_executed": false,
+      "physical_call_ids": [],
+      "expected": {
+        "original_id": "old-pep-618-conflict/premise",
+        "question": "Which exception does strict zip raise when its iterables have different lengths?",
+        "as_of": "2026-11-03T12:00:00Z",
+        "corpus": "PEP public source with controlled counterstatement",
+        "key_source": "evaluation/team_pilot/cases.json",
+        "expected_sides": [
+          {
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "aliases": [
+              "ValueError"
+            ],
+            "condition": null
+          },
+          {
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "aliases": [
+              "LengthMismatchError"
+            ],
+            "condition": null
+          }
+        ],
+        "historical_state": "unresolved",
+        "historical_output_sha256": "cb419cf692a737d0a072f38c19f116971de7c6d721e77cea73fd17ed028abe1b",
+        "historical_citations": [
+          {
+            "source_id": "80e3480fa35e216e36d37f05",
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "start": 0,
+            "end": 137,
+            "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+            "historical_answer": "LengthMismatchError"
+          },
+          {
+            "source_id": "44d1a4fcadb2fbfbc6769c81",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "start": 4121,
+            "end": 4386,
+            "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.",
+            "historical_answer": "ValueError"
+          }
+        ]
+      },
+      "source_records": {
+        "44d1a4fcadb2fbfbc6769c81": {
+          "owner": "PEP 618 contributors",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "PEP 618 contributors",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "text": "PEP: 618\nTitle: Add Optional Length-Checking To zip\nAuthor: Brandt Bucher <brandt@python.org>\nSponsor: Antoine Pitrou <antoine@python.org>\nBDFL-Delegate: Guido van Rossum <guido@python.org>\nStatus: Final\nType: Standards Track\nCreated: 01-May-2020\nPython-Version: 3.10\nPost-History: 01-May-2020, 10-May-2020, 16-Jun-2020\nResolution: https://mail.python.org/archives/list/python-dev@python.org/message/NLWB7FVJGMBBMCF4P3ZKUIE53JPDOWJ3\n\n\nAbstract\n========\n\nThis PEP proposes adding an optional ``strict`` boolean keyword\nparameter to the built-in ``zip``.  When enabled, a ``ValueError`` is\nraised if one of the arguments is exhausted before the others.\n\n\nMotivation\n==========\n\nIt is clear from the author's personal experience and a `survey of the\nstandard library <examples_>`_ that much (if not most) ``zip`` usage\ninvolves iterables that *must* be of equal length.  Sometimes this\ninvariant is proven true from the context of the surrounding code, but\noften the data being zipped is passed from the caller, sourced\nseparately, or generated in some fashion.  In any of these cases, the\ndefault behavior of ``zip`` means that faulty refactoring or logic\nerrors could easily result in silently losing data.  These bugs are\nnot only difficult to diagnose, but difficult to even detect at all.\n\nIt is easy to come up with simple cases where this could be a problem.\nFor example, the following code may work fine when ``items`` is a\nsequence, but silently start producing shortened, mismatched results\nif ``items`` is refactored by the caller to be a consumable iterator::\n\n    def apply_calculations(items):\n        transformed = transform(items)\n        for i, t in zip(items, transformed):\n            yield calculate(i, t)\n\nThere are several other ways in which ``zip`` is commonly used.\nIdiomatic tricks are especially susceptible, because they are often\nemployed by users who lack a complete understanding of how the code\nworks.  One example is unpacking into ``zip`` to lazily \"unzip\" or\n\"transpose\" nested iterables::\n\n    >>> x = [[1, 2, 3], [\"one\" \"two\" \"three\"]]\n    >>> xt = list(zip(*x))\n\nAnother is \"chunking\" data into equal-sized groups::\n\n    >>> n = 3\n    >>> x = range(n ** 2),\n    >>> xn = list(zip(*[iter(x)] * n))\n\nIn the first case, non-rectangular data is usually a logic error.  In\nthe second case, data with a length that is not a multiple of ``n`` is\noften an error as well.  However, both of these idioms will silently\nomit the tail-end items of malformed input.\n\nPerhaps most convincingly, the use of ``zip`` in the standard-library\n``ast`` module created a bug in ``literal_eval`` which `silently\ndropped parts of malformed nodes\n<https://bugs.python.org/issue40355>`_::\n\n    >>> from ast import Constant, Dict, literal_eval\n    >>> nasty_dict = Dict(keys=[Constant(None)], values=[])\n    >>> literal_eval(nasty_dict)  # Like eval(\"{None: }\")\n    {}\n\nIn fact, the author has `counted dozens of other call sites\n<examples_>`_ in Python's standard library and tooling where it\nwould be appropriate to enable this new feature immediately.\n\n\nRationale\n=========\n\nSome critics assert that constant boolean switches are a \"code-smell\",\nor go against Python's design philosophy.  However, Python currently\ncontains several examples of boolean keyword parameters on built-in\nfunctions which are typically called with compile-time constants:\n\n- ``compile(..., dont_inherit=True)``\n- ``open(..., closefd=False)``\n- ``print(..., flush=True)``\n- ``sorted(..., reverse=True)``\n\nMany more exist in the standard library.\n\nThe idea and name for this new parameter were `originally proposed\n<https://mail.python.org/archives/list/python-ideas@python.org/message/6GFUADSQ5JTF7W7OGWF7XF2NH2XUTUQM>`_\nby Ram Rachum.  The thread received over 100 replies, with the\nalternative \"equal\" receiving a similar amount of support.\n\nThe author does not have a strong preference between the two choices,\nthough \"equal equals\" *is* a bit awkward in prose.  It may also\n(wrongly) imply some notion of \"equality\" between the zipped items::\n\n    >>> z = zip([2.0, 4.0, 6.0], [2, 4, 8], equal=True)\n\n\nSpecification\n=============\n\nWhen the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.\n\n\nBackward Compatibility\n======================\n\nThis change is fully backward-compatible.  ``zip`` currently takes no\nkeyword arguments, and the \"non-strict\" default behavior when\n``strict`` is omitted remains unchanged.\n\n\nReference Implementation\n========================\n\nThe author has drafted a `C implementation\n<https://github.com/python/cpython/pull/20921>`_.\n\nAn approximate Python translation is::\n\n    def zip(*iterables, strict=False):\n        if not iterables:\n            return\n        iterators = tuple(iter(iterable) for iterable in iterables)\n        try:\n            while True:\n                items = []\n                for iterator in iterators:\n                    items.append(next(iterator))"
+          }
+        },
+        "80e3480fa35e216e36d37f05": {
+          "owner": "Fay",
+          "observed_at": "2026-11-03T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "Fay",
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "text": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths."
+          }
+        }
+      }
+    }
+  },
+  "mapping": {
+    "fafdd4e606d883a3": {
+      "case_id": "legacy-c000762632771ec9",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask"
+    },
+    "04b0e0850e80a418": {
+      "case_id": "legacy-c000762632771ec9",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask"
+    }
+  },
+  "operation_costs": [
+    {
+      "case_id": "legacy-c000762632771ec9",
+      "arm": "simple",
+      "label": "import",
+      "operation": "import_history",
+      "status": "ok",
+      "calls": 0,
+      "seconds": 0.06973051466047764,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-c000762632771ec9",
+      "arm": "simple",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "ok",
+      "calls": 1,
+      "seconds": 16.844159997999668,
+      "prompt_tokens": 25927,
+      "completion_tokens": 44,
+      "calls_missing_usage": 0
+    },
+    {
+      "case_id": "legacy-c000762632771ec9",
+      "arm": "cupmem",
+      "label": "import",
+      "operation": "import_history",
+      "status": "error",
+      "calls": 107,
+      "seconds": 656.4393088873476,
+      "prompt_tokens": 208346,
+      "completion_tokens": 13745,
+      "calls_missing_usage": 3
+    },
+    {
+      "case_id": "legacy-c000762632771ec9",
+      "arm": "cupmem",
+      "label": "qa-0",
+      "operation": "ask",
+      "status": "needs_rebuild",
+      "calls": 0,
+      "seconds": 4.326179623603821e-05,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "calls_missing_usage": 0
+    }
+  ],
+  "unfinished_operation_calls": 0,
+  "unfinished_operation_call_ids": [],
+  "all_physical_calls": 108,
+  "program_status": "complete",
+  "rating_fields": {
+    "qa": [
+      "answer_correct",
+      "citations_support_answer",
+      "unsupported_extra_claims",
+      "reason"
+    ],
+    "review": [
+      "supported_reconsideration",
+      "unnecessary_proposals",
+      "wrong_target_or_kind",
+      "reason"
+    ]
+  },
+  "rule": "Status/schema/citation offsets alone never establish semantic success; not_executed and needs_rebuild fail service acceptance."
+}
