@@ -1,0 +1,667 @@
+{
+  "t00": {
+    "topic": "hook",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+    "alternative": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+    "report": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "foil": [
+      "commit: convert {pre-commit,prepare-commit-msg} hook to hook.h",
+      "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+    ],
+    "rubric": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "distinction": "The alternative migrates the pre-commit and prepare-commit-msg hooks to hook.h; library migration is distinct from passing back the invoked flag.",
+    "masked": false
+  },
+  "t01": {
+    "topic": "hook",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+    "alternative": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+    "report": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "foil": [
+      "commit: convert {pre-commit,prepare-commit-msg} hook to hook.h",
+      "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+    ],
+    "rubric": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "distinction": "The alternative migrates the pre-commit and prepare-commit-msg hooks to hook.h; library migration is distinct from passing back the invoked flag.",
+    "masked": true
+  },
+  "t02": {
+    "topic": "hook",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+    "alternative": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+    "report": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "foil": [
+      "commit: convert {pre-commit,prepare-commit-msg} hook to hook.h",
+      "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+    ],
+    "rubric": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "distinction": "The alternative migrates the pre-commit and prepare-commit-msg hooks to hook.h; library migration is distinct from passing back the invoked flag.",
+    "masked": false
+  },
+  "t03": {
+    "topic": "hook",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+    "alternative": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+    "report": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "foil": [
+      "commit: convert {pre-commit,prepare-commit-msg} hook to hook.h",
+      "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+    ],
+    "rubric": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "distinction": "The alternative migrates the pre-commit and prepare-commit-msg hooks to hook.h; library migration is distinct from passing back the invoked flag.",
+    "masked": true
+  },
+  "t04": {
+    "topic": "hook",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+    "alternative": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+    "report": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "foil": [
+      "commit: convert {pre-commit,prepare-commit-msg} hook to hook.h",
+      "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+    ],
+    "rubric": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "distinction": "The alternative migrates the pre-commit and prepare-commit-msg hooks to hook.h; library migration is distinct from passing back the invoked flag.",
+    "masked": false
+  },
+  "t05": {
+    "topic": "header",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+    "alternative": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+    "report": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+    "old": [
+      "object-file.c: use \"enum\" return type for unpack_loose_header()",
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+      "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+      "-error: unable to unpack header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391\n\t+error: unable to parse header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+    ],
+    "foil": [
+      "object-file.c: return ULHR_TOO_LONG on \"header too long\"",
+      "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+      "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+    ],
+    "rubric": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "distinction": "The alternative distinguishes the oversized-header result (and the allow-unknown-type fallback); it is not the handling of generic unpack failure before parsing.",
+    "masked": false
+  },
+  "t06": {
+    "topic": "header",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+    "alternative": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+    "report": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+    "old": [
+      "object-file.c: use \"enum\" return type for unpack_loose_header()",
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+      "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+      "-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]",
+      "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+    ],
+    "foil": [
+      "object-file.c: return ULHR_TOO_LONG on \"header too long\"",
+      "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+      "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+    ],
+    "rubric": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "distinction": "The alternative distinguishes the oversized-header result (and the allow-unknown-type fallback); it is not the handling of generic unpack failure before parsing.",
+    "masked": true
+  },
+  "t07": {
+    "topic": "header",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+    "alternative": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+    "report": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+    "old": [
+      "object-file.c: use \"enum\" return type for unpack_loose_header()",
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+      "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+      "-error: unable to unpack header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391\n\t+error: unable to parse header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+    ],
+    "foil": [
+      "object-file.c: return ULHR_TOO_LONG on \"header too long\"",
+      "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+      "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+    ],
+    "rubric": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "distinction": "The alternative distinguishes the oversized-header result (and the allow-unknown-type fallback); it is not the handling of generic unpack failure before parsing.",
+    "masked": false
+  },
+  "t08": {
+    "topic": "header",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+    "alternative": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+    "report": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+    "old": [
+      "object-file.c: use \"enum\" return type for unpack_loose_header()",
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+      "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+      "-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]",
+      "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+    ],
+    "foil": [
+      "object-file.c: return ULHR_TOO_LONG on \"header too long\"",
+      "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+      "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+    ],
+    "rubric": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "distinction": "The alternative distinguishes the oversized-header result (and the allow-unknown-type fallback); it is not the handling of generic unpack failure before parsing.",
+    "masked": true
+  },
+  "t09": {
+    "topic": "header",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+    "alternative": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+    "report": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+    "old": [
+      "object-file.c: use \"enum\" return type for unpack_loose_header()",
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+      "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+      "-error: unable to unpack header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391\n\t+error: unable to parse header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+    ],
+    "foil": [
+      "object-file.c: return ULHR_TOO_LONG on \"header too long\"",
+      "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+      "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+    ],
+    "rubric": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "distinction": "The alternative distinguishes the oversized-header result (and the allow-unknown-type fallback); it is not the handling of generic unpack failure before parsing.",
+    "masked": false
+  },
+  "t10": {
+    "topic": "reflog",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+    "alternative": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+    "report": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+    "old": [
+      "reflog expire: don't use lookup_commit_reference_gently()",
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "reflog: don't be noisy on empty reflogs",
+      "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "foil": [
+      "reflog expire --stale-fix: be generous about missing objects",
+      "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+      "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+    ],
+    "rubric": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "distinction": "The alternative tolerates missing referenced objects in --stale-fix mode, distinct from handling a null OID while expiring an empty reflog.",
+    "masked": false
+  },
+  "t11": {
+    "topic": "reflog",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+    "alternative": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+    "report": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+    "old": [
+      "reflog expire: don't use lookup_commit_reference_gently()",
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "reflog: don't be noisy on empty reflogs",
+      "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "foil": [
+      "reflog expire --stale-fix: be generous about missing objects",
+      "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+      "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+    ],
+    "rubric": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "distinction": "The alternative tolerates missing referenced objects in --stale-fix mode, distinct from handling a null OID while expiring an empty reflog.",
+    "masked": true
+  },
+  "t12": {
+    "topic": "reflog",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+    "alternative": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+    "report": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+    "old": [
+      "reflog expire: don't use lookup_commit_reference_gently()",
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "reflog: don't be noisy on empty reflogs",
+      "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "foil": [
+      "reflog expire --stale-fix: be generous about missing objects",
+      "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+      "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+    ],
+    "rubric": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "distinction": "The alternative tolerates missing referenced objects in --stale-fix mode, distinct from handling a null OID while expiring an empty reflog.",
+    "masked": false
+  },
+  "t13": {
+    "topic": "reflog",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+    "alternative": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+    "report": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+    "old": [
+      "reflog expire: don't use lookup_commit_reference_gently()",
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "reflog: don't be noisy on empty reflogs",
+      "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "foil": [
+      "reflog expire --stale-fix: be generous about missing objects",
+      "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+      "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+    ],
+    "rubric": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "distinction": "The alternative tolerates missing referenced objects in --stale-fix mode, distinct from handling a null OID while expiring an empty reflog.",
+    "masked": true
+  },
+  "t14": {
+    "topic": "reflog",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+    "alternative": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+    "report": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+    "old": [
+      "reflog expire: don't use lookup_commit_reference_gently()",
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "reflog: don't be noisy on empty reflogs",
+      "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "foil": [
+      "reflog expire --stale-fix: be generous about missing objects",
+      "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+      "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+    ],
+    "rubric": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "distinction": "The alternative tolerates missing referenced objects in --stale-fix mode, distinct from handling a null OID while expiring an empty reflog.",
+    "masked": false
+  },
+  "t15": {
+    "topic": "prompt",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+    "alternative": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+    "report": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "foil": [
+      "git-prompt.sh: optionally show upstream branch name",
+      "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+      "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+    ],
+    "rubric": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "distinction": "The alternative displays an optional upstream branch name rather than changing whether the shell expands PS1.",
+    "masked": false
+  },
+  "t16": {
+    "topic": "prompt",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+    "alternative": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+    "report": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "foil": [
+      "git-prompt.sh: optionally show upstream branch name",
+      "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+      "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+    ],
+    "rubric": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "distinction": "The alternative displays an optional upstream branch name rather than changing whether the shell expands PS1.",
+    "masked": true
+  },
+  "t17": {
+    "topic": "prompt",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+    "alternative": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+    "report": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "foil": [
+      "git-prompt.sh: optionally show upstream branch name",
+      "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+      "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+    ],
+    "rubric": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "distinction": "The alternative displays an optional upstream branch name rather than changing whether the shell expands PS1.",
+    "masked": false
+  },
+  "t18": {
+    "topic": "prompt",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+    "alternative": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+    "report": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "foil": [
+      "git-prompt.sh: optionally show upstream branch name",
+      "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+      "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+    ],
+    "rubric": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "distinction": "The alternative displays an optional upstream branch name rather than changing whether the shell expands PS1.",
+    "masked": true
+  },
+  "t19": {
+    "topic": "prompt",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+    "alternative": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+    "report": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "foil": [
+      "git-prompt.sh: optionally show upstream branch name",
+      "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+      "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+    ],
+    "rubric": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "distinction": "The alternative displays an optional upstream branch name rather than changing whether the shell expands PS1.",
+    "masked": false
+  },
+  "t20": {
+    "topic": "range",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+    "alternative": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+    "report": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+    "old": [
+      "range-diff: relieve callers of low-level configuration burden",
+      "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.",
+      "While at it, localize these tweaks to be active only while generating\nthe range-diff, so they don't clobber the caller-provided\n'diff_options', which might be used beyond range-diff generation."
+    ],
+    "new": [
+      "range-diff: fix regression in passing along diff options",
+      "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+      "Fix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options."
+    ],
+    "foil": [
+      "range-diff: respect diff_option.file rather than assuming 'stdout'",
+      "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+    ],
+    "rubric": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "distinction": "The alternative sends output to diff_option.file instead of always stdout; output destination is distinct from option propagation.",
+    "masked": false
+  },
+  "t21": {
+    "topic": "range",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+    "alternative": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+    "report": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+    "old": [
+      "range-diff: relieve callers of low-level configuration burden",
+      "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.",
+      "While at it, localize these tweaks to be active only while generating\nthe range-diff, so they don't clobber the caller-provided\n'diff_options', which might be used beyond range-diff generation."
+    ],
+    "new": [
+      "range-diff: fix regression in passing along diff options",
+      "In [ref] (\"[referenced subject]\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+      "Fix that regression, and add a test asserting the pre-[ref]\nbehavior for some of these diff options."
+    ],
+    "foil": [
+      "range-diff: respect diff_option.file rather than assuming 'stdout'",
+      "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+    ],
+    "rubric": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "distinction": "The alternative sends output to diff_option.file instead of always stdout; output destination is distinct from option propagation.",
+    "masked": true
+  },
+  "t22": {
+    "topic": "range",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+    "alternative": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+    "report": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+    "old": [
+      "range-diff: relieve callers of low-level configuration burden",
+      "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.",
+      "While at it, localize these tweaks to be active only while generating\nthe range-diff, so they don't clobber the caller-provided\n'diff_options', which might be used beyond range-diff generation."
+    ],
+    "new": [
+      "range-diff: fix regression in passing along diff options",
+      "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+      "Fix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options."
+    ],
+    "foil": [
+      "range-diff: respect diff_option.file rather than assuming 'stdout'",
+      "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+    ],
+    "rubric": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "distinction": "The alternative sends output to diff_option.file instead of always stdout; output destination is distinct from option propagation.",
+    "masked": false
+  },
+  "t23": {
+    "topic": "range",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+    "alternative": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+    "report": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+    "old": [
+      "range-diff: relieve callers of low-level configuration burden",
+      "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.",
+      "While at it, localize these tweaks to be active only while generating\nthe range-diff, so they don't clobber the caller-provided\n'diff_options', which might be used beyond range-diff generation."
+    ],
+    "new": [
+      "range-diff: fix regression in passing along diff options",
+      "In [ref] (\"[referenced subject]\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+      "Fix that regression, and add a test asserting the pre-[ref]\nbehavior for some of these diff options."
+    ],
+    "foil": [
+      "range-diff: respect diff_option.file rather than assuming 'stdout'",
+      "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+    ],
+    "rubric": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "distinction": "The alternative sends output to diff_option.file instead of always stdout; output destination is distinct from option propagation.",
+    "masked": true
+  },
+  "t24": {
+    "topic": "range",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+    "alternative": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+    "report": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+    "old": [
+      "range-diff: relieve callers of low-level configuration burden",
+      "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.",
+      "While at it, localize these tweaks to be active only while generating\nthe range-diff, so they don't clobber the caller-provided\n'diff_options', which might be used beyond range-diff generation."
+    ],
+    "new": [
+      "range-diff: fix regression in passing along diff options",
+      "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+      "Fix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options."
+    ],
+    "foil": [
+      "range-diff: respect diff_option.file rather than assuming 'stdout'",
+      "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+    ],
+    "rubric": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "distinction": "The alternative sends output to diff_option.file instead of always stdout; output destination is distinct from option propagation.",
+    "masked": false
+  }
+}

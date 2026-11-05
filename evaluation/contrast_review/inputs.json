@@ -1,0 +1,922 @@
+[
+  {
+    "id": "t00",
+    "prior": [
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:17.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+          "text": "maintenance: update schedule before config\n\nWhen running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.\n\nThis has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.\n\nFix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+        }
+      },
+      {
+        "owner": "Patrick Steinhardt",
+        "observed_at": "2024-09-27T15:25:37.000000+00:00",
+        "source": {
+          "speaker": "Patrick Steinhardt",
+          "location": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+          "text": "builtin/maintenance: fix leak in `get_schedule_cmd()`\n\nThe `get_schedule_cmd()` function allows us to override the schedule\ncommand with a specific test command such that we can verify the\nunderlying logic in a platform-independent way. Its memory management is\nsomewhat wild though, because it basically gives up and assigns an\nallocated string to the string constant output pointer. While this part\nis marked with `UNLEAK()` to mask this, we also leak the local string\nlists.\n\nRework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Patrick Steinhardt",
+      "observed_at": "2024-10-10T17:04:43.000000+00:00",
+      "source": {
+        "speaker": "Patrick Steinhardt",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "text": "builtin/gc: fix crash when running `git maintenance start`\n\nIt was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.\n\nThe root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.\n\nSo why didn't we catch this trivial regression? The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem. But the faulty code where we don't set the `out` parameter will\nonly get hit in case that environment variable is _not_ set, which is\nnever the case when executing our tests.\n\nFix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t01",
+    "prior": [
+      {
+        "owner": "Patrick Steinhardt",
+        "observed_at": "2024-09-27T15:25:37.000000+00:00",
+        "source": {
+          "speaker": "Patrick Steinhardt",
+          "location": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+          "text": "builtin/maintenance: fix leak in `get_schedule_cmd()`\n\nThe `get_schedule_cmd()` function allows us to override the schedule\ncommand with a specific test command such that we can verify the\nunderlying logic in a platform-independent way. Its memory management is\nsomewhat wild though, because it basically gives up and assigns an\nallocated string to the string constant output pointer. While this part\nis marked with `UNLEAK()` to mask this, we also leak the local string\nlists.\n\nRework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+        }
+      },
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:17.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+          "text": "maintenance: update schedule before config\n\nWhen running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.\n\nThis has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.\n\nFix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Patrick Steinhardt",
+      "observed_at": "2024-10-10T17:04:43.000000+00:00",
+      "source": {
+        "speaker": "Patrick Steinhardt",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "text": "builtin/gc: fix crash when running `git maintenance start`\n\nIt was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with [ref] ([referenced subject], 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.\n\nThe root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.\n\nSo why didn't we catch this trivial regression? The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem. But the faulty code where we don't set the `out` parameter will\nonly get hit in case that environment variable is _not_ set, which is\nnever the case when executing our tests.\n\nFix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+      }
+    }
+  },
+  {
+    "id": "t02",
+    "prior": [
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:17.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+          "text": "maintenance: update schedule before config\n\nWhen running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.\n\nThis has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.\n\nFix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+        }
+      },
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:16.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/daa787010c82b32c3fdc8a2bf2a4ce90fff5d5b0",
+          "text": "maintenance: use random minute in systemd scheduler\n\nThe get_random_minute() method was created to allow maintenance\nschedules to be fixed to a random minute of the hour. This randomness is\nonly intended to spread out the load from a number of clients, but each\nclient should have an hour between each maintenance cycle.\n\nAdd this random minute to the systemd integration.\n\nThis integration is more complicated than similar changes for other\nschedulers because of a neat trick that systemd allows: templating.\n\nThe previous implementation generated two template files with names\nof the form 'git-maintenance@.(timer|service)'. The '.timer' or\n'.service' indicates that this is a template that is picked up when we\nlater specify '...@<schedule>.timer' or '...@<schedule>.service'. The\n'<schedule>' string is then used to insert into the template both the\n'OnCalendar' schedule setting and the '--schedule' parameter of the\n'git maintenance run' command.\n\nIn order to set these schedules to a given minute, we can no longer use\nthe 'hourly', 'daily', or 'weekly' strings for '<schedule>' and instead\nneed to abandon the template model for the .timer files. We can still\nuse templates for the .service files. For this reason, we split these\nwrites into two methods.\n\nModify the template with a custom schedule in the 'OnCalendar' setting.\nThis schedule has some interesting differences from cron-like patterns,\nbut is relatively easy to figure out from context. The one that might be\nconfusing is that '*-*-*' is a date-based pattern, but this must be\nomitted when using 'Mon' to signal that we care about the day of the\nweek. Monday is used since that matches the day used for the 'weekly'\nschedule used previously.\n\nNow that the timer files are not templates, we might want to abandon the\n'@' symbol in the file names. However, this would cause users with\nexisting schedules to get two competing schedules due to different\nnames. The work to remove the old schedule name is one thing that we can\navoid by keeping the '@' symbol in our unit names. Since we are locked\ninto this name, it makes sense that we keep the template model for the\n.service files.\n\nThe rest of the change involves making sure we are writing these .timer\nand .service files before initializing the schedule with 'systemctl' and\ndeleting the files when we are done. Some changes are also made to share\nthe random minute along with a single computation of the execution path\nof the current Git executable.\n\nIn addition, older Git versions may have written a\n'git-maintenance@.timer' template file. Be sure to remove this when\nsuccessfully enabling maintenance (or disabling maintenance)."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Patrick Steinhardt",
+      "observed_at": "2024-10-10T17:04:43.000000+00:00",
+      "source": {
+        "speaker": "Patrick Steinhardt",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "text": "builtin/gc: fix crash when running `git maintenance start`\n\nIt was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.\n\nThe root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.\n\nSo why didn't we catch this trivial regression? The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem. But the faulty code where we don't set the `out` parameter will\nonly get hit in case that environment variable is _not_ set, which is\nnever the case when executing our tests.\n\nFix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t03",
+    "prior": [
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:16.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/daa787010c82b32c3fdc8a2bf2a4ce90fff5d5b0",
+          "text": "maintenance: use random minute in systemd scheduler\n\nThe get_random_minute() method was created to allow maintenance\nschedules to be fixed to a random minute of the hour. This randomness is\nonly intended to spread out the load from a number of clients, but each\nclient should have an hour between each maintenance cycle.\n\nAdd this random minute to the systemd integration.\n\nThis integration is more complicated than similar changes for other\nschedulers because of a neat trick that systemd allows: templating.\n\nThe previous implementation generated two template files with names\nof the form 'git-maintenance@.(timer|service)'. The '.timer' or\n'.service' indicates that this is a template that is picked up when we\nlater specify '...@<schedule>.timer' or '...@<schedule>.service'. The\n'<schedule>' string is then used to insert into the template both the\n'OnCalendar' schedule setting and the '--schedule' parameter of the\n'git maintenance run' command.\n\nIn order to set these schedules to a given minute, we can no longer use\nthe 'hourly', 'daily', or 'weekly' strings for '<schedule>' and instead\nneed to abandon the template model for the .timer files. We can still\nuse templates for the .service files. For this reason, we split these\nwrites into two methods.\n\nModify the template with a custom schedule in the 'OnCalendar' setting.\nThis schedule has some interesting differences from cron-like patterns,\nbut is relatively easy to figure out from context. The one that might be\nconfusing is that '*-*-*' is a date-based pattern, but this must be\nomitted when using 'Mon' to signal that we care about the day of the\nweek. Monday is used since that matches the day used for the 'weekly'\nschedule used previously.\n\nNow that the timer files are not templates, we might want to abandon the\n'@' symbol in the file names. However, this would cause users with\nexisting schedules to get two competing schedules due to different\nnames. The work to remove the old schedule name is one thing that we can\navoid by keeping the '@' symbol in our unit names. Since we are locked\ninto this name, it makes sense that we keep the template model for the\n.service files.\n\nThe rest of the change involves making sure we are writing these .timer\nand .service files before initializing the schedule with 'systemctl' and\ndeleting the files when we are done. Some changes are also made to share\nthe random minute along with a single computation of the execution path\nof the current Git executable.\n\nIn addition, older Git versions may have written a\n'git-maintenance@.timer' template file. Be sure to remove this when\nsuccessfully enabling maintenance (or disabling maintenance)."
+        }
+      },
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:17.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+          "text": "maintenance: update schedule before config\n\nWhen running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.\n\nThis has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.\n\nFix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Patrick Steinhardt",
+      "observed_at": "2024-10-10T17:04:43.000000+00:00",
+      "source": {
+        "speaker": "Patrick Steinhardt",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "text": "builtin/gc: fix crash when running `git maintenance start`\n\nIt was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with [ref] ([referenced subject], 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.\n\nThe root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.\n\nSo why didn't we catch this trivial regression? The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem. But the faulty code where we don't set the `out` parameter will\nonly get hit in case that environment variable is _not_ set, which is\nnever the case when executing our tests.\n\nFix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+      }
+    }
+  },
+  {
+    "id": "t04",
+    "prior": [
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2023-08-10T21:04:17.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+          "text": "maintenance: update schedule before config\n\nWhen running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.\n\nThis has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.\n\nFix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Patrick Steinhardt",
+      "observed_at": "2024-10-10T17:04:43.000000+00:00",
+      "source": {
+        "speaker": "Patrick Steinhardt",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "text": "builtin/gc: fix crash when running `git maintenance start`\n\nIt was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.\n\nThe root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.\n\nSo why didn't we catch this trivial regression? The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem. But the faulty code where we don't set the `out` parameter will\nonly get hit in case that environment variable is _not_ set, which is\nnever the case when executing our tests.\n\nFix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+      }
+    }
+  },
+  {
+    "id": "t05",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+          "text": "scalar: implement the `help` subcommand\n\nIt is merely handing off to `git help scalar`."
+        }
+      },
+      {
+        "owner": "Victoria Dye",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Victoria Dye",
+          "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+          "text": "scalar: add to 'git help -a' command list\n\nAdd 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Martin Ågren",
+      "observed_at": "2022-09-23T17:01:07.000000+00:00",
+      "source": {
+        "speaker": "Martin Ågren",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "text": "cmd-list.perl: fix identifying man sections\n\nWe attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit cc75e556a9\n(\"scalar: add to 'git help -a' command list\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.\n\nThis makes our git(1) manpage look as follows:\n\n  Main porcelain commands\n       git-add(git)\n           Add file contents to the index.\n\n  [...]\n\n       gitk(git)\n           The Git repository browser.\n\n       scalar(scalar)\n           A tool for managing large Git repositories.\n\nRestore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.\n\nAs noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change. For now, just fix\nthe regression in cc75e556a9.\n\n[1] https://lore.kernel.org/git/220923.86wn9u4joo.gmgdl@evledraar.gmail.com/#t"
+      }
+    },
+    "check_order": true,
+    "qa": "Which git command does the scalar help subcommand delegate to?"
+  },
+  {
+    "id": "t06",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+          "text": "scalar: implement the `help` subcommand\n\nIt is merely handing off to `git help scalar`."
+        }
+      },
+      {
+        "owner": "Victoria Dye",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Victoria Dye",
+          "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+          "text": "scalar: add to 'git help -a' command list\n\nAdd 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Martin Ågren",
+      "observed_at": "2022-09-23T17:01:07.000000+00:00",
+      "source": {
+        "speaker": "Martin Ågren",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "text": "cmd-list.perl: fix identifying man sections\n\nWe attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.\n\nThis makes our git(1) manpage look as follows:\n\n  Main porcelain commands\n       git-add(git)\n           Add file contents to the index.\n\n  [...]\n\n       gitk(git)\n           The Git repository browser.\n\n       scalar(scalar)\n           A tool for managing large Git repositories.\n\nRestore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.\n\nAs noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change. For now, just fix\nthe regression in [ref].\n\n[1] https://lore.kernel.org/git/220923.86wn9u4joo.gmgdl@evledraar.gmail.com/#t"
+      }
+    }
+  },
+  {
+    "id": "t07",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+          "text": "scalar: implement the `help` subcommand\n\nIt is merely handing off to `git help scalar`."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2020-08-05T01:34:02.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/e7a9807a627772f795d5105be497fd648611bc70",
+          "text": "Documentation: don't hardcode command categories twice\n\nInstead of hard-coding the list of command categories in both\n`Documentation/Makefile` and `Documentation/cmd-list.perl`, make the\nMakefile the authoritative source and tweak `cmd-list.perl` so that it\nreceives the list of command categories as argument."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Martin Ågren",
+      "observed_at": "2022-09-23T17:01:07.000000+00:00",
+      "source": {
+        "speaker": "Martin Ågren",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "text": "cmd-list.perl: fix identifying man sections\n\nWe attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit cc75e556a9\n(\"scalar: add to 'git help -a' command list\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.\n\nThis makes our git(1) manpage look as follows:\n\n  Main porcelain commands\n       git-add(git)\n           Add file contents to the index.\n\n  [...]\n\n       gitk(git)\n           The Git repository browser.\n\n       scalar(scalar)\n           A tool for managing large Git repositories.\n\nRestore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.\n\nAs noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change. For now, just fix\nthe regression in cc75e556a9.\n\n[1] https://lore.kernel.org/git/220923.86wn9u4joo.gmgdl@evledraar.gmail.com/#t"
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t08",
+    "prior": [
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2020-08-05T01:34:02.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/e7a9807a627772f795d5105be497fd648611bc70",
+          "text": "Documentation: don't hardcode command categories twice\n\nInstead of hard-coding the list of command categories in both\n`Documentation/Makefile` and `Documentation/cmd-list.perl`, make the\nMakefile the authoritative source and tweak `cmd-list.perl` so that it\nreceives the list of command categories as argument."
+        }
+      },
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+          "text": "scalar: implement the `help` subcommand\n\nIt is merely handing off to `git help scalar`."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Martin Ågren",
+      "observed_at": "2022-09-23T17:01:07.000000+00:00",
+      "source": {
+        "speaker": "Martin Ågren",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "text": "cmd-list.perl: fix identifying man sections\n\nWe attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.\n\nThis makes our git(1) manpage look as follows:\n\n  Main porcelain commands\n       git-add(git)\n           Add file contents to the index.\n\n  [...]\n\n       gitk(git)\n           The Git repository browser.\n\n       scalar(scalar)\n           A tool for managing large Git repositories.\n\nRestore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.\n\nAs noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change. For now, just fix\nthe regression in [ref].\n\n[1] https://lore.kernel.org/git/220923.86wn9u4joo.gmgdl@evledraar.gmail.com/#t"
+      }
+    }
+  },
+  {
+    "id": "t09",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2022-09-02T17:02:56.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+          "text": "scalar: implement the `help` subcommand\n\nIt is merely handing off to `git help scalar`."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Martin Ågren",
+      "observed_at": "2022-09-23T17:01:07.000000+00:00",
+      "source": {
+        "speaker": "Martin Ågren",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "text": "cmd-list.perl: fix identifying man sections\n\nWe attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit cc75e556a9\n(\"scalar: add to 'git help -a' command list\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.\n\nThis makes our git(1) manpage look as follows:\n\n  Main porcelain commands\n       git-add(git)\n           Add file contents to the index.\n\n  [...]\n\n       gitk(git)\n           The Git repository browser.\n\n       scalar(scalar)\n           A tool for managing large Git repositories.\n\nRestore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.\n\nAs noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change. For now, just fix\nthe regression in cc75e556a9.\n\n[1] https://lore.kernel.org/git/220923.86wn9u4joo.gmgdl@evledraar.gmail.com/#t"
+      }
+    }
+  },
+  {
+    "id": "t10",
+    "prior": [
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-01-26T02:32:44.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+          "text": "pack-revindex: ensure that on-disk reverse indexes are given precedence\n\nWhen an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.\n\nLet's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.\n\nThen, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+        }
+      },
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-04-01T20:07:37.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+          "text": "pack-write.c: extract 'write_rev_file_order'\n\nExisting callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).\n\nPrepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).\n\nInstead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).\n\nExpose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-08T05:04:03.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "text": "pack-write: skip *.rev work when not writing *.rev\n\nFix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.\n\nThis redundant work was not present in the original version of this\ncode added in 8ef50d9958 (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t11",
+    "prior": [
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-04-01T20:07:37.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+          "text": "pack-write.c: extract 'write_rev_file_order'\n\nExisting callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).\n\nPrepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).\n\nInstead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).\n\nExpose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+        }
+      },
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-01-26T02:32:44.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+          "text": "pack-revindex: ensure that on-disk reverse indexes are given precedence\n\nWhen an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.\n\nLet's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.\n\nThen, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-08T05:04:03.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "text": "pack-write: skip *.rev work when not writing *.rev\n\nFix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.\n\nThis redundant work was not present in the original version of this\ncode added in [ref] (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+      }
+    }
+  },
+  {
+    "id": "t12",
+    "prior": [
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-02-26T22:42:27.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/66f52fa26b4facbf79e3f74d8bc95f8ac8535c50",
+          "text": "pack-revindex.c: don't close unopened file descriptors\n\nWhen opening a reverse index, load_revindex_from_disk() jumps to the\n'cleanup' label in case something goes wrong: the reverse index had the\nwrong size, an unrecognized version, or similar.\n\nIt also jumps to this label when the reverse index couldn't be opened in\nthe first place, which will cause an error with the unguarded close()\ncall in the label.\n\nGuard this call with \"if (fd >= 0)\" to make sure that we have a valid\nfile descriptor to close before attempting to close it."
+        }
+      },
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-01-26T02:32:44.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+          "text": "pack-revindex: ensure that on-disk reverse indexes are given precedence\n\nWhen an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.\n\nLet's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.\n\nThen, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-08T05:04:03.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "text": "pack-write: skip *.rev work when not writing *.rev\n\nFix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.\n\nThis redundant work was not present in the original version of this\ncode added in 8ef50d9958 (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t13",
+    "prior": [
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-01-26T02:32:44.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+          "text": "pack-revindex: ensure that on-disk reverse indexes are given precedence\n\nWhen an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.\n\nLet's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.\n\nThen, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+        }
+      },
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-02-26T22:42:27.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/66f52fa26b4facbf79e3f74d8bc95f8ac8535c50",
+          "text": "pack-revindex.c: don't close unopened file descriptors\n\nWhen opening a reverse index, load_revindex_from_disk() jumps to the\n'cleanup' label in case something goes wrong: the reverse index had the\nwrong size, an unrecognized version, or similar.\n\nIt also jumps to this label when the reverse index couldn't be opened in\nthe first place, which will cause an error with the unguarded close()\ncall in the label.\n\nGuard this call with \"if (fd >= 0)\" to make sure that we have a valid\nfile descriptor to close before attempting to close it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-08T05:04:03.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "text": "pack-write: skip *.rev work when not writing *.rev\n\nFix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.\n\nThis redundant work was not present in the original version of this\ncode added in [ref] (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+      }
+    }
+  },
+  {
+    "id": "t14",
+    "prior": [
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2021-01-26T02:32:44.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+          "text": "pack-revindex: ensure that on-disk reverse indexes are given precedence\n\nWhen an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.\n\nLet's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.\n\nThen, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-08T05:04:03.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "text": "pack-write: skip *.rev work when not writing *.rev\n\nFix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.\n\nThis redundant work was not present in the original version of this\ncode added in 8ef50d9958 (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+      }
+    }
+  },
+  {
+    "id": "t15",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-01-19T21:22:36.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+          "text": "difftool: implement the functionality in the builtin\n\nThis patch gives life to the skeleton added in the previous patch.\n\nThe motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.\n\nIn addition, Perl does not really have access to Git's internals. That\nmeans that any script will always have to jump through unnecessary\nhoops, and it will often need to perform unnecessary work (e.g. when\nreading the entire config every time `git config` is called to query a\nsingle config value).\n\nThe current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.\n\nNote: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true.\n\nThe reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.\n\nThe speedup is actually more noticable on Linux than on Windows: a quick\ntest shows that t7800-difftool.sh runs in (2.183s/0.052s/0.108s)\n(real/user/sys) in a Linux VM, down from  (6.529s/3.112s/0.644s), while on\nWindows, it is (36.064s/2.730s/7.194s), down from (47.637s/2.407s/6.863s).\nThe culprit is most likely the overhead incurred from *still* having to\nshell out to mergetool-lib.sh and difftool--helper.sh.\n\nStill, it is an improvement."
+        }
+      },
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2014-11-14T21:40:38.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+          "text": "difftool: honor --trust-exit-code for builtin tools\n\nrun_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.\n\nCapture the exit status and add a test to guarantee the behavior."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2019-03-18T02:48:19.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "text": "difftool: allow running outside Git worktrees with --no-index\n\nAs far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).\n\nIt is a bit embarrassing that it took over two years after retiring the\nPerl version to discover this regression, but at least we now know, and\ncan do something, about it.\n\nThis fixes https://github.com/git-for-windows/git/issues/2123"
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t16",
+    "prior": [
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2014-11-14T21:40:38.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+          "text": "difftool: honor --trust-exit-code for builtin tools\n\nrun_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.\n\nCapture the exit status and add a test to guarantee the behavior."
+        }
+      },
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-01-19T21:22:36.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+          "text": "difftool: implement the functionality in the builtin\n\nThis patch gives life to the skeleton added in the previous patch.\n\nThe motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.\n\nIn addition, Perl does not really have access to Git's internals. That\nmeans that any script will always have to jump through unnecessary\nhoops, and it will often need to perform unnecessary work (e.g. when\nreading the entire config every time `git config` is called to query a\nsingle config value).\n\nThe current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.\n\nNote: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true.\n\nThe reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.\n\nThe speedup is actually more noticable on Linux than on Windows: a quick\ntest shows that t7800-difftool.sh runs in (2.183s/0.052s/0.108s)\n(real/user/sys) in a Linux VM, down from  (6.529s/3.112s/0.644s), while on\nWindows, it is (36.064s/2.730s/7.194s), down from (47.637s/2.407s/6.863s).\nThe culprit is most likely the overhead incurred from *still* having to\nshell out to mergetool-lib.sh and difftool--helper.sh.\n\nStill, it is an improvement."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2019-03-18T02:48:19.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "text": "difftool: allow running outside Git worktrees with --no-index\n\nAs far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).\n\nIt is a bit embarrassing that it took over two years after retiring the\nPerl version to discover this regression, but at least we now know, and\ncan do something, about it.\n\nThis fixes https://github.com/git-for-windows/git/issues/2123"
+      }
+    }
+  },
+  {
+    "id": "t17",
+    "prior": [
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2014-11-14T21:40:38.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+          "text": "difftool: honor --trust-exit-code for builtin tools\n\nrun_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.\n\nCapture the exit status and add a test to guarantee the behavior."
+        }
+      },
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2018-08-03T15:36:20.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/9f6013a88d71860433a0c11571dc87aef3c9c809",
+          "text": "difftool: remove angular brackets from argument help\n\nParseopt wraps arguments in a pair of angular brackets by default,\nsignifying that the user needs to replace it with a value of the\ndocumented type.  Remove the pairs from the option definitions to\nduplication and confusion."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2019-03-18T02:48:19.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "text": "difftool: allow running outside Git worktrees with --no-index\n\nAs far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).\n\nIt is a bit embarrassing that it took over two years after retiring the\nPerl version to discover this regression, but at least we now know, and\ncan do something, about it.\n\nThis fixes https://github.com/git-for-windows/git/issues/2123"
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t18",
+    "prior": [
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2018-08-03T15:36:20.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/9f6013a88d71860433a0c11571dc87aef3c9c809",
+          "text": "difftool: remove angular brackets from argument help\n\nParseopt wraps arguments in a pair of angular brackets by default,\nsignifying that the user needs to replace it with a value of the\ndocumented type.  Remove the pairs from the option definitions to\nduplication and confusion."
+        }
+      },
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2014-11-14T21:40:38.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+          "text": "difftool: honor --trust-exit-code for builtin tools\n\nrun_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.\n\nCapture the exit status and add a test to guarantee the behavior."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2019-03-18T02:48:19.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "text": "difftool: allow running outside Git worktrees with --no-index\n\nAs far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).\n\nIt is a bit embarrassing that it took over two years after retiring the\nPerl version to discover this regression, but at least we now know, and\ncan do something, about it.\n\nThis fixes https://github.com/git-for-windows/git/issues/2123"
+      }
+    }
+  },
+  {
+    "id": "t19",
+    "prior": [
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2014-11-14T21:40:38.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+          "text": "difftool: honor --trust-exit-code for builtin tools\n\nrun_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.\n\nCapture the exit status and add a test to guarantee the behavior."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2019-03-18T02:48:19.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "text": "difftool: allow running outside Git worktrees with --no-index\n\nAs far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).\n\nIt is a bit embarrassing that it took over two years after retiring the\nPerl version to discover this regression, but at least we now know, and\ncan do something, about it.\n\nThis fixes https://github.com/git-for-windows/git/issues/2123"
+      }
+    }
+  },
+  {
+    "id": "t20",
+    "prior": [
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-07-23T18:19:09.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+          "text": "commit-graph.c: mark more strings for translation"
+        }
+      },
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2018-09-17T17:12:30.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+          "text": "commit-graph write: add progress output\n\nBefore this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).\n\nFurthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:\n\n    $ git -c gc.writeCommitGraph=true gc\n    Enumerating objects: 2821, done.\n    [...]\n    Computing commit graph generation numbers: 100% (867/867), done.\n\nOn larger repositories, such as linux.git the delayed progress bar(s)\nwill kick in, and we'll show what's going on instead of, as was\npreviously happening, printing nothing while we write the graph:\n\n    $ git -c gc.writeCommitGraph=true gc\n    [...]\n    Annotating commits in commit graph: 1565573, done.\n    Computing commit graph generation numbers: 100% (782484/782484), done.\n\nNote that here we don't show \"Finding commits for commit graph\", this\nis because under \"git gc\" we seed the search with the commit\nreferences in the repository, and that set is too small to show any\nprogress, but would e.g. on a smaller repo such as git.git with\n--stdin-commits:\n\n    $ git rev-list --all | git -c gc.writeCommitGraph=true write --stdin-commits\n    Finding commits for commit graph: 100% (162576/162576), done.\n    Computing commit graph generation numbers: 100% (162576/162576), done.\n\nWith --stdin-packs we don't show any estimation of how much is left to\ndo. This is because we might be processing more than one pack. We\ncould be less lazy here and show progress, either by detecting that\nwe're only processing one pack, or by first looping over the packs to\ndiscover how many commits they have. I don't see the point in doing\nthat work. So instead we get (on 2015-04-03-1M-git.git):\n\n    $ echo pack-<HASH>.idx | git -c gc.writeCommitGraph=true --exec-path=$PWD commit-graph write --stdin-packs\n    Finding commits for commit graph: 13064614, done.\n    Annotating commits in commit graph: 3001341, done.\n    Computing commit graph generation numbers: 100% (1000447/1000447), done.\n\nNo GC mode uses --stdin-packs. It's what they use at Microsoft to\nmanually compute the generation numbers for their collection of large\npacks which are never coalesced.\n\nThe reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.\n\nSince we write the commit graph from the \"git gc\" process itself (as\nopposed to what we do with say the \"git repack\" phase), we'd end up\nwriting the output to .git/gc.log and reporting it to the user next\ntime as part of the \"The last gc run reported the following[...]\"\nerror, see 329e6e8794 (\"gc: save log from daemonized gc --auto and\nprint it next time\", 2015-09-19).\n\nSo we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.\n\nSee [2] and subsequent replies for a discussion of an approach not\ntaken in compute_generation_numbers(). I.e. we're saying \"Computing\ncommit graph generation numbers\", even though on an established\nhistory we're mostly skipping over all the work we did in the\npast. This is similar to the white lie we tell in the \"Writing\nobjects\" phase (not all are objects being written).\n\nAlways showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2].\n\n1. https://github.com/avar/2015-04-03-1M-git\n\n2. <c6960252-c095-fb2b-e0bc-b1e6bb261614@gmail.com>\n   (https://public-inbox.org/git/c6960252-c095-fb2b-e0bc-b1e6bb261614@gmail.com/)"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-09-20T19:25:05.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "text": "gc: fix regression in 7b0f229222 impacting --quiet\n\nFix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.\n\nDo so, and add a test asserting that this works as expected. Since the\nTTY prequisite isn't available everywhere let's add a version of this\nthat both requires and doesn't require that. This test might be overly\nspecific and will break if new progress output is added, but I think\nit'll serve as a good reminder to test the undertested progress\nmode(s)."
+      }
+    },
+    "check_order": true,
+    "qa": "Which option must suppress the new commit-graph write progress?"
+  },
+  {
+    "id": "t21",
+    "prior": [
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-07-23T18:19:09.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+          "text": "commit-graph.c: mark more strings for translation"
+        }
+      },
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2018-09-17T17:12:30.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+          "text": "commit-graph write: add progress output\n\nBefore this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).\n\nFurthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:\n\n    $ git -c gc.writeCommitGraph=true gc\n    Enumerating objects: 2821, done.\n    [...]\n    Computing commit graph generation numbers: 100% (867/867), done.\n\nOn larger repositories, such as linux.git the delayed progress bar(s)\nwill kick in, and we'll show what's going on instead of, as was\npreviously happening, printing nothing while we write the graph:\n\n    $ git -c gc.writeCommitGraph=true gc\n    [...]\n    Annotating commits in commit graph: 1565573, done.\n    Computing commit graph generation numbers: 100% (782484/782484), done.\n\nNote that here we don't show \"Finding commits for commit graph\", this\nis because under \"git gc\" we seed the search with the commit\nreferences in the repository, and that set is too small to show any\nprogress, but would e.g. on a smaller repo such as git.git with\n--stdin-commits:\n\n    $ git rev-list --all | git -c gc.writeCommitGraph=true write --stdin-commits\n    Finding commits for commit graph: 100% (162576/162576), done.\n    Computing commit graph generation numbers: 100% (162576/162576), done.\n\nWith --stdin-packs we don't show any estimation of how much is left to\ndo. This is because we might be processing more than one pack. We\ncould be less lazy here and show progress, either by detecting that\nwe're only processing one pack, or by first looping over the packs to\ndiscover how many commits they have. I don't see the point in doing\nthat work. So instead we get (on 2015-04-03-1M-git.git):\n\n    $ echo pack-<HASH>.idx | git -c gc.writeCommitGraph=true --exec-path=$PWD commit-graph write --stdin-packs\n    Finding commits for commit graph: 13064614, done.\n    Annotating commits in commit graph: 3001341, done.\n    Computing commit graph generation numbers: 100% (1000447/1000447), done.\n\nNo GC mode uses --stdin-packs. It's what they use at Microsoft to\nmanually compute the generation numbers for their collection of large\npacks which are never coalesced.\n\nThe reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.\n\nSince we write the commit graph from the \"git gc\" process itself (as\nopposed to what we do with say the \"git repack\" phase), we'd end up\nwriting the output to .git/gc.log and reporting it to the user next\ntime as part of the \"The last gc run reported the following[...]\"\nerror, see 329e6e8794 (\"gc: save log from daemonized gc --auto and\nprint it next time\", 2015-09-19).\n\nSo we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.\n\nSee [2] and subsequent replies for a discussion of an approach not\ntaken in compute_generation_numbers(). I.e. we're saying \"Computing\ncommit graph generation numbers\", even though on an established\nhistory we're mostly skipping over all the work we did in the\npast. This is similar to the white lie we tell in the \"Writing\nobjects\" phase (not all are objects being written).\n\nAlways showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2].\n\n1. https://github.com/avar/2015-04-03-1M-git\n\n2. <c6960252-c095-fb2b-e0bc-b1e6bb261614@gmail.com>\n   (https://public-inbox.org/git/c6960252-c095-fb2b-e0bc-b1e6bb261614@gmail.com/)"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-09-20T19:25:05.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "text": "gc: fix regression in [ref] impacting --quiet\n\nFix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.\n\nDo so, and add a test asserting that this works as expected. Since the\nTTY prequisite isn't available everywhere let's add a version of this\nthat both requires and doesn't require that. This test might be overly\nspecific and will break if new progress output is added, but I think\nit'll serve as a good reminder to test the undertested progress\nmode(s)."
+      }
+    }
+  },
+  {
+    "id": "t22",
+    "prior": [
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2018-08-29T17:44:31.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/859fdc0c3cf9ad8cdd5eacaa24aee481bc1e7bc1",
+          "text": "commit-graph: define GIT_TEST_COMMIT_GRAPH\n\nThe commit-graph feature is tested in isolation by\nt5318-commit-graph.sh and t6600-test-reach.sh, but there are many\nmore interesting scenarios involving commit walks. Many of these\nscenarios are covered by the existing test suite, but we need to\nmaintain coverage when the optional commit-graph structure is not\npresent.\n\nTo allow running the full test suite with the commit-graph present,\nadd a new test environment variable, GIT_TEST_COMMIT_GRAPH. Similar\nto GIT_TEST_SPLIT_INDEX, this variable makes every Git command try\nto load the commit-graph when parsing commits, and writes the\ncommit-graph file after every 'git commit' command.\n\nThere are a few tests that rely on commits not existing in\npack-files to trigger important events, so manually set\nGIT_TEST_COMMIT_GRAPH to false for the necessary commands.\n\nThere is one test in t6024-recursive-merge.sh that relies on the\nmerge-base algorithm picking one of two ambiguous merge-bases, and\nthe commit-graph feature changes which merge-base is picked."
+        }
+      },
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-07-23T18:19:09.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+          "text": "commit-graph.c: mark more strings for translation"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-09-20T19:25:05.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "text": "gc: fix regression in 7b0f229222 impacting --quiet\n\nFix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.\n\nDo so, and add a test asserting that this works as expected. Since the\nTTY prequisite isn't available everywhere let's add a version of this\nthat both requires and doesn't require that. This test might be overly\nspecific and will break if new progress output is added, but I think\nit'll serve as a good reminder to test the undertested progress\nmode(s)."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t23",
+    "prior": [
+      {
+        "owner": "Derrick Stolee",
+        "observed_at": "2018-08-29T17:44:31.000000+00:00",
+        "source": {
+          "speaker": "Derrick Stolee",
+          "location": "https://github.com/git/git/commit/859fdc0c3cf9ad8cdd5eacaa24aee481bc1e7bc1",
+          "text": "commit-graph: define GIT_TEST_COMMIT_GRAPH\n\nThe commit-graph feature is tested in isolation by\nt5318-commit-graph.sh and t6600-test-reach.sh, but there are many\nmore interesting scenarios involving commit walks. Many of these\nscenarios are covered by the existing test suite, but we need to\nmaintain coverage when the optional commit-graph structure is not\npresent.\n\nTo allow running the full test suite with the commit-graph present,\nadd a new test environment variable, GIT_TEST_COMMIT_GRAPH. Similar\nto GIT_TEST_SPLIT_INDEX, this variable makes every Git command try\nto load the commit-graph when parsing commits, and writes the\ncommit-graph file after every 'git commit' command.\n\nThere are a few tests that rely on commits not existing in\npack-files to trigger important events, so manually set\nGIT_TEST_COMMIT_GRAPH to false for the necessary commands.\n\nThere is one test in t6024-recursive-merge.sh that relies on the\nmerge-base algorithm picking one of two ambiguous merge-bases, and\nthe commit-graph feature changes which merge-base is picked."
+        }
+      },
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-07-23T18:19:09.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+          "text": "commit-graph.c: mark more strings for translation"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-09-20T19:25:05.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "text": "gc: fix regression in [ref] impacting --quiet\n\nFix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.\n\nDo so, and add a test asserting that this works as expected. Since the\nTTY prequisite isn't available everywhere let's add a version of this\nthat both requires and doesn't require that. This test might be overly\nspecific and will break if new progress output is added, but I think\nit'll serve as a good reminder to test the undertested progress\nmode(s)."
+      }
+    }
+  },
+  {
+    "id": "t24",
+    "prior": [
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-07-23T18:19:09.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+          "text": "commit-graph.c: mark more strings for translation"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-09-20T19:25:05.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "text": "gc: fix regression in 7b0f229222 impacting --quiet\n\nFix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.\n\nDo so, and add a test asserting that this works as expected. Since the\nTTY prequisite isn't available everywhere let's add a version of this\nthat both requires and doesn't require that. This test might be overly\nspecific and will break if new progress output is added, but I think\nit'll serve as a good reminder to test the undertested progress\nmode(s)."
+      }
+    }
+  },
+  {
+    "id": "t25",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2020-04-25T05:25:50.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+          "text": "commit-graph: close descriptors after mmap\n\nWe don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+        }
+      },
+      {
+        "owner": "Jeff King",
+        "observed_at": "2023-10-03T21:28:24.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+          "text": "commit-graph: move slab-clearing to close_commit_graph()\n\nWhen closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.\n\nCommit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.\n\nMove it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-01-05T16:35:26.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "text": "commit-graph: retain commit slab when closing NULL commit_graph\n\nThis fixes a regression introduced in ac6d45d11f (commit-graph: move\nslab-clearing to close_commit_graph(), 2023-10-03), in which running:\n\n  git -c fetch.writeCommitGraph=true fetch --recurse-submodules\n\nmultiple times in a freshly cloned repository causes a segfault. What\nhappens in the second (and subsequent) runs is this:\n\n  1. We make a \"struct commit\" for any ref tips which we're storing\n     (even if we already have them, they still go into FETCH_HEAD).\n\n     Because the first run will have created a commit graph, we'll find\n     those commits in the graph.\n\n     The commit struct is therefore created with a NULL \"maybe_tree\"\n     entry, because we can load its oid from the graph later. But to do\n     that we need to remember that we got the commit from the graph,\n     which is recorded in a global commit_graph_data_slab object.\n\n  2. Because we're using --recurse-submodules, we'll try to fetch each\n     of the possible submodules. That implies creating a separate\n     \"struct repository\" in-process for each submodule, which will\n     require a later call to repo_clear().\n\n     The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.\n\n  3. Later, when trying to write out a new commit graph, we'll ask for\n     their tree oid via get_commit_tree_oid(), which will see that the\n     object is parsed but with a NULL maybe_tree field. We'd then\n     usually pull it from the graph file, but because the slab was\n     cleared, we don't realize that we can do so! We end up returning\n     NULL and segfaulting.\n\n     (It seems questionable that we'd write a graph entry for such a\n     commit anyway, since we know we already have one. I didn't\n     double-check, but that may simply be another side effect of having\n     cleared the slab).\n\nThe bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).\n\nThe most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-ac6d45d11f\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules).\n\nSo that fixes the regression in the least-risky way possible.\n\nI do think there's some fragility here that we might want to follow up\non. We have a global commit_graph_data_slab that contains graph\npositions, and our global commit structs depend on the that slab\nremaining valid. But close_commit_graph() is just about closing _one_\nobject store's graph. So it's dangerous to call that function and clear\nthe slab without also throwing away any \"struct commit\" we might have\nparsed that depends on it.\n\nWhich at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?\n\nThe answer is \"no\", but for very bizarre reasons. Remember that\nrepo_clear() calls raw_object_store_clear(), which then calls\nclose_object_store() and thus close_commit_graph(). But before it does\nso, raw_object_store_clear() does something else: it frees the commit\ngraph and sets it to NULL! So by this code path we'll _never_ see a\nnon-NULL commit_graph struct, and thus never clear the slab.\n\nSo it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).\n\nSo I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error). But I'm not sure how to trigger it, nor what the\nfix should look like (you probably would need to \"unparse\" any objects\npulled from the graph). And so this patch punts on that for now in favor\nof fixing the recent regression in the most direct way, which should not\nhave any other fallouts."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t26",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2020-04-25T05:25:50.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+          "text": "commit-graph: close descriptors after mmap\n\nWe don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+        }
+      },
+      {
+        "owner": "Jeff King",
+        "observed_at": "2023-10-03T21:28:24.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+          "text": "commit-graph: move slab-clearing to close_commit_graph()\n\nWhen closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.\n\nCommit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.\n\nMove it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-01-05T16:35:26.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "text": "commit-graph: retain commit slab when closing NULL commit_graph\n\nThis fixes a regression introduced in [ref] ([referenced subject], 2023-10-03), in which running:\n\n  git -c fetch.writeCommitGraph=true fetch --recurse-submodules\n\nmultiple times in a freshly cloned repository causes a segfault. What\nhappens in the second (and subsequent) runs is this:\n\n  1. We make a \"struct commit\" for any ref tips which we're storing\n     (even if we already have them, they still go into FETCH_HEAD).\n\n     Because the first run will have created a commit graph, we'll find\n     those commits in the graph.\n\n     The commit struct is therefore created with a NULL \"maybe_tree\"\n     entry, because we can load its oid from the graph later. But to do\n     that we need to remember that we got the commit from the graph,\n     which is recorded in a global commit_graph_data_slab object.\n\n  2. Because we're using --recurse-submodules, we'll try to fetch each\n     of the possible submodules. That implies creating a separate\n     \"struct repository\" in-process for each submodule, which will\n     require a later call to repo_clear().\n\n     The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.\n\n  3. Later, when trying to write out a new commit graph, we'll ask for\n     their tree oid via get_commit_tree_oid(), which will see that the\n     object is parsed but with a NULL maybe_tree field. We'd then\n     usually pull it from the graph file, but because the slab was\n     cleared, we don't realize that we can do so! We end up returning\n     NULL and segfaulting.\n\n     (It seems questionable that we'd write a graph entry for such a\n     commit anyway, since we know we already have one. I didn't\n     double-check, but that may simply be another side effect of having\n     cleared the slab).\n\nThe bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).\n\nThe most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-[ref]\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules).\n\nSo that fixes the regression in the least-risky way possible.\n\nI do think there's some fragility here that we might want to follow up\non. We have a global commit_graph_data_slab that contains graph\npositions, and our global commit structs depend on the that slab\nremaining valid. But close_commit_graph() is just about closing _one_\nobject store's graph. So it's dangerous to call that function and clear\nthe slab without also throwing away any \"struct commit\" we might have\nparsed that depends on it.\n\nWhich at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?\n\nThe answer is \"no\", but for very bizarre reasons. Remember that\nrepo_clear() calls raw_object_store_clear(), which then calls\nclose_object_store() and thus close_commit_graph(). But before it does\nso, raw_object_store_clear() does something else: it frees the commit\ngraph and sets it to NULL! So by this code path we'll _never_ see a\nnon-NULL commit_graph struct, and thus never clear the slab.\n\nSo it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).\n\nSo I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error). But I'm not sure how to trigger it, nor what the\nfix should look like (you probably would need to \"unparse\" any objects\npulled from the graph). And so this patch punts on that for now in favor\nof fixing the recent regression in the most direct way, which should not\nhave any other fallouts."
+      }
+    }
+  },
+  {
+    "id": "t27",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2020-04-25T05:25:50.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+          "text": "commit-graph: close descriptors after mmap\n\nWe don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+        }
+      },
+      {
+        "owner": "Jonathan Tan",
+        "observed_at": "2020-05-04T21:08:38.000000+00:00",
+        "source": {
+          "speaker": "Jonathan Tan",
+          "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+          "text": "commit-graph: avoid memory leaks\n\nA fuzzer running on the entry point provided by fuzz-commit-graph.c\nrevealed a memory leak when parse_commit_graph() creates a struct\nbloom_filter_settings and then returns early due to error. Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.\n\nWhile making that change, I also noticed another possible memory leak -\nwhen the BLOOMDATA chunk is provided but not BLOOMINDEXES. Also fix that\nerror."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-01-05T16:35:26.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "text": "commit-graph: retain commit slab when closing NULL commit_graph\n\nThis fixes a regression introduced in ac6d45d11f (commit-graph: move\nslab-clearing to close_commit_graph(), 2023-10-03), in which running:\n\n  git -c fetch.writeCommitGraph=true fetch --recurse-submodules\n\nmultiple times in a freshly cloned repository causes a segfault. What\nhappens in the second (and subsequent) runs is this:\n\n  1. We make a \"struct commit\" for any ref tips which we're storing\n     (even if we already have them, they still go into FETCH_HEAD).\n\n     Because the first run will have created a commit graph, we'll find\n     those commits in the graph.\n\n     The commit struct is therefore created with a NULL \"maybe_tree\"\n     entry, because we can load its oid from the graph later. But to do\n     that we need to remember that we got the commit from the graph,\n     which is recorded in a global commit_graph_data_slab object.\n\n  2. Because we're using --recurse-submodules, we'll try to fetch each\n     of the possible submodules. That implies creating a separate\n     \"struct repository\" in-process for each submodule, which will\n     require a later call to repo_clear().\n\n     The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.\n\n  3. Later, when trying to write out a new commit graph, we'll ask for\n     their tree oid via get_commit_tree_oid(), which will see that the\n     object is parsed but with a NULL maybe_tree field. We'd then\n     usually pull it from the graph file, but because the slab was\n     cleared, we don't realize that we can do so! We end up returning\n     NULL and segfaulting.\n\n     (It seems questionable that we'd write a graph entry for such a\n     commit anyway, since we know we already have one. I didn't\n     double-check, but that may simply be another side effect of having\n     cleared the slab).\n\nThe bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).\n\nThe most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-ac6d45d11f\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules).\n\nSo that fixes the regression in the least-risky way possible.\n\nI do think there's some fragility here that we might want to follow up\non. We have a global commit_graph_data_slab that contains graph\npositions, and our global commit structs depend on the that slab\nremaining valid. But close_commit_graph() is just about closing _one_\nobject store's graph. So it's dangerous to call that function and clear\nthe slab without also throwing away any \"struct commit\" we might have\nparsed that depends on it.\n\nWhich at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?\n\nThe answer is \"no\", but for very bizarre reasons. Remember that\nrepo_clear() calls raw_object_store_clear(), which then calls\nclose_object_store() and thus close_commit_graph(). But before it does\nso, raw_object_store_clear() does something else: it frees the commit\ngraph and sets it to NULL! So by this code path we'll _never_ see a\nnon-NULL commit_graph struct, and thus never clear the slab.\n\nSo it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).\n\nSo I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error). But I'm not sure how to trigger it, nor what the\nfix should look like (you probably would need to \"unparse\" any objects\npulled from the graph). And so this patch punts on that for now in favor\nof fixing the recent regression in the most direct way, which should not\nhave any other fallouts."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t28",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2020-04-25T05:25:50.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+          "text": "commit-graph: close descriptors after mmap\n\nWe don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+        }
+      },
+      {
+        "owner": "Jonathan Tan",
+        "observed_at": "2020-05-04T21:08:38.000000+00:00",
+        "source": {
+          "speaker": "Jonathan Tan",
+          "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+          "text": "commit-graph: avoid memory leaks\n\nA fuzzer running on the entry point provided by fuzz-commit-graph.c\nrevealed a memory leak when parse_commit_graph() creates a struct\nbloom_filter_settings and then returns early due to error. Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.\n\nWhile making that change, I also noticed another possible memory leak -\nwhen the BLOOMDATA chunk is provided but not BLOOMINDEXES. Also fix that\nerror."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-01-05T16:35:26.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "text": "commit-graph: retain commit slab when closing NULL commit_graph\n\nThis fixes a regression introduced in [ref] ([referenced subject], 2023-10-03), in which running:\n\n  git -c fetch.writeCommitGraph=true fetch --recurse-submodules\n\nmultiple times in a freshly cloned repository causes a segfault. What\nhappens in the second (and subsequent) runs is this:\n\n  1. We make a \"struct commit\" for any ref tips which we're storing\n     (even if we already have them, they still go into FETCH_HEAD).\n\n     Because the first run will have created a commit graph, we'll find\n     those commits in the graph.\n\n     The commit struct is therefore created with a NULL \"maybe_tree\"\n     entry, because we can load its oid from the graph later. But to do\n     that we need to remember that we got the commit from the graph,\n     which is recorded in a global commit_graph_data_slab object.\n\n  2. Because we're using --recurse-submodules, we'll try to fetch each\n     of the possible submodules. That implies creating a separate\n     \"struct repository\" in-process for each submodule, which will\n     require a later call to repo_clear().\n\n     The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.\n\n  3. Later, when trying to write out a new commit graph, we'll ask for\n     their tree oid via get_commit_tree_oid(), which will see that the\n     object is parsed but with a NULL maybe_tree field. We'd then\n     usually pull it from the graph file, but because the slab was\n     cleared, we don't realize that we can do so! We end up returning\n     NULL and segfaulting.\n\n     (It seems questionable that we'd write a graph entry for such a\n     commit anyway, since we know we already have one. I didn't\n     double-check, but that may simply be another side effect of having\n     cleared the slab).\n\nThe bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).\n\nThe most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-[ref]\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules).\n\nSo that fixes the regression in the least-risky way possible.\n\nI do think there's some fragility here that we might want to follow up\non. We have a global commit_graph_data_slab that contains graph\npositions, and our global commit structs depend on the that slab\nremaining valid. But close_commit_graph() is just about closing _one_\nobject store's graph. So it's dangerous to call that function and clear\nthe slab without also throwing away any \"struct commit\" we might have\nparsed that depends on it.\n\nWhich at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?\n\nThe answer is \"no\", but for very bizarre reasons. Remember that\nrepo_clear() calls raw_object_store_clear(), which then calls\nclose_object_store() and thus close_commit_graph(). But before it does\nso, raw_object_store_clear() does something else: it frees the commit\ngraph and sets it to NULL! So by this code path we'll _never_ see a\nnon-NULL commit_graph struct, and thus never clear the slab.\n\nSo it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).\n\nSo I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error). But I'm not sure how to trigger it, nor what the\nfix should look like (you probably would need to \"unparse\" any objects\npulled from the graph). And so this patch punts on that for now in favor\nof fixing the recent regression in the most direct way, which should not\nhave any other fallouts."
+      }
+    }
+  },
+  {
+    "id": "t29",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2020-04-25T05:25:50.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+          "text": "commit-graph: close descriptors after mmap\n\nWe don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-01-05T16:35:26.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "text": "commit-graph: retain commit slab when closing NULL commit_graph\n\nThis fixes a regression introduced in ac6d45d11f (commit-graph: move\nslab-clearing to close_commit_graph(), 2023-10-03), in which running:\n\n  git -c fetch.writeCommitGraph=true fetch --recurse-submodules\n\nmultiple times in a freshly cloned repository causes a segfault. What\nhappens in the second (and subsequent) runs is this:\n\n  1. We make a \"struct commit\" for any ref tips which we're storing\n     (even if we already have them, they still go into FETCH_HEAD).\n\n     Because the first run will have created a commit graph, we'll find\n     those commits in the graph.\n\n     The commit struct is therefore created with a NULL \"maybe_tree\"\n     entry, because we can load its oid from the graph later. But to do\n     that we need to remember that we got the commit from the graph,\n     which is recorded in a global commit_graph_data_slab object.\n\n  2. Because we're using --recurse-submodules, we'll try to fetch each\n     of the possible submodules. That implies creating a separate\n     \"struct repository\" in-process for each submodule, which will\n     require a later call to repo_clear().\n\n     The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.\n\n  3. Later, when trying to write out a new commit graph, we'll ask for\n     their tree oid via get_commit_tree_oid(), which will see that the\n     object is parsed but with a NULL maybe_tree field. We'd then\n     usually pull it from the graph file, but because the slab was\n     cleared, we don't realize that we can do so! We end up returning\n     NULL and segfaulting.\n\n     (It seems questionable that we'd write a graph entry for such a\n     commit anyway, since we know we already have one. I didn't\n     double-check, but that may simply be another side effect of having\n     cleared the slab).\n\nThe bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).\n\nThe most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-ac6d45d11f\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules).\n\nSo that fixes the regression in the least-risky way possible.\n\nI do think there's some fragility here that we might want to follow up\non. We have a global commit_graph_data_slab that contains graph\npositions, and our global commit structs depend on the that slab\nremaining valid. But close_commit_graph() is just about closing _one_\nobject store's graph. So it's dangerous to call that function and clear\nthe slab without also throwing away any \"struct commit\" we might have\nparsed that depends on it.\n\nWhich at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?\n\nThe answer is \"no\", but for very bizarre reasons. Remember that\nrepo_clear() calls raw_object_store_clear(), which then calls\nclose_object_store() and thus close_commit_graph(). But before it does\nso, raw_object_store_clear() does something else: it frees the commit\ngraph and sets it to NULL! So by this code path we'll _never_ see a\nnon-NULL commit_graph struct, and thus never clear the slab.\n\nSo it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).\n\nSo I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error). But I'm not sure how to trigger it, nor what the\nfix should look like (you probably would need to \"unparse\" any objects\npulled from the graph). And so this patch punts on that for now in favor\nof fixing the recent regression in the most direct way, which should not\nhave any other fallouts."
+      }
+    }
+  }
+]

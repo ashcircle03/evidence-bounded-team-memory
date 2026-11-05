@@ -1,0 +1,3711 @@
+{
+  "t00/fixed-review": {
+    "cid": "t00",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 61,
+        "end": 218,
+        "quote": "Fix a Time-of-check to time-of-use (TOCTOU) race in code added in\n680ee550d72 (commit: skip discarding the index if there is no\npre-commit hook, 2017-08-14).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 309,
+        "quote": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 61,
+        "end": 218,
+        "quote": "Fix a Time-of-check to time-of-use (TOCTOU) race in code added in\n680ee550d72 (commit: skip discarding the index if there is no\npre-commit hook, 2017-08-14).",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a failure in the fix where the \"invoked_hook\" variable was incorrectly not passed forward from run_commit_hook() to run_hooks_opt() despite push_to_checkout() correctly doing so in the original commit a8cc5943338 (hooks: fix an obscure TOCTOU \"did we just run a hook?\" race, 2022-03-07), necessitating a recheck of this specific implementation detail.",
+      "change_sentence": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/contrast-review": {
+    "cid": "t00",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/referenced-review": {
+    "cid": "t00",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "4c9037844996",
+    "distinction_card": "2c04f4832dec",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1026,
+        "end": 1455,
+        "quote": "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 309,
+        "quote": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1026,
+        "end": 1455,
+        "quote": "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the \"invoked_hook\" variable, which was correctly passed to run_commit_hook() in push_to_checkout() in the earlier commit, was omitted when calling run_hooks_opt(), leading to potential incorrect hook execution.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 51,
+        "quote": "hooks: fix \"invoked hook\" regression in a8cc5943338",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses moving hooks to a new hook.h library, which differs from the specific operation in the incoming report about fixing a regression in handling the \"invoked_hook\" variable."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/referenced-reversed": {
+    "cid": "t00",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "4c9037844996",
+    "distinction_card": "2c04f4832dec",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1026,
+        "end": 1455,
+        "quote": "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 309,
+        "quote": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1026,
+        "end": 1455,
+        "quote": "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the \"invoked_hook\" variable, which was correctly passed to run_commit_hook() in push_to_checkout() in the earlier commit, was omitted when calling run_hooks_opt(), leading to potential incorrect hook execution.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 51,
+        "quote": "hooks: fix \"invoked hook\" regression in a8cc5943338",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses moving hooks to a new hook.h library, which differs from the specific operation in the incoming report about fixing a regression in handling the \"invoked_hook\" variable."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/simple": {
+    "cid": "t00",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 269,
+        "end": 444,
+        "quote": "ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 829,
+        "end": 1374,
+        "quote": "==31275== Conditional jump or move depends on uninitialised value(s)\n    ==31275==    at 0x43C63F: prepare_to_commit (commit.c:1058)\n    ==31275==    by 0x4396A5: cmd_commit (commit.c:1722)\n    ==31275==    by 0x407C8A: run_builtin (git.c:465)\n    ==31275==    by 0x406741: handle_builtin (git.c:718)\n    ==31275==    by 0x407665: run_argv (git.c:785)\n    ==31275==    by 0x406500: cmd_main (git.c:916)\n    ==31275==    by 0x510839: main (common-main.c:56)\n    ==31275==  Uninitialised value was created by a stack allocation\n    ==31275==    at",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/fixed-review": {
+    "cid": "t01",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1745,
+        "end": 1965,
+        "quote": "In both of those cases we're saving ourselves CPU time by not\npreparing data for the hook that we'll then do nothing with if we\ndon't have the hook. So using this \"invoked_hook\" pattern doesn't make\nsense in those cases.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "90c37f2cef74b53eddb6d710",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 47,
+        "end": 258,
+        "quote": "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1745,
+        "end": 1965,
+        "quote": "In both of those cases we're saving ourselves CPU time by not\npreparing data for the hook that we'll then do nothing with if we\ndon't have the hook. So using this \"invoked_hook\" pattern doesn't make\nsense in those cases.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier behavior of not passing the \"invoked_hook\" variable from run_commit_hook() to run_hooks_opt() due to saving CPU time without utilizing the hook was revealed by the report; thus, the necessity to recheck the rationale behind this decision in light of the fix applied.",
+      "change_sentence": "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/contrast-review": {
+    "cid": "t01",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/referenced-review": {
+    "cid": "t01",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/simple": {
+    "cid": "t01",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/fixed-review": {
+    "cid": "t02",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 309,
+        "quote": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to move hooks from run-command.h to hook.h library should be revisited given the report reveals the \\\"invoked_hook\\\" variable was incorrectly not passed forward, indicating potential issues with the new location affecting functionality.",
+      "change_sentence": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "reviewer": "Emily Shaffer",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/contrast-review": {
+    "cid": "t02",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/referenced-review": {
+    "cid": "t02",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/referenced-reversed": {
+    "cid": "t02",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/simple": {
+    "cid": "t02",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "0584b2bb0400a6de0335bb8e",
+        "location": "https://github.com/git/git/commit/bbd837f040ebeda2d072cdf2bbd26ec61e0f445e",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 255,
+        "end": 443,
+        "quote": "Appending to a file called \"actual\" is the established convention in\nthis test for hooks, see the rest of the tests added in\nec55559f937 (push: Add support for pre-push hooks, 2013-01-13).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 311,
+        "end": 583,
+        "quote": "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/fixed-review": {
+    "cid": "t03",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "90c37f2cef74b53eddb6d710",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 47,
+        "end": 258,
+        "quote": "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to move hooks.h away from run-command.h to hook.h library should be rechecked due to the reported failure showing the \\\"invoked_hook\\\" variable was incorrectly not passed forward, as evidenced by the fix required.",
+      "change_sentence": "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "reviewer": "Emily Shaffer",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/contrast-review": {
+    "cid": "t03",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/referenced-review": {
+    "cid": "t03",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/simple": {
+    "cid": "t03",
+    "topic": "hook",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/fixed-review": {
+    "cid": "t04",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 309,
+        "quote": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to move hooks from run-command.h to hook.h library should be revisited given the report reveals the \\\"invoked_hook\\\" variable was incorrectly not passed forward, indicating potential issues with the new location affecting functionality.",
+      "change_sentence": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "reviewer": "Emily Shaffer",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/contrast-review": {
+    "cid": "t04",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/referenced-review": {
+    "cid": "t04",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/simple": {
+    "cid": "t04",
+    "topic": "hook",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 0,
+        "end": 62,
+        "quote": "commit: convert {pre-commit,prepare-commit-msg} hook to hook.h",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 829,
+        "end": 1374,
+        "quote": "==31275== Conditional jump or move depends on uninitialised value(s)\n    ==31275==    at 0x43C63F: prepare_to_commit (commit.c:1058)\n    ==31275==    by 0x4396A5: cmd_commit (commit.c:1722)\n    ==31275==    by 0x407C8A: run_builtin (git.c:465)\n    ==31275==    by 0x406741: handle_builtin (git.c:718)\n    ==31275==    by 0x407665: run_argv (git.c:785)\n    ==31275==    by 0x406500: cmd_main (git.c:916)\n    ==31275==    by 0x510839: main (common-main.c:56)\n    ==31275==  Uninitialised value was created by a stack allocation\n    ==31275==    at",
+        "status": "source_only"
+      },
+      "reviewer": "Emily Shaffer",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/fixed-review": {
+    "cid": "t05",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "rationale": "The reported failure reveals that the change in the return type from an enum to any negative value or zero in the function unpack_loose_header() in object-file.c (commit 3b6a8db3b03, 2021-10-01) may have introduced a regression, necessitating a recheck of the rationale behind this decision.",
+      "change_sentence": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/contrast-review": {
+    "cid": "t05",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/referenced-review": {
+    "cid": "t05",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": true,
+    "rationale_card": null,
+    "distinction_card": "25f748338c86",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the function unpack_loose_header() was incorrectly allowed to return any negative value or zero after being previously restricted to only return -1 or 0, leading to inconsistent behavior that was not caught by the test suite.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 66,
+        "quote": "object-file: fix a unpack_loose_header() regression in 3b6a8db3b03",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses returning negative values or zero, differing from the specific operation in the incoming report which now returns ULHR_TOO_LONG or other negative values."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/referenced-reversed": {
+    "cid": "t05",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": true,
+    "rationale_card": null,
+    "distinction_card": "25f748338c86",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the function unpack_loose_header() was incorrectly allowed to return any negative value or zero after being previously restricted to only return -1 or 0, leading to inconsistent behavior that was not caught by the test suite.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 66,
+        "quote": "object-file: fix a unpack_loose_header() regression in 3b6a8db3b03",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses returning negative values or zero, differing from the specific operation in the incoming report which now returns ULHR_TOO_LONG or other negative values."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/simple": {
+    "cid": "t05",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 226,
+        "quote": "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/fixed-review": {
+    "cid": "t06",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 62,
+        "end": 220,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7db4e979cb0de93c413be66c",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 219,
+        "quote": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+        "status": "source_only"
+      },
+      "rationale": "The report identifies a need to revisit the rationale behind changing and documenting `unpack_loose_header()` from returning any negative value or zero to only `-1` or `0`, as new evidence revealed a regression through running the test suite with `--valgrind` and the amended \"git fsck\" test.",
+      "change_sentence": "Fix a regression in my [ref] ([referenced subject], 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/contrast-review": {
+    "cid": "t06",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/referenced-review": {
+    "cid": "t06",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/simple": {
+    "cid": "t06",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 431,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 62,
+        "end": 220,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/fixed-review": {
+    "cid": "t07",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to refactor the return type in object-file.c to enum (3b6a8db3b03, 2021-10-01) may need revisiting given the new evidence of regressions uncovered during tests with --valgrind and git fsck.",
+      "change_sentence": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/contrast-review": {
+    "cid": "t07",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "the exact passages did not reproduce the document judgment"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/referenced-review": {
+    "cid": "t07",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/referenced-reversed": {
+    "cid": "t07",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/simple": {
+    "cid": "t07",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 431,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/fixed-review": {
+    "cid": "t08",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 222,
+        "end": 425,
+        "quote": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals that in version 2.34.0, the original author incorrectly claimed inability to parse headers when unable to unpack them, necessitating a recheck of prior parsing logic decisions.",
+      "change_sentence": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/contrast-review": {
+    "cid": "t08",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/referenced-review": {
+    "cid": "t08",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/simple": {
+    "cid": "t08",
+    "topic": "header",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 431,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 62,
+        "end": 220,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/fixed-review": {
+    "cid": "t09",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 578,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\".",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to refactor the return type in object-file.c to enum (3b6a8db3b03, 2021-10-01) may need revisiting given the new evidence of regressions uncovered during tests with --valgrind and git fsck.",
+      "change_sentence": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/contrast-review": {
+    "cid": "t09",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/referenced-review": {
+    "cid": "t09",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/simple": {
+    "cid": "t09",
+    "topic": "header",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 228,
+        "end": 431,
+        "quote": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "819fb2f5e1b20d4aacf0b47e",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 68,
+        "end": 275,
+        "quote": "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/fixed-review": {
+    "cid": "t10",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "ad0d21eb8ade",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 199,
+        "end": 424,
+        "quote": "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 199,
+        "end": 424,
+        "quote": "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a change from using `lookup_commit_reference_gently()` to `lookup_commit()` where stopping attempts to call `deref_tag()` and `parse_object()` on the provided OID led to returning a non-NULL value for `null_oid()`, indicating a potential failure in dereferencing tags in reflogs that needs reevaluation.",
+      "change_sentence": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/contrast-review": {
+    "cid": "t10",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/referenced-review": {
+    "cid": "t10",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "a338235a2e43",
+    "distinction_card": "d391cb553fe3",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 197,
+        "quote": "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 197,
+        "quote": "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because returning non-NULL for the null_oid() after removing the calls to deref_tag() and parse_object() led to incorrect handling of NULL OIDs in reflog expiration, potentially leading to dereferencing invalid objects.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 62,
+        "end": 273,
+        "quote": "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses fixing a regression by switching from `lookup_commit_reference_gently()` to `lookup_commit()`, which differs from the specific operation in the incoming report by also stopping attempts to call `deref_tag()` and `parse_object()` on the provided OID."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/referenced-reversed": {
+    "cid": "t10",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "a338235a2e43",
+    "distinction_card": "d391cb553fe3",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 197,
+        "quote": "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 197,
+        "quote": "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because returning non-NULL for the null_oid() after removing the calls to deref_tag() and parse_object() led to incorrect handling of NULL OIDs in reflog expiration, potentially leading to dereferencing invalid objects.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 62,
+        "end": 273,
+        "quote": "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses fixing a regression by switching from `lookup_commit_reference_gently()` to `lookup_commit()`, which differs from the specific operation in the incoming report by also stopping attempts to call `deref_tag()` and `parse_object()` on the provided OID."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/simple": {
+    "cid": "t10",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 653,
+        "end": 727,
+        "quote": "None of our tests cover the case where\n\"commit\" is NULL after this lookup.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/fixed-review": {
+    "cid": "t11",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "08a34f5e3936",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 426,
+        "end": 727,
+        "quote": "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9282aa1edabd35bed1594a15",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 311,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 426,
+        "end": 727,
+        "quote": "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a change from stopping deref_tag() and parse_object() calls with lookup_commit_reference_gently() to starting to return non-NULL for null_oid() with lookup_commit(), indicating a potential rationale for revisiting prior project decisions regarding error handling and object management.",
+      "change_sentence": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/contrast-review": {
+    "cid": "t11",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/referenced-review": {
+    "cid": "t11",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/simple": {
+    "cid": "t11",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 57,
+        "quote": "reflog expire: don't use lookup_commit_reference_gently()",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9282aa1edabd35bed1594a15",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 311,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/fixed-review": {
+    "cid": "t12",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "bb703cd6ace86fe12575f9d6",
+        "location": "https://github.com/git/git/commit/3c8150497f3c77a2c57e73c53bd3de933b85d9a3",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 46,
+        "end": 126,
+        "quote": "When dwim_log() returns the \"ref\" is always ether NULL or an\nxstrdup()'d string.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "bb703cd6ace86fe12575f9d6",
+        "location": "https://github.com/git/git/commit/3c8150497f3c77a2c57e73c53bd3de933b85d9a3",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 46,
+        "end": 126,
+        "quote": "When dwim_log() returns the \"ref\" is always ether NULL or an\nxstrdup()'d string.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a change from using lookup_commit_reference_gently() to lookup_commit() led to returning non-NULL for the null_oid(), indicating a potential oversight in rationale for this decision that must be rechecked.",
+      "change_sentence": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/contrast-review": {
+    "cid": "t12",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/referenced-review": {
+    "cid": "t12",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/referenced-reversed": {
+    "cid": "t12",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/simple": {
+    "cid": "t12",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 402,
+        "end": 558,
+        "quote": "Instead of adding insult to injury, let's be gentle and continue as best\nas we can in such a scenario, simply by ignoring the missing objects and\nmoving on.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/fixed-review": {
+    "cid": "t13",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "bb703cd6ace86fe12575f9d6",
+        "location": "https://github.com/git/git/commit/3c8150497f3c77a2c57e73c53bd3de933b85d9a3",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 46,
+        "end": 126,
+        "quote": "When dwim_log() returns the \"ref\" is always ether NULL or an\nxstrdup()'d string.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9282aa1edabd35bed1594a15",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 311,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "bb703cd6ace86fe12575f9d6",
+        "location": "https://github.com/git/git/commit/3c8150497f3c77a2c57e73c53bd3de933b85d9a3",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 46,
+        "end": 126,
+        "quote": "When dwim_log() returns the \"ref\" is always ether NULL or an\nxstrdup()'d string.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a change from using lookup_commit_reference_gently() to lookup_commit() led to returning non-NULL for the null_oid(), which may require revisiting prior decisions regarding deref_tag() and parse_object() calls.",
+      "change_sentence": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/contrast-review": {
+    "cid": "t13",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/referenced-review": {
+    "cid": "t13",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/simple": {
+    "cid": "t13",
+    "topic": "reflog",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 402,
+        "end": 558,
+        "quote": "Instead of adding insult to injury, let's be gentle and continue as best\nas we can in such a scenario, simply by ignoring the missing objects and\nmoving on.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9282aa1edabd35bed1594a15",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 311,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/fixed-review": {
+    "cid": "t14",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 275,
+        "end": 400,
+        "quote": "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 275,
+        "end": 400,
+        "quote": "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a change from using lookup_commit_reference_gently() to lookup_commit() led to returning non-NULL for the null_oid(), indicating a potential oversight in rationale for this decision that must be rechecked.",
+      "change_sentence": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/contrast-review": {
+    "cid": "t14",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/referenced-review": {
+    "cid": "t14",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/simple": {
+    "cid": "t14",
+    "topic": "reflog",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/fixed-review": {
+    "cid": "t15",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "9e688c5ceaa9",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 64,
+        "end": 264,
+        "quote": "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals that not all shells expand the value of PS1, which was previously assumed, necessitating a recheck of how PS1 is handled across different shells to ensure raw ref names are not directly included, avoiding potential security risks.",
+      "change_sentence": "Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "reviewer": "Richard Hansen",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/contrast-review": {
+    "cid": "t15",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/referenced-review": {
+    "cid": "t15",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "907e8056200f",
+    "distinction_card": "0beece32c11b",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the fix assumed zsh would expand PS1 by default, whereas it actually requires the `set -o prompt` option enabled to do so, leading to prompts displaying the literal placeholder instead of the actual branch name.",
+      "reviewer": "Richard Hansen",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "8b1d5f933be85480e0765203",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "speaker": "Julien Carsique",
+        "start": 53,
+        "end": 267,
+        "quote": "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses displaying tracking information for branches across multiple remotes, which differs from the specific issue of fixing the default behavior of `zsh` expanding `PS1` without parameter expansion enabled in the incoming report."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/referenced-reversed": {
+    "cid": "t15",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "907e8056200f",
+    "distinction_card": "0beece32c11b",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the fix assumed zsh would expand PS1 by default, whereas it actually requires the `set -o prompt` option enabled to do so, leading to prompts displaying the literal placeholder instead of the actual branch name.",
+      "reviewer": "Richard Hansen",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "8b1d5f933be85480e0765203",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "speaker": "Julien Carsique",
+        "start": 53,
+        "end": 267,
+        "quote": "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses displaying tracking information for branches across multiple remotes, which differs from the specific issue of fixing the default behavior of `zsh` expanding `PS1` without parameter expansion enabled in the incoming report."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/simple": {
+    "cid": "t15",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 0,
+        "end": 57,
+        "quote": "git-prompt.sh: don't put unsanitized branch names in $PS1",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 450,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.",
+        "status": "source_only"
+      },
+      "reviewer": "Richard Hansen",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/fixed-review": {
+    "cid": "t16",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "9e688c5ceaa9",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a69458de1e260363d61bd311",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 64,
+        "end": 264,
+        "quote": "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals that not all shells expand the value of PS1, which was previously assumed, necessitating a recheck of how PS1 is handled across different shells to ensure raw ref names are not directly included, avoiding potential security risks.",
+      "change_sentence": "Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "reviewer": "Richard Hansen",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/contrast-review": {
+    "cid": "t16",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/referenced-review": {
+    "cid": "t16",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/simple": {
+    "cid": "t16",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 173,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a69458de1e260363d61bd311",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 411,
+        "quote": "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.",
+        "status": "source_only"
+      },
+      "reviewer": "Richard Hansen",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/fixed-review": {
+    "cid": "t17",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d9f4305ea3dc08ae934a72e7",
+        "location": "https://github.com/git/git/commit/15981f4eec9c6a7c12b9c0fbe98e68228c46edb7",
+        "speaker": "Eduardo R. D'Avila",
+        "start": 56,
+        "end": 180,
+        "quote": "Do not print a duplicate clean color code when there\nis no other indicators other than the current branch\nin colored prompt.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d9f4305ea3dc08ae934a72e7",
+        "location": "https://github.com/git/git/commit/15981f4eec9c6a7c12b9c0fbe98e68228c46edb7",
+        "speaker": "Eduardo R. D'Avila",
+        "start": 56,
+        "end": 180,
+        "quote": "Do not print a duplicate clean color code when there\nis no other indicators other than the current branch\nin colored prompt.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to assume zsh expands PS1 by default, leading to a regression fixed in commit 8976500, should be reevaluated given this new evidence.",
+      "change_sentence": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.",
+      "reviewer": "Eduardo R. D'Avila",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/contrast-review": {
+    "cid": "t17",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/referenced-review": {
+    "cid": "t17",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/referenced-reversed": {
+    "cid": "t17",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/simple": {
+    "cid": "t17",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/fixed-review": {
+    "cid": "t18",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d9f4305ea3dc08ae934a72e7",
+        "location": "https://github.com/git/git/commit/15981f4eec9c6a7c12b9c0fbe98e68228c46edb7",
+        "speaker": "Eduardo R. D'Avila",
+        "start": 56,
+        "end": 180,
+        "quote": "Do not print a duplicate clean color code when there\nis no other indicators other than the current branch\nin colored prompt.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a69458de1e260363d61bd311",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 532,
+        "quote": "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d9f4305ea3dc08ae934a72e7",
+        "location": "https://github.com/git/git/commit/15981f4eec9c6a7c12b9c0fbe98e68228c46edb7",
+        "speaker": "Eduardo R. D'Avila",
+        "start": 56,
+        "end": 180,
+        "quote": "Do not print a duplicate clean color code when there\nis no other indicators other than the current branch\nin colored prompt.",
+        "status": "source_only"
+      },
+      "rationale": "Review the decision to assume zsh expands PS1 by default without additional context, as indicated by the bug showing prompts with literal strings instead of actual branch names.",
+      "change_sentence": "The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+      "reviewer": "Eduardo R. D'Avila",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/contrast-review": {
+    "cid": "t18",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/referenced-review": {
+    "cid": "t18",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/simple": {
+    "cid": "t18",
+    "topic": "prompt",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/fixed-review": {
+    "cid": "t19",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8b1d5f933be85480e0765203",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "speaker": "Julien Carsique",
+        "start": 269,
+        "end": 400,
+        "quote": "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8b1d5f933be85480e0765203",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "speaker": "Julien Carsique",
+        "start": 269,
+        "end": 400,
+        "quote": "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier addition of a \"name\" option to GIT_PS1_SHOWUPSTREAM in commit 8976500 (\"git-prompt.sh: don't put unsanitized branch names in $PS1\") may have inadvertently assumed zsh would expand PS1 by default, leading to a regression where prompts contained the literal string '${__git_ps1_branch_name}' instead of the actual branch name; this requires reevaluation of the initial assumption about zsh behavior.",
+      "change_sentence": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.",
+      "reviewer": "Julien Carsique",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/contrast-review": {
+    "cid": "t19",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/referenced-review": {
+    "cid": "t19",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/simple": {
+    "cid": "t19",
+    "topic": "prompt",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "8b1d5f933be85480e0765203",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "speaker": "Julien Carsique",
+        "start": 0,
+        "end": 51,
+        "quote": "git-prompt.sh: optionally show upstream branch name",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 450,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.",
+        "status": "source_only"
+      },
+      "reviewer": "Julien Carsique",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/fixed-review": {
+    "cid": "t20",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "speaker": "Eric Sunshine",
+        "start": 63,
+        "end": 344,
+        "quote": "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 317,
+        "end": 556,
+        "quote": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable. So this regression test will likely need to be tweaked\nonce we get a \"proper\" --stat option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "speaker": "Eric Sunshine",
+        "start": 63,
+        "end": 344,
+        "quote": "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier behavior indicated that the output was not meant to be stable, as noted in a change adding a section on output stability (2018-11-07), revealing a circumstance where the regression test may need to be adjusted given the new evidence suggesting the output is inherently unstable.",
+      "change_sentence": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable.",
+      "reviewer": "Eric Sunshine",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/contrast-review": {
+    "cid": "t20",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/referenced-review": {
+    "cid": "t20",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/referenced-reversed": {
+    "cid": "t20",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/simple": {
+    "cid": "t20",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "speaker": "Eric Sunshine",
+        "start": 0,
+        "end": 61,
+        "quote": "range-diff: relieve callers of low-level configuration burden",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 208,
+        "quote": "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+        "status": "source_only"
+      },
+      "reviewer": "Eric Sunshine",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/fixed-review": {
+    "cid": "t21",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "speaker": "Eric Sunshine",
+        "start": 63,
+        "end": 344,
+        "quote": "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f7f325a10ce563e0cec62a6d",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 266,
+        "end": 505,
+        "quote": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable. So this regression test will likely need to be tweaked\nonce we get a \"proper\" --stat option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "speaker": "Eric Sunshine",
+        "start": 63,
+        "end": 344,
+        "quote": "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier behavior indicated that the output was not meant to be stable, as noted in a change adding a section on output stability (2018-11-07), revealing a circumstance where the regression test may need to be adjusted given the new evidence suggesting the output is inherently unstable.",
+      "change_sentence": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable.",
+      "reviewer": "Eric Sunshine",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/contrast-review": {
+    "cid": "t21",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/referenced-review": {
+    "cid": "t21",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/simple": {
+    "cid": "t21",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "speaker": "Eric Sunshine",
+        "start": 0,
+        "end": 61,
+        "quote": "range-diff: relieve callers of low-level configuration burden",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f7f325a10ce563e0cec62a6d",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 266,
+        "end": 412,
+        "quote": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable.",
+        "status": "source_only"
+      },
+      "reviewer": "Eric Sunshine",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/fixed-review": {
+    "cid": "t22",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d78e3865461b35e42817d1fd",
+        "location": "https://github.com/git/git/commit/8d5ccb59def8c1737b3e055a5984eaaa4e881ce9",
+        "speaker": "Stefan Beller",
+        "start": 53,
+        "end": 296,
+        "quote": "This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 317,
+        "end": 556,
+        "quote": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable. So this regression test will likely need to be tweaked\nonce we get a \"proper\" --stat option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d78e3865461b35e42817d1fd",
+        "location": "https://github.com/git/git/commit/8d5ccb59def8c1737b3e055a5984eaaa4e881ce9",
+        "speaker": "Stefan Beller",
+        "start": 53,
+        "end": 296,
+        "quote": "This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to document that the output is not meant to be stable (range-diff doc: add a section about output stability, 2018-11-07) must be rechecked given the new evidence indicating the output may now be unstable.",
+      "change_sentence": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable.",
+      "reviewer": "Stefan Beller",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/contrast-review": {
+    "cid": "t22",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/referenced-review": {
+    "cid": "t22",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/referenced-reversed": {
+    "cid": "t22",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/simple": {
+    "cid": "t22",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 0,
+        "end": 66,
+        "quote": "range-diff: respect diff_option.file rather than assuming 'stdout'",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 208,
+        "quote": "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+        "status": "source_only"
+      },
+      "reviewer": "Eric Sunshine",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/fixed-review": {
+    "cid": "t23",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d78e3865461b35e42817d1fd",
+        "location": "https://github.com/git/git/commit/8d5ccb59def8c1737b3e055a5984eaaa4e881ce9",
+        "speaker": "Stefan Beller",
+        "start": 53,
+        "end": 296,
+        "quote": "This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f7f325a10ce563e0cec62a6d",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 266,
+        "end": 505,
+        "quote": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable. So this regression test will likely need to be tweaked\nonce we get a \"proper\" --stat option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d78e3865461b35e42817d1fd",
+        "location": "https://github.com/git/git/commit/8d5ccb59def8c1737b3e055a5984eaaa4e881ce9",
+        "speaker": "Stefan Beller",
+        "start": 53,
+        "end": 296,
+        "quote": "This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to document that the output is not meant to be stable (range-diff doc: add a section about output stability, 2018-11-07) must be rechecked given the new evidence indicating the output may now be unstable.",
+      "change_sentence": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable.",
+      "reviewer": "Stefan Beller",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/contrast-review": {
+    "cid": "t23",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/referenced-review": {
+    "cid": "t23",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/simple": {
+    "cid": "t23",
+    "topic": "range",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 0,
+        "end": 66,
+        "quote": "range-diff: respect diff_option.file rather than assuming 'stdout'",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f7f325a10ce563e0cec62a6d",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 266,
+        "end": 412,
+        "quote": "As noted in a change leading up to this (\"range-diff doc: add a\nsection about output stability\", 2018-11-07) the output is not meant\nto be stable.",
+        "status": "source_only"
+      },
+      "reviewer": "Eric Sunshine",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/fixed-review": {
+    "cid": "t24",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 68,
+        "end": 347,
+        "quote": "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 558,
+        "end": 806,
+        "quote": "See\nhttps://public-inbox.org/git/nycvar.QRO.7.76.6.1811071202480.39@tvgsbejvaqbjf.bet/\nfor a further explanation of the regression. The fix here is not the\nsame as in Johannes's on-list patch, for reasons that'll be explained\nin a follow-up commit.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 68,
+        "end": 347,
+        "quote": "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well.",
+        "status": "source_only"
+      },
+      "rationale": "Review the prior decision regarding the hardcoded emission of output_pair_header() to 'stdout' in range-diff, given the new evidence from the regression reported at https://public-inbox.org/git/nycvar.QRO.7.76.6.1811071202480.39@tvgsbejvaqbjf.bet/.",
+      "change_sentence": "See\nhttps://public-inbox.org/git/nycvar.QRO.7.76.6.1811071202480.39@tvgsbejvaqbjf.bet/\nfor a further explanation of the regression.",
+      "reviewer": "Eric Sunshine",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/contrast-review": {
+    "cid": "t24",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/referenced-review": {
+    "cid": "t24",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/simple": {
+    "cid": "t24",
+    "topic": "range",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 273,
+        "end": 347,
+        "quote": "Fix\nthis by making output_pair_header() respect diff_option.file, as well.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 208,
+        "quote": "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+        "status": "source_only"
+      },
+      "reviewer": "Eric Sunshine",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  }
+}

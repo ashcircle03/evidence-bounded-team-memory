@@ -1,0 +1,352 @@
+{
+  "cases": {
+    "git-alias-pos": {
+      "margin": 6.1875,
+      "by_order": {
+        "earlier-first": {
+          "change": -5.25,
+          "independent": -6.25,
+          "contrast": 1.0
+        },
+        "report-first": {
+          "change": -1.0,
+          "independent": -12.375,
+          "contrast": 11.375
+        }
+      },
+      "selected": {
+        "correct_old_document": true,
+        "old_ok": true,
+        "new_ok": false,
+        "earlier": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.",
+        "incoming": "This fixes a regression introduced by a9bcf6586d1 (alias: use\nthe early config machinery to expand aliases, 2017-06-14)."
+      }
+    },
+    "cross-alias": {
+      "margin": 6.25,
+      "by_order": {
+        "earlier-first": {
+          "change": -8.25,
+          "independent": -8.25,
+          "contrast": 0.0
+        },
+        "report-first": {
+          "change": 0.0,
+          "independent": -12.5,
+          "contrast": 12.5
+        }
+      }
+    },
+    "git-alias-neg": {
+      "margin": -1.75,
+      "by_order": {
+        "earlier-first": {
+          "change": -15.875,
+          "independent": -9.0,
+          "contrast": -6.875
+        },
+        "report-first": {
+          "change": -10.75,
+          "independent": -14.125,
+          "contrast": 3.375
+        }
+      }
+    },
+    "git-cvs-pos": {
+      "margin": 13.6875,
+      "by_order": {
+        "earlier-first": {
+          "change": -4.5,
+          "independent": -12.625,
+          "contrast": 8.125
+        },
+        "report-first": {
+          "change": 5.25,
+          "independent": -14.0,
+          "contrast": 19.25
+        }
+      },
+      "selected": {
+        "correct_old_document": true,
+        "old_ok": true,
+        "new_ok": false,
+        "earlier": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+        "incoming": "This fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass)."
+      }
+    },
+    "cross-cvs": {
+      "margin": 2.0,
+      "by_order": {
+        "earlier-first": {
+          "change": -14.25,
+          "independent": -15.25,
+          "contrast": 1.0
+        },
+        "report-first": {
+          "change": -15.0,
+          "independent": -18.0,
+          "contrast": 3.0
+        }
+      }
+    },
+    "git-cvs-neg": {
+      "margin": 8.0,
+      "by_order": {
+        "earlier-first": {
+          "change": -9.5,
+          "independent": -13.75,
+          "contrast": 4.25
+        },
+        "report-first": {
+          "change": 1.0,
+          "independent": -10.75,
+          "contrast": 11.75
+        }
+      }
+    },
+    "git-svn-pos": {
+      "margin": 10.25,
+      "by_order": {
+        "earlier-first": {
+          "change": 2.75,
+          "independent": -7.75,
+          "contrast": 10.5
+        },
+        "report-first": {
+          "change": 0.5,
+          "independent": -9.5,
+          "contrast": 10.0
+        }
+      },
+      "selected": {
+        "correct_old_document": false,
+        "old_ok": false,
+        "new_ok": false,
+        "earlier": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".",
+        "incoming": "Running test t9010 without svn currently errors out for no good reason."
+      }
+    },
+    "cross-svn": {
+      "margin": 10.0,
+      "by_order": {
+        "earlier-first": {
+          "change": 2.25,
+          "independent": -8.0,
+          "contrast": 10.25
+        },
+        "report-first": {
+          "change": -0.75,
+          "independent": -10.5,
+          "contrast": 9.75
+        }
+      }
+    },
+    "git-svn-neg": {
+      "margin": -0.5625,
+      "by_order": {
+        "earlier-first": {
+          "change": -11.125,
+          "independent": -10.0,
+          "contrast": -1.125
+        },
+        "report-first": {
+          "change": -5.75,
+          "independent": -5.75,
+          "contrast": 0.0
+        }
+      }
+    },
+    "git-trash-pos": {
+      "margin": 3.9375,
+      "by_order": {
+        "earlier-first": {
+          "change": -1.5,
+          "independent": -6.5,
+          "contrast": 5.0
+        },
+        "report-first": {
+          "change": -10.125,
+          "independent": -13.0,
+          "contrast": 2.875
+        }
+      },
+      "selected": {
+        "correct_old_document": true,
+        "old_ok": true,
+        "new_ok": false,
+        "earlier": "Fix this by always referring to the trash directory as $TRASH_DIRECTORY.",
+        "incoming": "This fixes a regression introduced by 38b074d (t/test-lib.sh: fix\nTRASH_DIRECTORY handling, 2013-04-14).  Before that commit, the\nTEST_OUTPUT_DIRECTORY setting was not respected consistently so most\ntests did their work in a \"trash\" subdirectory of the current\ndirectory instead of the output dir."
+      }
+    },
+    "cross-trash": {
+      "margin": 3.0,
+      "by_order": {
+        "earlier-first": {
+          "change": -5.25,
+          "independent": -6.5,
+          "contrast": 1.25
+        },
+        "report-first": {
+          "change": -7.25,
+          "independent": -12.0,
+          "contrast": 4.75
+        }
+      }
+    },
+    "git-trash-neg": {
+      "margin": -1.25,
+      "by_order": {
+        "earlier-first": {
+          "change": -16.625,
+          "independent": -15.25,
+          "contrast": -1.375
+        },
+        "report-first": {
+          "change": -16.375,
+          "independent": -15.25,
+          "contrast": -1.125
+        }
+      }
+    },
+    "git-symlink-pos": {
+      "margin": 3.0,
+      "by_order": {
+        "earlier-first": {
+          "change": -12.75,
+          "independent": -12.25,
+          "contrast": -0.5
+        },
+        "report-first": {
+          "change": -6.0,
+          "independent": -12.5,
+          "contrast": 6.5
+        }
+      },
+      "selected": {
+        "correct_old_document": true,
+        "old_ok": false,
+        "new_ok": true,
+        "earlier": "otherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical.",
+        "incoming": "This is a regression introduced by 18e051a:\n  setup: translate symlinks in filename when using absolute paths\n(which did not take symlinks inside the work tree into consideration)."
+      }
+    },
+    "cross-symlink": {
+      "margin": -2.1875,
+      "by_order": {
+        "earlier-first": {
+          "change": -16.375,
+          "independent": -12.75,
+          "contrast": -3.625
+        },
+        "report-first": {
+          "change": -15.5,
+          "independent": -14.75,
+          "contrast": -0.75
+        }
+      }
+    },
+    "git-symlink-neg": {
+      "margin": 8.25,
+      "by_order": {
+        "earlier-first": {
+          "change": 0.0,
+          "independent": -6.0,
+          "contrast": 6.0
+        },
+        "report-first": {
+          "change": -2.25,
+          "independent": -12.75,
+          "contrast": 10.5
+        }
+      }
+    },
+    "git-am-pos": {
+      "margin": 1.6875,
+      "by_order": {
+        "earlier-first": {
+          "change": -17.0,
+          "independent": -6.75,
+          "contrast": -10.25
+        },
+        "report-first": {
+          "change": -1.75,
+          "independent": -15.375,
+          "contrast": 13.625
+        }
+      },
+      "selected": {
+        "correct_old_document": true,
+        "old_ok": false,
+        "new_ok": true,
+        "earlier": "Include checks for mailboxes, stgit patch series, stgit single patches\nand hg patches.",
+        "incoming": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+      }
+    },
+    "cross-am": {
+      "margin": 4.8125,
+      "by_order": {
+        "earlier-first": {
+          "change": -5.75,
+          "independent": -12.625,
+          "contrast": 6.875
+        },
+        "report-first": {
+          "change": -11.625,
+          "independent": -14.375,
+          "contrast": 2.75
+        }
+      }
+    },
+    "git-am-neg": {
+      "margin": 6.0,
+      "by_order": {
+        "earlier-first": {
+          "change": -8.5,
+          "independent": -7.0,
+          "contrast": -1.5
+        },
+        "report-first": {
+          "change": 1.0,
+          "independent": -12.5,
+          "contrast": 13.5
+        }
+      }
+    },
+    "development-checkout": {
+      "margin": 9.0,
+      "by_order": {
+        "earlier-first": {
+          "change": -0.75,
+          "independent": -4.5,
+          "contrast": 3.75
+        },
+        "report-first": {
+          "change": 4.25,
+          "independent": -10.0,
+          "contrast": 14.25
+        }
+      },
+      "selected": {
+        "correct_old_document": true,
+        "old_ok": true,
+        "new_ok": true,
+        "earlier": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+        "incoming": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+      }
+    }
+  },
+  "checkout_focus": [
+    [
+      -7.25,
+      "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout."
+    ],
+    [
+      -18.625,
+      "As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early."
+    ],
+    [
+      -6.25,
+      "This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    ]
+  ]
+}

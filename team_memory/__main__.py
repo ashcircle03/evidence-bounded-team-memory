@@ -33,7 +33,7 @@ def main():
     sync.add_argument("--model", required=True)
     sync.add_argument("--notes-dir", help="also import the ordinary prose files under this repository-relative directory")
     sync.add_argument("--goal", default=DEFAULT_GOAL, help="the project goal, not an earlier record ID")
-    sync.add_argument("--strategy", choices=("simple","candidate","premise"), default="simple")
+    sync.add_argument("--strategy", choices=("simple","candidate","premise","pairwise","fixed-review","contrast-review","referenced-review","role-review","context-review"), default="simple")
     cmd.add_parser("inbox", help="recompute merge proposals after pulling records")
     vote = cmd.add_parser("review", help="record a local review on the exact proposal you inspected")
     for key in ("id", "proposal", "actor"):
@@ -68,7 +68,7 @@ def main():
     elif args.command == "pull":
         from .sync import pull
         from .writer import local_generator
-        result = pull(store, args.goal, local_generator(args.model, max_new_tokens=192 if args.strategy == "premise" else 64), args.strategy, args.notes_dir)
+        result = pull(store, args.goal, local_generator(args.model, max_new_tokens=192 if args.strategy in ("premise", "context-review") else 96 if args.strategy in ("pairwise", "fixed-review", "contrast-review", "referenced-review", "role-review","context-review") else 64), args.strategy, args.notes_dir)
     elif args.command == "review":
         handler = review_proposal if args.id in store.load("decision_assessments") else review
         if args.id in store.load("followups"):

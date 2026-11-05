@@ -1,0 +1,596 @@
+[
+  {
+    "case": "dev-1",
+    "operation": "compare",
+    "input": {
+      "earlier": [
+        {
+          "owner": "Build operator",
+          "observed_at": "2025-01-01T09:00:00.000000+00:00",
+          "source": {
+            "speaker": "Build operator",
+            "location": "scenario://development/dev-1/natural",
+            "text": "The build artifact archive is Orion. No deployment decision was made in this note."
+          }
+        },
+        {
+          "owner": "Scenario author dev-1",
+          "observed_at": "2025-01-02T10:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario author dev-1",
+            "location": "scenario://timeline/dev-1/1",
+            "text": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process. The audit folder is Cedar-audit."
+          }
+        },
+        {
+          "owner": "Scenario colleague dev-1",
+          "observed_at": "2025-01-02T11:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario colleague dev-1",
+            "location": "scenario://timeline/dev-1/2",
+            "text": "The Cedar meeting minutes now use larger headings. This is a formatting update only."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Scenario observer dev-1",
+        "observed_at": "2025-01-02T12:00:00.000000+00:00",
+        "source": {
+          "speaker": "Scenario observer dev-1",
+          "location": "scenario://timeline/dev-1/3",
+          "text": "Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged."
+        }
+      }
+    },
+    "output": {
+      "status": "ok",
+      "relations": [
+        {
+          "kind": "reconsider",
+          "previous": {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "location": "scenario://timeline/dev-1/1",
+            "speaker": "Scenario author dev-1",
+            "start": 61,
+            "end": 139,
+            "quote": "We suspended further Cedar trials because deployment permits only one process."
+          },
+          "incoming": {
+            "source_id": "af530c82f1bd9995d863c847",
+            "location": "scenario://timeline/dev-1/3",
+            "speaker": "Scenario observer dev-1",
+            "start": 0,
+            "end": 38,
+            "quote": "Deployment now permits four processes."
+          },
+          "reason": "Deployment permits now allow four processes, which changes the condition for the earlier decision to suspend Cedar trials.",
+          "reviewer": "Scenario author dev-1",
+          "history": [
+            "067b77569680cf73f3b90cfb",
+            "4a89eb054ea4d0d2a7a21184",
+            "6aaa548a8cc35cd712e5b2b7"
+          ],
+          "id": "83683d2668a09eac59212e49",
+          "status": "pending",
+          "selected_evidence": {
+            "previous": [
+              {
+                "id": "6aaa548a8cc35cd712e5b2b7:1",
+                "source_id": "6aaa548a8cc35cd712e5b2b7",
+                "owner": "Scenario author dev-1",
+                "speaker": "Scenario author dev-1",
+                "location": "scenario://timeline/dev-1/1",
+                "observed_at": "2025-01-02T10:00:00.000000+00:00",
+                "start": 61,
+                "end": 139,
+                "quote": "We suspended further Cedar trials because deployment permits only one process."
+              }
+            ],
+            "incoming": [
+              {
+                "id": "af530c82f1bd9995d863c847:0",
+                "source_id": "af530c82f1bd9995d863c847",
+                "owner": "Scenario observer dev-1",
+                "speaker": "Scenario observer dev-1",
+                "location": "scenario://timeline/dev-1/3",
+                "observed_at": "2025-01-02T12:00:00.000000+00:00",
+                "start": 0,
+                "end": 38,
+                "quote": "Deployment now permits four processes."
+              }
+            ]
+          }
+        },
+        {
+          "kind": "coexist",
+          "previous": {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "location": "scenario://timeline/dev-1/1",
+            "speaker": "Scenario author dev-1",
+            "start": 140,
+            "end": 172,
+            "quote": "The audit folder is Cedar-audit."
+          },
+          "incoming": {
+            "source_id": "af530c82f1bd9995d863c847",
+            "location": "scenario://timeline/dev-1/3",
+            "speaker": "Scenario observer dev-1",
+            "start": 98,
+            "end": 151,
+            "quote": "The old single-process measurement remains unchanged."
+          },
+          "reason": "The old single-process measurement remains unchanged, so the new measurement coexists with the earlier one.",
+          "reviewer": "Scenario author dev-1",
+          "history": [
+            "067b77569680cf73f3b90cfb",
+            "4a89eb054ea4d0d2a7a21184",
+            "6aaa548a8cc35cd712e5b2b7"
+          ],
+          "id": "ddda90751573e91d0c9e131d",
+          "status": "pending",
+          "selected_evidence": {
+            "previous": [
+              {
+                "id": "6aaa548a8cc35cd712e5b2b7:2",
+                "source_id": "6aaa548a8cc35cd712e5b2b7",
+                "owner": "Scenario author dev-1",
+                "speaker": "Scenario author dev-1",
+                "location": "scenario://timeline/dev-1/1",
+                "observed_at": "2025-01-02T10:00:00.000000+00:00",
+                "start": 140,
+                "end": 172,
+                "quote": "The audit folder is Cedar-audit."
+              }
+            ],
+            "incoming": [
+              {
+                "id": "af530c82f1bd9995d863c847:2",
+                "source_id": "af530c82f1bd9995d863c847",
+                "owner": "Scenario observer dev-1",
+                "speaker": "Scenario observer dev-1",
+                "location": "scenario://timeline/dev-1/3",
+                "observed_at": "2025-01-02T12:00:00.000000+00:00",
+                "start": 98,
+                "end": 151,
+                "quote": "The old single-process measurement remains unchanged."
+              }
+            ]
+          }
+        }
+      ],
+      "warnings": [],
+      "raw": "{\n  \"relations\": [\n    {\n      \"kind\": \"reconsider\",\n      \"old_evidence\": [\"6aaa548a8cc35cd712e5b2b7:1\"],\n      \"new_evidence\": [\"af530c82f1bd9995d863c847:0\"],\n      \"reason\": \"Deployment permits now allow four processes, which changes the condition for the earlier decision to suspend Cedar trials.\"\n    },\n    {\n      \"kind\": \"coexist\",\n      \"old_evidence\": [\"6aaa548a8cc35cd712e5b2b7:2\"],\n      \"new_evidence\": [\"af530c82f1bd9995d863c847:2\"],\n      \"reason\": \"The old single-process measurement remains unchanged, so the new measurement coexists with the earlier one.\"\n    }\n  ]\n}"
+    }
+  },
+  {
+    "case": "dev-2",
+    "operation": "compare",
+    "input": {
+      "earlier": [
+        {
+          "owner": "Build operator",
+          "observed_at": "2025-01-01T09:00:00.000000+00:00",
+          "source": {
+            "speaker": "Build operator",
+            "location": "scenario://development/dev-2/natural",
+            "text": "The build artifact archive is Orion. No deployment decision was made in this note."
+          }
+        },
+        {
+          "owner": "Scenario author dev-2",
+          "observed_at": "2025-01-02T10:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario author dev-2",
+            "location": "scenario://timeline/dev-2/1",
+            "text": "With the small-fixture input, Birch parsing took 40 seconds. The audit folder is Birch-audit."
+          }
+        },
+        {
+          "owner": "Scenario colleague dev-2",
+          "observed_at": "2025-01-02T11:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario colleague dev-2",
+            "location": "scenario://timeline/dev-2/2",
+            "text": "The Birch meeting minutes now use larger headings. This is a formatting update only."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Scenario observer dev-2",
+        "observed_at": "2025-01-02T12:00:00.000000+00:00",
+        "source": {
+          "speaker": "Scenario observer dev-2",
+          "location": "scenario://timeline/dev-2/3",
+          "text": "With the wide-fixture input, Birch parsing took 12 seconds. These observations concern different inputs; neither log retracts the other."
+        }
+      }
+    },
+    "output": {
+      "status": "ok",
+      "relations": [
+        {
+          "kind": "coexist",
+          "previous": {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "location": "scenario://timeline/dev-2/1",
+            "speaker": "Scenario author dev-2",
+            "start": 0,
+            "end": 60,
+            "quote": "With the small-fixture input, Birch parsing took 40 seconds."
+          },
+          "incoming": {
+            "source_id": "137ff3e629c456d8f64794e6",
+            "location": "scenario://timeline/dev-2/3",
+            "speaker": "Scenario observer dev-2",
+            "start": 0,
+            "end": 59,
+            "quote": "With the wide-fixture input, Birch parsing took 12 seconds."
+          },
+          "reason": "Different inputs lead to different parsing times; neither observation retracts the other.",
+          "reviewer": "Scenario author dev-2",
+          "history": [
+            "27f910dc20fc0bdfa99d7b99",
+            "551bd7e39a9db189135f663c",
+            "a5b521acbeeb54b7d01a08b6"
+          ],
+          "id": "6d48b4341a062b0a0c162e69",
+          "status": "pending",
+          "selected_evidence": {
+            "previous": [
+              {
+                "id": "27f910dc20fc0bdfa99d7b99:0",
+                "source_id": "27f910dc20fc0bdfa99d7b99",
+                "owner": "Scenario author dev-2",
+                "speaker": "Scenario author dev-2",
+                "location": "scenario://timeline/dev-2/1",
+                "observed_at": "2025-01-02T10:00:00.000000+00:00",
+                "start": 0,
+                "end": 60,
+                "quote": "With the small-fixture input, Birch parsing took 40 seconds."
+              }
+            ],
+            "incoming": [
+              {
+                "id": "137ff3e629c456d8f64794e6:0",
+                "source_id": "137ff3e629c456d8f64794e6",
+                "owner": "Scenario observer dev-2",
+                "speaker": "Scenario observer dev-2",
+                "location": "scenario://timeline/dev-2/3",
+                "observed_at": "2025-01-02T12:00:00.000000+00:00",
+                "start": 0,
+                "end": 59,
+                "quote": "With the wide-fixture input, Birch parsing took 12 seconds."
+              }
+            ]
+          }
+        }
+      ],
+      "warnings": [],
+      "raw": "{\"relations\":[{\"kind\":\"coexist\",\"old_evidence\":[\"27f910dc20fc0bdfa99d7b99:0\"],\"new_evidence\":[\"137ff3e629c456d8f64794e6:0\"],\"reason\":\"Different inputs lead to different parsing times; neither observation retracts the other.\"}]}"
+    }
+  },
+  {
+    "case": "dev-3",
+    "operation": "compare",
+    "input": {
+      "earlier": [
+        {
+          "owner": "Build operator",
+          "observed_at": "2025-01-01T09:00:00.000000+00:00",
+          "source": {
+            "speaker": "Build operator",
+            "location": "scenario://development/dev-3/natural",
+            "text": "The build artifact archive is Orion. No deployment decision was made in this note."
+          }
+        },
+        {
+          "owner": "Scenario author dev-3",
+          "observed_at": "2025-01-02T10:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario author dev-3",
+            "location": "scenario://timeline/dev-3/1",
+            "text": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit."
+          }
+        },
+        {
+          "owner": "Scenario colleague dev-3",
+          "observed_at": "2025-01-02T11:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario colleague dev-3",
+            "location": "scenario://timeline/dev-3/2",
+            "text": "The Maple meeting minutes now use larger headings. This is a formatting update only."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Scenario observer dev-3",
+        "observed_at": "2025-01-02T12:00:00.000000+00:00",
+        "source": {
+          "speaker": "Scenario observer dev-3",
+          "location": "scenario://timeline/dev-3/3",
+          "text": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items. We have not resolved the disagreement with the earlier report."
+        }
+      }
+    },
+    "output": {
+      "status": "ok",
+      "relations": [
+        {
+          "kind": "conflict",
+          "previous": {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "location": "scenario://timeline/dev-3/1",
+            "speaker": "Scenario author dev-3",
+            "start": 0,
+            "end": 61,
+            "quote": "Under release R7 settings, the Maple queue limit is 40 items."
+          },
+          "incoming": {
+            "source_id": "d577a58f55cc145828c70b78",
+            "location": "scenario://timeline/dev-3/3",
+            "speaker": "Scenario observer dev-3",
+            "start": 0,
+            "end": 98,
+            "quote": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items."
+          },
+          "reason": "Under release R7 settings, the Maple queue limit is reported as 40 items in the earlier report, but the incoming report states it as 12 items, indicating a conflict in the measurement of the Maple queue limit under the same conditions.",
+          "reviewer": "Scenario author dev-3",
+          "history": [
+            "add30efc1fcec1cd04e09735",
+            "be731d8996d8dd23407216b5",
+            "c62ff5ba1d4477b17b68a782"
+          ],
+          "id": "8a406de6130504dc876915d4",
+          "status": "pending",
+          "selected_evidence": {
+            "previous": [
+              {
+                "id": "add30efc1fcec1cd04e09735:0",
+                "source_id": "add30efc1fcec1cd04e09735",
+                "owner": "Scenario author dev-3",
+                "speaker": "Scenario author dev-3",
+                "location": "scenario://timeline/dev-3/1",
+                "observed_at": "2025-01-02T10:00:00.000000+00:00",
+                "start": 0,
+                "end": 61,
+                "quote": "Under release R7 settings, the Maple queue limit is 40 items."
+              }
+            ],
+            "incoming": [
+              {
+                "id": "d577a58f55cc145828c70b78:0",
+                "source_id": "d577a58f55cc145828c70b78",
+                "owner": "Scenario observer dev-3",
+                "speaker": "Scenario observer dev-3",
+                "location": "scenario://timeline/dev-3/3",
+                "observed_at": "2025-01-02T12:00:00.000000+00:00",
+                "start": 0,
+                "end": 98,
+                "quote": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items."
+              }
+            ]
+          }
+        }
+      ],
+      "warnings": [],
+      "raw": "{\"relations\":[{\"kind\":\"conflict\",\"old_evidence\":[\"add30efc1fcec1cd04e09735:0\"],\"new_evidence\":[\"d577a58f55cc145828c70b78:0\"],\"reason\":\"Under release R7 settings, the Maple queue limit is reported as 40 items in the earlier report, but the incoming report states it as 12 items, indicating a conflict in the measurement of the Maple queue limit under the same conditions.\"}]}"
+    }
+  },
+  {
+    "case": "dev-5",
+    "operation": "compare",
+    "input": {
+      "earlier": [
+        {
+          "owner": "Build operator",
+          "observed_at": "2025-01-01T09:00:00.000000+00:00",
+          "source": {
+            "speaker": "Build operator",
+            "location": "scenario://development/dev-5/natural",
+            "text": "The build artifact archive is Orion. No deployment decision was made in this note."
+          }
+        },
+        {
+          "owner": "Scenario author dev-5",
+          "observed_at": "2025-01-02T10:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario author dev-5",
+            "location": "scenario://timeline/dev-5/1",
+            "text": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit."
+          }
+        },
+        {
+          "owner": "Scenario colleague dev-5",
+          "observed_at": "2025-01-02T11:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario colleague dev-5",
+            "location": "scenario://timeline/dev-5/2",
+            "text": "The Oak meeting minutes now use larger headings. This is a formatting update only."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Scenario observer dev-5",
+        "observed_at": "2025-01-02T12:00:00.000000+00:00",
+        "source": {
+          "speaker": "Scenario observer dev-5",
+          "location": "scenario://timeline/dev-5/3",
+          "text": "The Oak user guide now has 12 pages after a heading cleanup. No transport run or failover test was performed."
+        }
+      }
+    },
+    "output": {
+      "status": "ok",
+      "relations": [],
+      "warnings": [],
+      "raw": "{\"relations\":[]}"
+    }
+  },
+  {
+    "case": "dev-1",
+    "operation": "qa",
+    "input": {
+      "records": [
+        {
+          "owner": "Build operator",
+          "observed_at": "2025-01-01T09:00:00.000000+00:00",
+          "source": {
+            "speaker": "Build operator",
+            "location": "scenario://development/dev-1/natural",
+            "text": "The build artifact archive is Orion. No deployment decision was made in this note."
+          }
+        },
+        {
+          "owner": "Scenario author dev-1",
+          "observed_at": "2025-01-02T10:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario author dev-1",
+            "location": "scenario://timeline/dev-1/1",
+            "text": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process. The audit folder is Cedar-audit."
+          }
+        },
+        {
+          "owner": "Scenario colleague dev-1",
+          "observed_at": "2025-01-02T11:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario colleague dev-1",
+            "location": "scenario://timeline/dev-1/2",
+            "text": "The Cedar meeting minutes now use larger headings. This is a formatting update only."
+          }
+        },
+        {
+          "owner": "Scenario observer dev-1",
+          "observed_at": "2025-01-02T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario observer dev-1",
+            "location": "scenario://timeline/dev-1/3",
+            "text": "Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged."
+          }
+        }
+      ],
+      "question": "조건별 배치 처리 시간은 각각 얼마야?"
+    },
+    "output": {
+      "status": "ok",
+      "kind": "conditional",
+      "question": "조건별 배치 처리 시간은 각각 얼마야?",
+      "answers": [
+        {
+          "text": "40 seconds per batch when using the single-process Cedar exporter.",
+          "evidence": [
+            {
+              "id": "6aaa548a8cc35cd712e5b2b7:0",
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "owner": "Scenario author dev-1",
+              "speaker": "Scenario author dev-1",
+              "location": "scenario://timeline/dev-1/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 0,
+              "end": 60,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        },
+        {
+          "text": "12 seconds per batch when using the four-process Cedar exporter.",
+          "evidence": [
+            {
+              "id": "af530c82f1bd9995d863c847:1",
+              "source_id": "af530c82f1bd9995d863c847",
+              "owner": "Scenario observer dev-1",
+              "speaker": "Scenario observer dev-1",
+              "location": "scenario://timeline/dev-1/3",
+              "observed_at": "2025-01-02T12:00:00.000000+00:00",
+              "start": 39,
+              "end": 97,
+              "quote": "The four-process Cedar exporter took 12 seconds per batch.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "warnings": [],
+      "rejected_answers": [],
+      "raw": "{\n  \"kind\": \"conditional\",\n  \"answers\": [\n    {\n      \"text\": \"40 seconds per batch when using the single-process Cedar exporter.\",\n      \"evidence\": [\"6aaa548a8cc35cd712e5b2b7:0\"]\n    },\n    {\n      \"text\": \"12 seconds per batch when using the four-process Cedar exporter.\",\n      \"evidence\": [\"af530c82f1bd9995d863c847:1\"]\n    }\n  ]\n}"
+    }
+  },
+  {
+    "case": "dev-3",
+    "operation": "qa",
+    "input": {
+      "records": [
+        {
+          "owner": "Build operator",
+          "observed_at": "2025-01-01T09:00:00.000000+00:00",
+          "source": {
+            "speaker": "Build operator",
+            "location": "scenario://development/dev-3/natural",
+            "text": "The build artifact archive is Orion. No deployment decision was made in this note."
+          }
+        },
+        {
+          "owner": "Scenario author dev-3",
+          "observed_at": "2025-01-02T10:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario author dev-3",
+            "location": "scenario://timeline/dev-3/1",
+            "text": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit."
+          }
+        },
+        {
+          "owner": "Scenario colleague dev-3",
+          "observed_at": "2025-01-02T11:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario colleague dev-3",
+            "location": "scenario://timeline/dev-3/2",
+            "text": "The Maple meeting minutes now use larger headings. This is a formatting update only."
+          }
+        },
+        {
+          "owner": "Scenario observer dev-3",
+          "observed_at": "2025-01-02T12:00:00.000000+00:00",
+          "source": {
+            "speaker": "Scenario observer dev-3",
+            "location": "scenario://timeline/dev-3/3",
+            "text": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items. We have not resolved the disagreement with the earlier report."
+          }
+        }
+      ],
+      "question": "실험 기록 폴더는 어디야?"
+    },
+    "output": {
+      "status": "ok",
+      "kind": "single",
+      "question": "실험 기록 폴더는 어디야?",
+      "answers": [
+        {
+          "text": "실험 기록 폴더는 Maple-audit입니다.",
+          "evidence": [
+            {
+              "id": "add30efc1fcec1cd04e09735:1",
+              "source_id": "add30efc1fcec1cd04e09735",
+              "owner": "Scenario author dev-3",
+              "speaker": "Scenario author dev-3",
+              "location": "scenario://timeline/dev-3/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 62,
+              "end": 94,
+              "quote": "The audit folder is Maple-audit.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "warnings": [],
+      "rejected_answers": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"실험 기록 폴더는 Maple-audit입니다.\",\n      \"evidence\": [\"add30efc1fcec1cd04e09735:1\"]\n    }\n  ]\n}"
+    }
+  }
+]

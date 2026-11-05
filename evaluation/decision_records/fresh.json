@@ -1,0 +1,194 @@
+{
+  "notes": {
+    "runner": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+          "time": "2017-01-27T10:53:40-08:00",
+          "author": "Johannes Schindelin",
+          "text": "t/Makefile: add a rule to re-run previously-failed tests\n\nThis patch automates the process of determining which tests failed\npreviously and re-running them.\n\nWhile developing patch series, it is a good practice to run the test\nsuite from time to time, just to make sure that obvious bugs are caught\nearly.  With complex patch series, it is common to run `make -j15 -k\ntest`, i.e.  run the tests in parallel and *not* stop at the first\nfailing test but continue. This has the advantage of identifying\npossibly multiple problems in one big test run.\n\nIt is particularly important to reduce the turn-around time thusly on\nWindows, where the test suite spends 45 minutes on the computer on which\nthis patch was developed.\n\nIt is the most convenient way to determine which tests failed after\nrunning the entire test suite, in parallel, to look for left-over \"trash\ndirectory.t*\" subdirectories in the t/ subdirectory. However, those\ndirectories might live outside t/ when overridden using the\n--root=<directory> option, to which the Makefile has no access. The next\nbest method is to grep explicitly for failed tests in the test-results/\ndirectory, which the Makefile *can* access.\n\nPlease note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/ecc486b1f8ad5962ed51bcbffbba75ff2bc633ad",
+        "time": "2017-02-03T11:25:19-08:00",
+        "author": "Junio C Hamano",
+        "text": "\"make -C t failed\" will now run only the tests that failed in the\nprevious run."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "mmap": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+          "time": "2018-01-24T12:55:26-08:00",
+          "author": "Kim Gybels",
+          "text": "packed_ref_cache: don't use mmap() for small files\n\nTake a hint from commit ea68b0ce9f8 (hash-object: don't use mmap() for\nsmall files, 2010-02-21) and use read() instead of mmap() for small\npacked-refs files."
+        },
+        {
+          "location": "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3",
+          "time": "2018-01-24T12:55:26-08:00",
+          "author": "Michael Haggerty",
+          "text": "load_contents(): don't try to mmap an empty file\n\nWe don't actually create zero-length `packed-refs` files, but they are\nvalid and we should handle them correctly. The old code `xmmap()`ed\nsuch files, which led to an error when `munmap()` was called. So, if\nthe `packed-refs` file is empty, leave the snapshot at its zero values\nand return 0 without trying to read or mmap the file.\n\nReturning 0 also makes `create_snapshot()` exit early, which avoids\nthe technically undefined comparison `NULL < NULL`."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/9db22910f74b64764d4fb4e17f8aef4eb5aa6af0",
+        "time": "2018-02-15T14:55:42-08:00",
+        "author": "Junio C Hamano",
+        "text": "Avoid mmapping small files while using packed refs (especially ones\nwith zero size, which would cause later munmap() to fail)."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "hunk": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+          "time": "2018-03-05T10:45:41-08:00",
+          "author": "Phillip Wood",
+          "text": "add -p: calculate offset delta for edited patches\n\nRecount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.\n\nThis is also a necessary step to removing '--recount' and\n'--allow-overlap' from the invocation of 'git apply'. Before\n'--recount' can be removed the splitting and coalescing counting needs\nto be fixed to handle a missing newline at the end of a file. In order\nto remove '--allow-overlap' there needs to be i) some way of verifying\nthe offset data in the edited hunk (probably by correlating the\npreimage (or postimage if the patch is going to be applied in reverse)\nlines of the edited and unedited versions to see if they are offset or\nif any leading/trailing context lines have been removed) and ii) a way of\ndealing with edited hunks that change context lines that are shared\nwith neighbouring hunks."
+        },
+        {
+          "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+          "time": "2018-03-05T10:45:41-08:00",
+          "author": "Phillip Wood",
+          "text": "add -p: don't rely on apply's '--recount' option\n\nNow that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'"
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/436d18f2d00b61bea44be2f8d35a437172132873",
+        "time": "2018-03-14T12:01:04-07:00",
+        "author": "Junio C Hamano",
+        "text": "\"git add -p\" has been lazy in coalescing split patches before\npassing the result to underlying \"git apply\", leading to corner\ncase bugs; the logic to prepare the patch to be applied after hunk\nselections has been tightened."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "verbosity": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae",
+          "time": "2018-01-25T11:19:21-08:00",
+          "author": "Stefan Beller",
+          "text": "builtin/pull: respect verbosity settings in submodules\n\nIn a6d7eb2c7a (pull: optionally rebase submodules (remote submodule\nchanges only), 2017-06-23), we taught Git how to rebase submodules in\na pull. However we missed to pass on the verbosity settings."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/157ee050615192d579a358723563e7f785d676ff",
+        "time": "2018-02-15T14:55:43-08:00",
+        "author": "Junio C Hamano",
+        "text": "\"git pull --rebase\" did not pass verbosity setting down when\nrecursing into a submodule."
+      },
+      "origin": "contemporaneous_git_merge"
+    }
+  },
+  "cases": [
+    {
+      "id": "fresh-01",
+      "group": "fresh_git",
+      "task": "review",
+      "topics": [
+        "mmap",
+        "hunk"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308",
+        "time": "2018-06-11T09:45:19-07:00",
+        "author": "Phillip Wood",
+        "text": "add -p: fix counting empty context lines in edited patches\n\nrecount_edited_hunk() introduced in commit 2b8ea7f3c7 (\"add -p:\ncalculate offset delta for edited patches\", 2018-03-05) required all\ncontext lines to start with a space, empty lines are not counted. This\nwas intended to avoid any recounting problems if the user had\nintroduced empty lines at the end when editing the patch. However this\nintroduced a regression into 'git add -p' as it seems it is common for\neditors to strip the trailing whitespace from empty context lines when\npatches are edited thereby introducing empty lines that should be\ncounted. 'git apply' knows how to deal with such empty lines and POSIX\nstates that whether or not there is an space on an empty context line\nis implementation defined [1].\n\nFix the regression by counting lines that consist solely of a newline\nas well as lines starting with a space as context lines and add a test\nto prevent future regressions.\n\n[1] http://pubs.opengroup.org/onlinepubs/9699919799/utilities/diff.html"
+      },
+      "target": "hunk",
+      "action": "review",
+      "rubric": "Recount missed empty context lines when an editor strips their leading space."
+    },
+    {
+      "id": "fresh-02",
+      "group": "fresh_git",
+      "task": "review",
+      "topics": [
+        "hunk",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/af91b0230ca9fb204aac04bd713ca0f420c8f8b1",
+        "time": "2019-03-08T09:12:45+09:00",
+        "author": "Denton Liu",
+        "text": "docs: move core.excludesFile from git-add to gitignore\n\nA section in \"git add\" documentation mentions core.excludesFile and\nexplains how it works, but this is not specific to the command.\n\nMove this description to gitignore.txt to be more generic."
+      },
+      "target": "hunk",
+      "action": "keep",
+      "rubric": "Moving the excludesFile docs does not change hunk recounting."
+    },
+    {
+      "id": "fresh-03",
+      "group": "fresh_git",
+      "task": "review",
+      "topics": [
+        "verbosity",
+        "runner"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/e84c3cf3dc3c3140d317f7ed0b18768adbec0401",
+        "time": "2018-08-14T12:48:28-07:00",
+        "author": "Stefan Beller",
+        "text": "git-submodule.sh: accept verbose flag in cmd_update to be non-quiet\n\nIn a56771a668d (builtin/pull: respect verbosity settings in submodules,\n2018-01-25), we made sure to pass on both quiet and verbose flag from\nbuiltin/pull.c to the submodule shell script. However git-submodule doesn't\nunderstand a verbose flag, which results in a bug when invoking\n\n  git pull --recurse-submodules -v [...]\n\nThere are a few different approaches to fix this bug:\n\n1) rewrite 'argv_push_verbosity' or its caller in builtin/pull.c to\n   cap opt_verbosity at 0. Then 'argv_push_verbosity' would only add\n   '-q' if any.\n\n2) Have a flag in 'argv_push_verbosity' that specifies if we allow adding\n  -q or -v (or both).\n\n3) Add -v to git-submodule.sh and make it a no-op\n\n(1) seems like a maintenance burden: What if we add code after\nthe submodule operations or move submodule operations higher up,\nthen we have altered the opt_verbosity setting further down the line\nin builtin/pull.c.\n\n(2) seems like it could work reasonably well without more regressions\n\n(3) seems easiest to implement as well as actually is a feature with the\n    last-one-wins rule of passing flags to Git commands."
+      },
+      "target": "verbosity",
+      "action": "review",
+      "rubric": "Passing -v through to git-submodule fails because the script does not accept it."
+    },
+    {
+      "id": "fresh-04",
+      "group": "fresh_git",
+      "task": "review",
+      "topics": [
+        "runner",
+        "verbosity"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/7401ab92f8c9c9f7c81763d6f7da8a63a258eff2",
+        "time": "2019-05-28T13:22:34-07:00",
+        "author": "Johannes Schindelin",
+        "text": "docs: say that `--rebase=preserve` is deprecated\n\nAs of Git v2.22.0, the `--preserve-merges` backend of `git rebase` will\nbe officially deprecated in favor of the `--rebase-merges` backend.\nConsequently, `git pull --rebase=preserve` will also be deprected. State\nthis explicitly."
+      },
+      "target": "verbosity",
+      "action": "keep",
+      "rubric": "Deprecation of a rebase backend does not change how verbosity is forwarded to submodules."
+    },
+    {
+      "id": "fresh-05",
+      "group": "fresh_controlled",
+      "task": "review",
+      "topics": [
+        "hunk",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://unseen/5",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z",
+        "text": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly."
+      },
+      "target": "hunk",
+      "action": "review",
+      "rubric": "Revisit the accepted loss of offset correction after edited hunks are split; the old unsplit common-case finding remains valid."
+    },
+    {
+      "id": "fresh-06",
+      "group": "fresh_controlled",
+      "task": "review",
+      "topics": [
+        "mmap",
+        "hunk"
+      ],
+      "incoming": {
+        "location": "fixture://unseen/6",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z",
+        "text": "The new GUI edits hunks and applies them without splitting. All 50 trials applied at the correct offset. The optional edit-then-split path was disabled and accounted for no user traffic or test failures."
+      },
+      "target": "hunk",
+      "action": "keep",
+      "rubric": "The unsplit workload matches the old common case; no evidence the known split limitation has become material."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-11-05T13:17:11.805932+00:00",
+  "status": "passed",
+  "command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-m",
+    "unittest",
+    "tests.test_cupmem_local_official",
+    "tests.test_cupmem_local_launch",
+    "tests.test_cupmem_transfer_pair",
+    "tests.test_cupmem_readers",
+    "tests.test_cupmem_scoring",
+    "-q"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "----------------------------------------------------------------------\nRan 61 tests in 0.292s\n\nOK\n",
+  "source_sha256": {
+    "evaluation/cupmem/local_official.py": "03bd664f421bbb43912aa26496e7377ae3a688b9d8a317ca4a4b3f74ad44b837",
+    "evaluation/cupmem/local_launch.py": "74c29adcb3a8033ac9b3a8eef2cbba0a27faba7c59e5dc6d2bee1ae3405498b1",
+    "evaluation/cupmem/transfer_pair.py": "a6c089ac88b2a6ddecdeba0e5dc2bb9508c14c375634414c34ff3b6b1f5130e5",
+    "evaluation/cupmem/readers.py": "1c04dacbf0eade35e3d485dff7e2c6b088c62a729c8be4d112c4cc94d6ff1f2b",
+    "evaluation/cupmem/scoring.py": "1ee7f3e21b6b3e216a72e6fb6754fa567d9efb9ddc40cf2e58023f466751212c",
+    "tests/test_cupmem_local_official.py": "d95afad9e7cbbde7285c528ec4dc471a216740ed111a19d3bc23740eb7213c82",
+    "tests/test_cupmem_local_launch.py": "362fa1afca29ef323e8991577d4c27c3a32a2d448702b373a30f630d7da74ddd",
+    "tests/test_cupmem_transfer_pair.py": "24a5ef3b28d2b2dba1dd5063670b3f6e3d3c2895f5ce9156ed950cd0b4a5ff4a",
+    "tests/test_cupmem_readers.py": "fe921c6b889ca67c0eeb253508b582ff9c583d6a0b24191baf9fc8c1f28128d7",
+    "tests/test_cupmem_scoring.py": "cd745e046fd65e34fd7686564722930e63bd967f52c6d15e6ba645c83e12940e"
+  },
+  "scope": "offline mocked protocol/runtime/source-binding checks; no model or server inference; not a performance result"
+}

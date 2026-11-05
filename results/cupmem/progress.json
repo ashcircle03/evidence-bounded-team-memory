@@ -1,0 +1,516 @@
+{
+  "status": "native_team_adapter_and_source_readout_development_complete",
+  "goal": "CUPMem original STALE reproduction and team-scenario transfer",
+  "upstream_revision": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+  "master_dispatch": "../../../campaigns/speakermem-dev/campaign-dispatch.json",
+  "source_root": "../../../campaigns/cupmem-stale/upstream",
+  "official_models": {
+    "actor": "gpt-4o-mini",
+    "judge": "gemini-3.1-flash-lite-preview"
+  },
+  "protocol": {
+    "session_mode": "full",
+    "official_scenarios": 400,
+    "queries_per_scenario": 3,
+    "query_memory": "fixed"
+  },
+  "preparation_budget": {
+    "cpu_wall_minutes": 10,
+    "gpus": 0,
+    "gpu_minutes": 0,
+    "paid_api_calls": 0
+  },
+  "preparation_result": {
+    "job_id": "119617",
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "program_status": "complete",
+    "verified_upstream_files": 72,
+    "dataset_revision": "617c51dc200b5ab09970834144c7e51c77959af0",
+    "dataset_sha256": "5f3ec375179e20e2e94469e018189188f34e2e7e5f21cbecbd99fcfa648c1876",
+    "scenarios": 400,
+    "sessions_per_scenario": 50,
+    "inference_calls": 0,
+    "evidence": "../../../campaigns/speakermem-dev/results/sm-119617.json"
+  },
+  "provider_catalog": {
+    "provider": "BAZE",
+    "http_status": 200,
+    "original_actor_listed": false,
+    "candidate_actor": "gpt-5.4-mini",
+    "candidate_judge": "gemini-3.1-flash-lite",
+    "inference_tested": true
+  },
+  "original_actor_route": {
+    "proposed_base_url": "https://api.openai.com/v1",
+    "model": "gpt-4o-mini",
+    "authentication": "separate authorized OpenAI API credential; never use BAZE credential for this host",
+    "account_access_verified": false,
+    "official_shutdown_date": "2027-01-14",
+    "official_availability_source": "https://developers.openai.com/api/docs/deprecations"
+  },
+  "pending_approval": {
+    "proposal": "local-relaunch-proposal.json",
+    "kind": "resource_cap_and_cancel_existing_job",
+    "current_job_continues_until_reply": true,
+    "applied": false
+  },
+  "next": [
+    "User-directed development on CUPMem foundation; no automatic new job submission. Baseline replacement remains undecided."
+  ],
+  "execution_choice": {
+    "provider": "Aurora-local",
+    "actor": "Qwen/Qwen3-8B",
+    "actor_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "judge": "local provisional judge; exact final configuration recorded before inference",
+    "label": "local-model STALE protocol reproduction; original models not reproduced",
+    "authorized_by": "User explicitly requested local models and delegated selection on2026-11-05",
+    "external_model_api_calls": false,
+    "prior_baze_results": "preserved separately; no cross-model inherited cases"
+  },
+  "pilot": {
+    "version": "cup-pilot-v5",
+    "cpus": 8,
+    "ram_gb": 16,
+    "gpus": 0,
+    "wall_minutes": 45,
+    "protocol": "../../evaluation/cupmem/PROTOCOL.md",
+    "state": "FAILED",
+    "job_id": "119626",
+    "node": "aurora-g2",
+    "completed_sessions_first_case": 50,
+    "completed_queries": 3,
+    "program_status": "budget_stopped",
+    "exit_code": "1:0",
+    "completed_cases": 1,
+    "partial_second_case_completed_sessions": 6,
+    "physical_requests": 1000,
+    "artifact_audit": "pilot-v5/artifact-audit.json"
+  },
+  "environment": {
+    "required": "activated conda on Slurm compute node",
+    "conda_root": "/ceph_data/pjw031003/anaconda3",
+    "target_prefix": "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/cupmem-conda-v1",
+    "setup_job_id": "119621",
+    "state": "verified",
+    "evidence": "../../../campaigns/speakermem-dev/results/sm-119621.json"
+  },
+  "attempts": [
+    {
+      "job_id": "119619",
+      "version": "cup-pilot-v1",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 11,
+      "api_calls": 0,
+      "reason": "pip absent in uv-managed environment"
+    },
+    {
+      "job_id": "119620",
+      "version": "cup-pilot-v2",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 250,
+      "api_calls": 0,
+      "reason": "credential not delivered after user required conda; receiver expired",
+      "offline_tests_passed": 8
+    },
+    {
+      "job_id": "119622",
+      "version": "cup-pilot-v3",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 303,
+      "api_calls": 0,
+      "reason": "prepaid preflight found missing random binding in direct truncation helper; no key delivered",
+      "conda_verified": true
+    },
+    {
+      "job_id": "119623",
+      "version": "cup-pilot-v4",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 195,
+      "api_calls": 0,
+      "reason": "repo-specific local shell omitted BAZE variable; workspace-root shell verified and courier fixed",
+      "offline_tests_passed": 9
+    }
+  ],
+  "compute_budget": {
+    "goal_cpu_minutes": 120,
+    "campaign_cpu_minutes": 200,
+    "gpu_minutes": 200,
+    "failures_included": true
+  },
+  "local_tests": {
+    "tests": 9,
+    "passed": 8,
+    "skipped": 1,
+    "skip_reason": "HTTPX/OpenAI runtime test will run on compute node"
+  },
+  "local_courier": {
+    "launch_cwd": "workspace root",
+    "command": "PYTHONPATH=\"$PWD/evidence-bounded-team-memory\" python3 -m evaluation.cupmem.deliver_key cup-pilot-v5",
+    "credential_storage": "none; inherited variable via SSH stdin to same-UID compute socket"
+  },
+  "checked_at": "2026-11-05T12:29:29.958873+00:00",
+  "runtime_validation": {
+    "offline_tests_passed": 9,
+    "actor_probe": {
+      "http_status": 200,
+      "reported_model": "gpt-5.4-mini-2026-03-17",
+      "input_tokens": 15,
+      "output_tokens": 8
+    },
+    "judge_probe": {
+      "http_status": 200,
+      "reported_model": "gemini-3.1-flash-lite",
+      "input_tokens": 10,
+      "output_tokens": 9
+    },
+    "probe_evidence": "/private/tmp/cupmem-probes-119626.jsonl"
+  },
+  "last_observed_api_usage": {
+    "requests": 1000,
+    "observed_input_tokens": 3301189,
+    "observed_output_tokens": 146887,
+    "reserved_or_uncertain_input_tokens": 9000,
+    "reserved_or_uncertain_output_tokens": 8192,
+    "uncertain_request_ids": [
+      69
+    ],
+    "censored_request_ids": [],
+    "limits": {
+      "requests": 1000,
+      "input_tokens": 5000000,
+      "output_tokens": 200000
+    }
+  },
+  "ssh": {
+    "state": "authenticated_at_last_check",
+    "checked_at": "2026-11-05T12:43:14.575568+00:00",
+    "queue": "empty",
+    "action": "Read-only queue/resource/name-conflict checks; no new job yet"
+  },
+  "submission_policy": {
+    "minimum_gpus_per_new_allocation": 1,
+    "explicit_conda_activation": true,
+    "reason": "User explicitly superseded CPU-only submissions on 2026-11-05",
+    "existing_jobs_unchanged": [
+      "119626"
+    ]
+  },
+  "dispatch_mirror_pending": false,
+  "completion_audit": {
+    "official_pilot": "incomplete:1of2 cases",
+    "original_actor_reproduction": "not run: BAZE alternate actor",
+    "official_400": "not run",
+    "team_transfer": "not run",
+    "paired_legacy_qa": "not run",
+    "design_decision": "not yet justified"
+  },
+  "offline_preparation": {
+    "extra_model_calls": 0,
+    "artifact_audit": "pilot-v5/artifact-audit.json",
+    "source_audit": "pilot-v5/source-audit.md",
+    "source_audit_evidence": "pilot-v5/source-audit.json",
+    "transfer": {
+      "status": "source_export_verified_not_executed",
+      "counts": {
+        "deferred_owner_reviews": 12,
+        "git_cases": 60,
+        "git_qa_checkpoints": 6,
+        "git_source_arrivals": 180,
+        "timeline_qa_checkpoints": 140,
+        "timeline_source_arrivals": 100,
+        "timeline_streams": 20
+      },
+      "manifest": "../../evaluation/cupmem/transfer-inputs.manifest.json",
+      "actor_sha256": "1748653fae227f155ffc47ded6ddb33c7100bfc300d2fcb82eb7a4facf06a154"
+    },
+    "legacy_qa": {
+      "status": "original_input_reconstruction_verified_not_new_model_performance",
+      "manifest": "../../evaluation/cupmem/legacy-inputs-manifest.json",
+      "artifact_sha256": "c2db53e4126b9c3f35733df079bc1c53f8c6137d70cf12cd102e67ac9ffddac8",
+      "sizing": {
+        "cases": 20,
+        "unique_documents": 786,
+        "unique_histories": 7,
+        "summed_case_documents": 3360,
+        "unique_history_documents": 1276,
+        "unique_source_prefix_states": {
+          "historical": 1015,
+          "chronological": 786
+        },
+        "history_case_counts": {
+          "d474ab3d7822c8ac3c19622bc08c2d7bd1ffeeba2aea50d1d936663d78dd6f0d": 5,
+          "ae24415845ae48a779c02e30e9293b2423d529a0be60360ac63ea69fb75cd817": 1,
+          "d30bb1f10fe4bfe83033850cb344925fb7a5d36af2e94e4d40c567c5d3d53aad": 1,
+          "702e9009795b2802deae72872915f0300c54cd2029a95e73a48d99b159a66072": 8,
+          "1d2a1e3271adf1333a8e2e3d634b3d8850f170aa5533c59273119ac1b841022e": 1,
+          "c000762632771ec9e4841da888fb1063618a9897f906ab37023a98b9e1bd25c1": 1,
+          "34429cce545ccdddc6967f74f2dd009c0352caa867afcdc1641ac77e13ce0413": 3
+        },
+        "unique_source_text_utf8_bytes": 318550,
+        "calls_estimate": null,
+        "caveat": "document/prefix counts are not API request counts; CUPMem makes multiple requests per session; reuse requires exact input/config hashes and query-memory immutability"
+      },
+      "archived_replay": {
+        "status": "verified",
+        "historical_rows_identical": 20,
+        "actual_reader_call_hashes_checked": 50,
+        "inference_calls": 0,
+        "meaning": "source/replay compatibility only; not new-actor QA preservation"
+      }
+    },
+    "source_audit_findings": [
+      "Initial UNKNOWN_CURRENT arose from an inferred prior preference with no existing candidate",
+      "Unrelated meditation/productivity evidence weakened gift-reciprocity item before actual change",
+      "Session38 did detect the actual change, but idempotent weak-challenge application did not append the newer valid rationale to item revision history",
+      "Actual new session contains both default pay-it-forward and an accepting-insistent-repayment exception; official judge sees the short gold summary, not the whole session"
+    ],
+    "limits": "One completed T1 case under alternate models; primary score untouched; no benchmark-wide result, causal intervention, team-transfer performance or new-actor QA/citation preservation claim",
+    "provenance": {
+      "status": "request_bound_source_expansion_prepared_not_citation_performance",
+      "module": "../../evaluation/cupmem/provenance.py",
+      "evidence": "pilot-v5/provenance-audit.json",
+      "actual_composer_requests": [
+        911,
+        918,
+        924
+      ],
+      "selected_original_turn_counts": [
+        1,
+        0,
+        4
+      ],
+      "source_binding_failures_are": "adapter errors, not native model errors",
+      "remaining": "common cited-reader prompt and interpretation of model-derived status annotations must be specified before executing fair paired citation evaluation"
+    },
+    "incremental_runtime": {
+      "status": "implemented_and_fake_engine_verified_not_real_inference",
+      "module": "../../evaluation/cupmem/transfer_runtime.py",
+      "covered_fixtures": 80,
+      "covered_source_arrivals": 280,
+      "covered_original_qa_checkpoints": 146,
+      "query_time_state_preserved": true,
+      "raw_and_native_trace_hash_scopes_distinguished": true,
+      "independent_review": "serialization, failing-event identity, exact query-time state binding reviewed after fixes",
+      "unimplemented": [
+        "prompted_review",
+        "common_cited_reader",
+        "evaluator",
+        "provider_and_slurm_integration",
+        "resume_or_prefix_cache"
+      ]
+    },
+    "tests": {
+      "evidence": "offline-validation.json",
+      "tests_run": 61,
+      "passed": 60,
+      "skipped": [
+        {
+          "test": "test_physical_retry_is_logged_and_credentials_are_redacted (evaluation.cupmem.test_protocol.ProtocolTests.test_physical_retry_is_logged_and_credentials_are_redacted)",
+          "reason": "SDK is on compute runtime"
+        }
+      ],
+      "model_calls": 0
+    },
+    "summary": "pilot-v5/README.md"
+  },
+  "last_goal_turn": {
+    "classification": "progress",
+    "evidence": [
+      "Reverified terminal119626 FAILED/1:0 via live sacct and empty user queue",
+      "Audited1000physical attempts and raw writer/composer/judge input-output linkage",
+      "Established source-level failures and correct later change detection without changing official score",
+      "Exported60Git/20timeline and reconstructed20legacy cases; source-only model boundary validated",
+      "Prepared request-bound provenance and incremental nativeQA core with60passing offline tests and1local SDK skip"
+    ],
+    "extra_api_calls": 0,
+    "new_slurm_jobs": 0,
+    "blocking_audit": "No blocked status: meaningful authorized runtime/evaluator preparation remains; extra inference budget still unanswered"
+  },
+  "local_model_choice": {
+    "model": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "dtype": "bfloat16",
+    "enable_thinking": false,
+    "native_context": 32768,
+    "planned_long_context": 131072,
+    "rope_scaling": {
+      "rope_type": "yarn",
+      "factor": 4.0,
+      "original_max_position_embeddings": 32768
+    },
+    "source": "https://huggingface.co/Qwen/Qwen3-8B",
+    "rationale": [
+      "public ungated Apache2 weights",
+      "multilingual support appropriate for mixed team records",
+      "explicit non-thinking mode for original JSON pipeline"
+    ],
+    "performance_equivalence_to_4o_mini": "not established; model card features do not establish task-specific equivalence",
+    "direct_context": "exact local chat-template count required; primary original tiktoken-trim protocol must not silently shrink input"
+  },
+  "local_setup": {
+    "job_id": "119669",
+    "source_version": "cup-local-setup-v1",
+    "state": "TIMEOUT",
+    "gpus": 1,
+    "cpus": 8,
+    "ram_gb": 48,
+    "wall_minutes": 30,
+    "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-local-setup-v1",
+    "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119669.json",
+    "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "source_frozen": true,
+    "slurm_exit_code": "0:0",
+    "elapsed_seconds": 1804,
+    "program_status": "running",
+    "model_calls": 0,
+    "completion_verified": false,
+    "interpretation": "Slurm TIMEOUT; preserved incomplete program record. CUDA BF16 smoke ran before download; no model inference."
+  },
+  "local_pilot_preparation": {
+    "version": "cup-local-pilot-v1",
+    "state": "RUNNING",
+    "gpus": 2,
+    "cpus": 16,
+    "ram_gb": 96,
+    "wall_minutes": 75,
+    "external_model_api_calls": false,
+    "same_actor_both_arms": "Qwen3-8B",
+    "judge": "Qwen3-8B provisional non-independent self-judge",
+    "direct_protocol": "qwen_token_budget",
+    "execution_order": "three short compatibility probes, six direct answers, two full50-session CUP cases and official judgments",
+    "reviews": [
+      "readers exact ordered source binding corrected;14 tests",
+      "local wrapper reviewed for original protocol and context behavior",
+      "launcher cleanup/serving compatibility review corrections applied"
+    ],
+    "inference_performance": "not measured",
+    "protocol_reason": "All six original_tiktoken packets fail actual Qwen input+8192 output reservation; explicit model-tokenizer variant chosen before any Qwen inference. Original privileged gold-preserving session removal algorithm retained; no arbitrary source shortening.",
+    "config_sha256": "d6c9f344cecce124e6d9251df093c85c7e11f1b2292baf8dd159882f9302c526",
+    "job_id": "119684",
+    "submitted_at": "2026-11-05T13:35:36.326742+00:00",
+    "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119684.json",
+    "source_sha256": {
+      "run.sbatch": "8be2c3428f66680283665cc25186d68d3846da704d6d67f7dcd6a37d87c9e48b",
+      "bootstrap.py": "0d4bb082b338f42eb19a3a6788c7dfa490466d173e02211f08c145b8db6f4568",
+      "config.json": "d6c9f344cecce124e6d9251df093c85c7e11f1b2292baf8dd159882f9302c526",
+      "harness.tar.gz": "bacde89b24f57446e085193e6dbd90e074b05538f84b7684ca9c864283ce4219"
+    },
+    "node": "aurora-g8",
+    "last_checked_at": "2026-11-05T13:47:55.765635+00:00",
+    "compatibility_probes": [
+      {
+        "probe": "json_object",
+        "input_sha256": "a30e16b631f70b875ea419b93f34722c968114a6e16d0525d44e8a4afc330a8b",
+        "passed": true
+      },
+      {
+        "probe": "strict_json_schema",
+        "input_sha256": "a30e16b631f70b875ea419b93f34722c968114a6e16d0525d44e8a4afc330a8b",
+        "passed": true
+      },
+      {
+        "probe": "native_multi_message_retry",
+        "input_sha256": "1028923ec800e7b2e9888c70300dba04ebfcfaf6c2cfde09e39eaadb8631d417",
+        "passed": true
+      }
+    ],
+    "server_state": "running_pilot",
+    "startup_elapsed_seconds": 571.591183014214,
+    "config_hash_verified": true,
+    "server_reported_max_model_len": 131072,
+    "verified_completed_request_contexts": [
+      {
+        "context": {
+          "model": "Qwen3-8B",
+          "phase": "compatibility_probe",
+          "probe": "json_object"
+        },
+        "reported_prompt_tokens": 30
+      },
+      {
+        "context": {
+          "model": "Qwen3-8B",
+          "phase": "compatibility_probe",
+          "probe": "strict_json_schema"
+        },
+        "reported_prompt_tokens": 30
+      },
+      {
+        "context": {
+          "model": "Qwen3-8B",
+          "phase": "compatibility_probe",
+          "probe": "native_multi_message_retry"
+        },
+        "reported_prompt_tokens": 98
+      },
+      {
+        "context": {
+          "arm": "direct",
+          "direct_protocol": "qwen_token_budget",
+          "phase": "answer",
+          "query_label": "dim1_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "reported_prompt_tokens": 121267
+      }
+    ],
+    "native_cases_complete": 0,
+    "performance_claim": "not available; only first long direct response and three compatibility probes verified so far"
+  },
+  "local_setup_recovery": {
+    "version": "cup-local-setup-v2",
+    "state": "COMPLETED",
+    "gpus": 1,
+    "wall_minutes": 20,
+    "reason": "Model download incomplete at wall limit; Xet transport stall is a hypothesis, not proven root cause. Existing conda reused; official HTTP fallback in separate directory; original bytes/partialfiles preserved.",
+    "job_id": "119672",
+    "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119672.json",
+    "source_sha256": {
+      "run.sbatch": "e5479a2ce28ca89f358149e627c65d2337afdbd13fb91bb91cd42bfd1061d94a",
+      "setup.py": "040e8ab3b927ccc21c34c46a171dc9466dc7a0854aa4be08f626c87f9f89c017",
+      "config.json": "c6f395074067f95dc1952b628ba64bd4361c44922c60d729c74303f84d04a46c",
+      "model-manifest.json": "0d9179c9a1e9e18074fd5467d58bfddd56782e0b4e49b42feed9fb8ff4e22dfa",
+      "upstream_helpers.py": "43e26bbb57d1cd498bcb07b72b5d76cbaae30782f32df468df0920cbdb3c03b6"
+    },
+    "submitted_at": "2026-11-05T13:22:02.800033+00:00",
+    "exit_code": "0:0",
+    "elapsed_seconds": 630,
+    "program_status": "complete",
+    "context_packets_sha256": "a2bbf02da8c35d7ae47f30459d6bba3a8923445cbd2617e182b936518a2df7aa",
+    "model_hashes_verified": true,
+    "verified_upstream_files": 72,
+    "dataset_sha256": "5f3ec375179e20e2e94469e018189188f34e2e7e5f21cbecbd99fcfa648c1876"
+  },
+  "goal_turn_audit": {
+    "previous_turn": "progress",
+    "evidence": "Verified prepared model119672 and actual longQwen response; submitted119684 once",
+    "current_turn": "progress",
+    "evidence_now": "119684 live, all six direct answers completed and five native sessions observed; full completion verifier added; measured walltime risk disclosed"
+  },
+  "local_pilot_terminal": {
+    "job_id": "119684",
+    "state": "FAILED",
+    "exit_code": "1:0",
+    "elapsed_seconds": 2660,
+    "resubmitted": false
+  },
+  "fast_preview": {
+    "job_id": "119750",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 204,
+    "summary": "../preview/run-summary.json",
+    "scope": "Existing direct system on three synthetic development streams; not CUPMem transfer or reproduction"
+  },
+  "team_adapter": {
+    "native_job": "119767",
+    "readout_job": "119777",
+    "report": "team-adapter/summary.json",
+    "benchmark_complete": false
+  }
+}

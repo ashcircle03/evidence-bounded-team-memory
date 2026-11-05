@@ -1,0 +1,2705 @@
+{
+  "t00/referenced-review": {
+    "cid": "t00",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "813787288739",
+    "distinction_card": "45b2611164ca",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "26c432928f289ac97d989ab1",
+        "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+        "speaker": "Taylor Blau",
+        "start": 51,
+        "end": 324,
+        "quote": "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4460998546f21ef8b70f83d6",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "speaker": "Jeff King",
+        "start": 1944,
+        "end": 2289,
+        "quote": "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "26c432928f289ac97d989ab1",
+        "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+        "speaker": "Taylor Blau",
+        "start": 51,
+        "end": 324,
+        "quote": "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+        "status": "source_only"
+      },
+      "rationale": "The incoming collision check failed to recognize the difference between an outdated version of the index file and a newly fetched updated version, thus incorrectly assuming the on-disk contents were identical and discarding the new file.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "4460998546f21ef8b70f83d6",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "speaker": "Jeff King",
+        "start": 50,
+        "end": 250,
+        "quote": "This patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "3c0d4f5a7785728fc9ea0523",
+        "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+        "speaker": "René Scharfe",
+        "start": 55,
+        "end": 290,
+        "quote": "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+        "status": "source_only"
+      },
+      "distinction": "\"The other decision addresses the collision check in finalize_object_file(), which differs from the specific operation in the incoming report by not recognizing the replacement of the remote version with the local one in a file collision scenario.\""
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/role-review": {
+    "cid": "t00",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/role-reversed": {
+    "cid": "t00",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/simple": {
+    "cid": "t00",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "26c432928f289ac97d989ab1",
+        "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+        "speaker": "Taylor Blau",
+        "start": 1561,
+        "end": 1803,
+        "quote": "- We don't treat the hash of the loose object file's contents as a\n    checksum, since the same loose object can be stored using different\n    bytes on disk (e.g., when adjusting core.compression, using a\n    different version of zlib, etc.).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4460998546f21ef8b70f83d6",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "speaker": "Jeff King",
+        "start": 5554,
+        "end": 5806,
+        "quote": "I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).",
+        "status": "source_only"
+      },
+      "reviewer": "Taylor Blau",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/referenced-review": {
+    "cid": "t01",
+    "topic": "http-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/role-review": {
+    "cid": "t01",
+    "topic": "http-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/simple": {
+    "cid": "t01",
+    "topic": "http-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "26c432928f289ac97d989ab1",
+        "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+        "speaker": "Taylor Blau",
+        "start": 1561,
+        "end": 1803,
+        "quote": "- We don't treat the hash of the loose object file's contents as a\n    checksum, since the same loose object can be stored using different\n    bytes on disk (e.g., when adjusting core.compression, using a\n    different version of zlib, etc.).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7fa19233ac6240e33fd7b91d",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "speaker": "Jeff King",
+        "start": 5515,
+        "end": 5767,
+        "quote": "I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).",
+        "status": "source_only"
+      },
+      "reviewer": "Taylor Blau",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/referenced-review": {
+    "cid": "t02",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/role-review": {
+    "cid": "t02",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/role-reversed": {
+    "cid": "t02",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/simple": {
+    "cid": "t02",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "3c0d4f5a7785728fc9ea0523",
+        "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+        "speaker": "René Scharfe",
+        "start": 55,
+        "end": 148,
+        "quote": "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4460998546f21ef8b70f83d6",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "speaker": "Jeff King",
+        "start": 5554,
+        "end": 5806,
+        "quote": "I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).",
+        "status": "source_only"
+      },
+      "reviewer": "René Scharfe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/referenced-review": {
+    "cid": "t03",
+    "topic": "http-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/role-review": {
+    "cid": "t03",
+    "topic": "http-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/simple": {
+    "cid": "t03",
+    "topic": "http-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "3c0d4f5a7785728fc9ea0523",
+        "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+        "speaker": "René Scharfe",
+        "start": 55,
+        "end": 148,
+        "quote": "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7fa19233ac6240e33fd7b91d",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "speaker": "Jeff King",
+        "start": 5515,
+        "end": 5767,
+        "quote": "I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).",
+        "status": "source_only"
+      },
+      "reviewer": "René Scharfe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/referenced-review": {
+    "cid": "t04",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/role-review": {
+    "cid": "t04",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/simple": {
+    "cid": "t04",
+    "topic": "http-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/referenced-review": {
+    "cid": "t05",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "598ce6371226",
+    "distinction_card": "22a75ad9c054",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c7189d6d1d4e0539269164d2",
+        "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1097,
+        "end": 1434,
+        "quote": "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "148a66eb9f811eddf8cdfa80",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 469,
+        "end": 997,
+        "quote": "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c7189d6d1d4e0539269164d2",
+        "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1097,
+        "end": 1434,
+        "quote": "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the explicit rule did not correctly handle the suffix stripping as expected, leading to the inclusion of unintended targets like \"git-status.txt.o\" instead of just \"git-status.1\".",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "148a66eb9f811eddf8cdfa80",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 65,
+        "quote": "Documentation/Makefile: fix \"make info\" regression in dad9cd7d518",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "b4fae2dc27175b9d6d7e4428",
+        "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+        "speaker": "Jeff King",
+        "start": 662,
+        "end": 917,
+        "quote": "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses implicit rules, whereas the incoming report discusses the behavior of '$*' in explicit rules."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/role-review": {
+    "cid": "t05",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/role-reversed": {
+    "cid": "t05",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/simple": {
+    "cid": "t05",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c7189d6d1d4e0539269164d2",
+        "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 47,
+        "end": 210,
+        "quote": "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "148a66eb9f811eddf8cdfa80",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1349,
+        "end": 1516,
+        "quote": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/referenced-review": {
+    "cid": "t06",
+    "topic": "make-info",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/role-review": {
+    "cid": "t06",
+    "topic": "make-info",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/simple": {
+    "cid": "t06",
+    "topic": "make-info",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c7189d6d1d4e0539269164d2",
+        "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 47,
+        "end": 210,
+        "quote": "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "79986b9677938bda9b6f7731",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1306,
+        "end": 1473,
+        "quote": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/referenced-review": {
+    "cid": "t07",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/role-review": {
+    "cid": "t07",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/role-reversed": {
+    "cid": "t07",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/simple": {
+    "cid": "t07",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "b4fae2dc27175b9d6d7e4428",
+        "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+        "speaker": "Jeff King",
+        "start": 0,
+        "end": 54,
+        "quote": "Documentation/Makefile: fix lint-docs mkdir dependency",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "148a66eb9f811eddf8cdfa80",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1349,
+        "end": 1516,
+        "quote": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list.",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/referenced-review": {
+    "cid": "t08",
+    "topic": "make-info",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/role-review": {
+    "cid": "t08",
+    "topic": "make-info",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/simple": {
+    "cid": "t08",
+    "topic": "make-info",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "b4fae2dc27175b9d6d7e4428",
+        "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+        "speaker": "Jeff King",
+        "start": 0,
+        "end": 54,
+        "quote": "Documentation/Makefile: fix lint-docs mkdir dependency",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "79986b9677938bda9b6f7731",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1306,
+        "end": 1473,
+        "quote": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list.",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/referenced-review": {
+    "cid": "t09",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/role-review": {
+    "cid": "t09",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/simple": {
+    "cid": "t09",
+    "topic": "make-info",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "b4fae2dc27175b9d6d7e4428",
+        "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+        "speaker": "Jeff King",
+        "start": 0,
+        "end": 54,
+        "quote": "Documentation/Makefile: fix lint-docs mkdir dependency",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "148a66eb9f811eddf8cdfa80",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1349,
+        "end": 1516,
+        "quote": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list.",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/referenced-review": {
+    "cid": "t10",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "32650fd09f28",
+    "distinction_card": "b4aab82fa10e",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/role-review": {
+    "cid": "t10",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "b1bc6c3d600a",
+    "distinction_card": "566413e785c2",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "Revisit the earlier decision reported as “Convert setup_git_directory_gently_1() and its helper functions setup_explicit_git_dir(), setup_discovered_git_dir() and setup_bare_git_dir() to use a struct strbuf to hold the current working directory. Replacing the PATH_MAX-sized buffer used before removes a path length limition on some file systems. The functions are converted all in one go because they all read and write the variable cwd.”. The incoming evidence gives the reason. This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “1. Do not strip off a leading slash, because that erroneously turns an absolute path into a relative path.”, while the new report concerns “This fixes a regression introduced with 7333ed17 (setup: convert setup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths longer than 127 bytes with components that miss read or execute permissions (e.g. 0711 on /home for privacy reasons); we used a fixed PATH_MAX-sized buffer before.”.",
+      "role_evidence": {
+        "subject": {
+          "evidence": {
+            "source_id": "ad8616faa45fa22c27edc5f4",
+            "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+            "speaker": "René Scharfe",
+            "start": 724,
+            "end": 747,
+            "quote": "This fixes a regression",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 481,
+            "end": 504,
+            "quote": "This fixes a regression"
+          }
+        },
+        "action": {
+          "evidence": {
+            "source_id": "ad8616faa45fa22c27edc5f4",
+            "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+            "speaker": "René Scharfe",
+            "start": 729,
+            "end": 747,
+            "quote": "fixes a regression",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 486,
+            "end": 504,
+            "quote": "fixes a regression"
+          }
+        },
+        "condition": {
+          "evidence": {
+            "source_id": "ad8616faa45fa22c27edc5f4",
+            "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+            "speaker": "René Scharfe",
+            "start": 852,
+            "end": 974,
+            "quote": "paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons)",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 609,
+            "end": 731,
+            "quote": "paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons)"
+          }
+        }
+      },
+      "explanation_mode": "source-bound"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/role-reversed": {
+    "cid": "t10",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "b1bc6c3d600a",
+    "distinction_card": "566413e785c2",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "Revisit the earlier decision reported as “Convert setup_git_directory_gently_1() and its helper functions setup_explicit_git_dir(), setup_discovered_git_dir() and setup_bare_git_dir() to use a struct strbuf to hold the current working directory. Replacing the PATH_MAX-sized buffer used before removes a path length limition on some file systems. The functions are converted all in one go because they all read and write the variable cwd.”. The incoming evidence gives the reason. This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “1. Do not strip off a leading slash, because that erroneously turns an absolute path into a relative path.”, while the new report concerns “This fixes a regression introduced with 7333ed17 (setup: convert setup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths longer than 127 bytes with components that miss read or execute permissions (e.g. 0711 on /home for privacy reasons); we used a fixed PATH_MAX-sized buffer before.”.",
+      "role_evidence": {
+        "subject": {
+          "evidence": {
+            "source_id": "ad8616faa45fa22c27edc5f4",
+            "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+            "speaker": "René Scharfe",
+            "start": 724,
+            "end": 747,
+            "quote": "This fixes a regression",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 481,
+            "end": 504,
+            "quote": "This fixes a regression"
+          }
+        },
+        "action": {
+          "evidence": {
+            "source_id": "ad8616faa45fa22c27edc5f4",
+            "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+            "speaker": "René Scharfe",
+            "start": 729,
+            "end": 747,
+            "quote": "fixes a regression",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 486,
+            "end": 504,
+            "quote": "fixes a regression"
+          }
+        },
+        "condition": {
+          "evidence": {
+            "source_id": "ad8616faa45fa22c27edc5f4",
+            "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+            "speaker": "René Scharfe",
+            "start": 852,
+            "end": 974,
+            "quote": "paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons)",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 609,
+            "end": 731,
+            "quote": "paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons)"
+          }
+        }
+      },
+      "explanation_mode": "source-bound"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/simple": {
+    "cid": "t10",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 267,
+        "end": 367,
+        "quote": "Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 586,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.",
+        "status": "source_only"
+      },
+      "reviewer": "René Scharfe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/referenced-review": {
+    "cid": "t11",
+    "topic": "freebsd-cwd",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/role-review": {
+    "cid": "t11",
+    "topic": "freebsd-cwd",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/simple": {
+    "cid": "t11",
+    "topic": "freebsd-cwd",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 267,
+        "end": 367,
+        "quote": "Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7edcc9f24e2ce9c56c51bdcf",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 896,
+        "quote": "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g.",
+        "status": "source_only"
+      },
+      "reviewer": "René Scharfe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/referenced-review": {
+    "cid": "t12",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/role-review": {
+    "cid": "t12",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/role-reversed": {
+    "cid": "t12",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/simple": {
+    "cid": "t12",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 0,
+        "end": 56,
+        "quote": "real_path(): properly handle nonexistent top-level paths",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 586,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.",
+        "status": "source_only"
+      },
+      "reviewer": "Michael Haggerty",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/referenced-review": {
+    "cid": "t13",
+    "topic": "freebsd-cwd",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/role-review": {
+    "cid": "t13",
+    "topic": "freebsd-cwd",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/simple": {
+    "cid": "t13",
+    "topic": "freebsd-cwd",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 0,
+        "end": 56,
+        "quote": "real_path(): properly handle nonexistent top-level paths",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7edcc9f24e2ce9c56c51bdcf",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 896,
+        "quote": "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g.",
+        "status": "source_only"
+      },
+      "reviewer": "Michael Haggerty",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/referenced-review": {
+    "cid": "t14",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/role-review": {
+    "cid": "t14",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/simple": {
+    "cid": "t14",
+    "topic": "freebsd-cwd",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 0,
+        "end": 56,
+        "quote": "real_path(): properly handle nonexistent top-level paths",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 586,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.",
+        "status": "source_only"
+      },
+      "reviewer": "Michael Haggerty",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/referenced-review": {
+    "cid": "t15",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "90bee98c0778",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/role-review": {
+    "cid": "t15",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "0614929197ee",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Revisit the earlier decision reported as “\"git fsck\" bails out with a claim that a loose object that cannot be read but exists on the filesystem to be corrupt, which is wrong when read_object() failed due to e.g. EMFILE.”. The incoming evidence gives the reason. Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Noticed and reported by BJ Hargrave.”, while the new report concerns “Since 3ba7a065527a (A loose object is not corrupt if it cannot be read due to EMFILE), \"git fsck\" on a repository with an empty loose object file complains with the error message”.",
+      "role_evidence": {
+        "subject": {
+          "evidence": {
+            "source_id": "3d071ab3b30bc81067aace4b",
+            "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+            "speaker": "Matthieu Moy",
+            "start": 150,
+            "end": 218,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 350,
+            "end": 418,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains"
+          }
+        },
+        "action": {
+          "evidence": {
+            "source_id": "3d071ab3b30bc81067aace4b",
+            "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+            "speaker": "Matthieu Moy",
+            "start": 150,
+            "end": 241,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 350,
+            "end": 441,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains with the error message"
+          }
+        },
+        "condition": {
+          "evidence": {
+            "source_id": "3d071ab3b30bc81067aace4b",
+            "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+            "speaker": "Matthieu Moy",
+            "start": 161,
+            "end": 208,
+            "quote": "on a repository with an empty\nloose object file",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 361,
+            "end": 408,
+            "quote": "on a repository with an empty\nloose object file"
+          }
+        }
+      },
+      "explanation_mode": "source-bound"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/role-reversed": {
+    "cid": "t15",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "0614929197ee",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Revisit the earlier decision reported as “\"git fsck\" bails out with a claim that a loose object that cannot be read but exists on the filesystem to be corrupt, which is wrong when read_object() failed due to e.g. EMFILE.”. The incoming evidence gives the reason. Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Noticed and reported by BJ Hargrave.”, while the new report concerns “Since 3ba7a065527a (A loose object is not corrupt if it cannot be read due to EMFILE), \"git fsck\" on a repository with an empty loose object file complains with the error message”.",
+      "role_evidence": {
+        "subject": {
+          "evidence": {
+            "source_id": "3d071ab3b30bc81067aace4b",
+            "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+            "speaker": "Matthieu Moy",
+            "start": 150,
+            "end": 218,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 350,
+            "end": 418,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains"
+          }
+        },
+        "action": {
+          "evidence": {
+            "source_id": "3d071ab3b30bc81067aace4b",
+            "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+            "speaker": "Matthieu Moy",
+            "start": 150,
+            "end": 241,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 350,
+            "end": 441,
+            "quote": "\"git fsck\" on a repository with an empty\nloose object file complains with the error message"
+          }
+        },
+        "condition": {
+          "evidence": {
+            "source_id": "3d071ab3b30bc81067aace4b",
+            "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+            "speaker": "Matthieu Moy",
+            "start": 161,
+            "end": 208,
+            "quote": "on a repository with an empty\nloose object file",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 361,
+            "end": 408,
+            "quote": "on a repository with an empty\nloose object file"
+          }
+        }
+      },
+      "explanation_mode": "source-bound"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/simple": {
+    "cid": "t15",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 0,
+        "end": 64,
+        "quote": "A loose object is not corrupt if it cannot be read due to EMFILE",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "reviewer": "Junio C Hamano",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/referenced-review": {
+    "cid": "t16",
+    "topic": "fsck-empty",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/role-review": {
+    "cid": "t16",
+    "topic": "fsck-empty",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/simple": {
+    "cid": "t16",
+    "topic": "fsck-empty",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 236,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "d26909e4c0536288cbdd89ad",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 190,
+        "quote": "Since [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "reviewer": "Junio C Hamano",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/referenced-review": {
+    "cid": "t17",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/role-review": {
+    "cid": "t17",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/role-reversed": {
+    "cid": "t17",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/simple": {
+    "cid": "t17",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 165,
+        "end": 329,
+        "quote": "Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "reviewer": "Junio C Hamano",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/referenced-review": {
+    "cid": "t18",
+    "topic": "fsck-empty",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/role-review": {
+    "cid": "t18",
+    "topic": "fsck-empty",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/simple": {
+    "cid": "t18",
+    "topic": "fsck-empty",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/referenced-review": {
+    "cid": "t19",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/role-review": {
+    "cid": "t19",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/simple": {
+    "cid": "t19",
+    "topic": "fsck-empty",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/referenced-review": {
+    "cid": "t20",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/role-review": {
+    "cid": "t20",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/role-reversed": {
+    "cid": "t20",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/simple": {
+    "cid": "t20",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "ea8afb3d136e3fa2b370966e",
+        "location": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+        "speaker": "John Keeping",
+        "start": 0,
+        "end": 42,
+        "quote": "difftool: fix argument handling in subdirs",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4aea3944f469757ceec86446",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "speaker": "David Aguilar",
+        "start": 62,
+        "end": 288,
+        "quote": "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+        "status": "source_only"
+      },
+      "reviewer": "John Keeping",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/referenced-review": {
+    "cid": "t21",
+    "topic": "dir-diff",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/role-review": {
+    "cid": "t21",
+    "topic": "dir-diff",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/simple": {
+    "cid": "t21",
+    "topic": "dir-diff",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c5ef72578d2c18ba5ff98f7a",
+        "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+        "speaker": "David Aguilar",
+        "start": 293,
+        "end": 347,
+        "quote": "Ensure that each worktree path is only processed once.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3fe4a2a9ae9a7133513c2efc",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "speaker": "David Aguilar",
+        "start": 62,
+        "end": 261,
+        "quote": "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+        "status": "source_only"
+      },
+      "reviewer": "David Aguilar",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/referenced-review": {
+    "cid": "t22",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/role-review": {
+    "cid": "t22",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/role-reversed": {
+    "cid": "t22",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/simple": {
+    "cid": "t22",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "bce82ad179b881313d6e9bba",
+        "location": "https://github.com/git/git/commit/1f197a1de497db8898c9920fab77533dab34a03c",
+        "speaker": "John Keeping",
+        "start": 65,
+        "end": 255,
+        "quote": "Commit 02c5631 (difftool --dir-diff: symlink all files matching the\nworking tree, 2013-03-14) does not handle the case where a file that is\nbeing compared does not exist in the working tree.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4aea3944f469757ceec86446",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "speaker": "David Aguilar",
+        "start": 62,
+        "end": 288,
+        "quote": "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+        "status": "source_only"
+      },
+      "reviewer": "John Keeping",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/referenced-review": {
+    "cid": "t23",
+    "topic": "dir-diff",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/role-review": {
+    "cid": "t23",
+    "topic": "dir-diff",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/simple": {
+    "cid": "t23",
+    "topic": "dir-diff",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "bce82ad179b881313d6e9bba",
+        "location": "https://github.com/git/git/commit/1f197a1de497db8898c9920fab77533dab34a03c",
+        "speaker": "John Keeping",
+        "start": 65,
+        "end": 255,
+        "quote": "Commit 02c5631 (difftool --dir-diff: symlink all files matching the\nworking tree, 2013-03-14) does not handle the case where a file that is\nbeing compared does not exist in the working tree.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3fe4a2a9ae9a7133513c2efc",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "speaker": "David Aguilar",
+        "start": 62,
+        "end": 261,
+        "quote": "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+        "status": "source_only"
+      },
+      "reviewer": "John Keeping",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/referenced-review": {
+    "cid": "t24",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/role-review": {
+    "cid": "t24",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/simple": {
+    "cid": "t24",
+    "topic": "dir-diff",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c5ef72578d2c18ba5ff98f7a",
+        "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+        "speaker": "David Aguilar",
+        "start": 157,
+        "end": 291,
+        "quote": "This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4aea3944f469757ceec86446",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "speaker": "David Aguilar",
+        "start": 62,
+        "end": 288,
+        "quote": "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+        "status": "source_only"
+      },
+      "reviewer": "David Aguilar",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  }
+}

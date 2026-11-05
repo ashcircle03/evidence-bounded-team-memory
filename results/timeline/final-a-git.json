@@ -1,0 +1,5116 @@
+{
+  "final-01/direct": {
+    "status": "passed",
+    "id": "final-01",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "f00cc10fa77f8cb36c7e76f30806ead8538bd61a2122516651076fde520ad2bc",
+      "6c0f3fc3af55dd0efd908f3481681d429cc0f4df8fe149077955f83732f99c07",
+      "37bce1b520e5b0cc8cfde606bd2d2814f15b97e73e07dc3cc8b9df962d72676c",
+      "e03714f1ee7085518f23fd5ec11508d21d23c8aa53433f7636080059eea49303",
+      "af0873fb7c5d13c549ec10fa21727c9af17385434f2fd09b2b463cc6c224f3d2",
+      "43547f7d995e3f77bd822323d703b582745765febddbc7bac979ecf1f4e93f52",
+      "ba3d668ff6454d6e349ffe216fb603e2a6dcd9cbe79544ee550e98d275cd9518",
+      "da8d7a9973842754d56672f968c49298e81772d9547886d7850593d8a31746b5",
+      "c27d2a80834d889d30a0ad841fe8837a12379bf11f99bd4326ce45a23ea8d496",
+      "b84715b07d380533d3d87b5b990e8da3159bca59bd834851fd53dc5961e6984c",
+      "533c16d7910ccf51a9aa65735c5d860adef6dcebb29b9d9f4214b848a5bcf3e0"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "0d038591cca032381faf04c8",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0d038591cca032381faf04c8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-10/Group 2/6",
+              "speaker": "Zihao Wan",
+              "start": 39,
+              "end": 219,
+              "quote": "The unit testing task for the frontend data visualization component has been completed. All test cases have passed, and code coverage has reached 96%, meeting quality requirements.",
+              "answer": "96%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "cd0887237ecf6e222e64c927",
+            "mode": "direct",
+            "history": [
+              "0d038591cca032381faf04c8"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "cd0887237ecf6e222e64c927",
+              "location": "scenario://timeline/final-01/1",
+              "speaker": "Scenario author final-01",
+              "start": 0,
+              "end": 79,
+              "quote": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album.",
+              "answer": "18 minutes per album",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "dc1fb5fba06303110ae99f76",
+            "mode": "direct",
+            "history": [
+              "0d038591cca032381faf04c8",
+              "cd0887237ecf6e222e64c927"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "cbff269e582ebfb63286c73b",
+            "mode": "direct",
+            "history": [
+              "0d038591cca032381faf04c8",
+              "cd0887237ecf6e222e64c927",
+              "dc1fb5fba06303110ae99f76"
+            ],
+            "proposals": [
+              "9cf474fccec89e85838d3202"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\": \"single\", \"answers\": [{\"source\": \"cd0887237ecf6e222e64c927\", \"quote\": \"With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU.\", \"answer\": \"18 minutes per album\", \"condition\": \"With the CPU-only worker\"}, {\"source\": \"cbff269e582ebfb63286c73b\", \"quote\": \"With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement.\", \"answer\": \"3 minutes per album\", \"condition\": \"With the GPU-enabled worker\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0d038591cca032381faf04c8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-10/Group 2/6",
+              "speaker": "Zihao Wan",
+              "start": 39,
+              "end": 219,
+              "quote": "The unit testing task for the frontend data visualization component has been completed. All test cases have passed, and code coverage has reached 96%, meeting quality requirements.",
+              "answer": "96%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"cd0887237ecf6e222e64c927\", \"quote\":\"With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU.\", \"answer\":\"18 minutes per album\", \"condition\":\"With the CPU-only worker\"}, {\"source\":\"cbff269e582ebfb63286c73b\", \"quote\":\"With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement.\", \"answer\":\"3 minutes per album\", \"condition\":\"With the GPU-enabled worker\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "cd0887237ecf6e222e64c927",
+              "location": "scenario://timeline/final-01/1",
+              "speaker": "Scenario author final-01",
+              "start": 0,
+              "end": 189,
+              "quote": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU. The evidence archive is Harbor-evidence.",
+              "answer": "Harbor-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d9ec391590b355bd4e099d25",
+            "mode": "direct",
+            "history": [
+              "0d038591cca032381faf04c8",
+              "cbff269e582ebfb63286c73b",
+              "cd0887237ecf6e222e64c927",
+              "dc1fb5fba06303110ae99f76"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0d038591cca032381faf04c8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-10/Group 2/6",
+              "speaker": "Zihao Wan",
+              "start": 39,
+              "end": 219,
+              "quote": "The unit testing task for the frontend data visualization component has been completed. All test cases have passed, and code coverage has reached 96%, meeting quality requirements.",
+              "answer": "96%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-01/indexed": {
+    "status": "passed",
+    "id": "final-01",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "3de7b1f44f58f59702a049707a8beca4f35a12f5c87492df7caa9ad613f06810",
+      "8f57ccd2aacdf13a9d2c1b39ef03613bfe4a74379b80bf833fe4debf55cb77d1",
+      "ddccb0634a3ff6fd6f05b8216c94b4de2cbd851b951cf843d1fcf6b5f13cb83e",
+      "6db15fc23ae4cf4814378ef397b6feb8eb6e1b00e3e61e924c73f434539f09ed",
+      "e49fe9dce41a5e45e38e3f78c302c61058993d05b6dd03c7a40fb9d4a617ef5c",
+      "80bc3972b0c83a852cc65838bb898fb41831d8077a479b115f0919ebeb4167b3",
+      "11d758815d2b5853a88bbd1f91f3e6c5728fe687ba627ca993b5bfa352ade2c5",
+      "7534d19ccc32d61553a192c8582648bee6675286b5abd62f341f230cb68d13b0",
+      "ed5c8a9e268956281ab13cea5f7330eac12ba47f4e70cd7aa4af96ca39f42485",
+      "13768faa88de2f28a95196646fdb5573d42e20ff22dce1f45ecc5e2dc98ed2fa",
+      "16d1e5feae703e5109fdf3fbf6d9b7430cba4e610554e2738170806a3d339ba0",
+      "13768faa88de2f28a95196646fdb5573d42e20ff22dce1f45ecc5e2dc98ed2fa",
+      "b4d373310e6a3cbf61b364a35391413fbd66d8fd262e5c758dafd0190f82bff6",
+      "0fc57439f3f245dde91fd543e518c372f748f7aff614210c7570c0f985123e22",
+      "5d02e83d2d1a85afe35e119f47f1a534603994f49028efaa1b5efa4dab19259c",
+      "eb5d362bab8d34c82752661108928545dd9cb7f6c406ba780f0602178991c2b2"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "0d038591cca032381faf04c8",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"The code has been committed to the git repository\",\"basis\":\"the task has been completed with all test cases passing and code coverage meeting quality requirements\",\"scope\":\"the frontend data visualization component\"},{\"decision\":\"The task has been marked as \\\"Done\\\" on Jira\",\"basis\":\"the task completion and successful testing\",\"scope\":\"the unit testing task for the frontend data visualization component\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0d038591cca032381faf04c8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-10/Group 2/6",
+              "speaker": "Zihao Wan",
+              "start": 39,
+              "end": 219,
+              "quote": "The unit testing task for the frontend data visualization component has been completed. All test cases have passed, and code coverage has reached 96%, meeting quality requirements.",
+              "answer": "96%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "cd0887237ecf6e222e64c927",
+            "mode": "indexed",
+            "history": [
+              "0d038591cca032381faf04c8"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "cd0887237ecf6e222e64c927",
+              "location": "scenario://timeline/final-01/1",
+              "speaker": "Scenario author final-01",
+              "start": 0,
+              "end": 79,
+              "quote": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album.",
+              "answer": "18 minutes per album",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "dc1fb5fba06303110ae99f76",
+            "mode": "indexed",
+            "history": [
+              "0d038591cca032381faf04c8",
+              "cd0887237ecf6e222e64c927"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "cbff269e582ebfb63286c73b",
+            "mode": "indexed",
+            "history": [
+              "0d038591cca032381faf04c8",
+              "cd0887237ecf6e222e64c927",
+              "dc1fb5fba06303110ae99f76"
+            ],
+            "proposals": [
+              "2ddd680be44315175d804009"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"cd0887237ecf6e222e64c927\", \"quote\":\"With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album.\", \"answer\":\"18 minutes per album\", \"condition\":\"\"}, {\"source\":\"cbff269e582ebfb63286c73b\", \"quote\":\"With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album.\", \"answer\":\"3 minutes per album\", \"condition\":\"\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0d038591cca032381faf04c8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-10/Group 2/6",
+              "speaker": "Zihao Wan",
+              "start": 39,
+              "end": 219,
+              "quote": "The unit testing task for the frontend data visualization component has been completed. All test cases have passed, and code coverage has reached 96%, meeting quality requirements.",
+              "answer": "96%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"cd0887237ecf6e222e64c927\", \"quote\":\"With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album.\", \"answer\":\"18 minutes per album\", \"condition\":\"\"}, {\"source\":\"cbff269e582ebfb63286c73b\", \"quote\":\"With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album.\", \"answer\":\"3 minutes per album\", \"condition\":\"\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "cd0887237ecf6e222e64c927",
+              "location": "scenario://timeline/final-01/1",
+              "speaker": "Scenario author final-01",
+              "start": 149,
+              "end": 189,
+              "quote": "The evidence archive is Harbor-evidence.",
+              "answer": "Harbor-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d9ec391590b355bd4e099d25",
+            "mode": "indexed",
+            "history": [
+              "0d038591cca032381faf04c8",
+              "cbff269e582ebfb63286c73b",
+              "cd0887237ecf6e222e64c927",
+              "dc1fb5fba06303110ae99f76"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0d038591cca032381faf04c8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-10/Group 2/6",
+              "speaker": "Zihao Wan",
+              "start": 39,
+              "end": 219,
+              "quote": "The unit testing task for the frontend data visualization component has been completed. All test cases have passed, and code coverage has reached 96%, meeting quality requirements.",
+              "answer": "96%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-09/indexed": {
+    "status": "passed",
+    "id": "final-09",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "ec6507f661fcef55e9cef8ad833d034002e6d34b12496fb8193a21d1f697abdd",
+      "1dc0e592adc66b628934e970019ed8e89a8f4dc436d108e4031fc42b241eb0d9",
+      "3a5a44badb873cfd73e81c0da5d648b0bd3fb165d862abdcd9a88194bf7f30c8",
+      "714d13458d27d7b6e5c29da2453ed32f741ac16f4566b67fda77b7583b037e00",
+      "a4b335adde9e2c277b9a2141ab0bd353b4fe26fd5a6555d6d799448c96adeb86",
+      "ad902b2234f37bbc8f52ff18b32d00cce8a0541eb7aad26a95556616736b5759",
+      "1d6a8ed401c5a290a7cec341bd13e1f383779c48746079a2d02965e5c7c38cd0",
+      "2dbaf08016c1af884c5aa2b2b010e4d82b7a50dfd74891abdf41b17377ae3898",
+      "e094f1565695f6c859936a1e9d3c4286f2288e269a3c53efd8416e5d2ace69c2",
+      "ab0314be1cdf2bbaf581d943223e792331cfd0af8a24f84931564a33f291266d",
+      "6d6ad5055a21d5890c375fcb917ddeea3c871b384688fc725a35e7e41d0c525c",
+      "ab0314be1cdf2bbaf581d943223e792331cfd0af8a24f84931564a33f291266d",
+      "045ceb9358da4d430d120d0d38a1443fa9100533dbcf4ea61d458126fb059fec",
+      "e995f31bc1ba01b897b70ed9e7e2b39a38163fb500443df4b7b84ea69c9650b2",
+      "cab928b83139dda48baae5579399324f8fbd1b9cc0c9c6a0e9334c341b2d00b5",
+      "7ae77f09ee1bc34f0bc079c738f1eeb8b475a7c96ab6dd88134594e90d2d017d"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "8d66455d38a7a6ab390e5d7c",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8d66455d38a7a6ab390e5d7c",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-22/Group 1/2",
+              "speaker": "Qianghan Mao",
+              "start": 0,
+              "end": 256,
+              "quote": "Good morning, Boss Li! The unit tests for user services are all done. The small bug found yesterday has been fixed, and corresponding regression test cases have been added. Code coverage has now reached 98%. It can be merged into the main branch anytime. 😎",
+              "answer": "98%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "63b7606d609cfdf518bf1bf9",
+            "mode": "indexed",
+            "history": [
+              "8d66455d38a7a6ab390e5d7c"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "63b7606d609cfdf518bf1bf9",
+              "location": "scenario://timeline/final-09/1",
+              "speaker": "Scenario author final-09",
+              "start": 0,
+              "end": 71,
+              "quote": "Under build A8 defaults, the Anchor connection limit is 64 connections.",
+              "answer": "64 connections",
+              "condition": {
+                "source_id": "63b7606d609cfdf518bf1bf9",
+                "location": "scenario://timeline/final-09/1",
+                "speaker": "Scenario author final-09",
+                "start": 0,
+                "end": 23,
+                "quote": "Under build A8 defaults"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e7b3e8fafd42dbf7a5d86187",
+            "mode": "indexed",
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "b692843b01d7115d0f61741f",
+            "mode": "indexed",
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c",
+              "e7b3e8fafd42dbf7a5d86187"
+            ],
+            "proposals": [
+              "64b32a113901e0590db03bec"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"63b7606d609cfdf518bf1bf9\", \"quote\":\"Under build A8 defaults, the Anchor connection limit is 64 connections.\", \"answer\":\"64 connections\", \"condition\":\"Under build A8 defaults\"}, {\"source\":\"b692843b01d7115d0f61741f\", \"quote\":\"My independent reading under the same build A8 defaults gives the Anchor connection limit as 96 connections.\", \"answer\":\"96 connections\", \"condition\":\"Under build A8 defaults\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8d66455d38a7a6ab390e5d7c",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-22/Group 1/2",
+              "speaker": "Qianghan Mao",
+              "start": 0,
+              "end": 256,
+              "quote": "Good morning, Boss Li! The unit tests for user services are all done. The small bug found yesterday has been fixed, and corresponding regression test cases have been added. Code coverage has now reached 98%. It can be merged into the main branch anytime. 😎",
+              "answer": "98%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"63b7606d609cfdf518bf1bf9\", \"quote\":\"Under build A8 defaults, the Anchor connection limit is 64 connections.\", \"answer\":\"64 connections\", \"condition\":\"Under build A8 defaults\"}, {\"source\":\"b692843b01d7115d0f61741f\", \"quote\":\"My independent reading under the same build A8 defaults gives the Anchor connection limit as 96 connections.\", \"answer\":\"96 connections\", \"condition\":\"Under build A8 defaults\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "63b7606d609cfdf518bf1bf9",
+              "location": "scenario://timeline/final-09/1",
+              "speaker": "Scenario author final-09",
+              "start": 0,
+              "end": 112,
+              "quote": "Under build A8 defaults, the Anchor connection limit is 64 connections. The evidence archive is Anchor-evidence.",
+              "answer": "Anchor-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "13051f69b0767435e64a22d1",
+            "mode": "indexed",
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c",
+              "b692843b01d7115d0f61741f",
+              "e7b3e8fafd42dbf7a5d86187"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "'decisions'",
+                "raw": "{}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8d66455d38a7a6ab390e5d7c",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-22/Group 1/2",
+              "speaker": "Qianghan Mao",
+              "start": 0,
+              "end": 256,
+              "quote": "Good morning, Boss Li! The unit tests for user services are all done. The small bug found yesterday has been fixed, and corresponding regression test cases have been added. Code coverage has now reached 98%. It can be merged into the main branch anytime. 😎",
+              "answer": "98%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-09/direct": {
+    "status": "passed",
+    "id": "final-09",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "aaefb6a3cac1736e98c828974bde0e733888be867c311bea90659aa49a32ee30",
+      "e763151cfc7318a2dd12baba10ec3e12d12241afcb18b91e746e051160fc38d6",
+      "170a0ac38a8f90a33ee228e905e916eb7e387e4dbdeb24adb45af61e83659e6e",
+      "6ad9de51c7b237506bbe70a0f618e419560c39a7ef1592ad106d4b3f99ad41f4",
+      "6f2e2bd4279c3241cd1d7a008eed3e7c44c2e69498e7c7171148d56304b989a0",
+      "8f6f3dd31a00f7131958a9a3fd494bbfad95fa1c83f96c98d17b969334965dd0",
+      "fa28a338d495f2bdf61baaaf6cca8c57faab15d40f9a9ed2a1c2dd0fe50707b8",
+      "8f6f3dd31a00f7131958a9a3fd494bbfad95fa1c83f96c98d17b969334965dd0",
+      "5c55983e97bb0939cb730e50a7d08978f78426181bb6990e1322ffb154474db8",
+      "d537ce547cc80c47d89344f7e9164dcffc658e9ce026bafb00db6b9c5749cdce",
+      "f62cd3693d9944a11832ecee7a6925d8c702742587aad72d705e23ca17d080a4"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "8d66455d38a7a6ab390e5d7c",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8d66455d38a7a6ab390e5d7c",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-22/Group 1/2",
+              "speaker": "Qianghan Mao",
+              "start": 0,
+              "end": 256,
+              "quote": "Good morning, Boss Li! The unit tests for user services are all done. The small bug found yesterday has been fixed, and corresponding regression test cases have been added. Code coverage has now reached 98%. It can be merged into the main branch anytime. 😎",
+              "answer": "98%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "63b7606d609cfdf518bf1bf9",
+            "mode": "direct",
+            "history": [
+              "8d66455d38a7a6ab390e5d7c"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "63b7606d609cfdf518bf1bf9",
+              "location": "scenario://timeline/final-09/1",
+              "speaker": "Scenario author final-09",
+              "start": 0,
+              "end": 71,
+              "quote": "Under build A8 defaults, the Anchor connection limit is 64 connections.",
+              "answer": "64 connections",
+              "condition": {
+                "source_id": "63b7606d609cfdf518bf1bf9",
+                "location": "scenario://timeline/final-09/1",
+                "speaker": "Scenario author final-09",
+                "start": 0,
+                "end": 23,
+                "quote": "Under build A8 defaults"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e7b3e8fafd42dbf7a5d86187",
+            "mode": "direct",
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "b692843b01d7115d0f61741f",
+            "mode": "direct",
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c",
+              "e7b3e8fafd42dbf7a5d86187"
+            ],
+            "proposals": [
+              "ea673ad7bf7d2faea12b5507"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"63b7606d609cfdf518bf1bf9\", \"quote\":\"Under build A8 defaults, the Anchor connection limit is 64 connections.\", \"answer\":\"64 connections\", \"condition\":\"Under build A8 defaults\"}, {\"source\":\"b692843b01d7115d0f61741f\", \"quote\":\"My independent reading under the same build A8 defaults gives the Anchor connection limit as 96 connections.\", \"answer\":\"96 connections\", \"condition\":\"Under build A8 defaults\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8d66455d38a7a6ab390e5d7c",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-22/Group 1/2",
+              "speaker": "Qianghan Mao",
+              "start": 0,
+              "end": 256,
+              "quote": "Good morning, Boss Li! The unit tests for user services are all done. The small bug found yesterday has been fixed, and corresponding regression test cases have been added. Code coverage has now reached 98%. It can be merged into the main branch anytime. 😎",
+              "answer": "98%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"63b7606d609cfdf518bf1bf9\", \"quote\":\"Under build A8 defaults, the Anchor connection limit is 64 connections.\", \"answer\":\"64 connections\", \"condition\":\"Under build A8 defaults\"}, {\"source\":\"b692843b01d7115d0f61741f\", \"quote\":\"My independent reading under the same build A8 defaults gives the Anchor connection limit as 96 connections.\", \"answer\":\"96 connections\", \"condition\":\"Under build A8 defaults\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "multiple answers required",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"63b7606d609cfdf518bf1bf9\", \"quote\":\"Under build A8 defaults, the Anchor connection limit is 64 connections. The evidence archive is Anchor-evidence.\", \"answer\":\"Anchor-evidence\", \"condition\":\"Under build A8 defaults, the Anchor connection limit is 64 connections.\"}]}"
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "13051f69b0767435e64a22d1",
+            "mode": "direct",
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c",
+              "b692843b01d7115d0f61741f",
+              "e7b3e8fafd42dbf7a5d86187"
+            ],
+            "proposals": [
+              "34644117fcbc9b86d9cd49be"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8d66455d38a7a6ab390e5d7c",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-22/Group 1/2",
+              "speaker": "Qianghan Mao",
+              "start": 0,
+              "end": 256,
+              "quote": "Good morning, Boss Li! The unit tests for user services are all done. The small bug found yesterday has been fixed, and corresponding regression test cases have been added. Code coverage has now reached 98%. It can be merged into the main branch anytime. 😎",
+              "answer": "98%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-17/direct": {
+    "status": "passed",
+    "id": "final-17",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "8d2fc5676d38159688bcdf1d8820727ba724cc2c4b582307f3d2415479260e6f",
+      "db630c457e13eef87123bb99869a8fdbdd2cc690261131ed20576824589399f7",
+      "821246f5a0c7886a3a3b991b6adee25ce0b6838c669c284ccf8cfe856df7d995",
+      "41713617cbce09436f26815560691e9b057f27301f711eebc72d6df82b36589b",
+      "383edd2a89fbace23a9aec920ce5c2ec173e8f2289c333d09fb932b995878637",
+      "12a2dc6e5280a0edf9510c85242f5ca85f8cbcb8b7fcbed45d4a6fb5e5f01909",
+      "1aaf3b2ffae58991218028b04cbf951d09204b54a42b30d70ee8514ff4d71f44",
+      "12a2dc6e5280a0edf9510c85242f5ca85f8cbcb8b7fcbed45d4a6fb5e5f01909",
+      "7c5a228209428efcda27b3c72514c66c2466219bf5c05f723e4323b7a5a24ba4",
+      "de856a7410cc1811ae8df189cedced57c4799484bc918325b290dfb92b5afa87",
+      "82a4c795e7eb41b0856f66221b368c269071dba70d8f868dbcb880a67663d9ae"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "3a81cbc1f34e14e7635029cf",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "3a81cbc1f34e14e7635029cf",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-30/Group 3/4",
+              "speaker": "Yu Lu",
+              "start": 137,
+              "end": 221,
+              "quote": "I worked overtime over the weekend to finish the unit tests, achieving 95% coverage.",
+              "answer": "95%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+            "mode": "direct",
+            "history": [
+              "3a81cbc1f34e14e7635029cf"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 150,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete. The evidence archive is Islet-evidence.",
+              "answer": "6 attempts",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "c963eba7eddb3a01acf3f8a4",
+            "mode": "direct",
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "9dc0b2e4f9c6fdd67c0ff939"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "874daa62025043d8e1b018a8",
+            "mode": "direct",
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "9dc0b2e4f9c6fdd67c0ff939",
+              "c963eba7eddb3a01acf3f8a4"
+            ],
+            "proposals": [
+              "c92b865d0a7580984fc6d56f"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 110,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete.",
+              "answer": "6 attempts",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "3a81cbc1f34e14e7635029cf",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-30/Group 3/4",
+              "speaker": "Yu Lu",
+              "start": 137,
+              "end": 221,
+              "quote": "I worked overtime over the weekend to finish the unit tests, achieving 95% coverage.",
+              "answer": "95%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 110,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete.",
+              "answer": "6 attempts",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 150,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete. The evidence archive is Islet-evidence.",
+              "answer": "Islet-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "822630516667d146d1717bb7",
+            "mode": "direct",
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "874daa62025043d8e1b018a8",
+              "9dc0b2e4f9c6fdd67c0ff939",
+              "c963eba7eddb3a01acf3f8a4"
+            ],
+            "proposals": [
+              "a5b5000b71518c250590e9d4"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "3a81cbc1f34e14e7635029cf",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-30/Group 3/4",
+              "speaker": "Yu Lu",
+              "start": 137,
+              "end": 221,
+              "quote": "I worked overtime over the weekend to finish the unit tests, achieving 95% coverage.",
+              "answer": "95%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-17/indexed": {
+    "status": "passed",
+    "id": "final-17",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "5067cf64de9a02d46cb1ea2ec8f1df25c58cfb18a254dd993514bfa0bcb3a325",
+      "542e07232669a95d835de59ada591ff36b4a29e92e3ee16528ee9c96deb082b3",
+      "5b9257898b38089c40ab0d0f258777167019297a1c746efe38af9a11d97548de",
+      "76b3b7c8cab7af926e6ca3389b2afcff22c7440cc7ea0b58b57db6be41641d79",
+      "7601924474e156397f23556d1d36ef898747763e75144dbff47ac4e2b429a925",
+      "1d52a2ad33c097fdc3721c1859afe31ccc87324516a2e3a6bdb9cb3dbf48f6b6",
+      "b988d7e87b7decf688ccbb8648c328003fb3cbd52457e8954282c9f4b458fc53",
+      "68e899a8be29644688a2e4246cb2add8b505338838627d2efcab7bcaa5894ae0",
+      "098f12d930a8ca34dc2454b4b960cc3fbf6624559d356e25904c3cd34b6d7e23",
+      "c5c561f17085ff53fdf090e2755dc13b22802e6696235cf69e25686f8845ac6b",
+      "c9db499c3feb064c47086179d416551164522666e14301aa5cd63f5a15b5747b",
+      "c5c561f17085ff53fdf090e2755dc13b22802e6696235cf69e25686f8845ac6b",
+      "074c11d48ba1c359f61c839701ed2de837fc5e7a50451d79f5dca559f854fd41",
+      "a527bddab15c14928a6b215cf620858cf06f53c31f3120d79fbc38572503e051",
+      "1058cc387e4b0eecbb0e59387edd95912bb8781cb89b3b1fc9b079b7cc900d4d",
+      "80623d9c04ca83100f60a6372b6453efe2bb9b50e69eb3bc4ad6ad47ca987f3a"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "3a81cbc1f34e14e7635029cf",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"The interface for querying doctor availability had its edge cases handled last Friday.\", \"basis\":\"\", \"scope\":\"\"},{\"decision\":\"Unit tests were finished over the weekend, achieving 95% coverage.\", \"basis\":\"\", \"scope\":\"\"},{\"decision\":\"It was deployed to the dev environment this morning.\", \"basis\":\"\", \"scope\":\"\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "3a81cbc1f34e14e7635029cf",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-30/Group 3/4",
+              "speaker": "Yu Lu",
+              "start": 137,
+              "end": 221,
+              "quote": "I worked overtime over the weekend to finish the unit tests, achieving 95% coverage.",
+              "answer": "95%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+            "mode": "indexed",
+            "history": [
+              "3a81cbc1f34e14e7635029cf"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 36,
+              "quote": "The Islet retry limit is 6 attempts.",
+              "answer": "6 attempts",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "c963eba7eddb3a01acf3f8a4",
+            "mode": "indexed",
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "9dc0b2e4f9c6fdd67c0ff939"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "874daa62025043d8e1b018a8",
+            "mode": "indexed",
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "9dc0b2e4f9c6fdd67c0ff939",
+              "c963eba7eddb3a01acf3f8a4"
+            ],
+            "proposals": [
+              "196e7cc6b14c06c8ceb7493a"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 150,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete. The evidence archive is Islet-evidence.",
+              "answer": "6 attempts",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "3a81cbc1f34e14e7635029cf",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-30/Group 3/4",
+              "speaker": "Yu Lu",
+              "start": 137,
+              "end": 221,
+              "quote": "I worked overtime over the weekend to finish the unit tests, achieving 95% coverage.",
+              "answer": "95%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 150,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete. The evidence archive is Islet-evidence.",
+              "answer": "6 attempts",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "location": "scenario://timeline/final-17/1",
+              "speaker": "Scenario author final-17",
+              "start": 0,
+              "end": 150,
+              "quote": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete. The evidence archive is Islet-evidence.",
+              "answer": "Islet-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "822630516667d146d1717bb7",
+            "mode": "indexed",
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "874daa62025043d8e1b018a8",
+              "9dc0b2e4f9c6fdd67c0ff939",
+              "c963eba7eddb3a01acf3f8a4"
+            ],
+            "proposals": [
+              "8e5765ec02c23c91f8b7f7ff"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "3a81cbc1f34e14e7635029cf",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-30/Group 3/4",
+              "speaker": "Yu Lu",
+              "start": 137,
+              "end": 221,
+              "quote": "I worked overtime over the weekend to finish the unit tests, achieving 95% coverage.",
+              "answer": "95%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-06/indexed": {
+    "status": "passed",
+    "id": "final-06",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "7fdbc56c44fe9a0a7b40d0649542849bfd49239a16dfa37ae7320446f5aee4fa",
+      "f8b6ee7e79f2cf9b5e388ce0ceb3264752c2c8eb7b1629b2420b7c85cd464e6d",
+      "847bb29c472e54f72c9130707a4787300495c05e0511ba5dcae14b16ee3975a0",
+      "94f9629edb04b6ba910f6b8d42af63e455744ac5dd185a81ee7993340a004c61",
+      "b729aadd4d675f0fa44a93bb5a53641a416d327edad9479686ec52f67b50432e",
+      "8d4542a37f1da7e28a7968467e5ac80424bf5a0b6f5eb3725a7de4718ca5a795",
+      "4c88405dd228f12b284132b07dbbc651ee091ab7cc049cd9566bdacad32abf5a",
+      "b866fc198d7823e9d4c32743fde71e668ead1e43e916182bd569ed7f6425131a",
+      "84d7cd6c423da194411e0f31fa9b1ce9fe2591f0f6779c505428b715c48df19a",
+      "6c48264bafc5a740982a252331e4c42a41e259212df5d4676e1b0b9f0a929c29",
+      "bb29bc059312ac0cdb9f11e06ce54dc87e5e62d420b929a1e9d09724dc11ef9f",
+      "6c48264bafc5a740982a252331e4c42a41e259212df5d4676e1b0b9f0a929c29",
+      "48fd44d30fdf3c34fe1cb711d3fe09a8a2675d234d151a5db5ab9e79c30126d0",
+      "08affa1ccc679286e4803e8b8c841395517e167e9ede5aa034cb36c26e8929c2",
+      "37fb14c22b3201fee27ce6552549fa09b5571f4c8b77f6e13bd7797a09be4a95",
+      "a3fd66989ca526bc9bceab685937c13eb2aa06d2341cca015039c0a3d9de8c75"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "974e12d5cf41b139d93f5a7d",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "974e12d5cf41b139d93f5a7d",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+              "speaker": "Mingzhi Li",
+              "start": 172,
+              "end": 253,
+              "quote": "first implement only the Client Credentials Grant mode for server-to-server calls",
+              "answer": "Client Credentials Grant mode",
+              "condition": {
+                "source_id": "974e12d5cf41b139d93f5a7d",
+                "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+                "speaker": "Mingzhi Li",
+                "start": 144,
+                "end": 163,
+                "quote": "initial development"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e64097386adb7851ac085f08",
+            "mode": "indexed",
+            "history": [
+              "974e12d5cf41b139d93f5a7d"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e64097386adb7851ac085f08",
+              "location": "scenario://timeline/final-06/1",
+              "speaker": "Scenario author final-06",
+              "start": 0,
+              "end": 110,
+              "quote": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+              "answer": "94%",
+              "condition": {
+                "source_id": "e64097386adb7851ac085f08",
+                "location": "scenario://timeline/final-06/1",
+                "speaker": "Scenario author final-06",
+                "start": 0,
+                "end": 24,
+                "quote": "On the indoor-camera set"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "2abb7b99e2ac12c124732f09",
+            "mode": "indexed",
+            "history": [
+              "974e12d5cf41b139d93f5a7d",
+              "e64097386adb7851ac085f08"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "6d5ac089de22699062db02c0",
+            "mode": "indexed",
+            "history": [
+              "2abb7b99e2ac12c124732f09",
+              "974e12d5cf41b139d93f5a7d",
+              "e64097386adb7851ac085f08"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"e64097386adb7851ac085f08\", \"quote\":\"On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.\", \"answer\":\"94%\", \"condition\":\"\"}, {\"source\":\"6d5ac089de22699062db02c0\", \"quote\":\"On the outdoor-camera set, Meadow object detection reached 81% recall. The indoor set was not rerun.\", \"answer\":\"81%\", \"condition\":\"\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "974e12d5cf41b139d93f5a7d",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+              "speaker": "Mingzhi Li",
+              "start": 0,
+              "end": 330,
+              "quote": "@Dong He Good question. Considering we are dealing with health data, security is paramount. We must adopt OAuth 2.0 from the start. To simplify initial development, we can first implement only the Client Credentials Grant mode for server-to-server calls, and then introduce Authorization Code Grant later based on the App's needs.",
+              "answer": "Client Credentials Grant mode for server-to-server calls",
+              "condition": {
+                "source_id": "974e12d5cf41b139d93f5a7d",
+                "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+                "speaker": "Mingzhi Li",
+                "start": 144,
+                "end": 163,
+                "quote": "initial development"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"e64097386adb7851ac085f08\", \"quote\":\"On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.\", \"answer\":\"94%\", \"condition\":\"\"}, {\"source\":\"6d5ac089de22699062db02c0\", \"quote\":\"On the outdoor-camera set, Meadow object detection reached 81% recall. The indoor set was not rerun.\", \"answer\":\"81%\", \"condition\":\"\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e64097386adb7851ac085f08",
+              "location": "scenario://timeline/final-06/1",
+              "speaker": "Scenario author final-06",
+              "start": 0,
+              "end": 110,
+              "quote": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+              "answer": "Meadow-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "9fdeef858d8fa806f8d407d6",
+            "mode": "indexed",
+            "history": [
+              "2abb7b99e2ac12c124732f09",
+              "6d5ac089de22699062db02c0",
+              "974e12d5cf41b139d93f5a7d",
+              "e64097386adb7851ac085f08"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "974e12d5cf41b139d93f5a7d",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+              "speaker": "Mingzhi Li",
+              "start": 172,
+              "end": 253,
+              "quote": "first implement only the Client Credentials Grant mode for server-to-server calls",
+              "answer": "Client Credentials Grant mode for server-to-server calls",
+              "condition": {
+                "source_id": "974e12d5cf41b139d93f5a7d",
+                "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+                "speaker": "Mingzhi Li",
+                "start": 144,
+                "end": 163,
+                "quote": "initial development"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-06/direct": {
+    "status": "passed",
+    "id": "final-06",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "8b10bcda7cab2dba24892557b03a13ea4bd6127563f3960e6c62ef9d681339b9",
+      "8b9aa45e2515d511e92e65c4bfda7cf074fab8d19472a0aff64596b245d771bf",
+      "a0743a4853173a3de1af9e07ea2da5b162c5910940b458c9190fcd0b08ea1275",
+      "a6ffba6a2ae2f6cecdef1e2d53172235c8a19e5b24e9cb42d17ed6ae10d60a92",
+      "a536f536c1937c4f64bdc657838968f0f6d643200ecc3132a8a955199c8d0388",
+      "134c4509b021a835d00a2e93381532d8df0d3485ca31c22c87eed38bddb0a999",
+      "dd9e67b7e25d121ef013940bb86a679d9f5088b4d05d9b35f9c71217cecd4217",
+      "134c4509b021a835d00a2e93381532d8df0d3485ca31c22c87eed38bddb0a999",
+      "548b3efae3158ce766823c8ab84218ced60d3731d8f00e9c74e3d66162d660ce",
+      "3c7ed5b5656c269c8a83acf57db958a110a9f7e75c1596e030f4b100d063e316",
+      "5d68a3f3f2650c5be74a382d17adf131e16eb110698d8029b6c102c029bdaaf2"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "974e12d5cf41b139d93f5a7d",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "974e12d5cf41b139d93f5a7d",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+              "speaker": "Mingzhi Li",
+              "start": 132,
+              "end": 330,
+              "quote": "To simplify initial development, we can first implement only the Client Credentials Grant mode for server-to-server calls, and then introduce Authorization Code Grant later based on the App's needs.",
+              "answer": "Client Credentials Grant",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e64097386adb7851ac085f08",
+            "mode": "direct",
+            "history": [
+              "974e12d5cf41b139d93f5a7d"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e64097386adb7851ac085f08",
+              "location": "scenario://timeline/final-06/1",
+              "speaker": "Scenario author final-06",
+              "start": 0,
+              "end": 110,
+              "quote": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+              "answer": "94%",
+              "condition": {
+                "source_id": "e64097386adb7851ac085f08",
+                "location": "scenario://timeline/final-06/1",
+                "speaker": "Scenario author final-06",
+                "start": 0,
+                "end": 24,
+                "quote": "On the indoor-camera set"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "2abb7b99e2ac12c124732f09",
+            "mode": "direct",
+            "history": [
+              "974e12d5cf41b139d93f5a7d",
+              "e64097386adb7851ac085f08"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "6d5ac089de22699062db02c0",
+            "mode": "direct",
+            "history": [
+              "2abb7b99e2ac12c124732f09",
+              "974e12d5cf41b139d93f5a7d",
+              "e64097386adb7851ac085f08"
+            ],
+            "proposals": [
+              "79d565443fb8540145f79b39"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"e64097386adb7851ac085f08\", \"quote\":\"On the indoor-camera set, Meadow object detection reached 94% recall.\", \"answer\":\"94%\", \"condition\":\"on the indoor-camera set\"},{\"source\":\"6d5ac089de22699062db02c0\", \"quote\":\"On the outdoor-camera set, Meadow object detection reached 81% recall.\", \"answer\":\"81%\", \"condition\":\"on the outdoor-camera set\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "974e12d5cf41b139d93f5a7d",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+              "speaker": "Mingzhi Li",
+              "start": 132,
+              "end": 330,
+              "quote": "To simplify initial development, we can first implement only the Client Credentials Grant mode for server-to-server calls, and then introduce Authorization Code Grant later based on the App's needs.",
+              "answer": "Client Credentials Grant mode",
+              "condition": {
+                "source_id": "974e12d5cf41b139d93f5a7d",
+                "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+                "speaker": "Mingzhi Li",
+                "start": 227,
+                "end": 253,
+                "quote": "for server-to-server calls"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"e64097386adb7851ac085f08\", \"quote\":\"On the indoor-camera set, Meadow object detection reached 94% recall.\", \"answer\":\"94%\", \"condition\":\"on the indoor-camera set\"},{\"source\":\"6d5ac089de22699062db02c0\", \"quote\":\"On the outdoor-camera set, Meadow object detection reached 81% recall.\", \"answer\":\"81%\", \"condition\":\"on the outdoor-camera set\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e64097386adb7851ac085f08",
+              "location": "scenario://timeline/final-06/1",
+              "speaker": "Scenario author final-06",
+              "start": 0,
+              "end": 110,
+              "quote": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+              "answer": "Meadow-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "9fdeef858d8fa806f8d407d6",
+            "mode": "direct",
+            "history": [
+              "2abb7b99e2ac12c124732f09",
+              "6d5ac089de22699062db02c0",
+              "974e12d5cf41b139d93f5a7d",
+              "e64097386adb7851ac085f08"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "974e12d5cf41b139d93f5a7d",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-25/Group 1/5",
+              "speaker": "Mingzhi Li",
+              "start": 132,
+              "end": 330,
+              "quote": "To simplify initial development, we can first implement only the Client Credentials Grant mode for server-to-server calls, and then introduce Authorization Code Grant later based on the App's needs.",
+              "answer": "Client Credentials Grant mode",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-14/direct": {
+    "status": "passed",
+    "id": "final-14",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "e033cf342db0a220ea3df150e2a815d0435fda778ac9a84b2b6bb4712c65957d",
+      "0e1800d220cf31225470f83bbf8d272e8b60b75e3de2c6d61cf21e473ab2f63e",
+      "e495c5b31f253b575ff01eb31b91a24d78822ac21ddc3f66bdc2ca59179f287a",
+      "1b7f4f1ebbf5b03c63195a799d3d86bad49e4822bd2e25bf123fd0e54d046f20",
+      "0ef119a77dbefc7b093c6cdd057397761fafa6426ce22f08b2684ed9a3ba2808",
+      "e80baa23d03a7111d18e75336573a54f951ac9c67528a378e2d7070714604163",
+      "55a4cee82d3d68411a0a47f34e36dfb36a7cec8a044afc15ce6cf003d1b849b3",
+      "4a5c38c5e9a48a9a5f2104d4319aaf837ac98f44fd882143860158cf0487a29c",
+      "a7d8e39338c93f77983d6f8f40290dc0580431964f467bf7328100e5e584cbb1",
+      "5abb49bbdc96f11d082969d514436468662a66be3fa6b4d1eac41bc16662cc4a",
+      "1dc743999e19f828ca15d31974e1f828728c82a83c747778ba2597ed408a4cdf"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "ee4adb92d98af949eb65bf37",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "ee4adb92d98af949eb65bf37",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-11/Group 1/7",
+              "speaker": "Hailong Qian",
+              "start": 0,
+              "end": 164,
+              "quote": "For the AI model, the first round of cross-validation is complete. The average accuracy of the 5-fold cross-validation is around 89%, which is a pretty good result.",
+              "answer": "89%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "72646eaf0ee3dba8123453fb",
+            "mode": "direct",
+            "history": [
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "72646eaf0ee3dba8123453fb",
+              "location": "scenario://timeline/final-14/1",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 68,
+              "quote": "For the F3 review round, the Flint submission deadline is 17:00 UTC.",
+              "answer": "17:00 UTC",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "aa44a4570bafb203e725a115",
+            "mode": "direct",
+            "history": [
+              "72646eaf0ee3dba8123453fb",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "0cfc6bd91368da0bac200b9c",
+            "mode": "direct",
+            "history": [
+              "72646eaf0ee3dba8123453fb",
+              "aa44a4570bafb203e725a115",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [
+              "9f9d877106898c33803bd83c"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0cfc6bd91368da0bac200b9c",
+              "location": "scenario://timeline/final-14/3",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 148,
+              "quote": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+              "answer": "15:00 UTC",
+              "condition": null,
+              "status": "pending_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "ee4adb92d98af949eb65bf37",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-11/Group 1/7",
+              "speaker": "Hailong Qian",
+              "start": 0,
+              "end": 164,
+              "quote": "For the AI model, the first round of cross-validation is complete. The average accuracy of the 5-fold cross-validation is around 89%, which is a pretty good result.",
+              "answer": "89%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0cfc6bd91368da0bac200b9c",
+              "location": "scenario://timeline/final-14/3",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 148,
+              "quote": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+              "answer": "15:00 UTC",
+              "condition": null,
+              "status": "approved_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "72646eaf0ee3dba8123453fb",
+              "location": "scenario://timeline/final-14/1",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 108,
+              "quote": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+              "answer": "Flint-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "b7a70e57166ae1ee7115ee55",
+            "mode": "direct",
+            "history": [
+              "0cfc6bd91368da0bac200b9c",
+              "72646eaf0ee3dba8123453fb",
+              "aa44a4570bafb203e725a115",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [
+              "43d402f891fc886c0d001bca"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "ee4adb92d98af949eb65bf37",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-11/Group 1/7",
+              "speaker": "Hailong Qian",
+              "start": 0,
+              "end": 164,
+              "quote": "For the AI model, the first round of cross-validation is complete. The average accuracy of the 5-fold cross-validation is around 89%, which is a pretty good result.",
+              "answer": "89%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-14/indexed": {
+    "status": "passed",
+    "id": "final-14",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "c15772d6a98bfec4f2c403b259bcc2d0918d4b216edc3196498576bde7617a05",
+      "30bf79974a4f2795cf85a86a46852142c6e82e9ac2a54781d48b1aa8da499596",
+      "5e7d7a4806c757e17bef7755df2dc3da776a53a8430fe7b367f2d0183c9d4d63",
+      "b89dbbd06b0ef7c2f4ccc94fd448af543fe1565028cb0d0a39cf60e222b17368",
+      "9730b2c9f80b3ed121fcbf6eefab73317f302144052352ce611da1cd61c5353c",
+      "d7f7c29f322b4526082b8cec4e02a7bfe3c91c6945380eb1b9d2b98fa81c8b71",
+      "5ecf60caed68c0f2911780a1ed2a6a0954a2c4dd56919f2ac3cc9704a2241184",
+      "2120daa379e1d3a7fa412c2eaa1ec0e94567b78f55100a36a20bdca38621a50d",
+      "f19f60b9541bb7081db6d9a34d5bc80d1163447b9efaccc973e58f8570a02fac",
+      "1b83ab9c899530506c7db2417be3e775278e789b1b9180b40bae7552296df734",
+      "baa5b27c8ab0bd02438844a50c265d9b17156283a542a2af1813c1455c43302c",
+      "765c382ba6e43ac801a89496968b055327711b9f5798591d5819ddee7d6a6992",
+      "9a96d1f814a29c4d59f64a41a8c11f61f78692a110a645497d223fc5aeba1a22",
+      "5d3a34df5e59a0739bbde9cf19a6878d1a7f973f4222cc953b4e16bb4fad854f",
+      "4f280550a16eaf9fc4321c1b787f7a997a8948119ae87daea307508538aec6b4",
+      "5d3536d15a2ba6f9914c6e5e7106377ab9ea3893a6b195df54b1936564fbd629"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "ee4adb92d98af949eb65bf37",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "ee4adb92d98af949eb65bf37",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-11/Group 1/7",
+              "speaker": "Hailong Qian",
+              "start": 0,
+              "end": 164,
+              "quote": "For the AI model, the first round of cross-validation is complete. The average accuracy of the 5-fold cross-validation is around 89%, which is a pretty good result.",
+              "answer": "around 89%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "72646eaf0ee3dba8123453fb",
+            "mode": "indexed",
+            "history": [
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\": [{\"decision\": \"The Flint submission deadline for the F3 review round is 17:00 UTC.\", \"basis\": \"\", \"scope\": \"\"}, {\"decision\": \"The evidence archive for the submissions is Flint-evidence.\", \"basis\": \"\", \"scope\": \"\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "72646eaf0ee3dba8123453fb",
+              "location": "scenario://timeline/final-14/1",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 68,
+              "quote": "For the F3 review round, the Flint submission deadline is 17:00 UTC.",
+              "answer": "17:00 UTC",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "aa44a4570bafb203e725a115",
+            "mode": "indexed",
+            "history": [
+              "72646eaf0ee3dba8123453fb",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "0cfc6bd91368da0bac200b9c",
+            "mode": "indexed",
+            "history": [
+              "72646eaf0ee3dba8123453fb",
+              "aa44a4570bafb203e725a115",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [
+              "32bc3baea034e536856b2ae0"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0cfc6bd91368da0bac200b9c",
+              "location": "scenario://timeline/final-14/3",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 148,
+              "quote": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+              "answer": "15:00 UTC",
+              "condition": {
+                "source_id": "0cfc6bd91368da0bac200b9c",
+                "location": "scenario://timeline/final-14/3",
+                "speaker": "Scenario author final-14",
+                "start": 81,
+                "end": 109,
+                "quote": "For the same F3 review round"
+              },
+              "status": "pending_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "ee4adb92d98af949eb65bf37",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-11/Group 1/7",
+              "speaker": "Hailong Qian",
+              "start": 0,
+              "end": 164,
+              "quote": "For the AI model, the first round of cross-validation is complete. The average accuracy of the 5-fold cross-validation is around 89%, which is a pretty good result.",
+              "answer": "around 89%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "0cfc6bd91368da0bac200b9c",
+              "location": "scenario://timeline/final-14/3",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 148,
+              "quote": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+              "answer": "15:00 UTC",
+              "condition": {
+                "source_id": "0cfc6bd91368da0bac200b9c",
+                "location": "scenario://timeline/final-14/3",
+                "speaker": "Scenario author final-14",
+                "start": 81,
+                "end": 109,
+                "quote": "For the same F3 review round"
+              },
+              "status": "approved_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "72646eaf0ee3dba8123453fb",
+              "location": "scenario://timeline/final-14/1",
+              "speaker": "Scenario author final-14",
+              "start": 0,
+              "end": 108,
+              "quote": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+              "answer": "Flint-evidence",
+              "condition": {
+                "source_id": "72646eaf0ee3dba8123453fb",
+                "location": "scenario://timeline/final-14/1",
+                "speaker": "Scenario author final-14",
+                "start": 0,
+                "end": 23,
+                "quote": "For the F3 review round"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "b7a70e57166ae1ee7115ee55",
+            "mode": "indexed",
+            "history": [
+              "0cfc6bd91368da0bac200b9c",
+              "72646eaf0ee3dba8123453fb",
+              "aa44a4570bafb203e725a115",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "ee4adb92d98af949eb65bf37",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-11/Group 1/7",
+              "speaker": "Hailong Qian",
+              "start": 0,
+              "end": 164,
+              "quote": "For the AI model, the first round of cross-validation is complete. The average accuracy of the 5-fold cross-validation is around 89%, which is a pretty good result.",
+              "answer": "89%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-03/indexed": {
+    "status": "passed",
+    "id": "final-03",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "28f59605a5f3bb83a58ae33b5cc4746f47682d07cee8a38b71e9d820c3fdcbb5",
+      "6b795f4ac8105cc0c3b1ee48d074c31a0e01343f50a103fc45bd866c526b1017",
+      "ec7a3927a8119ed1ee62990e1c3b5d095d636d967483a19dda9e6cf3eb3dba69",
+      "994176d218e03ceafb4184c60eb61b9e86f57ed6a48f5d86c6f74993b0068a89",
+      "b89bbf246a86e9b78d763441e282ffaae1c1bf92f4142246318499171c875e19",
+      "c75c947d91f8888c37f1ff93b218f79a36c5890cb0d0a5949b253e3a5b83ad9b",
+      "ff9703c4431a70cae1cb3d5adab08462ac8002215b5c17659623ded95ab8a76b",
+      "03bc5941e5a56c6cb67f6041e75d64a9445a211be1cc1ccb5f76681f538a71ac",
+      "5653d429df7e09275833784c4d470a094e4bb2c357a024d745a8b4319d7ae3b7",
+      "6e69123394f7a5df40b1a1a2c605e257dfed1802d2dc4faafb39481350316e6c",
+      "b2fa05b0406cd13134809d87c10e1069ca985d556e98ccf6dceb3d979af5951a",
+      "c7163a54671ab24d7948b4963b43dff4fbac88fbb9fd1dd67cd631cc96ccea66",
+      "9f4494dbbfe53c83de48e70b5406b6e0708524408279562bfb9df393dd8cff1c",
+      "c3d4e94f9bf14589945518005b9e774fdd9c794c541f3f45e8acdbbee0880b3e",
+      "ac3c8fcd95aa46e938d8e89921588c503e604eb110af6cc14c55a16019bd8518",
+      "52de6113e0e6a144a83f94a5d0edc108c7fce22a0f0a3ee9f3bb5dd304c40cee"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "752e7f1537709812d5903ea0",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "752e7f1537709812d5903ea0",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-21/Group 1/4",
+              "speaker": "Hanqiang Liang",
+              "start": 421,
+              "end": 609,
+              "quote": "@Junxin Yuan Engineer Yuan, for the historical data query interface, if the start time passed in is later than the end time, will the interface return an empty array or report a 400 error?",
+              "answer": "Junxin Yuan",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "8aac23fcdbbd6f514edc33a9",
+            "mode": "indexed",
+            "history": [
+              "752e7f1537709812d5903ea0"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"deferred the large-dictionary variant\",\"basis\":\"its dictionary could not fit within that cap\",\"scope\":\"the large-dictionary variant of Granite\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8aac23fcdbbd6f514edc33a9",
+              "location": "scenario://timeline/final-03/1",
+              "speaker": "Scenario author final-03",
+              "start": 0,
+              "end": 216,
+              "quote": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+              "answer": "9 seconds per request",
+              "condition": {
+                "source_id": "8aac23fcdbbd6f514edc33a9",
+                "location": "scenario://timeline/final-03/1",
+                "speaker": "Scenario author final-03",
+                "start": 0,
+                "end": 24,
+                "quote": "At the 256 MB memory cap"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "836971dc2f7676ae8ee3c2c1",
+            "mode": "indexed",
+            "history": [
+              "752e7f1537709812d5903ea0",
+              "8aac23fcdbbd6f514edc33a9"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "cea9a67692219dac99127a1d",
+            "mode": "indexed",
+            "history": [
+              "752e7f1537709812d5903ea0",
+              "836971dc2f7676ae8ee3c2c1",
+              "8aac23fcdbbd6f514edc33a9"
+            ],
+            "proposals": [
+              "50f9299f79e2c4306cfffa57"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "8aac23fcdbbd6f514edc33a9",
+              "location": "scenario://timeline/final-03/1",
+              "speaker": "Scenario author final-03",
+              "start": 0,
+              "end": 174,
+              "quote": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.",
+              "answer": "9 seconds per request",
+              "condition": {
+                "source_id": "8aac23fcdbbd6f514edc33a9",
+                "location": "scenario://timeline/final-03/1",
+                "speaker": "Scenario author final-03",
+                "start": 0,
+                "end": 24,
+                "quote": "At the 256 MB memory cap"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "cea9a67692219dac99127a1d",
+              "location": "scenario://timeline/final-03/3",
+              "speaker": "Scenario observer final-03",
+              "start": 43,
+              "end": 170,
+              "quote": "At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.",
+              "answer": "2 seconds per request",
+              "condition": {
+                "source_id": "cea9a67692219dac99127a1d",
+                "location": "scenario://timeline/final-03/3",
+                "speaker": "Scenario observer final-03",
+                "start": 43,
+                "end": 65,
+                "quote": "At the 2 GB memory cap"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "752e7f1537709812d5903ea0",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-21/Group 1/4",
+              "speaker": "Hanqiang Liang",
+              "start": 421,
+              "end": 609,
+              "quote": "@Junxin Yuan Engineer Yuan, for the historical data query interface, if the start time passed in is later than the end time, will the interface return an empty array or report a 400 error?",
+              "answer": "Junxin Yuan",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"8aac23fcdbbd6f514edc33a9\", \"quote\":\"At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.\", \"answer\":\"9 seconds per request\", \"condition\":\"At the 256 MB memory cap\"}, {\"source\":\"cea9a67692219dac99127a1d\", \"quote\":\"At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.\", \"answer\":\"2 seconds per request\", \"condition\":\"At the 2 GB memory cap\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8aac23fcdbbd6f514edc33a9",
+              "location": "scenario://timeline/final-03/1",
+              "speaker": "Scenario author final-03",
+              "start": 0,
+              "end": 216,
+              "quote": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+              "answer": "Granite-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "247212f04ed1332e0affbcd8",
+            "mode": "indexed",
+            "history": [
+              "752e7f1537709812d5903ea0",
+              "836971dc2f7676ae8ee3c2c1",
+              "8aac23fcdbbd6f514edc33a9",
+              "cea9a67692219dac99127a1d"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "752e7f1537709812d5903ea0",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-21/Group 1/4",
+              "speaker": "Hanqiang Liang",
+              "start": 421,
+              "end": 609,
+              "quote": "@Junxin Yuan Engineer Yuan, for the historical data query interface, if the start time passed in is later than the end time, will the interface return an empty array or report a 400 error?",
+              "answer": "Junxin Yuan",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-03/direct": {
+    "status": "passed",
+    "id": "final-03",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "050989a276ee70a4898bbe446203ccb99dc47bcb1b6aa8b63cd19c2cde8a0192",
+      "2b2e6c2fdd0923fe5e25879dda2eb8aecd365df83b31babffe5e145c4295726e",
+      "2d2aac3120453f119100aca157d660ca2b6f6521db20558fbf9c7e7e117fa921",
+      "af8aea4145cf97561d0414b064359393e69cee19ac7682fcc67d9c394b8acfd4",
+      "696541d0b8cebbcbaa142bddd44b0c0218f9c553fb737bc49da3774865f9ac6f",
+      "6983fbf7d700d926fcb6de2873be5070e98cdfa6796777ce0499004dd4d90f1a",
+      "6147877c3c9e15898b499e8414b78210b93a93066d6d68e74aa8177f025bf189",
+      "650b30e1b633cf919bf1fabf5b91d41a5518eb6090537793ffc79a437810e981",
+      "e65d6e13fa5eccc85136ca14d0eb6e57aa4058057495ae001af8fec88c60fcac",
+      "9f473cf9bca5ef0a521bc2beeb4502172b6394ec36473547bb5511c295586bce",
+      "37e9dcc2cb104e6e22b3c169a64ee35f620a97cf8701aac6ab9bcbf93c232746"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "752e7f1537709812d5903ea0",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "752e7f1537709812d5903ea0",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-21/Group 1/4",
+              "speaker": "Hanqiang Liang",
+              "start": 421,
+              "end": 609,
+              "quote": "@Junxin Yuan Engineer Yuan, for the historical data query interface, if the start time passed in is later than the end time, will the interface return an empty array or report a 400 error?",
+              "answer": "Junxin Yuan",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "8aac23fcdbbd6f514edc33a9",
+            "mode": "direct",
+            "history": [
+              "752e7f1537709812d5903ea0"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8aac23fcdbbd6f514edc33a9",
+              "location": "scenario://timeline/final-03/1",
+              "speaker": "Scenario author final-03",
+              "start": 0,
+              "end": 174,
+              "quote": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.",
+              "answer": "9 seconds per request",
+              "condition": {
+                "source_id": "8aac23fcdbbd6f514edc33a9",
+                "location": "scenario://timeline/final-03/1",
+                "speaker": "Scenario author final-03",
+                "start": 0,
+                "end": 24,
+                "quote": "At the 256 MB memory cap"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "836971dc2f7676ae8ee3c2c1",
+            "mode": "direct",
+            "history": [
+              "752e7f1537709812d5903ea0",
+              "8aac23fcdbbd6f514edc33a9"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "cea9a67692219dac99127a1d",
+            "mode": "direct",
+            "history": [
+              "752e7f1537709812d5903ea0",
+              "836971dc2f7676ae8ee3c2c1",
+              "8aac23fcdbbd6f514edc33a9"
+            ],
+            "proposals": [
+              "05ec20718a82a4a8ceebeed1"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\": \"single\", \"answers\": [{\"source\": \"8aac23fcdbbd6f514edc33a9\", \"quote\": \"At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.\", \"answer\": \"9 seconds per request\", \"condition\": \"At the 256 MB memory cap\"}, {\"source\": \"cea9a67692219dac99127a1d\", \"quote\": \"At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.\", \"answer\": \"2 seconds per request\", \"condition\": \"At the 2 GB memory cap\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "752e7f1537709812d5903ea0",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-21/Group 1/4",
+              "speaker": "Hanqiang Liang",
+              "start": 421,
+              "end": 609,
+              "quote": "@Junxin Yuan Engineer Yuan, for the historical data query interface, if the start time passed in is later than the end time, will the interface return an empty array or report a 400 error?",
+              "answer": "Junxin Yuan",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"8aac23fcdbbd6f514edc33a9\", \"quote\":\"At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.\", \"answer\":\"9 seconds per request\", \"condition\":\"At the 256 MB memory cap\"}, {\"source\":\"cea9a67692219dac99127a1d\", \"quote\":\"At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.\", \"answer\":\"2 seconds per request\", \"condition\":\"At the 2 GB memory cap\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8aac23fcdbbd6f514edc33a9",
+              "location": "scenario://timeline/final-03/1",
+              "speaker": "Scenario author final-03",
+              "start": 0,
+              "end": 216,
+              "quote": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+              "answer": "Granite-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "247212f04ed1332e0affbcd8",
+            "mode": "direct",
+            "history": [
+              "752e7f1537709812d5903ea0",
+              "836971dc2f7676ae8ee3c2c1",
+              "8aac23fcdbbd6f514edc33a9",
+              "cea9a67692219dac99127a1d"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "752e7f1537709812d5903ea0",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-21/Group 1/4",
+              "speaker": "Hanqiang Liang",
+              "start": 421,
+              "end": 609,
+              "quote": "@Junxin Yuan Engineer Yuan, for the historical data query interface, if the start time passed in is later than the end time, will the interface return an empty array or report a 400 error?",
+              "answer": "Junxin Yuan",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-11/direct": {
+    "status": "passed",
+    "id": "final-11",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "9d9464691269cc2b510db9b2dc80d2495b510bc0d6393272124aace21eb5f48d",
+      "0fd65a3f00a2e1b277d49acf35b43d2627dbea5fdc4530009f91409a9a4c0271",
+      "5026b3aaa128312efff596e494ee4a94b3b903a881a65e1c09c2109b967c34c5",
+      "98ced7a39411b62d53ae7f2bbca9f3ca107e64a94a04de417d4da2a03ce72e02",
+      "12bfec4a82fb76545ac6f5aaa476320c69c226a8f87ed93b8254b596db5844cf",
+      "c6e274ef8856a3a0add48e0af9388daa92ef350c2da1f3a68d8c0d434ac8b760",
+      "c9a6a98b6aba7f945fd12238625d05ccbaca4a5f7fdf34385c32f16238aa9d7d",
+      "c6e274ef8856a3a0add48e0af9388daa92ef350c2da1f3a68d8c0d434ac8b760",
+      "b8086482152a18d8ef36e2639d99bfaab4e3bf7f98d909017b31bedeeb00f2ac",
+      "2c672f220b54d41e90272d72bc09ff40a29a6bf950ecd4d2a4aa384acb4ee2cf",
+      "59baee471e80690915ef4b99378c88515dffa879abc86b08f1343836afd5b9ea"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a81e9fe96716ef6f05599bb8",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a81e9fe96716ef6f05599bb8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-04/Group 1/3",
+              "speaker": "Huihong Fu",
+              "start": 0,
+              "end": 176,
+              "quote": "The unit tests for the user profile update interface have been completed, with a coverage of 92%. This includes verification of various abnormal inputs and database operations.",
+              "answer": "92%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "7e826b2923a56e9125f87e18",
+            "mode": "direct",
+            "history": [
+              "a81e9fe96716ef6f05599bb8"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "7e826b2923a56e9125f87e18",
+              "location": "scenario://timeline/final-11/1",
+              "speaker": "Scenario author final-11",
+              "start": 0,
+              "end": 76,
+              "quote": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows.",
+              "answer": "4200 rows",
+              "condition": {
+                "source_id": "7e826b2923a56e9125f87e18",
+                "location": "scenario://timeline/final-11/1",
+                "speaker": "Scenario author final-11",
+                "start": 0,
+                "end": 40,
+                "quote": "For snapshot C5 after the agreed filters"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "b63198d227e37be0d39bdc66",
+            "mode": "direct",
+            "history": [
+              "7e826b2923a56e9125f87e18",
+              "a81e9fe96716ef6f05599bb8"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "837577e87caaf27b9debe686",
+            "mode": "direct",
+            "history": [
+              "7e826b2923a56e9125f87e18",
+              "a81e9fe96716ef6f05599bb8",
+              "b63198d227e37be0d39bdc66"
+            ],
+            "proposals": [
+              "fd50f214e6f56d468a31af5f"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "7e826b2923a56e9125f87e18",
+              "location": "scenario://timeline/final-11/1",
+              "speaker": "Scenario author final-11",
+              "start": 0,
+              "end": 76,
+              "quote": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows.",
+              "answer": "4200 rows",
+              "condition": {
+                "source_id": "7e826b2923a56e9125f87e18",
+                "location": "scenario://timeline/final-11/1",
+                "speaker": "Scenario author final-11",
+                "start": 16,
+                "end": 40,
+                "quote": "after the agreed filters"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "837577e87caaf27b9debe686",
+              "location": "scenario://timeline/final-11/3",
+              "speaker": "Scenario observer final-11",
+              "start": 0,
+              "end": 81,
+              "quote": "My separate count for the same snapshot C5 after the agreed filters is 4170 rows.",
+              "answer": "4170 rows",
+              "condition": {
+                "source_id": "837577e87caaf27b9debe686",
+                "location": "scenario://timeline/final-11/3",
+                "speaker": "Scenario observer final-11",
+                "start": 43,
+                "end": 67,
+                "quote": "after the agreed filters"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a81e9fe96716ef6f05599bb8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-04/Group 1/3",
+              "speaker": "Huihong Fu",
+              "start": 0,
+              "end": 176,
+              "quote": "The unit tests for the user profile update interface have been completed, with a coverage of 92%. This includes verification of various abnormal inputs and database operations.",
+              "answer": "92%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "7e826b2923a56e9125f87e18",
+              "location": "scenario://timeline/final-11/1",
+              "speaker": "Scenario author final-11",
+              "start": 0,
+              "end": 76,
+              "quote": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows.",
+              "answer": "4200 rows",
+              "condition": {
+                "source_id": "7e826b2923a56e9125f87e18",
+                "location": "scenario://timeline/final-11/1",
+                "speaker": "Scenario author final-11",
+                "start": 16,
+                "end": 40,
+                "quote": "after the agreed filters"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "837577e87caaf27b9debe686",
+              "location": "scenario://timeline/final-11/3",
+              "speaker": "Scenario observer final-11",
+              "start": 0,
+              "end": 81,
+              "quote": "My separate count for the same snapshot C5 after the agreed filters is 4170 rows.",
+              "answer": "4170 rows",
+              "condition": {
+                "source_id": "837577e87caaf27b9debe686",
+                "location": "scenario://timeline/final-11/3",
+                "speaker": "Scenario observer final-11",
+                "start": 43,
+                "end": 67,
+                "quote": "after the agreed filters"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "7e826b2923a56e9125f87e18",
+              "location": "scenario://timeline/final-11/1",
+              "speaker": "Scenario author final-11",
+              "start": 0,
+              "end": 117,
+              "quote": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows. The evidence archive is Cobalt-evidence.",
+              "answer": "Cobalt-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "17d472301c3dc8eff326200a",
+            "mode": "direct",
+            "history": [
+              "7e826b2923a56e9125f87e18",
+              "837577e87caaf27b9debe686",
+              "a81e9fe96716ef6f05599bb8",
+              "b63198d227e37be0d39bdc66"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a81e9fe96716ef6f05599bb8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-04/Group 1/3",
+              "speaker": "Huihong Fu",
+              "start": 0,
+              "end": 176,
+              "quote": "The unit tests for the user profile update interface have been completed, with a coverage of 92%. This includes verification of various abnormal inputs and database operations.",
+              "answer": "92%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-11/indexed": {
+    "status": "passed",
+    "id": "final-11",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "a86b35975ff99c79afff2cdaed588ae68a33ffaff0a6e3fe052f5ec342453655",
+      "eb9b9e831bff75323a29d71bbac8122f9f91a9d3fac12464d05c927c73d63a3c",
+      "e002bc752a5dcd646fe1a0843699fb16fc8a0309df5befe85f81fa867ae74b9f",
+      "4fa9075fdfcf2e24c2d084a9c9ca24030fbeda3b00a31b8c01f4b8a9bba6307d",
+      "c250183548f2f973fe1ad84c9214383c83c50ef2ee0576c5e2596bb09d0f9be2",
+      "7236ac1f1a66518e740851ac209ce7793cadb17ffba681c55d00786ae46d688f",
+      "4163e0cd7998010082059298804e8e784a8a08946b05e9453e6a50560fdf08b8",
+      "2a6083a9e09c81a3cb3bc522d58533c250395a73ede3a9fcf5c72a0c1c86a7c9",
+      "9a422f734204cd670c7d193d2f52d9b9887ef8036bd5d6d35118165220905316",
+      "0ed1b8b251328640b340c7d1ceb84658d38f016c65267502e57b508c0c9d6cbd",
+      "b62d94b62672f52a9816e007ef31f96925c1c75927668edb5df8bead76ca32a8",
+      "0ed1b8b251328640b340c7d1ceb84658d38f016c65267502e57b508c0c9d6cbd",
+      "33c3e299a9ca3e93780114cf760d078de5ae90577c6d76cbbec0da17ceb3f99d",
+      "24176af47528dace16156ae36d9f601c0eaaa6be218474af90f678a6efc26181",
+      "2e7eb142e61e2d0b09f3fb656dee660367e82706f1182a04f1a69b72e41825cb",
+      "12cb3e983e6bf8e4ae7f6a6269357ebe4b4ad645a5e857827f938a7bb6bf70e0"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a81e9fe96716ef6f05599bb8",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a81e9fe96716ef6f05599bb8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-04/Group 1/3",
+              "speaker": "Huihong Fu",
+              "start": 0,
+              "end": 96,
+              "quote": "The unit tests for the user profile update interface have been completed, with a coverage of 92%",
+              "answer": "92%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "7e826b2923a56e9125f87e18",
+            "mode": "indexed",
+            "history": [
+              "a81e9fe96716ef6f05599bb8"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "7e826b2923a56e9125f87e18",
+              "location": "scenario://timeline/final-11/1",
+              "speaker": "Scenario author final-11",
+              "start": 0,
+              "end": 76,
+              "quote": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows.",
+              "answer": "4200 rows",
+              "condition": {
+                "source_id": "7e826b2923a56e9125f87e18",
+                "location": "scenario://timeline/final-11/1",
+                "speaker": "Scenario author final-11",
+                "start": 0,
+                "end": 40,
+                "quote": "For snapshot C5 after the agreed filters"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "b63198d227e37be0d39bdc66",
+            "mode": "indexed",
+            "history": [
+              "7e826b2923a56e9125f87e18",
+              "a81e9fe96716ef6f05599bb8"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "837577e87caaf27b9debe686",
+            "mode": "indexed",
+            "history": [
+              "7e826b2923a56e9125f87e18",
+              "a81e9fe96716ef6f05599bb8",
+              "b63198d227e37be0d39bdc66"
+            ],
+            "proposals": [
+              "091db92d538027b634402f14"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"7e826b2923a56e9125f87e18\", \"quote\":\"For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows.\", \"answer\":\"4200 rows\", \"condition\":\"for snapshot C5 after the agreed filters\"}, {\"source\":\"837577e87caaf27b9debe686\", \"quote\":\"My separate count for the same snapshot C5 after the agreed filters is 4170 rows.\", \"answer\":\"4170 rows\", \"condition\":\"for snapshot C5 after the agreed filters\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a81e9fe96716ef6f05599bb8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-04/Group 1/3",
+              "speaker": "Huihong Fu",
+              "start": 0,
+              "end": 176,
+              "quote": "The unit tests for the user profile update interface have been completed, with a coverage of 92%. This includes verification of various abnormal inputs and database operations.",
+              "answer": "92%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"7e826b2923a56e9125f87e18\", \"quote\":\"For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows.\", \"answer\":\"4200 rows\", \"condition\":\"for snapshot C5 after the agreed filters\"}, {\"source\":\"837577e87caaf27b9debe686\", \"quote\":\"My separate count for the same snapshot C5 after the agreed filters is 4170 rows.\", \"answer\":\"4170 rows\", \"condition\":\"for snapshot C5 after the agreed filters\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "7e826b2923a56e9125f87e18",
+              "location": "scenario://timeline/final-11/1",
+              "speaker": "Scenario author final-11",
+              "start": 0,
+              "end": 117,
+              "quote": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows. The evidence archive is Cobalt-evidence.",
+              "answer": "Cobalt-evidence",
+              "condition": {
+                "source_id": "7e826b2923a56e9125f87e18",
+                "location": "scenario://timeline/final-11/1",
+                "speaker": "Scenario author final-11",
+                "start": 0,
+                "end": 40,
+                "quote": "For snapshot C5 after the agreed filters"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "17d472301c3dc8eff326200a",
+            "mode": "indexed",
+            "history": [
+              "7e826b2923a56e9125f87e18",
+              "837577e87caaf27b9debe686",
+              "a81e9fe96716ef6f05599bb8",
+              "b63198d227e37be0d39bdc66"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "'decisions'",
+                "raw": "{}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a81e9fe96716ef6f05599bb8",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-04/Group 1/3",
+              "speaker": "Huihong Fu",
+              "start": 0,
+              "end": 97,
+              "quote": "The unit tests for the user profile update interface have been completed, with a coverage of 92%.",
+              "answer": "92%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-19/indexed": {
+    "status": "passed",
+    "id": "final-19",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "b924e1880da8110c0ba2aeda6c8a09def1a2fba01954d7149f446c84d6e20a68",
+      "24c6d3aca7f1b145bd34bcc4c3e3b190084cd2f97213340de2a522684566f592",
+      "f0a56a94b4941bcd5a20df75377474ef9c495816fcae52d85014acba13d73246",
+      "ec41ffc0bbcab44c1e402e9a5f787b6c365ef25936b736dfed76e5a4a99dc053",
+      "a33c540f9c901147dd1292c42c51b1c7c7cf1a9768114350fae9b4d24c60097d",
+      "26006a0287425580fa6cc48b72fb6abe055299b691b8d6eb06c9f4d28b35d545",
+      "ba74a7dc5044e15f83caad61ad3e3cc2d2d5986cb95fcc573d32e47713790576",
+      "17be76cebc3cc3cfe3a7e72b5b7cf295dbc520c43b3976fc9bc53c4e7ba73ed3",
+      "75b5c7d11174aa56f6044a1e9665f4939386a69aa5a55805b426d2d02c9c22ae",
+      "caf2b947bb903120f9ba6d4b992e47448d1c2650fab0cf3296660c5ad9ac2619",
+      "5eb398ee348ff9b4b322296be43c9075da870a00222886ba9272e1b220c72b6b",
+      "caf2b947bb903120f9ba6d4b992e47448d1c2650fab0cf3296660c5ad9ac2619",
+      "c056d780cc3325e7f17dde8f658a75b40da609271cedafac4bb19663b3b06a60",
+      "ad7cab835c1917af69db84e4235df78128fdf18a754d3d250f0ce128cf1b2547",
+      "a1706ddded2bb2ea3001327e986646a7bdb0208330c7f5b78aa2278a41a80209",
+      "7e58e1ce6608e33115edf330d3ad2618f2bb06f67f7c17d0cbdd5bafa0469380"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e1e971dd574bf90f69129aab",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e1e971dd574bf90f69129aab",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/6",
+              "speaker": "Dong He",
+              "start": 162,
+              "end": 197,
+              "quote": "It has been uploaded to Confluence.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d80d47360c531a124e9217fd",
+            "mode": "indexed",
+            "history": [
+              "e1e971dd574bf90f69129aab"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d80d47360c531a124e9217fd",
+              "location": "scenario://timeline/final-19/1",
+              "speaker": "Scenario author final-19",
+              "start": 0,
+              "end": 143,
+              "quote": "Knoll validation precision is 91%. We rejected deployment because the offline bias audit is unfinished. The evidence archive is Knoll-evidence.",
+              "answer": "91%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "0621504f23de1551f05ed0f9",
+            "mode": "indexed",
+            "history": [
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e667c35ba3fe979d3f413887",
+            "mode": "indexed",
+            "history": [
+              "0621504f23de1551f05ed0f9",
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab"
+            ],
+            "proposals": [
+              "efb2776e1a57e4b000995e83"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"The meeting covered scheduling only\", \"basis\":\"\", \"scope\":\"the meeting\"},{\"decision\":\"no model evaluation was run\", \"basis\":\"\", \"scope\":\"the meeting\"},{\"decision\":\"no bias audit was run\", \"basis\":\"\", \"scope\":\"the meeting\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d80d47360c531a124e9217fd",
+              "location": "scenario://timeline/final-19/1",
+              "speaker": "Scenario author final-19",
+              "start": 0,
+              "end": 33,
+              "quote": "Knoll validation precision is 91%",
+              "answer": "91%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e1e971dd574bf90f69129aab",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/6",
+              "speaker": "Dong He",
+              "start": 162,
+              "end": 197,
+              "quote": "It has been uploaded to Confluence.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d80d47360c531a124e9217fd",
+              "location": "scenario://timeline/final-19/1",
+              "speaker": "Scenario author final-19",
+              "start": 0,
+              "end": 33,
+              "quote": "Knoll validation precision is 91%",
+              "answer": "91%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d80d47360c531a124e9217fd",
+              "location": "scenario://timeline/final-19/1",
+              "speaker": "Scenario author final-19",
+              "start": 104,
+              "end": 143,
+              "quote": "The evidence archive is Knoll-evidence.",
+              "answer": "Knoll-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "46284cac2e5e6509bba5d740",
+            "mode": "indexed",
+            "history": [
+              "0621504f23de1551f05ed0f9",
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab",
+              "e667c35ba3fe979d3f413887"
+            ],
+            "proposals": [
+              "4404ac1f4ff24d968d8a3194"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e1e971dd574bf90f69129aab",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/6",
+              "speaker": "Dong He",
+              "start": 162,
+              "end": 197,
+              "quote": "It has been uploaded to Confluence.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-19/direct": {
+    "status": "passed",
+    "id": "final-19",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "240b4eecc9eb4032126cfd2829de15712f2bd3f4924d12fd4886eaceb7817000",
+      "568a3ee70b80ab8a511ca21ae277157be3699bf885463281cb2e2f5d12935a36",
+      "a8213d805d9ce64e9aa89b2445b2aa8a829fa55945603a6a2552b4b6091e6de8",
+      "02015c823c68deed117e2ef3b98d486757b6382152396959380273a3f2024568",
+      "22e51228dcbac05192b0906d461ec32cffd25ff649d5224bc538dca7a2b2bf7f",
+      "fd6de5d808b61b1c656a0b31f8984f014c0b7dce27cb2c3bd9a71bd46d7bc0ec",
+      "c070493d559b16bc9019970aba15f787e772d47f032ecad9fe8f657f2dae0bd9",
+      "fd6de5d808b61b1c656a0b31f8984f014c0b7dce27cb2c3bd9a71bd46d7bc0ec",
+      "b7282e9aa80f566e7be500d11e43e07039e4bd987dc4fab6c0744ecca18b564a",
+      "bd4222e3517363bb0157e5a57a2c61c5020b426c9a9a9f890b38379173a3d21d",
+      "e3d79b6ad120a301db09b3b8251ced4108f2fb26971957ff91615a6bd12f9bc7"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e1e971dd574bf90f69129aab",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e1e971dd574bf90f69129aab",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/6",
+              "speaker": "Dong He",
+              "start": 162,
+              "end": 197,
+              "quote": "It has been uploaded to Confluence.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d80d47360c531a124e9217fd",
+            "mode": "direct",
+            "history": [
+              "e1e971dd574bf90f69129aab"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d80d47360c531a124e9217fd",
+              "location": "scenario://timeline/final-19/1",
+              "speaker": "Scenario author final-19",
+              "start": 0,
+              "end": 143,
+              "quote": "Knoll validation precision is 91%. We rejected deployment because the offline bias audit is unfinished. The evidence archive is Knoll-evidence.",
+              "answer": "91%",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "0621504f23de1551f05ed0f9",
+            "mode": "direct",
+            "history": [
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e667c35ba3fe979d3f413887",
+            "mode": "direct",
+            "history": [
+              "0621504f23de1551f05ed0f9",
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab"
+            ],
+            "proposals": [
+              "b9849029af358390cf201c71"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "multiple answers required",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"d80d47360c531a124e9217fd\", \"quote\":\"Knoll validation precision is 91%. We rejected deployment because the offline bias audit is unfinished.\", \"answer\":\"91%\", \"condition\":\"The offline bias audit is unfinished.\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e1e971dd574bf90f69129aab",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/6",
+              "speaker": "Dong He",
+              "start": 0,
+              "end": 253,
+              "quote": "The first draft of the on-call schedule has been completed, including the shifts and contact information for operations, backend, frontend, and customer support. It has been uploaded to Confluence. @Mingzhi Li @Jianguo Huang @Weihua Zhang Please review.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "multiple answers required",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"d80d47360c531a124e9217fd\", \"quote\":\"Knoll validation precision is 91%. We rejected deployment because the offline bias audit is unfinished.\", \"answer\":\"91%\", \"condition\":\"The offline bias audit is unfinished.\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d80d47360c531a124e9217fd",
+              "location": "scenario://timeline/final-19/1",
+              "speaker": "Scenario author final-19",
+              "start": 104,
+              "end": 143,
+              "quote": "The evidence archive is Knoll-evidence.",
+              "answer": "Knoll-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "46284cac2e5e6509bba5d740",
+            "mode": "direct",
+            "history": [
+              "0621504f23de1551f05ed0f9",
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab",
+              "e667c35ba3fe979d3f413887"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e1e971dd574bf90f69129aab",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/6",
+              "speaker": "Dong He",
+              "start": 0,
+              "end": 253,
+              "quote": "The first draft of the on-call schedule has been completed, including the shifts and contact information for operations, backend, frontend, and customer support. It has been uploaded to Confluence. @Mingzhi Li @Jianguo Huang @Weihua Zhang Please review.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-08/direct": {
+    "status": "passed",
+    "id": "final-08",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "3441a0c9a749c992bcec01ad9f6209a71dabc0e98244ce963f5e8571482fc48c",
+      "ee2c029ab0a36d043e936baa18f5910edb34ff2c9e1dd3abdaafc6d9f0f6ea72",
+      "3bc13abf9ef58500371a55d13aee0b6d45af43cd8ed1469c0a5f0dde124bc115",
+      "84733e2a02a513f842265c8bd07ed12cb535923055445f8fef3e0311259c320e",
+      "e3eeaac5d6c231b8a5fe04682f5e2fa6f30aa126848a557c72c9d9345b653c00",
+      "fef146a002392e62890f9c76ad702ae90a12a689a4ed1af944fa4205675a634e",
+      "74eee05bbb2bff5ccb2382e69b78ee42ead9855f11dc95df8d47c08b9a59d747",
+      "fef146a002392e62890f9c76ad702ae90a12a689a4ed1af944fa4205675a634e",
+      "546607edff2059587d977cdd4d2ea5ae1eb9789bbcd61768691907618eb7ec89",
+      "e0e8d87ac6777d2e57967ac36e935801ca1922c27a4b312686581f6f6248ed1e",
+      "b46ca6d582fd4215e3193d3fc64e73fd1b939676ba409c575a06137a4bc5cd39"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d61b9380681071b2b0bcbd84",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d61b9380681071b2b0bcbd84",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-08/Group 3/9",
+              "speaker": "Yangmeng Peng",
+              "start": 92,
+              "end": 296,
+              "quote": "The final high-fidelity design mockups, interaction specifications, full annotations, and slicing resource package have all been uploaded to Confluence, and the Figma link has been updated simultaneously.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "03d56ffbcab7d4d7fe507edf",
+            "mode": "direct",
+            "history": [
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month.",
+              "answer": "14 dollars per month",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "93fe6bd80287ab2e0d45e034",
+            "mode": "direct",
+            "history": [
+              "03d56ffbcab7d4d7fe507edf",
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d3058140ac03bc376c1d2a95",
+            "mode": "direct",
+            "history": [
+              "03d56ffbcab7d4d7fe507edf",
+              "93fe6bd80287ab2e0d45e034",
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [
+              "eb8c2b5216be5ebb401e1ddb"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month.",
+              "answer": "14 dollars per month",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "d3058140ac03bc376c1d2a95",
+              "location": "scenario://timeline/final-08/3",
+              "speaker": "Scenario observer final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With annual retention, Mosaic archive storage cost was 86 dollars per month.",
+              "answer": "86 dollars per month",
+              "condition": {
+                "source_id": "d3058140ac03bc376c1d2a95",
+                "location": "scenario://timeline/final-08/3",
+                "speaker": "Scenario observer final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With annual retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"d61b9380681071b2b0bcbd84\", \"quote\":\"the final high-fidelity design mockups, interaction specifications, full annotations, and slicing resource package have all been uploaded to Confluence, and the Figma link has been updated simultaneously.\", \"answer\":\"Confluence\", \"condition\":\"\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month.",
+              "answer": "14 dollars per month",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "d3058140ac03bc376c1d2a95",
+              "location": "scenario://timeline/final-08/3",
+              "speaker": "Scenario observer final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With annual retention, Mosaic archive storage cost was 86 dollars per month.",
+              "answer": "86 dollars per month",
+              "condition": {
+                "source_id": "d3058140ac03bc376c1d2a95",
+                "location": "scenario://timeline/final-08/3",
+                "speaker": "Scenario observer final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With annual retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 117,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month. The evidence archive is Mosaic-evidence.",
+              "answer": "Mosaic-evidence",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d71ab10c8aad27a89fbdf243",
+            "mode": "direct",
+            "history": [
+              "03d56ffbcab7d4d7fe507edf",
+              "93fe6bd80287ab2e0d45e034",
+              "d3058140ac03bc376c1d2a95",
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d61b9380681071b2b0bcbd84",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-08/Group 3/9",
+              "speaker": "Yangmeng Peng",
+              "start": 0,
+              "end": 315,
+              "quote": "Everyone, the UI design tasks for the consultation queue and call page have been completed. The final high-fidelity design mockups, interaction specifications, full annotations, and slicing resource package have all been uploaded to Confluence, and the Figma link has been updated simultaneously. Please check them.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-08/indexed": {
+    "status": "passed",
+    "id": "final-08",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "46504e1f5eed23807164299760c5f75b6aa61cd999f61ec0bc5f04b497f42756",
+      "c9f7992503b0c1318809875a3ed7ca0351a5cc340240aae7f39fa590b565bf85",
+      "4a9584f243b79e49afd4600ab1cb2ad4f0de97025f091d76e2d472720d37bc35",
+      "63e997c041318649b809475a03f473d8c87030e491499efd91d053a1d72c14b0",
+      "521a53629a2a4a94c381710bca8b0963a944dc643cf647f7c1dc75880ab70dd3",
+      "964d2663197f20c9e35a14277c48548905225744e92d3b814947f364386e1ad5",
+      "db7e9dd88b6d1f74eebe8f54e6a2518059707807ba91f5faf5d3e63e0020b153",
+      "9c35d3079a26869c7c43897ee295154d96206f1431c5c73c88f76ad4dd36b0c8",
+      "c8bfa460204b965274c2545cdb4fc2570a879fc8b082b9b08746f7ed858e4893",
+      "ae588a72c21375dccc61c9b71eae9e71c3677ab1eba9c7697e446ca01d3cafeb",
+      "866148b9178d195fdfabde40c8cfb664e30c58252ece46e77b5d590071119736",
+      "ae588a72c21375dccc61c9b71eae9e71c3677ab1eba9c7697e446ca01d3cafeb",
+      "e426799045ff976a81c9c5000fd1269462407089b648945a58e89543d0888928",
+      "ef73f7f8c1758e4bcde0ef4cd867c10231307d6808fd36c892a4d6a053ebc68e",
+      "20f9702d401a138bcce3f5a592f2adda21cd9d13b3aca6179a1a0b6094a4afda",
+      "ac239f9a9c0d3b79054fab397cee01fb7d79230eb9a58871767abac1da470e16"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d61b9380681071b2b0bcbd84",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d61b9380681071b2b0bcbd84",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-08/Group 3/9",
+              "speaker": "Yangmeng Peng",
+              "start": 92,
+              "end": 296,
+              "quote": "The final high-fidelity design mockups, interaction specifications, full annotations, and slicing resource package have all been uploaded to Confluence, and the Figma link has been updated simultaneously.",
+              "answer": "Confluence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "03d56ffbcab7d4d7fe507edf",
+            "mode": "indexed",
+            "history": [
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month.",
+              "answer": "14 dollars per month",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "93fe6bd80287ab2e0d45e034",
+            "mode": "indexed",
+            "history": [
+              "03d56ffbcab7d4d7fe507edf",
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d3058140ac03bc376c1d2a95",
+            "mode": "indexed",
+            "history": [
+              "03d56ffbcab7d4d7fe507edf",
+              "93fe6bd80287ab2e0d45e034",
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [
+              "4610cbd889682f39cc577ac8"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month.",
+              "answer": "14 dollars per month",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "d3058140ac03bc376c1d2a95",
+              "location": "scenario://timeline/final-08/3",
+              "speaker": "Scenario observer final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With annual retention, Mosaic archive storage cost was 86 dollars per month.",
+              "answer": "86 dollars per month",
+              "condition": {
+                "source_id": "d3058140ac03bc376c1d2a95",
+                "location": "scenario://timeline/final-08/3",
+                "speaker": "Scenario observer final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With annual retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"d61b9380681071b2b0bcbd84\", \"quote\":\"the final high-fidelity design mockups, interaction specifications, full annotations, and slicing resource package have all been uploaded to Confluence, and the Figma link has been updated simultaneously\", \"answer\":\"uploaded to Confluence\", \"condition\":\"\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month.",
+              "answer": "14 dollars per month",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "d3058140ac03bc376c1d2a95",
+              "location": "scenario://timeline/final-08/3",
+              "speaker": "Scenario observer final-08",
+              "start": 0,
+              "end": 76,
+              "quote": "With annual retention, Mosaic archive storage cost was 86 dollars per month.",
+              "answer": "86 dollars per month",
+              "condition": {
+                "source_id": "d3058140ac03bc376c1d2a95",
+                "location": "scenario://timeline/final-08/3",
+                "speaker": "Scenario observer final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With annual retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "03d56ffbcab7d4d7fe507edf",
+              "location": "scenario://timeline/final-08/1",
+              "speaker": "Scenario author final-08",
+              "start": 0,
+              "end": 117,
+              "quote": "With weekly retention, Mosaic archive storage cost was 14 dollars per month. The evidence archive is Mosaic-evidence.",
+              "answer": "Mosaic-evidence",
+              "condition": {
+                "source_id": "03d56ffbcab7d4d7fe507edf",
+                "location": "scenario://timeline/final-08/1",
+                "speaker": "Scenario author final-08",
+                "start": 0,
+                "end": 21,
+                "quote": "With weekly retention"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d71ab10c8aad27a89fbdf243",
+            "mode": "indexed",
+            "history": [
+              "03d56ffbcab7d4d7fe507edf",
+              "93fe6bd80287ab2e0d45e034",
+              "d3058140ac03bc376c1d2a95",
+              "d61b9380681071b2b0bcbd84"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"d61b9380681071b2b0bcbd84\", \"quote\":\"the final high-fidelity design mockups, interaction specifications, full annotations, and slicing resource package have all been uploaded to Confluence, and the Figma link has been updated simultaneously\", \"answer\":\"uploaded to Confluence\", \"condition\":\"\"}]}"
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-16/indexed": {
+    "status": "passed",
+    "id": "final-16",
+    "mode": "indexed",
+    "calls_replayed": 16,
+    "prompt_hashes": [
+      "222d084451ee1254310805a40cfdbae2498f0685f1bfbc5feb3002ef97f8f01b",
+      "2e00e560192b0be11cc8e1c7eae2d5df382075977ad20e22f2e6af0ad2528380",
+      "a9b6a7a9b1dd0908ff61f32eef2de8f793328003d744302fd9214f7d158f0406",
+      "c6427c99a3e9d14714ffd1eb0f2c7389ea943f6d304f4709e15c4602fb322246",
+      "e6f902fa7748a822dae45bf343fb0816324f5089f3e65ccb3d455a6749fc1617",
+      "9e4bc8d3a18195cc851739f83d3512aa8b36fea725c10d0c806b7d139309bb92",
+      "def501c94679141086d322400c8c40aa9d5f3f18343d99c42216d9012549ea0b",
+      "a71d37e70f1c94e07ce7bc1cbd89dee59ca57b37818e0f5efa6d130d89e03a6e",
+      "bb299daea29998b0cfe787e3f24eabc21e52a3ced34e89a2abeef476519dbdf3",
+      "1b3ed5e1ef9327a4dbe51b907f348c520c9a71265bce1d5a2538940db3345d02",
+      "f8f4edf6aece9aa0b1fd42ce49fa7c133744abe9f5fa723457fa356cb53bf952",
+      "d13df37d8e7befecc331c0262905f2156916cc6faea1b979e81bf5a235826612",
+      "1711f21227cf3be1c91b819a1135f13c5d5b282e550877db734a370cea949d0c",
+      "61385fbf0abe549f894a1d98572e9216240684091826def2ff52021ad5e28b0e",
+      "34018247ec2f19327344480e0640b0b1936781deeb71a46ddc35b5ae1f2e2848",
+      "c22a08756485a5f1f0de48e23d106fbb7bf8c98f74ed7f6d1f741e4393f53ee5"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "203c1918cd867209e7556af4",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "203c1918cd867209e7556af4",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-04/Group 3/5",
+              "speaker": "Mingzhi Li",
+              "start": 121,
+              "end": 280,
+              "quote": "After the \"Inquiry Service\" updates its own status, it will notify the \"Doctor Service\" and \"User Center\" through asynchronous messages (e.g., using RocketMQ).",
+              "answer": "RocketMQ",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "8b04c566642eee083097b7c6",
+            "mode": "indexed",
+            "history": [
+              "203c1918cd867209e7556af4"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"The Haven alert threshold is 0.75 under policy H2.\", \"basis\":\"Under policy H2, the Haven alert threshold is 0.75.\", \"scope\":\"policy H2\"}, {\"decision\":\"The evidence archive is Haven-evidence.\", \"basis\":\"The evidence archive is Haven-evidence.\", \"scope\":\"empty string\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8b04c566642eee083097b7c6",
+              "location": "scenario://timeline/final-16/1",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 51,
+              "quote": "Under policy H2, the Haven alert threshold is 0.75.",
+              "answer": "0.75",
+              "condition": {
+                "source_id": "8b04c566642eee083097b7c6",
+                "location": "scenario://timeline/final-16/1",
+                "speaker": "Scenario author final-16",
+                "start": 0,
+                "end": 15,
+                "quote": "Under policy H2"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "dc75b96c4c74fbf32f5a2e8b",
+            "mode": "indexed",
+            "history": [
+              "203c1918cd867209e7556af4",
+              "8b04c566642eee083097b7c6"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "393b5b9f117378cf456ee70f",
+            "mode": "indexed",
+            "history": [
+              "203c1918cd867209e7556af4",
+              "8b04c566642eee083097b7c6",
+              "dc75b96c4c74fbf32f5a2e8b"
+            ],
+            "proposals": [
+              "6d620d4e4f1e4dbda68b61f2"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"correct the threshold in my earlier Haven policy note: the decimal value was mistyped.\", \"basis\":\"the decimal value was mistyped\", \"scope\":\"the alert threshold is 0.57 under policy H2\"}, {\"decision\":\"the alert threshold is 0.57\", \"basis\":\"\", \"scope\":\"under policy H2\"}, {\"decision\":\"the policy itself did not change\", \"basis\":\"\", \"scope\":\"\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "8b04c566642eee083097b7c6",
+              "location": "scenario://timeline/final-16/1",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 91,
+              "quote": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+              "answer": "0.75",
+              "condition": {
+                "source_id": "8b04c566642eee083097b7c6",
+                "location": "scenario://timeline/final-16/1",
+                "speaker": "Scenario author final-16",
+                "start": 0,
+                "end": 15,
+                "quote": "Under policy H2"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "393b5b9f117378cf456ee70f",
+              "location": "scenario://timeline/final-16/3",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 143,
+              "quote": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+              "answer": "0.57",
+              "condition": {
+                "source_id": "393b5b9f117378cf456ee70f",
+                "location": "scenario://timeline/final-16/3",
+                "speaker": "Scenario author final-16",
+                "start": 89,
+                "end": 113,
+                "quote": "Under the same policy H2"
+              },
+              "status": "pending_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "203c1918cd867209e7556af4",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-04/Group 3/5",
+              "speaker": "Mingzhi Li",
+              "start": 121,
+              "end": 280,
+              "quote": "After the \"Inquiry Service\" updates its own status, it will notify the \"Doctor Service\" and \"User Center\" through asynchronous messages (e.g., using RocketMQ).",
+              "answer": "RocketMQ",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "393b5b9f117378cf456ee70f",
+              "location": "scenario://timeline/final-16/3",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 143,
+              "quote": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+              "answer": "0.57",
+              "condition": {
+                "source_id": "393b5b9f117378cf456ee70f",
+                "location": "scenario://timeline/final-16/3",
+                "speaker": "Scenario author final-16",
+                "start": 89,
+                "end": 113,
+                "quote": "Under the same policy H2"
+              },
+              "status": "approved_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8b04c566642eee083097b7c6",
+              "location": "scenario://timeline/final-16/1",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 91,
+              "quote": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+              "answer": "Haven-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "3a6c4ff0f1d72bc912ff0662",
+            "mode": "indexed",
+            "history": [
+              "203c1918cd867209e7556af4",
+              "393b5b9f117378cf456ee70f",
+              "8b04c566642eee083097b7c6",
+              "dc75b96c4c74fbf32f5a2e8b"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "203c1918cd867209e7556af4",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-04/Group 3/5",
+              "speaker": "Mingzhi Li",
+              "start": 121,
+              "end": 280,
+              "quote": "After the \"Inquiry Service\" updates its own status, it will notify the \"Doctor Service\" and \"User Center\" through asynchronous messages (e.g., using RocketMQ).",
+              "answer": "RocketMQ",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "final-16/direct": {
+    "status": "passed",
+    "id": "final-16",
+    "mode": "direct",
+    "calls_replayed": 11,
+    "prompt_hashes": [
+      "a4a3c9b27e48a86f8b011bf703116647d842891651829efd4d4b09ec38284711",
+      "4b47cfb87c1d750ac284dc00183621e0b731808345a24f6b4ac1227488bf890a",
+      "6d0b77eb06fc3728009176c44de5ca5046292d1bcaf7f887939d0c48e6652edd",
+      "8eabb422f32dfcff8c90995aa81b2c64f726a483fe98659b39cb7dd694e3bd41",
+      "8bd44cf4ee7d30ec126ae1fafa72cd2683cd24e87f78ded741ccc3483efe9b94",
+      "4f56c24e7c9f8927cc9ea8b4a224deae28975c8f46255e14439ecb349eefdccc",
+      "d5ae5eb5f6ca382611d16cb81b574e90d0fa6b5cfd6d4fb4c6c2e5fb5e1d832d",
+      "a2078ee549951f55daefb89d75871e2435f58758d321d91619979470fb4791ce",
+      "d5168a3e0546058977af46244d27b8d8b3db84d6d27764df967887ba5eeab917",
+      "ae4c0b14f093c13299d2cba2d2725734ef7477e0cbf88380bc81c2b8bf7a0c45",
+      "465576f61be2eca1bb3f75048e0d537a7f3aa46022fd152212e33515d5db7821"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "203c1918cd867209e7556af4",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "203c1918cd867209e7556af4",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-04/Group 3/5",
+              "speaker": "Mingzhi Li",
+              "start": 48,
+              "end": 280,
+              "quote": "The client requests the cancellation interface of the \"Inquiry Service\". After the \"Inquiry Service\" updates its own status, it will notify the \"Doctor Service\" and \"User Center\" through asynchronous messages (e.g., using RocketMQ).",
+              "answer": "RocketMQ",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "8b04c566642eee083097b7c6",
+            "mode": "direct",
+            "history": [
+              "203c1918cd867209e7556af4"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8b04c566642eee083097b7c6",
+              "location": "scenario://timeline/final-16/1",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 91,
+              "quote": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+              "answer": "0.75",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "dc75b96c4c74fbf32f5a2e8b",
+            "mode": "direct",
+            "history": [
+              "203c1918cd867209e7556af4",
+              "8b04c566642eee083097b7c6"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "393b5b9f117378cf456ee70f",
+            "mode": "direct",
+            "history": [
+              "203c1918cd867209e7556af4",
+              "8b04c566642eee083097b7c6",
+              "dc75b96c4c74fbf32f5a2e8b"
+            ],
+            "proposals": [
+              "06ffd1c9b9aa97f000edc183"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"8b04c566642eee083097b7c6\", \"quote\":\"Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.\", \"answer\":\"Under policy H2, the Haven alert threshold is 0.75\", \"condition\":\"\"}, {\"source\":\"393b5b9f117378cf456ee70f\", \"quote\":\"I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.\", \"answer\":\"Under the same policy H2, the alert threshold is 0.57\", \"condition\":\"The decimal value was mistyped in the previous report.\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "203c1918cd867209e7556af4",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-04/Group 3/5",
+              "speaker": "Mingzhi Li",
+              "start": 121,
+              "end": 280,
+              "quote": "After the \"Inquiry Service\" updates its own status, it will notify the \"Doctor Service\" and \"User Center\" through asynchronous messages (e.g., using RocketMQ).",
+              "answer": "RocketMQ",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "393b5b9f117378cf456ee70f",
+              "location": "scenario://timeline/final-16/3",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 143,
+              "quote": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+              "answer": "0.57",
+              "condition": null,
+              "status": "approved_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "8b04c566642eee083097b7c6",
+              "location": "scenario://timeline/final-16/1",
+              "speaker": "Scenario author final-16",
+              "start": 0,
+              "end": 91,
+              "quote": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+              "answer": "Haven-evidence",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "3a6c4ff0f1d72bc912ff0662",
+            "mode": "direct",
+            "history": [
+              "203c1918cd867209e7556af4",
+              "393b5b9f117378cf456ee70f",
+              "8b04c566642eee083097b7c6",
+              "dc75b96c4c74fbf32f5a2e8b"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_after_repeat",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "203c1918cd867209e7556af4",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-04/Group 3/5",
+              "speaker": "Mingzhi Li",
+              "start": 0,
+              "end": 418,
+              "quote": "@Guoxin Pan Yes, your understanding is correct. The client requests the cancellation interface of the \"Inquiry Service\". After the \"Inquiry Service\" updates its own status, it will notify the \"Doctor Service\" and \"User Center\" through asynchronous messages (e.g., using RocketMQ). This ensures loose coupling and eventual consistency between systems. I will clearly illustrate this interaction in the sequence diagram.",
+              "answer": "RocketMQ",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  }
+}

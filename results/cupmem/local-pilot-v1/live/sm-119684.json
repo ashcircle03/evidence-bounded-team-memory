@@ -1,0 +1,209 @@
+{
+  "status": "running",
+  "job_id": "119684",
+  "output_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/cupmem-local-119684",
+  "source_version": "cup-local-pilot-v1",
+  "config_sha256": "d6c9f344cecce124e6d9251df093c85c7e11f1b2292baf8dd159882f9302c526",
+  "actor": "Qwen3-8B",
+  "judge": "Qwen3-8B",
+  "model_repo": "Qwen/Qwen3-8B",
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "serving": {
+    "dtype": "bfloat16",
+    "enable_thinking": false,
+    "rope_scaling": {
+      "rope_type": "yarn",
+      "factor": 4.0,
+      "original_max_position_embeddings": 32768
+    },
+    "vllm_version": "0.8.5.post1",
+    "tensor_parallel_size": 2,
+    "max_num_seqs": 1,
+    "gpu_memory_utilization": 0.9,
+    "max_num_batched_tokens": 4096,
+    "seed": 42
+  },
+  "max_model_len": 131072,
+  "max_output_tokens": 8192,
+  "request_timeout_seconds": 600,
+  "retry_policy": "Native SDK and upstream retries preserved; every HTTP attempt audited",
+  "server_configuration_verification": "Launcher must attest revision/flags; not introspected by this wrapper",
+  "reproduction_label": "local Qwen3-8B alternate-model STALE two-case pilot; provisional non-independent self-judge",
+  "judge_is_independent": false,
+  "original_model_score_reproduction": false,
+  "direct_protocol": "qwen_token_budget",
+  "protocol_change": "explicit variant: original gold-preserving removal algorithm with actual Qwen tokenizer budget",
+  "upstream_revision": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+  "dataset_revision": "617c51dc200b5ab09970834144c7e51c77959af0",
+  "dataset_sha256": "5f3ec375179e20e2e94469e018189188f34e2e7e5f21cbecbd99fcfa648c1876",
+  "conda_prefix": "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/cupmem-qwen3-v1",
+  "python": "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/cupmem-qwen3-v1/bin/python",
+  "node": "aurora-g8",
+  "visible_gpu_count": 2,
+  "local_limits": {
+    "requests": 8000,
+    "input_tokens": 50000000,
+    "output_tokens": 2000000
+  },
+  "budget_kind": "local inference guardrails, not BAZE financial authorization",
+  "manual_source_audit": "required separately; self-judge does not establish semantic validity",
+  "completed": [],
+  "verified_upstream_files": 72,
+  "versions": {
+    "vllm": "0.8.5.post1",
+    "openai": "1.78.1",
+    "httpx": "0.28.1",
+    "torch": "2.6.0",
+    "transformers": "4.51.3",
+    "tiktoken": "0.9.0"
+  },
+  "type_counts": {
+    "T1": 200,
+    "T2": 200
+  },
+  "selection": [
+    {
+      "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+      "type": "T1",
+      "input_sha256": "f87cf96435d4ea25665585846b746408e2af26336c5403ac413ae26b6e5fffa5"
+    },
+    {
+      "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56",
+      "type": "T2",
+      "input_sha256": "752183bc61dc777d88a88972ffdf50bfd88c38b2afa6b77824ecef98aa855fc9"
+    }
+  ],
+  "thresholds": {
+    "state_salience_threshold": 0.3,
+    "explicit_min_confidence": 0.45,
+    "strong_support_min_confidence": 0.55,
+    "medium_support_min_confidence": 0.6,
+    "verifier_fallback_threshold": 0.45,
+    "candidate_top_k": 5,
+    "latent_invalidation_temperature": 0.3,
+    "invalidation_lane_max_workers": 4,
+    "invalidation_merge_max_keep": 2,
+    "invalidation_global_recall_top_k": 4,
+    "query_top_k": 8,
+    "fallback_top_k": 6
+  },
+  "frozen_direct_preflight": [
+    {
+      "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+      "query_label": "dim1_query",
+      "variant": "qwen_token_budget",
+      "messages_sha256": "1cd5f48430b365fc800891ba3e8f33a6d12ecc18c857dd718ba41aee3bbd513f",
+      "actual_qwen_input_tokens": 121267,
+      "output_reservation": 8192,
+      "max_model_len": 131072,
+      "compatible": true,
+      "phase": "frozen_direct_preflight",
+      "model_calls": 0
+    },
+    {
+      "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+      "query_label": "dim2_query",
+      "variant": "qwen_token_budget",
+      "messages_sha256": "a04b937814105512ec5ed0d4c61463c12d86386ad538b828e53ac0bd7be1ad38",
+      "actual_qwen_input_tokens": 118924,
+      "output_reservation": 8192,
+      "max_model_len": 131072,
+      "compatible": true,
+      "phase": "frozen_direct_preflight",
+      "model_calls": 0
+    },
+    {
+      "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+      "query_label": "dim3_query",
+      "variant": "qwen_token_budget",
+      "messages_sha256": "ae470a09acb37317ad0d91eeb14edbd8d456e9b2ae5157778c8057b3e2fdad46",
+      "actual_qwen_input_tokens": 120308,
+      "output_reservation": 8192,
+      "max_model_len": 131072,
+      "compatible": true,
+      "phase": "frozen_direct_preflight",
+      "model_calls": 0
+    },
+    {
+      "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56",
+      "query_label": "dim1_query",
+      "variant": "qwen_token_budget",
+      "messages_sha256": "7bae5d50478536fee310600d07e0e7c05e676e18abb554fb0ba69588dea22a3e",
+      "actual_qwen_input_tokens": 122095,
+      "output_reservation": 8192,
+      "max_model_len": 131072,
+      "compatible": true,
+      "phase": "frozen_direct_preflight",
+      "model_calls": 0
+    },
+    {
+      "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56",
+      "query_label": "dim2_query",
+      "variant": "qwen_token_budget",
+      "messages_sha256": "713b704bbbaeb40a98f4bb01978c344531a3d9ecb1f448b314a44f3a2788e240",
+      "actual_qwen_input_tokens": 120909,
+      "output_reservation": 8192,
+      "max_model_len": 131072,
+      "compatible": true,
+      "phase": "frozen_direct_preflight",
+      "model_calls": 0
+    },
+    {
+      "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56",
+      "query_label": "dim3_query",
+      "variant": "qwen_token_budget",
+      "messages_sha256": "e204024c09bc260de36fc9beb9e2756d4b4e059fecbf1edc74e21632ca9623da",
+      "actual_qwen_input_tokens": 120349,
+      "output_reservation": 8192,
+      "max_model_len": 131072,
+      "compatible": true,
+      "phase": "frozen_direct_preflight",
+      "model_calls": 0
+    }
+  ],
+  "context_packets_path": "/local_datasets/pjw031003/capstone-shared-knowledge/cupmem-local-inputs/cup-context-119672.json",
+  "context_packets_sha256": "a2bbf02da8c35d7ae47f30459d6bba3a8923445cbd2617e182b936518a2df7aa",
+  "compatibility_probes": [
+    {
+      "probe": "json_object",
+      "input_sha256": "a30e16b631f70b875ea419b93f34722c968114a6e16d0525d44e8a4afc330a8b",
+      "passed": true
+    },
+    {
+      "probe": "strict_json_schema",
+      "input_sha256": "a30e16b631f70b875ea419b93f34722c968114a6e16d0525d44e8a4afc330a8b",
+      "passed": true
+    },
+    {
+      "probe": "native_multi_message_retry",
+      "input_sha256": "1028923ec800e7b2e9888c70300dba04ebfcfaf6c2cfde09e39eaadb8631d417",
+      "passed": true
+    }
+  ],
+  "execution_order": "all six fresh direct answers, then each CUP case and paired self-judge",
+  "direct_answers": {
+    "a5aa884f-29d6-40dc-a72c-e155fcbc7c79": {
+      "dim1_response": "Yes, the user still keeps a mental ledger of gift costs. The user mentioned that they \"keep track of what people spend on my gifts so I can match it later,\" and they noted that the \"pressure to match\" can be a concern. They also expressed that they believe it's a \"weird mindset\" to bring to gift-giving, but they're conscious of the social expectations and want to maintain balance and avoid feeling like they owe anyone anything. They have been using this method as a way to manage the social dynamics of gift-giving, especially around special occasions like weddings and other events.",
+      "dim2_response": "Absolutely! Tracking gifts and ensuring you reciprocate at an equal value can help maintain social harmony and avoid feeling like you're \"paying a loan\" on your part. Here's a practical system to help you do this:\n\n---\n\n### **1. Notes and Journaling:**\n- **Use a digital or physical journal** to record the amount spent on a gift.\n- **Note the reason** for the gift (e.g., birthday, wedding, etc.).\n- **Track both the gift giver and recipient** (dates and relationships).\n- **Add a \"gift balance\" section** to keep track of what you've given and received.\n\n**Example:**\n- \"Gifted: $50 to Sarah on her birthday\"  \n- \"Received: $60 from Ali for my wedding\"\n\n---\n\n### **2. Spreadsheet Tracking:**\nSetting up a simple spreadsheet is a powerful way to keep a detailed log. Here's what to include:\n\n#### **Columns:**\n- **Date**: When the gift was given.\n- **Recipient**: Who received the gift.\n- **Amount Gifted**: What you spent to give the gift (this works best for monetary gifts).\n- **Recipient Told You Was Worth**: If the recipient mentioned the gift's value, optionally record that.\n- **Gift Type**: Gift (e.g., money, physical item, etc.).\n- **Notes**: Any remarks about the giving/receiving experience.\n- **Due Date**: Approximate time frame for your reciprocation.\n- **Reciprocal Amount**: What you plan to give back to match the value of the gift.\n\n**Tip:** You can use apps like Google Sheets, Microsoft Excel, or even free platforms like **Excel Online** or **Google Sheets** to make this easy.\n\n---\n\n### **3. Reciprocal Tracking Tools:**\n- **Note-taking apps**: Use **Evernote** to store and organize your gift entries. You can create a dedicated notebook or section for gift tracking.\n- **Reminder apps**: Apps like **Google Calendar**, **Apple Calendar**, or **Todoist** can help send yourself a reminder to reciprocate when the time is right.\n- **Apps for gift tracking with your contacts**: If you're using **Facebook**, **Google Contacts**, or **LinkedIn**, you can make it a habit to note the amount of gifts or money transferred with the person.\n\n---\n\n### **4. Organizations:**\n- **Company events or parties**: Keep note of whom you gave gifts to or what your host spent on you. If you're working on a group, you could have a shared document (e.g., a Google Sheet) to track concern for the group.\n- **Actual gift givers**: For specific people, be just as intentional as you'd be with your own gift-giving process.\n\n---\n\n### **5. Tips to Maintain Balance:**\n- **Adjust for tradition or cultural norms**: Some family members might have traditions of reciprocating different gifts, so this might not be necessary if you're planning to observe traditions.\n- **Reciprocal gifts without any pressure**: If a person gives you a gift, simply accept it and give them a gift of equal or comparable value. Gifts like a restaurant reservation, a small monetary gift, or handmade items often correlate with gift denomination.\n- **Repeat on important milestones**: Instead of always reciprocating, focus on making punctual observations on the other gift-giving concepts. This way, you're not performing a \"zero-sum game\" but curating meaningful interaction.\n\n---\n\n### **6. Trial Mix for Your Needs:**\nHere's an easy-to-use template that can be used primarily in a spreadsheet format:\n\n| Date       | Recipient     | Amount Gifted | Amount Received | Gift Type | Notes                         |\n|------------|---------------|---------------|-----------------|-----------|-------------------------------|\n| 02/14/25   | Emma          | $30           | $30             | Gift      | Birthday gift - lunch voucher  |\n| 02/18/25   | Mark          | $50           | $50             | Money      | Colleague gift - notebook      |\n| 02/20/25   | Alex          | $40           | $40             | Gift       | Personalized mug               |\n\nThis helps you quantify what you’re giving and what you’ve received.\n\n---\n\n### **7. Charlie vs. Jim: Track Dollars, Don’t Miss Perceptions**\n- **Elnakey – Keeping a Witty Balance**: Track dollars without placing other gift expectations on yourself. With the data, it's easier to curate connections authentically without the pressure of giving tasks.\n\n---\n\nWith this system, you’ll create a clear picture of your spending and giving comes across as a practice that aligns with your flavor of social good and context, as our intents don’t get further out of focus. Just figuring out how to track who gave what to you, and the value it has, allows you to avoid ancient accounting errors and show up with regard to people's expressions of appreciation.\n\nWould you like a downloadable version of this spreadsheet template, or do you want to explore free apps like **Notion**, **Trello**, or **Google Keep** for version tracking or extra reminders to manage this on the go?",
+      "dim3_response": "It's great that you're looking for a way to handle shared costs that feels smooth and avoids awkwardness. Shared expenses can be a delicate subject, and the goal is to make it feel natural and respectful. Here's how to navigate the situation if your friend tries to settle up with you:\n\n### 1. **Set the Tone Beforehand**  \nLet your friend know ahead of time that you're happy to split the cost equally or share expenses in a way that feels comfortable for both of you. If you're open to a “pay it forward” or a “split the cost” approach, communicate that, so they understand your preference. For example, you can say:  \n> “I’m happy for us to split the cost evenly, or we can just do it in a way that feels good for both of us. Let’s see how it goes!”\n\n### 2. **If They Offer to Pay You Back, Be Light**  \nIf they try to settle up, respond with a friendly and playful tone to keep it from feeling like a transaction. Here are a few examples of how to handle this:  \n- **Playful Rejection:**  \n  > “No worries at all! It’s no big deal. You can pass it on when you’re out with someone else, and they can do the same for you.”  \n- **Give Them Space:**  \n  > “No need to pay me back—just make sure it’s a good time for you to give it to someone else.”  \n- **Encourage the Chain Effect:**  \n  > “Feel free to pass it on to someone else when you get the chance. It's a way to keep things flowing.”\n\n### 3. **Check Their Intentions**  \nSometimes, people just want to make sure they’re not sticking out or being seen as a burden. You can address this by being proactive:  \n> “I’m okay with you helping me out if you want to, and I’m fine with you not paying back. Either way, it’s a win-win.”\n\n### 4. **Be Consistent with Your Approach**  \nIf you choose not to ask for reimbursement or to make it a “pay it forward” tradition, be consistent and match the emotional tone of the group. This helps set the precedent and makes it feel natural.\n\n### 5. **Set a Casual Rule (Optional)**  \nYou can make it a fun, light-hearted rule:  \n> “Let’s keep it simple—split the bill, or let whoever is in the lead handle the first round. We can all pay it forward when it’s our turn.”\n\n### 6. **Put in Your Own Effort to Sustain the Flow**  \nIf you’re not getting paid back, remember that it's not a loss—just a redistribution of kindness. You can keep this momentum by continuing to offer help without expecting repayment, which keeps the dynamic honest and reciprocal.\n\n### Keeping the Flow Natural:  \nYou can also do what you suggested before—pick up their coffee or help with supplies (like a coffee order, snacks, or even helping with a game night or a shared activity). If they try to pay you back, let the movement flow by politely declining.\n\n---\n\nIf you'd rather have the traditional balance, feel free to set boundaries with a gentle, non-pressuring tone. The key is to maintain a sense of fairness and mutual respect, while keeping the interaction light and enjoyable.\n\nLet me know if you'd like a few sample phrases to use in different scenarios, like when they offer to split the bill or when they ask for repayment."
+    }
+  },
+  "active_stage": {
+    "arm": "direct",
+    "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56"
+  },
+  "accounting": {
+    "requests": 6,
+    "observed_input_tokens": 360657,
+    "observed_output_tokens": 1964,
+    "reserved_or_uncertain_input_tokens": 0,
+    "reserved_or_uncertain_output_tokens": 0,
+    "uncertain_request_ids": [],
+    "censored_request_ids": [],
+    "limits": {
+      "requests": 8000,
+      "input_tokens": 50000000,
+      "output_tokens": 2000000
+    }
+  }
+}

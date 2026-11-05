@@ -1,0 +1,170 @@
+{
+  "0d263d8e1696": {
+    "criterion": "The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "earlier": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).",
+    "incoming": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around.",
+    "reason": "The earlier behavior where sub-test trash directories were incorrectly placed under the top-level t/ directory instead of the intended t0000 trash directory due to TEST_OUTPUT_DIRECTORY defaulting to TEST_DIRECTORY should be rechecked given the new evidence."
+  },
+  "130e6ea91b31": {
+    "criterion": "Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "earlier": "Include checks for mailboxes, stgit patch series, stgit single patches\nand hg patches.",
+    "incoming": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.",
+    "reason": "Adjust the patch format detection logic to ignore leading whitespace reveals a new evidence suggesting previous web-based email client practices may have influenced patch handling decisions; these prior decisions should be revisited."
+  },
+  "149180855f11": {
+    "criterion": "The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "earlier": "Fix this by always referring to the trash directory as $TRASH_DIRECTORY.",
+    "incoming": "This fixes a regression introduced by 38b074d (t/test-lib.sh: fix\nTRASH_DIRECTORY handling, 2013-04-14).  Before that commit, the\nTEST_OUTPUT_DIRECTORY setting was not respected consistently so most\ntests did their work in a \"trash\" subdirectory of the current\ndirectory instead of the output dir.",
+    "reason": "The report reveals that prior to commit 38b074d, tests used a \\\"trash\\\" directory within their current directory rather than the specified TEST_OUTPUT_DIRECTORY, suggesting a prior decision to use the current directory's trash for test outputs should be revisited."
+  },
+  "23763a37ad21": {
+    "criterion": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "earlier": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh.",
+    "incoming": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety.",
+    "reason": "The earlier decision to eliminate dependency on SVN perl bindings in commit b0ad24b (2010-10-10) may have introduced a regression due to the removal of lib-git-svn.sh, which contained safety checks; thus, the rationale for this decision should be revisited."
+  },
+  "249663f59537": {
+    "criterion": "When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "earlier": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+    "incoming": "This fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass).",
+    "reason": "The report reveals a decision to avoid scrambling passwords stored in .cvspass, which may need reevaluation given the fix addressing the unintended scrambling of command-line passwords introduced by 3fb9d582."
+  },
+  "2d5a8f63fffc": {
+    "criterion": "Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "earlier": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format.",
+    "incoming": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.",
+    "reason": "The earlier decision to default to mbox format if input is from stdin should be revisited given the new evidence that some web-based email clients prepend whitespace to raw message transcripts, as indicated by the report's recommendation to adjust the patch format detection logic to ignore leading whitespace."
+  },
+  "35faa602fde6": {
+    "criterion": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "earlier": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".",
+    "incoming": "Running test t9010 without svn currently errors out for no good reason.",
+    "reason": "The report reveals that running test t9010 without svn currently errors out for no good reason, indicating a failure in the current project decision to treat git calls as mandatory and requiring their graceful failure, necessitating a reevaluation of this prior project decision."
+  },
+  "36c078568c0e": {
+    "criterion": "When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "earlier": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.",
+    "incoming": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter.",
+    "reason": "The earlier decision relied on the fact that the case of config keys did not matter for adding aliases; however, the new evidence shows that with concrete new data indicating the importance of preserving the original casing when comparing config keys, this earlier result may no longer apply, unless there is a specific configuration or context where the casing comparison is irrelevant."
+  },
+  "3e8494c7f0de": {
+    "criterion": "When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "earlier": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.",
+    "incoming": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter.",
+    "reason": "The report reveals that allowing CamelCased aliases is acceptable despite previous decisions based on the assumption that config keys are case-sensitive, thus requiring reevaluation of those prior project decisions."
+  },
+  "3f19d5d95332": {
+    "criterion": "Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "earlier": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format.",
+    "incoming": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.",
+    "reason": "The earlier decision relied on initial observations about stdin inputs and patch format sniffing in browser content rendering. The new evidence shows that prepending whitespace to raw message transcripts can interfere with format detection logic, thus changing the applicability of the earlier result when dealing with such inputs. The earlier result remains valid for inputs without such whitespace interference."
+  },
+  "3f9ae76c2426": {
+    "criterion": "The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "earlier": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).",
+    "incoming": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around.",
+    "reason": "The earlier decision held that the trash directory was retained unless explicitly removed due to the default behavior of $TEST_OUTPUT_DIRECTORY overriding $TRASH_DIRECTORY; however, the new evidence shows that this retention only occurs if $TEST_OUTPUT_DIRECTORY does not default to \".\", indicating a need to reconsider the applicability of the earlier decision when $TEST_OUTPUT_DIRECTORY is \".\"."
+  },
+  "44f093e8b7f6": {
+    "criterion": "Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "earlier": "setup: translate symlinks in filename when using absolute paths",
+    "incoming": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead.",
+    "reason": "The earlier decision relied on the behavior that symlinks in the working tree are dereferenced and manipulated based on their absolute path. However, the introduction of concrete new evidence showing that git instead attempts to manipulate the actual target of the symlink when an absolute path is used changes its applicability under certain conditions where relative paths are employed."
+  },
+  "4deb4127f9a3": {
+    "criterion": "When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "earlier": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+    "incoming": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\".",
+    "reason": "The report reveals a scenario where initializing the password with just \"A\" is necessary if neither command-line input nor .cvspass passwords are present, indicating a potential oversight in previous project decisions regarding password initialization logic."
+  },
+  "4eaa238f67ec": {
+    "criterion": "Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "earlier": "setup: translate symlinks in filename when using absolute paths",
+    "incoming": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead.",
+    "reason": "The report reveals that manipulating symlinks with absolute paths causes git to dereference them and target manipulation, indicating a need to revisit the setup: translate symlinks in filename when using absolute paths."
+  },
+  "5f9c1f36230a": {
+    "criterion": "When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "earlier": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.",
+    "incoming": "This fixes a regression introduced by a9bcf6586d1 (alias: use\nthe early config machinery to expand aliases, 2017-06-14).",
+    "reason": "The report reveals a prior decision to use the early config machinery to expand aliases, introduced by commit a9bcf6586d1 on 2017-06-14, which may need reevaluation given the earlier behavior of discovering the .git/ directory and resetting global state."
+  },
+  "70a248d83899": {
+    "criterion": "Initial checkout requires updating the worktree and index; cheap test ordering is incidental.",
+    "earlier": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+    "incoming": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "reason": "The earlier decision to skip a full checkout for 'checkout -b' might need revisiting given the new evidence that it causes a regression fixed by fa655d8411 (checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+  },
+  "7691925cf8b5": {
+    "criterion": "When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "earlier": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+    "incoming": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\".",
+    "reason": "The earlier decision relied on the assumption that passwords read from the command line were unscrambled before being stored in .cvspass, whereas the new evidence shows that these passwords are also scrambled, thus changing the applicability of the earlier result and necessitating a reassessment of whether passwords from the command line need to be initialized with \"A\"."
+  },
+  "8085b4d76db7": {
+    "criterion": "When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "earlier": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.",
+    "incoming": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter.",
+    "reason": "The earlier decision relied on the method of finding .git/ directories and resetting global state based on matching aliases; the report introduces concrete new evidence showing that alias names can be in CamelCase, thus changing the applicability of the earlier result, provided that alias names are consistently written in either all lowercase or all uppercase for the earlier method to remain valid."
+  },
+  "89b067170b94": {
+    "criterion": "Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "earlier": "setup: translate symlinks in filename when using absolute paths",
+    "incoming": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead.",
+    "reason": "The earlier decision allowed for dereferencing symlinks in filenames when using absolute paths, but this decision may now need reconsideration given that concrete new evidence shows that such dereferencing can lead to unintended modifications of files other than the symlinked ones, thus changing its applicability."
+  },
+  "8b2ab1278142": {
+    "criterion": "Initial checkout requires updating the worktree and index; cheap test ordering is incidental.",
+    "earlier": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+    "incoming": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "reason": "The earlier decision relied on skipping updates for branch creation to avoid unnecessary overhead; however, the new evidence shows that filesystem access during branch creation can now impact performance, thus changing its applicability to scenarios involving filesystem access. The earlier result remains valid for other checkout options that do not involve filesystem access."
+  },
+  "949e1ef11f1f": {
+    "criterion": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "earlier": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh.",
+    "incoming": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety.",
+    "reason": "The earlier decision relied on eliminating the dependency on SVN perl bindings to simplify and improve readability of the tests. However, the new evidence shows that this change introduced a regression by removing the safety check for svn availability, thus changing its applicability. The earlier result remains true if the safety check for svn is reinstated."
+  },
+  "96d04c9d7109": {
+    "criterion": "The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "earlier": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).",
+    "incoming": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around.",
+    "reason": "The earlier decision relied on the default behavior of $TEST_OUTPUT_DIRECTORY being equal to $TEST_DIRECTORY, leading to sub-test trash directories being created under the top-level t/ directory. The new evidence shows that when $TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root is not specified, the $test variable uses $TRASH_DIRECTORY, thus changing the condition under which sub-test trash directories are retained; this concrete new evidence makes the earlier result applicable only if $TEST_OUTPUT_DIRECTORY"
+  },
+  "b1ebae460e96": {
+    "criterion": "Initial checkout requires updating the worktree and index; cheap test ordering is incidental.",
+    "earlier": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+    "incoming": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "reason": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" without affecting the working tree, but the new evidence indicates that filesystem access may occur during such checkouts, thus changing the applicability of the earlier result; the earlier decision remains valid for other checkout scenarios where no filesystem access is expected."
+  },
+  "b6991c925daa": {
+    "criterion": "When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "earlier": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+    "incoming": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\".",
+    "reason": "The earlier decision was based on the rationale that passwords stored in .cvspass are already scrambled and thus need not be scrambled again; however, the report introduces new evidence suggesting that if no passwords are found in .cvspass and none are read from the command line, the initialization process must use \"A\" as the password, thereby changing the applicability of the earlier decision when neither .cvspass nor command-line input contains passwords."
+  },
+  "d7c854fcb9d2": {
+    "criterion": "Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "earlier": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format.",
+    "incoming": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.",
+    "reason": "The earlier decision to default to mbox format based solely on input source was informed by the assumption that most email clients do not prepend whitespace; however, new evidence indicates that some clients do add leading whitespace, thus changing the applicability of this decision and requiring the patch format detection logic to account for this additional whitespace."
+  },
+  "dea5a891705c": {
+    "criterion": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "earlier": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".",
+    "incoming": "Running test t9010 without svn currently errors out for no good reason.",
+    "reason": "The earlier decision relied on ensuring that calls to git would gracefully fail, but the new evidence shows that this change causes tests to erroneously fail when using svn, thus changing its applicability unless explicitly allowed for svn interactions."
+  },
+  "f35a63369f59": {
+    "criterion": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "earlier": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh.",
+    "incoming": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety.",
+    "reason": "The earlier decision relied on the absence of SVN::perl modules causing test failures; however, the new evidence shows that this failure is due to a regression introduced by a commit that inadvertently removed a safety mechanism, thus changing the applicability of the earlier result under conditions where the safety mechanism was still present."
+  },
+  "ffb0f75d65e9": {
+    "criterion": "Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "earlier": "otherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical.",
+    "incoming": "This is a regression introduced by 18e051a:\n  setup: translate symlinks in filename when using absolute paths\n(which did not take symlinks inside the work tree into consideration).",
+    "reason": "The original author's decision to translate symlinks in filenames when using absolute paths (introduced by 18e051a) likely overlooked symlinks within the work tree, which should now be rechecked given this new evidence revealing a regression."
+  }
+}

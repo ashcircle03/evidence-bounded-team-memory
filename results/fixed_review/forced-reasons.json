@@ -1,0 +1,110 @@
+{
+  "status": "complete",
+  "job_id": "119295",
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "dtype": "torch.bfloat16",
+  "device": "NVIDIA GeForce RTX 3090",
+  "generation_seconds": 11.89,
+  "input_sha256": "07f14bbb9b16ce02738b421e3f16f5f36d9a5a93ecc9ab549b17001bf6f1391c",
+  "calls": [
+    {
+      "id": "unseen-2p/no_cost/earlier-first",
+      "sha256": "b6498ae74b1f535a739bed9173319e06fe867190dff6ff39f06eefa6c46eda79",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" to avoid unnecessary updates. The report introduces new evidence showing that a full checkout, including updating the working tree, is necessary for all checkout options, thus changing the applicability of the earlier decision to any checkout scenario, not just branch creation.",
+      "input_tokens": 208,
+      "output_tokens": 72
+    },
+    {
+      "id": "unseen-2p/no_cost/report-first",
+      "sha256": "3c2330c90aeec195265134424e831d8ec3c5fbb127b596b76fb797d554485285",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via 'git checkout -b <new_branch>' to avoid unnecessary updates. The new evidence shows that a full checkout including updating the working tree is necessary for a full checkout, not just when creating a new branch, thus changing the applicability of the earlier result. The earlier result remains valid for checkouts that do not involve creating a new branch.",
+      "input_tokens": 209,
+      "output_tokens": 84
+    },
+    {
+      "id": "unseen-3p/intact/earlier-first",
+      "sha256": "c33284ef8f3844a1101b9683dd02ed6077d1414c8f0dc3178b979c1db1e3e347",
+      "raw": "The earlier decision relied on the assumption that only blob objects could be missing, but the new evidence shows that trees can also be missing, thus changing the applicability of the earlier result to include trees; however, the earlier decision remains valid if the empty tree object exists on disk.",
+      "input_tokens": 210,
+      "output_tokens": 57
+    },
+    {
+      "id": "unseen-3p/intact/report-first",
+      "sha256": "493a8a083e2ce173cf104b1290f2cd949bf0c589d1818c5c8e5d13d1c30500b2",
+      "raw": "The earlier decision relied on the assumption that only blob objects could be missing, but the new evidence shows that trees can also be missing, thus changing the applicability of the earlier result to include trees; however, the earlier decision remains valid if the --missing=* and --exclude-promisor-objects flags are not used with rev-list.",
+      "input_tokens": 210,
+      "output_tokens": 68
+    },
+    {
+      "id": "unseen-2p/no_exception/earlier-first",
+      "sha256": "7dcd3cbb5c6d7cfe194ba8e315ed45ff1a454d838339023e463d0511f7f12a45",
+      "raw": "The earlier decision relied on the specific scenario of creating a new branch via \"git checkout -b <new_branch>\" to avoid unnecessary merge operations. The new evidence suggests that filesystem access during such checkouts may now cause significant performance regressions, thus changing the applicability of the earlier rule and necessitating a different approach for optimizing checkout behavior. The earlier result remains valid for all other checkout scenarios.",
+      "input_tokens": 211,
+      "output_tokens": 80
+    },
+    {
+      "id": "unseen-2p/no_exception/report-first",
+      "sha256": "b2114e1be998a9bcb59a10f80227489c20009fc5de70d72a0ef3a20e8b644858",
+      "raw": "The earlier decision relied on the specific case of creating a new branch via \"git checkout -b <new_branch>\" to avoid unnecessary operations. However, the new evidence indicates that filesystem access is now critical for performance, thus changing the applicability of skipping these operations when creating a new branch. The earlier result remains valid for other checkout scenarios not involving branch creation.",
+      "input_tokens": 212,
+      "output_tokens": 73
+    },
+    {
+      "id": "unseen-1p/intact/earlier-first",
+      "sha256": "a8854d21d0d4e8269b43b9e1652c28235ddc999431bd119dafb157f39bc7805d",
+      "raw": "The earlier decision relied on the assumption that setting configuration values in the order of hardcoded defaults, followed by reading configuration files, and finally command-line arguments would ensure that later settings override earlier ones. However, the new evidence shows that this is not sufficient because the current implementation uses a state machine that only updates configuration values if they are not already set, potentially leading to unintended behavior when command-line arguments override hardcoded defaults. This change applies as long as the state machine's behavior for updating configuration",
+      "input_tokens": 231,
+      "output_tokens": 96
+    },
+    {
+      "id": "unseen-1p/intact/report-first",
+      "sha256": "5004670973ff2e6894953a7d1fe871c37e2c807877cfbc18f7487e3ef61f9953",
+      "raw": "The earlier decision relied on ensuring correct order of parsing git-send-email command-line arguments and configuration settings to avoid overriding intended configurations. However, the new evidence shows that merely fixing the command-line parsing order is insufficient as it does not address the issue where certain configuration values might be overwritten due to an incorrect state machine in read_config(). This changes the applicability of the earlier result because the state machine's behavior needs to be reconsidered to prevent unintended overwrites.",
+      "input_tokens": 231,
+      "output_tokens": 92
+    },
+    {
+      "id": "unseen-2p/cost_first/earlier-first",
+      "sha256": "d978bada7ad1ed9936c8de68e196d843fb5450bf4b24c5b5ca23bced8557ea3f",
+      "raw": "The earlier decision relied on the specific scenario of creating a new branch via \"git checkout -b <new_branch>\" where skipping certain steps was justified. The new evidence indicates that filesystem access may occur during such checkouts, necessitating a full checkout including updating the working tree, thus changing the applicability of the earlier result under conditions involving filesystem operations.",
+      "input_tokens": 236,
+      "output_tokens": 71
+    },
+    {
+      "id": "unseen-2p/intact/earlier-first",
+      "sha256": "ac98ecdbb1a90f05ce96b2b238d441bb8acedcd794872c6aa2bed828fc543c92",
+      "raw": "The earlier decision relied on the specific context of a \"checkout -b\" operation to determine whether to skip updates; the report introduces new evidence showing filesystem access during such operations, thus changing its applicability to include these cases in the initial checkout process, provided that alternative cheaper tests can exit early.",
+      "input_tokens": 236,
+      "output_tokens": 60
+    },
+    {
+      "id": "unseen-2p/cost_first/report-first",
+      "sha256": "bf482b92c191030ccd06d18e473cf78eba3cc105874c6b4a539648eb001b584f",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via 'git checkout -b', but the new evidence shows that this optimization does not apply when performing a full checkout including updating the working tree, thus changing its applicability. The earlier result remains true for cases where a new branch is created without additional checkout options.",
+      "input_tokens": 237,
+      "output_tokens": 67
+    },
+    {
+      "id": "unseen-2p/intact/report-first",
+      "sha256": "b3a689ebb56d9ebdcb08e4ee817cb6d5528bf59183152fe17be79e8ea87b84a6",
+      "raw": "The earlier decision relied on skipping updates for branch creation to avoid unnecessary overhead. However, the new evidence shows that filesystem access during branch creation can now impact performance, thus changing the applicability of the earlier result; the earlier decision may not hold if filesystem operations are critical for the checkout process. The earlier result remains valid if the checkout is not intended to create a new branch or if filesystem access is not significant.",
+      "input_tokens": 237,
+      "output_tokens": 83
+    },
+    {
+      "id": "unseen-4p/intact/earlier-first",
+      "sha256": "e500315676901939c1da092debdc3afcccf12a4eb86a15d77d23ffd4f2af6f28",
+      "raw": "The earlier decision relied on simplifying the commit creation process in builtin/commit.c to avoid forking 'git commit' and ensure a clean exit, addressing a regression from 356ee4659b. The report introduces new evidence showing that this approach fails when amending a commit, as it incorrectly checks against HEAD^ instead of HEAD. This changes the applicability of the earlier decision, as the concrete new evidence indicates a failure mode not previously considered. The",
+      "input_tokens": 239,
+      "output_tokens": 96
+    },
+    {
+      "id": "unseen-4p/intact/report-first",
+      "sha256": "eca8225e8b86e8f3002a316b478a1b8bd87599355eeef7aee5ab5457ac2ce2d0",
+      "raw": "The earlier decision relied on the assumption that amending a commit did not involve merging or modifications, leading to the use of HEAD instead of HEAD^. New evidence shows that amending a commit can involve merges and modifications, thus changing the applicability of the earlier result and necessitating the use of HEAD^ to accurately determine if the commit would be empty.",
+      "input_tokens": 239,
+      "output_tokens": 71
+    }
+  ]
+}

@@ -1,0 +1,929 @@
+{
+  "status": "complete",
+  "job_id": "119280",
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "dtype": "torch.bfloat16",
+  "device": "NVIDIA GeForce RTX 3090",
+  "generation_seconds": 128.58,
+  "input_sha256": "aeb0f12a3d57e8c7cef3d8a8ef80fa79b2d3d31ec7436f5be0a0776ff7677472",
+  "calls": [
+    {
+      "id": "related-2/A",
+      "sha256": "7a5f6cc528e9f6da6b1c4278f53fd9ddb4bec16e5fa3adc364fc789b79babe9c",
+      "raw": "{\"answer\":\"0\",\"source\":\"O2.2.2\"}",
+      "input_tokens": 1081,
+      "output_tokens": 15
+    },
+    {
+      "id": "scope-04/A",
+      "sha256": "edddd462e64606df1bc4a1842265fb6ccd8bf2eed7dae88e4b483103a1140bed",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        {\n            \"id\": \"O1.1.1\",\n            \"speaker\": \"Johannes Schindelin\",\n            \"text\": \"t/Makefile: add a rule to re-run previously-failed tests\"\n        },\n        {\n            \"id\": \"O1.1.2\",\n            \"speaker\": \"Johannes Schindelin\",\n            \"text\": \"This patch automates the process of determining which tests failed\\npreviously and re-running them.\"\n        }\n    ],\n    \"new\": [\n        {\n            \"id\": \"N.1.1\",\n            \"speaker\": \"controlled team report\",\n            \"text\": \"On the new kernel mmap beat read in all ten",
+      "input_tokens": 1091,
+      "output_tokens": 160
+    },
+    {
+      "id": "scope-03/A",
+      "sha256": "b4dceccd21703bcbc1bc8322f4160956f23788bf3052833e2f0e8817a0e700a9",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        {\n            \"id\": \"O1.1.1\",\n            \"speaker\": \"Johannes Schindelin\",\n            \"text\": \"t/Makefile: add a rule to re-run previously-failed tests\"\n        },\n        {\n            \"id\": \"O1.1.2\",\n            \"speaker\": \"Johannes Schindelin\",\n            \"text\": \"This patch automates the process of determining which tests failed\\npreviously and re-running them.\"\n        },\n        {\n            \"id\": \"O1.1.3\",\n            \"speaker\": \"Johannes Schindelin\",\n            \"text\": \"While developing patch series, it is a good practice to run the",
+      "input_tokens": 1092,
+      "output_tokens": 160
+    },
+    {
+      "id": "historical-06/A",
+      "sha256": "72f35aa61769d939aea477efa103d900b6e4382bdcfc98b1c42080ca3f783525",
+      "raw": "{\"action\":\"keep\",\"old\":\"O1.1.1\",\"new\":\"N.1.1\",\"reason\":\"The incoming record 'N.1.1' discusses fixing grammar and style issues in userdiff, which is unrelated to the previous decisions made about test automation and EOL handling in the Makefile. These changes do not necessitate reviewing or altering the existing decisions regarding test re-running and EOL handling practices.\"}",
+      "input_tokens": 1151,
+      "output_tokens": 88
+    },
+    {
+      "id": "related-2/C",
+      "sha256": "00c057f53f0b798c5cb5369b1893fc408ccd48b4eb05d679c5fdf12ceac973fd",
+      "raw": "{\"answer\":\"0\",\"source\":\"O2.2.2\"}",
+      "input_tokens": 1154,
+      "output_tokens": 15
+    },
+    {
+      "id": "scope-04/C",
+      "sha256": "624eda247e1476e31b906b4b20314030caa0b654a085b54542add064da11d483",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record suggests that `make -C t` now only runs the tests that failed in the previous run, which aligns with the functionality described in the old record. However, the new record introduces a performance difference between `mmap` and `read` for certain file sizes, indicating a potential need to revisit the strategy of running only failed tests to ensure optimal performance across different scenarios.\"\n}",
+      "input_tokens": 1163,
+      "output_tokens": 119
+    },
+    {
+      "id": "scope-03/C",
+      "sha256": "5c21d7a9caafad341ed6de0314b68e4d3a03c8d23af6d30407048426235fce01",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a scenario where zero-length files cause issues with `mmap`. This suggests that the previous approach of running only the tests that failed in the previous run might not be sufficient for handling all edge cases, including zero-length files. Therefore, it may warrant reviewing the decision to ensure that such cases are properly handled.\"\n}",
+      "input_tokens": 1164,
+      "output_tokens": 106
+    },
+    {
+      "id": "related-3/A",
+      "sha256": "240b6e8ea5c70ba1a5d7f678dafcf351a8dcae43f365427908a6fc3cc2c4c014",
+      "raw": "{\"answer\":\"test-results/\",\"source\":\"O2.1.5\"}",
+      "input_tokens": 1165,
+      "output_tokens": 17
+    },
+    {
+      "id": "scope-06/A",
+      "sha256": "6f120021e33872330fbcc40ca618dd4c79936c3f8457e30f4b40c58472a103b6",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\"O1.1.1\", \"O1.1.2\"],\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record indicates that the presence of grafts affects the accuracy of ancestry queries, contrary to the expectation based on the old records. This suggests a need to either review the old decisions to ensure they still hold true in the presence of grafts, or test the old methods under conditions with grafts to confirm their reliability.\"\n}",
+      "input_tokens": 1165,
+      "output_tokens": 113
+    },
+    {
+      "id": "scope-05/A",
+      "sha256": "b723bd8f7a8c7f7135f2f586225a8b419c2abe311d83840308491d8afe324ac9",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        {\n            \"id\": \"O1.2.6\",\n            \"speaker\": \"Derrick Stolee\",\n            \"text\": \"For a copy of the Linux repository, where HEAD is checked out at v4.13~100, we get the following performance improvement for 'git branch --contains' over the previous commit:\"\n        }\n    ],\n    \"new\": [\n        {\n            \"id\": \"N.1.1\",\n            \"speaker\": \"controlled team report\",\n            \"text\": \"We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph",
+      "input_tokens": 1170,
+      "output_tokens": 160
+    },
+    {
+      "id": "scope-02/A",
+      "sha256": "e4fbf92a3d684eec4448f13d8b82eb0ca9b13c005c1fdbc153a4ae7fa388f19e",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        {\n            \"id\": \"O1.1.1\",\n            \"speaker\": \"Jens Lehmann\",\n            \"text\": \"Submodules: Don't parse .gitmodules when it contains, merge conflicts\"\n        },\n        {\n            \"id\": \"O1.1.2\",\n            \"speaker\": \"Jens Lehmann\",\n            \"text\": \"Commands like \\\"git status\\\", \\\"git diff\\\" and \\\"git fetch\\\" would fail when the\\n.gitmodules file contained merge conflicts because the config parser would\\ncall die() when hitting the conflict markers:\"\n        },\n        {\n            \"id\": \"O1.1.3\",\n            \"speaker\": \"Jens Lehmann\",\n           ",
+      "input_tokens": 1178,
+      "output_tokens": 160
+    },
+    {
+      "id": "scope-01/A",
+      "sha256": "9b36efcbde5473238130621b9148019a46ea35d4c73b0fc1285ee927c75d70b5",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        {\n            \"id\": \"O1.1.1\",\n            \"speaker\": \"Jens Lehmann\",\n            \"text\": \"Submodules: Don't parse .gitmodules when it contains, merge conflicts\"\n        },\n        {\n            \"id\": \"O1.1.2\",\n            \"speaker\": \"Jens Lehmann\",\n            \"text\": \"Commands like \\\"git status\\\", \\\"git diff\\\" and \\\"git fetch\\\" would fail when the\\n.gitmodules file contained merge conflicts because the config parser would\\ncall die() when hitting the conflict markers:\"\n        },\n        {\n            \"id\": \"O1.1.3\",\n            \"speaker\": \"Jens Lehmann\",\n           ",
+      "input_tokens": 1179,
+      "output_tokens": 160
+    },
+    {
+      "id": "historical-06/C",
+      "sha256": "4c5ee290658415ee1072926adad9060b1ebc30e4c7a1c3cbb9c8a0b29e8d07cf",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record 'userdiff: fix grammar and style issues' by Boxuan Li does not introduce any changes related to test re-running or conditions. It focuses on improving the userdiff script's grammar and style. The previous records discuss how 'make -C t failed' runs only the tests that failed in the previous run, which is unrelated to the incoming record.\"\n}",
+      "input_tokens": 1200,
+      "output_tokens": 112
+    },
+    {
+      "id": "related-2/B",
+      "sha256": "e674e60440e5b2a7cc5616281f83794545339db296820cb556a58ebc96a737c8",
+      "raw": "{\"answer\":\"0\",\"source\":\"O2.2.2\"}",
+      "input_tokens": 1220,
+      "output_tokens": 15
+    },
+    {
+      "id": "related-3/C",
+      "sha256": "a4dcf7d963ac6fb8a0edbe5e2e262923f14b6cda2becdd540081d1277daa207f",
+      "raw": "{\"answer\":\"test-results/\",\"source\":\"O2.1.5\"}",
+      "input_tokens": 1225,
+      "output_tokens": 17
+    },
+    {
+      "id": "scope-04/B",
+      "sha256": "6ac0527669d8c4c8a948feb1d2b5c45623f6489e767b8b632081f4cdd0f3b027",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.5\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record suggests that on new hardware configurations, mmap outperforms read for large packed-refs files, contradicting the previous evidence that read was more efficient. This change indicates a need to reassess the necessity of the previous decision to re-run tests automatically, as the performance characteristics have shifted.\"\n}",
+      "input_tokens": 1230,
+      "output_tokens": 100
+    },
+    {
+      "id": "scope-03/B",
+      "sha256": "db136539fcb9ac71f534375386b2c08f9860bcc0de84b907d696654a3634b564",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.5\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a scenario where zero-length packed-refs files cause issues with `mmap()`, contrary to the previous evidence that `mmap()` was faster than `read()` for non-empty files. This suggests a need to revisit the decision to automate the re-running of previously failed tests, as the current approach may not be reliable for all cases, including zero-length files.\"\n}",
+      "input_tokens": 1231,
+      "output_tokens": 117
+    },
+    {
+      "id": "scope-02/C",
+      "sha256": "653c10973792ee1c0d78e5b033e0d3d395514624d6ec014f9d23d6249f457635",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record mentions successful completion of 200 massively parallel prove runs with no crashes on the Linux native Perl workers, but unexplained crashes continued on the Windows MSYS2 pool. This suggests that the issue may have been resolved on Linux but remains unresolved on Windows, warranting further investigation.\"\n}",
+      "input_tokens": 1238,
+      "output_tokens": 100
+    },
+    {
+      "id": "scope-01/C",
+      "sha256": "5b37d5ebed22b51a38e8b5a4aefb2d6d1ba9f5455d806adf2543cbe114c09bd4",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record suggests that the Windows build with a native Perl and Subversion bindings completed 200 massively parallel prove runs without crashes, indicating that the previous issue with crashes due to the use of `prove` tool may have been resolved. However, the old record mentions that `prove` tool requires Perl, which could lead to crashes under stress conditions, especially when running massively-parallel tests. Therefore, while the crash issue seems to be resolved, the context of the new information is still relevant to ensure that the changes made do not introduce other unforeseen issues.\"\n}",
+      "input_tokens": 1239,
+      "output_tokens": 154
+    },
+    {
+      "id": "related-1/A",
+      "sha256": "9fb923b13ae2c1c6eaf91422f0550eb5a89da45bcb56300ebbac1237d2c779f8",
+      "raw": "{\"answer\":\"do nothing in case of EOL roundtrip errors\",\"source\":\"O1.1.2\"}",
+      "input_tokens": 1246,
+      "output_tokens": 24
+    },
+    {
+      "id": "historical-05/A",
+      "sha256": "49812cb1d624d147eea1ecb85f4d59536644a57ffa31d0d9172c796ab2acf9ad",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\",\n        \"O1.1.5\"\n    ],\n    \"new\": [\n        \"N.1.1\",\n        \"N.1.2\"\n    ],\n    \"reason\": \"The incoming record introduces a regression that affects the behavior of the 'safecrlf' setting, specifically causing a warning message to be displayed despite the setting being set to 'false'. This suggests a change in the system's handling of line endings, which could impact the previous decisions made regarding the 'safe_crlf' enum. The old",
+      "input_tokens": 1254,
+      "output_tokens": 160
+    },
+    {
+      "id": "scope-06/C",
+      "sha256": "1fde6fe0797350fa211ec4a8adffd0ecf08c9ee2e3567c1f1c7baa2da6e1ac43",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record indicates that the presence of grafts in the repository causes incorrect ancestor resolution, which was previously assumed to work correctly. This suggests that the compatibility issue identified in the old record may need to be revisited, especially since the new record highlights a failure scenario that wasn't covered in the initial analysis.\"\n}",
+      "input_tokens": 1260,
+      "output_tokens": 102
+    },
+    {
+      "id": "scope-05/C",
+      "sha256": "1bf3ef0072ab21ba06434b2cf5f07e498deb9c3ea636c91bcfc4acd0ebbbc815",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O2.2.2\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record mentions a prototype that keys the graph by the active graft table, leading to faster ancestry queries on a grafted repository. This suggests that the compatibility issue noted in the old record might not apply in all scenarios, especially when grafts are involved. Therefore, the old record should be reviewed to ensure it still holds relevance.\"\n}",
+      "input_tokens": 1265,
+      "output_tokens": 107
+    },
+    {
+      "id": "related-1/C",
+      "sha256": "dc51b11737607b1db55edc5ddc3317c8de5e70ca3df1deb1fbf07988ac095ff5",
+      "raw": "{\"answer\":\"do nothing in case of EOL roundtrip errors\",\"source\":\"O1.1.2\"}",
+      "input_tokens": 1295,
+      "output_tokens": 24
+    },
+    {
+      "id": "historical-02/A",
+      "sha256": "081cc2878b0b3829ec2479a039ef9f8fac2a687010395b0aec695c64eae5cd68",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": [\"O1.1.1\", \"O1.1.2\"],\n    \"new\": [\"N.1.1\", \"N.1.2\", \"N.1.3\"],\n    \"reason\": \"The incoming changes pertain to a different aspect of Git operations (multi-pack-index description correction) and do not contradict or necessitate a review of the previous decisions regarding packed-ref cache handling or struct object_entry optimizations. The old passages focus on improving memory efficiency and performance, while the new ones address a minor bug in the multi-pack-index description. These changes do not overlap significantly enough to warrant a review of the older decisions.\"\n}",
+      "input_tokens": 1300,
+      "output_tokens": 145
+    },
+    {
+      "id": "historical-05/C",
+      "sha256": "fe78aa329f17f5906c57bebae6a3ac95ec714258034b508c953478b6bd1d6646",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a regression that affects the behavior of the 'safecrlf' setting, specifically causing a warning message to be produced despite it being set to 'false'. This suggests a change in behavior that may require further investigation or adjustment of the previous decision regarding 'safecrlf'.\"\n}",
+      "input_tokens": 1303,
+      "output_tokens": 103
+    },
+    {
+      "id": "historical-06/B",
+      "sha256": "67da9c3500a129f86df293237f7c64706c43a75bb8d33cb4eacc6b66238eaaeb",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record 'userdiff: fix grammar and style issues' does not introduce any changes related to test re-running or conditions testing. It focuses on improving the grammar and style of the userdiff function, which is unrelated to the context of re-running previously failed tests discussed in the old records.\"\n}",
+      "input_tokens": 1309,
+      "output_tokens": 97
+    },
+    {
+      "id": "scope-06/B",
+      "sha256": "a9b163a6c0b5347406c6610f0df7175f57c83cf31faff6d98e6e82cbc55d8e51",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record indicates that repositories with commit grafts still use the original parent links and return incorrect ancestors, suggesting that the current decision to make commit_graph_compatible(r) return false for repositories with commit grafts might need reconsideration. The old passage supports the initial decision, but the new passage provides evidence that the current implementation may not fully address the issue.\"\n}",
+      "input_tokens": 1315,
+      "output_tokens": 112
+    },
+    {
+      "id": "scope-05/B",
+      "sha256": "e42f603379920ecfa42e4b9c0b8f1d75c83fc69fdd9b6738f92ea64e3ca00b9f",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.2.6\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record mentions a prototype that uses graft tables, which contradicts the assumption made in the old records about the absence of grafts. While the performance improvement was observed without grafts, the presence of grafts in the prototype suggests that the current implementation might need to handle them differently. Therefore, the decision to keep the changes should be reconsidered.\"\n}",
+      "input_tokens": 1320,
+      "output_tokens": 111
+    },
+    {
+      "id": "related-3/B",
+      "sha256": "3eb50b0da435e86d112d2d8b44d8c096d4101aafdc25e2dbdf215eafde2152f0",
+      "raw": "{\"answer\":\"test-results/\",\"source\":\"O2.1.5\"}",
+      "input_tokens": 1322,
+      "output_tokens": 17
+    },
+    {
+      "id": "historical-04/A",
+      "sha256": "510bd4a6b876aa3166345fe4639578ca74304544350e3b9577ed1f8d73259897",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": [\"O1.2.5\", \"O1.2.6\"],\n    \"new\": [\"N.1.1\", \"N.1.2\"],\n    \"reason\": \"The incoming changes are about documentation and do not affect the functionality or performance improvements described in the older passages. The references to the 'commit-graph file' are being corrected while maintaining the existing behavior regarding the commit graph.\"\n}",
+      "input_tokens": 1326,
+      "output_tokens": 96
+    },
+    {
+      "id": "scope-02/B",
+      "sha256": "8eb38b35bf526da1faf2347e354b96a9e58f15b8ce1cec90891d25e98f49623c",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record mentions successful completion of 200 massively parallel prove runs with no crashes on Linux native Perl workers, but unexplained crashes on Windows MSYS2. This suggests that the current decision to avoid parsing .gitmodules during merge conflicts may need reconsideration due to the recurring crashes on Windows. The old passage supports the initial decision to improve usability by avoiding command failures, while the new passage indicates potential issues with the current approach.\"\n}",
+      "input_tokens": 1335,
+      "output_tokens": 128
+    },
+    {
+      "id": "scope-01/B",
+      "sha256": "0e8edb52f911bab349cde0a459a61601c7f9258a1392a623070230c130ec1cad",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record suggests a successful implementation of the previous decision to avoid parsing .gitmodules during merge conflicts, leading to improved usability and reduced crash frequency on Windows builds. This indicates that while the initial decision was correct, its implementation may need further refinement based on new performance data.\"\n}",
+      "input_tokens": 1336,
+      "output_tokens": 95
+    },
+    {
+      "id": "historical-02/C",
+      "sha256": "6cd05744edf5c4a0c3918e222f48891cfd5170f99879729d310a3a105e2df60c",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a new issue regarding the multi-pack-index description, which is different from the previous records focused on packed-ref handling. However, the context suggests that both sets of changes aim to improve git operations' efficiency and correctness. The new record introduces a bug fix that affects the multi-pack-index description, which could indirectly impact the performance and correctness of git operations, especially when dealing with large repositories. Therefore, it warrants further investigation to ensure that the fix does not introduce unintended side effects.\"\n}",
+      "input_tokens": 1385,
+      "output_tokens": 139
+    },
+    {
+      "id": "historical-04/C",
+      "sha256": "634216c1b34fc4f090096fe495da90984a4c7fde4d3101c3c6a0e4368d0b4194",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record does not introduce any changes that would necessitate reviewing or altering the existing decisions regarding the use of generations in paint_down_to_common(). The proposed change in the incoming record is about documentation, specifically fixing references to the 'commit-graph file' with a dash, which does not conflict with or require revisiting the existing code changes.\"\n}",
+      "input_tokens": 1388,
+      "output_tokens": 106
+    },
+    {
+      "id": "related-1/B",
+      "sha256": "7b16a046e78e7bd45458b63817657e9afd406e51895310eed8d2ba5009ea8927",
+      "raw": "{\"answer\":\"do nothing in case of EOL roundtrip errors\",\"source\":\"O1.1.2\"}",
+      "input_tokens": 1404,
+      "output_tokens": 24
+    },
+    {
+      "id": "historical-05/B",
+      "sha256": "2f0e4e21a1f4487ab669c06eca627243cb6b8c6911ff34fb9bfa686ef27b1f29",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a regression that affects the behavior of `core.safecrlf` when set to `false`. This suggests that the previous decision to change `checksafe` to `conv_flags` as an integer bit pattern may need reconsideration, as the regression indicates that the old behavior (i.e., `safe_crlf` enum) still needs to be preserved for certain conditions. The old passage O1.1.1 supports the initial decision to change `checksafe` to `conv_flags`, while the new passage N.1.1 highlights a specific issue that arises when `",
+      "input_tokens": 1412,
+      "output_tokens": 160
+    },
+    {
+      "id": "F_SH_Top01_013/A",
+      "sha256": "ce1e62beb26ec82497d836f456e69ef222d49918ef3792f01ed71963f4969f9b",
+      "raw": "{\"answer\":\"at least 10 workdays\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1431,
+      "output_tokens": 20
+    },
+    {
+      "id": "historical-02/B",
+      "sha256": "76bd6078c3491104008b9a8fb161e13bb90b7e5abbedc52c02f4df7fb7520d82",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a new issue regarding the multi-pack-index description, which is different from the previous records focused on file handling and struct optimization. While the context of file handling might have some overlap, the specific problem described in N.1.1 pertains to a different aspect of Git operations.\"\n}",
+      "input_tokens": 1432,
+      "output_tokens": 100
+    },
+    {
+      "id": "q03/A",
+      "sha256": "addc1a0bd7fe58d9e2b38212f533cb1e5e7c3352dab4c3a1f7aa2e1ffb2255ae",
+      "raw": "{\"answer\":\"-1\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1446,
+      "output_tokens": 15
+    },
+    {
+      "id": "F_SH_Top01_033/A",
+      "sha256": "59c6ce3fb28367c8d48a2c0a62138fa807cc11ad5a8b4def28c40e050ab1e057",
+      "raw": "{\"answer\":\"Lizhen Zhou\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1452,
+      "output_tokens": 17
+    },
+    {
+      "id": "pep-515/A",
+      "sha256": "6ad25881f2c3df72188b8dcebbc3297de6d4f60311235dbbd5492c7380eb51ae",
+      "raw": "{\"answer\":\"one\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1481,
+      "output_tokens": 14
+    },
+    {
+      "id": "historical-04/B",
+      "sha256": "6db48e8b12ccc5c1d8d2d54d6f639c531903865d405dd72403a582c03eb50452",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": \"O1.2.5\",\n    \"new\": \"N.1.2\",\n    \"reason\": \"The incoming record does not introduce any changes that necessitate reviewing or altering the existing decisions. Martin Ågren's changes are purely about documentation, specifically fixing references to the 'commit-graph file' to include the dash. This does not impact the functionality or performance improvements discussed in the older records.\"\n}",
+      "input_tokens": 1482,
+      "output_tokens": 96
+    },
+    {
+      "id": "F_SH_Top01_002/A",
+      "sha256": "7e17809ab86b33be079e88c083de8a0e839cbda67d001647bd4f7e72c0d5039d",
+      "raw": "{\"answer\":\"Confluence\",\"source\":\"E.2.1\"}",
+      "input_tokens": 1487,
+      "output_tokens": 15
+    },
+    {
+      "id": "F_SH_Top01_013/C",
+      "sha256": "09a2055db00044f28b3933c5281fdcf6b1100912c6a9df3386db8d070180fda4",
+      "raw": "{\"answer\":\"at least 10 workdays\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1491,
+      "output_tokens": 20
+    },
+    {
+      "id": "q07/A",
+      "sha256": "d8a53b12248aa2237ab668ae3178799d3cd6902566b6bc5d1aa2157cd6962c60",
+      "raw": "{\"answer\":\"manual\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1491,
+      "output_tokens": 14
+    },
+    {
+      "id": "q03/C",
+      "sha256": "ea39b3262c200ca730f8a4d71d7792c2e04fba8eb481f64227acf425d3a34912",
+      "raw": "{\"answer\":\"-1\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1495,
+      "output_tokens": 15
+    },
+    {
+      "id": "prior_git-03/A",
+      "sha256": "06c54f663bb28dd0ee89da2e337576b7b1a25285b387b1c466c060c8e769ee3b",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\",\n        \"O1.1.5\",\n        \"O1.1.6\",\n        \"O1.1.7\"\n    ],\n    \"new\": [\n        \"N.1.1\",\n        \"N.1.2\",\n        \"N.1.3\",\n        \"N.1.4\",\n        \"N.1.5\",\n        \"N.1.6\",\n        \"N.1.7\"\n    ],\n    \"reason\": \"The incoming record introduces a new issue with the `git show",
+      "input_tokens": 1510,
+      "output_tokens": 160
+    },
+    {
+      "id": "F_SH_Top01_033/C",
+      "sha256": "1c500c825f6baaaf020a289f651896175434ef5c24fdde656c5f5e788f20a77c",
+      "raw": "{\"answer\":\"Yu Su\",\"source\":\"E.2.1\"}",
+      "input_tokens": 1512,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-618/A",
+      "sha256": "c8b9e12ca2a1243d7412fd2fc1ce15481793fffadef0b41699ad74786724b965",
+      "raw": "{\"answer\":\"ValueError\",\"source\":\"E.1.3\"}",
+      "input_tokens": 1520,
+      "output_tokens": 15
+    },
+    {
+      "id": "q07/C",
+      "sha256": "3b83a2699cba6201da7a86c30240da73503fbfb9bb68129a9738f1255edbbc76",
+      "raw": "{\"answer\":\"manual\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1540,
+      "output_tokens": 14
+    },
+    {
+      "id": "F_SH_Top01_002/C",
+      "sha256": "991f1a1ce027f36f7256b49f065d16edda0aadcbaa9caf5661d4d1cbb696b88b",
+      "raw": "{\"answer\":\"Confluence\",\"source\":\"E.2.1\"}",
+      "input_tokens": 1547,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-515/C",
+      "sha256": "14f71104cacf6e8247375652754baf8b1ecffd9f6b2c98e5b504bed6fc1cc8b5",
+      "raw": "{\"answer\":\"one\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1554,
+      "output_tokens": 14
+    },
+    {
+      "id": "pep-553/A",
+      "sha256": "ed4e3542018b0b39f2e75f61268cb85033db6fc2b2bccaed75cf73d5ee5d68c4",
+      "raw": "{\"answer\":\"0\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1555,
+      "output_tokens": 14
+    },
+    {
+      "id": "prior_git-03/C",
+      "sha256": "3cfab68bfab4e29e2b82a67570630393749223f83b5c36c6068fe29476419465",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.6\",\n    \"new\": \"N.1.2\",\n    \"reason\": \"The incoming record introduces a new issue with the `git-describe` command where it may prematurely terminate the search for tag candidates, leading to incorrect tag descriptions. This issue is demonstrated through a test case showing a memory leak regression introduced in a previous commit. The old passage does not address this specific problem, hence the need to review the behavior of `git-describe` in multi-root commit scenarios.\"\n}",
+      "input_tokens": 1576,
+      "output_tokens": 120
+    },
+    {
+      "id": "pep-669/A",
+      "sha256": "d3828adee8e3a78c18bcbb840fdc0c1bb0d8cbb145f2862f502513575a7448ef",
+      "raw": "{\"answer\":\"sys.monitoring\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1585,
+      "output_tokens": 16
+    },
+    {
+      "id": "F_SH_Top01_013/B",
+      "sha256": "ce94f58efa90fa9914851effa7a1b422c49129393db79f97bc90cc11b662c7a5",
+      "raw": "{\"answer\":\"at least 10 workdays\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1588,
+      "output_tokens": 20
+    },
+    {
+      "id": "pep-597/A",
+      "sha256": "7417aad0aad15bdd953c2c05ae937fba94a805324b0506c2beb990a0086fa015",
+      "raw": "{\"answer\":\"EncodingWarning\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1589,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-654/A",
+      "sha256": "07deeee8a214b529289d2a5516e6123eda899edc64ca761ede4213b6981b386d",
+      "raw": "{\"answer\":\"except*\", \"source\":\"E.1.2\"}",
+      "input_tokens": 1590,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-618/C",
+      "sha256": "f9c16fce7445ebbc0ee7b9c51cb44f46ef8e41d832ddbc103a8661d6ba002508",
+      "raw": "{\"answer\":\"ValueError\",\"source\":\"O1:note\"}",
+      "input_tokens": 1593,
+      "output_tokens": 14
+    },
+    {
+      "id": "pep-615/A",
+      "sha256": "fe9f5165884d2aa703405457ac3c0f5b1c79dc2b3c772b95da51a3a73ebff93c",
+      "raw": "{\"answer\":\"tzdata\",\"source\":\"E.1.2\"}",
+      "input_tokens": 1603,
+      "output_tokens": 15
+    },
+    {
+      "id": "q03/B",
+      "sha256": "a5f89e262221bd76b8d2736334ce60a24340465015e2521c4b80d04d28045ec6",
+      "raw": "{\"answer\":\"-1\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1604,
+      "output_tokens": 15
+    },
+    {
+      "id": "F_SH_Top01_033/B",
+      "sha256": "ab38122827535e9cf55dd5e273c470c9c2ad618e2153c94669a4f8546767177f",
+      "raw": "{\"answer\":\"Lizhen Zhou\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1609,
+      "output_tokens": 17
+    },
+    {
+      "id": "pep-515/B",
+      "sha256": "0347453954dc11ffedf9bd60faaea0696d5983e62a65c43e157f2e09874f8954",
+      "raw": "{\"answer\":\"one\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1620,
+      "output_tokens": 14
+    },
+    {
+      "id": "pep-572/A",
+      "sha256": "7b5e068d6ac9d3705655506d352b003899ee43bedc04eb4a0a7591f3f3d0d2c8",
+      "raw": "{\"answer\":\"NAME := expr\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1624,
+      "output_tokens": 16
+    },
+    {
+      "id": "pep-553/C",
+      "sha256": "5ca4126a6706e33c2365eeecf5e5b0174edd36b9e7e21d7b1e2ca8aaa988af7a",
+      "raw": "{\"answer\":\"0\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1628,
+      "output_tokens": 14
+    },
+    {
+      "id": "pep-680/A",
+      "sha256": "b38de91622d7049477bff90558a70e9e8cf4dbe5ebc0f258e0ee5c6e3e4d49ff",
+      "raw": "{\"answer\":\"tomllib\",\"source\":\"E.2.2\"}",
+      "input_tokens": 1631,
+      "output_tokens": 15
+    },
+    {
+      "id": "prior_git-03/B",
+      "sha256": "12119e9d78112051ffcad73b01c5ad324c1427a0214410bfa8764fcea30f2e9f",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.7\",\n    \"new\": \"N.1.2\",\n    \"reason\": \"The incoming record introduces a new issue related to the `git-describe` command's stopping condition, specifically mentioning a regression in the `show --word-diff --color-moved` functionality. This suggests that the previous decision to modify the stopping condition might not fully address all edge cases, particularly those involving multi-branch scenarios where tags are found across independent branches. Therefore, further investigation is warranted to ensure the accuracy and reliability of tag identification.\"\n}",
+      "input_tokens": 1631,
+      "output_tokens": 129
+    },
+    {
+      "id": "F_SH_Top01_002/B",
+      "sha256": "73faacdcdbc87da1699674c26f27aa9fc1ec8327038191c1bfc5e12c8272391a",
+      "raw": "{\"answer\":\"Confluence\",\"source\":\"E.2.1\"}",
+      "input_tokens": 1644,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-669/C",
+      "sha256": "cf85f015841ad513bb0941a8d951d5ca330bf8ad7cb298b1a8b5a3ebfd9a8686",
+      "raw": "{\"answer\":\"sys.monitoring\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1645,
+      "output_tokens": 16
+    },
+    {
+      "id": "q07/B",
+      "sha256": "a9d9dc096f3c52ad6198286b2d94cf014a4cc2eac05af5ddb15de2ae343af147",
+      "raw": "{\"answer\":\"manual\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1649,
+      "output_tokens": 14
+    },
+    {
+      "id": "pep-618/B",
+      "sha256": "271b059f1f2edbbad109162a5cf0772e4b4bb75cbed12e9f2ea3bc3aba18a39f",
+      "raw": "{\"answer\":\"ValueError\",\"source\":\"E.1.3\"}",
+      "input_tokens": 1659,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-552/A",
+      "sha256": "0eef0f45e83318e0e55ec1cbee1e4244ed2c08492cad492be3278aaf4aa68ca5",
+      "raw": "{\"answer\":\"SipHash\",\"source\":\"E.1.2\"}",
+      "input_tokens": 1664,
+      "output_tokens": 16
+    },
+    {
+      "id": "pep-572/C",
+      "sha256": "d94c1e309a6bfda8853658624af3ef5d1d665ad6337ac0cd6560825fd9bc8fc1",
+      "raw": "{\"answer\":\"NAME := expr\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1684,
+      "output_tokens": 16
+    },
+    {
+      "id": "pep-597/C",
+      "sha256": "eae65a04d79610ed6d864786b21198fa5b3b107fd28fb2d14233743a293f477a",
+      "raw": "{\"answer\":\"EncodingWarning\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1684,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-654/C",
+      "sha256": "1341d62c2c1955fb67fa5b983568bb4bf9b2967a473b25443ee4efc5a1452fa2",
+      "raw": "{\"answer\":\"except*\", \"source\":\"E.1.2\"}",
+      "input_tokens": 1685,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-680/C",
+      "sha256": "4dfb182acf005b26aad628acad062aae9f37c337ff3f1292b3d8a64a402babe6",
+      "raw": "{\"answer\":\"tomllib\",\"source\":\"E.2.2\"}",
+      "input_tokens": 1691,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-553/B",
+      "sha256": "3335be38f4a9ed8c96dafa3cd8d09917d0526d79e0f742e8d48519630c7f0e19",
+      "raw": "{\"answer\":\"0\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1694,
+      "output_tokens": 14
+    },
+    {
+      "id": "pep-615/C",
+      "sha256": "92a5771856b914e83463ec4d3671a5abbc490ecaa01ff4bf8a7d13dd79c11c02",
+      "raw": "{\"answer\":\"tzdata\",\"source\":\"E.1.2\"}",
+      "input_tokens": 1698,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-552/C",
+      "sha256": "652b6fe292215797ed6eed183f489ebfa68faac5dfbdb9a4cb39d228fdd20bee",
+      "raw": "{\"answer\":\"SipHash\",\"source\":\"E.1.2\"}",
+      "input_tokens": 1724,
+      "output_tokens": 16
+    },
+    {
+      "id": "pep-597/B",
+      "sha256": "8668a2c86e2bca844db5f695fe0b84f86360b752b6909d7ef03f6735b41c73e0",
+      "raw": "{\"answer\":\"EncodingWarning\",\"source\":\"E.2.3\"}",
+      "input_tokens": 1739,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-654/B",
+      "sha256": "45b76b67767e836419fa9c9e0aab534baeb81a6fa2553ef6a3250fdeefd04a2d",
+      "raw": "{\"answer\":\"except*\", \"source\":\"E.1.2\"}",
+      "input_tokens": 1740,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-669/B",
+      "sha256": "30d250db3726cea5f129e868ffd4d36303aaeec349928603391fc9ceba2f3647",
+      "raw": "{\"answer\":\"sys.monitoring\",\"source\":\"E.2.4\"}",
+      "input_tokens": 1742,
+      "output_tokens": 16
+    },
+    {
+      "id": "pep-615/B",
+      "sha256": "ef7870bcb21ef7e80287a3b616743c1e1609039728ff8a8fb9c6cca3f4f3b8ff",
+      "raw": "{\"answer\":\"tzdata\",\"source\":\"E.1.2\"}",
+      "input_tokens": 1753,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-572/B",
+      "sha256": "38793b03b71bffdc3ca50df5b6ee4781ee1c8a45aa03b81d1e6babad9c629893",
+      "raw": "{\"answer\":\"NAME := expr\",\"source\":\"E.1.1\"}",
+      "input_tokens": 1781,
+      "output_tokens": 16
+    },
+    {
+      "id": "pep-680/B",
+      "sha256": "2a2d9879cb91dd2cbe1a68de68aefa3af9751815efc28801ebe510e1ccd61c31",
+      "raw": "{\"answer\":\"tomllib\",\"source\":\"E.2.2\"}",
+      "input_tokens": 1788,
+      "output_tokens": 15
+    },
+    {
+      "id": "pep-552/B",
+      "sha256": "8927f12d39403c6a17da4cdcf984f7664686b94b2fa37da46b5166a3d0109440",
+      "raw": "{\"answer\":\"SipHash\",\"source\":\"E.1.2\"}",
+      "input_tokens": 1821,
+      "output_tokens": 16
+    },
+    {
+      "id": "prior_git-01/A",
+      "sha256": "72203e9817f968550b2d251ea3a8108d574c5d4d83c7d1d1af4a2c388078a1d7",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\",\n        \"O1.1.5\",\n        \"O1.1.6\",\n        \"O1.1.7\",\n        \"O1.1.8\"\n    ],\n    \"new\": [\n        \"N.1.1\",\n        \"N.1.2\",\n        \"N.1.3\",\n        \"N.1.4\",\n        \"N.1.5\",\n        \"N.1.6\",\n        \"N.1.7\"\n    ],\n    \"reason\": \"The incoming record",
+      "input_tokens": 1980,
+      "output_tokens": 160
+    },
+    {
+      "id": "historical-08/A",
+      "sha256": "84a4d2961b566cf2c1e8e9d86a757467d3b0ed6ec9434ebdddc594b3c331e9cf",
+      "raw": "{\n    \"action\": \"keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\",\n        \"O1.1.5\",\n        \"O1.1.6\"\n    ],\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record does not introduce a change related to the functionality described in the old passages. The new record pertains to improving documentation, which is unrelated to the automated test re-running and rebase handling functionalities mentioned in the old passages.\"\n}",
+      "input_tokens": 2048,
+      "output_tokens": 134
+    },
+    {
+      "id": "prior_git-01/C",
+      "sha256": "daa937522179d617024ca7279b1119dae561a3705601f478cbead1afd4695100",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record mentions a weakness in the disjoint-root handling of git-describe, specifically that it might stop too early when searching for the best tag to describe a commit. This suggests a potential issue that needs further investigation, hence warranting a review.\"\n}",
+      "input_tokens": 2051,
+      "output_tokens": 90
+    },
+    {
+      "id": "historical-07/A",
+      "sha256": "0d67c5e4e154d526f34b17051b712185fc657da5f50e4803158684d74b8ed835",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\",\n        \"O1.1.5\",\n        \"O1.1.6\"\n    ],\n    \"new\": [\n        \"N.1.1\",\n        \"N.1.2\"\n    ],\n    \"reason\": \"The incoming record introduces a regression in the labeling of commit messages when squashing commits together, which was fixed by the patch. This change impacts the functionality of the rebase -i command, warranting a review to ensure the fix does not introduce new issues.\"\n}",
+      "input_tokens": 2074,
+      "output_tokens": 153
+    },
+    {
+      "id": "aimers/A",
+      "sha256": "2219e2db681ddb5fd049815d8b2accb9d3bdecd713ea8bfe69fea496850d7f93",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\",\n        \"O1.1.5\",\n        \"O1.1.6\"\n    ],\n    \"new\": [\n        \"N.1.1\",\n        \"N.1.2\",\n        \"N.1.3\",\n        \"N.1.4\",\n        \"N.1.5\",\n        \"N.1.6\"\n    ],\n    \"reason\": \"새로운 데이터에서는 기존 모델과 새로운 모델인 clean-room TM-S가 성능이 우수하다는 것을 보여",
+      "input_tokens": 2105,
+      "output_tokens": 160
+    },
+    {
+      "id": "historical-08/C",
+      "sha256": "0b8839b0631ad5949e437577a42bc3714a380089f5983b5a942db4e005886337",
+      "raw": "{\"action\":\"review or keep\",\"old\":\"O1.1.1\",\"new\":\"N.1.1\",\"reason\":\"The incoming record does not introduce a change related to re-running previously failed tests or managing test results. The old record mentions adding a rule to re-run previously-failed tests, which is different from improving the documentation of the `--rebase-merges` option in the `git-rebase` command. Therefore, the incoming record does not warrant reopening the past decision or testing it under a changed condition.\"}",
+      "input_tokens": 2138,
+      "output_tokens": 110
+    },
+    {
+      "id": "prior_git-01/B",
+      "sha256": "a8e74f33b4ff4c32d968e85fa03662a702b3fa2eacdbe4e5274624ed6809a2e0",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.7\",\n    \"new\": \"N.1.5\",\n    \"reason\": \"The incoming record introduces a new scenario where the current stopping condition might prematurely abort the search, leading to incorrect results. This is highlighted by Jeff King's example in N.1.3, where the test fails due to early termination. Therefore, the old decision to modify the stopping condition to ensure accuracy in multi-branch scenarios needs to be reviewed to account for the new edge case introduced.\"\n}",
+      "input_tokens": 2139,
+      "output_tokens": 118
+    },
+    {
+      "id": "historical-07/C",
+      "sha256": "2e71bebe33071405968cbae3246afab84d322d92d7419327c2dcd635d01f7b9b",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a fix for a regression in commit messages when squashing commits, which aligns with the previous record indicating improvements in handling test failures. The new record specifically addresses a regression introduced by the previous patch, suggesting a need to review the impact of this change on the overall functionality.\"\n}",
+      "input_tokens": 2164,
+      "output_tokens": 99
+    },
+    {
+      "id": "historical-08/B",
+      "sha256": "21222f492dbd656b5b672f32a5fa8e5267c5f07f3a6243ba93debdde9e18065f",
+      "raw": "{\"action\":\"review or keep\",\"old\":\"O1\",\"new\":\"O2\",\"reason\":\"The incoming record does not directly relate to the functionality of re-running previously failed tests or handling rebase issues. The proposed change in Naveen Nathan's record aims to improve the documentation and clarity around the usage of `--rebase-merges` and `--preserve-merges`. These changes do not warrant reopening or testing the previous decisions regarding test re-running and rebase handling.\"}",
+      "input_tokens": 2199,
+      "output_tokens": 100
+    },
+    {
+      "id": "historical-07/B",
+      "sha256": "e5b043f6480f82927dcd1529a20c495f36efc6d342294be31871918063286a0d",
+      "raw": "{\"action\":\"review or keep\",\"old\":\"O1\",\"new\":\"O2\",\"reason\":\"The incoming record introduces a new feature ('current-fixups' file) that improves the handling of rebase operations, specifically addressing a regression in commit message numbering and cleanup. This change is significant enough to warrant reviewing the previous decision to adopt Johannes Schindelin's patch for re-running previously failed tests, as the new feature impacts the overall rebase process and commit message management. The old passage supports the initial decision to adopt the patch for test re-execution, while the new passage highlights the necessity of reviewing the rebase-related changes due to their impact on commit message handling.\"}",
+      "input_tokens": 2225,
+      "output_tokens": 136
+    },
+    {
+      "id": "q04/A",
+      "sha256": "bdc35720bb549544dcb6b25456e6d11ebe0ef0c6c1c8b8086950dd8e281ef234",
+      "raw": "{\"answer\":\"compact\",\"source\":\"O1.1.4\"}",
+      "input_tokens": 2246,
+      "output_tokens": 15
+    },
+    {
+      "id": "prior_git-02/A",
+      "sha256": "6b105151d87d7b1eb5115638b19f65784c61da5cf8c708ab57b4ecf012493df8",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\"O1.1.1\", \"O1.1.2\", \"O1.1.3\", \"O1.1.4\", \"O1.1.5\", \"O1.1.6\"],\n    \"new\": [\"N.1.1\", \"N.1.2\", \"N.1.3\", \"N.1.4\", \"N.1.5\", \"N.1.6\", \"N.1.7\", \"N.1.8\", \"N.1.9\", \"N.1.10\", \"N.1.11\", \"N.1.12\", \"N.1.13",
+      "input_tokens": 2263,
+      "output_tokens": 160
+    },
+    {
+      "id": "q08/A",
+      "sha256": "da7c8edff2b8f2541fcdc8aa8070bebd5ea3610d3b1b5dc03965e1064a1d6dcf",
+      "raw": "{\"answer\":\"grep.extendedRegexp\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2296,
+      "output_tokens": 18
+    },
+    {
+      "id": "aimers/B",
+      "sha256": "8917a337db63730b845dc89f63d4044ca749c78bb51cee94eda74da8924f2aa0",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.5\",\n    \"reason\": \"The incoming record introduces new performance data comparing the existing models with the TM-S model, showing significant improvements in certain metrics like SEL and CONF scores. This suggests that the TM-S model may be more effective than previously thought, warranting further investigation to determine if the previous decision should be reconsidered.\"\n}",
+      "input_tokens": 2297,
+      "output_tokens": 99
+    },
+    {
+      "id": "q04/C",
+      "sha256": "be14907a290e286b5917c123922099dabb26d5b0bfc1dd76809dab3b423d94ea",
+      "raw": "{\"answer\":\"compact\",\"source\":\"O1.1.1\"}",
+      "input_tokens": 2336,
+      "output_tokens": 15
+    },
+    {
+      "id": "prior_git-02/C",
+      "sha256": "d51563955a431d50079c8cfe2115dfa20840324946fd6ff1a5f2b5c5c15de7ed",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a new scenario regarding the handling of URLs in cloning operations, which could potentially lead to misinterpretation of local vs. remote repositories. This new information suggests a need to reassess the conditions under which the `clone_local()` optimization is applied, especially in cases where URLs might be misleading. The old passage focuses on parsing conflicts in `.gitmodules`, which is unrelated to the new issue of URL manipulation during cloning.\"\n}",
+      "input_tokens": 2368,
+      "output_tokens": 127
+    },
+    {
+      "id": "q08/C",
+      "sha256": "14a8dc1bab0c6c3572dd2e3bff1db31347e9e9add2c3d55469ba83b4b4fcc932",
+      "raw": "{\"answer\":\"grep.patternType::default\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2386,
+      "output_tokens": 18
+    },
+    {
+      "id": "q04/B",
+      "sha256": "5a29db48ac9b5b45b7b89f09cd37dbb82e830ffdb6d042dc37220d560aa3316a",
+      "raw": "{\"answer\":\"full\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2397,
+      "output_tokens": 14
+    },
+    {
+      "id": "prior_git-02/B",
+      "sha256": "c6acab5d2317c3d4a195124b5b3b16df80f8fa20c663e86b5cd5e97fb2a8c174",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a new scenario where Git might incorrectly identify a local URL due to a symbolic link in a submodule. This could lead to unintended local cloning, which contradicts the original intention of identifying local URLs. Therefore, the old decision to avoid parsing .gitmodules during merge conflicts may need reconsideration in light of the new vulnerability introduced by the symbolic link in the submodule.\"\n}",
+      "input_tokens": 2406,
+      "output_tokens": 116
+    },
+    {
+      "id": "q08/B",
+      "sha256": "62f5690c9fbc3acdb7c959d9306c2b7fc549a8c64cb90693fcc93e1da8821481",
+      "raw": "{\"answer\":\"grep.extendedRegexp\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2447,
+      "output_tokens": 18
+    },
+    {
+      "id": "historical-01/A",
+      "sha256": "08a57c12099ecf875a3148a9b353f62943f24a7ae3a544f0ef37885ebf2431f1",
+      "raw": "{\n  \"action\": \"review or keep\",\n  \"old\": [\"O1.1.1\", \"O1.1.2\"],\n  \"new\": [\"N.1.1\", \"N.1.2\"],\n  \"reason\": \"The incoming record introduces changes to the behavior of handling small files and large deltas in the context of pack-objects. While the old records discuss general practices and optimizations, the new record specifically addresses performance improvements and fixes related to large deltas. These changes suggest a need to reassess the handling of large deltas, which might affect the reliability and efficiency of previous decisions regarding small files. Therefore, the incoming record warrants a review to ensure compatibility and correctness.\"\n}",
+      "input_tokens": 2498,
+      "output_tokens": 144
+    },
+    {
+      "id": "historical-01/C",
+      "sha256": "30d4abae7bfc71201fa640259265b0e9f2100f133c6b6f3973dbb63046bfd349",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a new approach to handling small packed-refs files by using read() instead of mmap(), addressing the issue mentioned in the old record. However, the old record suggests avoiding mmap() for small files, which is still relevant and necessary to ensure that munmap() operations do not fail. Therefore, the old record remains true, warranting a review of the new approach.\"\n}",
+      "input_tokens": 2583,
+      "output_tokens": 118
+    },
+    {
+      "id": "historical-01/B",
+      "sha256": "bed5fed91ff4457a79870a18bb9e240d82ff1f8c45eaa455a823ba5fdb4c186d",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a new approach to handling large deltas during the packing process, which could lead to improved performance and reduced memory usage compared to the previous method. However, the change involves a significant adjustment in how large deltas are managed, which might affect the reliability and consistency of the system. Therefore, further review is necessary to ensure that the new approach does not introduce unforeseen issues.\"\n}",
+      "input_tokens": 2630,
+      "output_tokens": 117
+    },
+    {
+      "id": "historical-03/A",
+      "sha256": "a231ba5478892d420f223597d309614c910d030d74dc5d3c537d84ef50c56f3d",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": [\n        \"O1.1.1\",\n        \"O1.1.2\",\n        \"O1.1.3\",\n        \"O1.1.4\"\n    ],\n    \"new\": [\n        \"N.1.1\",\n        \"N.1.2\",\n        \"N.1.3\",\n        \"N.1.4\",\n        \"N.1.5\",\n        \"N.1.6\",\n        \"N.1.7\",\n        \"N.1.8\",\n        \"N.1.9\",\n        \"N.1.10\",\n        \"N.1.11\",\n        \"N.1.12\",\n        \"N",
+      "input_tokens": 2632,
+      "output_tokens": 160
+    },
+    {
+      "id": "q09/A",
+      "sha256": "8fbb6d50f6a570fa55f2735790de92e6df0d85fee416e70c78b7f3b432f9b83d",
+      "raw": "{\"answer\":\"4095\",\"source\":\"O1.1.1 ID\"}",
+      "input_tokens": 2671,
+      "output_tokens": 19
+    },
+    {
+      "id": "historical-03/C",
+      "sha256": "900eff67464c668ecc1429231f30220b2cbfcd2f2e3ae2922f2a74e6808082aa",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.1\",\n    \"new\": \"N.1.1\",\n    \"reason\": \"The incoming record introduces a significant change in the order of commits being inspected by paint_down_to_common(). This change affects the number of commits that are walked during the execution of the function, contrary to the original commit message. The new commit suggests avoiding the use of generation numbers if not needed, which directly impacts the performance and correctness of the function.\"\n}",
+      "input_tokens": 2694,
+      "output_tokens": 109
+    },
+    {
+      "id": "q01/A",
+      "sha256": "d33914086c3f34bd96d5ed969a54a8921d8b410b9f5b2a9f9663416c1781d1a6",
+      "raw": "{\"answer\":\"250\",\"source\":\"O1.1.1\"}",
+      "input_tokens": 2712,
+      "output_tokens": 17
+    },
+    {
+      "id": "q06/A",
+      "sha256": "2dcdada6c05d4a3719e115e45afa1c4c6bbd35a82ed6ed631b38266ea8f3b60a",
+      "raw": "{\"answer\":\"[PATCH]\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2745,
+      "output_tokens": 16
+    },
+    {
+      "id": "q09/C",
+      "sha256": "1f41cafee9d36bef7f6a337daa8bef47da00c98e1782f9d38b23307232b60430",
+      "raw": "{\"answer\":\"4095\",\"source\":\"E.1.1\"}",
+      "input_tokens": 2756,
+      "output_tokens": 17
+    },
+    {
+      "id": "historical-03/B",
+      "sha256": "be8a2dc550fdd740dd1f403771801a88cae61c1545432659f7c31f2965fd2933",
+      "raw": "{\n    \"action\": \"review or keep\",\n    \"old\": \"O1.1.4\",\n    \"new\": \"N.1.5\",\n    \"reason\": \"The incoming record introduces a significant change in the order of commits processed by paint_down_to_common(), which affects the number of commits walked. This change impacts the performance and correctness of the function, especially in certain topological scenarios. The old passage (O1.1.4) incorrectly states that the change does not affect the number of commits walked, which is contradicted by the new record (N.1.5) showing a substantial increase in the number of iterations due to the altered order. Therefore, the incoming record warrants reviewing the impact of this change.\"\n}",
+      "input_tokens": 2788,
+      "output_tokens": 153
+    },
+    {
+      "id": "q10/A",
+      "sha256": "ef87cfa7958adca553ae7b2b73dd57175abe81aeb4517723c6a47bc56b124234",
+      "raw": "{\"answer\":\"-U\",\"source\":\"O2.2.2\"}",
+      "input_tokens": 2792,
+      "output_tokens": 16
+    },
+    {
+      "id": "q01/C",
+      "sha256": "3c0a5c60f1b731771b402be19ba3c9455103c4e1f238b6102e57e7a1d48e4577",
+      "raw": "{\"answer\":\"250\",\"source\":\"E.1.1\"}",
+      "input_tokens": 2797,
+      "output_tokens": 16
+    },
+    {
+      "id": "q09/B",
+      "sha256": "131b5f1519ad5fd263c2849ee342d8a704bb04306b25e0afd17f06bbe4447080",
+      "raw": "{\"answer\":\"4095\",\"source\":\"E.1.1\"}",
+      "input_tokens": 2803,
+      "output_tokens": 17
+    },
+    {
+      "id": "q06/C",
+      "sha256": "d5fac51e18fda39f9f7b66893a3867156c8ef8794ff666dab23eb0da10f81f4c",
+      "raw": "{\"answer\":\"[PATCH]\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2808,
+      "output_tokens": 16
+    },
+    {
+      "id": "q02/A",
+      "sha256": "3a11df94aa9c1d8d98de0308fdcaaa6d5a1711ca19a8751e2b459c82278fa3b5",
+      "raw": "{\"answer\":\"man\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2813,
+      "output_tokens": 14
+    },
+    {
+      "id": "q05/A",
+      "sha256": "30bb6682802f59af0550f007117eb8e9c605b7dc172a480a8ab33a3bdffafb63",
+      "raw": "{\"answer\":\"zdiff3\",\"source\":\"O1.2.1\"}",
+      "input_tokens": 2837,
+      "output_tokens": 17
+    },
+    {
+      "id": "q01/B",
+      "sha256": "142df72c6f1f31da44942f4aa790526cef6657784d618762189f3a81adebd31f",
+      "raw": "{\"answer\":\"250\",\"source\":\"E.1.1\"}",
+      "input_tokens": 2844,
+      "output_tokens": 16
+    },
+    {
+      "id": "q10/C",
+      "sha256": "fa541cf5955bae48165de41c023d7d9011781796f34467da241cc286c57ed221",
+      "raw": "{\"answer\":\"-U\",\"source\":\"O2.2.2\"}",
+      "input_tokens": 2855,
+      "output_tokens": 16
+    },
+    {
+      "id": "q02/C",
+      "sha256": "84a59a69d516ffb4c4cf824c0555bcdc4cf10a3f620fb604604c114a329a4c1a",
+      "raw": "{\"answer\":\"man\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2876,
+      "output_tokens": 14
+    },
+    {
+      "id": "q06/B",
+      "sha256": "ad525285b552350a754cf3060c38eab33dda3e50cde499252bd20822aa9e0230",
+      "raw": "{\"answer\":\"[PATCH]\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2901,
+      "output_tokens": 16
+    },
+    {
+      "id": "q05/C",
+      "sha256": "701fb270bde57168e92390b211fd6c311b21517f413fd0bb7fa590b1b6323d9f",
+      "raw": "{\"answer\":\"zdiff3\",\"source\":\"O1.1\"}",
+      "input_tokens": 2922,
+      "output_tokens": 15
+    },
+    {
+      "id": "q10/B",
+      "sha256": "2e11e0873c608f3e5bdcd25a2f85959126003aafb01401c99bdda6458f759a00",
+      "raw": "{\"answer\":\"-U\",\"source\":\"O.2.1\"}",
+      "input_tokens": 2948,
+      "output_tokens": 15
+    },
+    {
+      "id": "q02/B",
+      "sha256": "ebd415063c51fa455869a932005b3f869c660bf23865df4e5d285d2c4b62884e",
+      "raw": "{\"answer\":\"man\",\"source\":\"E.2.1\"}",
+      "input_tokens": 2969,
+      "output_tokens": 14
+    },
+    {
+      "id": "q05/B",
+      "sha256": "62b96c14a9e3c7bdcac99b3fdeca0816383fbe86d61421eeade93a1c99aa630b",
+      "raw": "{\"answer\":\"\\\"zdiff3\\\"\", \"source\":\"E.1.1\"}",
+      "input_tokens": 2969,
+      "output_tokens": 18
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "status": "complete",
+  "job_id": "119279",
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "dtype": "torch.bfloat16",
+  "device": "NVIDIA GeForce RTX 3090",
+  "generation_seconds": 8.69,
+  "input_sha256": "976c57de758eb3f5d2bbd9dd408d7b6724c42760334a29356e845cb64a82fd72",
+  "calls": [
+    {
+      "id": "write/diff",
+      "sha256": "b5143366f7f8cfbbf9c4597abf35b15de91bf9ba06a4e9b07cdd34a3b25b9dd7",
+      "raw": "Decision: Amend diff.c to free \"buf\" in diff_words_flush(). This follows P.1.1 as it addresses freeing \"buf\" alongside its members as per earlier changes.",
+      "input_tokens": 204,
+      "output_tokens": 38
+    },
+    {
+      "id": "write/clone",
+      "sha256": "b2654dbe50ab1b1f1e834e9783e388b359af27757c65116d1dbd093bb08d6fa0",
+      "raw": "Decision: Adopt Michael Barabanov's suggestion to use local cloning with insteadOf for local URLs. This choice saves space and time in mirroring scenarios involving insteadOf rewrites, as per P.1.1.",
+      "input_tokens": 212,
+      "output_tokens": 45
+    },
+    {
+      "id": "write/graft",
+      "sha256": "3fd52a75af57b288e8eb27ef28e758e626d4f336e87915cb46d3970bd497808d",
+      "raw": "Decision: Augment commit_graph_compatible(r) to return false for repositories with commit grafts or shallow clones, as per P.1.2. This ensures compatibility checks ignore existing commit-graph files and prevent new ones from being written.",
+      "input_tokens": 336,
+      "output_tokens": 49
+    },
+    {
+      "id": "write/mmap",
+      "sha256": "ff9098357a0548dafe8ce5fa50a86eb0e077f9c09f4ecbc29667fa3114a97bd4",
+      "raw": "Decision: Use `read()` for small packed-refs files as per commit P.1.2. Conditions met with similar practice in P.2.2 where handling empty files ensures no errors. P.2.3 supports exiting early for better clarity.",
+      "input_tokens": 385,
+      "output_tokens": 53
+    },
+    {
+      "id": "write/submodule",
+      "sha256": "66cd085c00739bdf7a175976fa13b887bdb2ce43247a46f000557edfb7cac761",
+      "raw": "Decision: Do not parse .gitmodules during merge conflicts. This improves usability by avoiding command failures. As per P.1.2 & P.1.3, parsing fails with misleading errors. Post-resolution, check config in .git/config or global settings (P.1.5). Passage P.1.1 supports setting unchanged.",
+      "input_tokens": 470,
+      "output_tokens": 70
+    },
+    {
+      "id": "write/eol",
+      "sha256": "64ff7918e789f57e401d3cc11f8ac66d74bed0857cf5f73a04842e0b5c387220",
+      "raw": "Decision: Set `checksafe` to `conv_flags` as an integer bit pattern. Reasons: Enum `safe_crlf` was not ideal due to potential confusion with integer `0`. Renaming to `conv_flags` makes it more versatile for future extensions. Passage P.1.4 supports changing `0` to `SAFE_CRLF_FALSE`.",
+      "input_tokens": 480,
+      "output_tokens": 73
+    },
+    {
+      "id": "write/describe",
+      "sha256": "28289b2d07aba970100178a13de3042a358755e3a9dfdbee6b79d867797a47bb",
+      "raw": "Decision: Modify `git-describe`'s stopping condition to abort only when one branch remains and all candidates are its descendants. This ensures accuracy in tag identification, especially in multi-branch scenarios. This aligns with P.1.6, enhancing reliability without significant performance overhead.",
+      "input_tokens": 587,
+      "output_tokens": 58
+    },
+    {
+      "id": "write/runner",
+      "sha256": "c28fd606653e1e9d38e55ff9eb0fc3536aaaf139e9694621f28ac758a88083db",
+      "raw": "Decision: Adopt Johannes Schindelin's patch to add a rule in Makefile to re-run previously failed tests. This aligns with best practices for ensuring early bug detection, especially critical on Windows where test suite execution time is notably long. Passage P.1.2 supports this choice.",
+      "input_tokens": 650,
+      "output_tokens": 59
+    },
+    {
+      "id": "write/aimers",
+      "sha256": "288501fe792a38bf88e0844ca41c84541b02ad73bd1048d695aeaf58f9917bcd",
+      "raw": "Decision: Reject TabM as a blend candidate due to its negative impact on all models (w=0.05 -0.8, w=0.10 -2.1, w=0.20 -6.4). It contributes nothing in any weight setting. This is supported by the fact that even the best MLP variant scored 0.946, indicating no benefit. However, we will keep the observation that member ensemble mechanism works and speeds up training 9.6 times compared to FT.",
+      "input_tokens": 727,
+      "output_tokens": 109
+    },
+    {
+      "id": "write/pack",
+      "sha256": "e280355f6f6e04de16291f1e7f2b559550316e1be5f12a49908aaa39f9c59f97",
+      "raw": "Decision: Implement Nguyễn Thái Ngọc Duy's first patch reducing delta_size to 20 bits. Conditions: Existing deltas larger than 1MB will bypass cached delta_size, using oe_size() instead. This aligns with P.1.2.",
+      "input_tokens": 744,
+      "output_tokens": 52
+    },
+    {
+      "id": "write/order",
+      "sha256": "40a403f738b4743cff57391be6200fb76ff39da93c97f6b23a1e5c0867490d90",
+      "raw": "Decision Note: Adopt use of generations in paint_down_to_common() and add a short-circuit with min_generation parameter. This optimizes 'git branch --contains' by avoiding unnecessary walks, especially when commit dates alone cannot determine topological order. The addition reduces time from 0.21s to 0.13s (-38%), confirmed by test data.",
+      "input_tokens": 776,
+      "output_tokens": 77
+    },
+    {
+      "id": "write/squash",
+      "sha256": "b256aa86ca355944cd357127a07180e0dea2d68cab2e3c478ef96212061d44ea",
+      "raw": "Decision: Adopt Johannes Schindelin's changes to handle rebase issues, including the introduction of 'current-fixups' file and improvements for rebase --skip. This addresses the regression test failure and resolves the commit message cleanup issue. Passage P.1.1 supports the adoption of the new 'current-fixups' file.",
+      "input_tokens": 1272,
+      "output_tokens": 67
+    }
+  ]
+}

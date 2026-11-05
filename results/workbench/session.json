@@ -1,0 +1,24 @@
+{
+  "status": "interactive_running",
+  "job_id": "119751",
+  "url": "http://127.0.0.1:8766",
+  "model": "Qwen3-8B",
+  "actual_model_calls": 3,
+  "source_count": 2,
+  "proposal_count": 1,
+  "answer_count": 2,
+  "smoke_scope": "Two synthetic records through the UI; actual reconsideration and two free questions. No benchmark sweep.",
+  "qa_design": "Model selects source passage IDs; code attaches unmodified original quotations. Semantic correctness not automatically verified.",
+  "expires_at": "2026-11-05T23:59:06+09:00",
+  "checks": [
+    "Python and JavaScript syntax",
+    "One source-offset linkage check",
+    "Actual browser record ingestion and model QA"
+  ],
+  "limitations": [
+    "No GitHub identity authentication or automatic Git synchronization in this UI",
+    "Finite GPU session; saved local records survive expiry"
+  ],
+  "inputs_and_outputs": ".workbench/records",
+  "frozen_results_modified": false
+}

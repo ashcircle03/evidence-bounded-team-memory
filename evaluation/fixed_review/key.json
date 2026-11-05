@@ -1,0 +1,193 @@
+{
+  "git-alias-pos": {
+    "label": "pos",
+    "rubric": "When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "allowed_old": [
+      "alias: use the early config machinery to expand aliases",
+      "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    ],
+    "allowed_new": [
+      "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter.",
+      "Therefore, we must compare the alias name insensitively to the config\nkeys."
+    ],
+    "previous": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+    "incoming": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1"
+  },
+  "cross-alias": {
+    "label": "neg",
+    "rubric": "Distinct historical decision. When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "previous": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+    "incoming": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1"
+  },
+  "git-alias-neg": {
+    "label": "neg",
+    "rubric": "When resolving CamelCased aliases in early config, names must match config keys case-insensitively; -h output is independent.",
+    "allowed_old": [
+      "alias: use the early config machinery to expand aliases",
+      "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    ],
+    "allowed_new": [],
+    "previous": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+    "incoming": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346"
+  },
+  "git-cvs-pos": {
+    "label": "pos",
+    "rubric": "When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "allowed_old": [
+      "Do not scramble password read from .cvspass",
+      "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    ],
+    "allowed_new": [
+      "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    ],
+    "previous": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+    "incoming": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d"
+  },
+  "cross-cvs": {
+    "label": "neg",
+    "rubric": "Distinct historical decision. When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "previous": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+    "incoming": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d"
+  },
+  "git-cvs-neg": {
+    "label": "neg",
+    "rubric": "When neither CLI nor .cvspass supplies a password, initialize the scrambled empty value to A; object IDs do not change password handling.",
+    "allowed_old": [
+      "Do not scramble password read from .cvspass",
+      "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    ],
+    "allowed_new": [],
+    "previous": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+    "incoming": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717"
+  },
+  "git-svn-pos": {
+    "label": "pos",
+    "rubric": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "allowed_old": [
+      "t9010 (svn-fe): Eliminate dependency on svn perl bindings",
+      "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    ],
+    "allowed_new": [
+      "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    ],
+    "previous": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+    "incoming": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8"
+  },
+  "cross-svn": {
+    "label": "neg",
+    "rubric": "Distinct historical decision. Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "previous": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+    "incoming": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8"
+  },
+  "git-svn-neg": {
+    "label": "neg",
+    "rubric": "Dropping the Perl/shared library also lost the svn availability check; svnadmin tests need to skip or check when svn is absent. Empty-file test helpers do not restore it.",
+    "allowed_old": [
+      "t9010 (svn-fe): Eliminate dependency on svn perl bindings",
+      "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    ],
+    "allowed_new": [],
+    "previous": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+    "incoming": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1"
+  },
+  "git-trash-pos": {
+    "label": "pos",
+    "rubric": "The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "allowed_old": [
+      "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).",
+      "Fix this by always referring to the trash directory as $TRASH_DIRECTORY."
+    ],
+    "allowed_new": [
+      "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around.",
+      "Fix it by explicitly setting TEST_OUTPUT_DIRECTORY appropriately for\nsub-tests."
+    ],
+    "previous": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+    "incoming": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105"
+  },
+  "cross-trash": {
+    "label": "neg",
+    "rubric": "Distinct historical decision. The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "previous": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+    "incoming": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105"
+  },
+  "git-trash-neg": {
+    "label": "neg",
+    "rubric": "The output directory inherited/defaulted by the subtests puts their scratch outside t0000; set TEST_OUTPUT_DIRECTORY for the sub-tests. Indentation does not affect it.",
+    "allowed_old": [
+      "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).",
+      "Fix this by always referring to the trash directory as $TRASH_DIRECTORY."
+    ],
+    "allowed_new": [],
+    "previous": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+    "incoming": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a"
+  },
+  "git-symlink-pos": {
+    "label": "pos",
+    "rubric": "Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "allowed_old": [
+      "setup: translate symlinks in filename when using absolute paths"
+    ],
+    "allowed_new": [
+      "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead.",
+      "This is a regression introduced by 18e051a:\n  setup: translate symlinks in filename when using absolute paths\n(which did not take symlinks inside the work tree into consideration)."
+    ],
+    "previous": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+    "incoming": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc"
+  },
+  "cross-symlink": {
+    "label": "neg",
+    "rubric": "Distinct historical decision. Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "previous": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+    "incoming": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc"
+  },
+  "git-symlink-neg": {
+    "label": "neg",
+    "rubric": "Canonicalizing an absolute worktree symlink dereferences the link, making Git act on the target instead of the link. Local clone object-store symlinks are a different operation.",
+    "allowed_old": [
+      "setup: translate symlinks in filename when using absolute paths"
+    ],
+    "allowed_new": [],
+    "previous": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+    "incoming": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886"
+  },
+  "git-am-pos": {
+    "label": "pos",
+    "rubric": "Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "allowed_old": [
+      "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    ],
+    "allowed_new": [
+      "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    ],
+    "previous": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+    "incoming": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2"
+  },
+  "cross-am": {
+    "label": "neg",
+    "rubric": "Distinct historical decision. Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "previous": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+    "incoming": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2"
+  },
+  "git-am-neg": {
+    "label": "neg",
+    "rubric": "Patch-format detection must ignore leading whitespace that webmail prepends to saved mail. Resuming a failed patch without a tty is independent.",
+    "allowed_old": [
+      "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    ],
+    "allowed_new": [],
+    "previous": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+    "incoming": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6"
+  },
+  "development-checkout": {
+    "label": "pos",
+    "rubric": "Initial checkout requires updating the worktree and index; cheap test ordering is incidental.",
+    "previous": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+    "incoming": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+    "allowed_old": [
+      "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path."
+    ],
+    "allowed_new": [
+      "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    ]
+  }
+}

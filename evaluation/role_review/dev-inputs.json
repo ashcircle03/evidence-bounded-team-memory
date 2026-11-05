@@ -1,0 +1,185 @@
+[
+  {
+    "id": "hook",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1026,
+        "end": 1455,
+        "quote": "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 309,
+        "quote": "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "a34b553a893e479bbd728c90",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1026,
+        "end": 1455,
+        "quote": "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the \"invoked_hook\" variable, which was correctly passed to run_commit_hook() in push_to_checkout() in the earlier commit, was omitted when calling run_hooks_opt(), leading to potential incorrect hook execution.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "70e69fa6714d47043c7063ef",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 51,
+        "quote": "hooks: fix \"invoked hook\" regression in a8cc5943338",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "6f17972ed54f58eeb0ac3d34",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "speaker": "Emily Shaffer",
+        "start": 64,
+        "end": 148,
+        "quote": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses moving hooks to a new hook.h library, which differs from the specific operation in the incoming report about fixing a regression in handling the \"invoked_hook\" variable."
+    },
+    "claims": [
+      "The regression occurred because the \"invoked_hook\" variable, which was correctly passed to run_commit_hook() in push_to_checkout() in the earlier commit, was omitted when calling run_hooks_opt(), leading to potential incorrect hook execution.",
+      "The invoked_hook variable did not reach run_hooks_opt() from run_commit_hook(), while push_to_checkout() correctly forwarded it.",
+      "The invoked_hook variable did not reach run_commit_hook() from run_hooks_opt(), while push_to_checkout() correctly forwarded it.",
+      "The \"invoked_hook\" variable passed to run_commit_hook() wasn't passed forward to run_hooks_opt(), as push_to_checkout() in that commit correctly did."
+    ]
+  },
+  {
+    "id": "reflog",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 197,
+        "quote": "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "78bb626e939f997a7fbaa99a",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 197,
+        "quote": "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because returning non-NULL for the null_oid() after removing the calls to deref_tag() and parse_object() led to incorrect handling of NULL OIDs in reflog expiration, potentially leading to dereferencing invalid objects.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "a3040a8acbe2c17d874307fe",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 41,
+        "end": 354,
+        "quote": "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f4f0ef49720f8b3c7095600",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "speaker": "Johannes Schindelin",
+        "start": 62,
+        "end": 273,
+        "quote": "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses fixing a regression by switching from `lookup_commit_reference_gently()` to `lookup_commit()`, which differs from the specific operation in the incoming report by also stopping attempts to call `deref_tag()` and `parse_object()` on the provided OID."
+    },
+    "claims": [
+      "The regression occurred because returning non-NULL for the null_oid() after removing the calls to deref_tag() and parse_object() led to incorrect handling of NULL OIDs in reflog expiration, potentially leading to dereferencing invalid objects.",
+      "After switching to lookup_commit(), lookup of null_oid() started returning non-NULL.",
+      "After switching to lookup_commit(), lookup of null_oid() started returning NULL.",
+      "we also started returning non-NULL for the null_oid()."
+    ]
+  },
+  {
+    "id": "prompt",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "6db8ff6203822e41b501adbc",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "speaker": "Richard Hansen",
+        "start": 59,
+        "end": 504,
+        "quote": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because the fix assumed zsh would expand PS1 by default, whereas it actually requires the `set -o prompt` option enabled to do so, leading to prompts displaying the literal placeholder instead of the actual branch name.",
+      "reviewer": "Richard Hansen",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "1909756224e0c8a27b4bbeab",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "speaker": "Richard Hansen",
+        "start": 266,
+        "end": 571,
+        "quote": "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "8b1d5f933be85480e0765203",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "speaker": "Julien Carsique",
+        "start": 53,
+        "end": 267,
+        "quote": "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses displaying tracking information for branches across multiple remotes, which differs from the specific issue of fixing the default behavior of `zsh` expanding `PS1` without parameter expansion enabled in the incoming report."
+    },
+    "claims": [
+      "The regression occurred because the fix assumed zsh would expand PS1 by default, whereas it actually requires the `set -o prompt` option enabled to do so, leading to prompts displaying the literal placeholder instead of the actual branch name.",
+      "In default zsh, PS1 is not expanded, so the branch-name variable is shown literally.",
+      "In default zsh, PS1 is expanded, so the actual branch name is shown normally.",
+      "zsh does not expand PS1 by default, but that commit assumed it did."
+    ]
+  }
+]

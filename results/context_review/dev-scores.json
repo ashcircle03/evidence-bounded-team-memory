@@ -1,0 +1,606 @@
+{
+  "freebsd-cwd-selected-forward": {
+    "topic": "freebsd-cwd",
+    "variant": "selected",
+    "reverse": false,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 297,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-selected-reverse": {
+    "topic": "freebsd-cwd",
+    "variant": "selected",
+    "reverse": true,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 297,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-neighbors1-forward": {
+    "topic": "freebsd-cwd",
+    "variant": "neighbors1",
+    "reverse": false,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 596,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      2,
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": true,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-neighbors1-reverse": {
+    "topic": "freebsd-cwd",
+    "variant": "neighbors1",
+    "reverse": true,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 596,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      2,
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-neighbors2-forward": {
+    "topic": "freebsd-cwd",
+    "variant": "neighbors2",
+    "reverse": false,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 943,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      1,
+      2,
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": true,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-neighbors2-reverse": {
+    "topic": "freebsd-cwd",
+    "variant": "neighbors2",
+    "reverse": true,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 943,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      1,
+      2,
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-unrelated-forward": {
+    "topic": "freebsd-cwd",
+    "variant": "unrelated",
+    "reverse": false,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 432,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "freebsd-cwd-unrelated-reverse": {
+    "topic": "freebsd-cwd",
+    "variant": "unrelated",
+    "reverse": true,
+    "condition": "long path with missing permissions and insufficient initial getcwd buffer",
+    "behavior": "getcwd can give EACCES with small buffer although larger succeeds",
+    "source": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "unrelated": {
+      "owner": "Michael Haggerty",
+      "observed_at": "2012-09-06T23:19:58.000000+00:00",
+      "source": {
+        "speaker": "Michael Haggerty",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+      }
+    },
+    "characters": 432,
+    "focus_paragraph": 3,
+    "paragraph_indices": [
+      3
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "fsck-empty-selected-forward": {
+    "topic": "fsck-empty",
+    "variant": "selected",
+    "reverse": false,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 178,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "fsck-empty-selected-reverse": {
+    "topic": "fsck-empty",
+    "variant": "selected",
+    "reverse": true,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 178,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "fsck-empty-neighbors1-forward": {
+    "topic": "fsck-empty",
+    "variant": "neighbors1",
+    "reverse": false,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 231,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1,
+      2
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "fsck-empty-neighbors1-reverse": {
+    "topic": "fsck-empty",
+    "variant": "neighbors1",
+    "reverse": true,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 231,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1,
+      2
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "fsck-empty-neighbors2-forward": {
+    "topic": "fsck-empty",
+    "variant": "neighbors2",
+    "reverse": false,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 442,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1,
+      2,
+      3
+    ],
+    "score": {
+      "failure": true,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 Invalid argument는 복구했으나 발동 조건을 과거 EMFILE과 혼동하거나 조건 인용이 파싱되지 않았다."
+    }
+  },
+  "fsck-empty-neighbors2-reverse": {
+    "topic": "fsck-empty",
+    "variant": "neighbors2",
+    "reverse": true,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 442,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1,
+      2,
+      3
+    ],
+    "score": {
+      "failure": true,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 Invalid argument는 복구했으나 발동 조건을 과거 EMFILE과 혼동하거나 조건 인용이 파싱되지 않았다."
+    }
+  },
+  "fsck-empty-unrelated-forward": {
+    "topic": "fsck-empty",
+    "variant": "unrelated",
+    "reverse": false,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 456,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1
+    ],
+    "score": {
+      "failure": false,
+      "condition": false,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  },
+  "fsck-empty-unrelated-reverse": {
+    "topic": "fsck-empty",
+    "variant": "unrelated",
+    "reverse": true,
+    "condition": "empty loose object file",
+    "behavior": "fsck reports failed to read object / Invalid argument, from mmap EINVAL",
+    "source": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "unrelated": {
+      "owner": "Nguyễn Thái Ngọc Duy",
+      "observed_at": "2011-11-07T04:31:28.000000+00:00",
+      "source": {
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "text": "fsck: avoid reading every object twice\n\nDuring verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).\n\nAvoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.\n\nOn git.git, with this patch I got:\n\n$ /usr/bin/time ./git fsck >/dev/null\n98.97user 0.90system 1:40.01elapsed 99%CPU (0avgtext+0avgdata 616624maxresident)k\n0inputs+0outputs (0major+194186minor)pagefaults 0swaps\n\nWithout it:\n\n$ /usr/bin/time ./git fsck >/dev/null\n231.23user 2.35system 3:53.82elapsed 99%CPU (0avgtext+0avgdata 636688maxresident)k\n0inputs+0outputs (0major+461629minor)pagefaults 0swaps"
+      }
+    },
+    "characters": 456,
+    "focus_paragraph": 1,
+    "paragraph_indices": [
+      1
+    ],
+    "score": {
+      "failure": false,
+      "condition": true,
+      "rationale": false,
+      "success": false,
+      "reason": "실제 실패가 아닌 회귀 귀속 문장을 반복하거나 다른 문서의 동작을 골랐다. fsck 한 문단 확장에서는 오류 문자열이 원출력에 있어도 인용 형식이 잘못됐다."
+    }
+  }
+}

@@ -1,0 +1,2366 @@
+{
+  "final-01": {
+    "kind": "reconsider",
+    "old": "cd0887237ecf6e222e64c927",
+    "new": "cbff269e582ebfb63286c73b",
+    "expected_review": true,
+    "expected_relation": "reconsider",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "0d038591cca032381faf04c8",
+            "aliases": [
+              "96%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "cd0887237ecf6e222e64c927",
+            "aliases": [
+              "18 minutes"
+            ],
+            "condition": "CPU-only worker",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "cd0887237ecf6e222e64c927",
+            "aliases": [
+              "18 minutes"
+            ],
+            "condition": "CPU-only worker",
+            "status": "reported"
+          },
+          {
+            "source_id": "cbff269e582ebfb63286c73b",
+            "aliases": [
+              "3 minutes"
+            ],
+            "condition": "GPU-enabled worker",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "0d038591cca032381faf04c8",
+            "aliases": [
+              "96%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "cd0887237ecf6e222e64c927",
+            "aliases": [
+              "18 minutes"
+            ],
+            "condition": "CPU-only worker",
+            "status": "reported"
+          },
+          {
+            "source_id": "cbff269e582ebfb63286c73b",
+            "aliases": [
+              "3 minutes"
+            ],
+            "condition": "GPU-enabled worker",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "cd0887237ecf6e222e64c927",
+            "aliases": [
+              "Harbor-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "0d038591cca032381faf04c8",
+            "aliases": [
+              "96%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU. The evidence archive is Harbor-evidence.",
+    "new_text": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_002",
+    "reason_criterion": "The no-GPU production constraint that justified shelving GPU trials has changed; the new GPU result warrants reconsidering those trials, while the CPU result remains scoped.",
+    "repeat_source": "d9ec391590b355bd4e099d25",
+    "repeat_expected_alerts": 0
+  },
+  "final-02": {
+    "kind": "reconsider",
+    "old": "050480f532744b401bad884c",
+    "new": "02eb3a6430df2570c25114fa",
+    "expected_review": true,
+    "expected_relation": "reconsider",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4cdeeba9d16f8e3370eb35ed",
+            "aliases": [
+              "Hao Dafu Online"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "050480f532744b401bad884c",
+            "aliases": [
+              "72%"
+            ],
+            "condition": "English-only validation set",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "050480f532744b401bad884c",
+            "aliases": [
+              "72%"
+            ],
+            "condition": "English-only validation set",
+            "status": "reported"
+          },
+          {
+            "source_id": "02eb3a6430df2570c25114fa",
+            "aliases": [
+              "88%"
+            ],
+            "condition": "bilingual validation set",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4cdeeba9d16f8e3370eb35ed",
+            "aliases": [
+              "Hao Dafu Online"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "050480f532744b401bad884c",
+            "aliases": [
+              "72%"
+            ],
+            "condition": "English-only validation set",
+            "status": "reported"
+          },
+          {
+            "source_id": "02eb3a6430df2570c25114fa",
+            "aliases": [
+              "88%"
+            ],
+            "condition": "bilingual validation set",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "050480f532744b401bad884c",
+            "aliases": [
+              "Lumen-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4cdeeba9d16f8e3370eb35ed",
+            "aliases": [
+              "Hao Dafu Online"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "On the English-only validation set, Lumen multilingual routing had 72% accuracy. We stopped evaluating that routing because the release supported English only. The evidence archive is Lumen-evidence.",
+    "new_text": "The release now supports Korean as well as English. On the bilingual validation set, Lumen multilingual routing had 88% accuracy. The English-only result is unchanged.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_004",
+    "reason_criterion": "The English-only release scope underlying the stopped evaluation changed to bilingual support. The two accuracies are not a controlled same-set improvement.",
+    "repeat_source": "b6a9dc9cd91e87998d2c3e42",
+    "repeat_expected_alerts": 0
+  },
+  "final-03": {
+    "kind": "reconsider",
+    "old": "8aac23fcdbbd6f514edc33a9",
+    "new": "cea9a67692219dac99127a1d",
+    "expected_review": true,
+    "expected_relation": "reconsider",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "752e7f1537709812d5903ea0",
+            "aliases": [
+              "Junxin Yuan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8aac23fcdbbd6f514edc33a9",
+            "aliases": [
+              "9 seconds"
+            ],
+            "condition": "256 MB memory cap",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "8aac23fcdbbd6f514edc33a9",
+            "aliases": [
+              "9 seconds"
+            ],
+            "condition": "256 MB memory cap",
+            "status": "reported"
+          },
+          {
+            "source_id": "cea9a67692219dac99127a1d",
+            "aliases": [
+              "2 seconds"
+            ],
+            "condition": "2 GB memory cap",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "752e7f1537709812d5903ea0",
+            "aliases": [
+              "Junxin Yuan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "8aac23fcdbbd6f514edc33a9",
+            "aliases": [
+              "9 seconds"
+            ],
+            "condition": "256 MB memory cap",
+            "status": "reported"
+          },
+          {
+            "source_id": "cea9a67692219dac99127a1d",
+            "aliases": [
+              "2 seconds"
+            ],
+            "condition": "2 GB memory cap",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8aac23fcdbbd6f514edc33a9",
+            "aliases": [
+              "Granite-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "752e7f1537709812d5903ea0",
+            "aliases": [
+              "Junxin Yuan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+    "new_text": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory. The 256 MB observation remains valid.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_007",
+    "reason_criterion": "The memory-cap reason for deferring the large dictionary no longer holds in the new deployment; preserve the old constrained measurement.",
+    "repeat_source": "247212f04ed1332e0affbcd8",
+    "repeat_expected_alerts": 0
+  },
+  "final-04": {
+    "kind": "reconsider",
+    "old": "f957dd9203a0268905db3b51",
+    "new": "84890b5219375b618bfcc4a8",
+    "expected_review": true,
+    "expected_relation": "reconsider",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8d173dfd85ae6fb5b273fdb5",
+            "aliases": [
+              "useChartTheme"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "f957dd9203a0268905db3b51",
+            "aliases": [
+              "27 minutes"
+            ],
+            "condition": "serial-loader release",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "f957dd9203a0268905db3b51",
+            "aliases": [
+              "27 minutes"
+            ],
+            "condition": "serial-loader release",
+            "status": "reported"
+          },
+          {
+            "source_id": "84890b5219375b618bfcc4a8",
+            "aliases": [
+              "11 minutes"
+            ],
+            "condition": "parallel-loader release",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8d173dfd85ae6fb5b273fdb5",
+            "aliases": [
+              "useChartTheme"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "f957dd9203a0268905db3b51",
+            "aliases": [
+              "27 minutes"
+            ],
+            "condition": "serial-loader release",
+            "status": "reported"
+          },
+          {
+            "source_id": "84890b5219375b618bfcc4a8",
+            "aliases": [
+              "11 minutes"
+            ],
+            "condition": "parallel-loader release",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "f957dd9203a0268905db3b51",
+            "aliases": [
+              "Kite-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8d173dfd85ae6fb5b273fdb5",
+            "aliases": [
+              "useChartTheme"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Using the serial-loader release, Kite import took 27 minutes per archive. We ruled out the parallel loader for production because the vendor had not released a supported build. The evidence archive is Kite-evidence.",
+    "new_text": "The vendor has released a supported parallel-loader build for production. Using the parallel-loader release, Kite import took 11 minutes per archive. The serial-loader result has not been retracted.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_009",
+    "reason_criterion": "A supported build now exists, removing the specific availability reason for ruling out the parallel loader; neither result is erased.",
+    "repeat_source": "aa9417e69c0f425bd5264789",
+    "repeat_expected_alerts": 0
+  },
+  "final-05": {
+    "kind": "coexist",
+    "old": "33f32b970ea4c6d63720ff7f",
+    "new": "372e805dfe27341c32a6619c",
+    "expected_review": false,
+    "expected_relation": "coexist",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a4ca19f151ef554bfb1f83cf",
+            "aliases": [
+              "Option B"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "33f32b970ea4c6d63720ff7f",
+            "aliases": [
+              "8 milliseconds"
+            ],
+            "condition": "wired-LAN profile",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "33f32b970ea4c6d63720ff7f",
+            "aliases": [
+              "8 milliseconds"
+            ],
+            "condition": "wired-LAN profile",
+            "status": "reported"
+          },
+          {
+            "source_id": "372e805dfe27341c32a6619c",
+            "aliases": [
+              "130 milliseconds"
+            ],
+            "condition": "mobile-WAN profile",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a4ca19f151ef554bfb1f83cf",
+            "aliases": [
+              "Option B"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "33f32b970ea4c6d63720ff7f",
+            "aliases": [
+              "8 milliseconds"
+            ],
+            "condition": "wired-LAN profile",
+            "status": "reported"
+          },
+          {
+            "source_id": "372e805dfe27341c32a6619c",
+            "aliases": [
+              "130 milliseconds"
+            ],
+            "condition": "mobile-WAN profile",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "33f32b970ea4c6d63720ff7f",
+            "aliases": [
+              "Delta-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a4ca19f151ef554bfb1f83cf",
+            "aliases": [
+              "Option B"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Under the wired-LAN profile, Delta request latency was 8 milliseconds. The evidence archive is Delta-evidence.",
+    "new_text": "Under the mobile-WAN profile, Delta request latency was 130 milliseconds. No wired-LAN measurement is being corrected.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_013",
+    "reason_criterion": "Different network profiles support coexisting latency observations, with no earlier decision or same-condition contradiction.",
+    "repeat_source": "170b6f9893427d3ef1dbddfc",
+    "repeat_expected_alerts": 0
+  },
+  "final-06": {
+    "kind": "coexist",
+    "old": "e64097386adb7851ac085f08",
+    "new": "6d5ac089de22699062db02c0",
+    "expected_review": false,
+    "expected_relation": "coexist",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "974e12d5cf41b139d93f5a7d",
+            "aliases": [
+              "Client Credentials Grant mode"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e64097386adb7851ac085f08",
+            "aliases": [
+              "94%"
+            ],
+            "condition": "indoor-camera set",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "e64097386adb7851ac085f08",
+            "aliases": [
+              "94%"
+            ],
+            "condition": "indoor-camera set",
+            "status": "reported"
+          },
+          {
+            "source_id": "6d5ac089de22699062db02c0",
+            "aliases": [
+              "81%"
+            ],
+            "condition": "outdoor-camera set",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "974e12d5cf41b139d93f5a7d",
+            "aliases": [
+              "Client Credentials Grant mode"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "e64097386adb7851ac085f08",
+            "aliases": [
+              "94%"
+            ],
+            "condition": "indoor-camera set",
+            "status": "reported"
+          },
+          {
+            "source_id": "6d5ac089de22699062db02c0",
+            "aliases": [
+              "81%"
+            ],
+            "condition": "outdoor-camera set",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e64097386adb7851ac085f08",
+            "aliases": [
+              "Meadow-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "974e12d5cf41b139d93f5a7d",
+            "aliases": [
+              "Client Credentials Grant mode"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+    "new_text": "On the outdoor-camera set, Meadow object detection reached 81% recall. The indoor set was not rerun.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_015",
+    "reason_criterion": "Indoor and outdoor sets differ; retain both scoped results and do not infer a regression or request decision reversal.",
+    "repeat_source": "9fdeef858d8fa806f8d407d6",
+    "repeat_expected_alerts": 0
+  },
+  "final-07": {
+    "kind": "coexist",
+    "old": "217c874b03b2b6d9905eb660",
+    "new": "57fce2f8a894f135d4ca987a",
+    "expected_review": false,
+    "expected_relation": "coexist",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "c01049a55cb1461ab595968e",
+            "aliases": [
+              "Smart IoT Health Monitoring System"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "217c874b03b2b6d9905eb660",
+            "aliases": [
+              "120 MB"
+            ],
+            "condition": "10-file fixture",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "217c874b03b2b6d9905eb660",
+            "aliases": [
+              "120 MB"
+            ],
+            "condition": "10-file fixture",
+            "status": "reported"
+          },
+          {
+            "source_id": "57fce2f8a894f135d4ca987a",
+            "aliases": [
+              "940 MB"
+            ],
+            "condition": "1000-file fixture",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "c01049a55cb1461ab595968e",
+            "aliases": [
+              "Smart IoT Health Monitoring System"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "217c874b03b2b6d9905eb660",
+            "aliases": [
+              "120 MB"
+            ],
+            "condition": "10-file fixture",
+            "status": "reported"
+          },
+          {
+            "source_id": "57fce2f8a894f135d4ca987a",
+            "aliases": [
+              "940 MB"
+            ],
+            "condition": "1000-file fixture",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "217c874b03b2b6d9905eb660",
+            "aliases": [
+              "Fjord-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "c01049a55cb1461ab595968e",
+            "aliases": [
+              "Smart IoT Health Monitoring System"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "For the 10-file fixture, Fjord indexing peaked at 120 MB of memory. The evidence archive is Fjord-evidence.",
+    "new_text": "For the 1000-file fixture, Fjord indexing peaked at 940 MB of memory. This report covers only the larger fixture.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_016",
+    "reason_criterion": "The fixture sizes differ; neither peak contradicts or supersedes the other.",
+    "repeat_source": "85c13bc02d9b5e7d89de7f64",
+    "repeat_expected_alerts": 0
+  },
+  "final-08": {
+    "kind": "coexist",
+    "old": "03d56ffbcab7d4d7fe507edf",
+    "new": "d3058140ac03bc376c1d2a95",
+    "expected_review": false,
+    "expected_relation": "coexist",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d61b9380681071b2b0bcbd84",
+            "aliases": [
+              "Confluence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "03d56ffbcab7d4d7fe507edf",
+            "aliases": [
+              "14 dollars"
+            ],
+            "condition": "weekly retention",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "03d56ffbcab7d4d7fe507edf",
+            "aliases": [
+              "14 dollars"
+            ],
+            "condition": "weekly retention",
+            "status": "reported"
+          },
+          {
+            "source_id": "d3058140ac03bc376c1d2a95",
+            "aliases": [
+              "86 dollars"
+            ],
+            "condition": "annual retention",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d61b9380681071b2b0bcbd84",
+            "aliases": [
+              "Confluence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "03d56ffbcab7d4d7fe507edf",
+            "aliases": [
+              "14 dollars"
+            ],
+            "condition": "weekly retention",
+            "status": "reported"
+          },
+          {
+            "source_id": "d3058140ac03bc376c1d2a95",
+            "aliases": [
+              "86 dollars"
+            ],
+            "condition": "annual retention",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "03d56ffbcab7d4d7fe507edf",
+            "aliases": [
+              "Mosaic-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d61b9380681071b2b0bcbd84",
+            "aliases": [
+              "Confluence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "With weekly retention, Mosaic archive storage cost was 14 dollars per month. The evidence archive is Mosaic-evidence.",
+    "new_text": "With annual retention, Mosaic archive storage cost was 86 dollars per month. Both retention plans remain available.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_017",
+    "reason_criterion": "Different retention scopes legitimately have different monthly costs; no recorded decision needs reopening.",
+    "repeat_source": "d71ab10c8aad27a89fbdf243",
+    "repeat_expected_alerts": 0
+  },
+  "final-09": {
+    "kind": "conflict",
+    "old": "63b7606d609cfdf518bf1bf9",
+    "new": "b692843b01d7115d0f61741f",
+    "expected_review": true,
+    "expected_relation": "conflict",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8d66455d38a7a6ab390e5d7c",
+            "aliases": [
+              "98%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "63b7606d609cfdf518bf1bf9",
+            "aliases": [
+              "64 connections"
+            ],
+            "condition": "build A8 defaults",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "63b7606d609cfdf518bf1bf9",
+            "aliases": [
+              "64 connections"
+            ],
+            "condition": "build A8 defaults",
+            "status": "reported"
+          },
+          {
+            "source_id": "b692843b01d7115d0f61741f",
+            "aliases": [
+              "96 connections"
+            ],
+            "condition": "build A8 defaults",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8d66455d38a7a6ab390e5d7c",
+            "aliases": [
+              "98%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "63b7606d609cfdf518bf1bf9",
+            "aliases": [
+              "64 connections"
+            ],
+            "condition": "build A8 defaults",
+            "status": "reported"
+          },
+          {
+            "source_id": "b692843b01d7115d0f61741f",
+            "aliases": [
+              "96 connections"
+            ],
+            "condition": "build A8 defaults",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "63b7606d609cfdf518bf1bf9",
+            "aliases": [
+              "Anchor-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8d66455d38a7a6ab390e5d7c",
+            "aliases": [
+              "98%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Under build A8 defaults, the Anchor connection limit is 64 connections. The evidence archive is Anchor-evidence.",
+    "new_text": "My independent reading under the same build A8 defaults gives the Anchor connection limit as 96 connections. Neither report has been withdrawn and the mismatch is unresolved.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_021",
+    "reason_criterion": "Two unwithdrawn limits describe the same build and defaults, so preserve both and request resolution rather than selecting the later one.",
+    "repeat_source": "13051f69b0767435e64a22d1",
+    "repeat_expected_alerts": 0
+  },
+  "final-10": {
+    "kind": "conflict",
+    "old": "4616eae74fa0d8c6335da14c",
+    "new": "ed62ef51a136760b593c1b59",
+    "expected_review": true,
+    "expected_relation": "conflict",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4b77961cd0854b7c674c72c8",
+            "aliases": [
+              "v1.0.0"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4616eae74fa0d8c6335da14c",
+            "aliases": [
+              "83%"
+            ],
+            "condition": "frozen B2 evaluation set",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "4616eae74fa0d8c6335da14c",
+            "aliases": [
+              "83%"
+            ],
+            "condition": "frozen B2 evaluation set",
+            "status": "reported"
+          },
+          {
+            "source_id": "ed62ef51a136760b593c1b59",
+            "aliases": [
+              "87%"
+            ],
+            "condition": "frozen B2 evaluation set",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4b77961cd0854b7c674c72c8",
+            "aliases": [
+              "v1.0.0"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "4616eae74fa0d8c6335da14c",
+            "aliases": [
+              "83%"
+            ],
+            "condition": "frozen B2 evaluation set",
+            "status": "reported"
+          },
+          {
+            "source_id": "ed62ef51a136760b593c1b59",
+            "aliases": [
+              "87%"
+            ],
+            "condition": "frozen B2 evaluation set",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4616eae74fa0d8c6335da14c",
+            "aliases": [
+              "Beacon-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4b77961cd0854b7c674c72c8",
+            "aliases": [
+              "v1.0.0"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "On the frozen B2 evaluation set, Beacon classification accuracy is 83%. The evidence archive is Beacon-evidence.",
+    "new_text": "An independent calculation on the same frozen B2 evaluation set reports Beacon classification accuracy as 87%. We have not reconciled the two calculations or established that either is an error.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_022",
+    "reason_criterion": "The same frozen evaluation set has two unresolved accuracy calculations; a higher later number is not evidence of an accepted correction.",
+    "repeat_source": "27c9815e81ee0124b72c99cd",
+    "repeat_expected_alerts": 0
+  },
+  "final-11": {
+    "kind": "conflict",
+    "old": "7e826b2923a56e9125f87e18",
+    "new": "837577e87caaf27b9debe686",
+    "expected_review": true,
+    "expected_relation": "conflict",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a81e9fe96716ef6f05599bb8",
+            "aliases": [
+              "92%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "7e826b2923a56e9125f87e18",
+            "aliases": [
+              "4200 rows"
+            ],
+            "condition": "snapshot C5 after the agreed filters",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "7e826b2923a56e9125f87e18",
+            "aliases": [
+              "4200 rows"
+            ],
+            "condition": "snapshot C5 after the agreed filters",
+            "status": "reported"
+          },
+          {
+            "source_id": "837577e87caaf27b9debe686",
+            "aliases": [
+              "4170 rows"
+            ],
+            "condition": "snapshot C5 after the agreed filters",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a81e9fe96716ef6f05599bb8",
+            "aliases": [
+              "92%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "7e826b2923a56e9125f87e18",
+            "aliases": [
+              "4200 rows"
+            ],
+            "condition": "snapshot C5 after the agreed filters",
+            "status": "reported"
+          },
+          {
+            "source_id": "837577e87caaf27b9debe686",
+            "aliases": [
+              "4170 rows"
+            ],
+            "condition": "snapshot C5 after the agreed filters",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "7e826b2923a56e9125f87e18",
+            "aliases": [
+              "Cobalt-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a81e9fe96716ef6f05599bb8",
+            "aliases": [
+              "92%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "For snapshot C5 after the agreed filters, the Cobalt row count is 4200 rows. The evidence archive is Cobalt-evidence.",
+    "new_text": "My separate count for the same snapshot C5 after the agreed filters is 4170 rows. We have not determined the cause of disagreement and neither count is retracted.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_028",
+    "reason_criterion": "Snapshot and filters match, but counts differ with no resolution. Both sources must remain available.",
+    "repeat_source": "17d472301c3dc8eff326200a",
+    "repeat_expected_alerts": 0
+  },
+  "final-12": {
+    "kind": "conflict",
+    "old": "147e740af432277535045201",
+    "new": "b1f5b8f4cf4acdd11a776945",
+    "expected_review": true,
+    "expected_relation": "conflict",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "31ebd089ee9f777346bd3d42",
+            "aliases": [
+              "V1.0"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "147e740af432277535045201",
+            "aliases": [
+              "8082"
+            ],
+            "condition": "staging D4 configuration",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "147e740af432277535045201",
+            "aliases": [
+              "8082"
+            ],
+            "condition": "staging D4 configuration",
+            "status": "reported"
+          },
+          {
+            "source_id": "b1f5b8f4cf4acdd11a776945",
+            "aliases": [
+              "8092"
+            ],
+            "condition": "staging D4 configuration",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "31ebd089ee9f777346bd3d42",
+            "aliases": [
+              "V1.0"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "147e740af432277535045201",
+            "aliases": [
+              "8082"
+            ],
+            "condition": "staging D4 configuration",
+            "status": "reported"
+          },
+          {
+            "source_id": "b1f5b8f4cf4acdd11a776945",
+            "aliases": [
+              "8092"
+            ],
+            "condition": "staging D4 configuration",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "147e740af432277535045201",
+            "aliases": [
+              "Drift-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "31ebd089ee9f777346bd3d42",
+            "aliases": [
+              "V1.0"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "In the staging D4 configuration, the Drift callback port is 8082. The evidence archive is Drift-evidence.",
+    "new_text": "My independent inspection of the same staging D4 configuration reports the Drift callback port as 8092. No configuration change is recorded and the disagreement remains open.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_031",
+    "reason_criterion": "The inspections concern the same configuration without a recorded change; request resolution and do not infer a new configuration or correction.",
+    "repeat_source": "fe360003e79f7ebf079a01a6",
+    "repeat_expected_alerts": 0
+  },
+  "final-13": {
+    "kind": "correction",
+    "old": "540eb85de6a0200d9433edc2",
+    "new": "59261ebef9f950461bc01147",
+    "expected_review": true,
+    "expected_relation": "correction",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "5e4e5cbaf2a8c9eed4fc9463",
+            "aliases": [
+              "30%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "540eb85de6a0200d9433edc2",
+            "aliases": [
+              "150 records"
+            ],
+            "condition": "release E6",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "540eb85de6a0200d9433edc2",
+            "aliases": [
+              "150 records"
+            ],
+            "condition": "release E6",
+            "status": "reported"
+          },
+          {
+            "source_id": "59261ebef9f950461bc01147",
+            "aliases": [
+              "105 records"
+            ],
+            "condition": "release E6",
+            "status": "pending_correction"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "5e4e5cbaf2a8c9eed4fc9463",
+            "aliases": [
+              "30%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "59261ebef9f950461bc01147",
+            "aliases": [
+              "105 records"
+            ],
+            "condition": "release E6",
+            "status": "approved_correction"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "540eb85de6a0200d9433edc2",
+            "aliases": [
+              "Elm-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "5e4e5cbaf2a8c9eed4fc9463",
+            "aliases": [
+              "30%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "For release E6, the Elm export batch size is 150 records. The evidence archive is Elm-evidence.",
+    "new_text": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records. No other assertion in my earlier note is retracted.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_032",
+    "reason_criterion": "The original author explicitly corrects the transcribed batch size under the same release. Only that assertion changes after owner approval.",
+    "repeat_source": "359db929a23dc701a6cbee6b",
+    "repeat_expected_alerts": 0
+  },
+  "final-14": {
+    "kind": "correction",
+    "old": "72646eaf0ee3dba8123453fb",
+    "new": "0cfc6bd91368da0bac200b9c",
+    "expected_review": true,
+    "expected_relation": "correction",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "ee4adb92d98af949eb65bf37",
+            "aliases": [
+              "Around 89%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "72646eaf0ee3dba8123453fb",
+            "aliases": [
+              "17:00 UTC"
+            ],
+            "condition": "F3 review round",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "72646eaf0ee3dba8123453fb",
+            "aliases": [
+              "17:00 UTC"
+            ],
+            "condition": "F3 review round",
+            "status": "reported"
+          },
+          {
+            "source_id": "0cfc6bd91368da0bac200b9c",
+            "aliases": [
+              "15:00 UTC"
+            ],
+            "condition": "F3 review round",
+            "status": "pending_correction"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "ee4adb92d98af949eb65bf37",
+            "aliases": [
+              "Around 89%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "0cfc6bd91368da0bac200b9c",
+            "aliases": [
+              "15:00 UTC"
+            ],
+            "condition": "F3 review round",
+            "status": "approved_correction"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "72646eaf0ee3dba8123453fb",
+            "aliases": [
+              "Flint-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "ee4adb92d98af949eb65bf37",
+            "aliases": [
+              "Around 89%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+    "new_text": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC. The rest of the earlier note still applies.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_035",
+    "reason_criterion": "An explicit same-round author correction changes the deadline assertion after review, without changing other facts in the old note.",
+    "repeat_source": "b7a70e57166ae1ee7115ee55",
+    "repeat_expected_alerts": 0
+  },
+  "final-15": {
+    "kind": "correction",
+    "old": "47b5ee1b30f378b7f92e3e72",
+    "new": "4a87b5aea43f893fb8da2b78",
+    "expected_review": true,
+    "expected_relation": "correction",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "79948e794d224908195dfeee",
+            "aliases": [
+              "Zihao Wan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "47b5ee1b30f378b7f92e3e72",
+            "aliases": [
+              "46 seconds"
+            ],
+            "condition": "G9 timing run",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "47b5ee1b30f378b7f92e3e72",
+            "aliases": [
+              "46 seconds"
+            ],
+            "condition": "G9 timing run",
+            "status": "reported"
+          },
+          {
+            "source_id": "4a87b5aea43f893fb8da2b78",
+            "aliases": [
+              "64 seconds"
+            ],
+            "condition": "G9 timing run",
+            "status": "pending_correction"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "79948e794d224908195dfeee",
+            "aliases": [
+              "Zihao Wan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4a87b5aea43f893fb8da2b78",
+            "aliases": [
+              "64 seconds"
+            ],
+            "condition": "G9 timing run",
+            "status": "approved_correction"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "47b5ee1b30f378b7f92e3e72",
+            "aliases": [
+              "Grove-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "79948e794d224908195dfeee",
+            "aliases": [
+              "Zihao Wan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "In the G9 timing run, Grove startup took 46 seconds. The evidence archive is Grove-evidence.",
+    "new_text": "I correct my earlier Grove startup duration because I reversed two digits in the log summary. In the same G9 timing run, startup took 64 seconds. This is a transcription correction, not a new timing run.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_036",
+    "reason_criterion": "The author retracts a transcribed value for the identical timing run; it is a pending correction before review, not a new condition or performance regression.",
+    "repeat_source": "5857a4f66f770fc94ac7069e",
+    "repeat_expected_alerts": 0
+  },
+  "final-16": {
+    "kind": "correction",
+    "old": "8b04c566642eee083097b7c6",
+    "new": "393b5b9f117378cf456ee70f",
+    "expected_review": true,
+    "expected_relation": "correction",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "203c1918cd867209e7556af4",
+            "aliases": [
+              "RocketMQ"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8b04c566642eee083097b7c6",
+            "aliases": [
+              "0.75"
+            ],
+            "condition": "policy H2",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "8b04c566642eee083097b7c6",
+            "aliases": [
+              "0.75"
+            ],
+            "condition": "policy H2",
+            "status": "reported"
+          },
+          {
+            "source_id": "393b5b9f117378cf456ee70f",
+            "aliases": [
+              "0.57"
+            ],
+            "condition": "policy H2",
+            "status": "pending_correction"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "203c1918cd867209e7556af4",
+            "aliases": [
+              "RocketMQ"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "393b5b9f117378cf456ee70f",
+            "aliases": [
+              "0.57"
+            ],
+            "condition": "policy H2",
+            "status": "approved_correction"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "8b04c566642eee083097b7c6",
+            "aliases": [
+              "Haven-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "203c1918cd867209e7556af4",
+            "aliases": [
+              "RocketMQ"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+    "new_text": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57. The policy itself did not change.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_038",
+    "reason_criterion": "Explicit same-policy author correction changes only the mistyped threshold, pending owner approval; the policy did not evolve.",
+    "repeat_source": "3a6c4ff0f1d72bc912ff0662",
+    "repeat_expected_alerts": 0
+  },
+  "final-17": {
+    "kind": "irrelevant",
+    "old": "9dc0b2e4f9c6fdd67c0ff939",
+    "new": "874daa62025043d8e1b018a8",
+    "expected_review": false,
+    "expected_relation": null,
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "3a81cbc1f34e14e7635029cf",
+            "aliases": [
+              "95%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+            "aliases": [
+              "6 attempts"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+            "aliases": [
+              "6 attempts"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "3a81cbc1f34e14e7635029cf",
+            "aliases": [
+              "95%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+            "aliases": [
+              "6 attempts"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+            "aliases": [
+              "Islet-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "3a81cbc1f34e14e7635029cf",
+            "aliases": [
+              "95%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "The Islet retry limit is 6 attempts. We deferred the transport rollout because failover testing is incomplete. The evidence archive is Islet-evidence.",
+    "new_text": "The Islet troubleshooting guide now has 22 pages after copyediting. No failover test or transport run was performed.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_041",
+    "reason_criterion": "Guide length gives no new evidence about retry behavior or the missing failover validation; do not reopen the rollout decision.",
+    "repeat_source": "822630516667d146d1717bb7",
+    "repeat_expected_alerts": 0
+  },
+  "final-18": {
+    "kind": "irrelevant",
+    "old": "f16fc3de8a1cd0c18feb88d9",
+    "new": "cfb9c21740e4da76c2d1847d",
+    "expected_review": false,
+    "expected_relation": null,
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "6c1c9fd1f9708dfb44243044",
+            "aliases": [
+              "APISIX"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "f16fc3de8a1cd0c18feb88d9",
+            "aliases": [
+              "25 seconds"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "f16fc3de8a1cd0c18feb88d9",
+            "aliases": [
+              "25 seconds"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "6c1c9fd1f9708dfb44243044",
+            "aliases": [
+              "APISIX"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "f16fc3de8a1cd0c18feb88d9",
+            "aliases": [
+              "25 seconds"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "f16fc3de8a1cd0c18feb88d9",
+            "aliases": [
+              "Juniper-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "6c1c9fd1f9708dfb44243044",
+            "aliases": [
+              "APISIX"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "The Juniper query timeout is 25 seconds. We postponed the database index migration until lock contention is measured. The evidence archive is Juniper-evidence.",
+    "new_text": "The Juniper dashboard font size is now 16 pixels. This visual change includes no database benchmark or lock measurement.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_042",
+    "reason_criterion": "A dashboard font change is unrelated to timeout or the missing lock-contention evidence.",
+    "repeat_source": "5f6ebd7a110fa2e3e9dca20d",
+    "repeat_expected_alerts": 0
+  },
+  "final-19": {
+    "kind": "irrelevant",
+    "old": "d80d47360c531a124e9217fd",
+    "new": "e667c35ba3fe979d3f413887",
+    "expected_review": false,
+    "expected_relation": null,
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e1e971dd574bf90f69129aab",
+            "aliases": [
+              "Confluence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d80d47360c531a124e9217fd",
+            "aliases": [
+              "91%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d80d47360c531a124e9217fd",
+            "aliases": [
+              "91%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e1e971dd574bf90f69129aab",
+            "aliases": [
+              "Confluence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d80d47360c531a124e9217fd",
+            "aliases": [
+              "91%"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d80d47360c531a124e9217fd",
+            "aliases": [
+              "Knoll-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e1e971dd574bf90f69129aab",
+            "aliases": [
+              "Confluence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Knoll validation precision is 91%. We rejected deployment because the offline bias audit is unfinished. The evidence archive is Knoll-evidence.",
+    "new_text": "The Knoll planning agenda now has 7 topics. The meeting covered scheduling only, and no model evaluation or bias audit was run.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_045",
+    "reason_criterion": "An agenda edit does not resolve the missing bias audit or change measured precision.",
+    "repeat_source": "46284cac2e5e6509bba5d740",
+    "repeat_expected_alerts": 0
+  },
+  "final-20": {
+    "kind": "irrelevant",
+    "old": "4f1e64cd69c4b2f832a314fc",
+    "new": "761164951e5379d63ac994bb",
+    "expected_review": false,
+    "expected_relation": null,
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a1fe56cbb4435ea3ee9d3590",
+            "aliases": [
+              "Junxin Yuan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4f1e64cd69c4b2f832a314fc",
+            "aliases": [
+              "32 seconds"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4f1e64cd69c4b2f832a314fc",
+            "aliases": [
+              "32 seconds"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a1fe56cbb4435ea3ee9d3590",
+            "aliases": [
+              "Junxin Yuan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4f1e64cd69c4b2f832a314fc",
+            "aliases": [
+              "32 seconds"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "4f1e64cd69c4b2f832a314fc",
+            "aliases": [
+              "Lagoon-evidence"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after_repeat": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a1fe56cbb4435ea3ee9d3590",
+            "aliases": [
+              "Junxin Yuan"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Lagoon build startup takes 32 seconds. We suspended the compiler switch because the target ABI has not been validated. The evidence archive is Lagoon-evidence.",
+    "new_text": "Lagoon shipping labels now use 10-point text. This packaging change has no compiler build or ABI validation results.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "F_SH_Top02_046",
+    "reason_criterion": "A packaging typography update provides no evidence about startup or the unvalidated target ABI.",
+    "repeat_source": "58df2a8bdd3cdb2b6817e77c",
+    "repeat_expected_alerts": 0
+  }
+}

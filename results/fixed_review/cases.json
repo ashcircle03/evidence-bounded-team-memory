@@ -1,0 +1,2212 @@
+{
+  "git-alias-pos/end_to_end/pairwise/pairwise": {
+    "case": "git-alias-pos",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-pos/end_to_end/fixed-review/fixed-review": {
+    "case": "git-alias-pos",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "5f9c1f36230a",
+    "reason": "The report reveals a prior decision to use the early config machinery to expand aliases, introduced by commit a9bcf6586d1 on 2017-06-14, which may need reevaluation given the earlier behavior of discovering the .git/ directory and resetting global state.",
+    "old": {
+      "source_id": "b71d2621b957b19be718d9eb",
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "speaker": "Johannes Schindelin",
+      "start": 57,
+      "end": 262,
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "480367202a0b84c6e2454481",
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "speaker": "Johannes Schindelin",
+      "start": 249,
+      "end": 369,
+      "quote": "This fixes a regression introduced by a9bcf6586d1 (alias: use\nthe early config machinery to expand aliases, 2017-06-14).",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-pos/fixed/earlier-first/original": {
+    "case": "git-alias-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "8085b4d76db7",
+    "reason": "The earlier decision relied on the method of finding .git/ directories and resetting global state based on matching aliases; the report introduces concrete new evidence showing that alias names can be in CamelCase, thus changing the applicability of the earlier result, provided that alias names are consistently written in either all lowercase or all uppercase for the earlier method to remain valid.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-pos/fixed/earlier-first/revised": {
+    "case": "git-alias-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "3e8494c7f0de",
+    "reason": "The report reveals that allowing CamelCased aliases is acceptable despite previous decisions based on the assumption that config keys are case-sensitive, thus requiring reevaluation of those prior project decisions.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-pos/fixed/report-first/original": {
+    "case": "git-alias-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "36c078568c0e",
+    "reason": "The earlier decision relied on the fact that the case of config keys did not matter for adding aliases; however, the new evidence shows that with concrete new data indicating the importance of preserving the original casing when comparing config keys, this earlier result may no longer apply, unless there is a specific configuration or context where the casing comparison is irrelevant.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-pos/fixed/report-first/revised": {
+    "case": "git-alias-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "3e8494c7f0de",
+    "reason": "The report reveals that allowing CamelCased aliases is acceptable despite previous decisions based on the assumption that config keys are case-sensitive, thus requiring reevaluation of those prior project decisions.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-alias/fixed/earlier-first/original": {
+    "case": "cross-alias",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the potential future use of `split_cmdline()` for non-alias functionalities, but the report indicates that the current case-insensitive comparison of config keys means that adding CamelCased aliases does not pose a problem, thus changing the applicability of the earlier decision. The earlier result remains true if the case sensitivity of config keys is maintained or if there are no plans to change the comparison method.",
+    "old": {
+      "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+      "quote": "split_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-alias/fixed/earlier-first/revised": {
+    "case": "cross-alias",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals that config keys comparison ignores case sensitivity for CamelCased aliases, indicating a prior decision to allow such cases might need revisiting in light of this new evidence.",
+    "old": {
+      "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+      "quote": "split_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-alias/fixed/report-first/original": {
+    "case": "cross-alias",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision was based on the assumption that split_cmdline() is specifically for aliases, but the new evidence shows that config keys comparison indicates case does not affect functionality, thus changing its applicability to consider it useful for other builtins without needing to move it to alias.c unless there are specific cases where case sensitivity matters.",
+    "old": {
+      "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+      "quote": "split_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-alias/fixed/report-first/revised": {
+    "case": "cross-alias",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals that config keys comparison ignores case sensitivity for CamelCased aliases, indicating a prior decision to allow such cases might need revisiting in light of this new evidence.",
+    "old": {
+      "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+      "quote": "split_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-neg/end_to_end/pairwise/pairwise": {
+    "case": "git-alias-neg",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-neg/end_to_end/fixed-review/fixed-review": {
+    "case": "git-alias-neg",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "Review the decision to initially limit split_cmdline() usage to aliases only, given the reported exception where 'somecommand' fails with an invalid option '-h' when invoked via git sc -h.",
+    "old": {
+      "source_id": "0a01b38b4f82ecdf5ca19229",
+      "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+      "speaker": "Miklos Vajna",
+      "start": 33,
+      "end": 250,
+      "quote": "split_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "279728f442802f3ac915d3c0",
+      "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+      "speaker": "Rasmus Villemoes",
+      "start": 1055,
+      "end": 1133,
+      "quote": "$ git sc -h\n'sc' is aliased to '!somecommand'\nsomecommand: invalid option '-h'",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-neg/fixed/earlier-first/original": {
+    "case": "git-alias-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the observation that most Git commands provide helpful usage information when invoked with `-h`. The report introduces new evidence suggesting that aliases could benefit from additional context indicating they are aliases and for what command, thus changing the applicability of the earlier decision to consider providing such context for aliases specifically. The earlier result remains valid for other Git commands where `-h` is used.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+      "quote": "Most git commands respond to -h anywhere in the command line, or at\nleast as a first and lone argument, by printing the usage\ninformation. For aliases, we can provide a little more information that\nmight be useful in interpreting/understanding the following output by\nprepending a line telling that the command is an alias, and for what."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-neg/fixed/earlier-first/revised": {
+    "case": "git-alias-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier behavior of most git commands responding to -h by printing usage information may no longer align with the need to provide additional context for aliases, revealing a circumstance where rechecking the rationale behind this decision is necessary.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+      "quote": "Most git commands respond to -h anywhere in the command line, or at\nleast as a first and lone argument, by printing the usage\ninformation. For aliases, we can provide a little more information that\nmight be useful in interpreting/understanding the following output by\nprepending a line telling that the command is an alias, and for what."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-neg/fixed/report-first/original": {
+    "case": "git-alias-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the assumption that finding the .git/ directory was necessary before attempting to interpret aliases, but the new evidence shows that git commands now provide alias-specific usage information even when invoked without specifying the full command name, thus changing the applicability of this assumption. The earlier result remains true if the command does not include an alias or if alias interpretation is not required.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+      "quote": "Most git commands respond to -h anywhere in the command line, or at\nleast as a first and lone argument, by printing the usage\ninformation. For aliases, we can provide a little more information that\nmight be useful in interpreting/understanding the following output by\nprepending a line telling that the command is an alias, and for what."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-alias-neg/fixed/report-first/revised": {
+    "case": "git-alias-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier behavior of most git commands responding to -h by printing usage information may no longer align with the need to provide additional context for aliases, revealing a circumstance where rechecking the rationale behind this decision is necessary.",
+    "old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+      "quote": "Most git commands respond to -h anywhere in the command line, or at\nleast as a first and lone argument, by printing the usage\ninformation. For aliases, we can provide a little more information that\nmight be useful in interpreting/understanding the following output by\nprepending a line telling that the command is an alias, and for what."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-pos/end_to_end/pairwise/pairwise": {
+    "case": "git-cvs-pos",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-pos/end_to_end/fixed-review/fixed-review": {
+    "case": "git-cvs-pos",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "249663f59537",
+    "reason": "The report reveals a decision to avoid scrambling passwords stored in .cvspass, which may need reevaluation given the fix addressing the unintended scrambling of command-line passwords introduced by 3fb9d582.",
+    "old": {
+      "source_id": "376c68529ed37ac87f06e055",
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "speaker": "Pascal Obry",
+      "start": 45,
+      "end": 192,
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "ba1f0a1210f31cd59ed5aa6f",
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "speaker": "Clemens Buchacher",
+      "start": 182,
+      "end": 275,
+      "quote": "This fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass).",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-pos/fixed/earlier-first/original": {
+    "case": "git-cvs-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "b6991c925daa",
+    "reason": "The earlier decision was based on the rationale that passwords stored in .cvspass are already scrambled and thus need not be scrambled again; however, the report introduces new evidence suggesting that if no passwords are found in .cvspass and none are read from the command line, the initialization process must use \"A\" as the password, thereby changing the applicability of the earlier decision when neither .cvspass nor command-line input contains passwords.",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": true,
+    "grounded": false
+  },
+  "git-cvs-pos/fixed/earlier-first/revised": {
+    "case": "git-cvs-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "4deb4127f9a3",
+    "reason": "The report reveals a scenario where initializing the password with just \"A\" is necessary if neither command-line input nor .cvspass passwords are present, indicating a potential oversight in previous project decisions regarding password initialization logic.",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": true,
+    "grounded": true
+  },
+  "git-cvs-pos/fixed/report-first/original": {
+    "case": "git-cvs-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "7691925cf8b5",
+    "reason": "The earlier decision relied on the assumption that passwords read from the command line were unscrambled before being stored in .cvspass, whereas the new evidence shows that these passwords are also scrambled, thus changing the applicability of the earlier result and necessitating a reassessment of whether passwords from the command line need to be initialized with \"A\".",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-pos/fixed/report-first/revised": {
+    "case": "git-cvs-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "4deb4127f9a3",
+    "reason": "The report reveals a scenario where initializing the password with just \"A\" is necessary if neither command-line input nor .cvspass passwords are present, indicating a potential oversight in previous project decisions regarding password initialization logic.",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": true,
+    "grounded": true
+  },
+  "cross-cvs/fixed/earlier-first/original": {
+    "case": "cross-cvs",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the necessity of reading a password from the command line or having passwords stored in .cvspass for git-cvsimport to succeed in CVS repositories with unusual CVSROOT. The new evidence that changes its applicability is the finding that initializing the password with just \"A\" is sufficient, provided that either a password is read from the command line or stored in .cvspass. This condition preserves the earlier result as long as these alternative methods are available.",
+    "old": {
+      "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+      "quote": "For CVS repositories with unusual CVSROOT, git-cvsimport would fail:"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-cvs/fixed/earlier-first/revised": {
+    "case": "cross-cvs",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals a decision to initialize a password with just \"A\" if reading from the command line is disabled and no passwords are stored, which may need revisiting given new evidence; use the full report to verify this specific recommendation's necessity.",
+    "old": {
+      "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+      "quote": "For CVS repositories with unusual CVSROOT, git-cvsimport would fail:"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-cvs/fixed/report-first/original": {
+    "case": "cross-cvs",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision regarding CVSROOT initialization for unusual configurations is based on the assumption that if no passwords are set and not stored, \"A\" must be used; however, this rationale may no longer hold if the new evidence shows that git-cvsimport can now succeed without explicitly setting a password. The earlier result remains valid for standard CVSROOT setups where no default password handling exists.",
+    "old": {
+      "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+      "quote": "For CVS repositories with unusual CVSROOT, git-cvsimport would fail:"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-cvs/fixed/report-first/revised": {
+    "case": "cross-cvs",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals a decision to initialize a password with just \"A\" if reading from the command line is disabled and no passwords are stored, which may need revisiting given new evidence; use the full report to verify this specific recommendation's necessity.",
+    "old": {
+      "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+      "quote": "For CVS repositories with unusual CVSROOT, git-cvsimport would fail:"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-neg/end_to_end/pairwise/pairwise": {
+    "case": "git-cvs-neg",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-neg/end_to_end/fixed-review/fixed-review": {
+    "case": "git-cvs-neg",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests changing the function from `is_sha1` to `is_oid` to match either a SHA-1 or SHA-256 hex object ID, indicating a potential change in cryptographic standards that should be reevaluated in existing project decisions.",
+    "old": {
+      "source_id": "376c68529ed37ac87f06e055",
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "speaker": "Pascal Obry",
+      "start": 194,
+      "end": 318,
+      "quote": "This fixes a regression introduced by b2139db (git-cvsimport: add support\nfor cvs pserver password scrambling., 2009-08-14).",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "e11509e76fd05d1527898612",
+      "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+      "speaker": "brian m. carlson",
+      "start": 32,
+      "end": 153,
+      "quote": "Instead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-neg/fixed/earlier-first/original": {
+    "case": "git-cvs-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the principle that passwords stored in .cvspass are already scrambled and thus do not need to be scrambled again, whereas the report introduces new evidence suggesting that all command-line inputs for object IDs should now be checked using is_oid regardless of their cryptographic hash type, thereby changing the applicability of the earlier decision. The earlier result remains true if passwords in .cvspass continue to be scrambled as per the original policy.",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+      "quote": "Instead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-neg/fixed/earlier-first/revised": {
+    "case": "git-cvs-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests changing the function name from `is_sha1` to `is_oid` and updating its logic to recognize both SHA-1 and SHA-256 hex object IDs, indicating a potential change in password handling strategy that needs reevaluation.",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+      "quote": "Instead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-neg/fixed/report-first/original": {
+    "case": "git-cvs-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the principle that passwords stored in .cvspass are already scrambled and thus do not need further scrambling, but the new evidence shows that the updated function now accepts both SHA-1 and SHA-256 object IDs, potentially reintroducing a risk of password exposure if these IDs are derived from unscrambled inputs. This changes the applicability because the function's new functionality could lead to a situation where previously unscrambled inputs are now processed",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+      "quote": "Instead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-cvs-neg/fixed/report-first/revised": {
+    "case": "git-cvs-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests changing the function name from `is_sha1` to `is_oid` and updating its logic to recognize both SHA-1 and SHA-256 hex object IDs, indicating a potential change in password handling strategy that needs reevaluation.",
+    "old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+      "quote": "Instead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-pos/end_to_end/pairwise/pairwise": {
+    "case": "git-svn-pos",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "dea5a891705c",
+    "reason": "The earlier decision relied on ensuring that calls to git would gracefully fail, but the new evidence shows that this change causes tests to erroneously fail when using svn, thus changing its applicability unless explicitly allowed for svn interactions.",
+    "old": {
+      "source_id": "9e68d4de1ea78bcda22a3393",
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "speaker": "Stephan Beyer",
+      "start": 49,
+      "end": 184,
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "a8d8a91d1783108a514bc097",
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "speaker": "Junio C Hamano",
+      "start": 38,
+      "end": 109,
+      "quote": "Running test t9010 without svn currently errors out for no good reason.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-pos/end_to_end/fixed-review/fixed-review": {
+    "case": "git-svn-pos",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "35faa602fde6",
+    "reason": "The report reveals that running test t9010 without svn currently errors out for no good reason, indicating a failure in the current project decision to treat git calls as mandatory and requiring their graceful failure, necessitating a reevaluation of this prior project decision.",
+    "old": {
+      "source_id": "9e68d4de1ea78bcda22a3393",
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "speaker": "Stephan Beyer",
+      "start": 49,
+      "end": 184,
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "a8d8a91d1783108a514bc097",
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "speaker": "Junio C Hamano",
+      "start": 38,
+      "end": 109,
+      "quote": "Running test t9010 without svn currently errors out for no good reason.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-pos/fixed/earlier-first/original": {
+    "case": "git-svn-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "949e1ef11f1f",
+    "reason": "The earlier decision relied on eliminating the dependency on SVN perl bindings to simplify and improve readability of the tests. However, the new evidence shows that this change introduced a regression by removing the safety check for svn availability, thus changing its applicability. The earlier result remains true if the safety check for svn is reinstated.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": true,
+    "grounded": false
+  },
+  "git-svn-pos/fixed/earlier-first/revised": {
+    "case": "git-svn-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "23763a37ad21",
+    "reason": "The earlier decision to eliminate dependency on SVN perl bindings in commit b0ad24b (2010-10-10) may have introduced a regression due to the removal of lib-git-svn.sh, which contained safety checks; thus, the rationale for this decision should be revisited.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-pos/fixed/report-first/original": {
+    "case": "git-svn-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "f35a63369f59",
+    "reason": "The earlier decision relied on the absence of SVN::perl modules causing test failures; however, the new evidence shows that this failure is due to a regression introduced by a commit that inadvertently removed a safety mechanism, thus changing the applicability of the earlier result under conditions where the safety mechanism was still present.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-pos/fixed/report-first/revised": {
+    "case": "git-svn-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "23763a37ad21",
+    "reason": "The earlier decision to eliminate dependency on SVN perl bindings in commit b0ad24b (2010-10-10) may have introduced a regression due to the removal of lib-git-svn.sh, which contained safety checks; thus, the rationale for this decision should be revisited.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-svn/fixed/earlier-first/original": {
+    "case": "cross-svn",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on ensuring that calls to git failed gracefully; however, the new evidence shows that this change inadvertently removed a safety mechanism for svnadmin usage, which now requires explicit testing for svn availability, thus changing its applicability.",
+    "old": {
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\"."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-svn/fixed/earlier-first/revised": {
+    "case": "cross-svn",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals a prior decision to eliminate dependency on svn perl bindings, introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on svn perl bindings, 2010-10-10), which may need revisiting due to the current test's reliance on svnadmin without verifying its availability.",
+    "old": {
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\"."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-svn/fixed/report-first/original": {
+    "case": "cross-svn",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the assumption that using \"! git\" would ensure graceful failure for git calls, but the new evidence shows that this is no longer true due to the removal of \"./lib-git-svn.sh\", thus changing the applicability of the earlier result under conditions where the script provided fallbacks for git calls.",
+    "old": {
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\"."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-svn/fixed/report-first/revised": {
+    "case": "cross-svn",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals a prior decision to eliminate dependency on svn perl bindings, introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on svn perl bindings, 2010-10-10), which may need revisiting due to the current test's reliance on svnadmin without verifying its availability.",
+    "old": {
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\"."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-neg/end_to_end/pairwise/pairwise": {
+    "case": "git-svn-neg",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-neg/end_to_end/fixed-review/fixed-review": {
+    "case": "git-svn-neg",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests changing the test from \"test_must_fail\" to \"test_must_be_empty\", indicating a potential inefficiency and improved debugging; thus, the rationale behind advertising \"test_must_fail\" for new tests must be rechecked.",
+    "old": {
+      "source_id": "9e68d4de1ea78bcda22a3393",
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "speaker": "Stephan Beyer",
+      "start": 285,
+      "end": 339,
+      "quote": "- advertise the use of \"test_must_fail\" for new tests.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "e1f48000a63ce8e933583a46",
+      "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+      "speaker": "René Scharfe",
+      "start": 60,
+      "end": 267,
+      "quote": "Use test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-neg/fixed/earlier-first/original": {
+    "case": "git-svn-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision to avoid using SVN:: perl modules in test t9010 was based on the absence of a clear reason for errors; however, the introduction of use of test_must_be_empty, which is more efficient and provides better debugging information, makes the reliance on the original rationale less applicable, provided that the new test does not introduce significant performance overhead or loss of critical error detection capabilities.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+      "quote": "Use test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-neg/fixed/earlier-first/revised": {
+    "case": "git-svn-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests revisiting the decision to use test_must_be_empty, revealing inefficiency and suggesting better debug output, indicating prior project decisions on testing methods may need reevaluation.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+      "quote": "Use test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-neg/fixed/report-first/original": {
+    "case": "git-svn-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the inefficiency and verbosity of using SVN::perl modules for running specific tests, but the introduction of a more efficient alternative test_must_be_empty that avoids these issues makes the applicability of the earlier result conditional on the necessity of maintaining compatibility with SVN::perl or the desire to simplify and improve test readability and execution.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+      "quote": "Use test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-svn-neg/fixed/report-first/revised": {
+    "case": "git-svn-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests revisiting the decision to use test_must_be_empty, revealing inefficiency and suggesting better debug output, indicating prior project decisions on testing methods may need reevaluation.",
+    "old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+      "quote": "Use test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-pos/end_to_end/pairwise/pairwise": {
+    "case": "git-trash-pos",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-pos/end_to_end/fixed-review/fixed-review": {
+    "case": "git-trash-pos",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "149180855f11",
+    "reason": "The report reveals that prior to commit 38b074d, tests used a \\\"trash\\\" directory within their current directory rather than the specified TEST_OUTPUT_DIRECTORY, suggesting a prior decision to use the current directory's trash for test outputs should be revisited.",
+    "old": {
+      "source_id": "5450c13517d50a0c48a2e158",
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "speaker": "John Keeping",
+      "start": 414,
+      "end": 486,
+      "quote": "Fix this by always referring to the trash directory as $TRASH_DIRECTORY.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "427cfdc24db02274ae62501a",
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "speaker": "Jeff King",
+      "start": 1239,
+      "end": 1536,
+      "quote": "This fixes a regression introduced by 38b074d (t/test-lib.sh: fix\nTRASH_DIRECTORY handling, 2013-04-14).  Before that commit, the\nTEST_OUTPUT_DIRECTORY setting was not respected consistently so most\ntests did their work in a \"trash\" subdirectory of the current\ndirectory instead of the output dir.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-pos/fixed/earlier-first/original": {
+    "case": "git-trash-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "96d04c9d7109",
+    "reason": "The earlier decision relied on the default behavior of $TEST_OUTPUT_DIRECTORY being equal to $TEST_DIRECTORY, leading to sub-test trash directories being created under the top-level t/ directory. The new evidence shows that when $TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root is not specified, the $test variable uses $TRASH_DIRECTORY, thus changing the condition under which sub-test trash directories are retained; this concrete new evidence makes the earlier result applicable only if $TEST_OUTPUT_DIRECTORY",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-pos/fixed/earlier-first/revised": {
+    "case": "git-trash-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "0d263d8e1696",
+    "reason": "The earlier behavior where sub-test trash directories were incorrectly placed under the top-level t/ directory instead of the intended t0000 trash directory due to TEST_OUTPUT_DIRECTORY defaulting to TEST_DIRECTORY should be rechecked given the new evidence.",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": true,
+    "grounded": true
+  },
+  "git-trash-pos/fixed/report-first/original": {
+    "case": "git-trash-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "3f9ae76c2426",
+    "reason": "The earlier decision held that the trash directory was retained unless explicitly removed due to the default behavior of $TEST_OUTPUT_DIRECTORY overriding $TRASH_DIRECTORY; however, the new evidence shows that this retention only occurs if $TEST_OUTPUT_DIRECTORY does not default to \".\", indicating a need to reconsider the applicability of the earlier decision when $TEST_OUTPUT_DIRECTORY is \".\".",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-pos/fixed/report-first/revised": {
+    "case": "git-trash-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "0d263d8e1696",
+    "reason": "The earlier behavior where sub-test trash directories were incorrectly placed under the top-level t/ directory instead of the intended t0000 trash directory due to TEST_OUTPUT_DIRECTORY defaulting to TEST_DIRECTORY should be rechecked given the new evidence.",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": true,
+    "grounded": true
+  },
+  "cross-trash/fixed/earlier-first/original": {
+    "case": "cross-trash",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision was based on ensuring that test scripts did not fail due to whitespace or shell metacharacters in git checkout paths; however, the new evidence shows that this does not apply when sub-tests' expected failure scenarios leave behind persistent trash directories under the top-level t/ directory, thus changing its applicability.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+      "quote": "This fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-trash/fixed/earlier-first/revised": {
+    "case": "cross-trash",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier behavior of defaulting TEST_OUTPUT_DIRECTORY to TEST_DIRECTORY led to sub-test trash directories being created under the top-level t/ directory instead of the intended t0000 directory, revealing a discrepancy that must be rechecked in the TEST_OUTPUT_DIRECTORY setting's default logic.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+      "quote": "This fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-trash/fixed/report-first/original": {
+    "case": "cross-trash",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision was based on issues with the test script failing due to whitespace or shell metacharacters in the git checkout path; however, the new evidence indicates that sub-test trash directories are now being created in the top-level directory, changing the applicability of the earlier result as it does not pertain to sub-tests' failure scenarios.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+      "quote": "This fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-trash/fixed/report-first/revised": {
+    "case": "cross-trash",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier behavior of defaulting TEST_OUTPUT_DIRECTORY to TEST_DIRECTORY led to sub-test trash directories being created under the top-level t/ directory instead of the intended t0000 directory, revealing a discrepancy that must be rechecked in the TEST_OUTPUT_DIRECTORY setting's default logic.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+      "quote": "This fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-neg/end_to_end/pairwise/pairwise": {
+    "case": "git-trash-neg",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-neg/end_to_end/fixed-review/fixed-review": {
+    "case": "git-trash-neg",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-neg/fixed/earlier-first/original": {
+    "case": "git-trash-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the specific formatting of test scripts in t0000-basic.sh using four-space indentation; the report introduces new evidence indicating some tests now use tab indentation, thus changing the applicability of the earlier result for those tests. The earlier decision remains valid for tests still using the four-space indentation format.",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a",
+      "quote": "Some tests in t0000-basic.sh used the older four space indent format.\nUpdate these to use tabs."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-neg/fixed/earlier-first/revised": {
+    "case": "git-trash-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report sentence \"Update these to use tabs\" highlights an earlier project decision whose rationale should be revisited in light of new evidence, as indicated by the earlier behavior where the location of $TRASH_DIRECTORY was incorrectly adjusted based on $TEST_OUTPUT_DIRECTORY, revealing a potential oversight in handling the trash directory cleanup process.",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a",
+      "quote": "Some tests in t0000-basic.sh used the older four space indent format.\nUpdate these to use tabs."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-neg/fixed/report-first/original": {
+    "case": "git-trash-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the necessity of maintaining a trash directory for test cleanup after adjusting $TEST_OUTPUT_DIRECTORY; however, the new evidence indicates that since some scripts now use tab indentation instead of four spaces, the specific need to preserve the $TRASH_DIRECTORY for cleanup may no longer apply universally, as the exact script being referred to might have changed formatting requirements. The earlier result remains valid if the script still uses the four-space indentation format.",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a",
+      "quote": "Some tests in t0000-basic.sh used the older four space indent format.\nUpdate these to use tabs."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-trash-neg/fixed/report-first/revised": {
+    "case": "git-trash-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report sentence \"Update these to use tabs\" highlights an earlier project decision whose rationale should be revisited in light of new evidence, as indicated by the earlier behavior where the location of $TRASH_DIRECTORY was incorrectly adjusted based on $TEST_OUTPUT_DIRECTORY, revealing a potential oversight in handling the trash directory cleanup process.",
+    "old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a",
+      "quote": "Some tests in t0000-basic.sh used the older four space indent format.\nUpdate these to use tabs."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-pos/end_to_end/pairwise/pairwise": {
+    "case": "git-symlink-pos",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-pos/end_to_end/fixed-review/fixed-review": {
+    "case": "git-symlink-pos",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "ffb0f75d65e9",
+    "reason": "The original author's decision to translate symlinks in filenames when using absolute paths (introduced by 18e051a) likely overlooked symlinks within the work tree, which should now be rechecked given this new evidence revealing a regression.",
+    "old": {
+      "source_id": "fd8df3d677ad18c4bdf1bd3f",
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "speaker": "Carlo Marcelo Arenas Belon",
+      "start": 65,
+      "end": 197,
+      "quote": "otherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "91f04bd6699fc58d9ff71393",
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "speaker": "Junio C Hamano",
+      "start": 479,
+      "end": 659,
+      "quote": "This is a regression introduced by 18e051a:\n  setup: translate symlinks in filename when using absolute paths\n(which did not take symlinks inside the work tree into consideration).",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-pos/fixed/earlier-first/original": {
+    "case": "git-symlink-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "89b067170b94",
+    "reason": "The earlier decision allowed for dereferencing symlinks in filenames when using absolute paths, but this decision may now need reconsideration given that concrete new evidence shows that such dereferencing can lead to unintended modifications of files other than the symlinked ones, thus changing its applicability.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": true,
+    "grounded": false
+  },
+  "git-symlink-pos/fixed/earlier-first/revised": {
+    "case": "git-symlink-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "4eaa238f67ec",
+    "reason": "The report reveals that manipulating symlinks with absolute paths causes git to dereference them and target manipulation, indicating a need to revisit the setup: translate symlinks in filename when using absolute paths.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": true,
+    "grounded": true
+  },
+  "git-symlink-pos/fixed/report-first/original": {
+    "case": "git-symlink-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "44f093e8b7f6",
+    "reason": "The earlier decision relied on the behavior that symlinks in the working tree are dereferenced and manipulated based on their absolute path. However, the introduction of concrete new evidence showing that git instead attempts to manipulate the actual target of the symlink when an absolute path is used changes its applicability under certain conditions where relative paths are employed.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-pos/fixed/report-first/revised": {
+    "case": "git-symlink-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "4eaa238f67ec",
+    "reason": "The report reveals that manipulating symlinks with absolute paths causes git to dereference them and target manipulation, indicating a need to revisit the setup: translate symlinks in filename when using absolute paths.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": true,
+    "grounded": true
+  },
+  "cross-symlink/fixed/earlier-first/original": {
+    "case": "cross-symlink",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision that git dereferences symlinks when manipulating them with an absolute path is now applicable only if the path provided does not contain a relative component; otherwise, the concrete new evidence indicates that git may misinterpret the path and fail to dereference as previously assumed.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+      "quote": "Unify all"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-symlink/fixed/earlier-first/revised": {
+    "case": "cross-symlink",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals that manipulating symlinks with absolute paths causes git to dereference them and target manipulation, which may have been an unintended consequence; this behavior must be rechecked for potential risks or issues.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+      "quote": "Unify all"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-symlink/fixed/report-first/original": {
+    "case": "cross-symlink",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision to unify all manipulations involving symlinks was based on the assumption that dereferencing symlinks using an absolute path results in manipulation of the link target; however, the new evidence indicates that manipulating symlinks with absolute paths may not always result in the intended target modification due to potential differences in working directory contexts, thus changing its applicability. The earlier result remains true when the manipulation is performed within a consistent working directory context where dereferencing does indeed",
+    "old": {
+      "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+      "quote": "Unify all"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-symlink/fixed/report-first/revised": {
+    "case": "cross-symlink",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals that manipulating symlinks with absolute paths causes git to dereference them and target manipulation, which may have been an unintended consequence; this behavior must be rechecked for potential risks or issues.",
+    "old": {
+      "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+      "quote": "Unify all"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-neg/end_to_end/pairwise/pairwise": {
+    "case": "git-symlink-neg",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-neg/end_to_end/fixed-review/fixed-review": {
+    "case": "git-symlink-neg",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The original author should revisit prior project decisions regarding symlink handling, as the code that resolves symlinks persists despite the current policy against linking symlinks, potentially exposing vulnerabilities like CVE-2022-39253.",
+    "old": {
+      "source_id": "fd8df3d677ad18c4bdf1bd3f",
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "speaker": "Carlo Marcelo Arenas Belon",
+      "start": 65,
+      "end": 197,
+      "quote": "otherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "a385a563039108755290edc1",
+      "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+      "speaker": "Patrick Steinhardt",
+      "start": 1407,
+      "end": 1900,
+      "quote": "But even though we now shouldn't ever link symlinks anymore, the code\nthat resolves symlinks still exists. In the best case the code does not\nend up doing anything because there are no symlinks anymore. In the\nworst case though this can be abused by an adversary that rewrites the\nsource file after it has been checked not to be a symlink such that it\nactually is a symlink when we call link(3P). Thus, it is still possible\nto recreate CVE-2022-39253 due to this time-of-check-time-of-use bug.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-neg/fixed/earlier-first/original": {
+    "case": "git-symlink-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision to translate symlinks in filenames for absolute paths was based on the potential security risk of cloning from a malicious repository, as evidenced by CVE-2022-39253. However, the introduction of 6f054f9fb3 (refusing symlinks in the source repository for `--local` clones) makes the necessity of translating symlinks obsolete under certain conditions, specifically when avoiding `--local` clones",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+      "quote": "Eventually though, we figured out that following symlinks like this can\ncause havoc when performing a local clone of a malicious repository,\nwhich resulted in CVE-2022-39253. This issue was fixed via 6f054f9fb3\n(builtin/clone.c: disallow `--local` clones with symlinks, 2022-07-28),\nby refusing symlinks in the source repository."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-neg/fixed/earlier-first/revised": {
+    "case": "git-symlink-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals that allowing symlink translation in local repository clones could lead to security vulnerabilities, as evidenced by CVE-2022-39253, necessitating a reevaluation of the initial setup decision to translate symlinks in filenames when using absolute paths.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+      "quote": "Eventually though, we figured out that following symlinks like this can\ncause havoc when performing a local clone of a malicious repository,\nwhich resulted in CVE-2022-39253. This issue was fixed via 6f054f9fb3\n(builtin/clone.c: disallow `--local` clones with symlinks, 2022-07-28),\nby refusing symlinks in the source repository."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-neg/fixed/report-first/original": {
+    "case": "git-symlink-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision to translate symlinks in filenames for absolute paths was based on preventing potential security issues related to symbolic links; however, the introduction of CVE-2022-39253 demonstrates that allowing such translations can lead to vulnerabilities, thus making the earlier result applicable only in contexts where symlinks are not used in malicious repositories, specifically after the fix at 6f054f9fb3.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+      "quote": "Eventually though, we figured out that following symlinks like this can\ncause havoc when performing a local clone of a malicious repository,\nwhich resulted in CVE-2022-39253. This issue was fixed via 6f054f9fb3\n(builtin/clone.c: disallow `--local` clones with symlinks, 2022-07-28),\nby refusing symlinks in the source repository."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-symlink-neg/fixed/report-first/revised": {
+    "case": "git-symlink-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report reveals that allowing symlink translation in local repository clones could lead to security vulnerabilities, as evidenced by CVE-2022-39253, necessitating a reevaluation of the initial setup decision to translate symlinks in filenames when using absolute paths.",
+    "old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+      "quote": "Eventually though, we figured out that following symlinks like this can\ncause havoc when performing a local clone of a malicious repository,\nwhich resulted in CVE-2022-39253. This issue was fixed via 6f054f9fb3\n(builtin/clone.c: disallow `--local` clones with symlinks, 2022-07-28),\nby refusing symlinks in the source repository."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-pos/end_to_end/pairwise/pairwise": {
+    "case": "git-am-pos",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-pos/end_to_end/fixed-review/fixed-review": {
+    "case": "git-am-pos",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": "130e6ea91b31",
+    "reason": "Adjust the patch format detection logic to ignore leading whitespace reveals a new evidence suggesting previous web-based email client practices may have influenced patch handling decisions; these prior decisions should be revisited.",
+    "old": {
+      "source_id": "87f552e0393e132302fba718",
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "speaker": "Giuseppe Bilotta",
+      "start": 195,
+      "end": 281,
+      "quote": "Include checks for mailboxes, stgit patch series, stgit single patches\nand hg patches.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "9671b410dcee9915c1f42fc3",
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "speaker": "David Barr",
+      "start": 44,
+      "end": 238,
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-pos/fixed/earlier-first/original": {
+    "case": "git-am-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "d7c854fcb9d2",
+    "reason": "The earlier decision to default to mbox format based solely on input source was informed by the assumption that most email clients do not prepend whitespace; however, new evidence indicates that some clients do add leading whitespace, thus changing the applicability of this decision and requiring the patch format detection logic to account for this additional whitespace.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-pos/fixed/earlier-first/revised": {
+    "case": "git-am-pos",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "2d5a8f63fffc",
+    "reason": "The earlier decision to default to mbox format if input is from stdin should be revisited given the new evidence that some web-based email clients prepend whitespace to raw message transcripts, as indicated by the report's recommendation to adjust the patch format detection logic to ignore leading whitespace.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-pos/fixed/report-first/original": {
+    "case": "git-am-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "3f19d5d95332",
+    "reason": "The earlier decision relied on initial observations about stdin inputs and patch format sniffing in browser content rendering. The new evidence shows that prepending whitespace to raw message transcripts can interfere with format detection logic, thus changing the applicability of the earlier result when dealing with such inputs. The earlier result remains valid for inputs without such whitespace interference.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-pos/fixed/report-first/revised": {
+    "case": "git-am-pos",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "2d5a8f63fffc",
+    "reason": "The earlier decision to default to mbox format if input is from stdin should be revisited given the new evidence that some web-based email clients prepend whitespace to raw message transcripts, as indicated by the report's recommendation to adjust the patch format detection logic to ignore leading whitespace.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-am/fixed/earlier-first/original": {
+    "case": "cross-am",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on the consistent naming convention across all state files using dashes instead of underscores, and the absence of a need for an \"extra\" step. The report introduces new evidence showing that web-based email clients prepend whitespace to raw message transcripts, which changes the applicability of the earlier decision regarding file naming conventions but does not affect the necessity of the \"extra\" step.",
+    "old": {
+      "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+      "quote": "All other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-am/fixed/earlier-first/revised": {
+    "case": "cross-am",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests adjusting patch format detection logic to ignore leading whitespace, revealing inconsistent handling of whitespace across different email clients; this must be rechecked to ensure uniformity in patch formats.",
+    "old": {
+      "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+      "quote": "All other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-am/fixed/report-first/original": {
+    "case": "cross-am",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision relied on naming conventions and formatting practices specific to state files, but the new evidence indicates that web-based email clients now prepend whitespace to raw message transcripts, thus changing the applicability of the earlier result and requiring a reevaluation of patch format detection logic to account for leading whitespace. The earlier result remains true for state files using dashes in their names.",
+    "old": {
+      "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+      "quote": "All other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "cross-am/fixed/report-first/revised": {
+    "case": "cross-am",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The report suggests adjusting patch format detection logic to ignore leading whitespace, revealing inconsistent handling of whitespace across different email clients; this must be rechecked to ensure uniformity in patch formats.",
+    "old": {
+      "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+      "quote": "All other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-neg/end_to_end/pairwise/pairwise": {
+    "case": "git-am-neg",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "",
+    "old": {},
+    "new": {},
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-neg/end_to_end/fixed-review/fixed-review": {
+    "case": "git-am-neg",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The reported failure with `git am <patch` followed by `git am --3way` after an initial failure indicates prior project decisions to include checks for mailboxes, stgit patch series, stgit single patches, and hg patches should be reevaluated in light of this new evidence.",
+    "old": {
+      "source_id": "87f552e0393e132302fba718",
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "speaker": "Giuseppe Bilotta",
+      "start": 195,
+      "end": 281,
+      "quote": "Include checks for mailboxes, stgit patch series, stgit single patches\nand hg patches.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "2b040b66815305af367db3a9",
+      "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+      "speaker": "Jeff King",
+      "start": 174,
+      "end": 240,
+      "quote": "git am <patch\n  # oops, it failed; let's try again\n  git am --3way",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-neg/fixed/earlier-first/original": {
+    "case": "git-am-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision defaulted to mbox format when input was from stdin, assuming it would always come from a terminal. However, with the introduction of concrete new evidence showing that stdin can sometimes be non-interactive, this assumption may no longer hold, thus changing its applicability. The earlier result remains valid if stdin is indeed always provided through a terminal.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+      "quote": "So if no resume command is given, then we require that stdin be a tty,\nand otherwise complain about (potentially) receiving an mbox on stdin.\nBut of course you might not actually have a terminal available! And\nsadly there is no explicit way to hit this same code path; this is the\nonly place that sets RESUME_APPLY. So you're stuck, and scripts like our\ntest suite have to bend over backwards to create a pseudo-tty."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-neg/fixed/earlier-first/revised": {
+    "case": "git-am-neg",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision to require stdin to be a tty when no resume command is given, and to complain about receiving an mbox on stdin otherwise, must be rechecked in light of the new evidence suggesting this can lead to script limitations without a terminal available.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+      "quote": "So if no resume command is given, then we require that stdin be a tty,\nand otherwise complain about (potentially) receiving an mbox on stdin.\nBut of course you might not actually have a terminal available! And\nsadly there is no explicit way to hit this same code path; this is the\nonly place that sets RESUME_APPLY. So you're stuck, and scripts like our\ntest suite have to bend over backwards to create a pseudo-tty."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-neg/fixed/report-first/original": {
+    "case": "git-am-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "neg",
+    "action": "keep",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision defaulted to mbox format for stdin inputs without checking for a tty, but this reliance is now invalid due to the introduction of concrete new evidence showing that stdin may not always be associated with a tty, thus changing the applicability of the earlier result. The earlier decision remains valid when stdin is indeed a tty.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+      "quote": "So if no resume command is given, then we require that stdin be a tty,\nand otherwise complain about (potentially) receiving an mbox on stdin.\nBut of course you might not actually have a terminal available! And\nsadly there is no explicit way to hit this same code path; this is the\nonly place that sets RESUME_APPLY. So you're stuck, and scripts like our\ntest suite have to bend over backwards to create a pseudo-tty."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "git-am-neg/fixed/report-first/revised": {
+    "case": "git-am-neg",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "neg",
+    "action": "reassess",
+    "correct_pair": false,
+    "card": null,
+    "reason": "The earlier decision to require stdin to be a tty when no resume command is given, and to complain about receiving an mbox on stdin otherwise, must be rechecked in light of the new evidence suggesting this can lead to script limitations without a terminal available.",
+    "old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+      "quote": "So if no resume command is given, then we require that stdin be a tty,\nand otherwise complain about (potentially) receiving an mbox on stdin.\nBut of course you might not actually have a terminal available! And\nsadly there is no explicit way to hit this same code path; this is the\nonly place that sets RESUME_APPLY. So you're stuck, and scripts like our\ntest suite have to bend over backwards to create a pseudo-tty."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "development-checkout/end_to_end/pairwise/pairwise": {
+    "case": "development-checkout",
+    "regime": "end_to_end",
+    "mode": "pairwise",
+    "method": "pairwise",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "b1ebae460e96",
+    "reason": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" without affecting the working tree, but the new evidence indicates that filesystem access may occur during such checkouts, thus changing the applicability of the earlier result; the earlier decision remains valid for other checkout scenarios where no filesystem access is expected.",
+    "old": {
+      "source_id": "0790b8790ead045b7d97d5ea",
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "speaker": "Ben Peart",
+      "start": 51,
+      "end": 267,
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "0eb50c578a29e4b7fe4dd4de",
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "speaker": "Ben Peart",
+      "start": 62,
+      "end": 429,
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "development-checkout/end_to_end/fixed-review/fixed-review": {
+    "case": "development-checkout",
+    "regime": "end_to_end",
+    "mode": "fixed-review",
+    "method": "fixed-review",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "70a248d83899",
+    "reason": "The earlier decision to skip a full checkout for 'checkout -b' might need revisiting given the new evidence that it causes a regression fixed by fa655d8411 (checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "old": {
+      "source_id": "0790b8790ead045b7d97d5ea",
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "speaker": "Ben Peart",
+      "start": 51,
+      "end": 267,
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+      "status": "source_only"
+    },
+    "new": {
+      "source_id": "0eb50c578a29e4b7fe4dd4de",
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "speaker": "Ben Peart",
+      "start": 62,
+      "end": 429,
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+      "status": "source_only"
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "development-checkout/fixed/earlier-first/original": {
+    "case": "development-checkout",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "original",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "b1ebae460e96",
+    "reason": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" without affecting the working tree, but the new evidence indicates that filesystem access may occur during such checkouts, thus changing the applicability of the earlier result; the earlier decision remains valid for other checkout scenarios where no filesystem access is expected.",
+    "old": {
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "development-checkout/fixed/earlier-first/revised": {
+    "case": "development-checkout",
+    "regime": "fixed",
+    "mode": "earlier-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "70a248d83899",
+    "reason": "The earlier decision to skip a full checkout for 'checkout -b' might need revisiting given the new evidence that it causes a regression fixed by fa655d8411 (checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "old": {
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "development-checkout/fixed/report-first/original": {
+    "case": "development-checkout",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "original",
+    "label": "pos",
+    "action": "keep",
+    "correct_pair": true,
+    "card": "8b2ab1278142",
+    "reason": "The earlier decision relied on skipping updates for branch creation to avoid unnecessary overhead; however, the new evidence shows that filesystem access during branch creation can now impact performance, thus changing its applicability to scenarios involving filesystem access. The earlier result remains valid for other checkout options that do not involve filesystem access.",
+    "old": {
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    },
+    "correct_reason": false,
+    "grounded": false
+  },
+  "development-checkout/fixed/report-first/revised": {
+    "case": "development-checkout",
+    "regime": "fixed",
+    "mode": "report-first",
+    "method": "revised",
+    "label": "pos",
+    "action": "reassess",
+    "correct_pair": true,
+    "card": "70a248d83899",
+    "reason": "The earlier decision to skip a full checkout for 'checkout -b' might need revisiting given the new evidence that it causes a regression fixed by fa655d8411 (checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "old": {
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path."
+    },
+    "new": {
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    },
+    "correct_reason": false,
+    "grounded": false
+  }
+}

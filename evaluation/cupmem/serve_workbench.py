@@ -1,0 +1,80 @@
+"""One bounded, resident GPU server for the interactive workbench."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import signal
+import subprocess
+import sys
+import time
+from urllib.request import ProxyHandler, build_opener
+
+
+def main():
+    folder=Path(__file__).resolve().parent
+    cfg=json.loads((folder/'config.json').read_text())
+    assert os.environ.get('SLURM_JOB_ID') and os.environ.get('SLURMD_NODENAME')
+    assert os.environ.get('CONDA_PREFIX')==cfg['conda_prefix']
+    import torch
+    assert torch.cuda.device_count()==1
+    result=Path(cfg['project'])/'results'/('sm-'+os.environ['SLURM_JOB_ID']+'.json')
+    assert not result.exists()
+    record=dict(status='preparing',job_id=os.environ['SLURM_JOB_ID'],source_version=cfg['source_version'],
+                model=cfg['model_repo'],revision=cfg['model_revision'],external_model_api_calls=0,
+                port=28382,node=os.environ['SLURMD_NODENAME'],serve_seconds=cfg['serve_seconds'])
+    def save():
+        tmp=result.with_suffix('.tmp');tmp.write_text(json.dumps(record,indent=2));tmp.replace(result)
+    save();process=None
+    try:
+        local,shared=Path(cfg['model_path']),Path(cfg['model_shared'])
+        ready=json.loads((shared/'READY.json').read_text())
+        assert ready['revision']==cfg['model_revision'] and ready['files_sha256']==cfg['model_files_sha256']
+        local.mkdir(parents=True,exist_ok=True)
+        for name,expected in cfg['model_files_sha256'].items():
+            assert Path(name).name==name
+            dst=local/name;src=shared/name
+            if dst.exists():
+                assert dst.stat().st_size==src.stat().st_size, 'Cached model size mismatch'
+            else:
+                tmp=local/(name+'.workbench-'+record['job_id']);assert not tmp.exists()
+                h=hashlib.sha256()
+                with src.open('rb') as inp,tmp.open('xb') as out:
+                    while block:=inp.read(8*1024*1024):h.update(block);out.write(block)
+                assert h.hexdigest()==expected
+                tmp.replace(dst)
+        record['cache_check']='Previously verified cache: file sizes. Newly copied files: SHA256.'
+        cmd=[sys.executable,'-m','vllm.entrypoints.openai.api_server','--model',str(local),
+             '--served-model-name','Qwen3-8B','--host','127.0.0.1','--port','28382',
+             '--dtype','bfloat16','--tensor-parallel-size','1','--max-model-len','8192',
+             '--max-num-seqs','1','--gpu-memory-utilization','0.90','--max-num-batched-tokens','4096',
+             '--enable-chunked-prefill','--enforce-eager','--generation-config','vllm','--seed','42',
+             '--disable-log-requests']
+        env=dict(os.environ)
+        for key in ('OPENAI_API_KEY','BAZE_API_KEY','HF_TOKEN','HUGGING_FACE_HUB_TOKEN'):env.pop(key,None)
+        process=subprocess.Popen(cmd,env=env,start_new_session=True)
+        http=build_opener(ProxyHandler({}));start=time.monotonic()
+        while time.monotonic()-start<240:
+            if process.poll() is not None:raise RuntimeError('Model server exited during startup')
+            try:
+                with http.open('http://127.0.0.1:28382/health',timeout=3) as response:
+                    if response.status==200:break
+            except OSError:time.sleep(2)
+        else:raise RuntimeError('Server startup exceeded 240 seconds')
+        record.update(status='ready',ready_at=time.time(),expires_at=time.time()+cfg['serve_seconds'])
+        save();print('WORKBENCH_READY',json.dumps(record),flush=True)
+        try:process.wait(timeout=cfg['serve_seconds'])
+        except subprocess.TimeoutExpired:pass
+        else:raise RuntimeError('Model server exited before the session deadline')
+        record.update(status='complete',reason='scheduled interactive session ended')
+    except BaseException as exc:
+        record.update(status='failed',error=type(exc).__name__+': '+str(exc));raise
+    finally:
+        if process and process.poll() is None:
+            os.killpg(process.pid,signal.SIGTERM)
+            try:process.wait(timeout=15)
+            except subprocess.TimeoutExpired:os.killpg(process.pid,signal.SIGKILL);process.wait()
+        save()
+
+
+if __name__=='__main__':main()

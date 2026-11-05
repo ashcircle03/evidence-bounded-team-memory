@@ -1,0 +1,13 @@
+{
+  "change": "Dispatcher now counts all user GPU requests, including other projects, before any new submission.",
+  "reason": "Another user-owned CPU job appeared during development; concurrency limits apply across projects.",
+  "affects_inference_or_grading": false,
+  "dispatch_sha256": "66175b5a222e44b67952c600328f7512983322e2d61a5f5b5060513070f7b493",
+  "cases_checked": [
+    "untyped GPU request",
+    "typed GPU request",
+    "CPU-only job",
+    "expanded array tasks",
+    "unknown GPU count rejected"
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "primary_scores_unchanged": true,
+  "no_new_inference": true,
+  "qa_losses": {
+    "final-02/other_preserved": {
+      "runtime_error": "quotation is not an exact source substring",
+      "raw_kind": "single",
+      "raw_answer_count": 1,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "050480f532744b401bad884c",
+          "answer": "Lumen-evidence",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": false
+        }
+      ]
+    },
+    "final-04/changed": {
+      "runtime_error": "single answer cardinality",
+      "raw_kind": "single",
+      "raw_answer_count": 2,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "f957dd9203a0268905db3b51",
+          "answer": "27 minutes per archive",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        },
+        {
+          "source": "84890b5219375b618bfcc4a8",
+          "answer": "11 minutes per archive",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        }
+      ]
+    },
+    "final-05/changed": {
+      "runtime_error": "single answer cardinality",
+      "raw_kind": "single",
+      "raw_answer_count": 2,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "33f32b970ea4c6d63720ff7f",
+          "answer": "8 milliseconds",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        },
+        {
+          "source": "372e805dfe27341c32a6619c",
+          "answer": "130 milliseconds",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        }
+      ]
+    },
+    "final-05/reviewed": {
+      "runtime_error": "single answer cardinality",
+      "raw_kind": "single",
+      "raw_answer_count": 2,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "33f32b970ea4c6d63720ff7f",
+          "answer": "8 milliseconds",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        },
+        {
+          "source": "372e805dfe27341c32a6619c",
+          "answer": "130 milliseconds",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        }
+      ]
+    },
+    "final-07/changed": {
+      "runtime_error": "single answer cardinality",
+      "raw_kind": "single",
+      "raw_answer_count": 2,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "217c874b03b2b6d9905eb660",
+          "answer": "120 MB",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        },
+        {
+          "source": "57fce2f8a894f135d4ca987a",
+          "answer": "940 MB",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        }
+      ]
+    },
+    "final-07/reviewed": {
+      "runtime_error": "single answer cardinality",
+      "raw_kind": "single",
+      "raw_answer_count": 2,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "217c874b03b2b6d9905eb660",
+          "answer": "120 MB",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        },
+        {
+          "source": "57fce2f8a894f135d4ca987a",
+          "answer": "940 MB",
+          "quote_exact": true,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        }
+      ]
+    },
+    "final-08/natural_after_repeat": {
+      "runtime_error": "quotation is not an exact source substring",
+      "raw_kind": "single",
+      "raw_answer_count": 1,
+      "raw_source_value_pairs_match_expected": true,
+      "checks": [
+        {
+          "source": "d61b9380681071b2b0bcbd84",
+          "answer": "uploaded to Confluence",
+          "quote_exact": false,
+          "quote_matches_after_casefold": true,
+          "condition_exact": true
+        }
+      ]
+    }
+  },
+  "by_mode": {
+    "direct": {
+      "required_review_target_pairs_found": 12,
+      "required_review_target_pairs": 12,
+      "failed_alert_breakdown": {
+        "wrong_relation_kind": 4,
+        "repeat": 5,
+        "no_review_stream": 5
+      },
+      "valid_index_bundles": 0,
+      "saved_index_decisions": 0,
+      "index_errors": {}
+    },
+    "indexed": {
+      "required_review_target_pairs_found": 12,
+      "required_review_target_pairs": 12,
+      "failed_alert_breakdown": {
+        "wrong_relation_kind": 4,
+        "no_review_stream": 3,
+        "repeat": 4,
+        "ungrounded_reason": 1
+      },
+      "valid_index_bundles": 66,
+      "saved_index_decisions": 54,
+      "index_errors": {
+        "index: quotation is not an exact source substring": 11,
+        "index: list indices must be integers or slices, not str": 21,
+        "index: 'decisions'": 2
+      }
+    }
+  },
+  "equivalent_answer_flag": {
+    "case": "final-06/direct/natural_before",
+    "actual_answer": "Client Credentials Grant",
+    "official_answer": "Client Credentials Grant mode",
+    "assessment": "Same named OAuth flow with exact supporting citation; frozen alias matching rejects omission of the generic word mode. This is a metric strictness artifact, not failure to retrieve the fact. Primary totals remain unchanged."
+  },
+  "approximation_note": "Around 89% versus 89% is separately treated as omitted uncertainty in the short answer, with the qualifier still present in the citation.",
+  "evaluation_note": "Descriptive review of observed outputs only; no production normalization or post-hoc prompt/score changes."
+}

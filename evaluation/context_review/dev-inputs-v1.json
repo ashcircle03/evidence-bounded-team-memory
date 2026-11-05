@@ -1,0 +1,1254 @@
+[
+  {
+    "id": "freebsd-cwd-selected-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-selected-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-neighbors1-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 722,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-neighbors1-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 722,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-neighbors2-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 74,
+        "end": 421,
+        "quote": "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 722,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-neighbors2-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 423,
+        "end": 722,
+        "quote": "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 74,
+        "end": 421,
+        "quote": "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-unrelated-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 58,
+        "end": 84,
+        "quote": "The change has two points:",
+        "status": "source_only"
+      },
+      {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "freebsd-cwd-unrelated-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2402c0f38e793d9243f9eec4",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "speaker": "René Scharfe",
+        "start": 62,
+        "end": 460,
+        "quote": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes.",
+      "reviewer": "René Scharfe",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+    },
+    "passages": [
+      {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 86,
+        "end": 195,
+        "quote": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "603aaa3c49414f84206c46f5",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "speaker": "Michael Haggerty",
+        "start": 58,
+        "end": 84,
+        "quote": "The change has two points:",
+        "status": "source_only"
+      },
+      {
+        "source_id": "ad8616faa45fa22c27edc5f4",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "speaker": "René Scharfe",
+        "start": 724,
+        "end": 1021,
+        "quote": "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "ad8616faa45fa22c27edc5f4"
+  },
+  {
+    "id": "fsck-empty-selected-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-selected-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-neighbors1-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 245,
+        "end": 298,
+        "quote": "fatal: failed to read object <sha1>: Invalid argument",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-neighbors1-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 245,
+        "end": 298,
+        "quote": "fatal: failed to read object <sha1>: Invalid argument",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-neighbors2-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 245,
+        "end": 298,
+        "quote": "fatal: failed to read object <sha1>: Invalid argument",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 300,
+        "end": 511,
+        "quote": "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-neighbors2-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 300,
+        "end": 511,
+        "quote": "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 245,
+        "end": 298,
+        "quote": "fatal: failed to read object <sha1>: Invalid argument",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-unrelated-forward",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      {
+        "source_id": "6a0059825856530e981c1f48",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 40,
+        "end": 217,
+        "quote": "During verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).",
+        "status": "source_only"
+      },
+      {
+        "source_id": "6a0059825856530e981c1f48",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 219,
+        "end": 320,
+        "quote": "Avoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  },
+  {
+    "id": "fsck-empty-unrelated-reverse",
+    "base": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5a5b4fec44ad1b3bb4bab52d",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "speaker": "Junio C Hamano",
+        "start": 66,
+        "end": 244,
+        "quote": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+        "status": "source_only"
+      },
+      "rationale": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 658,
+        "end": 824,
+        "quote": "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "738312b68cd1c639129d4649",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "speaker": "Junio C Hamano",
+        "start": 331,
+        "end": 367,
+        "quote": "Noticed and reported by BJ Hargrave.",
+        "status": "source_only"
+      },
+      "distinction": "\"git fsck\" addresses the incorrect identification of a non-corrupt loose object due to EMFILE, differing from the incoming report which now correctly identifies such objects as non-corrupt."
+    },
+    "passages": [
+      {
+        "source_id": "6a0059825856530e981c1f48",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 219,
+        "end": 320,
+        "quote": "Avoid reading an object twice, do fsck_sha1 while we have an object\nuncompressed data in verify_pack.",
+        "status": "source_only"
+      },
+      {
+        "source_id": "6a0059825856530e981c1f48",
+        "location": "https://github.com/git/git/commit/c9486eb04dd99fc00df3e68f9b908f9ad7ff9728",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 40,
+        "end": 217,
+        "quote": "During verify_pack() all objects are read for SHA-1 check. Then\nfsck_sha1() is called on every object, which read the object again\n(fsck_sha1 -> parse_object -> read_sha1_file).",
+        "status": "source_only"
+      },
+      {
+        "source_id": "3d071ab3b30bc81067aace4b",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "speaker": "Matthieu Moy",
+        "start": 63,
+        "end": 241,
+        "quote": "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+        "status": "source_only"
+      }
+    ],
+    "report_id": "3d071ab3b30bc81067aace4b"
+  }
+]

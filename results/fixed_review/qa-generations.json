@@ -1,0 +1,1090 @@
+{
+  "status": "complete",
+  "job_id": "119297",
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "dtype": "torch.bfloat16",
+  "device": "NVIDIA GeForce RTX 3090",
+  "generation_seconds": 61.04,
+  "input_sha256": "c5e4984c0c100ca7054709648410e642b3d6d434004aed37459d0b1e86f49e27",
+  "calls": [
+    {
+      "id": "explanation-control/unseen-1p/intact/earlier-first",
+      "sha256": "a8854d21d0d4e8269b43b9e1652c28235ddc999431bd119dafb157f39bc7805d",
+      "raw": "The earlier decision relied on a state machine in the `read_config()` function that ensures configuration values are not overridden unless explicitly set via command line arguments. The new evidence shows this state machine does not handle all cases where command-line options might override configuration settings, specifically when dealing with email addresses like 'to' versus 'sendemail.to'. Therefore, the earlier result is applicable only if the state machine's behavior is sufficient for the given use case, but it may not cover all scenarios",
+      "input_tokens": 231,
+      "output_tokens": 96
+    },
+    {
+      "id": "explanation-control/unseen-1p/intact/report-first",
+      "sha256": "5004670973ff2e6894953a7d1fe871c37e2c807877cfbc18f7487e3ef61f9953",
+      "raw": "The earlier decision relied on ensuring correct order of parsing git-send-email command-line arguments and configuration settings to avoid overriding intended configurations. However, the new evidence shows that merely fixing the command-line parsing order is insufficient as it does not address the issue where certain configuration values might be overwritten due to an incorrect state machine in read_config(). This changes the applicability because the earlier result assumes a specific state machine behavior that now appears flawed. The earlier result remains true if the state machine in read",
+      "input_tokens": 231,
+      "output_tokens": 96
+    },
+    {
+      "id": "explanation-control/unseen-2p/cost_first/earlier-first",
+      "sha256": "d978bada7ad1ed9936c8de68e196d843fb5450bf4b24c5b5ca23bced8557ea3f",
+      "raw": "The earlier decision relied on the specific scenario of creating a new branch via \"git checkout -b <new_branch>\" where skipping certain steps was justified. The report introduces new evidence suggesting that for any checkout operation, including those not specifically creating a new branch, a full checkout with updated working tree is necessary to avoid regressions, thus changing the applicability of the earlier decision.",
+      "input_tokens": 236,
+      "output_tokens": 76
+    },
+    {
+      "id": "explanation-control/unseen-2p/cost_first/report-first",
+      "sha256": "bf482b92c191030ccd06d18e473cf78eba3cc105874c6b4a539648eb001b584f",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via 'git checkout -b', but the new evidence shows that this optimization does not apply when performing a full checkout including updating the working tree, thus changing its applicability. The earlier result remains true for cases where a new branch is created without additional checkout options.",
+      "input_tokens": 237,
+      "output_tokens": 67
+    },
+    {
+      "id": "explanation-control/unseen-2p/intact/earlier-first",
+      "sha256": "ac98ecdbb1a90f05ce96b2b238d441bb8acedcd794872c6aa2bed828fc543c92",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" without affecting the working tree, but the new evidence indicates that filesystem access may occur during such checkouts, thus changing the applicability of the earlier result; the earlier decision remains valid for other checkout scenarios where no filesystem access is expected.",
+      "input_tokens": 236,
+      "output_tokens": 71
+    },
+    {
+      "id": "explanation-control/unseen-2p/intact/report-first",
+      "sha256": "b3a689ebb56d9ebdcb08e4ee817cb6d5528bf59183152fe17be79e8ea87b84a6",
+      "raw": "The earlier decision relied on skipping updates for branch creation to avoid unnecessary overhead; however, the new evidence shows that filesystem access during branch creation can now impact performance, thus changing its applicability to scenarios involving filesystem access. The earlier result remains valid for other checkout options that do not involve filesystem access.",
+      "input_tokens": 237,
+      "output_tokens": 60
+    },
+    {
+      "id": "explanation-control/unseen-2p/no_cost/earlier-first",
+      "sha256": "b6498ae74b1f535a739bed9173319e06fe867190dff6ff39f06eefa6c46eda79",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" to avoid unnecessary updates. The report introduces new evidence showing that a full checkout, including updating the working tree, is necessary for all checkout options, thus changing the applicability of the earlier decision to any checkout scenario, not just branch creation.",
+      "input_tokens": 208,
+      "output_tokens": 72
+    },
+    {
+      "id": "explanation-control/unseen-2p/no_cost/report-first",
+      "sha256": "3c2330c90aeec195265134424e831d8ec3c5fbb127b596b76fb797d554485285",
+      "raw": "The earlier decision relied on the specific context of creating a new branch via 'git checkout -b <new_branch>' to avoid unnecessary updates. The new evidence shows that a full checkout including updating the working tree is necessary for a full checkout, not just when creating a new branch, thus changing its applicability. The earlier result remains true for checkouts initiated specifically to create a new branch.",
+      "input_tokens": 209,
+      "output_tokens": 79
+    },
+    {
+      "id": "explanation-control/unseen-2p/no_exception/earlier-first",
+      "sha256": "7dcd3cbb5c6d7cfe194ba8e315ed45ff1a454d838339023e463d0511f7f12a45",
+      "raw": "The earlier decision relied on the specific case of creating a new branch via \"git checkout -b <new_branch>\" to avoid unnecessary merge operations. The new evidence suggests that filesystem access during such checkouts may now cause significant performance regressions, thus changing the applicability of the earlier rule and necessitating a different approach for all checkout scenarios, not just branch creation.",
+      "input_tokens": 211,
+      "output_tokens": 74
+    },
+    {
+      "id": "explanation-control/unseen-2p/no_exception/report-first",
+      "sha256": "b2114e1be998a9bcb59a10f80227489c20009fc5de70d72a0ef3a20e8b644858",
+      "raw": "The earlier decision relied on the specific case of creating a new branch via \"git checkout -b <new_branch>\" to avoid unnecessary operations. However, the new evidence indicates that filesystem access is now critical for performance, thus changing the applicability of skipping these operations when creating a new branch. The earlier result remains valid for other checkout scenarios not involving branch creation.",
+      "input_tokens": 212,
+      "output_tokens": 73
+    },
+    {
+      "id": "explanation-control/unseen-3p/intact/earlier-first",
+      "sha256": "c33284ef8f3844a1101b9683dd02ed6077d1414c8f0dc3178b979c1db1e3e347",
+      "raw": "The earlier decision relied on the assumption that only blob objects could be missing, but the new evidence shows that trees can also be missing, thus changing the applicability of the earlier result to include trees; however, the earlier result remains valid if the empty tree object exists on disk.",
+      "input_tokens": 210,
+      "output_tokens": 57
+    },
+    {
+      "id": "explanation-control/unseen-3p/intact/report-first",
+      "sha256": "493a8a083e2ce173cf104b1290f2cd949bf0c589d1818c5c8e5d13d1c30500b2",
+      "raw": "The earlier decision relied on the assumption that only blob objects could be missing, but the new evidence shows that trees can also be missing, thus changing the applicability of the earlier result to include trees; this revision maintains the earlier logic's validity for blob objects.",
+      "input_tokens": 210,
+      "output_tokens": 53
+    },
+    {
+      "id": "explanation-control/unseen-4p/intact/earlier-first",
+      "sha256": "e500315676901939c1da092debdc3afcccf12a4eb86a15d77d23ffd4f2af6f28",
+      "raw": "The earlier decision relied on simplifying the commit creation process in builtin/commit.c to avoid forking 'git commit' and ensure a clean exit, addressing a regression from 356ee4659b. The report introduces new evidence showing that this approach fails when amending a commit, as it incorrectly checks against HEAD^ instead of HEAD. This changes the applicability of the earlier decision, as the concrete new evidence indicates a failure mode not previously considered. The",
+      "input_tokens": 239,
+      "output_tokens": 96
+    },
+    {
+      "id": "explanation-control/unseen-4p/intact/report-first",
+      "sha256": "eca8225e8b86e8f3002a316b478a1b8bd87599355eeef7aee5ab5457ac2ce2d0",
+      "raw": "The earlier decision relied on the assumption that amending a commit did not involve merging or modifications, leading to the use of HEAD instead of HEAD^. New evidence shows that amending a commit can involve merges and modifications, thus changing the applicability of the earlier result and necessitating the use of HEAD^ to accurately determine if the commit would be empty.",
+      "input_tokens": 239,
+      "output_tokens": 71
+    },
+    {
+      "id": "probe/development-checkout/control",
+      "sha256": "54a21bafac8b6d26081211e8bd7983772661ad573152f974021dcb7ca128d0d4",
+      "raw": "E1 | checkout.optimizeNewBranch",
+      "input_tokens": 820,
+      "output_tokens": 8
+    },
+    {
+      "id": "probe/development-checkout/pulled",
+      "sha256": "54a21bafac8b6d26081211e8bd7983772661ad573152f974021dcb7ca128d0d4",
+      "raw": "E1 | checkout.optimizeNewBranch",
+      "input_tokens": 820,
+      "output_tokens": 8
+    },
+    {
+      "id": "probe/git-cvs-pos/control",
+      "sha256": "91738c23fa0851a3c72a140f68ce48acdd904526bcc673f83c07b7278b610244",
+      "raw": "E1 | A\nE2 | A",
+      "input_tokens": 1121,
+      "output_tokens": 10
+    },
+    {
+      "id": "probe/git-cvs-pos/pulled",
+      "sha256": "91738c23fa0851a3c72a140f68ce48acdd904526bcc673f83c07b7278b610244",
+      "raw": "E1 | A\nE2 | A",
+      "input_tokens": 1121,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/pull-pilot-v1/pep-597/unrelated/candidate",
+      "sha256": "345d078287c41ea0d2b9ebc389ff9cc30ac3614bfb6ce6f72484de535488d5a2",
+      "raw": "E1 | EncodingWarning",
+      "input_tokens": 1487,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/pull-pilot-v1/pep-680/clean/candidate",
+      "sha256": "1d3387f56ce1189b49dbd11f1d4f423b79aed2a297544404726f7169ccf32862",
+      "raw": "E4 | tomllib",
+      "input_tokens": 1494,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/pull-pilot-v1/pep-680/unrelated/candidate",
+      "sha256": "1d3387f56ce1189b49dbd11f1d4f423b79aed2a297544404726f7169ccf32862",
+      "raw": "E4 | tomllib",
+      "input_tokens": 1494,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/pull-pilot-v1/pep-618/clean/candidate",
+      "sha256": "f72cee8e5a938c50251b8dc9fb4535515b201149d6fabadd741063be453a1409",
+      "raw": "E3 | ValueError",
+      "input_tokens": 1497,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-dev-v3/probe1-second/premise/2",
+      "sha256": "c0046f8f66576cc6bc00efbca3705f84863adb4f5e5d5e71f081a912b836e503",
+      "raw": "E1 | every 75 seconds | inland installation",
+      "input_tokens": 222,
+      "output_tokens": 12
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_033/premise/3",
+      "sha256": "8acb33f27b1a7da25d6563e8b01b86cd132a1b34e0d5229beabe20332fce8fdb",
+      "raw": "NONE",
+      "input_tokens": 338,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_013/premise/3",
+      "sha256": "b79baa6ea5d50ac8335fce4e35c0056e3e5cb41eed60523bff23f18d81e43fa6",
+      "raw": "NONE",
+      "input_tokens": 361,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_002/premise/3",
+      "sha256": "1370a2af807b3ab40d6545c4ad231fbe532481ad767b5cf7b9ab0d2c15b5bc31",
+      "raw": "NONE",
+      "input_tokens": 371,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_033/premise/2",
+      "sha256": "ee7ca31c2cd11e96c888ff337292faaed547d6a8da5477089457572507c8859f",
+      "raw": "E1 | Lizhen Zhou | Group 1/5",
+      "input_tokens": 377,
+      "output_tokens": 13
+    },
+    {
+      "id": "qa/revision-dev-v3/F_TP_Top01_018/premise/2",
+      "sha256": "30a3c598625c843aee11a496b923b88a33bc61c0b0b60db3f4ba61331e118b59",
+      "raw": "NONE",
+      "input_tokens": 380,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/F_TP_Top01_018/premise/3",
+      "sha256": "7015bba2a96b9c1028453c1b671270313ff06aa365c19700379e3593a263c2eb",
+      "raw": "NONE",
+      "input_tokens": 401,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_013/premise/2",
+      "sha256": "724ac532aa7664d35d3dbb89c95e54a7ba4749f8d59f1297b10738f1d3b118f5",
+      "raw": "E1 | at least 10 working days",
+      "input_tokens": 403,
+      "output_tokens": 11
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_002/premise/2",
+      "sha256": "2af46acd23b9b200ab13f69bb8a291d4dc075952bc0544d379a9e8708e540449",
+      "raw": "E1 | Confluence | https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report",
+      "input_tokens": 436,
+      "output_tokens": 38
+    },
+    {
+      "id": "qa/revision-dev-v3/MA_P_Top01_001/premise/3",
+      "sha256": "76d3474816385e743ab4e15fa07860c41aaaba6cea95d04d3bf2435484662d32",
+      "raw": "NONE",
+      "input_tokens": 713,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/MA_P_Top01_001/premise/2",
+      "sha256": "08d0e538861fd90fe5efdfb92ae78d978e41e454c5bb15f917a4d80a382fc485",
+      "raw": "NONE",
+      "input_tokens": 749,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-dev-v3/F_TP_Top01_018/premise/1",
+      "sha256": "a2757e5cd1f3dad3918d482ae555e01372cfe3fe3d3fb0832b488f05d1d37e9f",
+      "raw": "E9 | 21",
+      "input_tokens": 1566,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_002/premise/1",
+      "sha256": "7cb126b94d0e90b062629e29ad20653474f991d8ae3fba4749f098619bdd19d6",
+      "raw": "E1 | Confluence",
+      "input_tokens": 1593,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_013/premise/1",
+      "sha256": "0d7b8b721d49984e5d30797ce7b2e3aa95400f0a4e58ce1bd34d641676a64600",
+      "raw": "E2 | 10 working days",
+      "input_tokens": 1597,
+      "output_tokens": 9
+    },
+    {
+      "id": "qa/revision-dev-v3/F_SH_Top01_033/premise/1",
+      "sha256": "282a604803048c900dc70a2442b8cd4bc8354cb3506c383ba35071e4a01f145e",
+      "raw": "E1 | Lizhen Zhou",
+      "input_tokens": 1614,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-dev-v3/MA_P_Top01_001/premise/1",
+      "sha256": "fdc2761065d424a6c28609d2f7574554219fae2269e81e19c7665edd1568cea6",
+      "raw": "E2 | For example, by correlating energy consumption fluctuations with equipment start-stop logs and production work orders, we can initially determine if it's an equipment issue.  \nE9 | When you're developing, you can also think about how our products can integrate similar Agent capabilities in the future.",
+      "input_tokens": 1959,
+      "output_tokens": 60
+    },
+    {
+      "id": "qa/revision-final-v1/q02-ordinary/simple/1",
+      "sha256": "342554ce7d13811e1d470168a37efa78a9a07977d6b594f2ab7c8d25355d2c56",
+      "raw": "E1 | help.format",
+      "input_tokens": 1410,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q02-unrelated/simple/1",
+      "sha256": "342554ce7d13811e1d470168a37efa78a9a07977d6b594f2ab7c8d25355d2c56",
+      "raw": "E1 | help.format",
+      "input_tokens": 1410,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q06-ordinary/simple/1",
+      "sha256": "8db60bb9b3e1e6a53030c1656b4de6b3ef8ede25c9f167149a6168538d813e21",
+      "raw": "E1 | [PATCH]",
+      "input_tokens": 1432,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/q06-unrelated/simple/1",
+      "sha256": "8db60bb9b3e1e6a53030c1656b4de6b3ef8ede25c9f167149a6168538d813e21",
+      "raw": "E1 | [PATCH]",
+      "input_tokens": 1432,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/q04-unrelated/simple/1",
+      "sha256": "56ccaf678c9487bf966c3cf4a6a7970b1a179803bcd046b2f4924ddec5c00f7e",
+      "raw": "E1 | fetch.output",
+      "input_tokens": 1482,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q03-ordinary/simple/1",
+      "sha256": "6a5b2f77f4213cbd185f6ff30f4e399213b7f276e6942f373e5f782cd493e478",
+      "raw": "E1 | 0",
+      "input_tokens": 1491,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q03-unrelated/simple/1",
+      "sha256": "6a5b2f77f4213cbd185f6ff30f4e399213b7f276e6942f373e5f782cd493e478",
+      "raw": "E1 | 0",
+      "input_tokens": 1491,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q08-ordinary/simple/1",
+      "sha256": "7a65a165525b47dcd8e5ffa020bb473c3943ac956b3d4ac17b5d0056c469edad",
+      "raw": "E1 | grep.extendedRegexp",
+      "input_tokens": 1495,
+      "output_tokens": 9
+    },
+    {
+      "id": "qa/revision-final-v1/q05-ordinary/simple/1",
+      "sha256": "20d9772c0a8baf34cbe4987b1bda10f0b9d795aa5baa45c86bae1df5306bb5be",
+      "raw": "E1 | zdiff3",
+      "input_tokens": 1578,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/q05-unrelated/simple/1",
+      "sha256": "20d9772c0a8baf34cbe4987b1bda10f0b9d795aa5baa45c86bae1df5306bb5be",
+      "raw": "E1 | zdiff3",
+      "input_tokens": 1578,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/q04-ordinary/legacy/1",
+      "sha256": "c1cd1624af77f8365360badecca078490ebf3bf25b42667dfd6eff4c8b145b0b",
+      "raw": "{\"kind\":\"single\",\"n\":1,\"field\":\"quote\",\"span\":\"Default value is `full`.\"}",
+      "input_tokens": 1634,
+      "output_tokens": 24
+    },
+    {
+      "id": "qa/revision-final-v1/r16/premise/1",
+      "sha256": "10abe9a2022bfb698388a8ce960cb10c7ffae42e5693e0dfcd232fb248ce6412",
+      "raw": "RETEST | P1 | N1 | The new evidence suggests a method to bypass the `is_local` check, potentially leading to unauthorized access through non-local transports, which contradicts the rationale behind limiting input sizes to prevent memory leaks.",
+      "input_tokens": 1665,
+      "output_tokens": 49
+    },
+    {
+      "id": "qa/revision-final-v1/d09/premise/2",
+      "sha256": "f0c08d960985cd9899258c7eec40cb6d5cace98a608daffdf0ad9b85fbed5203",
+      "raw": "E1 | a tab",
+      "input_tokens": 236,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/d09/premise/3",
+      "sha256": "ca520ae2e685db57b5b076c5d7796b4fde2c2e3589e68f1825bad6275207a1cb",
+      "raw": "E1 | semicolon",
+      "input_tokens": 239,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/d07/premise/2",
+      "sha256": "9fa488ca27dda7ec625ed9c7ff8da0ec418e672b79546036564bf8326c0b0398",
+      "raw": "E1 | L-2 cartridge | freshwater sites",
+      "input_tokens": 241,
+      "output_tokens": 11
+    },
+    {
+      "id": "qa/revision-final-v1/d08/premise/2",
+      "sha256": "4cd9f84115c5d704fb6e6bfbb3394cf4d24dcae7eefd1b5ebe2b8633bc6a6e13",
+      "raw": "E1 | every six hours | standby mode",
+      "input_tokens": 241,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-clean/premise/2",
+      "sha256": "aa1b979c94fb6299b83afe14d7f99b9522321a02f8795fe39f68f031fc1cc90b",
+      "raw": "NONE",
+      "input_tokens": 479,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-conflict/premise/3",
+      "sha256": "aa1b979c94fb6299b83afe14d7f99b9522321a02f8795fe39f68f031fc1cc90b",
+      "raw": "NONE",
+      "input_tokens": 479,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-unrelated/premise/2",
+      "sha256": "aa1b979c94fb6299b83afe14d7f99b9522321a02f8795fe39f68f031fc1cc90b",
+      "raw": "NONE",
+      "input_tokens": 479,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-clean/premise/3",
+      "sha256": "ce3e49cbad94b280ed3afbc987fa5c089fdfb278a5f625aa0cb81f5d9b5fc87b",
+      "raw": "NONE",
+      "input_tokens": 481,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-unrelated/premise/3",
+      "sha256": "ce3e49cbad94b280ed3afbc987fa5c089fdfb278a5f625aa0cb81f5d9b5fc87b",
+      "raw": "NONE",
+      "input_tokens": 481,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-clean/premise/2",
+      "sha256": "9ca27f2abfbd59fe23c1f0fd1c4fd83f53266bdef30628c9d10e41d0486e434f",
+      "raw": "E1 | NAME := expr",
+      "input_tokens": 484,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-conflict/premise/2",
+      "sha256": "9ca27f2abfbd59fe23c1f0fd1c4fd83f53266bdef30628c9d10e41d0486e434f",
+      "raw": "E1 | NAME := expr",
+      "input_tokens": 484,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-unrelated/premise/2",
+      "sha256": "9ca27f2abfbd59fe23c1f0fd1c4fd83f53266bdef30628c9d10e41d0486e434f",
+      "raw": "E1 | NAME := expr",
+      "input_tokens": 484,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-552-clean/premise/2",
+      "sha256": "5eef33f4ec22edfcfa672e559be209d1072ffef3b0f8d8476c70b81fb78c27b9",
+      "raw": "NONE",
+      "input_tokens": 526,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-552-conflict/premise/3",
+      "sha256": "5eef33f4ec22edfcfa672e559be209d1072ffef3b0f8d8476c70b81fb78c27b9",
+      "raw": "NONE",
+      "input_tokens": 526,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-552-unrelated/premise/2",
+      "sha256": "5eef33f4ec22edfcfa672e559be209d1072ffef3b0f8d8476c70b81fb78c27b9",
+      "raw": "NONE",
+      "input_tokens": 526,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-clean/premise/2",
+      "sha256": "5d446d39210ec03240ef01c021a8c8ae72c953f501bba5ca7ee95594b8cfff32",
+      "raw": "E2 | ValueError",
+      "input_tokens": 547,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-conflict/premise/3",
+      "sha256": "5d446d39210ec03240ef01c021a8c8ae72c953f501bba5ca7ee95594b8cfff32",
+      "raw": "E2 | ValueError",
+      "input_tokens": 547,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-unrelated/premise/2",
+      "sha256": "5d446d39210ec03240ef01c021a8c8ae72c953f501bba5ca7ee95594b8cfff32",
+      "raw": "E2 | ValueError",
+      "input_tokens": 547,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-clean/premise/2",
+      "sha256": "8a7244ff6248482fcb21cf852a0f9084327303079939be269a5688e2e72dafd1",
+      "raw": "E1 | sys.monitoring",
+      "input_tokens": 570,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-conflict/premise/3",
+      "sha256": "8a7244ff6248482fcb21cf852a0f9084327303079939be269a5688e2e72dafd1",
+      "raw": "E1 | sys.monitoring",
+      "input_tokens": 570,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/d07/premise/1",
+      "sha256": "369adffa5a97845c1c5719cb63a8a5fc927ffe7fa15334bf52de300c8c2a9502",
+      "raw": "E1 | For freshwater sites the field water sampler uses the L-2 cartridge.  \nE2 | NONE",
+      "input_tokens": 1174,
+      "output_tokens": 23
+    },
+    {
+      "id": "qa/revision-final-v1/d09/premise/1",
+      "sha256": "d3bb9e7c2b32dd580ab11159ac3ec68ae5a6e5d956488bc1c34beda6670f519b",
+      "raw": "E1 | tab\nE2 | ;",
+      "input_tokens": 1352,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-515-conflict/premise/1",
+      "sha256": "5bd397e1108623db699a2f3dfc40892ef36ea34d69fb8a94d7ce9b7087e6e3be",
+      "raw": "E1 | 2 underscores",
+      "input_tokens": 1397,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/d10/premise/1",
+      "sha256": "7d5b976b5df253e3c475742bf7d2f5f716ba2e5afdc5327ba41f404a4f061552",
+      "raw": "E1 | 20 microliters\nE2 | 80 microliters",
+      "input_tokens": 1408,
+      "output_tokens": 22
+    },
+    {
+      "id": "qa/revision-final-v1/q09-unrelated/premise/1",
+      "sha256": "8ae6a8cccc9befa826de04fa92ecc405ba331bdb2c0f28edad44963a2dd3bc60",
+      "raw": "E2 | 4095\nE3 | 65535",
+      "input_tokens": 1464,
+      "output_tokens": 19
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-conflict/premise/1",
+      "sha256": "775a128b8ea8ace039a949c76e05e2ceada7b68eb2506f2d645db3bf6ad20f4a",
+      "raw": "E8 | NAME := expr",
+      "input_tokens": 1466,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-conflict/premise/1",
+      "sha256": "844a6a4664d3667c23307049ab9e3d224a69395caa963b84e9ce305d35265aa4",
+      "raw": "E1 | LengthMismatchError",
+      "input_tokens": 1473,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/q04-ordinary/premise/1",
+      "sha256": "56ccaf678c9487bf966c3cf4a6a7970b1a179803bcd046b2f4924ddec5c00f7e",
+      "raw": "E1 | fetch.output",
+      "input_tokens": 1482,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q08-ordinary/premise/1",
+      "sha256": "7a65a165525b47dcd8e5ffa020bb473c3943ac956b3d4ac17b5d0056c469edad",
+      "raw": "E1 | grep.extendedRegexp",
+      "input_tokens": 1495,
+      "output_tokens": 9
+    },
+    {
+      "id": "qa/revision-final-v1/q08-unrelated/premise/1",
+      "sha256": "7a65a165525b47dcd8e5ffa020bb473c3943ac956b3d4ac17b5d0056c469edad",
+      "raw": "E1 | grep.extendedRegexp",
+      "input_tokens": 1495,
+      "output_tokens": 9
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-553-clean/premise/1",
+      "sha256": "2b8cea58df96c88717ed601a4adcfbd656e997938c341406ed908e6f0913fb81",
+      "raw": "E2 | 0",
+      "input_tokens": 1501,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-553-unrelated/premise/1",
+      "sha256": "2b8cea58df96c88717ed601a4adcfbd656e997938c341406ed908e6f0913fb81",
+      "raw": "E2 | 0",
+      "input_tokens": 1501,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-conflict/premise/1",
+      "sha256": "f2366b083a49a2471cdec118038d61aee10908df0bcb869ab3c49539f26287bf",
+      "raw": "E1 | catch*",
+      "input_tokens": 1506,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q07-ordinary/premise/1",
+      "sha256": "5b6b58549aa7f30f59033d6826b7037ca53df237eeae18d7e9510e9f4df50925",
+      "raw": "E1 | NONE",
+      "input_tokens": 1514,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/q07-unrelated/premise/1",
+      "sha256": "5b6b58549aa7f30f59033d6826b7037ca53df237eeae18d7e9510e9f4df50925",
+      "raw": "E1 | NONE",
+      "input_tokens": 1514,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-clean/premise/1",
+      "sha256": "4ed2a0970a8bab13386f50967e6b1239224620a77bae3aee0c80f33774b1b9e5",
+      "raw": "E2 | strict=ValueError",
+      "input_tokens": 1517,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/d10/premise/3",
+      "sha256": "743389852a6c18cc5dbbe492909cda54fca15568dabb6bb52cb6b381e8758501",
+      "raw": "E1 | 80 microliters ; trial://worklog/8146183c7859f89ba2fb97aa",
+      "input_tokens": 254,
+      "output_tokens": 38
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-515-conflict/premise/2",
+      "sha256": "9a840560a860e93b8d3b72d6cd71a7eaeae0ce3ccd8e6c7f59c65f220dc480c1",
+      "raw": "E1 | at least two underscores ; casebook://messages/98fdf33401be1601088b7671",
+      "input_tokens": 254,
+      "output_tokens": 35
+    },
+    {
+      "id": "qa/revision-final-v1/d01/premise/2",
+      "sha256": "94f8b9eb0d2d527847c683a064362622c5497c4778577de8b90129f5a2c08572",
+      "raw": "E1 | upstream ; trial://worklog/646956c0e537938abf1125c2",
+      "input_tokens": 256,
+      "output_tokens": 34
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-conflict/premise/3",
+      "sha256": "9345b3fabcc02102ee567e878495f6251aaa6e79ef6d580cee4739b517e66024",
+      "raw": "E1 | NAME <- expr | language review",
+      "input_tokens": 256,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-conflict/premise/1",
+      "sha256": "cb3bf7ca845c54e5e90ba956ae13feb6d94d08aefd203e683014e28a80b2e341",
+      "raw": "E1 | sys.events",
+      "input_tokens": 1528,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q10-ordinary/premise/1",
+      "sha256": "e2866f631728f6ca116e9bff673a7966716c2f6df2b50e3420c02381997b3c2b",
+      "raw": "E1 | diff.context",
+      "input_tokens": 1528,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q10-unrelated/premise/1",
+      "sha256": "e2866f631728f6ca116e9bff673a7966716c2f6df2b50e3420c02381997b3c2b",
+      "raw": "E1 | diff.context",
+      "input_tokens": 1528,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-clean/premise/1",
+      "sha256": "7cb8fa6f0d4d182e479ff52bd589ac9de8d36141b48cb5fc0677ee0bc84313df",
+      "raw": "E9 | EncodingWarning",
+      "input_tokens": 1540,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-unrelated/premise/1",
+      "sha256": "7cb8fa6f0d4d182e479ff52bd589ac9de8d36141b48cb5fc0677ee0bc84313df",
+      "raw": "E9 | EncodingWarning",
+      "input_tokens": 1540,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-clean/premise/1",
+      "sha256": "715ab99fc8b875c6e7077f711c818eb55aff5b77609d589686e2f6c76e9a3e38",
+      "raw": "E3 | the ``except*`` syntax",
+      "input_tokens": 1546,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-unrelated/premise/1",
+      "sha256": "715ab99fc8b875c6e7077f711c818eb55aff5b77609d589686e2f6c76e9a3e38",
+      "raw": "E3 | the ``except*`` syntax",
+      "input_tokens": 1546,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/d02/premise/1",
+      "sha256": "a24497e862919653c28f24eb03879ffc60b982804b16766bd303620bdd1e7870",
+      "raw": "E2 | warn",
+      "input_tokens": 1549,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-clean/premise/1",
+      "sha256": "74ab4bdf7abf3c05e22ed285b77be52d9617d1f5930ac25c19b774e44cbd4f52",
+      "raw": "E6 | NAME := expr",
+      "input_tokens": 1554,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-572-unrelated/premise/1",
+      "sha256": "74ab4bdf7abf3c05e22ed285b77be52d9617d1f5930ac25c19b774e44cbd4f52",
+      "raw": "E6 | NAME := expr",
+      "input_tokens": 1554,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-conflict/premise/1",
+      "sha256": "f8ad76603d5e61e1ce9b3d9f2e2a88b8cc7b4423d144901c6385ba156a06d968",
+      "raw": "E1 | zonefiles",
+      "input_tokens": 1561,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/d01/premise/1",
+      "sha256": "4156cef259f723a66d5705040055e473abb5241b960ab22f3eee9a3f3ad0e257",
+      "raw": "E1 | upstream",
+      "input_tokens": 1567,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-clean/premise/1",
+      "sha256": "782f63e1b5de26ddb90f3456e5dff187042ceb6054885321254c4954dee10310",
+      "raw": "E1 | sys.monitoring",
+      "input_tokens": 1569,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-unrelated/premise/1",
+      "sha256": "782f63e1b5de26ddb90f3456e5dff187042ceb6054885321254c4954dee10310",
+      "raw": "E1 | sys.monitoring",
+      "input_tokens": 1569,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-552-clean/premise/1",
+      "sha256": "8d718cae365f8bc83b22ca86b9d007ddb13cc3b36a01f943604878ecfd33629b",
+      "raw": "E12 | default | means the check_source flag in hash-based pycs determines invalidation as described above.",
+      "input_tokens": 1575,
+      "output_tokens": 25
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-552-unrelated/premise/1",
+      "sha256": "8d718cae365f8bc83b22ca86b9d007ddb13cc3b36a01f943604878ecfd33629b",
+      "raw": "E12 | default | means the check_source flag in hash-based pycs determines invalidation as described above.",
+      "input_tokens": 1575,
+      "output_tokens": 25
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-clean/premise/1",
+      "sha256": "3efb612351f0df26c80eb4e0171eccb0c1400092fb3af5b86ba31fb8036c1ae3",
+      "raw": "E1 | tzdata",
+      "input_tokens": 1615,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-unrelated/premise/1",
+      "sha256": "3efb612351f0df26c80eb4e0171eccb0c1400092fb3af5b86ba31fb8036c1ae3",
+      "raw": "E1 | tzdata",
+      "input_tokens": 1615,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-680-conflict/premise/1",
+      "sha256": "32b5791f0896072f5df6fa99aad9d446d0037473cd623eb71350112c96c9f805",
+      "raw": "E7 | E7",
+      "input_tokens": 1644,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/d04/premise/1",
+      "sha256": "136a8c31d6cfa161a4f66a25f9e606bad6a160c9f2e3e93d3701cf2cbfbe3df2",
+      "raw": "E1 | always\nE2 | always",
+      "input_tokens": 1687,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-680-unrelated/premise/3",
+      "sha256": "97a19c9ecae99d6093f4ce93dcec66f00725dcad365148b4c2686b59df80fadd",
+      "raw": "NONE",
+      "input_tokens": 311,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/q06-ordinary/premise/3",
+      "sha256": "371122fde068d7025e1dc7b7605cd19d96b8069a85fa2a2cbec32384e731de55",
+      "raw": "E1 | `.patch`",
+      "input_tokens": 311,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/q06-unrelated/premise/3",
+      "sha256": "371122fde068d7025e1dc7b7605cd19d96b8069a85fa2a2cbec32384e731de55",
+      "raw": "E1 | `.patch`",
+      "input_tokens": 311,
+      "output_tokens": 7
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-553-clean/premise/3",
+      "sha256": "419051f9f2c87282da32c79e177c360083c723ba266270d1cdd13efc0b5a02a1",
+      "raw": "NONE",
+      "input_tokens": 314,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/d07/premise/3",
+      "sha256": "08752a17e3d171a513f025656a49846bf0810bf0eb0b68e586e3114973f2ffe3",
+      "raw": "E1 | B-8 cartridge | brackish sites",
+      "input_tokens": 243,
+      "output_tokens": 13
+    },
+    {
+      "id": "qa/revision-final-v1/d08/premise/3",
+      "sha256": "6789934ff0cae0f69de1d1c012dac85035a9e6fa9776fd2084d02f10db537c12",
+      "raw": "E1 | every fifteen minutes ; trial://worklog/76c05d290ebe00985547217c",
+      "input_tokens": 243,
+      "output_tokens": 36
+    },
+    {
+      "id": "qa/revision-final-v1/d05/premise/2",
+      "sha256": "84ebc2da763eef1ea3e8e1e1d1c69efec7e0be3f303cf9d374bdd43ce01917c0",
+      "raw": "NONE",
+      "input_tokens": 245,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/d06/premise/2",
+      "sha256": "3350e25f3202cc54933a49d691b770c8d1f01f8f86c69f143934c7f1c534b388",
+      "raw": "E1 | 50 minutes",
+      "input_tokens": 248,
+      "output_tokens": 8
+    },
+    {
+      "id": "qa/revision-final-v1/q03-unrelated/premise/2",
+      "sha256": "ee6df0928802d116291a2ba16337047ab5ec42cdae8b7874249ae88e2ad8d912",
+      "raw": "E1 | -1 means to try indefinitely",
+      "input_tokens": 337,
+      "output_tokens": 10
+    },
+    {
+      "id": "qa/revision-final-v1/old-F_SH_Top01_033/premise/3",
+      "sha256": "8acb33f27b1a7da25d6563e8b01b86cd132a1b34e0d5229beabe20332fce8fdb",
+      "raw": "NONE",
+      "input_tokens": 338,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/q07-ordinary/premise/3",
+      "sha256": "23ef917eb82226e075e9822f4ffff3282402c384dbc93aa36c94c7be60d0e26b",
+      "raw": "NONE",
+      "input_tokens": 346,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/q07-unrelated/premise/3",
+      "sha256": "23ef917eb82226e075e9822f4ffff3282402c384dbc93aa36c94c7be60d0e26b",
+      "raw": "NONE",
+      "input_tokens": 346,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-clean/premise/3",
+      "sha256": "efcd5a234cd0644a3f3de43e9216843cc6f3eb58368763c29e0d7402394c7cd4",
+      "raw": "NONE",
+      "input_tokens": 357,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-unrelated/premise/3",
+      "sha256": "efcd5a234cd0644a3f3de43e9216843cc6f3eb58368763c29e0d7402394c7cd4",
+      "raw": "NONE",
+      "input_tokens": 357,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-clean/premise/3",
+      "sha256": "8f314aef9491fe4aefa62e6bc2c4658c4df8f44581d7326b1560c2ecb87c5ed3",
+      "raw": "NONE",
+      "input_tokens": 357,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-unrelated/premise/3",
+      "sha256": "8f314aef9491fe4aefa62e6bc2c4658c4df8f44581d7326b1560c2ecb87c5ed3",
+      "raw": "NONE",
+      "input_tokens": 357,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-clean/premise/3",
+      "sha256": "321567d918119c11d676f59886d61a817ed0a43ca7a8aa4ea764d52fd3ebfaee",
+      "raw": "NONE",
+      "input_tokens": 368,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-unrelated/premise/3",
+      "sha256": "321567d918119c11d676f59886d61a817ed0a43ca7a8aa4ea764d52fd3ebfaee",
+      "raw": "NONE",
+      "input_tokens": 368,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/d01/premise/3",
+      "sha256": "7feef0c9c7a476fe49635e5c446516f7e21628da40e3965b96ced5fede2f77cf",
+      "raw": "E1 | origin",
+      "input_tokens": 370,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-clean/premise/3",
+      "sha256": "d067ed707ea275655afd8fcdc6bc4beaae7cfa1ae0364426472338ed37cc7744",
+      "raw": "NONE",
+      "input_tokens": 374,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-669-unrelated/premise/3",
+      "sha256": "d067ed707ea275655afd8fcdc6bc4beaae7cfa1ae0364426472338ed37cc7744",
+      "raw": "NONE",
+      "input_tokens": 374,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-F_SH_Top01_033/premise/2",
+      "sha256": "ee7ca31c2cd11e96c888ff337292faaed547d6a8da5477089457572507c8859f",
+      "raw": "E1 | Lizhen Zhou | @Luhao Zhao",
+      "input_tokens": 377,
+      "output_tokens": 13
+    },
+    {
+      "id": "qa/revision-final-v1/q07-ordinary/premise/2",
+      "sha256": "988901e3a3a5ffb143c644024df7697c7cb965d55cc74569ee6ba6a6451b3a1e",
+      "raw": "E1 | manual",
+      "input_tokens": 380,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/q07-unrelated/premise/2",
+      "sha256": "988901e3a3a5ffb143c644024df7697c7cb965d55cc74569ee6ba6a6451b3a1e",
+      "raw": "E1 | manual",
+      "input_tokens": 380,
+      "output_tokens": 5
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-515-clean/premise/3",
+      "sha256": "fd3907ee1415fc17177a0d9880cbb43037fabe8363d3acf4e418da73d9d1ac52",
+      "raw": "NONE",
+      "input_tokens": 390,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-515-unrelated/premise/3",
+      "sha256": "fd3907ee1415fc17177a0d9880cbb43037fabe8363d3acf4e418da73d9d1ac52",
+      "raw": "NONE",
+      "input_tokens": 390,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-clean/premise/3",
+      "sha256": "676b85c0d3fbf7db673662f4a6a21dea39b43377ee92874c91511a310594fed2",
+      "raw": "NONE",
+      "input_tokens": 394,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-615-unrelated/premise/3",
+      "sha256": "676b85c0d3fbf7db673662f4a6a21dea39b43377ee92874c91511a310594fed2",
+      "raw": "NONE",
+      "input_tokens": 394,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-conflict/premise/2",
+      "sha256": "f22c5503564284b8f86307c8dbe5a2c162959851f8d8d05e5aed19e3ac72f573",
+      "raw": "E1 | catch* | casebook://messages/61f9b8edce2e869a5a740d67",
+      "input_tokens": 248,
+      "output_tokens": 34
+    },
+    {
+      "id": "qa/revision-final-v1/d06/premise/3",
+      "sha256": "07ee32b5cb72eadc680629d25b6a079f17ca8ea67cee91ea824f9926198477f0",
+      "raw": "E1 | 35 minutes ; trial://worklog/6cd6d670243d5700c94f9963 ; Eli",
+      "input_tokens": 249,
+      "output_tokens": 39
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-conflict/premise/2",
+      "sha256": "15edf61cb015638aed9b7ada33c0352d037dcad6f9ed8b94b93c6ae2815a0e21",
+      "raw": "E1 | LocaleDefaultWarning | casebook://messages/f80aed03ddb8216b98658f5f",
+      "input_tokens": 250,
+      "output_tokens": 32
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-618-conflict/premise/2",
+      "sha256": "08222f87a5bfaefaeb3dad1d8c739636b1b424a54392bd3687a535103c74bd63",
+      "raw": "E1 | LengthMismatchError | strict zip unequal-lengths check",
+      "input_tokens": 251,
+      "output_tokens": 14
+    },
+    {
+      "id": "qa/revision-final-v1/d03/premise/2",
+      "sha256": "6084f7ef99e8daabad69182215b7fbb9cf8a99fa4479b2e8fe05aa92af0f87b1",
+      "raw": "E1 | 2",
+      "input_tokens": 395,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-clean/premise/2",
+      "sha256": "560f25ab023f4df1f6eb037864a538578f518b7d90788aac6561260c7623ca96",
+      "raw": "E1 | EncodingWarning",
+      "input_tokens": 396,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-conflict/premise/3",
+      "sha256": "560f25ab023f4df1f6eb037864a538578f518b7d90788aac6561260c7623ca96",
+      "raw": "E1 | EncodingWarning",
+      "input_tokens": 396,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-597-unrelated/premise/2",
+      "sha256": "560f25ab023f4df1f6eb037864a538578f518b7d90788aac6561260c7623ca96",
+      "raw": "E1 | EncodingWarning",
+      "input_tokens": 396,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-clean/premise/2",
+      "sha256": "10d643ec91ef494726c2fec822d6d6cc7e8ea1ee06a414943fdbfb49102caa33",
+      "raw": "E1 | ExceptionGroup",
+      "input_tokens": 407,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-conflict/premise/3",
+      "sha256": "10d643ec91ef494726c2fec822d6d6cc7e8ea1ee06a414943fdbfb49102caa33",
+      "raw": "E1 | ExceptionGroup",
+      "input_tokens": 407,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-654-unrelated/premise/2",
+      "sha256": "10d643ec91ef494726c2fec822d6d6cc7e8ea1ee06a414943fdbfb49102caa33",
+      "raw": "E1 | ExceptionGroup",
+      "input_tokens": 407,
+      "output_tokens": 6
+    },
+    {
+      "id": "qa/revision-final-v1/q04-ordinary/premise/3",
+      "sha256": "54211abe83c9c91d2620d1c813e8e135f6bd14598315a41d9554aa66094f2588",
+      "raw": "NONE",
+      "input_tokens": 411,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/q04-unrelated/premise/3",
+      "sha256": "54211abe83c9c91d2620d1c813e8e135f6bd14598315a41d9554aa66094f2588",
+      "raw": "NONE",
+      "input_tokens": 411,
+      "output_tokens": 2
+    },
+    {
+      "id": "qa/revision-final-v1/q05-ordinary/premise/2",
+      "sha256": "41e9eb02cff8d6af59714d81cdaacecf1d6fc9023e6461d884a5aede77490c29",
+      "raw": "E1 | at least six days",
+      "input_tokens": 412,
+      "output_tokens": 8
+    },
+    {
+      "id": "qa/revision-final-v1/q05-unrelated/premise/2",
+      "sha256": "41e9eb02cff8d6af59714d81cdaacecf1d6fc9023e6461d884a5aede77490c29",
+      "raw": "E1 | at least six days",
+      "input_tokens": 412,
+      "output_tokens": 8
+    },
+    {
+      "id": "qa/revision-final-v1/old-pep-553-clean/premise/2",
+      "sha256": "efc3db582bb28fc10eeea6735fe37ea94f2d0734a2ce0387b8e5c8b387f9cbb4",
+      "raw": "E2 | 0",
+      "input_tokens": 416,
+      "output_tokens": 6
+    }
+  ]
+}

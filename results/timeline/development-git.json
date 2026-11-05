@@ -1,0 +1,2278 @@
+{
+  "dev-1/direct": {
+    "status": "passed",
+    "id": "dev-1",
+    "mode": "direct",
+    "calls_replayed": 9,
+    "prompt_hashes": [
+      "77ac966ef2d94957303c400826d8987a6fd0066139a8739d2dec6874dcd02518",
+      "37e7f02c8a6c92820a23c1659b0b0af1aa67fcadd9e0347a4fcc00068299e1c3",
+      "353d5dd9a0aaf5c80fa0e3bc44db50229547d871eade122dc22831724f81d185",
+      "d16386ccd57491ca7cbd189ac937e53b83faee67a2e8781db58da9bf4b0359e9",
+      "242c67bcf6917e5cb5c41bff5c5c0fb204a93c1a695f1ee1d77200c93efe66c0",
+      "495764b53852b3821d40509962f58de175712aeea96615e2ea4184cc6631c03d",
+      "bd81a4d461ed90eabfac19c74d696cc19f8832271c8262271a2644f14c4a01d8",
+      "f96e505fa033adefa44ae32578634a437f9c20ea243f5bee1f9dff1950238105",
+      "f283f5ab013f7962b7872956f6bf083784e3990f6913c3aee101505e2bbf3865"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "067b77569680cf73f3b90cfb",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "067b77569680cf73f3b90cfb",
+              "location": "scenario://development/dev-1/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 36,
+              "quote": "The build artifact archive is Orion.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "mode": "direct",
+            "history": [
+              "067b77569680cf73f3b90cfb"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "location": "scenario://timeline/dev-1/1",
+              "speaker": "Scenario author dev-1",
+              "start": 0,
+              "end": 139,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process.",
+              "answer": "40 seconds",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "4a89eb054ea4d0d2a7a21184",
+            "mode": "direct",
+            "history": [
+              "067b77569680cf73f3b90cfb",
+              "6aaa548a8cc35cd712e5b2b7"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "af530c82f1bd9995d863c847",
+            "mode": "direct",
+            "history": [
+              "067b77569680cf73f3b90cfb",
+              "4a89eb054ea4d0d2a7a21184",
+              "6aaa548a8cc35cd712e5b2b7"
+            ],
+            "proposals": [
+              "036e6ee2237e0e81f9e71196"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"6aaa548a8cc35cd712e5b2b7\", \"quote\":\"The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process.\", \"answer\":\"40 seconds per batch\", \"condition\":\"for the single-process configuration\"}, {\"source\":\"af530c82f1bd9995d863c847\", \"quote\":\"Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.\", \"answer\":\"12 seconds per batch\", \"condition\":\"for the four-process configuration\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "067b77569680cf73f3b90cfb",
+              "location": "scenario://development/dev-1/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"af530c82f1bd9995d863c847\", \"quote\":\"Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.\", \"answer\":\"12 seconds per batch\", \"condition\":\"for four processes\"}, {\"source\":\"af530c82f1bd9995d863c847\", \"quote\":\"Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.\", \"answer\":\"40 seconds per batch\", \"condition\":\"for single process\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "location": "scenario://timeline/dev-1/1",
+              "speaker": "Scenario author dev-1",
+              "start": 0,
+              "end": 172,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process. The audit folder is Cedar-audit.",
+              "answer": "Cedar-audit",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-1/indexed": {
+    "status": "passed",
+    "id": "dev-1",
+    "mode": "indexed",
+    "calls_replayed": 13,
+    "prompt_hashes": [
+      "75c5de8a14150eef9f2654898a35ed5e1422792edd3fefef7a7d0d4bf6fcbf4f",
+      "046b2d6a0494c867436f9a064c08e13bcc6a2fe319afa47dae32c78b76aa9360",
+      "f6c303a4b1b71e98e1449941e6a845989b530fa3b88c7c717f854d4da0034543",
+      "b26c4ccc9ab1378474f9d9850dfaefa99f1a35f6b7f8733c296c035aa5d4ff8e",
+      "e3f278c3292cf10dba6c56aa542188d84e3305df49a88504431a60ddcc4121df",
+      "1d5db8012e8a16c40c0a77766e998e7cc37211114fc2d21566dc1a1e38c30050",
+      "9725704ef267e998ecdab4096d861fc7f266747fa2b52fb69cd1473f88fc3f2b",
+      "1ad8424918feb823bb800c9f78892b32fd86f3e5474ffd8cfee1cdb9549061d6",
+      "b313ce0cb154f790fb88939bfb7f817bb6a0317a612db899f9fa829105f93bb2",
+      "4f53cbbba9aa859d08a377ac6928640702f8e4fe823831e5ed82e9a9c807b9ce",
+      "431dcf79f5895cded20ee7deb49281a55faad9965e0b06366ec826f47fcd5656",
+      "44a760583afdca6213092aadcb4eb2e91076667a7e5f4b6e67ac0db4eac6f8b3",
+      "3c75031d0328f8ea4e36198a80671538e024510eb9af56cbfe7002e8af452df5"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "067b77569680cf73f3b90cfb",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "067b77569680cf73f3b90cfb",
+              "location": "scenario://development/dev-1/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "mode": "indexed",
+            "history": [
+              "067b77569680cf73f3b90cfb"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"We suspended further Cedar trials\", \"basis\":\"deployment permits only one process\", \"scope\":\"further Cedar trials\"},{\"decision\":\"The audit folder is Cedar-audit.\", \"basis\":\"\", \"scope\":\"audit folder naming\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "location": "scenario://timeline/dev-1/1",
+              "speaker": "Scenario author dev-1",
+              "start": 0,
+              "end": 139,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process.",
+              "answer": "40 seconds",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "4a89eb054ea4d0d2a7a21184",
+            "mode": "indexed",
+            "history": [
+              "067b77569680cf73f3b90cfb",
+              "6aaa548a8cc35cd712e5b2b7"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "af530c82f1bd9995d863c847",
+            "mode": "indexed",
+            "history": [
+              "067b77569680cf73f3b90cfb",
+              "4a89eb054ea4d0d2a7a21184",
+              "6aaa548a8cc35cd712e5b2b7"
+            ],
+            "proposals": [
+              "15b2e5e4b8214dfd402eb148"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"6aaa548a8cc35cd712e5b2b7\", \"quote\":\"The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process.\", \"answer\":\"40 seconds per batch\", \"condition\":\"for the single-process configuration\"}, {\"source\":\"af530c82f1bd9995d863c847\", \"quote\":\"Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.\", \"answer\":\"12 seconds per batch\", \"condition\":\"for the four-process configuration\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "067b77569680cf73f3b90cfb",
+              "location": "scenario://development/dev-1/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "single answer cardinality",
+          "raw": "{\"kind\":\"single\", \"answers\":[{\"source\":\"af530c82f1bd9995d863c847\", \"quote\":\"Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.\", \"answer\":\"12 seconds per batch\", \"condition\":\"four-process\"}, {\"source\":\"af530c82f1bd9995d863c847\", \"quote\":\"Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.\", \"answer\":\"40 seconds per batch\", \"condition\":\"single-process\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "location": "scenario://timeline/dev-1/1",
+              "speaker": "Scenario author dev-1",
+              "start": 0,
+              "end": 172,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process. The audit folder is Cedar-audit.",
+              "answer": "Cedar-audit",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-2/indexed": {
+    "status": "passed",
+    "id": "dev-2",
+    "mode": "indexed",
+    "calls_replayed": 13,
+    "prompt_hashes": [
+      "78f1817a2c03839c4bc235ce08a6d3e3a37da257da21679a5a8f7b5357565b1b",
+      "c3b68f2371c0becd88aa9b6a5538535ac37f9d968ae5473d5547654ea84db3a3",
+      "db05d3fa756326d26a3a1c53e950de78e26478d569faa8904af3ca291bfc5b7e",
+      "cc00828b7ae7125c8d25e0b89604e7e769d118949c75a2088f20c3d8f8e70b63",
+      "5ab6cf6b6997bed94daf5a8b2f9fce2bcbcf55fc94ce7f40558fab3ad8151a45",
+      "a50e8d5c4261c1f62104ea497adbbbe1c62baf19790e07c89959c417d881ad39",
+      "6713b45e5bc2d6fbc0a34a90e23d86ba1ba994b4a154c21fc6ec2518f6e5b414",
+      "90c39753b834d7796eb70b3f2051adb106c9426f74758238f1562ac3b0e62d32",
+      "b0ab8962d811d5d98cc54d0b1503f4f14271f5fed85ab2a20e42069bd9e5b785",
+      "d69b2849db7a4a970ecf899fd590db2442d348c788bb1661d5f1db15561685a3",
+      "6ef0e415e4ebf0a87b31ac00254048a49643a48af9737a11f9c142db0253555f",
+      "d69b2849db7a4a970ecf899fd590db2442d348c788bb1661d5f1db15561685a3",
+      "787da38d8d07206454954dc97f86f252c62d4faa1ebd2976a1836d26a9a38627"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a5b521acbeeb54b7d01a08b6",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a5b521acbeeb54b7d01a08b6",
+              "location": "scenario://development/dev-2/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "mode": "indexed",
+            "history": [
+              "a5b521acbeeb54b7d01a08b6"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 60,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds.",
+              "answer": "40 seconds",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "551bd7e39a9db189135f663c",
+            "mode": "indexed",
+            "history": [
+              "27f910dc20fc0bdfa99d7b99",
+              "a5b521acbeeb54b7d01a08b6"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "137ff3e629c456d8f64794e6",
+            "mode": "indexed",
+            "history": [
+              "27f910dc20fc0bdfa99d7b99",
+              "551bd7e39a9db189135f663c",
+              "a5b521acbeeb54b7d01a08b6"
+            ],
+            "proposals": [
+              "1057fc137303f55d16068c31"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 60,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds.",
+              "answer": "40 seconds",
+              "condition": {
+                "source_id": "27f910dc20fc0bdfa99d7b99",
+                "location": "scenario://timeline/dev-2/1",
+                "speaker": "Scenario author dev-2",
+                "start": 0,
+                "end": 28,
+                "quote": "With the small-fixture input"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "137ff3e629c456d8f64794e6",
+              "location": "scenario://timeline/dev-2/3",
+              "speaker": "Scenario observer dev-2",
+              "start": 0,
+              "end": 59,
+              "quote": "With the wide-fixture input, Birch parsing took 12 seconds.",
+              "answer": "12 seconds",
+              "condition": {
+                "source_id": "137ff3e629c456d8f64794e6",
+                "location": "scenario://timeline/dev-2/3",
+                "speaker": "Scenario observer dev-2",
+                "start": 0,
+                "end": 27,
+                "quote": "With the wide-fixture input"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a5b521acbeeb54b7d01a08b6",
+              "location": "scenario://development/dev-2/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 60,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds.",
+              "answer": "40 seconds",
+              "condition": {
+                "source_id": "27f910dc20fc0bdfa99d7b99",
+                "location": "scenario://timeline/dev-2/1",
+                "speaker": "Scenario author dev-2",
+                "start": 0,
+                "end": 28,
+                "quote": "With the small-fixture input"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "137ff3e629c456d8f64794e6",
+              "location": "scenario://timeline/dev-2/3",
+              "speaker": "Scenario observer dev-2",
+              "start": 0,
+              "end": 59,
+              "quote": "With the wide-fixture input, Birch parsing took 12 seconds.",
+              "answer": "12 seconds",
+              "condition": {
+                "source_id": "137ff3e629c456d8f64794e6",
+                "location": "scenario://timeline/dev-2/3",
+                "speaker": "Scenario observer dev-2",
+                "start": 0,
+                "end": 27,
+                "quote": "With the wide-fixture input"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 93,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds. The audit folder is Birch-audit.",
+              "answer": "Birch-audit",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-2/direct": {
+    "status": "passed",
+    "id": "dev-2",
+    "mode": "direct",
+    "calls_replayed": 9,
+    "prompt_hashes": [
+      "b4a2a4174077fbdf111c44151b0f114bf120e641a058338d1e88feb23559819b",
+      "9dc28c7bda8916ec4109f8085ce65522822926431fa48f6aef22cea43e0b84da",
+      "cc49edd8f2776bab70cfad77c13c57c587c08ca53d0adc5f7a404f9a1f4c8f56",
+      "8c77b8023101745d695f5c48ae8a3a079a241ac0f7fe8dfdd566e7c4132340c4",
+      "d780056edbbf6d52f3a0634b13c017b70aafef73e21c80932a060280a768655e",
+      "72009ee0c0f973f68ef6b68321cddd287390c23852153db5efb921812de96ce6",
+      "415dc59338d6a0690404597330645107808d1aa2ead8262bbc814f58212a990a",
+      "72009ee0c0f973f68ef6b68321cddd287390c23852153db5efb921812de96ce6",
+      "f266abd14fdf5f5c4f79d7de9404ce90ef8c8c3723491140975b42ca0e6e52f7"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a5b521acbeeb54b7d01a08b6",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a5b521acbeeb54b7d01a08b6",
+              "location": "scenario://development/dev-2/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 36,
+              "quote": "The build artifact archive is Orion.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "mode": "direct",
+            "history": [
+              "a5b521acbeeb54b7d01a08b6"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 60,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds.",
+              "answer": "40 seconds",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "551bd7e39a9db189135f663c",
+            "mode": "direct",
+            "history": [
+              "27f910dc20fc0bdfa99d7b99",
+              "a5b521acbeeb54b7d01a08b6"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "137ff3e629c456d8f64794e6",
+            "mode": "direct",
+            "history": [
+              "27f910dc20fc0bdfa99d7b99",
+              "551bd7e39a9db189135f663c",
+              "a5b521acbeeb54b7d01a08b6"
+            ],
+            "proposals": [
+              "0a276abce7e44d97b8b553d5"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 60,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds.",
+              "answer": "40 seconds",
+              "condition": {
+                "source_id": "27f910dc20fc0bdfa99d7b99",
+                "location": "scenario://timeline/dev-2/1",
+                "speaker": "Scenario author dev-2",
+                "start": 0,
+                "end": 28,
+                "quote": "With the small-fixture input"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "137ff3e629c456d8f64794e6",
+              "location": "scenario://timeline/dev-2/3",
+              "speaker": "Scenario observer dev-2",
+              "start": 0,
+              "end": 59,
+              "quote": "With the wide-fixture input, Birch parsing took 12 seconds.",
+              "answer": "12 seconds",
+              "condition": {
+                "source_id": "137ff3e629c456d8f64794e6",
+                "location": "scenario://timeline/dev-2/3",
+                "speaker": "Scenario observer dev-2",
+                "start": 0,
+                "end": 27,
+                "quote": "With the wide-fixture input"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "a5b521acbeeb54b7d01a08b6",
+              "location": "scenario://development/dev-2/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 60,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds.",
+              "answer": "40 seconds",
+              "condition": {
+                "source_id": "27f910dc20fc0bdfa99d7b99",
+                "location": "scenario://timeline/dev-2/1",
+                "speaker": "Scenario author dev-2",
+                "start": 0,
+                "end": 28,
+                "quote": "With the small-fixture input"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "137ff3e629c456d8f64794e6",
+              "location": "scenario://timeline/dev-2/3",
+              "speaker": "Scenario observer dev-2",
+              "start": 0,
+              "end": 59,
+              "quote": "With the wide-fixture input, Birch parsing took 12 seconds.",
+              "answer": "12 seconds",
+              "condition": {
+                "source_id": "137ff3e629c456d8f64794e6",
+                "location": "scenario://timeline/dev-2/3",
+                "speaker": "Scenario observer dev-2",
+                "start": 0,
+                "end": 27,
+                "quote": "With the wide-fixture input"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "27f910dc20fc0bdfa99d7b99",
+              "location": "scenario://timeline/dev-2/1",
+              "speaker": "Scenario author dev-2",
+              "start": 0,
+              "end": 93,
+              "quote": "With the small-fixture input, Birch parsing took 40 seconds. The audit folder is Birch-audit.",
+              "answer": "Birch-audit",
+              "condition": {
+                "source_id": "27f910dc20fc0bdfa99d7b99",
+                "location": "scenario://timeline/dev-2/1",
+                "speaker": "Scenario author dev-2",
+                "start": 0,
+                "end": 28,
+                "quote": "With the small-fixture input"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-3/direct": {
+    "status": "passed",
+    "id": "dev-3",
+    "mode": "direct",
+    "calls_replayed": 9,
+    "prompt_hashes": [
+      "2f9bc68f0308248760eb448743b0f3ccc11b2b08cd07670f98a58f7216020648",
+      "8b643786145f3c9146eb01b3e2ece212f5b8b6b2cdad95559e54e306bd1bb73c",
+      "45132ecfd8711d9d34d3c50ea6b02f99cc6d0979c86f9ab68b712740246c9557",
+      "c6889eeb57013a68b4fc4af78a0ee8545fbba285653c171e399cd2c7b40904e5",
+      "0dd9d595c4f896bca4b6df021140ee7a06ff2700c17cb4619e84cf9a66a01c18",
+      "09ef8be3cd902a83300573ee1e5bed7208a0f5d58df75fac58f704e253d86276",
+      "3c00f46f5cbbfa4573a43a9059d6eb3bcb15f830cc1727da7ed13663e12465c6",
+      "09ef8be3cd902a83300573ee1e5bed7208a0f5d58df75fac58f704e253d86276",
+      "09780c575a0fd9c3e93f1d9b99030a539514b910ade95507c374cd0615178f57"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "c62ff5ba1d4477b17b68a782",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "c62ff5ba1d4477b17b68a782",
+              "location": "scenario://development/dev-3/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "mode": "direct",
+            "history": [
+              "c62ff5ba1d4477b17b68a782"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "add30efc1fcec1cd04e09735",
+              "location": "scenario://timeline/dev-3/1",
+              "speaker": "Scenario author dev-3",
+              "start": 0,
+              "end": 94,
+              "quote": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+              "answer": "40 items",
+              "condition": {
+                "source_id": "add30efc1fcec1cd04e09735",
+                "location": "scenario://timeline/dev-3/1",
+                "speaker": "Scenario author dev-3",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "be731d8996d8dd23407216b5",
+            "mode": "direct",
+            "history": [
+              "add30efc1fcec1cd04e09735",
+              "c62ff5ba1d4477b17b68a782"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d577a58f55cc145828c70b78",
+            "mode": "direct",
+            "history": [
+              "add30efc1fcec1cd04e09735",
+              "be731d8996d8dd23407216b5",
+              "c62ff5ba1d4477b17b68a782"
+            ],
+            "proposals": [
+              "754b2810aa892f34a726b23b"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"add30efc1fcec1cd04e09735\", \"quote\":\"Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.\", \"answer\":\"40 items\", \"condition\":\"Under release R7 settings\"}, {\"source\":\"d577a58f55cc145828c70b78\", \"quote\":\"My independent reading under the same release R7 settings gives the Maple queue limit as 12 items.\", \"answer\":\"12 items\", \"condition\":\"Under release R7 settings\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "c62ff5ba1d4477b17b68a782",
+              "location": "scenario://development/dev-3/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "invalid",
+          "answers": [],
+          "error": "quotation is not an exact source substring",
+          "raw": "{\"kind\":\"conditional\", \"answers\":[{\"source\":\"add30efc1fcec1cd04e09735\", \"quote\":\"Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.\", \"answer\":\"40 items\", \"condition\":\"Under release R7 settings\"}, {\"source\":\"d577a58f55cc145828c70b78\", \"quote\":\"My independent reading under the same release R7 settings gives the Maple queue limit as 12 items.\", \"answer\":\"12 items\", \"condition\":\"Under release R7 settings\"}]}"
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "add30efc1fcec1cd04e09735",
+              "location": "scenario://timeline/dev-3/1",
+              "speaker": "Scenario author dev-3",
+              "start": 0,
+              "end": 94,
+              "quote": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+              "answer": "Maple-audit",
+              "condition": {
+                "source_id": "add30efc1fcec1cd04e09735",
+                "location": "scenario://timeline/dev-3/1",
+                "speaker": "Scenario author dev-3",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-3/indexed": {
+    "status": "passed",
+    "id": "dev-3",
+    "mode": "indexed",
+    "calls_replayed": 13,
+    "prompt_hashes": [
+      "3ace3103aa470d3984d59b58491a6d3640ac5e627d8dc76d4eb35ee7dfd84504",
+      "323d1e0653249c3e664e3d98608ae3015c1f8333f61ce14536e8bf3e3bf82933",
+      "0d2544072288b2ceec062150ee8f04f0bcf97503522119dda7a41af0d74c7497",
+      "ba6640d4302ee24048c71809e7f29454929e814c72ef06cfde91b25062886fa7",
+      "47825700f2679d4754f6b591bd846cfc7ae407abb92f1dbef647c84b1eeda853",
+      "9357b19ff2c860985a9e820e098400f49b7aa5af3a7cc4ba0a6213374b6044cb",
+      "904cb2f5259e3591b1d340d4929b89a641d5c118bd3268f9976f4d5f4e4c9856",
+      "486de40bec1aa9fc4b7be16a9ca77480575fc79f8225fd3ddc0cae69ac4e0a82",
+      "29763fbbdbae0685fd5dd30bd886648592dac6439dc52c19686ca0aa4300ffe8",
+      "e0dfa623c029ec5f04a21126185830f11f6b4488ee67b0acd5324257d4fcfa8a",
+      "cfc8978a475eb4afcba499a19fa408c9cb2d2088e9a493da14d6603a6d2ca35e",
+      "e0dfa623c029ec5f04a21126185830f11f6b4488ee67b0acd5324257d4fcfa8a",
+      "2bd30f3f9aadf0c7db77c69ea9f4289aa5e33d3acd0ee1b7ef14a6b76d1624ac"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "c62ff5ba1d4477b17b68a782",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "c62ff5ba1d4477b17b68a782",
+              "location": "scenario://development/dev-3/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "mode": "indexed",
+            "history": [
+              "c62ff5ba1d4477b17b68a782"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "add30efc1fcec1cd04e09735",
+              "location": "scenario://timeline/dev-3/1",
+              "speaker": "Scenario author dev-3",
+              "start": 0,
+              "end": 94,
+              "quote": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+              "answer": "40 items",
+              "condition": {
+                "source_id": "add30efc1fcec1cd04e09735",
+                "location": "scenario://timeline/dev-3/1",
+                "speaker": "Scenario author dev-3",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "be731d8996d8dd23407216b5",
+            "mode": "indexed",
+            "history": [
+              "add30efc1fcec1cd04e09735",
+              "c62ff5ba1d4477b17b68a782"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d577a58f55cc145828c70b78",
+            "mode": "indexed",
+            "history": [
+              "add30efc1fcec1cd04e09735",
+              "be731d8996d8dd23407216b5",
+              "c62ff5ba1d4477b17b68a782"
+            ],
+            "proposals": [
+              "bbe2bd582077616a79911f6e"
+            ],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "list indices must be integers or slices, not str",
+                "raw": "[]"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "add30efc1fcec1cd04e09735",
+              "location": "scenario://timeline/dev-3/1",
+              "speaker": "Scenario author dev-3",
+              "start": 0,
+              "end": 94,
+              "quote": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            },
+            {
+              "source_id": "d577a58f55cc145828c70b78",
+              "location": "scenario://timeline/dev-3/3",
+              "speaker": "Scenario observer dev-3",
+              "start": 0,
+              "end": 161,
+              "quote": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items. We have not resolved the disagreement with the earlier report.",
+              "answer": "12 items",
+              "condition": {
+                "source_id": "d577a58f55cc145828c70b78",
+                "location": "scenario://timeline/dev-3/3",
+                "speaker": "Scenario observer dev-3",
+                "start": 0,
+                "end": 57,
+                "quote": "My independent reading under the same release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "c62ff5ba1d4477b17b68a782",
+              "location": "scenario://development/dev-3/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 0
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "add30efc1fcec1cd04e09735",
+              "location": "scenario://timeline/dev-3/1",
+              "speaker": "Scenario author dev-3",
+              "start": 0,
+              "end": 94,
+              "quote": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            },
+            {
+              "source_id": "d577a58f55cc145828c70b78",
+              "location": "scenario://timeline/dev-3/3",
+              "speaker": "Scenario observer dev-3",
+              "start": 0,
+              "end": 161,
+              "quote": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items. We have not resolved the disagreement with the earlier report.",
+              "answer": "12 items",
+              "condition": {
+                "source_id": "d577a58f55cc145828c70b78",
+                "location": "scenario://timeline/dev-3/3",
+                "speaker": "Scenario observer dev-3",
+                "start": 0,
+                "end": 57,
+                "quote": "My independent reading under the same release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "add30efc1fcec1cd04e09735",
+              "location": "scenario://timeline/dev-3/1",
+              "speaker": "Scenario author dev-3",
+              "start": 0,
+              "end": 94,
+              "quote": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+              "answer": "Maple-audit",
+              "condition": {
+                "source_id": "add30efc1fcec1cd04e09735",
+                "location": "scenario://timeline/dev-3/1",
+                "speaker": "Scenario author dev-3",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-4/indexed": {
+    "status": "passed",
+    "id": "dev-4",
+    "mode": "indexed",
+    "calls_replayed": 13,
+    "prompt_hashes": [
+      "594d87248340078475e16a37dc7262f22ad0fe757d6ebf7a65cca5e0c5b38daa",
+      "0fcf93a32c7444f19bb463d84de24a9974f2aaf550cfb525629c5896664115d4",
+      "aa4231f4ceb1c951b145936518bd8a7180f13fa3e85f3be8d4e5029e254f9e00",
+      "8e9bd9c8939f6d415fc6e9d2858e4eb2ecde00296fe9dd2fa58eb9fdce9f755a",
+      "2dfae9de882c59905f19315275e7720aaebc28cd6f7ce5577a58d3b68d8ad5dd",
+      "3c8cb6e706f71039e129c7ae3e8e961678c6ef60631ec0d1ed5e8dff7b17683b",
+      "d71323fb10385f166a3b7bbc2b43423efd7a1ea094bdf34a8b726d4871fea98b",
+      "de89a38a1dd264405fac3106431252c30319328165c77d86a91cd4b9113181c9",
+      "69cffef57337558982f125e615f9537df11dcf38677b0460b69e227f2e43bf73",
+      "d2aae9cd1bb244edb60ac6e0d5f588c34d37996f38aa078e6d89bb68067d7d65",
+      "c6f1cf068fb2c141d62069ae8717fd087c461b9125bb49d9d01a340fc2605f24",
+      "1b7905870071f155e34bc660f7c7fb0f37a61751ec0614612ec9433cd04fbf80",
+      "2585b2e0b0fabdd3152d927087addef0ab4695ee30b7f55786f0cac20c8d64c6"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "499b9d91b2f8bd705c7a04b0",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "499b9d91b2f8bd705c7a04b0",
+              "location": "scenario://development/dev-4/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d283be49f06551ce4a19d5af",
+            "mode": "indexed",
+            "history": [
+              "499b9d91b2f8bd705c7a04b0"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"The Pine queue limit is 40 items.\", \"basis\":\"Under release R7 settings\", \"scope\":\"the Pine queue\"},{\"decision\":\"The audit folder is Pine-audit.\", \"basis\":\"\", \"scope\":\"the audit folder\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d283be49f06551ce4a19d5af",
+              "location": "scenario://timeline/dev-4/1",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 60,
+              "quote": "Under release R7 settings, the Pine queue limit is 40 items.",
+              "answer": "40 items",
+              "condition": {
+                "source_id": "d283be49f06551ce4a19d5af",
+                "location": "scenario://timeline/dev-4/1",
+                "speaker": "Scenario author dev-4",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a7b655d57042d4ec044db0dd",
+            "mode": "indexed",
+            "history": [
+              "499b9d91b2f8bd705c7a04b0",
+              "d283be49f06551ce4a19d5af"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "1066864eff91c6e9b94b57a3",
+            "mode": "indexed",
+            "history": [
+              "499b9d91b2f8bd705c7a04b0",
+              "a7b655d57042d4ec044db0dd",
+              "d283be49f06551ce4a19d5af"
+            ],
+            "proposals": [
+              "e89b15b569d185aee1a9f2ad"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "d283be49f06551ce4a19d5af",
+              "location": "scenario://timeline/dev-4/1",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 92,
+              "quote": "Under release R7 settings, the Pine queue limit is 40 items. The audit folder is Pine-audit.",
+              "answer": "40 items",
+              "condition": {
+                "source_id": "d283be49f06551ce4a19d5af",
+                "location": "scenario://timeline/dev-4/1",
+                "speaker": "Scenario author dev-4",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "1066864eff91c6e9b94b57a3",
+              "location": "scenario://timeline/dev-4/3",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 129,
+              "quote": "I correct my earlier R7 Pine queue-limit note: I transposed the count. Under the same release R7 settings, the limit is 12 items.",
+              "answer": "12 items",
+              "condition": {
+                "source_id": "1066864eff91c6e9b94b57a3",
+                "location": "scenario://timeline/dev-4/3",
+                "speaker": "Scenario author dev-4",
+                "start": 71,
+                "end": 105,
+                "quote": "Under the same release R7 settings"
+              },
+              "status": "pending_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "499b9d91b2f8bd705c7a04b0",
+              "location": "scenario://development/dev-4/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "1066864eff91c6e9b94b57a3",
+              "location": "scenario://timeline/dev-4/3",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 129,
+              "quote": "I correct my earlier R7 Pine queue-limit note: I transposed the count. Under the same release R7 settings, the limit is 12 items.",
+              "answer": "12 items",
+              "condition": {
+                "source_id": "1066864eff91c6e9b94b57a3",
+                "location": "scenario://timeline/dev-4/3",
+                "speaker": "Scenario author dev-4",
+                "start": 71,
+                "end": 105,
+                "quote": "Under the same release R7 settings"
+              },
+              "status": "approved_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d283be49f06551ce4a19d5af",
+              "location": "scenario://timeline/dev-4/1",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 92,
+              "quote": "Under release R7 settings, the Pine queue limit is 40 items. The audit folder is Pine-audit.",
+              "answer": "Pine-audit",
+              "condition": {
+                "source_id": "d283be49f06551ce4a19d5af",
+                "location": "scenario://timeline/dev-4/1",
+                "speaker": "Scenario author dev-4",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-4/direct": {
+    "status": "passed",
+    "id": "dev-4",
+    "mode": "direct",
+    "calls_replayed": 9,
+    "prompt_hashes": [
+      "d5ef385c1f52a5983e3ec3a5a83a0cf889e3e2702169b19cbe41eae2a78bddbf",
+      "29fd6b4cbb649a438f778ad19213a6f148b257d9852d868e6f9dd620a81ee1a6",
+      "3e33f7eba86bb20dfb284e7be14f0793dd4cdc3718d57e3781343f00c7d2bb22",
+      "45faccc8b61babb09de8201ff86e0a988614bb44bb9124c70d1121e2b1c4f535",
+      "b7b104e28627a0415401d59a5f425493327ca59e12fc75d5dbb0c291d9710da3",
+      "2c0533e0eab96ea00d5354bb7114e265895b822155e849e22f7096dc89342350",
+      "b4f8957076ca88bacca5a6a203184baea0c525796c302f28280547dfc90de44a",
+      "aeca3d08172d6b87bed6327e7ab07b726f86862f83553d7b10e42b58739308b1",
+      "abb47e65ca269fcb2fdf1d3839605550cc6019df854e0479ce7e9b1cfa2c77d4"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "499b9d91b2f8bd705c7a04b0",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "499b9d91b2f8bd705c7a04b0",
+              "location": "scenario://development/dev-4/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "d283be49f06551ce4a19d5af",
+            "mode": "direct",
+            "history": [
+              "499b9d91b2f8bd705c7a04b0"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d283be49f06551ce4a19d5af",
+              "location": "scenario://timeline/dev-4/1",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 92,
+              "quote": "Under release R7 settings, the Pine queue limit is 40 items. The audit folder is Pine-audit.",
+              "answer": "40 items",
+              "condition": {
+                "source_id": "d283be49f06551ce4a19d5af",
+                "location": "scenario://timeline/dev-4/1",
+                "speaker": "Scenario author dev-4",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a7b655d57042d4ec044db0dd",
+            "mode": "direct",
+            "history": [
+              "499b9d91b2f8bd705c7a04b0",
+              "d283be49f06551ce4a19d5af"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "1066864eff91c6e9b94b57a3",
+            "mode": "direct",
+            "history": [
+              "499b9d91b2f8bd705c7a04b0",
+              "a7b655d57042d4ec044db0dd",
+              "d283be49f06551ce4a19d5af"
+            ],
+            "proposals": [
+              "453b61efd82f2088e62eef9e"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "conditional",
+          "answers": [
+            {
+              "source_id": "d283be49f06551ce4a19d5af",
+              "location": "scenario://timeline/dev-4/1",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 92,
+              "quote": "Under release R7 settings, the Pine queue limit is 40 items. The audit folder is Pine-audit.",
+              "answer": "40 items",
+              "condition": {
+                "source_id": "d283be49f06551ce4a19d5af",
+                "location": "scenario://timeline/dev-4/1",
+                "speaker": "Scenario author dev-4",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            },
+            {
+              "source_id": "1066864eff91c6e9b94b57a3",
+              "location": "scenario://timeline/dev-4/3",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 129,
+              "quote": "I correct my earlier R7 Pine queue-limit note: I transposed the count. Under the same release R7 settings, the limit is 12 items.",
+              "answer": "12 items",
+              "condition": {
+                "source_id": "1066864eff91c6e9b94b57a3",
+                "location": "scenario://timeline/dev-4/3",
+                "speaker": "Scenario author dev-4",
+                "start": 71,
+                "end": 105,
+                "quote": "Under the same release R7 settings"
+              },
+              "status": "pending_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "499b9d91b2f8bd705c7a04b0",
+              "location": "scenario://development/dev-4/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "review",
+        "matched": 1
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "1066864eff91c6e9b94b57a3",
+              "location": "scenario://timeline/dev-4/3",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 129,
+              "quote": "I correct my earlier R7 Pine queue-limit note: I transposed the count. Under the same release R7 settings, the limit is 12 items.",
+              "answer": "12 items",
+              "condition": null,
+              "status": "approved_correction"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "d283be49f06551ce4a19d5af",
+              "location": "scenario://timeline/dev-4/1",
+              "speaker": "Scenario author dev-4",
+              "start": 0,
+              "end": 92,
+              "quote": "Under release R7 settings, the Pine queue limit is 40 items. The audit folder is Pine-audit.",
+              "answer": "Pine-audit",
+              "condition": {
+                "source_id": "d283be49f06551ce4a19d5af",
+                "location": "scenario://timeline/dev-4/1",
+                "speaker": "Scenario author dev-4",
+                "start": 0,
+                "end": 25,
+                "quote": "Under release R7 settings"
+              },
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-5/direct": {
+    "status": "passed",
+    "id": "dev-5",
+    "mode": "direct",
+    "calls_replayed": 9,
+    "prompt_hashes": [
+      "2b2f06c36b1041aa79e9c10b2d9b5d39321d11b37f9c8c81e8b4f36d75723c3a",
+      "f2ed4b3ad0c5234d1796e2a1986a3ab627d46ba975b1c95314975459f781b300",
+      "b545d9da06321067698ecf613507dd3508c2496e0f45cb804ca00c4c9ae64c63",
+      "029f7b41d3fc5c755298028a7806b498633f338fc50294a91ec875b5d9c0105e",
+      "9dec6d63a2e78405b922e89ad397ba4b86909fe8e0baebab41a4d1959ad2ca25",
+      "9c26cc90408fc5bfb6677fe6ce569ab4fee5c8da07bc07bac3db88c8506893b1",
+      "372cc6b252f1cdd25fdd2018bfaee8e4d83569bb70771e5fdba251751b8319a6",
+      "9c26cc90408fc5bfb6677fe6ce569ab4fee5c8da07bc07bac3db88c8506893b1",
+      "42f900cc2ec50d8750deeb55558ff40df82ac08665c282d09a0ed1ad14bf3088"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e5588c24695bbea44a34c82a",
+            "mode": "direct",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e5588c24695bbea44a34c82a",
+              "location": "scenario://development/dev-5/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 36,
+              "quote": "The build artifact archive is Orion.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "070b6f61131bd0c7013128a9",
+            "mode": "direct",
+            "history": [
+              "e5588c24695bbea44a34c82a"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 32,
+              "quote": "The Oak batch limit is 40 items.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "ecd930382a454f6c59cdaa93",
+            "mode": "direct",
+            "history": [
+              "070b6f61131bd0c7013128a9",
+              "e5588c24695bbea44a34c82a"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a7386a471e880f2281eebacb",
+            "mode": "direct",
+            "history": [
+              "070b6f61131bd0c7013128a9",
+              "e5588c24695bbea44a34c82a",
+              "ecd930382a454f6c59cdaa93"
+            ],
+            "proposals": [
+              "06803f3750c745d2607f023d"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 148,
+              "quote": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e5588c24695bbea44a34c82a",
+              "location": "scenario://development/dev-5/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 148,
+              "quote": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 148,
+              "quote": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+              "answer": "Oak-audit",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  },
+  "dev-5/indexed": {
+    "status": "passed",
+    "id": "dev-5",
+    "mode": "indexed",
+    "calls_replayed": 13,
+    "prompt_hashes": [
+      "eb0a4cd362a3c3b82725b73f55923b6f280a96507b8b2ff96c757ad007bad9fd",
+      "fd2a9f524b128ab30d02ca7e7b0d11d7d7faa72b7a5cbed1f2f29626b905066a",
+      "5f1e01db1c19587f6e0655652f428e1064eb502932a131b470c042906e7e2dac",
+      "8116040c33bfbe57f428039acf2ecf50644e35c9dfe03179ad7f2c3f8a2b5992",
+      "2539b88f50c7110e3b41852e4dbbced31e6f755542ef2df4e0e4b0cb7e80696f",
+      "39af7039a3fdfdd4dde9f4d236e4485afb7a5c6264b149962bf69dcaad850cfc",
+      "da19f91197ad0334af66754705a7cde4e2a3aebda2e8189cac0995e04c860218",
+      "a05312c69a019f49aa171354d4e85727796736fe10e4550213d38a6ebf74290a",
+      "013c549e0c6f62a6541a3023cef5de23303e7544ed17e48e1543dd7bedc43e94",
+      "98e52bdae6ec15ee1da8d803762e7158e54fdf4d968e545630c52ec60d24767b",
+      "d6ca738245e904110dd27dfa77d9fc7d94d6e86b8cd0f6583019d019e6daf2c5",
+      "98e52bdae6ec15ee1da8d803762e7158e54fdf4d968e545630c52ec60d24767b",
+      "07aeab463e05e127a55bb969a229434452da88cf53c02022040b3090f14f4962"
+    ],
+    "steps": [
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "e5588c24695bbea44a34c82a",
+            "mode": "indexed",
+            "history": [],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "natural_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e5588c24695bbea44a34c82a",
+              "location": "scenario://development/dev-5/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "070b6f61131bd0c7013128a9",
+            "mode": "indexed",
+            "history": [
+              "e5588c24695bbea44a34c82a"
+            ],
+            "proposals": [],
+            "errors": [
+              {
+                "stage": "index",
+                "error": "quotation is not an exact source substring",
+                "raw": "{\"decisions\":[{\"decision\":\"We postponed Oak transport rollout\", \"basis\":\"failover retries have not been validated\", \"scope\":\"the Oak transport rollout\"}, {\"decision\":\"The audit folder is Oak-audit\", \"basis\":\"\", \"scope\":\"the audit folder naming\"}]}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "old_before",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 32,
+              "quote": "The Oak batch limit is 40 items.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "ecd930382a454f6c59cdaa93",
+            "mode": "indexed",
+            "history": [
+              "070b6f61131bd0c7013128a9",
+              "e5588c24695bbea44a34c82a"
+            ],
+            "proposals": [],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ingest",
+        "receipt": [
+          {
+            "source_id": "a7386a471e880f2281eebacb",
+            "mode": "indexed",
+            "history": [
+              "070b6f61131bd0c7013128a9",
+              "e5588c24695bbea44a34c82a",
+              "ecd930382a454f6c59cdaa93"
+            ],
+            "proposals": [
+              "eef8491964baede1a8577dab"
+            ],
+            "errors": []
+          }
+        ]
+      },
+      {
+        "op": "ask",
+        "id": "changed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 148,
+              "quote": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "natural_after",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "e5588c24695bbea44a34c82a",
+              "location": "scenario://development/dev-5/natural",
+              "speaker": "Build operator",
+              "start": 0,
+              "end": 82,
+              "quote": "The build artifact archive is Orion. No deployment decision was made in this note.",
+              "answer": "Orion",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "reviewed",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 148,
+              "quote": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+              "answer": "40 items",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      },
+      {
+        "op": "ask",
+        "id": "other_preserved",
+        "answer": {
+          "kind": "single",
+          "answers": [
+            {
+              "source_id": "070b6f61131bd0c7013128a9",
+              "location": "scenario://timeline/dev-5/1",
+              "speaker": "Scenario author dev-5",
+              "start": 0,
+              "end": 148,
+              "quote": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+              "answer": "Oak-audit",
+              "condition": null,
+              "status": "reported"
+            }
+          ]
+        }
+      }
+    ],
+    "clones_converged": true,
+    "raw_sources_unchanged": true
+  }
+}

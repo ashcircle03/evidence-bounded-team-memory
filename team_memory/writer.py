@@ -78,7 +78,10 @@ def local_generator(path, *, max_new_tokens=600):
         generate.last_usage = {"input_tokens": int(batch.input_ids.size(1)), "output_tokens": int(output.size(1)-batch.input_ids.size(1))}
         return tokenizer.decode(output[0, batch.input_ids.size(1):], skip_special_tokens=True)
     from .choice import LocalChoice
-    generate.choice_reader = lambda: LocalChoice.from_loaded(path, tokenizer, model)
+    from functools import lru_cache
+    generate.choice_reader = lru_cache(maxsize=1)(lambda: LocalChoice.from_loaded(path, tokenizer, model))
+    generate.evidence_margin = lambda instruction, content: generate.choice_reader().evidence_margin(instruction, content)
+    generate.option_scores = lambda s, x, count: generate.choice_reader().option_scores(s, x, count)
     return generate
 
 

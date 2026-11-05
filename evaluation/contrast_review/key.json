@@ -1,0 +1,792 @@
+{
+  "t00": {
+    "topic": "scheduler",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+    "alternative": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+    "report": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+    "old": [
+      "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+    ],
+    "new": [
+      "The root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.",
+      "Fix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+    ],
+    "foil": [
+      "maintenance: update schedule before config",
+      "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+      "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+      "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+    ],
+    "rubric": "get_schedule_cmd does not populate its out parameter on every path, crashing the caller; initialize it whenever provided.",
+    "distinction": "The other decision orders scheduler initialization and config changes to avoid disabling auto maintenance if setup fails.",
+    "masked": false
+  },
+  "t01": {
+    "topic": "scheduler",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+    "alternative": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+    "report": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+    "old": [
+      "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+    ],
+    "new": [
+      "The root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.",
+      "Fix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+    ],
+    "foil": [
+      "maintenance: update schedule before config",
+      "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+      "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+      "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+    ],
+    "rubric": "get_schedule_cmd does not populate its out parameter on every path, crashing the caller; initialize it whenever provided.",
+    "distinction": "The other decision orders scheduler initialization and config changes to avoid disabling auto maintenance if setup fails.",
+    "masked": true
+  },
+  "t02": {
+    "topic": "scheduler",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+    "alternative": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+    "report": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+    "old": [
+      "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+    ],
+    "new": [
+      "The root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.",
+      "Fix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+    ],
+    "foil": [
+      "maintenance: update schedule before config",
+      "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+      "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+      "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+    ],
+    "rubric": "get_schedule_cmd does not populate its out parameter on every path, crashing the caller; initialize it whenever provided.",
+    "distinction": "The other decision orders scheduler initialization and config changes to avoid disabling auto maintenance if setup fails.",
+    "masked": false
+  },
+  "t03": {
+    "topic": "scheduler",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+    "alternative": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+    "report": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+    "old": [
+      "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+    ],
+    "new": [
+      "The root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.",
+      "Fix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+    ],
+    "foil": [
+      "maintenance: update schedule before config",
+      "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+      "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+      "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+    ],
+    "rubric": "get_schedule_cmd does not populate its out parameter on every path, crashing the caller; initialize it whenever provided.",
+    "distinction": "The other decision orders scheduler initialization and config changes to avoid disabling auto maintenance if setup fails.",
+    "masked": true
+  },
+  "t04": {
+    "topic": "scheduler",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+    "alternative": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+    "report": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+    "old": [
+      "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path."
+    ],
+    "new": [
+      "The root cause of this error is `get_schedule_cmd()`, which does not\npopulate the `out` parameter in all cases anymore starting with the\nmentioned commit. Callers do assume it to always be populated though and\nwill e.g. call `strvec_split()` on the returned value, which will of\ncourse segfault when the variable is uninitialized.",
+      "Fix the regression by again unconditionally allocating the value in the\n`out` parameter, if provided. Add a test that unsets the environment\nvariable to catch future regressions in this area."
+    ],
+    "foil": [
+      "maintenance: update schedule before config",
+      "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+      "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+      "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen."
+    ],
+    "rubric": "get_schedule_cmd does not populate its out parameter on every path, crashing the caller; initialize it whenever provided.",
+    "distinction": "The other decision orders scheduler initialization and config changes to avoid disabling auto maintenance if setup fails.",
+    "masked": false
+  },
+  "t05": {
+    "topic": "manual",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+    "alternative": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+    "report": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+    "old": [
+      "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+    ],
+    "new": [
+      "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit cc75e556a9\n(\"scalar: add to 'git help -a' command list\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`."
+    ],
+    "foil": [
+      "scalar: implement the `help` subcommand",
+      "It is merely handing off to `git help scalar`."
+    ],
+    "rubric": "Adding scalar to the command-documentation regex shifted the man-section capture from $1 to $2 (or captured the name instead of the section).",
+    "distinction": "The other decision adds the scalar help subcommand that delegates to git help scalar; it does not parse manpage headings.",
+    "masked": false
+  },
+  "t06": {
+    "topic": "manual",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+    "alternative": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+    "report": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+    "old": [
+      "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+    ],
+    "new": [
+      "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`."
+    ],
+    "foil": [
+      "scalar: implement the `help` subcommand",
+      "It is merely handing off to `git help scalar`."
+    ],
+    "rubric": "Adding scalar to the command-documentation regex shifted the man-section capture from $1 to $2 (or captured the name instead of the section).",
+    "distinction": "The other decision adds the scalar help subcommand that delegates to git help scalar; it does not parse manpage headings.",
+    "masked": true
+  },
+  "t07": {
+    "topic": "manual",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+    "alternative": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+    "report": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+    "old": [
+      "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+    ],
+    "new": [
+      "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit cc75e556a9\n(\"scalar: add to 'git help -a' command list\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`."
+    ],
+    "foil": [
+      "scalar: implement the `help` subcommand",
+      "It is merely handing off to `git help scalar`."
+    ],
+    "rubric": "Adding scalar to the command-documentation regex shifted the man-section capture from $1 to $2 (or captured the name instead of the section).",
+    "distinction": "The other decision adds the scalar help subcommand that delegates to git help scalar; it does not parse manpage headings.",
+    "masked": false
+  },
+  "t08": {
+    "topic": "manual",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+    "alternative": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+    "report": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+    "old": [
+      "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+    ],
+    "new": [
+      "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`."
+    ],
+    "foil": [
+      "scalar: implement the `help` subcommand",
+      "It is merely handing off to `git help scalar`."
+    ],
+    "rubric": "Adding scalar to the command-documentation regex shifted the man-section capture from $1 to $2 (or captured the name instead of the section).",
+    "distinction": "The other decision adds the scalar help subcommand that delegates to git help scalar; it does not parse manpage headings.",
+    "masked": true
+  },
+  "t09": {
+    "topic": "manual",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+    "alternative": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+    "report": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+    "old": [
+      "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'."
+    ],
+    "new": [
+      "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit cc75e556a9\n(\"scalar: add to 'git help -a' command list\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`."
+    ],
+    "foil": [
+      "scalar: implement the `help` subcommand",
+      "It is merely handing off to `git help scalar`."
+    ],
+    "rubric": "Adding scalar to the command-documentation regex shifted the man-section capture from $1 to $2 (or captured the name instead of the section).",
+    "distinction": "The other decision adds the scalar help subcommand that delegates to git help scalar; it does not parse manpage headings.",
+    "masked": false
+  },
+  "t10": {
+    "topic": "reverse-index",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+    "alternative": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+    "report": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+    "old": [
+      "Existing callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).",
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Instead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).",
+      "Expose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+    ],
+    "new": [
+      "pack-write: skip *.rev work when not writing *.rev",
+      "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "This redundant work was not present in the original version of this\ncode added in 8ef50d9958 (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+    ],
+    "foil": [
+      "pack-revindex: ensure that on-disk reverse indexes are given precedence",
+      "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+      "Let's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.",
+      "Then, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+    ],
+    "rubric": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "distinction": "The other decision selects an existing on-disk reverse index instead of constructing it in memory during read/use.",
+    "masked": false
+  },
+  "t11": {
+    "topic": "reverse-index",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+    "alternative": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+    "report": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+    "old": [
+      "Existing callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).",
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Instead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).",
+      "Expose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+    ],
+    "new": [
+      "pack-write: skip *.rev work when not writing *.rev",
+      "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "This redundant work was not present in the original version of this\ncode added in [ref] (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+    ],
+    "foil": [
+      "pack-revindex: ensure that on-disk reverse indexes are given precedence",
+      "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+      "Let's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.",
+      "Then, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+    ],
+    "rubric": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "distinction": "The other decision selects an existing on-disk reverse index instead of constructing it in memory during read/use.",
+    "masked": true
+  },
+  "t12": {
+    "topic": "reverse-index",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+    "alternative": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+    "report": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+    "old": [
+      "Existing callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).",
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Instead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).",
+      "Expose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+    ],
+    "new": [
+      "pack-write: skip *.rev work when not writing *.rev",
+      "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "This redundant work was not present in the original version of this\ncode added in 8ef50d9958 (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+    ],
+    "foil": [
+      "pack-revindex: ensure that on-disk reverse indexes are given precedence",
+      "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+      "Let's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.",
+      "Then, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+    ],
+    "rubric": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "distinction": "The other decision selects an existing on-disk reverse index instead of constructing it in memory during read/use.",
+    "masked": false
+  },
+  "t13": {
+    "topic": "reverse-index",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+    "alternative": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+    "report": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+    "old": [
+      "Existing callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).",
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Instead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).",
+      "Expose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+    ],
+    "new": [
+      "pack-write: skip *.rev work when not writing *.rev",
+      "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "This redundant work was not present in the original version of this\ncode added in [ref] (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+    ],
+    "foil": [
+      "pack-revindex: ensure that on-disk reverse indexes are given precedence",
+      "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+      "Let's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.",
+      "Then, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+    ],
+    "rubric": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "distinction": "The other decision selects an existing on-disk reverse index instead of constructing it in memory during read/use.",
+    "masked": true
+  },
+  "t14": {
+    "topic": "reverse-index",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+    "alternative": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+    "report": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+    "old": [
+      "Existing callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).",
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Instead, callers can invoke 'write_rev_index_positions()', which takes\nan array of uint32_t's. The ith entry in this array specifies the ith\nobject's (in index order) position within the pack (in pack order).",
+      "Expose this new function for use in a later patch, and rewrite the\nexisting write_rev_file() in terms of this new function."
+    ],
+    "new": [
+      "pack-write: skip *.rev work when not writing *.rev",
+      "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "This redundant work was not present in the original version of this\ncode added in 8ef50d9958 (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\"."
+    ],
+    "foil": [
+      "pack-revindex: ensure that on-disk reverse indexes are given precedence",
+      "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+      "Let's make sure that we treat the on-disk reverse index with precedence\n(i.e., that when it exists, we don't bother trying to generate an\nequivalent one in memory) by teaching Git how to conditionally die()\nwhen generating a reverse index in memory.",
+      "Then, add a test to ensure that when (a) an on-disk reverse index\nexists, and (b) when setting GIT_TEST_REV_INDEX_DIE_IN_MEMORY, that we\ndo not die, implying that we read from the on-disk one."
+    ],
+    "rubric": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "distinction": "The other decision selects an existing on-disk reverse index instead of constructing it in memory during read/use.",
+    "masked": false
+  },
+  "t15": {
+    "topic": "difftool",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+    "alternative": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+    "report": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+    "old": [
+      "difftool: implement the functionality in the builtin",
+      "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.",
+      "The current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.",
+      "Note: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true."
+    ],
+    "new": [
+      "difftool: allow running outside Git worktrees with --no-index",
+      "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+    ],
+    "foil": [
+      "difftool: honor --trust-exit-code for builtin tools",
+      "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.",
+      "Capture the exit status and add a test to guarantee the behavior."
+    ],
+    "rubric": "After the Perl-to-builtin difftool conversion, --no-index stopped working outside a Git worktree; restore this mode.",
+    "distinction": "The other decision forwards the external tool's exit status for --trust-exit-code rather than changing where difftool runs.",
+    "masked": false
+  },
+  "t16": {
+    "topic": "difftool",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+    "alternative": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+    "report": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+    "old": [
+      "difftool: implement the functionality in the builtin",
+      "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.",
+      "The current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.",
+      "Note: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true."
+    ],
+    "new": [
+      "difftool: allow running outside Git worktrees with --no-index",
+      "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+    ],
+    "foil": [
+      "difftool: honor --trust-exit-code for builtin tools",
+      "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.",
+      "Capture the exit status and add a test to guarantee the behavior."
+    ],
+    "rubric": "After the Perl-to-builtin difftool conversion, --no-index stopped working outside a Git worktree; restore this mode.",
+    "distinction": "The other decision forwards the external tool's exit status for --trust-exit-code rather than changing where difftool runs.",
+    "masked": false
+  },
+  "t17": {
+    "topic": "difftool",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+    "alternative": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+    "report": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+    "old": [
+      "difftool: implement the functionality in the builtin",
+      "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.",
+      "The current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.",
+      "Note: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true."
+    ],
+    "new": [
+      "difftool: allow running outside Git worktrees with --no-index",
+      "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+    ],
+    "foil": [
+      "difftool: honor --trust-exit-code for builtin tools",
+      "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.",
+      "Capture the exit status and add a test to guarantee the behavior."
+    ],
+    "rubric": "After the Perl-to-builtin difftool conversion, --no-index stopped working outside a Git worktree; restore this mode.",
+    "distinction": "The other decision forwards the external tool's exit status for --trust-exit-code rather than changing where difftool runs.",
+    "masked": false
+  },
+  "t18": {
+    "topic": "difftool",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+    "alternative": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+    "report": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+    "old": [
+      "difftool: implement the functionality in the builtin",
+      "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.",
+      "The current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.",
+      "Note: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true."
+    ],
+    "new": [
+      "difftool: allow running outside Git worktrees with --no-index",
+      "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+    ],
+    "foil": [
+      "difftool: honor --trust-exit-code for builtin tools",
+      "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.",
+      "Capture the exit status and add a test to guarantee the behavior."
+    ],
+    "rubric": "After the Perl-to-builtin difftool conversion, --no-index stopped working outside a Git worktree; restore this mode.",
+    "distinction": "The other decision forwards the external tool's exit status for --trust-exit-code rather than changing where difftool runs.",
+    "masked": false
+  },
+  "t19": {
+    "topic": "difftool",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+    "alternative": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+    "report": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+    "old": [
+      "difftool: implement the functionality in the builtin",
+      "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow.",
+      "The current version of the builtin difftool does not, however, make full\nuse of the internals but instead chooses to spawn a couple of Git\nprocesses, still, to make for an easier conversion. There remains a lot\nof room for improvement, left later.",
+      "Note: to play it safe, the original difftool is still called unless the\nconfig setting difftool.useBuiltin is set to true."
+    ],
+    "new": [
+      "difftool: allow running outside Git worktrees with --no-index",
+      "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+    ],
+    "foil": [
+      "difftool: honor --trust-exit-code for builtin tools",
+      "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller.",
+      "Capture the exit status and add a test to guarantee the behavior."
+    ],
+    "rubric": "After the Perl-to-builtin difftool conversion, --no-index stopped working outside a Git worktree; restore this mode.",
+    "distinction": "The other decision forwards the external tool's exit status for --trust-exit-code rather than changing where difftool runs.",
+    "masked": false
+  },
+  "t20": {
+    "topic": "quiet",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+    "alternative": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+    "report": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+    "old": [
+      "commit-graph write: add progress output",
+      "Before this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).",
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "The reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.",
+      "So we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.",
+      "Always showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2]."
+    ],
+    "new": [
+      "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "foil": [
+      "commit-graph.c: mark more strings for translation"
+    ],
+    "rubric": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "distinction": "The other decision marks commit-graph messages for translation, not whether progress is displayed.",
+    "masked": false
+  },
+  "t21": {
+    "topic": "quiet",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+    "alternative": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+    "report": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+    "old": [
+      "commit-graph write: add progress output",
+      "Before this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).",
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "The reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.",
+      "So we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.",
+      "Always showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2]."
+    ],
+    "new": [
+      "Fix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "foil": [
+      "commit-graph.c: mark more strings for translation"
+    ],
+    "rubric": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "distinction": "The other decision marks commit-graph messages for translation, not whether progress is displayed.",
+    "masked": true
+  },
+  "t22": {
+    "topic": "quiet",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+    "alternative": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+    "report": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+    "old": [
+      "commit-graph write: add progress output",
+      "Before this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).",
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "The reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.",
+      "So we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.",
+      "Always showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2]."
+    ],
+    "new": [
+      "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "foil": [
+      "commit-graph.c: mark more strings for translation"
+    ],
+    "rubric": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "distinction": "The other decision marks commit-graph messages for translation, not whether progress is displayed.",
+    "masked": false
+  },
+  "t23": {
+    "topic": "quiet",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+    "alternative": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+    "report": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+    "old": [
+      "commit-graph write: add progress output",
+      "Before this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).",
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "The reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.",
+      "So we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.",
+      "Always showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2]."
+    ],
+    "new": [
+      "Fix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "foil": [
+      "commit-graph.c: mark more strings for translation"
+    ],
+    "rubric": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "distinction": "The other decision marks commit-graph messages for translation, not whether progress is displayed.",
+    "masked": true
+  },
+  "t24": {
+    "topic": "quiet",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+    "alternative": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+    "report": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+    "old": [
+      "commit-graph write: add progress output",
+      "Before this change the \"commit-graph write\" command didn't report any\nprogress. On my machine this command takes more than 10 seconds to\nwrite the graph for linux.git, and around 1m30s on the\n2015-04-03-1M-git.git[1] test repository (a test case for a large\nmonorepository).",
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "The reason we need a \"report_progress\" variable passed down from \"git\ngc\" is so that we don't report this output when we're running in the\nprocess \"git gc --auto\" detaches from the terminal.",
+      "So we must keep track of whether or not we're running in that\ndemonized mode, and if so print no progress.",
+      "Always showing progress is considered more important than\naccuracy. I.e. on a repository like 2015-04-03-1M-git.git we'd hang\nfor 6 seconds with no output on the second \"git gc\" if no changes were\nmade to any objects in the interim if we'd take the approach in [2]."
+    ],
+    "new": [
+      "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "foil": [
+      "commit-graph.c: mark more strings for translation"
+    ],
+    "rubric": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "distinction": "The other decision marks commit-graph messages for translation, not whether progress is displayed.",
+    "masked": false
+  },
+  "t25": {
+    "topic": "slab",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+    "alternative": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+    "report": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+    "old": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "When closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.",
+      "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.",
+      "Move it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+    ],
+    "new": [
+      "commit-graph: retain commit slab when closing NULL commit_graph",
+      "The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "The most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-ac6d45d11f\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules)."
+    ],
+    "foil": [
+      "commit-graph: close descriptors after mmap",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "rubric": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "distinction": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "masked": false
+  },
+  "t26": {
+    "topic": "slab",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+    "alternative": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+    "report": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+    "old": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "When closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.",
+      "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.",
+      "Move it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+    ],
+    "new": [
+      "commit-graph: retain commit slab when closing NULL commit_graph",
+      "The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "The most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-[ref]\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules)."
+    ],
+    "foil": [
+      "commit-graph: close descriptors after mmap",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "rubric": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "distinction": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "masked": true
+  },
+  "t27": {
+    "topic": "slab",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+    "alternative": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+    "report": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+    "old": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "When closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.",
+      "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.",
+      "Move it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+    ],
+    "new": [
+      "commit-graph: retain commit slab when closing NULL commit_graph",
+      "The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "The most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-ac6d45d11f\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules)."
+    ],
+    "foil": [
+      "commit-graph: close descriptors after mmap",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "rubric": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "distinction": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "masked": false
+  },
+  "t28": {
+    "topic": "slab",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+    "alternative": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+    "report": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+    "old": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "When closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.",
+      "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.",
+      "Move it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+    ],
+    "new": [
+      "commit-graph: retain commit slab when closing NULL commit_graph",
+      "The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "The most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-[ref]\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules)."
+    ],
+    "foil": [
+      "commit-graph: close descriptors after mmap",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "rubric": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "distinction": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "masked": true
+  },
+  "t29": {
+    "topic": "slab",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+    "alternative": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+    "report": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+    "old": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "When closing and freeing a commit-graph, the main entry point is\nclose_commit_graph(), which then uses close_commit_graph_one() to\nrecurse through the base_graph links and free each one.",
+      "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable. It works OK in practice because clearing the slab is\nidempotent, but it makes the code harder to reason about and refactor.",
+      "Move it into the parent function so it's only called once (and there are\nno other direct callers of the recursive close_commit_graph_one(), so we\nare not hurting them)."
+    ],
+    "new": [
+      "commit-graph: retain commit slab when closing NULL commit_graph",
+      "The call to repo_clear() calls raw_object_store_clear(), which in\n     turn calls close_object_store(), which in turn calls\n     close_commit_graph(). And the latter frees the commit graph data\n     slab.",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "The most immediate fix is to add in a NULL check in close_commit_graph(),\nmaking it a true noop when passed in an object_store with a NULL\ncommit_graph (it's OK to just return early, since the rest of its code\nis already a noop when passed NULL). That restores the pre-ac6d45d11f\nbehavior. And that's what this patch does, along with a test that\nexercises it (we already have a test that uses submodules along with\nfetch.writeCommitGraph, but the bug only triggers when there is a\nsubsequent fetch and when that fetch uses --recurse-submodules)."
+    ],
+    "foil": [
+      "commit-graph: close descriptors after mmap",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "rubric": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "distinction": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "masked": false
+  }
+}

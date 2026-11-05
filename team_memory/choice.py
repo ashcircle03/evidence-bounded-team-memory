@@ -26,13 +26,28 @@ class LocalChoice:
         self.last_usage = {}
         self.identity = str(path)
 
+    def option_scores(self, instruction, content, count):
+        if not 2 <= count <= len(self.ids):
+            raise ValueError("expected between two and five options")
+        return self._scores(instruction, content, self.ids[:count]).float().tolist()
+
+    def evidence_margin(self, instruction, content):
+        labels = [self.tokenizer.encode(s, add_special_tokens=False) for s in ("Yes", "No")]
+        if any(len(ids) != 1 for ids in labels):
+            raise ValueError("Yes and No must each be a single token")
+        scores = self._scores(instruction, content, [ids[0] for ids in labels])
+        return float(scores[0].float() - scores[1].float())
+
     def __call__(self, instruction, content):
+        return self.letters[int(self._scores(instruction, content, self.ids).argmax())]
+
+    def _scores(self, instruction, content, label_ids):
         messages = [{"role": "system", "content": instruction}, {"role": "user", "content": content}]
         ids = self.tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
         if ids.shape[1] > self.model.config.max_position_embeddings:
             raise ValueError("evidence does not fit the model context")
         with self.torch.inference_mode():
             hidden = self.model.model(input_ids=ids.to(self.model.device), use_cache=False).last_hidden_state[:, -1, :]
-            logits = self.model.lm_head(hidden)[0, self.ids]
+            logits = self.model.lm_head(hidden)[0, label_ids]
         self.last_usage = {"input_tokens": ids.shape[1], "scored_tokens": 1}
-        return self.letters[int(logits.argmax())]
+        return logits

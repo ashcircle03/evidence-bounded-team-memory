@@ -1,0 +1,269 @@
+{
+  "status": "audited_partial_not_completed",
+  "label": "Alternate-model stopped pilot; not a benchmark score",
+  "job_id": "119626",
+  "slurm_state": "FAILED",
+  "exit_code": "1:0",
+  "slurm_elapsed_seconds": 1935,
+  "program_elapsed_seconds": 1917.0520513057709,
+  "usage_records": [
+    {
+      "JobID": "119626",
+      "State": "FAILED",
+      "ExitCode": "1:0",
+      "Elapsed": "00:32:15",
+      "ElapsedRaw": "1935",
+      "AllocCPUS": "8",
+      "ReqMem": "16G",
+      "MaxRSS": "",
+      "TotalCPU": "06:32.541",
+      "AllocTRES": "billing=8,cpu=8,mem=16G,node=1",
+      "NodeList": "aurora-g2"
+    },
+    {
+      "JobID": "119626.batch",
+      "State": "FAILED",
+      "ExitCode": "1:0",
+      "Elapsed": "00:32:15",
+      "ElapsedRaw": "1935",
+      "AllocCPUS": "8",
+      "ReqMem": "",
+      "MaxRSS": "958460K",
+      "TotalCPU": "06:31.625",
+      "AllocTRES": "cpu=8,mem=16G,node=1",
+      "NodeList": "aurora-g2"
+    },
+    {
+      "JobID": "119626.extern",
+      "State": "COMPLETED",
+      "ExitCode": "0:0",
+      "Elapsed": "00:32:15",
+      "ElapsedRaw": "1935",
+      "AllocCPUS": "8",
+      "ReqMem": "",
+      "MaxRSS": "0",
+      "TotalCPU": "00:00.001",
+      "AllocTRES": "billing=8,cpu=8,mem=16G,node=1",
+      "NodeList": "aurora-g2"
+    },
+    {
+      "JobID": "119626.0",
+      "State": "COMPLETED",
+      "ExitCode": "0:0",
+      "Elapsed": "00:00:01",
+      "ElapsedRaw": "1",
+      "AllocCPUS": "1",
+      "ReqMem": "",
+      "MaxRSS": "116K",
+      "TotalCPU": "00:00.914",
+      "AllocTRES": "cpu=1,mem=256M,node=1",
+      "NodeList": "aurora-g2"
+    }
+  ],
+  "accounting": {
+    "requests": 1000,
+    "observed_input_tokens": 3301189,
+    "observed_output_tokens": 146887,
+    "reserved_or_uncertain_input_tokens": 9000,
+    "reserved_or_uncertain_output_tokens": 8192,
+    "uncertain_request_ids": [
+      69
+    ],
+    "censored_request_ids": [],
+    "limits": {
+      "requests": 1000,
+      "input_tokens": 5000000,
+      "output_tokens": 200000
+    }
+  },
+  "http_audit": {
+    "reported_models": {
+      "gpt-5.4-mini-2026-03-17": 996,
+      "gemini-3.1-flash-lite": 3
+    },
+    "http_statuses": {
+      "200": 999
+    },
+    "transport_errors": [
+      {
+        "request_id": 69,
+        "error_type": "ReadTimeout"
+      }
+    ],
+    "groups": [
+      {
+        "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56",
+        "arm": "cupmem",
+        "phase": "ingest",
+        "requests": 71,
+        "observed_input_tokens": 158276,
+        "observed_output_tokens": 11515,
+        "uncertain_request_ids": []
+      },
+      {
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+        "arm": "cupmem",
+        "phase": "ingest",
+        "requests": 902,
+        "observed_input_tokens": 2628738,
+        "observed_output_tokens": 128400,
+        "uncertain_request_ids": [
+          69
+        ]
+      },
+      {
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+        "arm": "cupmem",
+        "phase": "official_judge",
+        "requests": 1,
+        "observed_input_tokens": 1050,
+        "observed_output_tokens": 188,
+        "uncertain_request_ids": []
+      },
+      {
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+        "arm": "cupmem",
+        "phase": "query_start",
+        "requests": 20,
+        "observed_input_tokens": 139466,
+        "observed_output_tokens": 5944,
+        "uncertain_request_ids": []
+      },
+      {
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+        "arm": "direct",
+        "phase": "answer",
+        "requests": 3,
+        "observed_input_tokens": 372104,
+        "observed_output_tokens": 643,
+        "uncertain_request_ids": []
+      },
+      {
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+        "arm": "direct",
+        "phase": "official_judge",
+        "requests": 1,
+        "observed_input_tokens": 1530,
+        "observed_output_tokens": 180,
+        "uncertain_request_ids": []
+      },
+      {
+        "uid": "compatibility",
+        "arm": "probe",
+        "phase": "compatibility_probe",
+        "requests": 2,
+        "observed_input_tokens": 25,
+        "observed_output_tokens": 17,
+        "uncertain_request_ids": []
+      }
+    ]
+  },
+  "complete_cases": [
+    {
+      "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+      "type": "T1",
+      "sessions": 50,
+      "queries": 3,
+      "memory_boundary_checks": 6,
+      "persistent_memory_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+      "actual_writer_sessions_verified": 50,
+      "official_scores": [
+        {
+          "arm": "cupmem",
+          "passes": {
+            "dim1": true,
+            "dim2": true,
+            "dim3": false
+          },
+          "passed": 2,
+          "total": 3,
+          "judge_request_id": 928
+        },
+        {
+          "arm": "direct",
+          "passes": {
+            "dim1": false,
+            "dim2": false,
+            "dim3": true
+          },
+          "passed": 1,
+          "total": 3,
+          "judge_request_id": 929
+        }
+      ],
+      "direct_truncation": [
+        {
+          "query": "dim1_query",
+          "input_sha256": "66e1b582ed4105a7e64f3fdb8b2d14998b5ae96f90f149aa947b059192c5059b",
+          "retained_sessions": 40,
+          "removed_sessions": 10,
+          "estimated_input_tokens": 122426,
+          "gold_preserving_truncation": true
+        },
+        {
+          "query": "dim2_query",
+          "input_sha256": "45954265a980bb6e53bb8637f83529c3b7eb51be2e21754aee01433bb5aad0f4",
+          "retained_sessions": 41,
+          "removed_sessions": 9,
+          "estimated_input_tokens": 124388,
+          "gold_preserving_truncation": true
+        },
+        {
+          "query": "dim3_query",
+          "input_sha256": "b0ac875080797a73282c098e887e79d3bd2feb8a232bc2e5488f36d676929e42",
+          "retained_sessions": 41,
+          "removed_sessions": 9,
+          "estimated_input_tokens": 125293,
+          "gold_preserving_truncation": true
+        }
+      ],
+      "semantic_correctness": "Not established by artifact integrity; see separate source audit"
+    }
+  ],
+  "partial_cases": [
+    {
+      "uid": "84d0bb8e-5f94-4a47-9f2f-378d92f1cf56",
+      "completed_sessions": 6,
+      "completed_queries": 0,
+      "actual_writer_sessions_verified": 6,
+      "label": "Last persisted session boundary; later physical attempts count in audit"
+    }
+  ],
+  "source_archive_sha256": "c82f39c0c64d6208f2d48fea9ecfeefa215075147711a237de93ae9c2bbb764d",
+  "dataset_verification": "Pinned hash checked by executed runner on compute node; dataset not copied or rehashed locally",
+  "currency_cost": "BAZE currency/credit debit unavailable; token usage is not a monetary bill",
+  "artifacts": [
+    {
+      "path": "../campaigns/speakermem-dev/results/sm-119626.json",
+      "sha256": "a3ef41cfc21b09ad09298a263539e9965f2ec720edd51a7047d56d016f7d6298"
+    },
+    {
+      "path": "../campaigns/speakermem-dev/source/cup-pilot-v5/config.json",
+      "sha256": "3a71cbdffcfe8ab60b5b68c860d19d2a4fc5f29689a9489c7d04b2706cf21e3b"
+    },
+    {
+      "path": "results/cupmem/pilot-v5/http.jsonl",
+      "sha256": "3a3dd2e220bb13f89ba0ecfbc3276be2bf34efc7c0132025f33533f67b4f821a"
+    },
+    {
+      "path": "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.cupmem.json",
+      "sha256": "4ebafca02888f98247e10e5e157353dde50687bbaffbfc5cad394044258c028e"
+    },
+    {
+      "path": "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.direct.json",
+      "sha256": "4071584266496d3eb08056499cb87e9d17cd4b9dce9c7271d62eeceeb61a8dd7"
+    },
+    {
+      "path": "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.answers.json",
+      "sha256": "7b9048a15a95ee46be877e88d474dd591615853f50588e636c0c52d12e8930c3"
+    },
+    {
+      "path": "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.judgments.json",
+      "sha256": "82e22440340a2e03d80d9f51e15e8be30e0f07e5ad22d6be4e7addc861cd3049"
+    },
+    {
+      "path": "results/cupmem/pilot-v5/84d0bb8e-5f94-4a47-9f2f-378d92f1cf56.cupmem.partial.json",
+      "sha256": "55923c70aa1751dd78e8fdb3f7940b89e5ceb2fe6502aa2a0941c882c1ad6d20"
+    }
+  ]
+}

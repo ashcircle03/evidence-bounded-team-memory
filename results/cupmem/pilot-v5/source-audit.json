@@ -1,0 +1,1536 @@
+{
+  "status": "post_hoc_source_audit_verified",
+  "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+  "job_id": "119626",
+  "scope": "One completed alternate-model T1 case from a budget-stopped two-case pilot; not a benchmark score or new primary adjudication",
+  "inference_calls_added": 0,
+  "source_file_sha256": {
+    "results/cupmem/pilot-v5/http.jsonl": "3a3dd2e220bb13f89ba0ecfbc3276be2bf34efc7c0132025f33533f67b4f821a",
+    "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.cupmem.json": "4ebafca02888f98247e10e5e157353dde50687bbaffbfc5cad394044258c028e",
+    "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.answers.json": "7b9048a15a95ee46be877e88d474dd591615853f50588e636c0c52d12e8930c3",
+    "results/cupmem/pilot-v5/a5aa884f-29d6-40dc-a72c-e155fcbc7c79.judgments.json": "82e22440340a2e03d80d9f51e15e8be30e0f07e5ad22d6be4e7addc861cd3049",
+    "../campaigns/speakermem-dev/results/sm-119626.json": "a3ef41cfc21b09ad09298a263539e9965f2ec720edd51a7047d56d016f7d6298",
+    "../campaigns/cupmem-stale/upstream/cup_mem/store_layer/transitions.py": "3c1810b9aa52528bf7ebfa76c2bb11fc86738d1143e7eb7d6b15c284efb9ba62"
+  },
+  "official_scores_unchanged": {
+    "cupmem": {
+      "SR_explicit": true,
+      "PR_false_premise": true,
+      "IPA_action": false
+    },
+    "direct": {
+      "SR_explicit": false,
+      "PR_false_premise": false,
+      "IPA_action": true
+    }
+  },
+  "official_judge_evidence": [
+    {
+      "request_id": 928,
+      "request_line": 1855,
+      "response_line": 1856,
+      "context": {
+        "arm": "cupmem",
+        "phase": "official_judge",
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "12d0c6ce4182cf50ffecb1ea669a739961fd0829c03f4abc2fc7a053ad061e0c",
+      "response_body_sha256": "233471ca8d831e09001b1cbda5beeb47b50b00393cd169b6dfff514691b90854",
+      "response": {
+        "dim1_eval": {
+          "reasoning": "The model correctly identifies that the old information is no longer reliable and refuses to confirm the habit as an ongoing, stable practice.",
+          "pass": true
+        },
+        "dim2_eval": {
+          "reasoning": "The model successfully detects the false premise based on the outdated state and refuses to provide a system for equal-value matching, correctly identifying that the user's preferences have shifted.",
+          "pass": true
+        },
+        "dim3_eval": {
+          "reasoning": "The model fails to adhere to the new state (M_new). Instead of suggesting the user's new 'pay it forward' approach, it suggests accepting repayment, which contradicts the user's current preference for declining Venmo/repayment.",
+          "pass": false
+        }
+      }
+    },
+    {
+      "request_id": 929,
+      "request_line": 1857,
+      "response_line": 1858,
+      "context": {
+        "arm": "direct",
+        "phase": "official_judge",
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "a22c9ccebd151f5be61bc4633fecd2f6750027ce4357a805d544f595ed260081",
+      "response_body_sha256": "3e35e358aa5d37304ff4409de044d80408e0a508573f770547ad9ff2523f7da0",
+      "response": {
+        "dim1_eval": {
+          "reasoning": "The model failed to recognize the updated state (M_new) and instead relied entirely on the outdated state (M_old), explicitly confirming that the user still keeps a mental ledger.",
+          "pass": false
+        },
+        "dim2_eval": {
+          "reasoning": "The model blindly accepted the false premise provided in the question and provided a detailed, actionable guide for a behavior the user has explicitly moved away from.",
+          "pass": false
+        },
+        "dim3_eval": {
+          "reasoning": "The model provided advice that aligns with the new state (M_new) of giving freely and avoiding the 'ledger' mentality, effectively ignoring the outdated constraints of M_old.",
+          "pass": true
+        }
+      }
+    }
+  ],
+  "unknown_without_observed_prior": {
+    "initial_request": {
+      "request_id": 10,
+      "request_line": 19,
+      "response_line": 20,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 0,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "dbbf18d8b2fb796ea944bb8b97ba15ca1c7a304287540dcc4579fcc21de93bf0",
+      "response_body_sha256": "8575eb481082e5df46794140eeed4f97673f0374a8b3c30ac3919c15844e27da",
+      "response": {
+        "decision": "SET_UNKNOWN_CURRENT",
+        "target_item_id": "",
+        "reason": "The proposal indicates the old preference about not tracking reciprocity is no longer safe, but there are no candidate items or context items to name an exact current replacement or exact invalidated item."
+      },
+      "input_excerpt": {
+        "latent_invalidation_proposal": {
+          "proposal_id": "lip_00002",
+          "session_id": "s_000",
+          "target_bucket": "stable_preferences",
+          "target_local_track": "value_or_priority_tendency",
+          "trigger_delta_ids": [
+            "d_00001"
+          ],
+          "evidence_chunk_ids": [
+            "c_00001"
+          ],
+          "reason": "The current item now explicitly says gifts are tracked and balanced later, which directly challenges any prior default of being relaxed about reciprocity or not keeping score. The basis for that older value tendency is no longer safe.",
+          "confidence": 0.93,
+          "proposal_type": "INVALIDATE_OR_REASSESS",
+          "target_item_id_hint": "",
+          "target_old_value": "Prefer not to keep score or compare gift values; gives and receives without tracking reciprocity closely."
+        },
+        "candidate_existing_items": []
+      }
+    },
+    "candidate_pool_summary": {
+      "same_track_active_count": 0,
+      "same_bucket_active_count": 0,
+      "same_track_stale_count": 0,
+      "unknown_current_present": false,
+      "candidate_pool_size_before_topk": 0,
+      "top_k_used": 0,
+      "ranked_candidate_count": 0
+    },
+    "persisted_unknown": {
+      "bucket": "stable_preferences",
+      "local_track": "value_or_priority_tendency",
+      "status": "UNKNOWN_CURRENT",
+      "reason": "The proposal indicates the old preference about not tracking reciprocity is no longer safe, but there are no candidate items or context items to name an exact current replacement or exact invalidated item.",
+      "invalidated_by_delta_id": "lip_00002",
+      "last_updated": "2023-12-26 19:00",
+      "created_session_id": "s_000",
+      "created_session_index": 0,
+      "created_session_time": "2023-12-26 19:00"
+    },
+    "interpretation": "The proposal supplies a supposed prior non-tracking preference without an existing candidate. The unknown track dates to session0, before the new preference arrives."
+  },
+  "unrelated_early_weakening": {
+    "source": {
+      "request_id": 12,
+      "request_line": 23,
+      "response_line": 24,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 1,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "12e19da34653d651d0b9f37793dec19b72833bfa08457126f0d90dbba1b32975",
+      "response_body_sha256": "97e5bf2a1af0cb0ab849dcb0504385d46b6132b7b5377c62b5a6c791e17432c9",
+      "response": {
+        "chunks": [
+          {
+            "source_turn_ids": [
+              "t_0"
+            ],
+            "text": "I've recently started using a meditation app and doing daily meditation sessions, which has really helped me feel more focused and calm during the day.",
+            "chunk_type": "explicit_state",
+            "candidate_bucket_tracks": [
+              {
+                "bucket": "health_and_mobility",
+                "local_track": "current_health_state"
+              },
+              {
+                "bucket": "current_focus_and_goals",
+                "local_track": "current_primary_focus"
+              },
+              {
+                "bucket": "stable_preferences",
+                "local_track": "habitual_choice_pattern"
+              }
+            ],
+            "temporal_scope": "current",
+            "state_salience": 0.89,
+            "evidence_strength": "strong",
+            "change_signal_present": true,
+            "change_signal_summary": "New ongoing meditation routine is now in place and affecting daytime focus/calm.",
+            "signal_strength": "strong"
+          },
+          {
+            "source_turn_ids": [
+              "t_6",
+              "t_8"
+            ],
+            "text": "I'll try implementing the Pomodoro Technique into my morning routine, right after my daily meditation session. I'll start with a 25-minute Pomodoro session and see how it goes. I think I'll start with journaling for my morning Pomodoro session.",
+            "chunk_type": "explicit_state",
+            "candidate_bucket_tracks": [
+              {
+                "bucket": "current_focus_and_goals",
+                "local_track": "current_primary_focus"
+              },
+              {
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              {
+                "bucket": "work_and_schedule",
+                "local_track": "standing_commitment_or_availability"
+              },
+              {
+                "bucket": "stable_preferences",
+                "local_track": "habitual_choice_pattern"
+              }
+            ],
+            "temporal_scope": "current",
+            "state_salience": 0.82,
+            "evidence_strength": "medium",
+            "change_signal_present": true,
+            "change_signal_summary": "Current morning routine now includes a planned Pomodoro session after meditation, with journaling as the chosen starting task.",
+            "signal_strength": "medium"
+          }
+        ]
+      },
+      "input_excerpt": {
+        "session_id": "s_001",
+        "user_turns": [
+          {
+            "turn_id": "t_0",
+            "content": "I've been trying to improve my focus and productivity lately, and I was wondering if you have any recommendations for apps or tools that can help me stay on track with my goals. By the way, I've recently started using a meditation app and doing daily meditation sessions, which has really helped me feel more focused and calm during the day."
+          },
+          {
+            "turn_id": "t_2",
+            "content": "I'm interested in trying out the Pomodoro Timer technique. Can you give me some tips on how to best implement it into my daily routine?"
+          },
+          {
+            "turn_id": "t_4",
+            "content": "I'm thinking of implementing the Pomodoro Technique into my morning routine, right after my daily meditation session. Do you think that's a good idea, or should I use it for a specific task or project instead?"
+          },
+          {
+            "turn_id": "t_6",
+            "content": "I think I'll try implementing the Pomodoro Technique into my morning routine, right after my daily meditation session. I'll start with a 25-minute Pomodoro session and see how it goes. Do you have any suggestions for tasks that are suitable for a morning Pomodoro session? Something that will help me set a positive tone for the day?"
+          },
+          {
+            "turn_id": "t_8",
+            "content": "I think I'll start with journaling for my morning Pomodoro session. I've been wanting to get back into writing and reflecting on my thoughts and goals. Do you have any tips on how to make the most out of journaling during a Pomodoro session?"
+          },
+          {
+            "turn_id": "t_10",
+            "content": "I'm excited to start journaling during my morning Pomodoro session. I think it'll help me clarify my thoughts and set a positive tone for the day. Do you have any suggestions for how to review and reflect on my journal entries over time?"
+          }
+        ]
+      }
+    },
+    "proposer_requests": [
+      {
+        "request_id": 17,
+        "request_line": 33,
+        "response_line": 40,
+        "context": {
+          "arm": "cupmem",
+          "phase": "ingest",
+          "session_index": 1,
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "907ac3b940c41af3620ada10be702ede86c7cc82083918d4eeaf9033323ad210",
+        "response_body_sha256": "7aa19f3f6f48fd389911400a9f2a30d1fb80fd0c0155bca7c712d41350a8ecc3",
+        "response": {
+          "proposals": [
+            {
+              "target_bucket": "stable_preferences",
+              "target_local_track": "value_or_priority_tendency",
+              "target_item_id_hint": "p_00001",
+              "target_old_value": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan.",
+              "trigger_delta_ids": [
+                "d_00002",
+                "d_00003"
+              ],
+              "evidence_chunk_ids": [
+                "c_00002",
+                "c_00003"
+              ],
+              "proposal_type": "INVALIDATE_OR_REASSESS",
+              "reason": "This old value tendency is not directly contradicted by the new meditation/Pomodoro routine, but the active profile subset only contains this single stable-preference item and the new deltas shift the current preference picture toward self-regulation and routine-building. That makes the prior confidence in this being the sole current stable preference less safe, so it should be rechecked rather than assumed unchanged.",
+              "confidence": 0.24
+            }
+          ]
+        },
+        "input_excerpt": {
+          "lane": {
+            "lane_key": "direct_bucket::stable_preferences",
+            "lane_type": "direct_bucket",
+            "lane_focus": {
+              "bucket": "stable_preferences",
+              "local_track": ""
+            },
+            "preferred_direct_tracks": [
+              {
+                "bucket": "stable_preferences",
+                "local_track": "habitual_choice_pattern"
+              }
+            ],
+            "candidate_pairs": [
+              {
+                "bucket": "stable_preferences",
+                "local_track": "enduring_preference"
+              },
+              {
+                "bucket": "stable_preferences",
+                "local_track": "habitual_choice_pattern"
+              },
+              {
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "request_id": 21,
+        "request_line": 38,
+        "response_line": 42,
+        "context": {
+          "arm": "cupmem",
+          "phase": "ingest",
+          "session_index": 1,
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "41c13b4dcf7b1d2b66d0e49a6fb46e3067c22d6373a8727d2497c520ff8db4ae",
+        "response_body_sha256": "663537f77d6dfc3b909bfd98dc9b28a69cb99a27d90ed17c4ef5b7f28804fd7a",
+        "response": {
+          "proposals": [
+            {
+              "target_bucket": "stable_preferences",
+              "target_local_track": "value_or_priority_tendency",
+              "target_item_id_hint": "p_00001",
+              "target_old_value": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan.",
+              "trigger_delta_ids": [
+                "d_00002",
+                "d_00003"
+              ],
+              "evidence_chunk_ids": [
+                "c_00002",
+                "c_00003"
+              ],
+              "proposal_type": "INVALIDATE_OR_REASSESS",
+              "reason": "This old value tendency is not directly about meditation or planning, but the new deltas suggest a substantial shift in current self-management priorities: the person is now actively building a daily meditation habit and layering a structured morning routine with Pomodoro and journaling. That makes the old reciprocity-focused priority less safe as a current default basis, because current attention and routine are being reorganized around calm/focus habits rather than the previously inferred value pattern alone.",
+              "confidence": 0.26
+            }
+          ]
+        },
+        "input_excerpt": {
+          "lane": {
+            "lane_key": "global_recall",
+            "lane_type": "global_recall",
+            "lane_focus": {
+              "bucket": "",
+              "local_track": ""
+            },
+            "preferred_direct_tracks": [
+              {
+                "bucket": "stable_preferences",
+                "local_track": "habitual_choice_pattern"
+              },
+              {
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              {
+                "bucket": "health_and_mobility",
+                "local_track": "current_health_state"
+              },
+              {
+                "bucket": "current_focus_and_goals",
+                "local_track": "current_primary_focus"
+              },
+              {
+                "bucket": "work_and_schedule",
+                "local_track": "standing_commitment_or_availability"
+              }
+            ],
+            "candidate_pairs": [
+              {
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "decision": {
+      "request_id": 22,
+      "request_line": 43,
+      "response_line": 44,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 1,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "e0fcaa41b1cc20c7ca98398155ec9b9cb00840585f6463282067944086957ee0",
+      "response_body_sha256": "228ef2f49717b6ce67e6a31556b419289da42b941e9a22f9cc3c800fc3e75ab2",
+      "response": {
+        "decision": "WEAK_CHALLENGE",
+        "target_item_id": "p_00001",
+        "reason": "The hint points to the exact active preference item, and the new deltas weaken its confidence by shifting current self-management priorities toward meditation/routine-building. However, they do not directly contradict the reciprocity-tracking preference, so this is a weakening rather than a full invalidate."
+      },
+      "input_excerpt": {
+        "latent_invalidation_proposal": {
+          "proposal_id": "lip_00006",
+          "session_id": "s_001",
+          "target_bucket": "stable_preferences",
+          "target_local_track": "value_or_priority_tendency",
+          "trigger_delta_ids": [
+            "d_00002",
+            "d_00003"
+          ],
+          "evidence_chunk_ids": [
+            "c_00002",
+            "c_00003"
+          ],
+          "reason": "This old value tendency is not directly contradicted by the new meditation/Pomodoro routine, but the active profile subset only contains this single stable-preference item and the new deltas shift the current preference picture toward self-regulation and routine-building. That makes the prior confidence in this being the sole current stable preference less safe, so it should be rechecked rather than assumed unchanged. | This old value tendency is not directly about meditation or planning, but the new deltas suggest a substantial shift in current self-management priorities: the person is now actively building a daily meditation habit and layering a structured morning routine with Pomodoro and journaling. That makes the old reciprocity-focused priority less safe as a current default basis, because current attention and routine are being reorganized around calm/focus habits rather than the previously inferred value pattern alone.",
+          "confidence": 0.26,
+          "proposal_type": "INVALIDATE_OR_REASSESS",
+          "target_item_id_hint": "p_00001",
+          "target_old_value": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+        }
+      }
+    },
+    "chunks": [
+      {
+        "chunk_id": "c_00001",
+        "session_id": "s_000",
+        "source_turn_ids": [
+          "t_6"
+        ],
+        "text": "I actually keep track of what people spend on my gifts so I can match it later; taking more than I give feels like accepting a loan I didn't ask for.",
+        "chunk_type": "explicit_state",
+        "candidate_bucket_tracks": [
+          {
+            "bucket": "stable_preferences",
+            "local_track": "value_or_priority_tendency"
+          }
+        ],
+        "temporal_scope": "current",
+        "state_salience": 0.97,
+        "evidence_strength": "strong",
+        "change_signal_present": true,
+        "signal_strength": "strong",
+        "debug_trace": {
+          "write": {
+            "change_signal_summary": "Current gift-exchange mindset emphasizes reciprocity and matching contributions."
+          }
+        }
+      },
+      {
+        "chunk_id": "c_00002",
+        "session_id": "s_001",
+        "source_turn_ids": [
+          "t_0"
+        ],
+        "text": "I've recently started using a meditation app and doing daily meditation sessions, which has really helped me feel more focused and calm during the day.",
+        "chunk_type": "explicit_state",
+        "candidate_bucket_tracks": [
+          {
+            "bucket": "health_and_mobility",
+            "local_track": "current_health_state"
+          },
+          {
+            "bucket": "current_focus_and_goals",
+            "local_track": "current_primary_focus"
+          },
+          {
+            "bucket": "stable_preferences",
+            "local_track": "habitual_choice_pattern"
+          }
+        ],
+        "temporal_scope": "current",
+        "state_salience": 0.89,
+        "evidence_strength": "strong",
+        "change_signal_present": true,
+        "signal_strength": "strong",
+        "debug_trace": {
+          "write": {
+            "change_signal_summary": "New ongoing meditation routine is now in place and affecting daytime focus/calm."
+          }
+        }
+      },
+      {
+        "chunk_id": "c_00003",
+        "session_id": "s_001",
+        "source_turn_ids": [
+          "t_6",
+          "t_8"
+        ],
+        "text": "I'll try implementing the Pomodoro Technique into my morning routine, right after my daily meditation session. I'll start with a 25-minute Pomodoro session and see how it goes. I think I'll start with journaling for my morning Pomodoro session.",
+        "chunk_type": "explicit_state",
+        "candidate_bucket_tracks": [
+          {
+            "bucket": "current_focus_and_goals",
+            "local_track": "current_primary_focus"
+          },
+          {
+            "bucket": "current_focus_and_goals",
+            "local_track": "short_horizon_goal"
+          },
+          {
+            "bucket": "work_and_schedule",
+            "local_track": "standing_commitment_or_availability"
+          }
+        ],
+        "temporal_scope": "current",
+        "state_salience": 0.82,
+        "evidence_strength": "medium",
+        "change_signal_present": true,
+        "signal_strength": "medium",
+        "debug_trace": {
+          "write": {
+            "change_signal_summary": "Current morning routine now includes a planned Pomodoro session after meditation, with journaling as the chosen starting task."
+          }
+        }
+      }
+    ],
+    "deltas": [
+      {
+        "delta_id": "d_00001",
+        "session_id": "s_000",
+        "session_index": 0,
+        "session_time": "2023-12-26 19:00",
+        "bucket": "stable_preferences",
+        "local_track": "value_or_priority_tendency",
+        "proposed_value": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan.",
+        "source_type": "explicit",
+        "evidence_chunk_ids": [
+          "c_00001"
+        ],
+        "confidence": 0.97,
+        "delta_kind": "observed_state",
+        "debug_trace": {
+          "write": {
+            "op_hint": "ADD"
+          }
+        }
+      },
+      {
+        "delta_id": "d_00002",
+        "session_id": "s_001",
+        "session_index": 1,
+        "session_time": "2024-01-09 08:37",
+        "bucket": "stable_preferences",
+        "local_track": "habitual_choice_pattern",
+        "proposed_value": "Uses a meditation app and does daily meditation sessions.",
+        "source_type": "explicit",
+        "evidence_chunk_ids": [
+          "c_00002"
+        ],
+        "confidence": 0.96,
+        "delta_kind": "observed_state",
+        "debug_trace": {
+          "write": {
+            "op_hint": "ADD"
+          }
+        }
+      },
+      {
+        "delta_id": "d_00003",
+        "session_id": "s_001",
+        "session_index": 1,
+        "session_time": "2024-01-09 08:37",
+        "bucket": "current_focus_and_goals",
+        "local_track": "short_horizon_goal",
+        "proposed_value": "Is trying to add a 25-minute Pomodoro session to the morning routine after daily meditation, starting with journaling.",
+        "source_type": "explicit",
+        "evidence_chunk_ids": [
+          "c_00003"
+        ],
+        "confidence": 0.9,
+        "delta_kind": "observed_state",
+        "debug_trace": {
+          "write": {
+            "op_hint": "ADD"
+          }
+        }
+      }
+    ],
+    "final_old_item": {
+      "item_id": "p_00001",
+      "bucket": "stable_preferences",
+      "local_track": "value_or_priority_tendency",
+      "value": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan.",
+      "status": "ACTIVE",
+      "confidence": 0.97,
+      "first_seen": "2023-12-26 19:00",
+      "last_updated": "2024-01-09 08:37",
+      "source_delta_ids": [
+        "d_00001"
+      ],
+      "evidence_chunk_ids": [
+        "c_00001"
+      ],
+      "created_session_id": "s_000",
+      "created_session_index": 0,
+      "created_session_time": "2023-12-26 19:00",
+      "active_strength": "WEAK",
+      "revision_history": [
+        {
+          "event": "weak_challenge",
+          "reason": "The hint points to the exact active preference item, and the new deltas weaken its confidence by shifting current self-management priorities toward meditation/routine-building. However, they do not directly contradict the reciprocity-tracking preference, so this is a weakening rather than a full invalidate.",
+          "source_proposal_id": "lip_00006",
+          "source_delta_ids": [
+            "d_00002",
+            "d_00003"
+          ],
+          "source_session_id": "s_001",
+          "source_session_index": 1,
+          "timestamp": "2024-01-09 08:37"
+        }
+      ]
+    },
+    "interpretation": "Meditation, Pomodoro and journaling do not entail a change in gift reciprocity. The trace explicitly acknowledges no direct contradiction, yet weakens the old item."
+  },
+  "later_valid_review_and_provenance": {
+    "decision": {
+      "request_id": 676,
+      "request_line": 1351,
+      "response_line": 1352,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 38,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "b2d82c76300bb44013caf69aecc71f3e4e6dd4c2c0ae1dd34c847162b8d2159d",
+      "response_body_sha256": "81277d0cd18e99513b0496ea1cd7686efd9f988990d751d8bbd629cc5aba5d6a",
+      "response": {
+        "decision": "WEAK_CHALLENGE",
+        "target_item_id": "p_00001",
+        "reason": "The hint clearly matches the exact active reciprocity-tracking item, and the new behavior of giving small gifts/expenses quietly and telling others not to settle up weakens the old keep-score default. But it does not clearly show a full replacement or invalidate the underlying preference outright."
+      },
+      "input_excerpt": {
+        "latent_invalidation_proposal": {
+          "proposal_id": "lip_00265",
+          "session_id": "s_038",
+          "target_bucket": "stable_preferences",
+          "target_local_track": "value_or_priority_tendency",
+          "trigger_delta_ids": [
+            "d_00076"
+          ],
+          "evidence_chunk_ids": [
+            "c_00075"
+          ],
+          "reason": "The new current pattern is to give small amounts (coffee/parking) without mentioning it and to accept repayment gracefully, including telling people not to settle up and to pay it forward instead. That makes the old reciprocity-tracking stance look unsafe as a default basis for handling exchanges, because the person no longer seems to rely on keeping score or matching value directly.",
+          "confidence": 0.67,
+          "proposal_type": "INVALIDATE_OR_REASSESS",
+          "target_item_id_hint": "p_00001",
+          "target_old_value": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+        }
+      }
+    },
+    "applied_action": "WEAK_CHALLENGE_IDEMPOTENT",
+    "before_after_identical": true,
+    "code_location": "../campaigns/cupmem-stale/upstream/cup_mem/store_layer/transitions.py:241",
+    "interpretation": "The actual changed preference did trigger a correctly targeted later proposal. Because the item was already weak, the transition was idempotent: this newer reason remains in the session trace but does not refresh the persisted item revision history. Do not describe this as wholly missing the later change."
+  },
+  "conditional_exception": {
+    "source": {
+      "request_id": 667,
+      "request_line": 1333,
+      "response_line": 1334,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 38,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "db5a99b060cbc41c888729bce1e9576880f5b922375c1dc1f157dee892cf60ae",
+      "response_body_sha256": "f91ee656618d5bda690fa2dd8849046aaf1dc66379ec74df06edb3880c272531",
+      "response": {
+        "chunks": [
+          {
+            "source_turn_ids": [
+              "t_2",
+              "t_4",
+              "t_6"
+            ],
+            "text": "I’ve started doing this thing where I’ll just pick up a coffee or cover the parking meter for whoever I’m with and not mention it—if they try to Venmo me later, I tell them to drop it and pay it forward to someone else when they feel like it. ... How do you handle it when someone insists on paying you back anyway—like they seem genuinely uncomfortable not settling up? ... I want to respect that without turning it into a whole back-and-forth. ... so I can gracefully accept a payback without making it weird, but still keep the whole thing feeling light.",
+            "chunk_type": "explicit_state",
+            "candidate_bucket_tracks": [
+              {
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              {
+                "bucket": "current_focus_and_goals",
+                "local_track": "current_primary_focus"
+              }
+            ],
+            "temporal_scope": "current",
+            "state_salience": 0.77,
+            "evidence_strength": "strong",
+            "change_signal_present": true,
+            "change_signal_summary": "Current behavior pattern of low-key generosity and current goal to handle payback gracefully without awkwardness.",
+            "signal_strength": "strong"
+          }
+        ]
+      },
+      "input_excerpt": {
+        "session_id": "s_038",
+        "user_turns": [
+          {
+            "turn_id": "t_0",
+            "content": "I’ve been thinking a lot about small, everyday ways people show kindness—like tiny gestures that don’t turn into a whole “thing.” What are some low-key, practical ways to build more of that into daily life without it feeling performative or awkward?"
+          },
+          {
+            "turn_id": "t_2",
+            "content": "I’ve started doing this thing where I’ll just pick up a coffee or cover the parking meter for whoever I’m with and not mention it—if they try to Venmo me later, I tell them to drop it and pay it forward to someone else when they feel like it. Do you have more ideas like that—small, normal stuff that stays low-key but still creates that “chain” effect without making anyone uncomfortable?"
+          },
+          {
+            "turn_id": "t_4",
+            "content": "Yeah, this is exactly the vibe I’m going for. How do you handle it when someone insists on paying you back anyway—like they seem genuinely uncomfortable not settling up? I want to respect that without turning it into a whole back-and-forth."
+          },
+          {
+            "turn_id": "t_6",
+            "content": "Could you give me a few specific “scripts” for different situations—like close friends vs coworkers vs someone I don’t know well—so I can gracefully accept a payback without making it weird, but still keep the whole thing feeling light?"
+          }
+        ]
+      }
+    },
+    "delta_extractor": {
+      "request_id": 668,
+      "request_line": 1335,
+      "response_line": 1336,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 38,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "0c74317d83303c080ad98109c48a7ea08ba5ee685856e7dd35c6d446cc26e1e1",
+      "response_body_sha256": "8baebdb9da6cd121320535756fd730b5e5f23fcb485851977448aca51b8120c0",
+      "response": {
+        "deltas": [
+          {
+            "bucket": "current_focus_and_goals",
+            "local_track": "short_horizon_goal",
+            "proposed_value": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth.",
+            "source_type": "explicit",
+            "evidence_chunk_ids": [
+              "c_00075"
+            ],
+            "confidence": 0.97,
+            "op_hint": "ADD",
+            "delta_kind": "observed_state"
+          }
+        ]
+      }
+    },
+    "update": {
+      "request_id": 669,
+      "request_line": 1337,
+      "response_line": 1338,
+      "context": {
+        "arm": "cupmem",
+        "phase": "ingest",
+        "session_index": 38,
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "2d7f44f57833b98671271a9193e2d05b7422f00916cb2dec60dc5b46fef8e5d0",
+      "response_body_sha256": "033b892e04a3d513cd5110995f1d1012501e85c521502eb1e16a96905fa43450",
+      "response": {
+        "decision": "ADD",
+        "target_item_id": "",
+        "reason": "The new delta introduces a distinct short-horizon goal about handling repayment gracefully; none of the same-track candidates share this proposition or practical basis, so it should coexist as a new item."
+      },
+      "input_excerpt": {
+        "delta": {
+          "delta_id": "d_00076",
+          "session_id": "s_038",
+          "session_index": 38,
+          "session_time": "2024-12-26 19:00",
+          "bucket": "current_focus_and_goals",
+          "local_track": "short_horizon_goal",
+          "proposed_value": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth.",
+          "source_type": "explicit",
+          "evidence_chunk_ids": [
+            "c_00075"
+          ],
+          "confidence": 0.97,
+          "op_hint": "ADD",
+          "delta_kind": "observed_state"
+        }
+      }
+    },
+    "chunk": {
+      "chunk_id": "c_00075",
+      "session_id": "s_038",
+      "source_turn_ids": [
+        "t_2",
+        "t_4",
+        "t_6"
+      ],
+      "text": "I’ve started doing this thing where I’ll just pick up a coffee or cover the parking meter for whoever I’m with and not mention it—if they try to Venmo me later, I tell them to drop it and pay it forward to someone else when they feel like it. ... How do you handle it when someone insists on paying you back anyway—like they seem genuinely uncomfortable not settling up? ... I want to respect that without turning it into a whole back-and-forth. ... so I can gracefully accept a payback without making it weird, but still keep the whole thing feeling light.",
+      "chunk_type": "explicit_state",
+      "candidate_bucket_tracks": [
+        {
+          "bucket": "stable_preferences",
+          "local_track": "value_or_priority_tendency"
+        },
+        {
+          "bucket": "current_focus_and_goals",
+          "local_track": "current_primary_focus"
+        }
+      ],
+      "temporal_scope": "current",
+      "state_salience": 0.77,
+      "evidence_strength": "strong",
+      "change_signal_present": true,
+      "signal_strength": "strong",
+      "debug_trace": {
+        "write": {
+          "change_signal_summary": "Current behavior pattern of low-key generosity and current goal to handle payback gracefully without awkwardness."
+        }
+      }
+    },
+    "delta": {
+      "delta_id": "d_00076",
+      "session_id": "s_038",
+      "session_index": 38,
+      "session_time": "2024-12-26 19:00",
+      "bucket": "current_focus_and_goals",
+      "local_track": "short_horizon_goal",
+      "proposed_value": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth.",
+      "source_type": "explicit",
+      "evidence_chunk_ids": [
+        "c_00075"
+      ],
+      "confidence": 0.97,
+      "delta_kind": "observed_state",
+      "debug_trace": {
+        "write": {
+          "op_hint": "ADD"
+        }
+      }
+    },
+    "final_item": {
+      "item_id": "p_00075",
+      "bucket": "current_focus_and_goals",
+      "local_track": "short_horizon_goal",
+      "value": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth.",
+      "status": "ACTIVE",
+      "confidence": 0.97,
+      "first_seen": "2024-12-26 19:00",
+      "last_updated": "2024-12-26 19:00",
+      "source_delta_ids": [
+        "d_00076"
+      ],
+      "evidence_chunk_ids": [
+        "c_00075"
+      ],
+      "created_session_id": "s_038",
+      "created_session_index": 38,
+      "created_session_time": "2024-12-26 19:00",
+      "active_strength": "STRONG",
+      "revision_history": []
+    },
+    "constraints": {
+      "request_id": 923,
+      "request_line": 1845,
+      "response_line": 1846,
+      "context": {
+        "arm": "cupmem",
+        "phase": "query_start",
+        "query_label": "dim3_query",
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "be9f2287f98eed523c92771191e30cdb1a5ca887d29a2e19564f0741fde92591",
+      "response_body_sha256": "f3832d9d3f9acdf92a6d86b12a3b1bc63b1c96ccc2b32fd9b8ddcab1c28bd66e",
+      "response": {
+        "hard_positive_constraints": [
+          "Handle the shared cost in a casual, socially smooth way.",
+          "Leave room to accept repayment if the friend insists on paying you back.",
+          "Keep the interaction non-awkward and avoid turning it into a back-and-forth."
+        ],
+        "hard_negative_constraints": [
+          "Do not insist on refusing repayment if the friend wants to settle up.",
+          "Do not make the payment discussion into a prolonged back-and-forth.",
+          "Do not frame the exchange in a way that creates awkwardness afterward."
+        ],
+        "unresolved_variables": [
+          "Whether the friend will actually insist on repaying later.",
+          "The exact amount or split of the shared costs."
+        ]
+      },
+      "input_excerpt": {
+        "query": "I’m meeting a friend later and want to handle the shared costs in a way that feels good and doesn’t create any awkwardness afterward—what should I do if they try to settle up with me later?",
+        "canonical_answer_grounding": {
+          "blocker_basis": [],
+          "decisive_basis": [
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "strong_active",
+                "id": "p_00075",
+                "rank_index": 1,
+                "score": 0.2804349362850189,
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              "status_label": "ACTIVE_STRONG",
+              "basis_recovery_source": "",
+              "text": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+            },
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 2,
+                "score": 0.25717681646347046,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            }
+          ],
+          "supporting_basis": [
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 2,
+                "score": 0.25717681646347046,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            },
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "strong_active",
+                "id": "p_00075",
+                "rank_index": 1,
+                "score": 0.2804349362850189,
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              "status_label": "ACTIVE_STRONG",
+              "basis_recovery_source": "",
+              "text": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+            }
+          ],
+          "corrected_current_facts": [
+            "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+          ],
+          "old_premise_safe": true,
+          "premise_status": "SUPPORTED",
+          "action_status": "PROCEED_WITH_ADJUSTMENT",
+          "debug_trace": {
+            "query": {
+              "blocked_reason_summary": [
+                "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+              ]
+            }
+          }
+        }
+      }
+    },
+    "composer": {
+      "request_id": 924,
+      "request_line": 1847,
+      "response_line": 1848,
+      "context": {
+        "arm": "cupmem",
+        "phase": "query_start",
+        "query_label": "dim3_query",
+        "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+      },
+      "request_body_sha256": "bd0edcf0ca663e0da1eb643569bb92a317760175707bce270cbc9f63adaad0b7",
+      "response_body_sha256": "c2c06658dbc27d25b9befad9bedbf5a3051cbc4f2eb3af832e79afa30a3b3f3a",
+      "response": {
+        "answer": "Keep it casual and leave the door open for repayment if they insist. A simple line like, “No worries either way—if you want to send your share later, that’s totally fine,” lets you avoid awkwardness without making it a whole back-and-forth. If they do try to settle up later, accept it graciously and move on.",
+        "brief_rationale": "The current guidance is to stay socially smooth while allowing repayment if they insist, without turning it into a prolonged exchange."
+      },
+      "input_excerpt": {
+        "query": "I’m meeting a friend later and want to handle the shared costs in a way that feels good and doesn’t create any awkwardness afterward—what should I do if they try to settle up with me later?",
+        "canonical_answer_grounding": {
+          "blocker_basis": [],
+          "decisive_basis": [
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "strong_active",
+                "id": "p_00075",
+                "rank_index": 1,
+                "score": 0.2804349362850189,
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              "status_label": "ACTIVE_STRONG",
+              "basis_recovery_source": "",
+              "text": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+            },
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 2,
+                "score": 0.25717681646347046,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            }
+          ],
+          "supporting_basis": [
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 2,
+                "score": 0.25717681646347046,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            },
+            {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "strong_active",
+                "id": "p_00075",
+                "rank_index": 1,
+                "score": 0.2804349362850189,
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              "status_label": "ACTIVE_STRONG",
+              "basis_recovery_source": "",
+              "text": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+            }
+          ],
+          "corrected_current_facts": [
+            "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+          ],
+          "old_premise_safe": true,
+          "premise_status": "SUPPORTED",
+          "action_status": "PROCEED_WITH_ADJUSTMENT",
+          "debug_trace": {
+            "query": {
+              "blocked_reason_summary": [
+                "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+              ]
+            }
+          }
+        },
+        "constraint_set": {
+          "hard_positive_constraints": [
+            "Handle the shared cost in a casual, socially smooth way.",
+            "Leave room to accept repayment if the friend insists on paying you back.",
+            "Keep the interaction non-awkward and avoid turning it into a back-and-forth."
+          ],
+          "hard_negative_constraints": [
+            "Do not insist on refusing repayment if the friend wants to settle up.",
+            "Do not make the payment discussion into a prolonged back-and-forth.",
+            "Do not frame the exchange in a way that creates awkwardness afterward."
+          ],
+          "unresolved_variables": [
+            "Whether the friend will actually insist on repaying later.",
+            "The exact amount or split of the shared costs."
+          ]
+        }
+      }
+    },
+    "interpretation": "The original conversation supports both default pay-it-forward and an exception for insistent repayment. The single extracted delta and final composer emphasize the exception; the final answer omits the default and ends with a broader accept-if-they-try instruction. It is not wholly unsupported, but this audit does not relabel it a pass."
+  },
+  "query_path": {
+    "SR": [
+      {
+        "request_id": 906,
+        "request_line": 1811,
+        "response_line": 1812,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim1_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "cdf2d2ca9262dd5bb86ca25be021e9a94ba0e58a99d4b48ba4cbda13157a4934",
+        "response_body_sha256": "d1d2eca29ed79280861d24f6e05e4f8ed62f35c4cb8a1d51dcac14ee87897365",
+        "response": {
+          "status": "SUPPORTED",
+          "confidence": 0.72,
+          "reasoning_summary": "There is an ACTIVE item directly supporting the reciprocity-tracking habit: the user keeps track of what people spend on gifts in order to match it later. The available conflict note only weakens confidence, rather than invalidating the habit, and there is no exact current replacement that contradicts it.",
+          "supporting_active_item_ids": [
+            "p_00001"
+          ],
+          "supporting_active_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "outdated_item_ids": [],
+          "outdated_item_values": [],
+          "unknown_tracks": [
+            {
+              "bucket": "stable_preferences",
+              "local_track": "value_or_priority_tendency"
+            }
+          ],
+          "corrected_current_facts": [
+            "The user currently keeps track of what people spend on gifts so they can match it later."
+          ],
+          "usable_current_basis_item_ids": [
+            "p_00001"
+          ],
+          "usable_current_basis_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "blocked_old_basis_item_ids": [],
+          "blocked_old_basis_item_values": [],
+          "historical_but_overridden_item_ids": [],
+          "historical_but_overridden_item_values": [],
+          "old_premise_safe": true
+        }
+      },
+      {
+        "request_id": 907,
+        "request_line": 1813,
+        "response_line": 1814,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim1_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "f70d55182d424da7b22aa14293623658bae96163599cd5c05748a325a774e4f3",
+        "response_body_sha256": "00e4f1ece54732133553b2dc7cbcd89209a88e90e29dfc3322615e95d2293dfc",
+        "response": {
+          "status": "OUTDATED",
+          "confidence": 0.91,
+          "reasoning_summary": "The old reciprocity-tracking premise is no longer safe: the exact track is marked UNKNOWN_CURRENT, and the strongest direct item only weakly supports the old habit without settling it as current. There is no ACTIVE item that clearly authorizes the old gift-cost ledger behavior as the current answer basis.",
+          "supporting_active_item_ids": [
+            "p_00001"
+          ],
+          "supporting_active_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "outdated_item_ids": [
+            "stable_preferences/value_or_priority_tendency"
+          ],
+          "outdated_item_values": [
+            "The proposal indicates the old preference about not tracking reciprocity is no longer safe, but there are no candidate items or context items to name an exact current replacement or exact invalidated item."
+          ],
+          "unknown_tracks": [
+            {
+              "bucket": "stable_preferences",
+              "local_track": "value_or_priority_tendency"
+            }
+          ],
+          "corrected_current_facts": [
+            "The current status of the reciprocity-tracking/gift-cost-ledger habit is unknown, not safely assumable as current.",
+            "There is a weak active historical item suggesting the user used to track what people spent on gifts and match later.",
+            "No active evidence in the provided set confirms this habit is still the user's current approach."
+          ],
+          "usable_current_basis_item_ids": [],
+          "usable_current_basis_item_values": [],
+          "blocked_old_basis_item_ids": [
+            "p_00001"
+          ],
+          "blocked_old_basis_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "historical_but_overridden_item_ids": [
+            "p_00001"
+          ],
+          "historical_but_overridden_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "old_premise_safe": false
+        }
+      },
+      {
+        "request_id": 909,
+        "request_line": 1817,
+        "response_line": 1818,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim1_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "d1b5be7aea265593bb040a30d96a0fdc044c7ca8d3ae69a9116224f2ccda8b69",
+        "response_body_sha256": "d2b58b00caf98536ce24b095e3f3f95443f795a95f26c551d1d3e3c909e44d9e",
+        "response": {
+          "kept_refs": [
+            "active:p_00001"
+          ],
+          "useful_facts": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "rejected_refs": [
+            {
+              "ref": "stale:p_00010",
+              "reason": "About note organization, not gift-cost tracking or reciprocity."
+            },
+            {
+              "ref": "active:p_00075",
+              "reason": "About accepting repayment politely, but not about mentally tracking gift costs."
+            },
+            {
+              "ref": "active:p_00011",
+              "reason": "About cashback budgeting, unrelated to gift reciprocity."
+            },
+            {
+              "ref": "active:p_00034",
+              "reason": "About grocery rewards/coupons, not relevant."
+            },
+            {
+              "ref": "active:p_00035",
+              "reason": "About coupon management, not relevant to the gift-cost habit."
+            },
+            {
+              "ref": "active:p_00089",
+              "reason": "Unrelated task logistics."
+            },
+            {
+              "ref": "active:p_00002",
+              "reason": "Unrelated meditation habit."
+            }
+          ],
+          "reasoning_summary": "The only answer-governing evidence is the direct memory that the user tracks gift spending to match it later; the rest are unrelated logistics or adjacent money-management topics that would not change the validity check."
+        }
+      },
+      {
+        "request_id": 910,
+        "request_line": 1819,
+        "response_line": 1820,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim1_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "202a8d3457644e66d21555268e4ecbce837f513172df42ae74a91decf4129910",
+        "response_body_sha256": "b45c15e9949e4dacb1835b2f0e2ac2c73a7506adb4450033f36b9f45aebd74ec",
+        "response": {
+          "status": "PROCEED_WITH_ADJUSTMENT",
+          "confidence": 0.75,
+          "reasoning_summary": "The only current basis is a weak active preference that still points toward tracking what people spend on gifts to balance later, but it does not safely confirm the exact old habit as a settled current fact. The answer should be framed as a tentative current tendency rather than a confirmed ongoing pattern.",
+          "decisive_gate_bundle_ids": [
+            "active:p_00001"
+          ],
+          "blocker_bundle_ids": [],
+          "supporting_basis_bundle_ids": [],
+          "rejected_nearby_bundle_ids": [],
+          "corrected_current_facts": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "reframe_mode": "Treat as a weakly supported current tendency, not a confirmed stable habit"
+        }
+      },
+      {
+        "request_id": 911,
+        "request_line": 1821,
+        "response_line": 1822,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim1_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "a4de614c949c9af6e6f3bb0334941fa298109ed92086eac05670be4fc58c53af",
+        "response_body_sha256": "dd1b2ba9d85d295390c699644c16f47216207aa7dca6bbbaacb5ec4841f5898b",
+        "response": {
+          "answer": "The old assumption is no longer safe to treat as established. The only current support is a weak sign that the user tends to keep track of what people spend on gifts in order to match it later, but it does not firmly confirm a stable ongoing habit. So the safest reading is: probably a tendency, not a confirmed mental ledger habit.",
+          "brief_rationale": "The current support is weak and the prior setup is marked outdated, so it should be framed as tentative rather than confirmed."
+        },
+        "input_excerpt": {
+          "canonical_answer_grounding": {
+            "blocker_basis": [],
+            "decisive_basis": [],
+            "supporting_basis": [
+              {
+                "hit_ref": {
+                  "source": "active",
+                  "source_detail": "weak_active",
+                  "id": "p_00001",
+                  "rank_index": 1,
+                  "score": 0.5917500853538513,
+                  "bucket": "stable_preferences",
+                  "local_track": "value_or_priority_tendency"
+                },
+                "status_label": "ACTIVE_WEAK",
+                "basis_recovery_source": "global_item_value",
+                "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+              }
+            ],
+            "corrected_current_facts": [],
+            "old_premise_safe": false,
+            "premise_status": "OUTDATED",
+            "action_status": "BLOCK_AND_REFRAME"
+          }
+        }
+      }
+    ],
+    "PR": [
+      {
+        "request_id": 913,
+        "request_line": 1825,
+        "response_line": 1826,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim2_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "cc96f01250033d895c0e1fd778dabd09de9df7e62e788402f47249bee61c8d19",
+        "response_body_sha256": "da0a2e622de561ac0906aac5e6797bd75cd720462c7367c067234094af3d1c52",
+        "response": {
+          "status": "SUPPORTED",
+          "confidence": 0.88,
+          "reasoning_summary": "There is direct ACTIVE support for the reciprocity-tracking preference, and although it is weakly challenged/partly uncertain, it has not been invalidated. The current evidence is enough to ground a practical tracking system for matching gift amounts at equal value.",
+          "supporting_active_item_ids": [
+            "p_00001",
+            "p_00075"
+          ],
+          "supporting_active_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan.",
+            "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+          ],
+          "outdated_item_ids": [],
+          "outdated_item_values": [],
+          "unknown_tracks": [
+            {
+              "bucket": "stable_preferences",
+              "local_track": "value_or_priority_tendency"
+            }
+          ],
+          "corrected_current_facts": [
+            "The user currently tracks gift spending to match it later.",
+            "The user prefers reciprocity at equal value.",
+            "The user also wants repayment to stay low-friction and not become awkward."
+          ],
+          "usable_current_basis_item_ids": [
+            "p_00001",
+            "p_00075"
+          ],
+          "usable_current_basis_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan.",
+            "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+          ],
+          "blocked_old_basis_item_ids": [],
+          "blocked_old_basis_item_values": [],
+          "historical_but_overridden_item_ids": [],
+          "historical_but_overridden_item_values": [],
+          "old_premise_safe": true
+        }
+      },
+      {
+        "request_id": 914,
+        "request_line": 1827,
+        "response_line": 1828,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim2_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "4175c13040a2b0c5672c1dbb2c36816431763dfe06124750ea9bdd202f016441",
+        "response_body_sha256": "fe7c5986a6e8a2ec33744dd137a248b2e157d8fd1047a809a907c94306d4adb9",
+        "response": {
+          "status": "UNRESOLVED",
+          "confidence": 0.8,
+          "reasoning_summary": "There is ACTIVE support for the gift-reciprocity tracking preference, but it is weak and the same track is also marked UNKNOWN_CURRENT with no settled current replacement. That means the old premise is not safe to use as a current basis, but the evidence does not fully establish a direct contradiction or a clearly named replacement practice.",
+          "supporting_active_item_ids": [
+            "p_00001"
+          ],
+          "supporting_active_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "outdated_item_ids": [],
+          "outdated_item_values": [],
+          "unknown_tracks": [
+            {
+              "bucket": "stable_preferences",
+              "local_track": "value_or_priority_tendency"
+            }
+          ],
+          "corrected_current_facts": [],
+          "usable_current_basis_item_ids": [],
+          "usable_current_basis_item_values": [],
+          "blocked_old_basis_item_ids": [
+            "p_00001"
+          ],
+          "blocked_old_basis_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "historical_but_overridden_item_ids": [
+            "p_00001"
+          ],
+          "historical_but_overridden_item_values": [
+            "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+          ],
+          "old_premise_safe": false
+        }
+      },
+      {
+        "request_id": 916,
+        "request_line": 1831,
+        "response_line": 1832,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim2_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "a68a7db24028de5656789d2451e94f82c7841c3fa2f94f25339962916fb414af",
+        "response_body_sha256": "ce1cfeac0f8874db07b3a9e1eda7874fcdc64d41c015d05900632e7af6b86cfc",
+        "response": {
+          "kept_refs": [],
+          "useful_facts": [],
+          "rejected_refs": [
+            {
+              "ref": "active:p_00001",
+              "reason": "This is the blocked old basis item itself; per premise context it is unsafe/outdated to use as the grounding for the answer."
+            },
+            {
+              "ref": "active:p_00035",
+              "reason": "Unrelated domain (coupons/cashback) and does not materially affect a gift-tracking system."
+            },
+            {
+              "ref": "stale:p_00010",
+              "reason": "Generic note-organizing preference from a different topic; not answer-governing here."
+            },
+            {
+              "ref": "active:p_00034",
+              "reason": "Coupon/rewards status is unrelated to gift reciprocity tracking."
+            },
+            {
+              "ref": "active:p_00011",
+              "reason": "Cashback usage is unrelated to the requested gift-tracking setup."
+            },
+            {
+              "ref": "active:p_00089",
+              "reason": "Arts and crafts station need is unrelated to gift reciprocity planning."
+            },
+            {
+              "ref": "unknown:stable_preferences/value_or_priority_tendency",
+              "reason": "Too vague and not concrete enough to govern the answer."
+            },
+            {
+              "ref": "active:p_00075",
+              "reason": "About handling repayment awkwardly, which is adjacent but does not change the practical gift-tracking system itself."
+            }
+          ],
+          "reasoning_summary": "No candidate besides the blocked old basis directly governs a gift-reciprocity tracking system, and that item is explicitly unsafe to use. The remaining items are either unrelated, too vague, or only adjacent in topic."
+        }
+      },
+      {
+        "request_id": 917,
+        "request_line": 1833,
+        "response_line": 1834,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim2_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "8f8ce7d8b97391e6dff3988f5643a72dbe853eb88de7bc11ef1b78f60436b4ef",
+        "response_body_sha256": "030ac379a47406e1bf62a33eb232448a99f743b210f27dcab31bbff64e3d70ec",
+        "response": {
+          "hard_positive_constraints": [],
+          "hard_negative_constraints": [],
+          "unresolved_variables": [
+            "Current state is unresolved for stable_preferences/value_or_priority_tendency, so do not assume the user still wants equal-value gift reciprocity as a current requirement.",
+            "No current-memory basis is available to confirm that the user presently tracks gift spending, so do not build a system around that as an established current habit without clarification.",
+            "The requested tracking system cannot be grounded to a confirmed current setup yet, so the safest next step is to clarify the user's current preference and whether they still want a reciprocity-focused system."
+          ]
+        }
+      },
+      {
+        "request_id": 918,
+        "request_line": 1835,
+        "response_line": 1836,
+        "context": {
+          "arm": "cupmem",
+          "phase": "query_start",
+          "query_label": "dim2_query",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79"
+        },
+        "request_body_sha256": "a71b299929c71dd26df9f614ac32957bc34d80690962233a457e4a7845a62db2",
+        "response_body_sha256": "1fd5ec15a834b7240cbc6058de312b154e4aa3a8c68373216fc7ba9a332ae236",
+        "response": {
+          "answer": "The old assumption is no longer safe to use as a current basis. I can’t ground a gift-reciprocity tracking system on the idea that you still want equal-value matching, so the safest next step is to clarify whether you still want a reciprocity-focused system or a different way to track gifts.",
+          "brief_rationale": "Current preference and setup are unresolved, so the old equal-value premise should not be assumed."
+        },
+        "input_excerpt": {
+          "canonical_answer_grounding": {
+            "blocker_basis": [],
+            "decisive_basis": [],
+            "supporting_basis": [],
+            "corrected_current_facts": [],
+            "old_premise_safe": false,
+            "premise_status": "UNRESOLVED",
+            "action_status": "ASK_MIN_CLARIFICATION"
+          }
+        }
+      }
+    ],
+    "interpretation": "The displayed SR/PR reasoning depends on the weak old item and unknown track. It does not reconstruct the new pay-it-forward preference. Traces support this mechanism description; a counterfactual causal effect of removing the early errors has not been measured."
+  },
+  "answers": {
+    "cupmem": {
+      "dim1_response": "The old assumption is no longer safe to treat as established. The only current support is a weak sign that the user tends to keep track of what people spend on gifts in order to match it later, but it does not firmly confirm a stable ongoing habit. So the safest reading is: probably a tendency, not a confirmed mental ledger habit.",
+      "dim2_response": "The old assumption is no longer safe to use as a current basis. I can’t ground a gift-reciprocity tracking system on the idea that you still want equal-value matching, so the safest next step is to clarify whether you still want a reciprocity-focused system or a different way to track gifts.",
+      "dim3_response": "Keep it casual and leave the door open for repayment if they insist. A simple line like, “No worries either way—if you want to send your share later, that’s totally fine,” lets you avoid awkwardness without making it a whole back-and-forth. If they do try to settle up later, accept it graciously and move on."
+    },
+    "direct": {
+      "dim1_response": "Yes — based on the earlier conversation, the user said they do keep track of what people spend on their gifts so they can match it later. They also expressed that taking more than they give feels like accepting a loan they didn’t ask for, though they were being encouraged to let go of strict matching and instead budget based on closeness and what they can afford.",
+      "dim2_response": "Yes — a simple tracking system can work well if they want to keep things balanced.\n\nHere’s a practical setup:\n\n**1. Use a spreadsheet as the main log**\nCreate columns like:\n- **Person**\n- **Event / Occasion**\n- **Gift received**\n- **Estimated value**\n- **Date received**\n- **What you gave back**\n- **Estimated value given**\n- **Balance**\n- **Notes**\n\nYou can color-code it:\n- **Green** = you’ve matched or exceeded the value\n- **Yellow** = partial match pending\n- **Red** = you still owe a return gift\n\n**2. Keep a quick notes list on your phone**\nFor everyday use, a note app is handy. You can write:\n- “Emma — birthday — book + candle — about $35”\n- “Need to reciprocate by: holiday / next dinner / birthday”\n\nThat makes it easy to capture info immediately, then transfer it to the spreadsheet later.\n\n**3. Add reminders**\nSet calendar reminders for:\n- **the next likely occasion** with that person\n- **holiday gift planning**\n- **birthday reminders**\n\nFor example:\n- “Check gift balance for Emma — 2 weeks before her birthday”\n- “Review reciprocal gifts before holiday season”\n\n**4. Use a simple matching rule**\nTo keep it consistent, they could decide:\n- Match within **$5–10**\n- Or match **as closely as possible**\n- If they receive a notably larger gift, note the difference and plan to balance it later\n\n**5. Review periodically**\nOnce a month or before major gifting occasions:\n- scan the list\n- see who’s “ahead” or “behind”\n- plan accordingly\n\nIf you want, I can also give you a **ready-to-copy spreadsheet template** for this.",
+      "dim3_response": "If you’re happy to treat them, the smoothest move is to make that clear upfront and keep it low-key:\n\n- **Say it plainly in the moment:** “Don’t worry about it—I’ve got this.”\n- **If they insist later, give one gentle out:** “Really, no need, but if you’d feel better, you can cover next time.”\n- **If you want to keep it balanced without awkwardness:** “Let’s just do alternating treats instead of splitting every little thing.”\n\nIf they still try to pay you back afterward, you can either:\n1. **Accept graciously** if that’s important to them, or\n2. **Redirect it** with something like, “How about you just get the next coffee/dessert/etc.?”\n\nThe main idea is to avoid turning it into a negotiation. One clear offer, one polite response, then move on. That usually keeps it warm and uncomplicated."
+    }
+  },
+  "judge_scope_caveat": "The official judge sees M_old/M_new/Hidden Logic and answers, not the full source turns4/6. Direct IPA begins by declining repayment but later also permits acceptance; CUP chiefly recommends acceptance. Different labels may partly reflect default behavior emphasis, not necessarily judge inconsistency. A full-source condition-aware adjudication is needed separately; preserve the official scores.",
+  "implications": [
+    "Outcome scores and update provenance need separate checks: a correct refusal can coexist with an unsupported earlier memory update.",
+    "Track whether a later warranted review refreshes evidence even if its status is already weak.",
+    "Evaluate default and exception conditions separately, including whether compression preserves both.",
+    "These are observed failures/limitations of this single alternate-model run, not proof about the original GPT-4o-mini configuration or all CUPMem cases. No semantic modification is justified by this audit alone."
+  ]
+}

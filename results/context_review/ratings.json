@@ -1,0 +1,58 @@
+{
+  "0d7e98f28489": {
+    "ok": false,
+    "reason": "첫 값과 마지막 값의 우선순위 문제를 undef 초기화 문제로 바꿨다. 전역 값이 로컬 값을 덮는 방향도 명확하지 않다."
+  },
+  "2e614d26ade5": {
+    "ok": false,
+    "reason": "실제로 네 hunk로 나눈 로그에 hunk가 하나뿐이었다는 잘못된 조건을 덧붙였다."
+  },
+  "42c1f4f9b4b0": {
+    "ok": false,
+    "reason": "LSAN의 스택 추적 목적은 맞지만 새 보고의 ASan 런타임 선로딩 실패와 구분하지 못하고 중복 검사 제거 설명에 머문다."
+  },
+  "6951a2078e80": {
+    "ok": false,
+    "reason": "주소 sanitizer와 malloc 검사의 중복만 설명한다. 실제 런타임 로드 순서 오류와 적용 조건을 복구하지 못했다."
+  },
+  "6e8475906415": {
+    "ok": true,
+    "reason": "수동 편집과 여러 hunk에서 정규식 검색의 다른 작업을 구분한다."
+  },
+  "789c7519b30d": {
+    "ok": true,
+    "reason": "검색 키를 제한한 과거 결정에 대해 네 hunk로 나눈 뒤 /Many 검색에서 초기화되지 않은 $1 경고가 나고 다시 검색식을 묻는 실제 동작을 인용한다."
+  },
+  "8120bcea48dc": {
+    "ok": true,
+    "reason": "자동 교정 안내 문구와 도움말 구획 앞 개행을 구분한다."
+  },
+  "986c2185e184": {
+    "ok": false,
+    "reason": "ASan 런타임이 먼저 로드되지 않는 실제 오류와 glibc 버전은 보존했다. SANITIZE=address로 컴파일한 경우라는 발동 조건은 선택 구절 바로 다음 문단에 있어 누락됐다."
+  },
+  "9be2ca317054": {
+    "ok": false,
+    "reason": "대안은 LSAN 스택 추적 설정이다. MALLOC_CHECK_ 비활성화를 대안의 동작으로 잘못 귀속했다."
+  },
+  "a9212f49695d": {
+    "ok": true,
+    "reason": "단일 guide 구획 앞에 의도하지 않은 개행이 삽입된다는 실제 동작과 단일 구획 조건을 정확히 설명한다."
+  },
+  "b3612d3a50ec": {
+    "ok": false,
+    "reason": "실제 오류는 ASan 런타임의 로딩 순서다. undefined behavior와 sanitizer false negative는 주어진 기록에 없다."
+  },
+  "e2a8547e982c": {
+    "ok": true,
+    "reason": "대안의 LSAN 스택 추적과 보고의 ASan 초기 라이브러리 순서 오류를 서로 다른 동작으로 제시한다."
+  },
+  "f61afc88a548": {
+    "ok": true,
+    "reason": "수동 hunk 편집 시 주석 줄 제거와 여러 hunk를 대상으로 한 검색 오류의 작업 차이를 원문으로 보여준다."
+  },
+  "f662a7eb2a23": {
+    "ok": false,
+    "reason": "core.hooksPath가 SMTP 설정 로딩에 영향을 준다고 잘못 연결했다."
+  }
+}

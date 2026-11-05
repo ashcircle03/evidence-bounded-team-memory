@@ -1,0 +1,58 @@
+{
+  "423d7bd022cc": {
+    "case": "unseen-1p",
+    "criterion": "The defaults/config/options order fails for --identity because identity selects which config to read.",
+    "old": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+    "new": "In just fixing the --identity command-line parsing bug I discovered\nthat a narrow fix to that wouldn't do. In read_config() we had a state\nmachine that would only set config values if they weren't set already,\nand thus by proxy we wouldn't e.g. set \"to\" based on sendemail.to if\nwe'd seen sendemail.gmail.to before, with --identity=gmail.",
+    "reason": "The earlier decision relied on the assumption that setting configuration values in the order of hardcoded defaults, followed by reading configuration files, and finally command-line arguments would ensure that later settings override earlier ones. However, the new evidence shows that this is not sufficient because the current implementation uses a state machine that only updates configuration values if they are not already set, potentially leading to unintended behavior when command-line arguments override hardcoded defaults. This change applies as long as the state machine's behavior for updating configuration"
+  },
+  "467c68613b5a": {
+    "case": "prior_git-02",
+    "criterion": "A nonlocal transport can be mistaken for a local clone despite the URL test.",
+    "old": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+    "new": "However, with a specially crafted repository, Git can be tricked into\nusing a non-local transport while still setting `is_local` to \"1\" and\nusing the `clone_local()` optimization. The below test case\ndemonstrates such an instance, and shows that it can be used to include\narbitrary (known) paths in the working copy of a cloned repository on a\nvictim's machine[^1], even if local file clones are forbidden by\n`protocol.file.allow`.",
+    "reason": "The earlier decision relied on the assumption that `is_local` accurately reflects whether a clone was performed locally or remotely, but this is undermined by new evidence showing Git can be manipulated to bypass this check and include arbitrary paths in the working copy, thus changing its applicability; however, if `protocol.file.allow` is strictly enforced, the earlier result remains valid."
+  },
+  "869c7c1d3305": {
+    "case": "unseen-2p",
+    "criterion": "Skipping worktree/index updates on checkout -b is unsafe during the initial checkout.",
+    "old": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+    "new": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+    "reason": "The earlier decision relied on the specific context of a \"checkout -b\" operation to determine whether to skip updates; the report introduces new evidence showing filesystem access during such operations, thus changing its applicability to include these cases in the initial checkout process, provided that alternative cheaper tests can still exit early."
+  },
+  "86f9c1341a95": {
+    "case": "fresh-01",
+    "criterion": "Recount missed empty context lines when an editor strips their leading space.",
+    "old": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+    "new": "recount_edited_hunk() introduced in commit 2b8ea7f3c7 (\"add -p:\ncalculate offset delta for edited patches\", 2018-03-05) required all\ncontext lines to start with a space, empty lines are not counted. This\nwas intended to avoid any recounting problems if the user had\nintroduced empty lines at the end when editing the patch. However this\nintroduced a regression into 'git add -p' as it seems it is common for\neditors to strip the trailing whitespace from empty context lines when\npatches are edited thereby introducing empty lines that should be\ncounted. 'git apply' knows how to deal with such empty lines and POSIX\nstates that whether or not there is an space on an empty context line\nis implementation defined [1].",
+    "reason": "The earlier decision relied on the requirement that all context lines starting with a space should be counted to avoid recounting issues; however, the introduction of empty lines stripped by editors now affects this rule, making the previous recommendation inapplicable given that 'git apply' can handle such cases according to POSIX standards [1], unless the editor behavior is consistently known to always preserve leading spaces on empty lines."
+  },
+  "8a2842cd50a7": {
+    "case": "historical-03",
+    "criterion": "Generation-first ordering can increase walk count or time on certain topologies, contrary to the old claim.",
+    "old": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+    "new": "When paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.",
+    "reason": "The earlier decision relied on the assumption that exploring commits in topological order ensures all reachable commits are considered before processing a specific commit. However, the new evidence shows that using generation numbers instead of commit dates can lead to incorrect behavior if a commit reachable from an older version (like v4.8) can also reach the target commit (B), thus changing its applicability. This new evidence suggests that the earlier result holds true when generation numbers do not introduce such incorrect behaviors."
+  },
+  "a7d1e653eb97": {
+    "case": "scope-01",
+    "criterion": "Re-test prove on the newly stable Windows Perl configuration. The old MSYS2 crashes remain valid.",
+    "old": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+    "new": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+    "reason": "The earlier decision to reject `prove` due to frequent crashes was based on empirical evidence of crashes under stress; however, the new evidence shows that with a native Perl and Subversion bindings, 200 massively parallel prove runs completed successfully without crashes, thus changing the applicability of the earlier decision under these conditions."
+  },
+  "e3fb186a52ac": {
+    "case": "fresh-05",
+    "criterion": "Revisit the accepted loss of offset correction after edited hunks are split; the old unsplit common-case finding remains valid.",
+    "old": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+    "new": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+    "reason": "The earlier decision relied on the infrequent occurrence of hunk splits not affecting the accuracy of offset corrections, but the new evidence shows that in 18 out of 50 trials with GUI edits, the selection resulted in incorrect offset corrections after a split, thus changing its applicability."
+  },
+  "eb106aba4e4b": {
+    "case": "fresh-03",
+    "criterion": "Passing -v through to git-submodule fails because the script does not accept it.",
+    "old": "builtin/pull: respect verbosity settings in submodules",
+    "new": "In a56771a668d (builtin/pull: respect verbosity settings in submodules,\n2018-01-25), we made sure to pass on both quiet and verbose flag from\nbuiltin/pull.c to the submodule shell script. However git-submodule doesn't\nunderstand a verbose flag, which results in a bug when invoking",
+    "reason": "The incoming work introduces a new approach to handle the verbosity flag in the submodule shell script, which directly impacts the handling of verbosity settings in the pull command. This change suggests a new implementation strategy that affects the original observation about passing verbosity settings to submodules. Therefore, reviewing the original and new approaches is necessary to assess their implications and potential impact on the overall functionality and user experience."
+  }
+}

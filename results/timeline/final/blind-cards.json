@@ -1,0 +1,130 @@
+{
+  "2a7fbbc15441": {
+    "kind": "reconsider",
+    "old": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU.",
+    "new": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement.",
+    "reason": "The previous decision to shelve GPU trials was based on the lack of GPUs in production workers. However, the new evidence shows that production workers now include a supported GPU, which significantly reduces the rendering time. This change in conditions warrants a reconsideration of whether to resume GPU trials.",
+    "old_source": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU. The evidence archive is Harbor-evidence.",
+    "new_source": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement."
+  },
+  "681779ac8ad9": {
+    "kind": "reconsider",
+    "old": "We shelved Harbor GPU trials because production workers have no GPU.",
+    "new": "Production workers now include a supported GPU.",
+    "reason": "The previous decision to shelve GPU trials was based on the absence of GPUs in production workers. However, the new information indicates that production workers now include a supported GPU, which changes the feasibility of conducting GPU trials.",
+    "old_source": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU. The evidence archive is Harbor-evidence.",
+    "new_source": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement."
+  },
+  "41240e800419": {
+    "kind": "coexist",
+    "old": "On the indoor-camera set, Meadow object detection reached 94% recall.",
+    "new": "On the outdoor-camera set, Meadow object detection reached 81% recall.",
+    "reason": "The old quote reports the performance of Meadow object detection on the indoor camera set, while the new quote provides the performance on the outdoor camera set. These observations coexist under different conditions (indoor vs. outdoor settings) without contradicting each other.",
+    "old_source": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+    "new_source": "On the outdoor-camera set, Meadow object detection reached 81% recall. The indoor set was not rerun."
+  },
+  "c2d77f0b0197": {
+    "kind": "correction",
+    "old": "For the F3 review round, the Flint submission deadline is 17:00 UTC.",
+    "new": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+    "reason": "The original deadline was incorrectly stated as 17:00 UTC due to copying the wrong hour. The corrected deadline is 15:00 UTC.",
+    "old_source": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+    "new_source": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC. The rest of the earlier note still applies."
+  },
+  "46d135521ac1": {
+    "kind": "correction",
+    "old": "For the F3 review round, the Flint submission deadline is 17:00 UTC.",
+    "new": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+    "reason": "The original statement about the Flint submission deadline was incorrect due to a mistake in copying the time. The new information explicitly corrects this error, specifying the correct deadline as 15:00 UTC.",
+    "old_source": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+    "new_source": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC. The rest of the earlier note still applies."
+  },
+  "e3a6fd06490d": {
+    "kind": "reconsider",
+    "old": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.",
+    "new": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.",
+    "reason": "The previous observation noted the performance and feasibility issues with the large-dictionary variant at a 256 MB memory cap. However, the new evidence shows that with a 2 GB memory cap, the large-dictionary variant performs well and fits within the memory limit. Therefore, the feasibility and performance considerations at the higher memory cap should be reviewed.",
+    "old_source": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+    "new_source": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory. The 256 MB observation remains valid."
+  },
+  "85773ac03ede": {
+    "kind": "reconsider",
+    "old": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.",
+    "new": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.",
+    "reason": "The previous observation noted that the large-dictionary variant was deferred due to the 256 MB memory limit. However, with the new deployment providing a 2 GB memory cap, the large-dictionary variant performs well and fits within the memory limit. This suggests that the original deferral decision may no longer be necessary under the new conditions.",
+    "old_source": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+    "new_source": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory. The 256 MB observation remains valid."
+  },
+  "eb4b16337d90": {
+    "kind": "correction",
+    "old": "Under policy H2, the Haven alert threshold is 0.75.",
+    "new": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+    "reason": "The original statement about the alert threshold under policy H2 was corrected due to a typographical error. The new threshold value is explicitly stated as 0.57.",
+    "old_source": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+    "new_source": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57. The policy itself did not change."
+  },
+  "16123d43ae1c": {
+    "kind": "correction",
+    "old": "Under policy H2, the Haven alert threshold is 0.75.",
+    "new": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+    "reason": "The old quote incorrectly stated the alert threshold as 0.75 under policy H2, while the new quote explicitly corrects this mistake to 0.57 under the same policy, indicating a typographical error in the original statement.",
+    "old_source": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+    "new_source": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57. The policy itself did not change."
+  },
+  "1ae17ced09ea": {
+    "kind": "correction",
+    "old": "For release E6, the Elm export batch size is 150 records.",
+    "new": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records.",
+    "reason": "The earlier statement about the Elm export batch size for release E6 was explicitly corrected to 105 records due to a transcription error.",
+    "old_source": "For release E6, the Elm export batch size is 150 records. The evidence archive is Elm-evidence.",
+    "new_source": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records. No other assertion in my earlier note is retracted."
+  },
+  "6da4a742e91c": {
+    "kind": "correction",
+    "old": "For release E6, the Elm export batch size is 150 records.",
+    "new": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records.",
+    "reason": "The earlier statement about the Elm export batch size was explicitly corrected by the scenario author, specifying the correct batch size as 105 records for release E6.",
+    "old_source": "For release E6, the Elm export batch size is 150 records. The evidence archive is Elm-evidence.",
+    "new_source": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records. No other assertion in my earlier note is retracted."
+  },
+  "3752cce43859": {
+    "kind": "reconsider",
+    "old": "On the English-only validation set, Lumen multilingual routing had 72% accuracy. We stopped evaluating that routing because the release supported English only.",
+    "new": "The release now supports Korean as well as English. On the bilingual validation set, Lumen multilingual routing had 88% accuracy. The English-only result is unchanged.",
+    "reason": "The previous evaluation was based on the assumption that the release only supported English. However, the new information indicates that the release now supports Korean, and the accuracy on a bilingual validation set is higher than previously reported. This suggests that the decision to stop evaluating the routing may no longer be valid given the expanded language support.",
+    "old_source": "On the English-only validation set, Lumen multilingual routing had 72% accuracy. We stopped evaluating that routing because the release supported English only. The evidence archive is Lumen-evidence.",
+    "new_source": "The release now supports Korean as well as English. On the bilingual validation set, Lumen multilingual routing had 88% accuracy. The English-only result is unchanged."
+  },
+  "cea13666f142": {
+    "kind": "reconsider",
+    "old": "We stopped evaluating that routing because the release supported English only.",
+    "new": "The release now supports Korean as well as English. On the bilingual validation set, Lumen multilingual routing had 88% accuracy. The English-only result is unchanged.",
+    "reason": "The previous decision to stop evaluating the routing was based on the assumption that the release supported English only. However, the new information indicates that the release now supports Korean as well, and there is a bilingual validation set with 88% accuracy. This suggests that the evaluation should be reconsidered to include both languages.",
+    "old_source": "On the English-only validation set, Lumen multilingual routing had 72% accuracy. We stopped evaluating that routing because the release supported English only. The evidence archive is Lumen-evidence.",
+    "new_source": "The release now supports Korean as well as English. On the bilingual validation set, Lumen multilingual routing had 88% accuracy. The English-only result is unchanged."
+  },
+  "5349a33a8edf": {
+    "kind": "correction",
+    "old": "In the G9 timing run, Grove startup took 46 seconds.",
+    "new": "I correct my earlier Grove startup duration because I reversed two digits in the log summary. In the same G9 timing run, startup took 64 seconds.",
+    "reason": "The original claim about Grove startup duration in the G9 timing run was explicitly corrected due to a digit reversal in the log summary. The new observation directly contradicts the old one under the same conditions.",
+    "old_source": "In the G9 timing run, Grove startup took 46 seconds. The evidence archive is Grove-evidence.",
+    "new_source": "I correct my earlier Grove startup duration because I reversed two digits in the log summary. In the same G9 timing run, startup took 64 seconds. This is a transcription correction, not a new timing run."
+  },
+  "9b46b623d8a2": {
+    "kind": "reconsider",
+    "old": "We ruled out the parallel loader for production because the vendor had not released a supported build.",
+    "new": "The vendor has released a supported parallel-loader build for production.",
+    "reason": "The original decision to rule out the parallel loader for production was based on the lack of a supported build from the vendor. However, the new information indicates that the vendor has now released a supported parallel-loader build for production. This change in circumstances warrants reconsidering the previous decision to exclude the parallel loader from production use.",
+    "old_source": "Using the serial-loader release, Kite import took 27 minutes per archive. We ruled out the parallel loader for production because the vendor had not released a supported build. The evidence archive is Kite-evidence.",
+    "new_source": "The vendor has released a supported parallel-loader build for production. Using the parallel-loader release, Kite import took 11 minutes per archive. The serial-loader result has not been retracted."
+  },
+  "7423476f731b": {
+    "kind": "reconsider",
+    "old": "Using the serial-loader release, Kite import took 27 minutes per archive. We ruled out the parallel loader for production because the vendor had not released a supported build.",
+    "new": "The vendor has released a supported parallel-loader build for production. Using the parallel-loader release, Kite import took 11 minutes per archive.",
+    "reason": "The original decision to rule out the parallel loader was based on the lack of a supported build at the time. With the new release, the parallel loader is now available and performs better than the serial loader, which took 27 minutes per archive. This new information suggests that the parallel loader should be reconsidered for production use.",
+    "old_source": "Using the serial-loader release, Kite import took 27 minutes per archive. We ruled out the parallel loader for production because the vendor had not released a supported build. The evidence archive is Kite-evidence.",
+    "new_source": "The vendor has released a supported parallel-loader build for production. Using the parallel-loader release, Kite import took 11 minutes per archive. The serial-loader result has not been retracted."
+  }
+}

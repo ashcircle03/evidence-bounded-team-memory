@@ -1,0 +1,935 @@
+[
+  {
+    "id": "patch-search/mixed/hidden",
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "paragraphs": {
+          "1": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "paragraphs": {
+          "1": "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:",
+          "3": "If your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).",
+          "4": "We can fix that by telling perl not to respect\nmetacharacters."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "paragraphs": {
+          "2": "In Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+          "3": "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:",
+          "4": "    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+          "5": "I.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+        }
+      }
+    ]
+  },
+  {
+    "id": "patch-search/no-match/hidden",
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/d5addcf522deb05d259ecbc0946584d977879565",
+        "paragraphs": {
+          "1": "The prompt_yesno function loops indefinitely waiting for a\n\"y\" or \"n\" response. But it doesn't handle EOF, meaning\nthat we can end up in an infinite loop of reading EOF from\nstdin. One way to simulate that is with:",
+          "2": "  echo e | GIT_EDITOR='echo corrupt >' git add -p",
+          "3": "Let's break out of the loop and propagate the undef to the\ncaller. Without modifying the callers that effectively turns\nit into a \"no\" response. This is reasonable for both of the\ncurrent callers, and it leaves room for any future caller to\ncheck for undef explicitly."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "paragraphs": {
+          "1": "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:",
+          "3": "If your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).",
+          "4": "We can fix that by telling perl not to respect\nmetacharacters."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "paragraphs": {
+          "2": "In Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+          "3": "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:",
+          "4": "    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+          "5": "I.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+        }
+      }
+    ]
+  },
+  {
+    "id": "asan-preload/mixed/hidden",
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "paragraphs": {
+          "1": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+          "7": "Now we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:",
+          "10": "As the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:",
+          "14": "I think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "paragraphs": {
+          "1": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+          "2": "Using the ordinary glibc system variable detect if this is glibc >= 2.34 and\nuse GLIBC_TUNABLES and the new library."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "paragraphs": {
+          "1": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+          "2": "This fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+          "3": "    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+          "4": "when git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+        }
+      }
+    ]
+  },
+  {
+    "id": "asan-preload/no-match/hidden",
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/49da4040701f6d3dd480c6d007109c9a2fc2cb7a",
+        "paragraphs": {
+          "1": "When running the full test suite many tests can be skipped because of\nmissing prerequisites. It not easy right now to get an overview of which\nones are missing.\nWhen switching to a new machine or environment some libraries and tools\nmight be missing or maybe a dependency broke completely. In this case\nthe tests would indicate nothing since all dependant tests are simply\nskipped. This could hide broken behaviour or missing features in the\nbuild. Therefore this patch summarizes the missing prereqs at the end of\nthe test run making it easier to spot such cases.",
+          "2": " - Add failed prereqs to the test results.\n - Aggregate and then show them with the totals."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "paragraphs": {
+          "1": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+          "7": "Now we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:",
+          "10": "As the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:",
+          "14": "I think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "paragraphs": {
+          "1": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+          "2": "This fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+          "3": "    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+          "4": "when git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+        }
+      }
+    ]
+  },
+  {
+    "id": "email-priority/mixed/hidden",
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+        "paragraphs": {
+          "1": "Optimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.",
+          "2": "For boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+        "paragraphs": {
+          "1": "get-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.",
+          "2": "Since the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.",
+          "3": "Instead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "paragraphs": {
+          "1": "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+          "2": "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+          "5": "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local."
+        }
+      }
+    ]
+  },
+  {
+    "id": "email-priority/no-match/hidden",
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+        "paragraphs": {
+          "1": "get-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.",
+          "2": "Since the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.",
+          "3": "Instead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/dd84e528a34c3822e7ab0473a95e411665b37681",
+        "paragraphs": {
+          "1": "I've seen several people mis-configure git send-email on their first\nattempt because they set the sendmail.* config options - not\nsendemail.*. This patch detects this mistake and bails out with a\nfriendly warning."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "paragraphs": {
+          "1": "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+          "2": "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+          "5": "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local."
+        }
+      }
+    ]
+  },
+  {
+    "id": "commit-permissions/mixed/hidden",
+    "criterion": "Updating/writing the cache tree during commit leads to duplicate insufficient-permission errors when .git/objects cannot be written. prepare_index should be quiet; prepare_to_commit should report the error. State the duplication and unwritable condition without swapping which call should be silent.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+        "paragraphs": {
+          "1": "The search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/9c4d6c0297b7d6167bf330853139b0515b351b89",
+        "paragraphs": {
+          "1": "During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "paragraphs": {
+          "1": "Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before [ref] ([referenced subject], 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.",
+          "2": "The cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.",
+          "3": "But with [ref] the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-[ref] the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter."
+        }
+      }
+    ]
+  },
+  {
+    "id": "commit-permissions/no-match/hidden",
+    "criterion": "Updating/writing the cache tree during commit leads to duplicate insufficient-permission errors when .git/objects cannot be written. prepare_index should be quiet; prepare_to_commit should report the error. State the duplication and unwritable condition without swapping which call should be silent.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/8b7e5f79723b0f2e1d3dca4e959ad2a2041e9453",
+        "paragraphs": {
+          "1": "There is no need for an early",
+          "2": "    return it;",
+          "3": "from the loop if slash points at the end of the string, because that\nis exactly what will happen when the while condition fails at the\nstart of the next iteration."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+        "paragraphs": {
+          "1": "The search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "paragraphs": {
+          "1": "Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before [ref] ([referenced subject], 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.",
+          "2": "The cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.",
+          "3": "But with [ref] the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-[ref] the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter."
+        }
+      }
+    ]
+  },
+  {
+    "id": "help-spacing/mixed/hidden",
+    "criterion": "Moving guide output to section-printing code adds an unintended leading newline for git help --guides or other single-section output. Describe the newline and single-section condition; not missing or duplicated guide text.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+        "paragraphs": {
+          "1": "When help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.",
+          "6": "The continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.",
+          "8": "   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.",
+          "10": "   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/1b81d8cb19d8da6d865b7fca5a095dd5fec8d209",
+        "paragraphs": {
+          "1": "The help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "paragraphs": {
+          "1": "Fix a formatting regression in [ref] ([referenced subject], 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+          "7": "That we started printing an extra \"\\n\" in [ref] wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections."
+        }
+      }
+    ]
+  },
+  {
+    "id": "help-spacing/no-match/hidden",
+    "criterion": "Moving guide output to section-printing code adds an unintended leading newline for git help --guides or other single-section output. Describe the newline and single-section condition; not missing or duplicated guide text.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/659fef199fb52d4a5cb24f1dfd2b272980fc5038",
+        "paragraphs": {
+          "1": "Git has this feature which suggests similar commands (including aliases)\nin case the user specified an unknown command.",
+          "2": "This feature currently relies on a side effect of the way we expand\naliases right now: when a command is not a builtin, we use the regular\nconfig machinery (meaning: discovering the .git/ directory and\ninitializing global state such as the config cache) to see whether the\ncommand refers to an alias.",
+          "3": "However, we will change the way aliases are expanded in the next\ncommits, to use the early config instead. That means that the\nautocorrect feature can no longer discover the available aliases by\nlooking at the config cache (because it has not yet been initialized)."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+        "paragraphs": {
+          "1": "When help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.",
+          "6": "The continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.",
+          "8": "   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.",
+          "10": "   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "paragraphs": {
+          "1": "Fix a formatting regression in [ref] ([referenced subject], 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+          "7": "That we started printing an extra \"\\n\" in [ref] wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections."
+        }
+      }
+    ]
+  },
+  {
+    "id": "http-index/mixed/hidden",
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+        "paragraphs": {
+          "1": "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+          "4": "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+        "paragraphs": {
+          "1": "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+          "2": "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "paragraphs": {
+          "1": "This patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+          "2": "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+          "7": "       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).",
+          "9": "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+        }
+      }
+    ]
+  },
+  {
+    "id": "http-index/no-match/hidden",
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/e941c48d49ebe24404515acf258d8003f2374627",
+        "paragraphs": {
+          "1": "Having non-existent packs in objects/info/packs causes\ndumb HTTP clients to abort.",
+          "2": "v2: use single loop with ALLOC_GROW as suggested by Jeff King"
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+        "paragraphs": {
+          "1": "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+          "2": "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "paragraphs": {
+          "1": "This patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+          "2": "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+          "7": "       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).",
+          "9": "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+        }
+      }
+    ]
+  },
+  {
+    "id": "make-info/mixed/hidden",
+    "criterion": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+        "paragraphs": {
+          "1": "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+          "3": "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+          "4": "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+          "9": "The fix is easy: we just need to depend on the correct parent directory."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+        "paragraphs": {
+          "1": "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+          "2": "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+          "6": "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "paragraphs": {
+          "1": "Fix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+          "3": "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+          "6": "\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+          "7": "\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+          "8": "I.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+          "9": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+        }
+      }
+    ]
+  },
+  {
+    "id": "make-info/no-match/hidden",
+    "criterion": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/56da21392b10ebe161dbf426f170e74f800178cf",
+        "paragraphs": {
+          "1": "asciidoc needs asciidoc.conf, asciidoctor asciidoctor-extensions.rb.",
+          "2": "Neither needs the other."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+        "paragraphs": {
+          "1": "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+          "3": "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+          "4": "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+          "9": "The fix is easy: we just need to depend on the correct parent directory."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "paragraphs": {
+          "1": "Fix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+          "3": "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+          "6": "\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+          "7": "\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+          "8": "I.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+          "9": "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+        }
+      }
+    ]
+  },
+  {
+    "id": "freebsd-cwd/mixed/hidden",
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+        "paragraphs": {
+          "1": "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "paragraphs": {
+          "2": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+          "3": "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "paragraphs": {
+          "1": "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+          "3": "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+        }
+      }
+    ]
+  },
+  {
+    "id": "freebsd-cwd/no-match/hidden",
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+        "paragraphs": {
+          "2": "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+          "3": "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/3efe5d1d32fde899b23ebbb1fde499a0897e1c4e",
+        "paragraphs": {
+          "0": "real_path(): reject the empty string"
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "paragraphs": {
+          "1": "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+          "3": "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+        }
+      }
+    ]
+  },
+  {
+    "id": "fsck-empty/mixed/hidden",
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "paragraphs": {
+          "1": "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+        "paragraphs": {
+          "1": "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "paragraphs": {
+          "1": "Since [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+          "2": "  fatal: failed to read object <sha1>: Invalid argument",
+          "3": "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is"
+        }
+      }
+    ]
+  },
+  {
+    "id": "fsck-empty/no-match/hidden",
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/a3ed7552d6c800b476a3bdfec5fa575295ea4bdf",
+        "paragraphs": {
+          "0": "fsck: return error code when verify_pack() goes wrong"
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+        "paragraphs": {
+          "1": "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "paragraphs": {
+          "1": "Since [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+          "2": "  fatal: failed to read object <sha1>: Invalid argument",
+          "3": "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dir-diff/mixed/hidden",
+    "criterion": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+        "paragraphs": {
+          "1": "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+          "2": "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+        "paragraphs": {
+          "1": "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+          "2": "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "paragraphs": {
+          "1": "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+          "3": "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index."
+        }
+      }
+    ]
+  },
+  {
+    "id": "dir-diff/no-match/hidden",
+    "criterion": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/1f197a1de497db8898c9920fab77533dab34a03c",
+        "paragraphs": {
+          "1": "Commit 02c5631 (difftool --dir-diff: symlink all files matching the\nworking tree, 2013-03-14) does not handle the case where a file that is\nbeing compared does not exist in the working tree.  Fix this by checking\nfor existence explicitly before running git-hash-object."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+        "paragraphs": {
+          "1": "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+          "2": "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "paragraphs": {
+          "1": "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+          "3": "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index."
+        }
+      }
+    ]
+  },
+  {
+    "id": "hook/mixed/hidden",
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/a8cc594333848713b8e772cccf8159196ea85ede",
+        "paragraphs": {
+          "2": "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+          "4": "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "paragraphs": {
+          "1": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "paragraphs": {
+          "1": "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+          "2": "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+        }
+      }
+    ]
+  },
+  {
+    "id": "hook/no-match/hidden",
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/bbd837f040ebeda2d072cdf2bbd26ec61e0f445e",
+        "paragraphs": {
+          "1": "Extend the tests added in ec55559f937 (push: Add support for pre-push\nhooks, 2013-01-13) to exhaustively test for the exact input we're\nexpecting. This ensures that we e.g. don't miss a trailing newline.",
+          "2": "Appending to a file called \"actual\" is the established convention in\nthis test for hooks, see the rest of the tests added in\nec55559f937 (push: Add support for pre-push hooks, 2013-01-13). Let's\nfollow that convention here."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/f443246b9f29b815f0b98a07bb2d425628ae6522",
+        "paragraphs": {
+          "1": "Move these hooks hook away from run-command.h to and over to the new\nhook.h library."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4369e3a1a39895ab51c2bef2985255ad05957a20",
+        "paragraphs": {
+          "1": "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+          "2": "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+        }
+      }
+    ]
+  },
+  {
+    "id": "header/mixed/hidden",
+    "criterion": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "paragraphs": {
+          "1": "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+          "2": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/3b6a8db3b03adb118bfafb90bbc710068dbd6d14",
+        "paragraphs": {
+          "1": "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+          "2": "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "paragraphs": {
+          "1": "Fix a regression in my [ref] ([referenced subject], 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+          "2": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+          "3": "\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]",
+          "4": "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+        }
+      }
+    ]
+  },
+  {
+    "id": "header/no-match/hidden",
+    "criterion": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/d21f8426907e84465ab54df5b05bc81057f448d9",
+        "paragraphs": {
+          "1": "When opening a loose object file, we often do this sequence:",
+          "2": " - prepare a short buffer for the object header (on stack)",
+          "3": " - call unpack_sha1_header() and have early part of the object data\n   inflated, enough to fill the buffer"
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "paragraphs": {
+          "1": "Split up the return code for \"header too long\" from the generic\nnegative return value unpack_loose_header() returns, and report via\nerror() if we exceed MAX_HEADER_LEN.",
+          "2": "As a test added earlier in this series in t1006-cat-file.sh shows\nwe'll correctly emit zlib errors from zlib.c already in this case, so\nwe have no need to carry those return codes further down the\nstack. Let's instead just return ULHR_TOO_LONG saying we ran into the\nMAX_HEADER_LEN limit, or other negative values for \"unable to unpack\n<OID> header\"."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "paragraphs": {
+          "1": "Fix a regression in my [ref] ([referenced subject], 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+          "2": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+          "3": "\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]",
+          "4": "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object."
+        }
+      }
+    ]
+  },
+  {
+    "id": "reflog/mixed/hidden",
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/daf1d8285eeb44eeb8be92b7b01706e887f718ed",
+        "paragraphs": {
+          "2": "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+          "3": "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "paragraphs": {
+          "1": "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+          "2": "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "paragraphs": {
+          "0": "reflog: don't be noisy on empty reflogs",
+          "1": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+          "2": "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+        }
+      }
+    ]
+  },
+  {
+    "id": "reflog/no-match/hidden",
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/c809798b2acf1afdeeea02a9175677590ad8d689",
+        "paragraphs": {
+          "1": "Whenever a user runs `git reflog expire --stale-fix`, the most likely\nreason is that their repository is at least _somewhat_ corrupt. Which\nmeans that it is more than just possible that some objects are missing.",
+          "2": "If that is the case, that can currently let the command abort through\nthe phase where it tries to mark all reachable objects."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/3c8150497f3c77a2c57e73c53bd3de933b85d9a3",
+        "paragraphs": {
+          "1": "When dwim_log() returns the \"ref\" is always ether NULL or an\nxstrdup()'d string."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/57be9c6deeb1be7c3ce6270df52473eddc09a86c",
+        "paragraphs": {
+          "0": "reflog: don't be noisy on empty reflogs",
+          "1": "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+          "2": "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+        }
+      }
+    ]
+  },
+  {
+    "id": "prompt/mixed/hidden",
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "paragraphs": {
+          "1": "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+          "2": "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/8976500cbbb13270398d3b3e07a17b8cc7bff43f",
+        "paragraphs": {
+          "1": "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "paragraphs": {
+          "1": "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+          "2": "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+        }
+      }
+    ]
+  },
+  {
+    "id": "prompt/no-match/hidden",
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/15981f4eec9c6a7c12b9c0fbe98e68228c46edb7",
+        "paragraphs": {
+          "1": "Do not print a duplicate clean color code when there\nis no other indicators other than the current branch\nin colored prompt."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/1f6806cf2da84e30d162ca3aee15d16db4f1daef",
+        "paragraphs": {
+          "1": "When working with multiple remotes, it is common to switch the upstream\nfrom a remote to another. Doing so, the prompt may not be the expected\none. Providing an option to display tracking information sounds useful.",
+          "2": "Add a \"name\" option to GIT_PS1_SHOWUPSTREAM which will show the upstream\nabbrev name. This option is ignored if \"verbose\" is false."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/1e4119c81b3e203e1729e03be6e4a53eb9207f5c",
+        "paragraphs": {
+          "1": "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+          "2": "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+        }
+      }
+    ]
+  },
+  {
+    "id": "range/mixed/hidden",
+    "criterion": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "paragraphs": {
+          "1": "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/73a834e9e27906a76940f1ced5c132bce205d3f8",
+        "paragraphs": {
+          "1": "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+          "2": "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.",
+          "3": "While at it, localize these tweaks to be active only while generating\nthe range-diff, so they don't clobber the caller-provided\n'diff_options', which might be used beyond range-diff generation."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "paragraphs": {
+          "1": "In [ref] (\"[referenced subject]\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+          "2": "Fix that regression, and add a test asserting the pre-[ref]\nbehavior for some of these diff options."
+        }
+      }
+    ]
+  },
+  {
+    "id": "range/no-match/hidden",
+    "criterion": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "documents": [
+      {
+        "id": "P0",
+        "location": "https://github.com/git/git/commit/8d5ccb59def8c1737b3e055a5984eaaa4e881ce9",
+        "paragraphs": {
+          "1": "This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines."
+        }
+      },
+      {
+        "id": "P1",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "paragraphs": {
+          "1": "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well."
+        }
+      },
+      {
+        "id": "N",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "paragraphs": {
+          "1": "In [ref] (\"[referenced subject]\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+          "2": "Fix that regression, and add a test asserting the pre-[ref]\nbehavior for some of these diff options."
+        }
+      }
+    ]
+  }
+]

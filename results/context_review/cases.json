@@ -1,0 +1,3172 @@
+{
+  "t00/referenced-review": {
+    "cid": "t00",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "2e614d26ade5",
+    "distinction_card": "6e8475906415",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 296,
+        "quote": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 615,
+        "end": 975,
+        "quote": "$ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 296,
+        "quote": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because attempting to search for \"Many\" failed due to an uninitialized value, which specifically went wrong when trying to search with \"/\" after splitting into four hunks, despite there being only one hunk available for search.",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 206,
+        "quote": "Fix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "478b6af338491647ef3f40f8",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "speaker": "Jeff King",
+        "start": 43,
+        "end": 329,
+        "quote": "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses editing a hunk manually, differing from the specific operation in the incoming report which involves searching for a regex pattern \"/Many\" after splitting into multiple hunks."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/role-review": {
+    "cid": "t00",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/context-review": {
+    "cid": "t00",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "789c7519b30d",
+    "distinction_card": "f61afc88a548",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 296,
+        "quote": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 510,
+        "end": 975,
+        "quote": "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 296,
+        "quote": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.”. The new report gives the following behavior and its conditions. “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 206,
+        "quote": "Fix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "478b6af338491647ef3f40f8",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "speaker": "Jeff King",
+        "start": 43,
+        "end": 329,
+        "quote": "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:”. The reported observation is “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”.",
+      "report_anchor": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 615,
+        "end": 975,
+        "quote": "$ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 510,
+        "end": 975,
+        "quote": "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      }
+    },
+    "grounded": true,
+    "contrast": true
+  },
+  "t00/context-reversed": {
+    "cid": "t00",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "789c7519b30d",
+    "distinction_card": "f61afc88a548",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 296,
+        "quote": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 510,
+        "end": 975,
+        "quote": "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 296,
+        "quote": "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.”. The new report gives the following behavior and its conditions. “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 206,
+        "quote": "Fix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "478b6af338491647ef3f40f8",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "speaker": "Jeff King",
+        "start": 43,
+        "end": 329,
+        "quote": "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:”. The reported observation is “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”.",
+      "report_anchor": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 615,
+        "end": 975,
+        "quote": "$ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 510,
+        "end": 975,
+        "quote": "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+        "status": "source_only"
+      }
+    },
+    "grounded": true,
+    "contrast": true
+  },
+  "t00/simple": {
+    "cid": "t00",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1a26df38575e0abb113443d3",
+        "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+        "speaker": "Phillip Wood",
+        "start": 0,
+        "end": 58,
+        "quote": "add -p: only bind search key if there's more than one hunk",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 206,
+        "quote": "Fix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.",
+        "status": "source_only"
+      },
+      "reviewer": "Phillip Wood",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/referenced-review": {
+    "cid": "t01",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/role-review": {
+    "cid": "t01",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/context-review": {
+    "cid": "t01",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/simple": {
+    "cid": "t01",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "478b6af338491647ef3f40f8",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "speaker": "Jeff King",
+        "start": 535,
+        "end": 597,
+        "quote": "We can fix that by telling perl not to respect\nmetacharacters.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "cbf1ecdc79e1d03be7a5f236",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 236,
+        "end": 465,
+        "quote": "When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/referenced-review": {
+    "cid": "t02",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/role-review": {
+    "cid": "t02",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/context-review": {
+    "cid": "t02",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/context-reversed": {
+    "cid": "t02",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/simple": {
+    "cid": "t02",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "478b6af338491647ef3f40f8",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "speaker": "Jeff King",
+        "start": 350,
+        "end": 533,
+        "quote": "If your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2edf0634b6db15a66c807eb5",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 206,
+        "quote": "Fix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/referenced-review": {
+    "cid": "t03",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/role-review": {
+    "cid": "t03",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/context-review": {
+    "cid": "t03",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/simple": {
+    "cid": "t03",
+    "topic": "patch-search",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "478b6af338491647ef3f40f8",
+        "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+        "speaker": "Jeff King",
+        "start": 350,
+        "end": 533,
+        "quote": "If your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "cbf1ecdc79e1d03be7a5f236",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 236,
+        "end": 465,
+        "quote": "When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/referenced-review": {
+    "cid": "t04",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/role-review": {
+    "cid": "t04",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/context-review": {
+    "cid": "t04",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/simple": {
+    "cid": "t04",
+    "topic": "patch-search",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/referenced-review": {
+    "cid": "t05",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "b3612d3a50ec",
+    "distinction_card": "9be2ca317054",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "rationale": "Setting MALLOC_CHECK_ when compiling with -fsanitize=address went wrong because it conflicts with the requirement in glibc >= 2.34 to use GLIBC_TUNABLES instead, leading to undefined behavior and potential false negatives in address sanitization.",
+      "reviewer": "Elia Pinto",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 489,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 57,
+        "end": 253,
+        "quote": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses disabling MALLOC_CHECK_ for ASAN compatibility, differing from the incoming report's recommendation to use GLIBC_TUNABLES for glibc >= 2.34."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/role-review": {
+    "cid": "t05",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "6951a2078e80",
+    "distinction_card": "42c1f4f9b4b0",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "rationale": "Revisit the earlier decision reported as “In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment variables have been replaced by GLIBC_TUNABLES. Also the new glibc requires that you preload a library called libc_malloc_debug.so to get these features.”. The incoming evidence gives the reason. As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+      "reviewer": "Elia Pinto",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 489,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 57,
+        "end": 253,
+        "quote": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful stack traces from LSAN. This isn't required under ASAN which will emit traces such as this one for a leak in \"t/t0006-date.sh\":”, while the new report concerns “As the address sanitizer checks for a superset of the issues detected by setting MALLOC_CHECK_ (which tries to detect things like double frees and off-by-one errors) there is no need to set the latter when compiling with -fsanitize=address.”.",
+      "role_evidence": {
+        "subject": {
+          "evidence": {
+            "source_id": "6548e41a144056601f1daeb4",
+            "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+            "speaker": "Phillip Wood",
+            "start": 57,
+            "end": 297,
+            "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 301,
+            "end": 541,
+            "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address."
+          }
+        },
+        "action": {
+          "evidence": {
+            "source_id": "6548e41a144056601f1daeb4",
+            "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+            "speaker": "Phillip Wood",
+            "start": 223,
+            "end": 297,
+            "quote": "there is no need to set the latter when\ncompiling with -fsanitize=address.",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 467,
+            "end": 541,
+            "quote": "there is no need to set the latter when\ncompiling with -fsanitize=address."
+          }
+        },
+        "condition": {
+          "evidence": {
+            "source_id": "6548e41a144056601f1daeb4",
+            "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+            "speaker": "Phillip Wood",
+            "start": 258,
+            "end": 297,
+            "quote": "when\ncompiling with -fsanitize=address.",
+            "status": "source_only"
+          },
+          "assertion": {
+            "start": 502,
+            "end": 541,
+            "quote": "when\ncompiling with -fsanitize=address."
+          }
+        }
+      },
+      "explanation_mode": "source-bound"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/context-review": {
+    "cid": "t05",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "986c2185e184",
+    "distinction_card": "e2a8547e982c",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 651,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.”. The new report gives the following behavior and its conditions. “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”",
+      "reviewer": "Elia Pinto",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 489,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 57,
+        "end": 253,
+        "quote": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":”. The reported observation is “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”.",
+      "report_anchor": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 651,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+        "status": "source_only"
+      }
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/context-reversed": {
+    "cid": "t05",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-reversed",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "986c2185e184",
+    "distinction_card": "e2a8547e982c",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 651,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 75,
+        "end": 292,
+        "quote": "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.”. The new report gives the following behavior and its conditions. “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”",
+      "reviewer": "Elia Pinto",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 489,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 57,
+        "end": 253,
+        "quote": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":”. The reported observation is “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”.",
+      "report_anchor": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 651,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+        "status": "source_only"
+      }
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/simple": {
+    "cid": "t05",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "05df7a58e9a8bdd5011fb265",
+        "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+        "speaker": "Elia Pinto",
+        "start": 0,
+        "end": 73,
+        "quote": "test-lib.sh: Use GLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 489,
+        "quote": "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+        "status": "source_only"
+      },
+      "reviewer": "Elia Pinto",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/referenced-review": {
+    "cid": "t06",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/role-review": {
+    "cid": "t06",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/context-review": {
+    "cid": "t06",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/simple": {
+    "cid": "t06",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/referenced-review": {
+    "cid": "t07",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/role-review": {
+    "cid": "t07",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/context-review": {
+    "cid": "t07",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/context-reversed": {
+    "cid": "t07",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/simple": {
+    "cid": "t07",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1390,
+        "end": 1475,
+        "quote": "almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/referenced-review": {
+    "cid": "t08",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/role-review": {
+    "cid": "t08",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/context-review": {
+    "cid": "t08",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/simple": {
+    "cid": "t08",
+    "topic": "asan-preload",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 259,
+        "end": 799,
+        "quote": "$ ASAN_OPTIONS=detect_leaks=1 ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x488b94 in strdup (t/helper/test-tool+0x488b94)\n        #1 0x9444a4 in xstrdup wrapper.c:29:14\n        #2 0x5995fa in parse_date_format date.c:991:24\n        #3 0x4d2056 in show_dates t/helper/test-date.c:39:2\n        #4 0x4d174a in cmd__date t/helper/test-date.c:116:3\n        #5 0x4cce89 in cmd_main t/helper/test-tool.c:127:11\n        #6 0x4cd1e3 in main common-main.c:52:11\n        #7 0x7fef3c695e49 in",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "05b5e4ed464bbef36a0be088",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/referenced-review": {
+    "cid": "t09",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/role-review": {
+    "cid": "t09",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/context-review": {
+    "cid": "t09",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/simple": {
+    "cid": "t09",
+    "topic": "asan-preload",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1390,
+        "end": 1475,
+        "quote": "almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6548e41a144056601f1daeb4",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/referenced-review": {
+    "cid": "t10",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "0d7e98f28489",
+    "distinction_card": "f662a7eb2a23",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e6d50326d46ee3fda4b083b4",
+        "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 880,
+        "end": 1388,
+        "quote": "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "485dbfc2ec27e46c15d1f105",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 308,
+        "end": 551,
+        "quote": "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e6d50326d46ee3fda4b083b4",
+        "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 880,
+        "end": 1388,
+        "quote": "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred when the decision to initialize boolean values as undef was applied, leading to misinterpretation of repository-specific configurations over system-wide defaults, such as differing smtpServer settings between .git/config and ~/.gitconfig files.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "485dbfc2ec27e46c15d1f105",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 306,
+        "quote": "Fix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "81ecbfb3c15a4e6c47f05332",
+        "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+        "speaker": "Robert Foss",
+        "start": 163,
+        "end": 333,
+        "quote": "Since the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses the change in `core.hooksPath` which affects how configuration options like `sendemail.smtpserver` are loaded, differing from the specific issue with `undef` values in `sendemail.smtpserveroption`."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/role-review": {
+    "cid": "t10",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/context-review": {
+    "cid": "t10",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no supported observation with its condition in the report window"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/context-reversed": {
+    "cid": "t10",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no supported observation with its condition in the report window"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/simple": {
+    "cid": "t10",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e6d50326d46ee3fda4b083b4",
+        "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1488,
+        "end": 1624,
+        "quote": "We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "485dbfc2ec27e46c15d1f105",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 306,
+        "quote": "Fix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/referenced-review": {
+    "cid": "t11",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/role-review": {
+    "cid": "t11",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/context-review": {
+    "cid": "t11",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/simple": {
+    "cid": "t11",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e6d50326d46ee3fda4b083b4",
+        "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 1488,
+        "end": 1624,
+        "quote": "We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "53149a89c89e58acdb995df1",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 272,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/referenced-review": {
+    "cid": "t12",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/role-review": {
+    "cid": "t12",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/context-review": {
+    "cid": "t12",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/context-reversed": {
+    "cid": "t12",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/simple": {
+    "cid": "t12",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "81ecbfb3c15a4e6c47f05332",
+        "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+        "speaker": "Robert Foss",
+        "start": 48,
+        "end": 161,
+        "quote": "get-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "485dbfc2ec27e46c15d1f105",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 306,
+        "quote": "Fix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+        "status": "source_only"
+      },
+      "reviewer": "Robert Foss",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/referenced-review": {
+    "cid": "t13",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/role-review": {
+    "cid": "t13",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/context-review": {
+    "cid": "t13",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/simple": {
+    "cid": "t13",
+    "topic": "email-priority",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "81ecbfb3c15a4e6c47f05332",
+        "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+        "speaker": "Robert Foss",
+        "start": 48,
+        "end": 161,
+        "quote": "get-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "53149a89c89e58acdb995df1",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 272,
+        "quote": "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+        "status": "source_only"
+      },
+      "reviewer": "Robert Foss",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/referenced-review": {
+    "cid": "t14",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/role-review": {
+    "cid": "t14",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/context-review": {
+    "cid": "t14",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/simple": {
+    "cid": "t14",
+    "topic": "email-priority",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "81ecbfb3c15a4e6c47f05332",
+        "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+        "speaker": "Robert Foss",
+        "start": 48,
+        "end": 161,
+        "quote": "get-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "485dbfc2ec27e46c15d1f105",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 65,
+        "end": 306,
+        "quote": "Fix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+        "status": "source_only"
+      },
+      "reviewer": "Robert Foss",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/referenced-review": {
+    "cid": "t15",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/role-review": {
+    "cid": "t15",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/context-review": {
+    "cid": "t15",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/context-reversed": {
+    "cid": "t15",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/simple": {
+    "cid": "t15",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "6e41f2f708ac441aacf1a36e",
+        "location": "https://github.com/git/git/commit/9c4d6c0297b7d6167bf330853139b0515b351b89",
+        "speaker": "David Turner",
+        "start": 51,
+        "end": 100,
+        "quote": "During the commit process, update the cache-tree.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "c5c9646e7f892ad8e7db7a63",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 306,
+        "end": 457,
+        "quote": "The cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc.",
+        "status": "source_only"
+      },
+      "reviewer": "David Turner",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/referenced-review": {
+    "cid": "t16",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/role-review": {
+    "cid": "t16",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/context-review": {
+    "cid": "t16",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/simple": {
+    "cid": "t16",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "6e41f2f708ac441aacf1a36e",
+        "location": "https://github.com/git/git/commit/9c4d6c0297b7d6167bf330853139b0515b351b89",
+        "speaker": "David Turner",
+        "start": 51,
+        "end": 100,
+        "quote": "During the commit process, update the cache-tree.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "035d8bd1d692376c207ba109",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 830,
+        "end": 1007,
+        "quote": "So let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set.",
+        "status": "source_only"
+      },
+      "reviewer": "David Turner",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/referenced-review": {
+    "cid": "t17",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/role-review": {
+    "cid": "t17",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/context-review": {
+    "cid": "t17",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/context-reversed": {
+    "cid": "t17",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/simple": {
+    "cid": "t17",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/referenced-review": {
+    "cid": "t18",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/role-review": {
+    "cid": "t18",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/context-review": {
+    "cid": "t18",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/simple": {
+    "cid": "t18",
+    "topic": "commit-permissions",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "53d0395a1ad627b867ac32bd",
+        "location": "https://github.com/git/git/commit/8b7e5f79723b0f2e1d3dca4e959ad2a2041e9453",
+        "speaker": "Michael Haggerty",
+        "start": 87,
+        "end": 250,
+        "quote": "from the loop if slash points at the end of the string, because that\nis exactly what will happen when the while condition fails at the\nstart of the next iteration.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "035d8bd1d692376c207ba109",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 830,
+        "end": 1007,
+        "quote": "So let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set.",
+        "status": "source_only"
+      },
+      "reviewer": "Michael Haggerty",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/referenced-review": {
+    "cid": "t19",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/role-review": {
+    "cid": "t19",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/context-review": {
+    "cid": "t19",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/simple": {
+    "cid": "t19",
+    "topic": "commit-permissions",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "6be6488482f084e8d6ccd4e7",
+        "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+        "speaker": "Michael Haggerty",
+        "start": 64,
+        "end": 214,
+        "quote": "The search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "c5c9646e7f892ad8e7db7a63",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 306,
+        "end": 457,
+        "quote": "The cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc.",
+        "status": "source_only"
+      },
+      "reviewer": "Michael Haggerty",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/referenced-review": {
+    "cid": "t20",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "a9212f49695d",
+    "distinction_card": "8120bcea48dc",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "f75e27e4cf18fb975ab7ec10",
+        "location": "https://github.com/git/git/commit/1b81d8cb19d8da6d865b7fca5a095dd5fec8d209",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 53,
+        "end": 322,
+        "quote": "The help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7e8110d78a077b61c3d77ffa",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 320,
+        "quote": "Fix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "f75e27e4cf18fb975ab7ec10",
+        "location": "https://github.com/git/git/commit/1b81d8cb19d8da6d865b7fca5a095dd5fec8d209",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 53,
+        "end": 322,
+        "quote": "The help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow.",
+        "status": "source_only"
+      },
+      "rationale": "The regression occurred because adjusting the output of \"git help --guides\" led to an unintended newline being inserted before the only section when there are no sections to separate, contrary to the expectation of a single guide section without additional whitespace.",
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "attribution": {
+        "source_id": "7e8110d78a077b61c3d77ffa",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 53,
+        "end": 320,
+        "quote": "Fix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+        "status": "source_only"
+      },
+      "alternative": {
+        "source_id": "4586b4a5728ee8be0308d0f7",
+        "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+        "speaker": "Marc Branchaud",
+        "start": 580,
+        "end": 730,
+        "quote": "The continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.",
+        "status": "source_only"
+      },
+      "distinction": "The other decision addresses improving the phrasing of continuation messages, which differs from the incoming report's focus on adjusting newline insertion in help command outputs."
+    },
+    "grounded": true,
+    "contrast": true
+  },
+  "t20/role-review": {
+    "cid": "t20",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "incomplete role evidence for the reported change"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/context-review": {
+    "cid": "t20",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no supported observation with its condition in the report window"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/context-reversed": {
+    "cid": "t20",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no supported observation with its condition in the report window"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/simple": {
+    "cid": "t20",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "4586b4a5728ee8be0308d0f7",
+        "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+        "speaker": "Marc Branchaud",
+        "start": 629,
+        "end": 654,
+        "quote": "This commit cleans it up.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7e8110d78a077b61c3d77ffa",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 693,
+        "end": 881,
+        "quote": "With 1b81d8cb19d we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in cfb22a02ab5 (help:\nuse command-list.h for common command list, 2018-05-10).",
+        "status": "source_only"
+      },
+      "reviewer": "Marc Branchaud",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/referenced-review": {
+    "cid": "t21",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/role-review": {
+    "cid": "t21",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/context-review": {
+    "cid": "t21",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/simple": {
+    "cid": "t21",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "f75e27e4cf18fb975ab7ec10",
+        "location": "https://github.com/git/git/commit/1b81d8cb19d8da6d865b7fca5a095dd5fec8d209",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 134,
+        "end": 175,
+        "quote": "Let's move this list to command-list.txt.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "47023da0d94f1d8e770eda2e",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 126,
+        "end": 283,
+        "quote": "Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+        "status": "source_only"
+      },
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/referenced-review": {
+    "cid": "t22",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/role-review": {
+    "cid": "t22",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/context-review": {
+    "cid": "t22",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/context-reversed": {
+    "cid": "t22",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "context-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/simple": {
+    "cid": "t22",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "a25dc9e8e683e9dd033a20e7",
+        "location": "https://github.com/git/git/commit/659fef199fb52d4a5cb24f1dfd2b272980fc5038",
+        "speaker": "Johannes Schindelin",
+        "start": 475,
+        "end": 581,
+        "quote": "However, we will change the way aliases are expanded in the next\ncommits, to use the early config instead.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7e8110d78a077b61c3d77ffa",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 693,
+        "end": 881,
+        "quote": "With 1b81d8cb19d we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in cfb22a02ab5 (help:\nuse command-list.h for common command list, 2018-05-10).",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/referenced-review": {
+    "cid": "t23",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/role-review": {
+    "cid": "t23",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/context-review": {
+    "cid": "t23",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/simple": {
+    "cid": "t23",
+    "topic": "help-spacing",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "a25dc9e8e683e9dd033a20e7",
+        "location": "https://github.com/git/git/commit/659fef199fb52d4a5cb24f1dfd2b272980fc5038",
+        "speaker": "Johannes Schindelin",
+        "start": 797,
+        "end": 988,
+        "quote": "This is slightly less performant than the previous way, as the early\nconfig is used *twice*: once to see whether the command refers to an\nalias, and then to see what aliases are most similar.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "47023da0d94f1d8e770eda2e",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 650,
+        "end": 826,
+        "quote": "With [ref] we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in [ref] (help:\nuse command-list.h for common command list, 2018-05-10).",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/referenced-review": {
+    "cid": "t24",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "referenced-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/role-review": {
+    "cid": "t24",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "role-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/context-review": {
+    "cid": "t24",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "context-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "attributed decision absent or ambiguous among earlier records"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/simple": {
+    "cid": "t24",
+    "topic": "help-spacing",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "4586b4a5728ee8be0308d0f7",
+        "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+        "speaker": "Marc Branchaud",
+        "start": 764,
+        "end": 832,
+        "quote": "WARNING: You called a Git command named 'lgo', which does not exist.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7e8110d78a077b61c3d77ffa",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 493,
+        "end": 691,
+        "quote": "That we started printing an extra \"\\n\" in 1b81d8cb19d wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.",
+        "status": "source_only"
+      },
+      "reviewer": "Marc Branchaud",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  }
+}

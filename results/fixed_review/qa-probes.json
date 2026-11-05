@@ -1,0 +1,128 @@
+{
+  "git-cvs-pos": {
+    "control": {
+      "status": "invalid_citation"
+    },
+    "pulled": {
+      "status": "invalid_citation"
+    },
+    "question": "What literal value is needed to initialize an empty CVS password when neither source supplies one?",
+    "context": [
+      {
+        "action": "reassess",
+        "change_sentence": "This fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass).",
+        "goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+        "incoming": {
+          "end": 275,
+          "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+          "quote": "This fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass).",
+          "source_id": "ba1f0a1210f31cd59ed5aa6f",
+          "speaker": "Clemens Buchacher",
+          "start": 182,
+          "status": "source_only"
+        },
+        "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+        "previous": {
+          "end": 192,
+          "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+          "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+          "source_id": "376c68529ed37ac87f06e055",
+          "speaker": "Pascal Obry",
+          "start": 45,
+          "status": "source_only"
+        },
+        "prior_rationale": {
+          "end": 192,
+          "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+          "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.",
+          "source_id": "376c68529ed37ac87f06e055",
+          "speaker": "Pascal Obry",
+          "start": 45,
+          "status": "source_only"
+        },
+        "rationale": "The report reveals a decision to avoid scrambling passwords stored in .cvspass, which may need reevaluation given the fix addressing the unintended scrambling of command-line passwords introduced by 3fb9d582.",
+        "reviewer": "Pascal Obry",
+        "strategy": "fixed-review",
+        "id": "828ada4c6836085b75834aad",
+        "proposal": "828ada4c6836085b75834aad",
+        "kind": "followup",
+        "status": "pending"
+      }
+    ]
+  },
+  "development-checkout": {
+    "control": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 269,
+          "end": 580,
+          "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+          "status": "source_only",
+          "answer": "checkout.optimizeNewBranch"
+        }
+      ]
+    },
+    "pulled": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 269,
+          "end": 580,
+          "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+          "status": "source_only",
+          "answer": "checkout.optimizeNewBranch"
+        }
+      ]
+    },
+    "question": "Which configuration key opts sparse-checkout users into the earlier optimized branch-creation behavior?",
+    "context": [
+      {
+        "action": "reassess",
+        "change_sentence": "This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+        "goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+        "incoming": {
+          "end": 429,
+          "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+          "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+          "source_id": "0eb50c578a29e4b7fe4dd4de",
+          "speaker": "Ben Peart",
+          "start": 62,
+          "status": "source_only"
+        },
+        "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+        "previous": {
+          "end": 267,
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "speaker": "Ben Peart",
+          "start": 51,
+          "status": "source_only"
+        },
+        "prior_rationale": {
+          "end": 267,
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "speaker": "Ben Peart",
+          "start": 51,
+          "status": "source_only"
+        },
+        "rationale": "The earlier decision to skip a full checkout for 'checkout -b' might need revisiting given the new evidence that it causes a regression fixed by fa655d8411 (checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+        "reviewer": "Ben Peart",
+        "strategy": "fixed-review",
+        "id": "84092573d302e9e85a7f2cd6",
+        "proposal": "84092573d302e9e85a7f2cd6",
+        "kind": "followup",
+        "status": "pending"
+      }
+    ]
+  }
+}

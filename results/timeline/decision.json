@@ -1,0 +1,1315 @@
+{
+  "selected": "direct",
+  "checks": {
+    "more_grounded_reviews": false,
+    "no_more_unsupported_alerts": true,
+    "no_paired_qa_loss": false,
+    "no_raw_loss": true,
+    "no_unreviewed_promotion": true
+  },
+  "paired": {
+    "final-01": {
+      "type": "reconsider",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-02": {
+      "type": "reconsider",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": [
+        "other_preserved"
+      ]
+    },
+    "final-03": {
+      "type": "reconsider",
+      "review_gain": false,
+      "review_loss": true,
+      "qa_gains": [
+        "changed"
+      ],
+      "qa_losses": []
+    },
+    "final-04": {
+      "type": "reconsider",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": [
+        "changed"
+      ]
+    },
+    "final-05": {
+      "type": "coexist",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": [
+        "changed",
+        "reviewed"
+      ]
+    },
+    "final-06": {
+      "type": "coexist",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [
+        "natural_before"
+      ],
+      "qa_losses": []
+    },
+    "final-07": {
+      "type": "coexist",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": [
+        "changed",
+        "reviewed"
+      ]
+    },
+    "final-08": {
+      "type": "coexist",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": [
+        "natural_after_repeat"
+      ]
+    },
+    "final-09": {
+      "type": "conflict",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [
+        "other_preserved"
+      ],
+      "qa_losses": []
+    },
+    "final-10": {
+      "type": "conflict",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-11": {
+      "type": "conflict",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-12": {
+      "type": "conflict",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-13": {
+      "type": "correction",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-14": {
+      "type": "correction",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [
+        "natural_before",
+        "natural_after"
+      ],
+      "qa_losses": []
+    },
+    "final-15": {
+      "type": "correction",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-16": {
+      "type": "correction",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-17": {
+      "type": "irrelevant",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-18": {
+      "type": "irrelevant",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    },
+    "final-19": {
+      "type": "irrelevant",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [
+        "changed",
+        "reviewed"
+      ],
+      "qa_losses": []
+    },
+    "final-20": {
+      "type": "irrelevant",
+      "review_gain": false,
+      "review_loss": false,
+      "qa_gains": [],
+      "qa_losses": []
+    }
+  },
+  "qa_gains": [
+    "final-03/changed",
+    "final-06/natural_before",
+    "final-09/other_preserved",
+    "final-14/natural_before",
+    "final-14/natural_after",
+    "final-19/changed",
+    "final-19/reviewed"
+  ],
+  "qa_losses": [
+    "final-02/other_preserved",
+    "final-04/changed",
+    "final-05/changed",
+    "final-05/reviewed",
+    "final-07/changed",
+    "final-07/reviewed",
+    "final-08/natural_after_repeat"
+  ],
+  "by_mode": {
+    "direct": {
+      "types": {
+        "reconsider": {
+          "streams": 4,
+          "required_reviews": 4,
+          "grounded_reviews": 4,
+          "unsupported_alerts": 0,
+          "qa_correct": 21,
+          "qa_total": 28
+        },
+        "coexist": {
+          "streams": 4,
+          "required_reviews": 0,
+          "grounded_reviews": 0,
+          "unsupported_alerts": 3,
+          "qa_correct": 24,
+          "qa_total": 28
+        },
+        "conflict": {
+          "streams": 4,
+          "required_reviews": 4,
+          "grounded_reviews": 0,
+          "unsupported_alerts": 6,
+          "qa_correct": 19,
+          "qa_total": 28
+        },
+        "correction": {
+          "streams": 4,
+          "required_reviews": 4,
+          "grounded_reviews": 4,
+          "unsupported_alerts": 2,
+          "qa_correct": 21,
+          "qa_total": 28
+        },
+        "irrelevant": {
+          "streams": 4,
+          "required_reviews": 0,
+          "grounded_reviews": 0,
+          "unsupported_alerts": 3,
+          "qa_correct": 26,
+          "qa_total": 28
+        }
+      },
+      "checkpoints": {
+        "natural_before": {
+          "correct": 18,
+          "total": 20
+        },
+        "old_before": {
+          "correct": 20,
+          "total": 20
+        },
+        "changed": {
+          "correct": 7,
+          "total": 20
+        },
+        "natural_after": {
+          "correct": 18,
+          "total": 20
+        },
+        "reviewed": {
+          "correct": 10,
+          "total": 20
+        },
+        "other_preserved": {
+          "correct": 19,
+          "total": 20
+        },
+        "natural_after_repeat": {
+          "correct": 19,
+          "total": 20
+        }
+      },
+      "qa_failures": [
+        {
+          "case": "final-01",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-01",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-09",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-09",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-09",
+          "checkpoint": "other_preserved",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-06",
+          "checkpoint": "natural_before",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "answer"
+          ]
+        },
+        {
+          "case": "final-06",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-06",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-14",
+          "checkpoint": "natural_before",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "answer"
+          ]
+        },
+        {
+          "case": "final-14",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-14",
+          "checkpoint": "natural_after",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "answer"
+          ]
+        },
+        {
+          "case": "final-14",
+          "checkpoint": "natural_after_repeat",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "answer"
+          ]
+        },
+        {
+          "case": "final-03",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-03",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-11",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-11",
+          "checkpoint": "reviewed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-19",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-19",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-08",
+          "checkpoint": "natural_after",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-16",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-13",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-02",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-02",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-10",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-10",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-15",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-04",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-12",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-12",
+          "checkpoint": "reviewed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        }
+      ],
+      "qa_failure_categories": {
+        "invalid_model_output": 18,
+        "answer_evidence_scope_or_status_error": 11
+      },
+      "repeated_arrival_alerts": [
+        {
+          "case": "final-09",
+          "proposal": {
+            "history": [
+              "63b7606d609cfdf518bf1bf9",
+              "8d66455d38a7a6ab390e5d7c",
+              "b692843b01d7115d0f61741f",
+              "e7b3e8fafd42dbf7a5d86187"
+            ],
+            "incoming": {
+              "end": 129,
+              "location": "scenario://timeline/final-09/repeat",
+              "quote": "My independent reading under the same build A8 defaults gives the Anchor connection limit as 96 connections.",
+              "source_id": "13051f69b0767435e64a22d1",
+              "speaker": "Scenario observer final-09",
+              "start": 21
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 71,
+              "location": "scenario://timeline/final-09/1",
+              "quote": "Under build A8 defaults, the Anchor connection limit is 64 connections.",
+              "source_id": "63b7606d609cfdf518bf1bf9",
+              "speaker": "Scenario author final-09",
+              "start": 0
+            },
+            "reason": "The previous claim about the Anchor connection limit being 64 under build A8 defaults is now challenged by a new independent reading which reports a limit of 96 connections under the same conditions. This discrepancy requires a review of the original claim to determine the correct value.",
+            "reviewer": "Scenario author final-09",
+            "id": "34644117fcbc9b86d9cd49be",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-17",
+          "proposal": {
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "874daa62025043d8e1b018a8",
+              "9dc0b2e4f9c6fdd67c0ff939",
+              "c963eba7eddb3a01acf3f8a4"
+            ],
+            "incoming": {
+              "end": 137,
+              "location": "scenario://timeline/final-17/repeat",
+              "quote": "No failover test or transport run was performed.",
+              "source_id": "822630516667d146d1717bb7",
+              "speaker": "Scenario observer final-17",
+              "start": 89
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 110,
+              "location": "scenario://timeline/final-17/1",
+              "quote": "We deferred the transport rollout because failover testing is incomplete.",
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "speaker": "Scenario author final-17",
+              "start": 37
+            },
+            "reason": "The original statement suggested that the transport rollout was deferred due to incomplete failover testing. However, the new information indicates that no failover tests were conducted at all, which may imply a need to reconsider the rationale behind deferring the transport rollout.",
+            "reviewer": "Scenario author final-17",
+            "id": "a5b5000b71518c250590e9d4",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-14",
+          "proposal": {
+            "history": [
+              "0cfc6bd91368da0bac200b9c",
+              "72646eaf0ee3dba8123453fb",
+              "aa44a4570bafb203e725a115",
+              "ee4adb92d98af949eb65bf37"
+            ],
+            "incoming": {
+              "end": 169,
+              "location": "scenario://timeline/final-14/repeat",
+              "quote": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+              "source_id": "b7a70e57166ae1ee7115ee55",
+              "speaker": "Scenario author final-14",
+              "start": 21
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 148,
+              "location": "scenario://timeline/final-14/3",
+              "quote": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+              "source_id": "0cfc6bd91368da0bac200b9c",
+              "speaker": "Scenario author final-14",
+              "start": 0
+            },
+            "reason": "The previous correction of the deadline from 17:00 UTC to 15:00 UTC is reiterated without any new information or condition change.",
+            "reviewer": "Scenario author final-14",
+            "id": "43d402f891fc886c0d001bca",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-13",
+          "proposal": {
+            "history": [
+              "540eb85de6a0200d9433edc2",
+              "59261ebef9f950461bc01147",
+              "5e4e5cbaf2a8c9eed4fc9463",
+              "d721dcc5a984670e00fc42bb"
+            ],
+            "incoming": {
+              "end": 162,
+              "location": "scenario://timeline/final-13/repeat",
+              "quote": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records.",
+              "source_id": "359db929a23dc701a6cbee6b",
+              "speaker": "Scenario author final-13",
+              "start": 21
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 141,
+              "location": "scenario://timeline/final-13/3",
+              "quote": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records.",
+              "source_id": "59261ebef9f950461bc01147",
+              "speaker": "Scenario author final-13",
+              "start": 0
+            },
+            "reason": "The incoming source repeats the exact same correction without introducing any new information or changing the conditions. It does not warrant reconsideration but confirms the previous correction.",
+            "reviewer": "Scenario author final-13",
+            "id": "7c3c7528353947517f493122",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-12",
+          "proposal": {
+            "history": [
+              "147e740af432277535045201",
+              "31ebd089ee9f777346bd3d42",
+              "5d0be6727cd4b7f7dc3c3484",
+              "b1f5b8f4cf4acdd11a776945"
+            ],
+            "incoming": {
+              "end": 124,
+              "location": "scenario://timeline/final-12/repeat",
+              "quote": "My independent inspection of the same staging D4 configuration reports the Drift callback port as 8092.",
+              "source_id": "fe360003e79f7ebf079a01a6",
+              "speaker": "Scenario observer final-12",
+              "start": 21
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 65,
+              "location": "scenario://timeline/final-12/1",
+              "quote": "In the staging D4 configuration, the Drift callback port is 8082.",
+              "source_id": "147e740af432277535045201",
+              "speaker": "Scenario author final-12",
+              "start": 0
+            },
+            "reason": "The original statement about the Drift callback port being 8082 needs to be reconsidered due to the new observation that the port is reported as 8092 by an independent inspector. There is no record of any configuration change, indicating a potential discrepancy that requires further investigation.",
+            "reviewer": "Scenario author final-12",
+            "id": "04676f779b2e55bdcb9105b5",
+            "status": "pending"
+          }
+        }
+      ],
+      "natural_qa_regressions": {
+        "natural_after": [
+          "final-08"
+        ],
+        "natural_after_repeat": []
+      },
+      "correction_workflows": [
+        {
+          "case": "final-14",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        },
+        {
+          "case": "final-16",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        },
+        {
+          "case": "final-13",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        },
+        {
+          "case": "final-15",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        }
+      ],
+      "ingest_errors_by_stage": {}
+    },
+    "indexed": {
+      "types": {
+        "reconsider": {
+          "streams": 4,
+          "required_reviews": 4,
+          "grounded_reviews": 3,
+          "unsupported_alerts": 1,
+          "qa_correct": 20,
+          "qa_total": 28
+        },
+        "coexist": {
+          "streams": 4,
+          "required_reviews": 0,
+          "grounded_reviews": 0,
+          "unsupported_alerts": 1,
+          "qa_correct": 20,
+          "qa_total": 28
+        },
+        "conflict": {
+          "streams": 4,
+          "required_reviews": 4,
+          "grounded_reviews": 0,
+          "unsupported_alerts": 5,
+          "qa_correct": 20,
+          "qa_total": 28
+        },
+        "correction": {
+          "streams": 4,
+          "required_reviews": 4,
+          "grounded_reviews": 4,
+          "unsupported_alerts": 1,
+          "qa_correct": 23,
+          "qa_total": 28
+        },
+        "irrelevant": {
+          "streams": 4,
+          "required_reviews": 0,
+          "grounded_reviews": 0,
+          "unsupported_alerts": 4,
+          "qa_correct": 28,
+          "qa_total": 28
+        }
+      },
+      "checkpoints": {
+        "natural_before": {
+          "correct": 20,
+          "total": 20
+        },
+        "old_before": {
+          "correct": 20,
+          "total": 20
+        },
+        "changed": {
+          "correct": 6,
+          "total": 20
+        },
+        "natural_after": {
+          "correct": 19,
+          "total": 20
+        },
+        "reviewed": {
+          "correct": 9,
+          "total": 20
+        },
+        "other_preserved": {
+          "correct": 19,
+          "total": 20
+        },
+        "natural_after_repeat": {
+          "correct": 18,
+          "total": 20
+        }
+      },
+      "qa_failures": [
+        {
+          "case": "final-01",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-01",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-09",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-09",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-06",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-06",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-14",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-14",
+          "checkpoint": "natural_after_repeat",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "answer"
+          ]
+        },
+        {
+          "case": "final-03",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-11",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-11",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-08",
+          "checkpoint": "natural_after",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-08",
+          "checkpoint": "natural_after_repeat",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-16",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-05",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-05",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-13",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-02",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-02",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-02",
+          "checkpoint": "other_preserved",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source"
+          ]
+        },
+        {
+          "case": "final-10",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-10",
+          "checkpoint": "reviewed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-07",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-07",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-15",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-04",
+          "checkpoint": "changed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-04",
+          "checkpoint": "reviewed",
+          "category": "invalid_model_output",
+          "errors": [
+            "kind",
+            "answer_count",
+            "source",
+            "source"
+          ]
+        },
+        {
+          "case": "final-12",
+          "checkpoint": "changed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        },
+        {
+          "case": "final-12",
+          "checkpoint": "reviewed",
+          "category": "answer_evidence_scope_or_status_error",
+          "errors": [
+            "kind"
+          ]
+        }
+      ],
+      "qa_failure_categories": {
+        "invalid_model_output": 20,
+        "answer_evidence_scope_or_status_error": 9
+      },
+      "repeated_arrival_alerts": [
+        {
+          "case": "final-17",
+          "proposal": {
+            "history": [
+              "3a81cbc1f34e14e7635029cf",
+              "874daa62025043d8e1b018a8",
+              "9dc0b2e4f9c6fdd67c0ff939",
+              "c963eba7eddb3a01acf3f8a4"
+            ],
+            "incoming": {
+              "end": 137,
+              "location": "scenario://timeline/final-17/repeat",
+              "quote": "No failover test or transport run was performed.",
+              "source_id": "822630516667d146d1717bb7",
+              "speaker": "Scenario observer final-17",
+              "start": 89
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 110,
+              "location": "scenario://timeline/final-17/1",
+              "quote": "We deferred the transport rollout because failover testing is incomplete.",
+              "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+              "speaker": "Scenario author final-17",
+              "start": 37
+            },
+            "reason": "The previous decision to defer the transport rollout was based on the incompleteness of failover testing. However, the new information indicates that no failover tests were actually conducted, which may imply a different reason for the deferral or a need to reassess the readiness for transport rollout.",
+            "reviewer": "Scenario author final-17",
+            "id": "8e5765ec02c23c91f8b7f7ff",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-19",
+          "proposal": {
+            "history": [
+              "0621504f23de1551f05ed0f9",
+              "d80d47360c531a124e9217fd",
+              "e1e971dd574bf90f69129aab",
+              "e667c35ba3fe979d3f413887"
+            ],
+            "incoming": {
+              "end": 148,
+              "location": "scenario://timeline/final-19/repeat",
+              "quote": "The meeting covered scheduling only, and no model evaluation or bias audit was run.",
+              "source_id": "46284cac2e5e6509bba5d740",
+              "speaker": "Scenario observer final-19",
+              "start": 65
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 103,
+              "location": "scenario://timeline/final-19/1",
+              "quote": "We rejected deployment because the offline bias audit is unfinished.",
+              "source_id": "d80d47360c531a124e9217fd",
+              "speaker": "Scenario author final-19",
+              "start": 35
+            },
+            "reason": "The previous decision to reject deployment due to an unfinished offline bias audit may need reconsideration as the incoming source indicates that no bias audit was conducted during the recent meeting.",
+            "reviewer": "Scenario author final-19",
+            "id": "4404ac1f4ff24d968d8a3194",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-13",
+          "proposal": {
+            "history": [
+              "540eb85de6a0200d9433edc2",
+              "59261ebef9f950461bc01147",
+              "5e4e5cbaf2a8c9eed4fc9463",
+              "d721dcc5a984670e00fc42bb"
+            ],
+            "incoming": {
+              "end": 162,
+              "location": "scenario://timeline/final-13/repeat",
+              "quote": "I correct my earlier Elm export batch-size note: I transcribed the count incorrectly. For the same release E6, the batch size is 105 records.",
+              "source_id": "359db929a23dc701a6cbee6b",
+              "speaker": "Scenario author final-13",
+              "start": 21
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 57,
+              "location": "scenario://timeline/final-13/1",
+              "quote": "For release E6, the Elm export batch size is 150 records.",
+              "source_id": "540eb85de6a0200d9433edc2",
+              "speaker": "Scenario author final-13",
+              "start": 0
+            },
+            "reason": "The earlier statement about the Elm export batch size for release E6 was explicitly corrected to 105 records due to a transcription error.",
+            "reviewer": "Scenario author final-13",
+            "id": "25e2d1dc484a03bd146b1aeb",
+            "status": "pending"
+          }
+        },
+        {
+          "case": "final-12",
+          "proposal": {
+            "history": [
+              "147e740af432277535045201",
+              "31ebd089ee9f777346bd3d42",
+              "5d0be6727cd4b7f7dc3c3484",
+              "b1f5b8f4cf4acdd11a776945"
+            ],
+            "incoming": {
+              "end": 124,
+              "location": "scenario://timeline/final-12/repeat",
+              "quote": "My independent inspection of the same staging D4 configuration reports the Drift callback port as 8092.",
+              "source_id": "fe360003e79f7ebf079a01a6",
+              "speaker": "Scenario observer final-12",
+              "start": 21
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 65,
+              "location": "scenario://timeline/final-12/1",
+              "quote": "In the staging D4 configuration, the Drift callback port is 8082.",
+              "source_id": "147e740af432277535045201",
+              "speaker": "Scenario author final-12",
+              "start": 0
+            },
+            "reason": "The previous statement about the Drift callback port being 8082 needs to be reconsidered due to the new observation that the port is reported as 8092 by an independent inspector. There is no record of any configuration change, indicating a potential discrepancy that requires further investigation.",
+            "reviewer": "Scenario author final-12",
+            "id": "aac5a8bda99f621e4db0c191",
+            "status": "pending"
+          }
+        }
+      ],
+      "natural_qa_regressions": {
+        "natural_after": [
+          "final-08"
+        ],
+        "natural_after_repeat": [
+          "final-14",
+          "final-08"
+        ]
+      },
+      "correction_workflows": [
+        {
+          "case": "final-14",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        },
+        {
+          "case": "final-16",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        },
+        {
+          "case": "final-13",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        },
+        {
+          "case": "final-15",
+          "review_matched": 1,
+          "after_review_correct": true,
+          "old_assertion_returned": false,
+          "stale_after_actual_approval": false,
+          "unaffected_archive_correct": true
+        }
+      ],
+      "ingest_errors_by_stage": {
+        "index": 34
+      }
+    }
+  },
+  "interpretation": "Selection among these two prototypes on this controlled set, not proof of general reliability. Primary scores are unchanged; missing review versus downstream QA errors are diagnostic categories."
+}

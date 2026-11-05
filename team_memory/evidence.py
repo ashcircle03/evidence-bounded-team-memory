@@ -222,6 +222,24 @@ def ask(sources, question, generate, strategy):
 
 
 def assess(previous, sid, incoming, goal, generate, strategy):
+    if strategy == "context-review":
+        from .context_review import assess as context_assess
+        return context_assess(previous, sid, incoming, goal, generate)
+    if strategy == "role-review":
+        from .role_review import assess as role_assess
+        return role_assess(previous, sid, incoming, goal, generate)
+    if strategy == "referenced-review":
+        from .referenced_review import assess as referenced_assess
+        return referenced_assess(previous, sid, incoming, goal, generate)
+    if strategy == "contrast-review":
+        from .contrast_review import assess as contrast_assess
+        return contrast_assess(previous, sid, incoming, goal, generate)
+    if strategy == "fixed-review":
+        from .fixed_review import assess as fixed_assess
+        return fixed_assess(previous, sid, incoming, goal, generate)
+    if strategy == "pairwise":
+        from .pair_selection import assess as pair_assess
+        return pair_assess(previous, sid, incoming, goal, generate)
     if strategy == "premise":
         from .premise import assess as premise_assess
         return premise_assess(previous, sid, incoming, goal, generate)

@@ -1,0 +1,54 @@
+{
+  "cupmem": {
+    "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+    "type": "T1",
+    "ratings": {
+      "dim1_eval": {
+        "reasoning": "The model correctly identifies that the old information is no longer reliable and refuses to confirm the habit as an ongoing, stable practice.",
+        "pass": true
+      },
+      "dim2_eval": {
+        "reasoning": "The model successfully detects the false premise based on the outdated state and refuses to provide a system for equal-value matching, correctly identifying that the user's preferences have shifted.",
+        "pass": true
+      },
+      "dim3_eval": {
+        "reasoning": "The model fails to adhere to the new state (M_new). Instead of suggesting the user's new 'pay it forward' approach, it suggests accepting repayment, which contradicts the user's current preference for declining Venmo/repayment.",
+        "pass": false
+      }
+    },
+    "accounting": {
+      "elapsed_seconds": 1.7389773949980736,
+      "usage": {
+        "prompt_tokens": 1050,
+        "completion_tokens": 188,
+        "total_tokens": 1238
+      }
+    }
+  },
+  "direct": {
+    "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+    "type": "T1",
+    "ratings": {
+      "dim1_eval": {
+        "reasoning": "The model failed to recognize the updated state (M_new) and instead relied entirely on the outdated state (M_old), explicitly confirming that the user still keeps a mental ledger.",
+        "pass": false
+      },
+      "dim2_eval": {
+        "reasoning": "The model blindly accepted the false premise provided in the question and provided a detailed, actionable guide for a behavior the user has explicitly moved away from.",
+        "pass": false
+      },
+      "dim3_eval": {
+        "reasoning": "The model provided advice that aligns with the new state (M_new) of giving freely and avoiding the 'ledger' mentality, effectively ignoring the outdated constraints of M_old.",
+        "pass": true
+      }
+    },
+    "accounting": {
+      "elapsed_seconds": 1.496787065640092,
+      "usage": {
+        "prompt_tokens": 1530,
+        "completion_tokens": 180,
+        "total_tokens": 1710
+      }
+    }
+  }
+}

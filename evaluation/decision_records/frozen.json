@@ -1,0 +1,1452 @@
+{
+  "notes": {
+    "submodule": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007",
+          "time": "2011-05-14T10:57:56-07:00",
+          "author": "Jens Lehmann",
+          "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts\n\nCommands like \"git status\", \"git diff\" and \"git fetch\" would fail when the\n.gitmodules file contained merge conflicts because the config parser would\ncall die() when hitting the conflict markers:\n\n    \"fatal: bad config file line <n> in <path>/.gitmodules\"\n\nWhile this behavior was on the safe side, it is really unhelpful to the\nuser to have commands like status and diff fail, as these are needed to\nfind out what's going on. And the error message is only mildly helpful,\nas it points to the right file but doesn't mention that it is unmerged.\nUsers of git gui were not shown any conflicts at all when this happened.\n\nImprove the situation by checking if the index records .gitmodules as\nunmerged. When that is the case we can't make any assumptions about the\nconfiguration to be found there after the merge conflict is resolved by\nthe user, so assume that all recursion is disabled unless .git/config or\nthe global config say otherwise.\n\nAs soon as the merge conflict is resolved and the .gitmodules file has\nbeen staged subsequent commands again honor any configuration done there."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/1d699f79340b40b8020d9ed570aab124186fbd97",
+        "time": "2011-05-19T20:37:21-07:00",
+        "author": "Junio C Hamano",
+        "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts"
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "pack": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+          "time": "2018-04-16T12:38:59+09:00",
+          "author": "Nguyễn Thái Ngọc Duy",
+          "text": "pack-objects: shrink delta_size field in struct object_entry\n\nAllowing a delta size of 64 bits is crazy. Shrink this field down to\n20 bits with one overflow bit.\n\nIf we find an existing delta larger than 1MB, we do not cache\ndelta_size at all and will get the value from oe_size(), potentially\nfrom disk if it's larger than 4GB.\n\nNote, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe."
+        },
+        {
+          "location": "https://github.com/git/git/commit/3b13a5f263872c4643f7f0eb6eccb7a8196b2760",
+          "time": "2018-04-16T12:38:59+09:00",
+          "author": "Nguyễn Thái Ngọc Duy",
+          "text": "pack-objects: reorder members to shrink struct object_entry\n\nPrevious patches leave lots of holes and padding in this struct. This\npatch reorders the members and shrinks the struct down to 80 bytes\n(from 136 bytes on 64-bit systems, before any field shrinking is done)\nwith 16 bits to spare (and a couple more in in_pack_header_size when\nwe really run out of bits).\n\nThis is the last in a series of memory reduction patches (see\n\"pack-objects: a bit of document about struct object_entry\" for the\nfirst one).\n\nOverall they've reduced repack memory size on linux-2.6.git from\n3.747G to 3.424G, or by around 320M, a decrease of 8.5%. The runtime\nof repack has stayed the same throughout this series. Ævar's testing\non a big monorepo he has access to (bigger than linux-2.6.git) has\nshown a 7.9% reduction, so the overall expected improvement should be\nsomewhere around 8%.\n\nSee 87po42cwql.fsf@evledraar.gmail.com on-list\n(https://public-inbox.org/git/87po42cwql.fsf@evledraar.gmail.com/) for\nmore detailed numbers and a test script used to produce the numbers\ncited above."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/ad635e82d600e1b725a2e65d69114140db6bc876",
+        "time": "2018-05-23T14:38:19+09:00",
+        "author": "Junio C Hamano",
+        "text": "\"git pack-objects\" needs to allocate tons of \"struct object_entry\"\nwhile doing its work, and shrinking its size helps the performance\nquite a bit."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "order": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+          "time": "2018-05-22T12:36:34+09:00",
+          "author": "Derrick Stolee",
+          "text": "commit: use generations in paint_down_to_common()\n\nDefine compare_commits_by_gen_then_commit_date(), which uses generation\nnumbers as a primary comparison and commit date to break ties (or as a\ncomparison when both commits do not have computed generation numbers).\n\nSince the commit-graph file is closed under reachability, we know that\nall commits in the file have generation at most GENERATION_NUMBER_MAX\nwhich is less than GENERATION_NUMBER_INFINITY.\n\nThis change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare."
+        },
+        {
+          "location": "https://github.com/git/git/commit/d7c1ec3efd0092ee665085cba4e8a2bcef95143b",
+          "time": "2018-05-22T12:36:34+09:00",
+          "author": "Derrick Stolee",
+          "text": "commit: add short-circuit to paint_down_to_common()\n\nWhen running 'git branch --contains', the in_merge_bases_many()\nmethod calls paint_down_to_common() to discover if a specific\ncommit is reachable from a set of branches. Commits with lower\ngeneration number are not needed to correctly answer the\ncontainment query of in_merge_bases_many().\n\nAdd a new parameter, min_generation, to paint_down_to_common() that\nprevents walking commits with generation number strictly less than\nmin_generation. If 0 is given, then there is no functional change.\n\nFor in_merge_bases_many(), we can pass commit->generation as the\ncutoff, and this saves time during 'git branch --contains' queries\nthat would otherwise walk \"around\" the commit we are inspecting.\n\nFor a copy of the Linux repository, where HEAD is checked out at\nv4.13~100, we get the following performance improvement for\n'git branch --contains' over the previous commit:\n\nBefore: 0.21s\nAfter:  0.13s\nRel %: -38%"
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/a856e7d69f51776e40633d6f1f1f38a7fd64f0d5",
+        "time": "2018-06-25T13:22:36-07:00",
+        "author": "Junio C Hamano",
+        "text": "commit: use generations in paint_down_to_common()"
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "eol": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945",
+          "time": "2018-01-16T12:35:56-08:00",
+          "author": "Torsten Bögershausen",
+          "text": "convert_to_git(): safe_crlf/checksafe becomes int conv_flags\n\nWhen calling convert_to_git(), the checksafe parameter defined what\nshould happen if the EOL conversion (CRLF --> LF --> CRLF) does not\nroundtrip cleanly. In addition, it also defined if line endings should\nbe renormalized (CRLF --> LF) or kept as they are.\n\nchecksafe was an safe_crlf enum with these values:\nSAFE_CRLF_FALSE:       do nothing in case of EOL roundtrip errors\nSAFE_CRLF_FAIL:        die in case of EOL roundtrip errors\nSAFE_CRLF_WARN:        print a warning in case of EOL roundtrip errors\nSAFE_CRLF_RENORMALIZE: change CRLF to LF\nSAFE_CRLF_KEEP_CRLF:   keep all line endings as they are\n\nIn some cases the integer value 0 was passed as checksafe parameter\ninstead of the correct enum value SAFE_CRLF_FALSE. That was no problem\nbecause SAFE_CRLF_FALSE is defined as 0.\n\nFALSE/FAIL/WARN are different from RENORMALIZE and KEEP_CRLF. Therefore,\nan enum is not ideal. Let's use a integer bit pattern instead and rename\nthe parameter to conv_flags to make it more generically usable. This\nallows us to extend the bit pattern in a subsequent commit."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/9bc89b17e36db31a54bc3ff16e48b5cb6beb095b",
+        "time": "2018-02-13T13:39:08-08:00",
+        "author": "Junio C Hamano",
+        "text": "Code clean-up."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "squash": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/e12a7ef5972423c822834f9c514a54e32ea99e65",
+          "time": "2018-05-02T07:47:47+09:00",
+          "author": "Johannes Schindelin",
+          "text": "rebase -i: Handle \"combination of <n> commits\" with GETTEXT_POISON\n\nWe previously relied on the localized versions of\n\n\t# This is a combination of <N> commits\n\n(which we write into the commit messages during fixup/squash chains)\nto contain <N> encoded in ASCII.\n\nThis is not true in general, and certainly not true when compiled with\nGETTEXT_POISON=TryToKillMe, as demonstrated by the regression test we\njust introduced in t3418.\n\nSo let's decouple keeping track of the count from the (localized) commit\nmessages by introducing a new file called 'current-fixups' that keeps\ntrack of the current fixup/squash chain. This file contains a bit more\nthan just the count (it contains a list of \"fixup <commit>\"/\"squash\n<commit>\" lines). This is done on purpose, as it will come in handy for\na fix for the bug where `git rebase --skip` on a final fixup/squash will\nleave the commit message in limbo."
+        },
+        {
+          "location": "https://github.com/git/git/commit/15ef69314d54945471603223bef00091673b5725",
+          "time": "2018-05-02T07:47:47+09:00",
+          "author": "Johannes Schindelin",
+          "text": "rebase --skip: clean up commit message after a failed fixup/squash\n\nDuring a series of fixup/squash commands, the interactive rebase builds\nup a commit message with comments. This will be presented to the user in\nthe editor if at least one of those commands was a `squash`.\n\nIn any case, the commit message will be cleaned up eventually, removing\nall those intermediate comments, in the final step of such a\nfixup/squash chain.\n\nHowever, if the last fixup/squash command in such a chain fails with\nmerge conflicts, and if the user then decides to skip it (or resolve it\nto a clean worktree and then continue the rebase), the current code\nfails to clean up the commit message.\n\nThis commit fixes that behavior.\n\nThe fix is quite a bit more involved than meets the eye because it is\nnot only about the question whether we are `git rebase --skip`ing a\nfixup or squash. It is also about removing the skipped fixup/squash's\ncommit message from the accumulated commit message. And it is also about\nthe question whether we should let the user edit the final commit\nmessage or not (\"Was there a squash in the chain *that was not\nskipped*?\").\n\nFor example, in this case we will want to fix the commit message, but\nnot open it in an editor:\n\n\tpick\t<- succeeds\n\tfixup\t<- succeeds\n\tsquash\t<- fails, will be skipped\n\nThis is where the newly-introduced `current-fixups` file comes in real\nhandy. A quick look and we can determine whether there was a non-skipped\nsquash. We only need to make sure to keep it up to date with respect to\nskipped fixup/squash commands. As a bonus, we can even avoid committing\nunnecessarily, e.g. when there was only one fixup, and it failed, and\nwas skipped.\n\nTo fix only the bug where the final commit message was not cleaned up\nproperly, but without fixing the rest, would have been more complicated\nthan fixing it all in one go, hence this commit lumps together more than\na single concern.\n\nFor the same reason, this commit also adds a bit more to the existing\ntest case for the regression we just fixed.\n\nThe diff is best viewed with --color-moved."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/4a3bf32b6c7e5d832e02f30a78ad23dc6ba15dcc",
+        "time": "2018-05-23T14:38:18+09:00",
+        "author": "Junio C Hamano",
+        "text": "\"git rebase -i\" sometimes left intermediate \"# This is a\ncombination of N commits\" message meant for the human consumption\ninside an editor in the final result in certain corner cases, which\nhas been fixed."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "runner": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+          "time": "2017-01-27T10:53:40-08:00",
+          "author": "Johannes Schindelin",
+          "text": "t/Makefile: add a rule to re-run previously-failed tests\n\nThis patch automates the process of determining which tests failed\npreviously and re-running them.\n\nWhile developing patch series, it is a good practice to run the test\nsuite from time to time, just to make sure that obvious bugs are caught\nearly.  With complex patch series, it is common to run `make -j15 -k\ntest`, i.e.  run the tests in parallel and *not* stop at the first\nfailing test but continue. This has the advantage of identifying\npossibly multiple problems in one big test run.\n\nIt is particularly important to reduce the turn-around time thusly on\nWindows, where the test suite spends 45 minutes on the computer on which\nthis patch was developed.\n\nIt is the most convenient way to determine which tests failed after\nrunning the entire test suite, in parallel, to look for left-over \"trash\ndirectory.t*\" subdirectories in the t/ subdirectory. However, those\ndirectories might live outside t/ when overridden using the\n--root=<directory> option, to which the Makefile has no access. The next\nbest method is to grep explicitly for failed tests in the test-results/\ndirectory, which the Makefile *can* access.\n\nPlease note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/ecc486b1f8ad5962ed51bcbffbba75ff2bc633ad",
+        "time": "2017-02-03T11:25:19-08:00",
+        "author": "Junio C Hamano",
+        "text": "\"make -C t failed\" will now run only the tests that failed in the\nprevious run."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "mmap": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+          "time": "2018-01-24T12:55:26-08:00",
+          "author": "Kim Gybels",
+          "text": "packed_ref_cache: don't use mmap() for small files\n\nTake a hint from commit ea68b0ce9f8 (hash-object: don't use mmap() for\nsmall files, 2010-02-21) and use read() instead of mmap() for small\npacked-refs files."
+        },
+        {
+          "location": "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3",
+          "time": "2018-01-24T12:55:26-08:00",
+          "author": "Michael Haggerty",
+          "text": "load_contents(): don't try to mmap an empty file\n\nWe don't actually create zero-length `packed-refs` files, but they are\nvalid and we should handle them correctly. The old code `xmmap()`ed\nsuch files, which led to an error when `munmap()` was called. So, if\nthe `packed-refs` file is empty, leave the snapshot at its zero values\nand return 0 without trying to read or mmap the file.\n\nReturning 0 also makes `create_snapshot()` exit early, which avoids\nthe technically undefined comparison `NULL < NULL`."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/9db22910f74b64764d4fb4e17f8aef4eb5aa6af0",
+        "time": "2018-02-15T14:55:42-08:00",
+        "author": "Junio C Hamano",
+        "text": "Avoid mmapping small files while using packed refs (especially ones\nwith zero size, which would cause later munmap() to fail)."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "graft": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+          "time": "2018-08-21T10:22:51-07:00",
+          "author": "Derrick Stolee",
+          "text": "commit-graph: not compatible with grafts\n\nAugment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files."
+        },
+        {
+          "location": "https://github.com/git/git/commit/d6538246d3d4edbfbc9b0af6a2aa38552d35f7f1",
+          "time": "2018-08-21T10:22:51-07:00",
+          "author": "Derrick Stolee",
+          "text": "commit-graph: not compatible with replace objects\n\nCreate new method commit_graph_compatible(r) to check if a given\nrepository r is compatible with the commit-graph feature. Fill the\nmethod with a check to see if replace-objects exist. Test this\ninteraction succeeds, including ignoring an existing commit-graph and\nfailing to write a new commit-graph. However, we do ensure that\nwe write a new commit-graph by setting read_replace_refs to 0, thereby\nignoring the replace refs."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/6d8f8ebb74d21b51cfbf427a436094134af36ee2",
+        "time": "2018-10-16T16:15:59+09:00",
+        "author": "Junio C Hamano",
+        "text": "The recently introduced commit-graph auxiliary data is incompatible\nwith mechanisms such as replace & grafts that \"breaks\" immutable\nnature of the object reference relationship.  Disable optimizations\nbased on its use (and updating existing commit-graph) when these\nincompatible features are in use in the repository."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "describe": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+          "time": "2020-02-26T12:14:12-08:00",
+          "author": "Benno Evers",
+          "text": "describe: don't abort too early when searching tags\n\nWhen searching the commit graph for tag candidates, `git-describe`\nwill stop as soon as there is only one active branch left and\nit already found an annotated tag as a candidate.\n\nThis works well as long as all branches eventually connect back\nto a common root, but if the tags are found across branches\nwith no common ancestor\n\n                  B\n                  o----.\n                        \\\n          o-----o---o----x\n          A\n\nit can happen that the search on one branch terminates prematurely\nbecause a tag was found on another, independent branch. This scenario\nisn't quite as obscure as it sounds, since cloning with a limited\ndepth often introduces many independent \"dead ends\" into the commit\ngraph.\n\nThe help text of `git-describe` states pretty clearly that when\ndescribing a commit D, the number appended to the emitted tag X should\ncorrespond to the number of commits found by `git log X..D`.\n\nThus, this commit modifies the stopping condition to only abort\nthe search when only one branch is left to search *and* all current\nbest candidates are descendants from that branch.\n\nFor repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/f3ccd9f0d963a09994e4f934efdd71ea837b6e7b",
+        "time": "2020-03-05T10:43:04-08:00",
+        "author": "Junio C Hamano",
+        "text": "\"git describe\" in a repository with multiple root commits sometimes\ngave up looking for the best tag to describe a given commit with\ntoo early, which has been adjusted."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "clone": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+          "time": "2014-07-17T11:17:13-07:00",
+          "author": "Michael Barabanov",
+          "text": "use local cloning if insteadOf makes a local URL\n\nMove the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.\n\nThis saves a lot of space (and time) in some of the mirroring scenarios that\ninvolve insteadOf rewrites."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/bc88defa2f9f92324106dca48126039246ab00e1",
+        "time": "2014-07-23T11:35:49-07:00",
+        "author": "Junio C Hamano",
+        "text": "Apply the \"if cloning from a local disk, physically copy repository\nusing hardlinks, unless otherwise told not to with --no-local\"\noptimization when url.*.insteadOf mechanism rewrites a \"git clone\n$URL\" that refers to a repository over the network to a clone from\na local disk."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "diff": {
+      "raw": [
+        {
+          "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+          "time": "2022-03-04T13:24:18-08:00",
+          "author": "Ævar Arnfjörð Bjarmason",
+          "text": "diff.c: free \"buf\" in diff_words_flush()\n\nAmend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members."
+        }
+      ],
+      "human": {
+        "location": "https://github.com/git/git/commit/ccafbbfb4ee29ee3e9fab1e5e22ec3b88a5aec4f",
+        "time": "2022-03-13T22:56:18Z",
+        "author": "Junio C Hamano",
+        "text": "Plug random memory leaks."
+      },
+      "origin": "contemporaneous_git_merge"
+    },
+    "aimers": {
+      "raw": [
+        {
+          "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/a8e64a1d52a0daa1ee7bf4595a0dfe4e6acf49a3/jaewon/notes/findings.md#L484-L503",
+          "text": "## 18. TabM / inner-val 기준 — 둘 다 기각, 그런데 구조가 하나 보인다 (2026-08-11)\n\n### 18-1. TabM (Gorishniy et al., ICLR 2025) — 블렌드 후보로 기각\n\n파라미터 효율 앙상블. k=32 서브모델이 가중치를 공유하고 rank-1 어댑터로만 갈라져\n**한 번 학습에 32개 앙상블**이 나온다. FT 의 시드 도박(551~850)을 구조로 없애는 게 목적.\n\n| | 점수 | ↔CatBoost | ↔FT이진 | ↔MLP | 시드당 |\n|---|---|---|---|---|---|\n| TabM 3시드 | 727.3 | 0.875 | 0.907 | **0.946** | 147s |\n| TabM 최적(18-2 적용) | **801.4** | 0.924 | 0.915 | | 148s |\n| FT 이진 | 841.2 | 0.90 | — | | 1410s |\n| CatBoost | 862.1 | — | | | |\n\n**어떤 가중치에서도 기여가 없다** (w=0.05 −0.8 / w=0.10 −2.1 / w=0.20 −6.4 역효과).\n4원 최적에서 `tabm 0.00`. ↔MLP 0.946 이 말해주듯 MLP 계열이고, 그 계열은 이 블렌드에서\n이미 R/F 양쪽 0.00 이다.\n\n부수 확인: 멤버 앙상블 기제는 실제로 작동한다 (개별 평균 720 → 앙상블 753).\n그리고 **속도는 FT 의 9.6배**다. 블렌드에는 못 들어가지만 이 사실은 남겨둔다.",
+          "author": "jaewon",
+          "time": "2026-08-11T00:00:00Z"
+        }
+      ],
+      "human": null,
+      "origin": "authorship_unverified"
+    }
+  },
+  "cases": [
+    {
+      "id": "historical-01",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "mmap",
+        "pack"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+        "time": "2018-07-23T10:21:29-07:00",
+        "author": "Nguyễn Thái Ngọc Duy",
+        "text": "pack-objects: fix performance issues on packing large deltas\n\nLet's start with some background about oe_delta_size() and\noe_set_delta_size(). If you already know, skip the next paragraph.\n\nThese two are added in 0aca34e826 (pack-objects: shrink delta_size\nfield in struct object_entry - 2018-04-14) to help reduce 'struct\nobject_entry' size. The delta size field in this struct is reduced to\nonly contain max 1MB. So if any new delta is produced and larger than\n1MB, it's dropped because we can't really save such a large size\nanywhere. Fallback is provided in case existing packfiles already have\nlarge deltas, then we can retrieve it from the pack.\n\nWhile this should help small machines repacking large repos without\nlarge deltas (i.e. less memory pressure), dropping large deltas during\nthe delta selection process could end up with worse pack files. And if\nexisting packfiles already have >1MB delta and pack-objects is\ninstructed to not reuse deltas, all of them will be dropped on the\nfloor, and the resulting pack would be definitely bigger.\n\nThere is also a regression in terms of CPU/IO if we have large on-disk\ndeltas because fallback code needs to parse the pack every time the\ndelta size is needed and just access to the mmap'd pack data is enough\nfor extra page faults when memory is under pressure.\n\nBoth of these issues were reported on the mailing list. Here's some\nnumbers for comparison.\n\n    Version  Pack (MB)  MaxRSS(kB)  Time (s)\n    -------  ---------  ----------  --------\n     2.17.0     5498     43513628    2494.85\n     2.18.0    10531     40449596    4168.94\n\nThis patch provides a better fallback that is\n\n- cheaper in terms of cpu and io because we won't have to read\n  existing pack files as much\n\n- better in terms of pack size because the pack heuristics is back to\n  2.17.0 time, we do not drop large deltas at all\n\nIf we encounter any delta (on-disk or created during try_delta phase)\nthat is larger than the 1MB limit, we stop using delta_size_ field for\nthis because it can't contain such size anyway. A new array of delta\nsize is dynamically allocated and can hold all the deltas that 2.17.0\ncan. This array only contains delta sizes that delta_size_ can't\ncontain.\n\nWith this, we do not have to drop deltas in try_delta() anymore. Of\ncourse the downside is we use slightly more memory, even compared to\n2.17.0. But since this is considered an uncommon case, a bit more\nmemory consumption should not be a problem.\n\nDelta size limit is also raised from 1MB to 16MB to better cover\ncommon case and avoid that extra memory consumption (99.999% deltas in\nthis reported repo are under 12MB; Jeff noted binary artifacts topped\nout at about 3MB in some other private repos). Other fields are\nshuffled around to keep this struct packed tight. We don't use more\nmemory in common case even with this limit update.\n\nA note about thread synchronization. Since this code can be run in\nparallel during delta searching phase, we need a mutex. The realloc\npart in packlist_alloc() is not protected because it only happens\nduring the object counting phase, which is always single-threaded.\n\nAccess to e->delta_size_ (and by extension\npack->delta_size[e - pack->objects]) is unprotected as before, the\nthread scheduler in pack-objects must make sure \"e\" is never updated\nby two different threads.\n\nThe area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads."
+      },
+      "target": "pack",
+      "action": "review",
+      "rubric": "The small-field design drops or repeatedly reads large deltas, hurting pack size or time for that workload."
+    },
+    {
+      "id": "historical-02",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "mmap",
+        "pack"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/eb31044ff793de9a8a093f567f5eb262ac196c24",
+        "time": "2020-02-10T09:01:48-08:00",
+        "author": "Johannes Berg",
+        "text": "pack-format: correct multi-pack-index description\n\nThe description of the multi-pack-index contains a small bug,\nif all offsets are < 2^32 then there will be no LOFF chunk,\nnot only if they're all < 2^31 (since the highest bit is only\nneeded as the \"LOFF-escape\" when that's actually needed.)\n\nCorrect this, and clarify that in that case only offsets up\nto 2^31-1 can be stored in the OOFF chunk."
+      },
+      "target": "pack",
+      "action": "keep",
+      "rubric": "The corrected multi-pack-index offset encoding is separate from the in-memory delta-size choice."
+    },
+    {
+      "id": "historical-03",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "order",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+        "time": "2018-08-30T11:17:57-07:00",
+        "author": "Derrick Stolee",
+        "text": "commit: don't use generation numbers if not needed\n\nIn 3afc679b \"commit: use generations in paint_down_to_common()\",\nthe queue in paint_down_to_common() was changed to use a priority\norder based on generation number before commit date. This served\ntwo purposes:\n\n 1. When generation numbers are present, the walk guarantees\n    correct topological relationships, regardless of clock skew in\n    commit dates.\n\n 2. It enables short-circuiting the walk when the min_generation\n    parameter is added in d7c1ec3e \"commit: add short-circuit to\n    paint_down_to_common()\". This short-circuit helps commands\n    like 'git branch --contains' from needing to walk to a merge\n    base when we know the result is false.\n\nThe commit message for 3afc679b includes the following sentence:\n\n    This change does not affect the number of commits that are\n    walked during the execution of paint_down_to_common(), only\n    the order that those commits are inspected.\n\nThis statement is incorrect. Because it changes the order in which\nthe commits are inspected, it changes the order they are added to\nthe queue, and hence can change the number of loops before the\nqueue_has_nonstale() method returns true.\n\nThis change makes a concrete difference depending on the topology\nof the commit graph. For instance, computing the merge-base between\nconsecutive versions of the Linux kernel has no effect for versions\nafter v4.9, but 'git merge-base v4.8 v4.9' presents a performance\nregression:\n\n    v2.18.0: 0.122s\nv2.19.0-rc1: 0.547s\n       HEAD: 0.127s\n\nTo determine that this was simply an ordering issue, I inserted\na counter within the while loop of paint_down_to_common() and\nfound that the loop runs 167,468 times in v2.18.0 and 635,579\ntimes in v2.19.0-rc1.\n\nThe topology of this case can be described in a simplified way\nhere:\n\n  v4.9\n   |  \\\n   |   \\\n  v4.8  \\\n   | \\   \\\n   |  \\   |\n  ...  A  B\n   |  /  /\n   | /  /\n   |/__/\n   C\n\nHere, the \"...\" means \"a very long line of commits\". By generation\nnumber, A and B have generation one more than C. However, A and B\nhave commit date higher than most of the commits reachable from\nv4.8. When the walk reaches v4.8, we realize that it has PARENT1\nand PARENT2 flags, so everything it can reach is marked as STALE,\nincluding A. B has only the PARENT1 flag, so is not STALE.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_commit_date, A and B are removed from the queue\nearly and C is inserted into the queue. At this point, C and the\nrest of the queue entries are marked as STALE. The loop then\nterminates.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.\n\nThe performance regression is probably the worse option, since\nthese incorrect results in paint_down_to_common() are rare. The\ntopology required for the performance regression are less rare,\nbut still require multiple merge commits where the parents differ\ngreatly in generation number. In our example above, the commit A\nis as important as the commit B to demonstrate the problem, since\notherwise the commit C will sit in the queue as non-stale just as\nlong in both orders.\n\nThe solution provided uses the min_generation parameter to decide\nif we should use generation numbers in our ordering. When\nmin_generation is equal to zero, it means that the caller has no\nknown cutoff for the walk, so we should rely on our commit-date\nheuristic as before; this is the case with merge_bases_many().\nWhen min_generation is non-zero, then the caller knows a valuable\ncutoff for the short-circuit mechanism; this is the case with\nremove_redundant() and in_merge_bases_many()."
+      },
+      "target": "order",
+      "action": "review",
+      "rubric": "Generation-first ordering can increase walk count or time on certain topologies, contrary to the old claim."
+    },
+    {
+      "id": "historical-04",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "order",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/4c399442f781f70a00273746ca6a0de9fef9b0d3",
+        "time": "2018-09-27T15:29:12-07:00",
+        "author": "Martin Ågren",
+        "text": "Doc: refer to the \"commit-graph file\" with dash\n\nThe file processed by `git commit-graph` is referred to as the\n\"commit-graph file\", also with a dash. We have a few references to the\n\"commit graph file\", though, without the dash. These occur in\ngit-commit-graph.txt as well as in Doc/technical/commit-graph.txt. Fix\nthem.\n\nDo not change the references to the \"commit graph\" (without \"... file\")\nas a data structure."
+      },
+      "target": "order",
+      "action": "keep",
+      "rubric": "Hyphenation of the file name does not affect ordering or the walk."
+    },
+    {
+      "id": "historical-05",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "eol",
+        "runner"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5",
+        "time": "2018-06-11T10:22:32-07:00",
+        "author": "Anthony Sottile",
+        "text": "config.c: fix regression for core.safecrlf false\n\nA regression introduced in 8462ff43 (\"convert_to_git():\nsafe_crlf/checksafe becomes int conv_flags\", 2018-01-13) back in Git\n2.17 cycle caused autocrlf rewrites to produce a warning message\ndespite setting safecrlf=false."
+      },
+      "target": "eol",
+      "action": "review",
+      "rubric": "safecrlf=false should suppress round-trip errors but the flag conversion can emit a warning."
+    },
+    {
+      "id": "historical-06",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "runner",
+        "eol"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/2731a7840a462a97b8afb5beadaf36c1db992ac7",
+        "time": "2019-05-29T09:50:31-07:00",
+        "author": "Boxuan Li",
+        "text": "userdiff: fix grammar and style issues"
+      },
+      "target": "eol",
+      "action": "keep",
+      "rubric": "Grammar or style in userdiff leaves the line-ending flags and behavior untouched."
+    },
+    {
+      "id": "historical-07",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "runner",
+        "squash"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e",
+        "time": "2018-08-15T10:50:24-07:00",
+        "author": "Phillip Wood",
+        "text": "rebase -i: fix numbering in squash message\n\nCommit e12a7ef597 (\"rebase -i: Handle \"combination of <n> commits\" with\nGETTEXT_POISON\", 2018-04-27) changed the way that individual commit\nmessages are labelled when squashing commits together. In doing so a\nregression was introduced where the numbering of the messages is off by\none. This commit fixes that and adds a test for the numbering."
+      },
+      "target": "squash",
+      "action": "review",
+      "rubric": "Moving fixup/squash counting away from localized text caused an off-by-one in displayed message numbers."
+    },
+    {
+      "id": "historical-08",
+      "group": "historical",
+      "task": "review",
+      "topics": [
+        "runner",
+        "squash"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/d3a8caebf38b42d8d8ca80cb1856ee2e54fb4c4d",
+        "time": "2019-11-12T13:14:19+09:00",
+        "author": "Naveen Nathan",
+        "text": "doc: improve readability of --rebase-merges in git-rebase\n\nWhen --preserve-merges was deprecated in 427c3bd28a a sentence\nwas introduced describing the difference between --rebase-merges and\n--preserve-merges which is a little unclear and difficult to parse.\nThis patch improves readability while retaining original meaning."
+      },
+      "target": "squash",
+      "action": "keep",
+      "rubric": "Wording about rebase-merges preserves its meaning and has no bearing on squash-message numbering."
+    },
+    {
+      "id": "prior_git-01",
+      "group": "prior_git",
+      "task": "review",
+      "topics": [
+        "describe",
+        "order"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae",
+        "time": "2024-11-07T13:28:21+09:00",
+        "author": "Jeff King",
+        "text": "t6120: demonstrate weakness in disjoint-root handling\n\nCommit 30b1c7ad9d (describe: don't abort too early when searching tags,\n2020-02-26) tried to fix a problem that happens when there are disjoint\nhistories: to accurately compare the counts for different tags, we need\nto keep walking the history longer in order to find a common base.\n\nBut its fix misses a case: we may still bail early if we hit the\nmax_candidates limit, producing suboptimal output. You can see this in\naction by adding \"--candidates=2\" to the tests; we'll stop traversing as\nsoon as we see the second tag and will produce the wrong answer. I hit\nthis in practice while trying to teach git-describe not to keep looking\nfor candidates after we've seen all tags in the repo (effectively adding\n--candidates=2, since these toy repos have only two tags each).\n\nThis is probably fixable by continuing to walk after hitting the\nmax-candidates limit, all the way down to a common ancestor of all\ncandidates. But it's not clear in practice what the preformance\nimplications would be (it would depend on how long the branches that\nhold the candidates are).\n\nSo I'm punting on that for now, but I'd like to adjust the tests to be\nmore resilient, and to document the findings. So this patch:\n\n  1. Adds an extra tag at the bottom of history. This shouldn't change\n     the output, but does mean we are more resilient to low values of\n     --candidates (e.g., if we start reducing it to the total number of\n     tags). This is arguably closer to the real world anyway, where\n     you're not going to have just 2 tags, but an arbitrarily long\n     history going back in time, possibly with multiple irrelevant tags\n     in it (I called the new tag \"H\" here for \"history\").\n\n  2. Run the same tests with --candidates=2, which shows that even with\n     the current code they can fail if we end the traversal early. That\n     leaves a trail for anybody interested in trying to improve the\n     behavior."
+      },
+      "target": "describe",
+      "action": "review",
+      "rubric": "The candidate limit still gives incorrect distance with disjoint roots."
+    },
+    {
+      "id": "prior_git-02",
+      "group": "prior_git",
+      "task": "review",
+      "topics": [
+        "submodule",
+        "clone"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052",
+        "time": "2023-01-24T16:52:16-08:00",
+        "author": "Taylor Blau",
+        "text": "t5619: demonstrate clone_local() with ambiguous transport\n\nWhen cloning a repository, Git must determine (a) what transport\nmechanism to use, and (b) whether or not the clone is local.\n\nSince f38aa83f9a (use local cloning if insteadOf makes a local URL,\n2014-07-17), the latter check happens after the remote has been\ninitialized, and references the remote's URL instead of the local path.\nThis is done to make it possible for a `url.<base>.insteadOf` rule to\nconvert a remote URL into a local one, in which case the `clone_local()`\nmechanism should be used.\n\nHowever, with a specially crafted repository, Git can be tricked into\nusing a non-local transport while still setting `is_local` to \"1\" and\nusing the `clone_local()` optimization. The below test case\ndemonstrates such an instance, and shows that it can be used to include\narbitrary (known) paths in the working copy of a cloned repository on a\nvictim's machine[^1], even if local file clones are forbidden by\n`protocol.file.allow`.\n\nThis happens in a few parts:\n\n 1. We first call `get_repo_path()` to see if the remote is a local\n    path. If it is, we replace the repo name with its absolute path.\n\n 2. We then call `transport_get()` on the repo name and decide how to\n    access it. If it was turned into an absolute path in the previous\n    step, then we should always treat it like a file.\n\n 3. We use `get_repo_path()` again, and set `is_local` as appropriate.\n    But it's already too late to rewrite the repo name as an absolute\n    path, since we've already fed it to the transport code.\n\nThe attack works by including a submodule whose URL corresponds to a\npath on disk. In the below example, the repository \"sub\" is reachable\nvia the dumb HTTP protocol at (something like):\n\n    http://127.0.0.1:NNNN/dumb/sub.git\n\nHowever, the path \"http:/127.0.0.1:NNNN/dumb\" (that is, a top-level\ndirectory called \"http:\", then nested directories \"127.0.0.1:NNNN\", and\n\"dumb\") exists within the repository, too.\n\nTo determine this, it first picks the appropriate transport, which is\ndumb HTTP. It then uses the remote's URL in order to determine whether\nthe repository exists locally on disk. However, the malicious repository\nalso contains an embedded stub repository which is the target of a\nsymbolic link at the local path corresponding to the \"sub\" repository on\ndisk (i.e., there is a symbolic link at \"http:/127.0.0.1/dumb/sub.git\",\npointing to the stub repository via \".git/modules/sub/../../../repo\").\n\nThis stub repository fools Git into thinking that a local repository\nexists at that URL and thus can be cloned locally. The affected call is\nin `get_repo_path()`, which in turn calls `get_repo_path_1()`, which\nlocates a valid repository at that target.\n\nThis then causes Git to set the `is_local` variable to \"1\", and in turn\ninstructs Git to clone the repository using its local clone optimization\nvia the `clone_local()` function.\n\nThe exploit comes into play because the stub repository's top-level\n\"$GIT_DIR/objects\" directory is a symbolic link which can point to an\narbitrary path on the victim's machine. `clone_local()` resolves the\ntop-level \"objects\" directory through a `stat(2)` call, meaning that we\nread through the symbolic link and copy or hardlink the directory\ncontents at the destination of the link.\n\nIn other words, we can get steps (1) and (3) to disagree by leveraging\nthe dangling symlink to pick a non-local transport in the first step,\nand then set is_local to \"1\" in the third step when cloning with\n`--separate-git-dir`, which makes the symlink non-dangling.\n\nThis can result in data-exfiltration on the victim's machine when\nsensitive data is at a known path (e.g., \"/home/$USER/.ssh\").\n\nThe appropriate fix is two-fold:\n\n - Resolve the transport later on (to avoid using the local\n   clone optimization with a non-local transport).\n\n - Avoid reading through the top-level \"objects\" directory when\n   (correctly) using the clone_local() optimization.\n\nThis patch merely demonstrates the issue. The following two patches will\nimplement each part of the above fix, respectively.\n\n[^1]: Provided that any target directory does not contain symbolic\n  links, in which case the changes from 6f054f9fb3 (builtin/clone.c:\n  disallow `--local` clones with symlinks, 2022-07-28) will abort the\n  clone."
+      },
+      "target": "clone",
+      "action": "review",
+      "rubric": "A nonlocal transport can be mistaken for a local clone despite the URL test."
+    },
+    {
+      "id": "prior_git-03",
+      "group": "prior_git",
+      "task": "review",
+      "topics": [
+        "describe",
+        "diff"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/b59ec03cb5f69d6a87dce8fc3ccbfd22d8de3c16",
+        "time": "2022-03-17T08:49:07-07:00",
+        "author": "Michael J Gruber",
+        "text": "tests: demonstrate \"show --word-diff --color-moved\" regression\n\nAdd a failing test which demonstrates a regression in\na18d66cefb (\"diff.c: free \"buf\" in diff_words_flush()\", 2022-03-04),\nthe regression is discussed in detail in the subsequent commit. With\nit running `git show --word-diff --color-moved` with SANITIZE=address\nwould emit:\n\n\t==31191==ERROR: AddressSanitizer: attempting double-free on 0x617000021100 in thread T0:\n\t    #0 0x49f0a2 in free (git+0x49f0a2)\n\t    #1 0x9b0e4d in diff_words_flush diff.c:2153:3\n\t    #2 0x9aed5d in fn_out_consume diff.c:2354:3\n\t    #3 0xe092ab in consume_one xdiff-interface.c:43:9\n\t    #4 0xe072eb in xdiff_outf xdiff-interface.c:76:10\n\t    #5 0xec7014 in xdl_emit_diffrec xdiff/xutils.c:53:6\n\t    [...]\n\n\t0x617000021100 is located 0 bytes inside of 768-byte region [0x617000021100,0x617000021400)\n\tfreed by thread T0 here:\n\t    #0 0x49f0a2 in free (git+0x49f0a2)\n\t    [...(same stacktrace)...]\n\n\tpreviously allocated by thread T0 here:\n\t    #0 0x49f603 in __interceptor_realloc (git+0x49f603)\n\t    #1 0xde4da4 in xrealloc wrapper.c:126:8\n\t    #2 0x995dc5 in append_emitted_diff_symbol diff.c:794:2\n\t    #3 0x96c44a in emit_diff_symbol diff.c:1527:3\n\t    [...]\n\nThis was not caught by the test suite because we test `diff\n--word-diff --color-moved` only so far.\n\nTherefore, add a test for `show`, too."
+      },
+      "target": "diff",
+      "action": "review",
+      "rubric": "Freeing the containing buffer can double-free it with word-diff and color-moved together."
+    },
+    {
+      "id": "scope-01",
+      "group": "controlled",
+      "task": "review",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "target": "runner",
+      "action": "review",
+      "rubric": "Re-test prove on the newly stable Windows Perl configuration. The old MSYS2 crashes remain valid."
+    },
+    {
+      "id": "scope-02",
+      "group": "controlled",
+      "task": "review",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/2",
+        "text": "The Linux native Perl workers completed 200 massively parallel prove runs with no crashes. On the Windows MSYS2 pool the same unexplained crashes recurred, and there is still no native Perl with Subversion bindings.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "target": "runner",
+      "action": "keep",
+      "rubric": "Linux success does not remove the Windows compatibility and crash reason."
+    },
+    {
+      "id": "scope-03",
+      "group": "controlled",
+      "task": "review",
+      "topics": [
+        "runner",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/3",
+        "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "target": "mmap",
+      "action": "review",
+      "rubric": "Re-test mmap for small nonempty files on the new kernel while keeping the empty-file exception."
+    },
+    {
+      "id": "scope-04",
+      "group": "controlled",
+      "task": "review",
+      "topics": [
+        "runner",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/4",
+        "text": "On the new kernel mmap beat read in all ten runs on 128 MiB packed-refs files. For nonempty 2 KiB files read still won. Zero-length mappings still failed at munmap.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "target": "mmap",
+      "action": "keep",
+      "rubric": "Large-file results do not overturn the small- or empty-file policy."
+    },
+    {
+      "id": "scope-05",
+      "group": "controlled",
+      "task": "review",
+      "topics": [
+        "order",
+        "graft"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/5",
+        "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "target": "graft",
+      "action": "review",
+      "rubric": "Test the graft-aware prototype separately. The original incompatibility of the shipping graph still holds."
+    },
+    {
+      "id": "scope-06",
+      "group": "controlled",
+      "task": "review",
+      "topics": [
+        "graft",
+        "order"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/6",
+        "text": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "target": "graft",
+      "action": "keep",
+      "rubric": "Ungrafted speed does not remove the correctness problem with active grafts."
+    },
+    {
+      "id": "aimers",
+      "group": "prior_aimers",
+      "task": "review",
+      "topics": [
+        "aimers",
+        "runner"
+      ],
+      "incoming": {
+        "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/9bf532cde00494dabb86076e16a07940a47400e3/seonghun/docs/experiment_log.md#L377-L403",
+        "text": "## SH-TABM 야간 비교 및 TM-S 최종 재학습 — 2026-08-11\n\n동일한 시간 분할과 64개 entity-free 피처로 공식 TabM 및 clean-room BatchEnsemble\nMLP를 비교했다. 대형화가 자동으로 성능 향상으로 이어지지 않았고, 가장 작은\nclean-room `TM-S`(4상태, k=16, width=256, 2 blocks)가 최고였다.\n\n| 후보 | SEL | CONF | 결정 |\n| --- | ---: | ---: | --- |\n| clean-room TM-S | **1017.438285** | **684.398704** | 채택 |\n| official TabM B | 950.238 | 579.521 | 기각 |\n| official binary | 852.384 | 634.781 | 기각 |\n| official W | 801.088 | 649.992 | 기각 |\n| clean-room B | 763.935 | 612.632 | 기각 |\n| clean-room BIN | 801.467 | 568.487 | 기각 |\n| clean-room K | 870.779 | 580.724 | 기각 |\n| clean-room W | 788.663 | 632.714 | 기각 |\n| clean-room XL | 859.787 | 537.701 | 기각 |\n\n기존 모델과 고정 가중치 비교:\n\n- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]\n",
+        "author": "seonghun",
+        "time": "2026-08-11T01:00:00Z"
+      },
+      "target": "aimers",
+      "action": "review",
+      "rubric": "Compare clean-room TM-S with the current blend under the new setup. The old official TabM result remains valid."
+    },
+    {
+      "id": "q01",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "mmap",
+        "pack"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+        "time": "2018-07-23T10:21:29-07:00",
+        "author": "Nguyễn Thái Ngọc Duy",
+        "text": "pack-objects: fix performance issues on packing large deltas\n\nLet's start with some background about oe_delta_size() and\noe_set_delta_size(). If you already know, skip the next paragraph.\n\nThese two are added in 0aca34e826 (pack-objects: shrink delta_size\nfield in struct object_entry - 2018-04-14) to help reduce 'struct\nobject_entry' size. The delta size field in this struct is reduced to\nonly contain max 1MB. So if any new delta is produced and larger than\n1MB, it's dropped because we can't really save such a large size\nanywhere. Fallback is provided in case existing packfiles already have\nlarge deltas, then we can retrieve it from the pack.\n\nWhile this should help small machines repacking large repos without\nlarge deltas (i.e. less memory pressure), dropping large deltas during\nthe delta selection process could end up with worse pack files. And if\nexisting packfiles already have >1MB delta and pack-objects is\ninstructed to not reuse deltas, all of them will be dropped on the\nfloor, and the resulting pack would be definitely bigger.\n\nThere is also a regression in terms of CPU/IO if we have large on-disk\ndeltas because fallback code needs to parse the pack every time the\ndelta size is needed and just access to the mmap'd pack data is enough\nfor extra page faults when memory is under pressure.\n\nBoth of these issues were reported on the mailing list. Here's some\nnumbers for comparison.\n\n    Version  Pack (MB)  MaxRSS(kB)  Time (s)\n    -------  ---------  ----------  --------\n     2.17.0     5498     43513628    2494.85\n     2.18.0    10531     40449596    4168.94\n\nThis patch provides a better fallback that is\n\n- cheaper in terms of cpu and io because we won't have to read\n  existing pack files as much\n\n- better in terms of pack size because the pack heuristics is back to\n  2.17.0 time, we do not drop large deltas at all\n\nIf we encounter any delta (on-disk or created during try_delta phase)\nthat is larger than the 1MB limit, we stop using delta_size_ field for\nthis because it can't contain such size anyway. A new array of delta\nsize is dynamically allocated and can hold all the deltas that 2.17.0\ncan. This array only contains delta sizes that delta_size_ can't\ncontain.\n\nWith this, we do not have to drop deltas in try_delta() anymore. Of\ncourse the downside is we use slightly more memory, even compared to\n2.17.0. But since this is considered an uncommon case, a bit more\nmemory consumption should not be a problem.\n\nDelta size limit is also raised from 1MB to 16MB to better cover\ncommon case and avoid that extra memory consumption (99.999% deltas in\nthis reported repo are under 12MB; Jeff noted binary artifacts topped\nout at about 3MB in some other private repos). Other fields are\nshuffled around to keep this struct packed tight. We don't use more\nmemory in common case even with this limit update.\n\nA note about thread synchronization. Since this code can be run in\nparallel during delta searching phase, we need a mutex. The realloc\npart in packlist_alloc() is not protected because it only happens\nduring the object counting phase, which is always single-threaded.\n\nAccess to e->delta_size_ (and by extension\npack->delta_size[e - pack->objects]) is unprotected as before, the\nthread scheduler in pack-objects must make sure \"e\" is never updated\nby two different threads.\n\nThe area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L10-L18",
+          "text": "gc.aggressiveWindow::\n\tThe window size parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 250, which is a much more aggressive window size than\n\tthe default `--window` of 10.\n+\nSee the documentation for the `--window` option in\nlinkgit:git-repack[1] for more details."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        }
+      ],
+      "question": "What window size does Git's aggressive garbage collection use by default for delta compression?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L10-L18"
+      ],
+      "aliases": [
+        "250"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "q02",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "order",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+        "time": "2018-08-30T11:17:57-07:00",
+        "author": "Derrick Stolee",
+        "text": "commit: don't use generation numbers if not needed\n\nIn 3afc679b \"commit: use generations in paint_down_to_common()\",\nthe queue in paint_down_to_common() was changed to use a priority\norder based on generation number before commit date. This served\ntwo purposes:\n\n 1. When generation numbers are present, the walk guarantees\n    correct topological relationships, regardless of clock skew in\n    commit dates.\n\n 2. It enables short-circuiting the walk when the min_generation\n    parameter is added in d7c1ec3e \"commit: add short-circuit to\n    paint_down_to_common()\". This short-circuit helps commands\n    like 'git branch --contains' from needing to walk to a merge\n    base when we know the result is false.\n\nThe commit message for 3afc679b includes the following sentence:\n\n    This change does not affect the number of commits that are\n    walked during the execution of paint_down_to_common(), only\n    the order that those commits are inspected.\n\nThis statement is incorrect. Because it changes the order in which\nthe commits are inspected, it changes the order they are added to\nthe queue, and hence can change the number of loops before the\nqueue_has_nonstale() method returns true.\n\nThis change makes a concrete difference depending on the topology\nof the commit graph. For instance, computing the merge-base between\nconsecutive versions of the Linux kernel has no effect for versions\nafter v4.9, but 'git merge-base v4.8 v4.9' presents a performance\nregression:\n\n    v2.18.0: 0.122s\nv2.19.0-rc1: 0.547s\n       HEAD: 0.127s\n\nTo determine that this was simply an ordering issue, I inserted\na counter within the while loop of paint_down_to_common() and\nfound that the loop runs 167,468 times in v2.18.0 and 635,579\ntimes in v2.19.0-rc1.\n\nThe topology of this case can be described in a simplified way\nhere:\n\n  v4.9\n   |  \\\n   |   \\\n  v4.8  \\\n   | \\   \\\n   |  \\   |\n  ...  A  B\n   |  /  /\n   | /  /\n   |/__/\n   C\n\nHere, the \"...\" means \"a very long line of commits\". By generation\nnumber, A and B have generation one more than C. However, A and B\nhave commit date higher than most of the commits reachable from\nv4.8. When the walk reaches v4.8, we realize that it has PARENT1\nand PARENT2 flags, so everything it can reach is marked as STALE,\nincluding A. B has only the PARENT1 flag, so is not STALE.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_commit_date, A and B are removed from the queue\nearly and C is inserted into the queue. At this point, C and the\nrest of the queue entries are marked as STALE. The loop then\nterminates.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.\n\nThe performance regression is probably the worse option, since\nthese incorrect results in paint_down_to_common() are rare. The\ntopology required for the performance regression are less rare,\nbut still require multiple merge commits where the parents differ\ngreatly in generation number. In our example above, the commit A\nis as important as the commit B to demonstrate the problem, since\notherwise the commit C will sit in the queue as non-stale just as\nlong in both orders.\n\nThe solution provided uses the min_generation parameter to decide\nif we should use generation numbers in our ordering. When\nmin_generation is equal to zero, it means that the caller has no\nknown cutoff for the walk, so we should rely on our commit-date\nheuristic as before; this is the case with merge_bases_many().\nWhen min_generation is non-zero, then the caller knows a valuable\ncutoff for the short-circuit mechanism; this is the case with\nremove_redundant() and in_merge_bases_many()."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/help.adoc#L5-L9",
+          "text": "help.format::\n\tOverride the default help format used by linkgit:git-help[1].\n\tValues 'man', 'info', 'web' and 'html' are supported. 'man' is\n\tthe default. 'web' and 'html' are the same."
+        }
+      ],
+      "question": "Which help format is the default for Git's help viewer?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/help.adoc#L5-L9"
+      ],
+      "aliases": [
+        "man"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "q03",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "eol",
+        "runner"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5",
+        "time": "2018-06-11T10:22:32-07:00",
+        "author": "Anthony Sottile",
+        "text": "config.c: fix regression for core.safecrlf false\n\nA regression introduced in 8462ff43 (\"convert_to_git():\nsafe_crlf/checksafe becomes int conv_flags\", 2018-01-13) back in Git\n2.17 cycle caused autocrlf rewrites to produce a warning message\ndespite setting safecrlf=false."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/credential.adoc#L51-L55",
+          "text": "credentialStore.lockTimeoutMS::\n\tThe length of time, in milliseconds, for git-credential-store to retry\n\twhen trying to lock the credentials file. A value of 0 means not to retry at\n\tall; -1 means to try indefinitely. Default is 1000 (i.e., retry for\n\t1s)."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        }
+      ],
+      "question": "What credential-store lock timeout value means to retry indefinitely?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/credential.adoc#L51-L55"
+      ],
+      "aliases": [
+        "-1"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "q04",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "runner",
+        "squash"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e",
+        "time": "2018-08-15T10:50:24-07:00",
+        "author": "Phillip Wood",
+        "text": "rebase -i: fix numbering in squash message\n\nCommit e12a7ef597 (\"rebase -i: Handle \"combination of <n> commits\" with\nGETTEXT_POISON\", 2018-04-27) changed the way that individual commit\nmessages are labelled when squashing commits together. In doing so a\nregression was introduced where the numbering of the messages is off by\none. This commit fixes that and adds a test for the numbering."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+          "text": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details."
+        }
+      ],
+      "question": "Which style does Git use by default for printing fetch ref update status?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63"
+      ],
+      "aliases": [
+        "full"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "q05",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "mmap",
+        "pack"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+        "time": "2018-07-23T10:21:29-07:00",
+        "author": "Nguyễn Thái Ngọc Duy",
+        "text": "pack-objects: fix performance issues on packing large deltas\n\nLet's start with some background about oe_delta_size() and\noe_set_delta_size(). If you already know, skip the next paragraph.\n\nThese two are added in 0aca34e826 (pack-objects: shrink delta_size\nfield in struct object_entry - 2018-04-14) to help reduce 'struct\nobject_entry' size. The delta size field in this struct is reduced to\nonly contain max 1MB. So if any new delta is produced and larger than\n1MB, it's dropped because we can't really save such a large size\nanywhere. Fallback is provided in case existing packfiles already have\nlarge deltas, then we can retrieve it from the pack.\n\nWhile this should help small machines repacking large repos without\nlarge deltas (i.e. less memory pressure), dropping large deltas during\nthe delta selection process could end up with worse pack files. And if\nexisting packfiles already have >1MB delta and pack-objects is\ninstructed to not reuse deltas, all of them will be dropped on the\nfloor, and the resulting pack would be definitely bigger.\n\nThere is also a regression in terms of CPU/IO if we have large on-disk\ndeltas because fallback code needs to parse the pack every time the\ndelta size is needed and just access to the mmap'd pack data is enough\nfor extra page faults when memory is under pressure.\n\nBoth of these issues were reported on the mailing list. Here's some\nnumbers for comparison.\n\n    Version  Pack (MB)  MaxRSS(kB)  Time (s)\n    -------  ---------  ----------  --------\n     2.17.0     5498     43513628    2494.85\n     2.18.0    10531     40449596    4168.94\n\nThis patch provides a better fallback that is\n\n- cheaper in terms of cpu and io because we won't have to read\n  existing pack files as much\n\n- better in terms of pack size because the pack heuristics is back to\n  2.17.0 time, we do not drop large deltas at all\n\nIf we encounter any delta (on-disk or created during try_delta phase)\nthat is larger than the 1MB limit, we stop using delta_size_ field for\nthis because it can't contain such size anyway. A new array of delta\nsize is dynamically allocated and can hold all the deltas that 2.17.0\ncan. This array only contains delta sizes that delta_size_ can't\ncontain.\n\nWith this, we do not have to drop deltas in try_delta() anymore. Of\ncourse the downside is we use slightly more memory, even compared to\n2.17.0. But since this is considered an uncommon case, a bit more\nmemory consumption should not be a problem.\n\nDelta size limit is also raised from 1MB to 16MB to better cover\ncommon case and avoid that extra memory consumption (99.999% deltas in\nthis reported repo are under 12MB; Jeff noted binary artifacts topped\nout at about 3MB in some other private repos). Other fields are\nshuffled around to keep this struct packed tight. We don't use more\nmemory in common case even with this limit update.\n\nA note about thread synchronization. Since this code can be run in\nparallel during delta searching phase, we need a mutex. The realloc\npart in packlist_alloc() is not protected because it only happens\nduring the object counting phase, which is always single-threaded.\n\nAccess to e->delta_size_ (and by extension\npack->delta_size[e - pack->objects]) is unprotected as before, the\nthread scheduler in pack-objects must make sure \"e\" is never updated\nby two different threads.\n\nThe area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+          "text": "merge.conflictStyle::\n\tSpecify the style in which conflicted hunks are written out to\n\tworking tree files upon merge.  The default is \"merge\", which\n\tshows a `<<<<<<<` conflict marker, changes made by one side,\n\ta `=======` marker, changes made by the other side, and then\n\ta `>>>>>>>` marker.  An alternate style, \"diff3\", adds a `|||||||`\n\tmarker and the original text before the `=======` marker.  The\n\t\"merge\" style tends to produce smaller conflict regions than diff3,\n\tboth because of the exclusion of the original text, and because\n\twhen a subset of lines match on the two sides, they are just pulled\n\tout of the conflict region.  Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        }
+      ],
+      "question": "Which alternate merge conflict style removes matching lines near either edge of the conflict region?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15"
+      ],
+      "aliases": [
+        "zdiff3"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "q06",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "order",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+        "time": "2018-08-30T11:17:57-07:00",
+        "author": "Derrick Stolee",
+        "text": "commit: don't use generation numbers if not needed\n\nIn 3afc679b \"commit: use generations in paint_down_to_common()\",\nthe queue in paint_down_to_common() was changed to use a priority\norder based on generation number before commit date. This served\ntwo purposes:\n\n 1. When generation numbers are present, the walk guarantees\n    correct topological relationships, regardless of clock skew in\n    commit dates.\n\n 2. It enables short-circuiting the walk when the min_generation\n    parameter is added in d7c1ec3e \"commit: add short-circuit to\n    paint_down_to_common()\". This short-circuit helps commands\n    like 'git branch --contains' from needing to walk to a merge\n    base when we know the result is false.\n\nThe commit message for 3afc679b includes the following sentence:\n\n    This change does not affect the number of commits that are\n    walked during the execution of paint_down_to_common(), only\n    the order that those commits are inspected.\n\nThis statement is incorrect. Because it changes the order in which\nthe commits are inspected, it changes the order they are added to\nthe queue, and hence can change the number of loops before the\nqueue_has_nonstale() method returns true.\n\nThis change makes a concrete difference depending on the topology\nof the commit graph. For instance, computing the merge-base between\nconsecutive versions of the Linux kernel has no effect for versions\nafter v4.9, but 'git merge-base v4.8 v4.9' presents a performance\nregression:\n\n    v2.18.0: 0.122s\nv2.19.0-rc1: 0.547s\n       HEAD: 0.127s\n\nTo determine that this was simply an ordering issue, I inserted\na counter within the while loop of paint_down_to_common() and\nfound that the loop runs 167,468 times in v2.18.0 and 635,579\ntimes in v2.19.0-rc1.\n\nThe topology of this case can be described in a simplified way\nhere:\n\n  v4.9\n   |  \\\n   |   \\\n  v4.8  \\\n   | \\   \\\n   |  \\   |\n  ...  A  B\n   |  /  /\n   | /  /\n   |/__/\n   C\n\nHere, the \"...\" means \"a very long line of commits\". By generation\nnumber, A and B have generation one more than C. However, A and B\nhave commit date higher than most of the commits reachable from\nv4.8. When the walk reaches v4.8, we realize that it has PARENT1\nand PARENT2 flags, so everything it can reach is marked as STALE,\nincluding A. B has only the PARENT1 flag, so is not STALE.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_commit_date, A and B are removed from the queue\nearly and C is inserted into the queue. At this point, C and the\nrest of the queue entries are marked as STALE. The loop then\nterminates.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.\n\nThe performance regression is probably the worse option, since\nthese incorrect results in paint_down_to_common() are rare. The\ntopology required for the performance regression are less rare,\nbut still require multiple merge commits where the parents differ\ngreatly in generation number. In our example above, the commit A\nis as important as the commit B to demonstrate the problem, since\notherwise the commit C will sit in the queue as non-stale just as\nlong in both orders.\n\nThe solution provided uses the min_generation parameter to decide\nif we should use generation numbers in our ordering. When\nmin_generation is equal to zero, it means that the caller has no\nknown cutoff for the walk, so we should rely on our commit-date\nheuristic as before; this is the case with merge_bases_many().\nWhen min_generation is non-zero, then the caller knows a valuable\ncutoff for the short-circuit mechanism; this is the case with\nremove_redundant() and in_merge_bases_many()."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L60-L64",
+          "text": "format.suffix::\n\tThe default for format-patch is to output files with the suffix\n\t`.patch`. Use this variable to change that suffix (make sure to\n\tinclude the dot if you want it)."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+          "text": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix. Use this variable to change that prefix."
+        }
+      ],
+      "question": "What default subject prefix does format-patch put on its output?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43"
+      ],
+      "aliases": [
+        "[PATCH]"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "q07",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "eol",
+        "runner"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5",
+        "time": "2018-06-11T10:22:32-07:00",
+        "author": "Anthony Sottile",
+        "text": "config.c: fix regression for core.safecrlf false\n\nA regression introduced in 8462ff43 (\"convert_to_git():\nsafe_crlf/checksafe becomes int conv_flags\", 2018-01-13) back in Git\n2.17 cycle caused autocrlf rewrites to produce a warning message\ndespite setting safecrlf=false."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+          "text": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1]."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        }
+      ],
+      "question": "If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9"
+      ],
+      "aliases": [
+        "manual"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "q08",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "runner",
+        "squash"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e",
+        "time": "2018-08-15T10:50:24-07:00",
+        "author": "Phillip Wood",
+        "text": "rebase -i: fix numbering in squash message\n\nCommit e12a7ef597 (\"rebase -i: Handle \"combination of <n> commits\" with\nGETTEXT_POISON\", 2018-04-27) changed the way that individual commit\nmessages are labelled when squashing commits together. In doing so a\nregression was introduced where the numbering of the messages is off by\none. This commit fixes that and adds a test for the numbering."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+          "text": "grep.patternType::\n\tSet the default matching behavior. Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'."
+        }
+      ],
+      "question": "Which Git configuration option chooses between basic and extended when grep.patternType is set to default?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13"
+      ],
+      "aliases": [
+        "grep.extendedRegexp"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "q09",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "mmap",
+        "pack"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+        "time": "2018-07-23T10:21:29-07:00",
+        "author": "Nguyễn Thái Ngọc Duy",
+        "text": "pack-objects: fix performance issues on packing large deltas\n\nLet's start with some background about oe_delta_size() and\noe_set_delta_size(). If you already know, skip the next paragraph.\n\nThese two are added in 0aca34e826 (pack-objects: shrink delta_size\nfield in struct object_entry - 2018-04-14) to help reduce 'struct\nobject_entry' size. The delta size field in this struct is reduced to\nonly contain max 1MB. So if any new delta is produced and larger than\n1MB, it's dropped because we can't really save such a large size\nanywhere. Fallback is provided in case existing packfiles already have\nlarge deltas, then we can retrieve it from the pack.\n\nWhile this should help small machines repacking large repos without\nlarge deltas (i.e. less memory pressure), dropping large deltas during\nthe delta selection process could end up with worse pack files. And if\nexisting packfiles already have >1MB delta and pack-objects is\ninstructed to not reuse deltas, all of them will be dropped on the\nfloor, and the resulting pack would be definitely bigger.\n\nThere is also a regression in terms of CPU/IO if we have large on-disk\ndeltas because fallback code needs to parse the pack every time the\ndelta size is needed and just access to the mmap'd pack data is enough\nfor extra page faults when memory is under pressure.\n\nBoth of these issues were reported on the mailing list. Here's some\nnumbers for comparison.\n\n    Version  Pack (MB)  MaxRSS(kB)  Time (s)\n    -------  ---------  ----------  --------\n     2.17.0     5498     43513628    2494.85\n     2.18.0    10531     40449596    4168.94\n\nThis patch provides a better fallback that is\n\n- cheaper in terms of cpu and io because we won't have to read\n  existing pack files as much\n\n- better in terms of pack size because the pack heuristics is back to\n  2.17.0 time, we do not drop large deltas at all\n\nIf we encounter any delta (on-disk or created during try_delta phase)\nthat is larger than the 1MB limit, we stop using delta_size_ field for\nthis because it can't contain such size anyway. A new array of delta\nsize is dynamically allocated and can hold all the deltas that 2.17.0\ncan. This array only contains delta sizes that delta_size_ can't\ncontain.\n\nWith this, we do not have to drop deltas in try_delta() anymore. Of\ncourse the downside is we use slightly more memory, even compared to\n2.17.0. But since this is considered an uncommon case, a bit more\nmemory consumption should not be a problem.\n\nDelta size limit is also raised from 1MB to 16MB to better cover\ncommon case and avoid that extra memory consumption (99.999% deltas in\nthis reported repo are under 12MB; Jeff noted binary artifacts topped\nout at about 3MB in some other private repos). Other fields are\nshuffled around to keep this struct packed tight. We don't use more\nmemory in common case even with this limit update.\n\nA note about thread synchronization. Since this code can be run in\nparallel during delta searching phase, we need a mutex. The realloc\npart in packlist_alloc() is not protected because it only happens\nduring the object counting phase, which is always single-threaded.\n\nAccess to e->delta_size_ (and by extension\npack->delta_size[e - pack->objects]) is unprotected as before, the\nthread scheduler in pack-objects must make sure \"e\" is never updated\nby two different threads.\n\nThe area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/pack.adoc#L5-L9",
+          "text": "pack.depth::\n\tThe maximum delta depth used by linkgit:git-pack-objects[1] when no\n\tmaximum depth is given on the command line. Defaults to 50.\n\tMaximum value is 4095."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        }
+      ],
+      "question": "What is the maximum permitted value for Git's pack.depth setting?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/pack.adoc#L5-L9"
+      ],
+      "aliases": [
+        "4095"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "q10",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "order",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+        "time": "2018-08-30T11:17:57-07:00",
+        "author": "Derrick Stolee",
+        "text": "commit: don't use generation numbers if not needed\n\nIn 3afc679b \"commit: use generations in paint_down_to_common()\",\nthe queue in paint_down_to_common() was changed to use a priority\norder based on generation number before commit date. This served\ntwo purposes:\n\n 1. When generation numbers are present, the walk guarantees\n    correct topological relationships, regardless of clock skew in\n    commit dates.\n\n 2. It enables short-circuiting the walk when the min_generation\n    parameter is added in d7c1ec3e \"commit: add short-circuit to\n    paint_down_to_common()\". This short-circuit helps commands\n    like 'git branch --contains' from needing to walk to a merge\n    base when we know the result is false.\n\nThe commit message for 3afc679b includes the following sentence:\n\n    This change does not affect the number of commits that are\n    walked during the execution of paint_down_to_common(), only\n    the order that those commits are inspected.\n\nThis statement is incorrect. Because it changes the order in which\nthe commits are inspected, it changes the order they are added to\nthe queue, and hence can change the number of loops before the\nqueue_has_nonstale() method returns true.\n\nThis change makes a concrete difference depending on the topology\nof the commit graph. For instance, computing the merge-base between\nconsecutive versions of the Linux kernel has no effect for versions\nafter v4.9, but 'git merge-base v4.8 v4.9' presents a performance\nregression:\n\n    v2.18.0: 0.122s\nv2.19.0-rc1: 0.547s\n       HEAD: 0.127s\n\nTo determine that this was simply an ordering issue, I inserted\na counter within the while loop of paint_down_to_common() and\nfound that the loop runs 167,468 times in v2.18.0 and 635,579\ntimes in v2.19.0-rc1.\n\nThe topology of this case can be described in a simplified way\nhere:\n\n  v4.9\n   |  \\\n   |   \\\n  v4.8  \\\n   | \\   \\\n   |  \\   |\n  ...  A  B\n   |  /  /\n   | /  /\n   |/__/\n   C\n\nHere, the \"...\" means \"a very long line of commits\". By generation\nnumber, A and B have generation one more than C. However, A and B\nhave commit date higher than most of the commits reachable from\nv4.8. When the walk reaches v4.8, we realize that it has PARENT1\nand PARENT2 flags, so everything it can reach is marked as STALE,\nincluding A. B has only the PARENT1 flag, so is not STALE.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_commit_date, A and B are removed from the queue\nearly and C is inserted into the queue. At this point, C and the\nrest of the queue entries are marked as STALE. The loop then\nterminates.\n\nWhen paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.\n\nThe performance regression is probably the worse option, since\nthese incorrect results in paint_down_to_common() are rare. The\ntopology required for the performance regression are less rare,\nbut still require multiple merge commits where the parents differ\ngreatly in generation number. In our example above, the commit A\nis as important as the commit B to demonstrate the problem, since\notherwise the commit C will sit in the queue as non-stale just as\nlong in both orders.\n\nThe solution provided uses the min_generation parameter to decide\nif we should use generation numbers in our ordering. When\nmin_generation is equal to zero, it means that the caller has no\nknown cutoff for the walk, so we should rely on our commit-date\nheuristic as before; this is the case with merge_bases_many().\nWhen min_generation is non-zero, then the caller knows a valuable\ncutoff for the short-circuit mechanism; this is the case with\nremove_redundant() and in_merge_bases_many()."
+      },
+      "raw": [
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/gc.adoc#L1-L9",
+          "text": "gc.aggressiveDepth::\n\tThe depth parameter used in the delta compression\n\talgorithm used by 'git gc --aggressive'.  This defaults\n\tto 50, which is the default for the `--depth` option when\n\t`--aggressive` isn't in use.\n+\nSee the documentation for the `--depth` option in\nlinkgit:git-repack[1] for more details."
+        },
+        {
+          "speaker": "Git documentation contributors",
+          "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/diff.adoc#L70-L73",
+          "text": "`diff.context`::\n\tGenerate diffs with _<n>_ lines of context instead of the default\n\tof 3. This value is overridden by the `-U` option."
+        }
+      ],
+      "question": "Which command-line option overrides the configured number of diff context lines?",
+      "correct_locations": [
+        "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/diff.adoc#L70-L73"
+      ],
+      "aliases": [
+        "-U"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "pep-680",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        },
+        {
+          "speaker": "PEP 680 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+          "text": "Resolution: https://mail.python.org/archives/list/python-dev@python.org/thread/3AHGWYY562HHO55L4Z2OVYUFZP5W73IS/\n\n.. canonical-doc:: :mod:`python:tomllib`\n\nAbstract\n========\n\nThis PEP proposes adding the ``tomllib`` module to the standard library for\nparsing TOML (Tom's Obvious Minimal Language,\n`https://toml.io <https://toml.io/en/>`_).\n\n\nMotivation\n==========\n\nTOML is the format of choice for Python packaging, as evidenced by"
+        }
+      ],
+      "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst"
+      ],
+      "aliases": [
+        "tomllib"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-615",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "order",
+        "graft"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/5",
+        "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 615 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+          "text": "Abstract\n========\n\nThis proposes adding a module, ``zoneinfo``, to provide a concrete time zone\nimplementation supporting the IANA time zone database.  By default,\n``zoneinfo`` will use the system's time zone data if available; if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI. [d]_\n\nMotivation\n==========\n\nThe ``datetime`` library uses a flexible mechanism to handle time zones: all\nconversions and time zone information queries are delegated to an instance of a\nsubclass of the abstract ``datetime.tzinfo`` base class. [#tzinfo]_ This allows\nusers to implement arbitrarily complex time zone rules, but in practice the"
+        },
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        }
+      ],
+      "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst"
+      ],
+      "aliases": [
+        "tzdata"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-515",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "runner",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/3",
+        "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        },
+        {
+          "speaker": "PEP 515 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0515.rst",
+          "text": "    # same, for string conversions\n    flags = int('0b_1111_0000', 2)\n\n\nSpecification\n=============\n\nThe current proposal is to allow one underscore between digits, and\nafter base specifiers in numeric literals.  The underscores have no\nsemantic meaning, and literals are parsed as if the underscores were\nabsent.\n\nLiteral Grammar\n---------------\n\nThe production list for integer literals would therefore look like"
+        }
+      ],
+      "question": "How many underscores may go between adjacent digits in a Python numeric literal?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0515.rst"
+      ],
+      "aliases": [
+        "one underscore",
+        "one",
+        "1"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "pep-572",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 572 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+          "text": "Resolution: https://mail.python.org/pipermail/python-dev/2018-July/154601.html\n\n\nAbstract\n========\n\nThis is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.\n\nAs part of this change, there is also an update to dictionary comprehension\nevaluation order to ensure key expressions are executed before value\nexpressions (allowing the key to be bound to a name and then re-used as part of\ncalculating the corresponding value).\n\nDuring discussion of this PEP, the operator became informally known as\n\"the walrus operator\". The construct's formal name is \"Assignment Expressions\""
+        },
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        }
+      ],
+      "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst"
+      ],
+      "aliases": [
+        "NAME := expr",
+        ":="
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-597",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "order",
+        "graft"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/5",
+        "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        },
+        {
+          "speaker": "PEP 597 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+          "text": "Created: 05-Jun-2019\nPython-Version: 3.10\n\n\nAbstract\n========\n\nAdd a new warning category ``EncodingWarning``. It is emitted when the\n``encoding`` argument to ``open()`` is omitted and the default\nlocale-specific encoding is used.\n\nThe warning is disabled by default. A new ``-X warn_default_encoding``\ncommand-line option and a new ``PYTHONWARNDEFAULTENCODING`` environment\nvariable can be used to enable it.\n\nA ``\"locale\"`` argument value for ``encoding`` is added too. It"
+        }
+      ],
+      "question": "Which warning category signals omitted encoding when open uses the locale default?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst"
+      ],
+      "aliases": [
+        "EncodingWarning"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-618",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "runner",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/3",
+        "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 618 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+          "text": "Resolution: https://mail.python.org/archives/list/python-dev@python.org/message/NLWB7FVJGMBBMCF4P3ZKUIE53JPDOWJ3\n\n\nAbstract\n========\n\nThis PEP proposes adding an optional ``strict`` boolean keyword\nparameter to the built-in ``zip``.  When enabled, a ``ValueError`` is\nraised if one of the arguments is exhausted before the others.\n\n\nMotivation\n==========\n\nIt is clear from the author's personal experience and a `survey of the\nstandard library <examples_>`_ that much (if not most) ``zip`` usage"
+        },
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        }
+      ],
+      "question": "Which exception does strict zip raise when its iterables have different lengths?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst"
+      ],
+      "aliases": [
+        "ValueError"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-669",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        },
+        {
+          "speaker": "PEP 669 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+          "text": "This PEP proposes an API for monitoring Python programs running\non CPython that will enable monitoring at low cost.\n\nAlthough this PEP does not specify an implementation, it is expected that\nit will be implemented using the quickening step of\n:pep:`659`.\n\nA ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.\n\n\nMotivation\n==========\n\nDevelopers should not have to pay an unreasonable cost to use debuggers,\nprofilers and other similar tools."
+        }
+      ],
+      "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst"
+      ],
+      "aliases": [
+        "sys.monitoring"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-654",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "order",
+        "graft"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/5",
+        "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 654 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+          "text": "\nThis document proposes language extensions that allow programs to raise and handle\nmultiple unrelated exceptions simultaneously:\n\n* A new standard exception type, the ``ExceptionGroup``, which represents a\n  group of unrelated exceptions being propagated together.\n\n* A new syntax ``except*`` for handling ``ExceptionGroups``.\n\nMotivation\n==========\n\nThe interpreter is currently able to propagate at most one exception at a\ntime. The chaining features introduced in :pep:`3134` link together\nexceptions that are related to each other as the cause or context, but\nthere are situations where multiple unrelated exceptions need to be propagated"
+        },
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        }
+      ],
+      "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst"
+      ],
+      "aliases": [
+        "except*"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-553",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "runner",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/3",
+        "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        },
+        {
+          "speaker": "PEP 553 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+          "text": "Environment variable\n====================\n\nThe default implementation of ``sys.breakpointhook()`` consults a new\nenvironment variable called ``PYTHONBREAKPOINT``.  This environment variable\ncan have various values:\n\n* ``PYTHONBREAKPOINT=0`` disables debugging.  Specifically, with this value\n  ``sys.breakpointhook()`` returns ``None`` immediately.\n\n* ``PYTHONBREAKPOINT=`` (i.e. the empty string).  This is the same as not\n  setting the environment variable at all, in which case ``pdb.set_trace()``\n  is run as usual.\n\n* ``PYTHONBREAKPOINT=some.importable.callable``.  In this case,\n  ``sys.breakpointhook()`` imports the ``some.importable`` module and gets the"
+        }
+      ],
+      "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst"
+      ],
+      "aliases": [
+        "0",
+        "PYTHONBREAKPOINT=0"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "pep-552",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "speaker": "PEP 552 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst",
+          "text": "If the bit field is 0, the pyc is a traditional timestamp-based pyc. I.e., the\nthird and forth words will be the timestamp and file size respectively, and\ninvalidation will be done by comparing the metadata of the source file with that\nin the header.\n\nIf the lowest bit of the bit field is set, the pyc is a hash-based pyc. We call\nthe second lowest bit the ``check_source`` flag. Following the bit field is a\n64-bit hash of the source file. We will use a SipHash_ with a hardcoded key of\nthe contents of the source file. Another fast hash like MD5 or BLAKE2_ would\nalso work. We choose SipHash because Python already has a builtin implementation\nof it from :pep:`456`, although an interface that allows picking the SipHash key\nmust be exposed to Python. Security of the hash is not a concern, though we pass\nover completely-broken hashes like MD5 to ease auditing of Python in controlled\nenvironments.\n\nWhen Python encounters a hash-based pyc, its behavior depends on the setting of"
+        },
+        {
+          "speaker": "PEP 498 contributors",
+          "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0498.rst",
+          "text": "%-formatting [#]_, ``str.format()`` [#]_, and ``string.Template``\n[#]_. Each of these methods have their advantages, but in addition\nhave disadvantages that make them cumbersome to use in practice. This\nPEP proposed to add a new string formatting mechanism: Literal String\nInterpolation. In this PEP, such strings will be referred to as\n\"f-strings\", taken from the leading character used to denote such\nstrings, and standing for \"formatted strings\".\n\nThis PEP does not propose to remove or deprecate any of the existing\nstring formatting mechanisms.\n"
+        }
+      ],
+      "question": "Which hash algorithm was chosen for the source contents in the hash-based pyc format?",
+      "correct_locations": [
+        "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0552.rst"
+      ],
+      "aliases": [
+        "SipHash"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "F_SH_Top01_002",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-30/Group 3/2",
+          "speaker": "Huilan Chen",
+          "text": "Good morning, Boss Zhang. Yang Zhao and I have registered for and tried EcoTrace's free version. Our initial conclusion is that its user onboarding process is very streamlined and easy to get started with. However, the free features are very limited, basically only providing a basic framework for core enterprises to assign data entry tasks to suppliers, with almost no data analysis or reporting functions. Users who want to get real value must upgrade to the paid version. I am currently compiling a detailed experience analysis and screenshots, which I expect to send out this afternoon."
+        },
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-31/Group 3/3",
+          "speaker": "Huilan Chen",
+          "text": "@all Good morning, I have completed the analysis report on our main competitors. It focuses on EcoTrace's features, pricing, and market strategy, especially their Freemium model and user conversion path. The report has been uploaded to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report. @Weihua Zhang @Jianguo Huang @Guohua Han The core conclusion is that they use a minimalist free collaboration feature as a traffic entry point, and then set up a paywall through powerful data analysis and reporting functions. This strategy is very much worth learning from."
+        }
+      ],
+      "question": "In the competitive analysis task for the supply chain carbon footprint project, after Huilan Chen completed the analysis of key competitors (especially EcoTrace), which document management system did she upload the final report to?",
+      "correct_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-30/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-31/Group 3/3"
+      ],
+      "aliases": [
+        "Confluence"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "F_SH_Top01_013",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5",
+          "speaker": "Xuexin Yin",
+          "text": "@Mingzhi Li Boss Li, the draft technical evaluation report on the data quality of the production line energy management system has been completed and uploaded to the project folder. The core conclusion is that the automated cleaning of this data source is quite difficult, and it is initially estimated that at least 10 working days of data engineer input will be required for rule development and initial manual verification. It is recommended to clearly define this part of the work as a \"data preprocessing\" sub-task in the scope statement and establish separate acceptance criteria."
+        },
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/9",
+          "speaker": "Lizhen Zhou",
+          "text": "I have just completed the review of the charter and scope document, especially the sections related to finance and asset management. The currently defined direction of \"integrating fixed asset ledgers with energy consumption data\" is very clear and consistent with our financial standards. Regarding the data cleansing work mentioned by Mingzhi Li, I suggest that the cost of this part be clearly itemized in the project budget and treated as a special technical service fee."
+        }
+      ],
+      "question": "After conducting a technical assessment of the data quality of the production line energy management system, what is the preliminary estimated number of workdays required for data cleansing and initial verification in the report?",
+      "correct_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/9"
+      ],
+      "aliases": [
+        "at least 10 working days",
+        "at least 10 business days"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "F_SH_Top01_033",
+      "task": "qa",
+      "group": "retention",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5",
+          "speaker": "Lizhen Zhou",
+          "text": "@Luhao Zhao I've read the outline, and it's well-written. Regarding the sections for managers and audit requirements, I suggest adding a question: \"What customizable dimensions would you like the generated reports to have? For example, by time, by emission source, by branch company, etc.\" This is crucial for our subsequent report design. @Yu Su's suggestion is also very good; data is the foundation."
+        },
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-27/Group 1/1",
+          "speaker": "Luhao Zhao",
+          "text": "Good morning, everyone! A new week has begun. My main task today is to finalize the revisions to the user interview outline. Last Friday, I really appreciate the feedback from Boss Lizhen Zhou and Yu Su. I'm currently incorporating the issues you all raised regarding custom dimensions for reports and details of current user operations."
+        },
+        {
+          "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-27/Group 1/22",
+          "speaker": "Jianguo Huang",
+          "text": "Received, @Luhao Zhao, very efficient! I quickly skimmed through it, the outline is comprehensive, and the logic is clear. This way we can start arranging the interviews. Thank you for your hard work."
+        }
+      ],
+      "question": "When reviewing the first draft of the user interview outline for the carbon emissions management platform, who suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors?",
+      "correct_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-27/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-27/Group 1/22"
+      ],
+      "aliases": [
+        "Lizhen Zhou"
+      ],
+      "previously_correct": true
+    },
+    {
+      "id": "related-1",
+      "task": "qa",
+      "group": "related_qa",
+      "topics": [
+        "eol",
+        "runner"
+      ],
+      "incoming": {
+        "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5",
+        "time": "2018-06-11T10:22:32-07:00",
+        "author": "Anthony Sottile",
+        "text": "config.c: fix regression for core.safecrlf false\n\nA regression introduced in 8462ff43 (\"convert_to_git():\nsafe_crlf/checksafe becomes int conv_flags\", 2018-01-13) back in Git\n2.17 cycle caused autocrlf rewrites to produce a warning message\ndespite setting safecrlf=false."
+      },
+      "raw": [],
+      "question": "With the earlier SAFE_CRLF_FALSE setting, what should happen on EOL roundtrip errors?",
+      "correct_locations": [
+        "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945"
+      ],
+      "aliases": [
+        "do nothing"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "related-2",
+      "task": "qa",
+      "group": "related_qa",
+      "topics": [
+        "runner",
+        "mmap"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/3",
+        "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [],
+      "question": "According to the old change, what does the empty packed-refs load return?",
+      "correct_locations": [
+        "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+        "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3"
+      ],
+      "aliases": [
+        "0"
+      ],
+      "previously_correct": false
+    },
+    {
+      "id": "related-3",
+      "task": "qa",
+      "group": "related_qa",
+      "topics": [
+        "submodule",
+        "runner"
+      ],
+      "incoming": {
+        "location": "fixture://changed-condition/1",
+        "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "author": "controlled team report",
+        "time": "2021-01-01T00:00:00Z"
+      },
+      "raw": [],
+      "question": "Which directory did the old Makefile approach inspect for failed tests?",
+      "correct_locations": [
+        "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+      ],
+      "aliases": [
+        "test-results/",
+        "test-results"
+      ],
+      "previously_correct": false
+    }
+  ]
+}

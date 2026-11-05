@@ -1,0 +1,103 @@
+{
+  "25e5215eb24a": {
+    "task": "changed condition",
+    "criterion": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "source": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct)."
+    ],
+    "answer": "The earlier decision to move slab-clearing to `close_commit_graph()` now fails because the commit introduces a scenario where the slab is cleared even when the repository does not have a commit graph struct, as seen with the observed condition of `ac6d45d11f`."
+  },
+  "2cee4b76215e": {
+    "task": "difference from alternative",
+    "criterion": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "source": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "answer": "The other decision addresses closing file descriptors immediately after use, whereas the incoming report discusses avoiding slab clearing in certain repository cleanup scenarios."
+  },
+  "47a2d4b8d527": {
+    "task": "changed condition",
+    "criterion": "Clearing the shared commit slab on closing a NULL graph/submodule repo discards data still needed by the parent; that close must leave the slab intact.",
+    "source": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct)."
+    ],
+    "answer": "The earlier decision to move slab-clearing to `close_commit_graph()` now fails because the observed condition of not always having a `commit_graph` struct, as noted in the incoming change, causes `repo_clear()` to be called unnecessarily, leading to potential unintended side effects."
+  },
+  "4c33ac7b48ab": {
+    "task": "changed condition",
+    "criterion": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "source": [
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all."
+    ],
+    "answer": "The earlier decision to prepare for writing a .rev file by allocating and sorting the \"pack_order\" array appears flawed given the report revealing we are no longer writing *.rev files, necessitating a recheck of this assumption."
+  },
+  "4f4df9b7e8a6": {
+    "task": "changed condition",
+    "criterion": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "source": [
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "answer": "The original author should revisit the decision to add progress output for \"commit-graph write\" without checking the --quiet option, as revealed by the reported regression in 7b0f229222 (\\\"commit-graph write: add progress output\\\", 2018-09-17)."
+  },
+  "7b6a20715cbb": {
+    "task": "changed condition",
+    "criterion": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "source": [
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all."
+    ],
+    "answer": "The earlier decision to prepare for writing a .rev file by allocating and sorting the \"pack_order\" array appears unnecessary given the report's revelation that *.rev files are no longer being written, necessitating a reevaluation of this project decision."
+  },
+  "7d4b580224fd": {
+    "task": "changed condition",
+    "criterion": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "source": [
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all."
+    ],
+    "answer": "The earlier decision relied on the expectation that .rev files would be written, but the new evidence shows that this is no longer the case, thus changing its applicability; however, if future projects decide to write .rev files again, the earlier rationale may still apply."
+  },
+  "8a92e04b5200": {
+    "task": "changed condition",
+    "criterion": "Progress output added for commit-graph writes fails to honor --quiet and must be suppressed then.",
+    "source": [
+      "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+      "Fix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option."
+    ],
+    "answer": "The original author should revisit the decision to add progress output for \"commit-graph write\" without checking the --quiet option, as evidenced by the reported regression."
+  },
+  "93709a064d84": {
+    "task": "changed condition",
+    "criterion": "The refactored reverse-index writer needlessly allocates/sorts pack order when no .rev will be written; skip this work on that path.",
+    "source": [
+      "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+      "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all."
+    ],
+    "answer": "The earlier decision relied on the necessity of writing a .rev file, which was based on the assumption that the multi-pack index would generate such a file. The report introduces new evidence indicating that *.rev files are not being written, thus changing the applicability of the earlier decision; however, the earlier result remains valid if the multi-pack index is configured to produce and utilize these files."
+  },
+  "a7f0930a66b6": {
+    "task": "difference from alternative",
+    "criterion": "The other decision closes an unused file descriptor after mmap to avoid fd exhaustion; it does not release the shared graph slab.",
+    "source": [
+      "commit-graph: move slab-clearing to close_commit_graph()",
+      "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct).",
+      "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+    ],
+    "answer": "The other decision addresses closing file descriptors immediately after use, whereas the incoming report discusses avoiding slab clearing in certain repository cleanup scenarios."
+  },
+  "f1725f7b6fb6": {
+    "task": "changed condition",
+    "criterion": "Adding scalar to the command-documentation regex shifted the man-section capture from $1 to $2 (or captured the name instead of the section).",
+    "source": [
+      "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+      "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`."
+    ],
+    "answer": "The original author's update to the regex for matching man sections in Git documentation commands failed to correctly handle the new structure where the man section is now located in `$2` instead of `$1`."
+  }
+}

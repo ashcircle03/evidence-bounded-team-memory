@@ -33,6 +33,9 @@ def followups(store):
         witnesses = [(old, prior), (new, incoming)]
         if "prior_rationale" in item:
             witnesses.append((item["prior_rationale"], prior))
+        if "attribution" in item:
+            valid &= item["attribution"]["source_id"] == new["source_id"]
+            witnesses.append((item["attribution"], incoming))
         for w, env in witnesses:
             src = env["source"]
             valid &= (
@@ -42,6 +45,26 @@ def followups(store):
                 and w["location"] == src["location"]
                 and w["speaker"] == src["speaker"]
             )
+        if "alternative" in item:
+            w = item["alternative"]
+            alt = sources.get(w["source_id"])
+            valid &= bool(alt and w["source_id"] not in (old["source_id"], new["source_id"])
+                          and alt["observed_at"] <= incoming["observed_at"]
+                          and 0 <= w["start"] < w["end"] <= len(alt["source"]["text"])
+                          and w["quote"] == alt["source"]["text"][w["start"]:w["end"]]
+                          and w["location"] == alt["source"]["location"] and w["speaker"] == alt["source"]["speaker"])
+        if item.get("strategy") == "role-review" or "role_evidence" in item:
+            from .role_review import valid_ledger
+            valid &= valid_ledger(item)
+        if item.get("strategy") == "context-review" or "observation_evidence" in item:
+            from .context_review import valid_evidence
+            valid &= valid_evidence(item)
+        if "report_anchor" in item:
+            w = item["report_anchor"]
+            src = incoming["source"]
+            valid &= (w["source_id"] == new["source_id"] and w["location"] == src["location"]
+                      and w["speaker"] == src["speaker"] and 0 <= w["start"] < w["end"] <= len(src["text"]))
+            valid &= src["text"][w["start"]:w["end"]] == w["quote"]
         if not valid:
             continue
         choices = {
@@ -93,7 +116,7 @@ def relevant_followups(store, question):
 
 
 def assess_arrivals(store, arrivals, goal, generate, strategy, incoming_history=None):
-    history = active_sources(store, include_retired=strategy == "premise")
+    history = active_sources(store, include_retired=strategy in ("premise", "pairwise", "fixed-review", "contrast-review", "referenced-review", "role-review", "context-review"))
     output = []
     for sid in arrivals:
         if sid not in history or history[sid][1] in {"rejected", "superseded"}:
@@ -109,6 +132,8 @@ def assess_arrivals(store, arrivals, goal, generate, strategy, incoming_history=
         if result["action"] in ("retest", "reassess"):
             old_id = result["previous"]["source_id"]
             store.put("sources", previous[old_id][0])
+            if "alternative" in result:
+                store.put("sources", previous[result["alternative"]["source_id"]][0])
             pid = store.put("followups", dict(result, goal=goal, strategy=strategy))
             result = dict(result, id=pid)
         output.append(dict(source_id=sid, result=result))
@@ -160,7 +185,7 @@ def _pull_locked(store, goal, generate, strategy, root, subdir, cursor, notes_di
         if not boot.exists():
             collect(store, root, old, notes_dir)
             boot.touch()
-        existing = set(active_sources(store, include_retired=strategy == "premise")) - set(added)
+        existing = set(active_sources(store, include_retired=strategy in ("premise", "pairwise", "fixed-review", "contrast-review", "referenced-review", "role-review", "context-review"))) - set(added)
         incoming_groups = collect(store, root, f"{old}..{head}", notes_dir)
         # On retry, already captured arrivals remain in the store. Exclude all of them
         # until their commit is reached, including siblings with equal Git timestamps.

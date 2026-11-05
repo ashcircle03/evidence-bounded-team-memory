@@ -19,7 +19,18 @@ jobs:
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.12'
+      - name: Check out the pinned CUPMem source for offline adapter tests
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: icedreamc/STALE
+          ref: ea7d391103a151927cd29d2f01d87597a782bdcb
+          path: .cache/cupmem-upstream
+          persist-credentials: false
+      - name: Install the frozen upstream file manifest
+        run: cp evaluation/cupmem/upstream-manifest.json .cache/cupmem-upstream/UPSTREAM_MANIFEST.json
       - name: Run unit tests
+        env:
+          CUPMEM_UPSTREAM_ROOT: ${{ github.workspace }}/.cache/cupmem-upstream
         run: python -m unittest discover -s tests -v
       - name: Replay the two-clone Git demo
         run: |

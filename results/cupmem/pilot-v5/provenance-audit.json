@@ -1,0 +1,1348 @@
+{
+  "status": "bound_offline_adapter_preparation_not_citation_success",
+  "model_calls_added": 0,
+  "http_sha256": "3a3dd2e220bb13f89ba0ecfbc3276be2bf34efc7c0132025f33533f67b4f821a",
+  "trace_sha256": "4ebafca02888f98247e10e5e157353dde50687bbaffbfc5cad394044258c028e",
+  "query_memory_hash_checks": [
+    {
+      "phase": "query_start",
+      "query": "dim1_query",
+      "state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462"
+    },
+    {
+      "phase": "query_complete",
+      "query": "dim1_query",
+      "state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462"
+    },
+    {
+      "phase": "query_start",
+      "query": "dim2_query",
+      "state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462"
+    },
+    {
+      "phase": "query_complete",
+      "query": "dim2_query",
+      "state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462"
+    },
+    {
+      "phase": "query_start",
+      "query": "dim3_query",
+      "state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462"
+    },
+    {
+      "phase": "query_complete",
+      "query": "dim3_query",
+      "state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462"
+    }
+  ],
+  "reports": [
+    {
+      "request_id": 911,
+      "request_line": 1821,
+      "request_body_sha256": "a4de614c949c9af6e6f3bb0334941fa298109ed92086eac05670be4fc58c53af",
+      "query": "Based on the conversation history, does the user still keep a mental ledger of gift costs so they can match what others spent later?",
+      "query_label": "dim1_query",
+      "resolution": {
+        "schema_version": 1,
+        "status": "bound_offline_source_expansion_only",
+        "grounding_sha256": "349301ce82eec7431a479f0cd3e9b1c324218f5c3c5f36eaa9dcc2b8468bf3fc",
+        "trace_sha256": "f0f607d7a3fc49398a767f1a5f70d7f557f664e3cc3a090ddfadc5b5e5c4d0b3",
+        "basis_bindings": [
+          {
+            "binding_id": "supporting_basis:0",
+            "role": "supporting_basis",
+            "position": 0,
+            "native_basis": {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 1,
+                "score": 0.5917500853538513,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "global_item_value",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            },
+            "value_provenance": [
+              {
+                "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00001",
+                  "session:s_000",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "item.source_delta_ids",
+                  "delta:d_00001",
+                  "chunk:c_00001",
+                  "session:s_000",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_provenance": [
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00002",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00002",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_events": [
+              {
+                "event": {
+                  "event": "weak_challenge",
+                  "reason": "The hint points to the exact active preference item, and the new deltas weaken its confidence by shifting current self-management priorities toward meditation/routine-building. However, they do not directly contradict the reciprocity-tracking preference, so this is a weakening rather than a full invalidate.",
+                  "source_proposal_id": "lip_00006",
+                  "source_delta_ids": [
+                    "d_00002",
+                    "d_00003"
+                  ],
+                  "source_session_id": "s_001",
+                  "source_session_index": 1,
+                  "timestamp": "2024-01-09 08:37"
+                },
+                "role": "stored_status_rationale_not_a_source_quote",
+                "selected_causal_passages_by_native": false
+              }
+            ],
+            "unresolved": [],
+            "limitations": [
+              "The native grounding names a status but does not select its causal source passages; resolved status causes are audit-only and excluded from reader_payload.",
+              "Lineage does not establish that the original turns entail the generated value, status, or answer."
+            ],
+            "resolved_record_status": "ACTIVE",
+            "resolved_active_strength": "WEAK",
+            "resolution": "resolved"
+          }
+        ],
+        "original_turns_for_audit": [
+          {
+            "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_000",
+            "turn_id": "t_6",
+            "content_sha256": "7425363d269e5555f959f151e30c574eb25bc10d956bef817446eb24a4502b16",
+            "session_index": 0,
+            "session_time": "2023-12-26 19:00",
+            "text": "I’m realizing part of why I overthink it is I actually keep track of what people spend on my gifts so I can match it later; taking more than I give feels like accepting a loan I didn't ask for. Is that a weird mindset to bring to weddings too—like should I try to let go of “matching” and just pick a budget based on closeness + what I can afford?",
+            "uses": [
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "value"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-28b141faec67fd0ea38d",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_001",
+            "turn_id": "t_0",
+            "content_sha256": "fff52b308181687328783d1b433517057366b547828961a7b82d696fe0efaf29",
+            "session_index": 1,
+            "session_time": "2024-01-09 08:37",
+            "text": "I've been trying to improve my focus and productivity lately, and I was wondering if you have any recommendations for apps or tools that can help me stay on track with my goals. By the way, I've recently started using a meditation app and doing daily meditation sessions, which has really helped me feel more focused and calm during the day.",
+            "uses": [
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "status_cause"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-242b2c5d9073073f0793",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_001",
+            "turn_id": "t_6",
+            "content_sha256": "42eac27004e0b0681c3c636ba21eab83897a3f9f87e486ab88e5ecf104c0db41",
+            "session_index": 1,
+            "session_time": "2024-01-09 08:37",
+            "text": "I think I'll try implementing the Pomodoro Technique into my morning routine, right after my daily meditation session. I'll start with a 25-minute Pomodoro session and see how it goes. Do you have any suggestions for tasks that are suitable for a morning Pomodoro session? Something that will help me set a positive tone for the day?",
+            "uses": [
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "status_cause"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_001",
+            "turn_id": "t_8",
+            "content_sha256": "68dbf2761b059463e42321c3706234b0e65400e415c0d3e65f77f1a05403ac05",
+            "session_index": 1,
+            "session_time": "2024-01-09 08:37",
+            "text": "I think I'll start with journaling for my morning Pomodoro session. I've been wanting to get back into writing and reflecting on my thoughts and goals. Do you have any tips on how to make the most out of journaling during a Pomodoro session?",
+            "uses": [
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "status_cause"
+              }
+            ]
+          }
+        ],
+        "unresolved": [],
+        "reader_payload": {
+          "passages": [
+            {
+              "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+              "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+              "session_id": "s_000",
+              "turn_id": "t_6",
+              "content_sha256": "7425363d269e5555f959f151e30c574eb25bc10d956bef817446eb24a4502b16",
+              "session_index": 0,
+              "session_time": "2023-12-26 19:00",
+              "text": "I’m realizing part of why I overthink it is I actually keep track of what people spend on my gifts so I can match it later; taking more than I give feels like accepting a loan I didn't ask for. Is that a weird mindset to bring to weddings too—like should I try to let go of “matching” and just pick a budget based on closeness + what I can afford?"
+            }
+          ],
+          "policy": "Only original turns linked to native-selected value records; status-cause audit passages are not automatically added."
+        },
+        "limitations": [
+          "No semantic validation or citation-success score is produced.",
+          "Status labels/reasons and generated chunks are not original quotations.",
+          "No unselected history, neighboring turn, corrected_current_fact or top-k candidate is added.",
+          "Whole linked original turns may contain more detail than the native summary; this explicit citation adapter is separate from native CUPMem QA.",
+          "reader_payload is source-expansion preparation, not a complete fair cited-QA prompt. A later reader must explicitly decide how to present native status/summary annotations as model-derived information; stripping them could degrade CUPMem artificially.",
+          "Resolver or binding failure is an adapter failure, never a native CUPMem QA error."
+        ],
+        "binding": {
+          "verified": true,
+          "query_label": "dim1_query",
+          "query_text": "Based on the conversation history, does the user still keep a mental ledger of gift costs so they can match what others spent later?",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+          "request_id": 911,
+          "request_body_sha256": "a4de614c949c9af6e6f3bb0334941fa298109ed92086eac05670be4fc58c53af",
+          "expected_state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+          "actual_state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+          "errors": []
+        },
+        "source_expansion_ready": true
+      }
+    },
+    {
+      "request_id": 918,
+      "request_line": 1835,
+      "request_body_sha256": "a71b299929c71dd26df9f614ac32957bc34d80690962233a457e4a7845a62db2",
+      "query": "Since the user keeps track of what people spend on their gifts so they can match it later, can you suggest a practical system (notes, spreadsheet categories, reminders) for tracking amounts and ensuring they always reciprocate at an equal value?",
+      "query_label": "dim2_query",
+      "resolution": {
+        "schema_version": 1,
+        "status": "bound_offline_source_expansion_only",
+        "grounding_sha256": "b0f4d43d88257101013dca5fe356254abca781790da5b2f2df4ab10eac972c9e",
+        "trace_sha256": "f0f607d7a3fc49398a767f1a5f70d7f557f664e3cc3a090ddfadc5b5e5c4d0b3",
+        "basis_bindings": [],
+        "original_turns_for_audit": [],
+        "unresolved": [],
+        "reader_payload": {
+          "passages": [],
+          "policy": "Only original turns linked to native-selected value records; status-cause audit passages are not automatically added."
+        },
+        "limitations": [
+          "No semantic validation or citation-success score is produced.",
+          "Status labels/reasons and generated chunks are not original quotations.",
+          "No unselected history, neighboring turn, corrected_current_fact or top-k candidate is added.",
+          "Whole linked original turns may contain more detail than the native summary; this explicit citation adapter is separate from native CUPMem QA.",
+          "reader_payload is source-expansion preparation, not a complete fair cited-QA prompt. A later reader must explicitly decide how to present native status/summary annotations as model-derived information; stripping them could degrade CUPMem artificially.",
+          "Resolver or binding failure is an adapter failure, never a native CUPMem QA error."
+        ],
+        "binding": {
+          "verified": true,
+          "query_label": "dim2_query",
+          "query_text": "Since the user keeps track of what people spend on their gifts so they can match it later, can you suggest a practical system (notes, spreadsheet categories, reminders) for tracking amounts and ensuring they always reciprocate at an equal value?",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+          "request_id": 918,
+          "request_body_sha256": "a71b299929c71dd26df9f614ac32957bc34d80690962233a457e4a7845a62db2",
+          "expected_state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+          "actual_state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+          "errors": []
+        },
+        "source_expansion_ready": true
+      }
+    },
+    {
+      "request_id": 924,
+      "request_line": 1847,
+      "request_body_sha256": "bd0edcf0ca663e0da1eb643569bb92a317760175707bce270cbc9f63adaad0b7",
+      "query": "I’m meeting a friend later and want to handle the shared costs in a way that feels good and doesn’t create any awkwardness afterward—what should I do if they try to settle up with me later?",
+      "query_label": "dim3_query",
+      "resolution": {
+        "schema_version": 1,
+        "status": "bound_offline_source_expansion_only",
+        "grounding_sha256": "f41ccd4acfe58352dc44e8d64d94f1f14f8936b4b37544a7a725e6c2bc60f7cc",
+        "trace_sha256": "f0f607d7a3fc49398a767f1a5f70d7f557f664e3cc3a090ddfadc5b5e5c4d0b3",
+        "basis_bindings": [
+          {
+            "binding_id": "decisive_basis:0",
+            "role": "decisive_basis",
+            "position": 0,
+            "native_basis": {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "strong_active",
+                "id": "p_00075",
+                "rank_index": 1,
+                "score": 0.2804349362850189,
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              "status_label": "ACTIVE_STRONG",
+              "basis_recovery_source": "",
+              "text": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+            },
+            "value_provenance": [
+              {
+                "citation_id": "cupturn-3dd41362a89ba7dc3c83",
+                "path": [
+                  "decisive_basis[0].hit_ref",
+                  "active:p_00075",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_2"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-2b4befe9818aa71a1674",
+                "path": [
+                  "decisive_basis[0].hit_ref",
+                  "active:p_00075",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_4"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-9e7209b23b9565a98abf",
+                "path": [
+                  "decisive_basis[0].hit_ref",
+                  "active:p_00075",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-3dd41362a89ba7dc3c83",
+                "path": [
+                  "decisive_basis[0].hit_ref",
+                  "active:p_00075",
+                  "item.source_delta_ids",
+                  "delta:d_00076",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_2"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-2b4befe9818aa71a1674",
+                "path": [
+                  "decisive_basis[0].hit_ref",
+                  "active:p_00075",
+                  "item.source_delta_ids",
+                  "delta:d_00076",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_4"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-9e7209b23b9565a98abf",
+                "path": [
+                  "decisive_basis[0].hit_ref",
+                  "active:p_00075",
+                  "item.source_delta_ids",
+                  "delta:d_00076",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_provenance": [],
+            "status_events": [],
+            "unresolved": [],
+            "limitations": [
+              "Lineage does not establish that the original turns entail the generated value, status, or answer."
+            ],
+            "resolved_record_status": "ACTIVE",
+            "resolved_active_strength": "STRONG",
+            "resolution": "resolved"
+          },
+          {
+            "binding_id": "decisive_basis:1",
+            "role": "decisive_basis",
+            "position": 1,
+            "native_basis": {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 2,
+                "score": 0.25717681646347046,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            },
+            "value_provenance": [
+              {
+                "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00001",
+                  "session:s_000",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "item.source_delta_ids",
+                  "delta:d_00001",
+                  "chunk:c_00001",
+                  "session:s_000",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_provenance": [
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00002",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00002",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "decisive_basis[1].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_events": [
+              {
+                "event": {
+                  "event": "weak_challenge",
+                  "reason": "The hint points to the exact active preference item, and the new deltas weaken its confidence by shifting current self-management priorities toward meditation/routine-building. However, they do not directly contradict the reciprocity-tracking preference, so this is a weakening rather than a full invalidate.",
+                  "source_proposal_id": "lip_00006",
+                  "source_delta_ids": [
+                    "d_00002",
+                    "d_00003"
+                  ],
+                  "source_session_id": "s_001",
+                  "source_session_index": 1,
+                  "timestamp": "2024-01-09 08:37"
+                },
+                "role": "stored_status_rationale_not_a_source_quote",
+                "selected_causal_passages_by_native": false
+              }
+            ],
+            "unresolved": [],
+            "limitations": [
+              "The native grounding names a status but does not select its causal source passages; resolved status causes are audit-only and excluded from reader_payload.",
+              "Lineage does not establish that the original turns entail the generated value, status, or answer."
+            ],
+            "resolved_record_status": "ACTIVE",
+            "resolved_active_strength": "WEAK",
+            "resolution": "resolved"
+          },
+          {
+            "binding_id": "supporting_basis:0",
+            "role": "supporting_basis",
+            "position": 0,
+            "native_basis": {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "weak_active",
+                "id": "p_00001",
+                "rank_index": 2,
+                "score": 0.25717681646347046,
+                "bucket": "stable_preferences",
+                "local_track": "value_or_priority_tendency"
+              },
+              "status_label": "ACTIVE_WEAK",
+              "basis_recovery_source": "",
+              "text": "Keeps track of what people spend on their gifts in order to match it later, because taking more than they give feels like accepting an unwanted loan."
+            },
+            "value_provenance": [
+              {
+                "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00001",
+                  "session:s_000",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "item.source_delta_ids",
+                  "delta:d_00001",
+                  "chunk:c_00001",
+                  "session:s_000",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_provenance": [
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00002",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-28b141faec67fd0ea38d",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00002",
+                  "chunk:c_00002",
+                  "session:s_001",
+                  "user_turn:t_0"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-242b2c5d9073073f0793",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+                "path": [
+                  "supporting_basis[0].hit_ref",
+                  "active:p_00001",
+                  "revision_history[0]",
+                  "proposal:lip_00006",
+                  "delta:d_00003",
+                  "chunk:c_00003",
+                  "session:s_001",
+                  "user_turn:t_8"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_events": [
+              {
+                "event": {
+                  "event": "weak_challenge",
+                  "reason": "The hint points to the exact active preference item, and the new deltas weaken its confidence by shifting current self-management priorities toward meditation/routine-building. However, they do not directly contradict the reciprocity-tracking preference, so this is a weakening rather than a full invalidate.",
+                  "source_proposal_id": "lip_00006",
+                  "source_delta_ids": [
+                    "d_00002",
+                    "d_00003"
+                  ],
+                  "source_session_id": "s_001",
+                  "source_session_index": 1,
+                  "timestamp": "2024-01-09 08:37"
+                },
+                "role": "stored_status_rationale_not_a_source_quote",
+                "selected_causal_passages_by_native": false
+              }
+            ],
+            "unresolved": [],
+            "limitations": [
+              "The native grounding names a status but does not select its causal source passages; resolved status causes are audit-only and excluded from reader_payload.",
+              "Lineage does not establish that the original turns entail the generated value, status, or answer."
+            ],
+            "resolved_record_status": "ACTIVE",
+            "resolved_active_strength": "WEAK",
+            "resolution": "resolved"
+          },
+          {
+            "binding_id": "supporting_basis:1",
+            "role": "supporting_basis",
+            "position": 1,
+            "native_basis": {
+              "hit_ref": {
+                "source": "active",
+                "source_detail": "strong_active",
+                "id": "p_00075",
+                "rank_index": 1,
+                "score": 0.2804349362850189,
+                "bucket": "current_focus_and_goals",
+                "local_track": "short_horizon_goal"
+              },
+              "status_label": "ACTIVE_STRONG",
+              "basis_recovery_source": "",
+              "text": "Wants to gracefully accept payback when someone insists on repaying them, without making it awkward or turning it into a back-and-forth."
+            },
+            "value_provenance": [
+              {
+                "citation_id": "cupturn-3dd41362a89ba7dc3c83",
+                "path": [
+                  "supporting_basis[1].hit_ref",
+                  "active:p_00075",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_2"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-2b4befe9818aa71a1674",
+                "path": [
+                  "supporting_basis[1].hit_ref",
+                  "active:p_00075",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_4"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-9e7209b23b9565a98abf",
+                "path": [
+                  "supporting_basis[1].hit_ref",
+                  "active:p_00075",
+                  "item.evidence_chunk_ids",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-3dd41362a89ba7dc3c83",
+                "path": [
+                  "supporting_basis[1].hit_ref",
+                  "active:p_00075",
+                  "item.source_delta_ids",
+                  "delta:d_00076",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_2"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-2b4befe9818aa71a1674",
+                "path": [
+                  "supporting_basis[1].hit_ref",
+                  "active:p_00075",
+                  "item.source_delta_ids",
+                  "delta:d_00076",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_4"
+                ],
+                "chunk_text_is_not_a_quote": true
+              },
+              {
+                "citation_id": "cupturn-9e7209b23b9565a98abf",
+                "path": [
+                  "supporting_basis[1].hit_ref",
+                  "active:p_00075",
+                  "item.source_delta_ids",
+                  "delta:d_00076",
+                  "chunk:c_00075",
+                  "session:s_038",
+                  "user_turn:t_6"
+                ],
+                "chunk_text_is_not_a_quote": true
+              }
+            ],
+            "status_provenance": [],
+            "status_events": [],
+            "unresolved": [],
+            "limitations": [
+              "Lineage does not establish that the original turns entail the generated value, status, or answer."
+            ],
+            "resolved_record_status": "ACTIVE",
+            "resolved_active_strength": "STRONG",
+            "resolution": "resolved"
+          }
+        ],
+        "original_turns_for_audit": [
+          {
+            "citation_id": "cupturn-3dd41362a89ba7dc3c83",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_038",
+            "turn_id": "t_2",
+            "content_sha256": "a6499bef3f10b56acae3d0feb2b44b90a497119d910545588d15575b3da0adc2",
+            "session_index": 38,
+            "session_time": "2024-12-26 19:00",
+            "text": "I’ve started doing this thing where I’ll just pick up a coffee or cover the parking meter for whoever I’m with and not mention it—if they try to Venmo me later, I tell them to drop it and pay it forward to someone else when they feel like it. Do you have more ideas like that—small, normal stuff that stays low-key but still creates that “chain” effect without making anyone uncomfortable?",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:0",
+                "purpose": "value"
+              },
+              {
+                "binding_id": "supporting_basis:1",
+                "purpose": "value"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-2b4befe9818aa71a1674",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_038",
+            "turn_id": "t_4",
+            "content_sha256": "e9555943056c212a50b70492d76c615fc16f617efd21fcb21628f1b7700152a3",
+            "session_index": 38,
+            "session_time": "2024-12-26 19:00",
+            "text": "Yeah, this is exactly the vibe I’m going for. How do you handle it when someone insists on paying you back anyway—like they seem genuinely uncomfortable not settling up? I want to respect that without turning it into a whole back-and-forth.",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:0",
+                "purpose": "value"
+              },
+              {
+                "binding_id": "supporting_basis:1",
+                "purpose": "value"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-9e7209b23b9565a98abf",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_038",
+            "turn_id": "t_6",
+            "content_sha256": "5cb193e43f73333209b9f054f24814029fa3ad25151b94734610fe47d79a67f8",
+            "session_index": 38,
+            "session_time": "2024-12-26 19:00",
+            "text": "Could you give me a few specific “scripts” for different situations—like close friends vs coworkers vs someone I don’t know well—so I can gracefully accept a payback without making it weird, but still keep the whole thing feeling light?",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:0",
+                "purpose": "value"
+              },
+              {
+                "binding_id": "supporting_basis:1",
+                "purpose": "value"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_000",
+            "turn_id": "t_6",
+            "content_sha256": "7425363d269e5555f959f151e30c574eb25bc10d956bef817446eb24a4502b16",
+            "session_index": 0,
+            "session_time": "2023-12-26 19:00",
+            "text": "I’m realizing part of why I overthink it is I actually keep track of what people spend on my gifts so I can match it later; taking more than I give feels like accepting a loan I didn't ask for. Is that a weird mindset to bring to weddings too—like should I try to let go of “matching” and just pick a budget based on closeness + what I can afford?",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:1",
+                "purpose": "value"
+              },
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "value"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-28b141faec67fd0ea38d",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_001",
+            "turn_id": "t_0",
+            "content_sha256": "fff52b308181687328783d1b433517057366b547828961a7b82d696fe0efaf29",
+            "session_index": 1,
+            "session_time": "2024-01-09 08:37",
+            "text": "I've been trying to improve my focus and productivity lately, and I was wondering if you have any recommendations for apps or tools that can help me stay on track with my goals. By the way, I've recently started using a meditation app and doing daily meditation sessions, which has really helped me feel more focused and calm during the day.",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:1",
+                "purpose": "status_cause"
+              },
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "status_cause"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-242b2c5d9073073f0793",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_001",
+            "turn_id": "t_6",
+            "content_sha256": "42eac27004e0b0681c3c636ba21eab83897a3f9f87e486ab88e5ecf104c0db41",
+            "session_index": 1,
+            "session_time": "2024-01-09 08:37",
+            "text": "I think I'll try implementing the Pomodoro Technique into my morning routine, right after my daily meditation session. I'll start with a 25-minute Pomodoro session and see how it goes. Do you have any suggestions for tasks that are suitable for a morning Pomodoro session? Something that will help me set a positive tone for the day?",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:1",
+                "purpose": "status_cause"
+              },
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "status_cause"
+              }
+            ]
+          },
+          {
+            "citation_id": "cupturn-0244073e0dc5d9a3e2e9",
+            "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+            "session_id": "s_001",
+            "turn_id": "t_8",
+            "content_sha256": "68dbf2761b059463e42321c3706234b0e65400e415c0d3e65f77f1a05403ac05",
+            "session_index": 1,
+            "session_time": "2024-01-09 08:37",
+            "text": "I think I'll start with journaling for my morning Pomodoro session. I've been wanting to get back into writing and reflecting on my thoughts and goals. Do you have any tips on how to make the most out of journaling during a Pomodoro session?",
+            "uses": [
+              {
+                "binding_id": "decisive_basis:1",
+                "purpose": "status_cause"
+              },
+              {
+                "binding_id": "supporting_basis:0",
+                "purpose": "status_cause"
+              }
+            ]
+          }
+        ],
+        "unresolved": [],
+        "reader_payload": {
+          "passages": [
+            {
+              "citation_id": "cupturn-3dd41362a89ba7dc3c83",
+              "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+              "session_id": "s_038",
+              "turn_id": "t_2",
+              "content_sha256": "a6499bef3f10b56acae3d0feb2b44b90a497119d910545588d15575b3da0adc2",
+              "session_index": 38,
+              "session_time": "2024-12-26 19:00",
+              "text": "I’ve started doing this thing where I’ll just pick up a coffee or cover the parking meter for whoever I’m with and not mention it—if they try to Venmo me later, I tell them to drop it and pay it forward to someone else when they feel like it. Do you have more ideas like that—small, normal stuff that stays low-key but still creates that “chain” effect without making anyone uncomfortable?"
+            },
+            {
+              "citation_id": "cupturn-2b4befe9818aa71a1674",
+              "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+              "session_id": "s_038",
+              "turn_id": "t_4",
+              "content_sha256": "e9555943056c212a50b70492d76c615fc16f617efd21fcb21628f1b7700152a3",
+              "session_index": 38,
+              "session_time": "2024-12-26 19:00",
+              "text": "Yeah, this is exactly the vibe I’m going for. How do you handle it when someone insists on paying you back anyway—like they seem genuinely uncomfortable not settling up? I want to respect that without turning it into a whole back-and-forth."
+            },
+            {
+              "citation_id": "cupturn-9e7209b23b9565a98abf",
+              "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+              "session_id": "s_038",
+              "turn_id": "t_6",
+              "content_sha256": "5cb193e43f73333209b9f054f24814029fa3ad25151b94734610fe47d79a67f8",
+              "session_index": 38,
+              "session_time": "2024-12-26 19:00",
+              "text": "Could you give me a few specific “scripts” for different situations—like close friends vs coworkers vs someone I don’t know well—so I can gracefully accept a payback without making it weird, but still keep the whole thing feeling light?"
+            },
+            {
+              "citation_id": "cupturn-918b1a1c4ac49ac7fb4a",
+              "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+              "session_id": "s_000",
+              "turn_id": "t_6",
+              "content_sha256": "7425363d269e5555f959f151e30c574eb25bc10d956bef817446eb24a4502b16",
+              "session_index": 0,
+              "session_time": "2023-12-26 19:00",
+              "text": "I’m realizing part of why I overthink it is I actually keep track of what people spend on my gifts so I can match it later; taking more than I give feels like accepting a loan I didn't ask for. Is that a weird mindset to bring to weddings too—like should I try to let go of “matching” and just pick a budget based on closeness + what I can afford?"
+            }
+          ],
+          "policy": "Only original turns linked to native-selected value records; status-cause audit passages are not automatically added."
+        },
+        "limitations": [
+          "No semantic validation or citation-success score is produced.",
+          "Status labels/reasons and generated chunks are not original quotations.",
+          "No unselected history, neighboring turn, corrected_current_fact or top-k candidate is added.",
+          "Whole linked original turns may contain more detail than the native summary; this explicit citation adapter is separate from native CUPMem QA.",
+          "reader_payload is source-expansion preparation, not a complete fair cited-QA prompt. A later reader must explicitly decide how to present native status/summary annotations as model-derived information; stripping them could degrade CUPMem artificially.",
+          "Resolver or binding failure is an adapter failure, never a native CUPMem QA error."
+        ],
+        "binding": {
+          "verified": true,
+          "query_label": "dim3_query",
+          "query_text": "I’m meeting a friend later and want to handle the shared costs in a way that feels good and doesn’t create any awkwardness afterward—what should I do if they try to settle up with me later?",
+          "uid": "a5aa884f-29d6-40dc-a72c-e155fcbc7c79",
+          "request_id": 924,
+          "request_body_sha256": "bd0edcf0ca663e0da1eb643569bb92a317760175707bce270cbc9f63adaad0b7",
+          "expected_state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+          "actual_state_sha256": "5ed3ce0cfd65080c3ea9b4ace3ccbc58b323481768d183b4e0f843c7244f9462",
+          "errors": []
+        },
+        "source_expansion_ready": true
+      }
+    }
+  ],
+  "source_type_reachability": {
+    "upstream_revision": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+    "scope": "Static normal unmodified CupMemEngine.answer_query call path, not arbitrary helper calls or monkey-patched inputs",
+    "reachable_primary_hit_sources": [
+      "active",
+      "stale",
+      "unknown"
+    ],
+    "dead_legacy_handler_sources": [
+      "chunk",
+      "delta",
+      "recoverable_delta",
+      "chain",
+      "conflict_bundle"
+    ],
+    "source_file_sha256": {
+      "query/engine.py": "eaf0655800a778499f338042f74718078c85451300b068787f9798af81ba1143",
+      "query/readout.py": "a0f30b457babc1055dcc0601a36f6bab6654151f00fedebd6947bb378ec90c95",
+      "query/basis_recovery_impl.py": "708a66c1a3321131fdae74f7b25d8ecc0a7704a8b2c4dcdc3379d6b4984e4f33",
+      "query/support.py": "c318ae09a279fa17fdea31a7e5c062087b2b144088fa43a0f91e7948b9355ce5",
+      "query/action_grounding.py": "8d4264b5e4a37858b5f41b71306a4959f1e4816ce2d02f6602870832e91eea71",
+      "core/engine_utils.py": "63cf9721cdbf561411289d721d0c958f79b3cd13408245a92c97805ab7793975"
+    },
+    "literal_hit_source_constructors": [
+      {
+        "path": "query/readout.py",
+        "line": 116,
+        "source": "stale",
+        "kind": "dict"
+      },
+      {
+        "path": "query/readout.py",
+        "line": 131,
+        "source": "unknown",
+        "kind": "dict"
+      },
+      {
+        "path": "query/readout.py",
+        "line": 214,
+        "source": "stale",
+        "kind": "dict"
+      },
+      {
+        "path": "query/readout.py",
+        "line": 231,
+        "source": "unknown",
+        "kind": "dict"
+      },
+      {
+        "path": "query/readout.py",
+        "line": 100,
+        "source": "active",
+        "kind": "dict"
+      },
+      {
+        "path": "query/readout.py",
+        "line": 197,
+        "source": "active",
+        "kind": "dict"
+      },
+      {
+        "path": "query/basis_recovery_impl.py",
+        "line": 209,
+        "source": "stale",
+        "kind": "call_keyword"
+      },
+      {
+        "path": "query/basis_recovery_impl.py",
+        "line": 218,
+        "source": "unknown",
+        "kind": "call_keyword"
+      },
+      {
+        "path": "query/basis_recovery_impl.py",
+        "line": 259,
+        "source": "stale",
+        "kind": "call_keyword"
+      },
+      {
+        "path": "query/basis_recovery_impl.py",
+        "line": 268,
+        "source": "unknown",
+        "kind": "call_keyword"
+      },
+      {
+        "path": "query/basis_recovery_impl.py",
+        "line": 250,
+        "source": "active",
+        "kind": "call_keyword"
+      },
+      {
+        "path": "query/support.py",
+        "line": 595,
+        "source": "stale",
+        "kind": "dict"
+      },
+      {
+        "path": "query/support.py",
+        "line": 604,
+        "source": "unknown",
+        "kind": "dict"
+      }
+    ],
+    "call_graph_evidence": [
+      {
+        "path": "query/engine.py:9",
+        "finding": "answer_query collects context, runs basis recovery and optional fallback, then calls _compose_answer."
+      },
+      {
+        "path": "query/readout.py:90",
+        "finding": "_retrieve_query_topk emits active, stale, unknown; _retrieve_query_peripheral_topk at177 uses the same sources."
+      },
+      {
+        "path": "query/basis_recovery_impl.py:542",
+        "finding": "_run_basis_recovery uses only _rank_stale_unknown_basis_hits and _rank_global_item_value_hits; their candidate constructors emit stale/unknown and active/stale/unknown respectively."
+      },
+      {
+        "path": "query/support.py:588",
+        "finding": "_fallback_retrieve emits stale/unknown. Conflict retrieval uses existing same-source hits."
+      },
+      {
+        "path": "query/readout.py:544",
+        "finding": "_build_topk_hit_bundles preserves primary_hit; chain_view and conflict families are nested metadata, not new primary_hit source types."
+      },
+      {
+        "path": "query/support.py:256",
+        "finding": "_build_canonical_answer_grounding copies _hit_ref(primary_hit); text is selected from that payload."
+      },
+      {
+        "path": "query/action_grounding.py:51",
+        "finding": "Action candidate preparation uses existing bundles; LLM-selected IDs map back to the bundle lookup, not newly invented source records."
+      }
+    ],
+    "limitation": "Legacy source branches remain in helpers, but no reachable constructor produces those primary_hit sources in this revision. Unknown future types must stop adapter scoring as adapter gaps, never count as native CUPMem QA failures."
+  },
+  "reader_design_caveat": "The value-only source expansion is not a complete fair cited-QA prompt. A later common reader must explicitly present any native status/summary as model-derived annotations rather than source facts; stripping them could artificially degrade CUPMem. No new semantic prompt was implemented."
+}

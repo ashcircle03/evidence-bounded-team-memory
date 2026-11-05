@@ -1,0 +1,11 @@
+{
+  "reason": "Code review before any model output: each client must own its processing cursor; another agent receipt must not suppress local assessment. Correction and QA logic are unchanged. Added CLI and strict mode guard.",
+  "original_archive_sha256": "b6a598310eccd3947b9e0c945645ee10b0195b5dfe5d281cda7e281bfdba7816",
+  "model_prompts_identical": true,
+  "prompts_sha256": {
+    "INDEX": "746f8873c2dc44a3740809b7afeca150816101f10d004806492a3650e60506ee",
+    "COMPARE": "80ec9cf35fe7bc4ccc71306a907343778cca40992e151f12c102bb7d89103dec",
+    "QA": "61f56a4a6dc88651893f9d36c0c093c0173e3f53b766abcbae574da31b3dd397"
+  },
+  "required_check": "Replay all actual development prompts/outputs through final code and real Git before accepting development results. Do not reinterpret a code change as measured model improvement."
+}

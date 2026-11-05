@@ -1,0 +1,524 @@
+{
+  "status": "complete",
+  "job_id": "119286",
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "device": "NVIDIA GeForce RTX 3090",
+  "dtype": "torch.bfloat16",
+  "generation_seconds": 74.39,
+  "input_sha256": "db84656aeb50994cf8b0fda9f42a649385f5cd973a65277f0903775a00089ffe",
+  "calls": [
+    {
+      "id": "fresh-06/reverse",
+      "sha256": "768a67e445f653803b7288ca44f6bb499ddc6d75b8f6200b3be20a19afae245b",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming update describes a new GUI feature that edits hunks and applies them without splitting, successfully applying all 50 trials at the correct offset. This suggests that the need for the '--recount' option has changed due to the new editing behavior, warranting a reevaluation of the previous choices.\\nThe incoming work introduces a new GUI feature that changes the application process of patches, specifically by avoiding the need for '--recount', thus altering the necessity of the previous choices related to patch handling and recounting.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming update describes a new GUI feature that edits hunks and applies them without splitting, successfully applying all 50 trials at the correct offset. This suggests that the need for the '--recount' option has changed due to the new editing behavior, warranting a reevaluation of the previous choices.\nThe incoming work introduces a new GUI feature that changes the application process of patches, specifically by avoiding the need for '--recount', thus altering the necessity of the previous choices related to patch handling and recounting.",
+      "input_tokens": 952,
+      "output_tokens": 129
+    },
+    {
+      "id": "fresh-06/forward",
+      "sha256": "53346f6d58e44188f7ad2dff684f600d62b55024ef00fc249e5ca150985f6db2",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new approach to editing and applying hunks, specifically mentioning that the new GUI edits hunks and applies them without splitting. This change directly impacts the previous decision to avoid using `mmap()` for small packed-refs files, as the new method does not rely on the same assumptions about file sizes. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.\\nRaw Passages:\\nOld: {\\\"id\\\": \\\"O1.1.1\\\", \\\"speaker\\\": \\\"Kim Gybels\\\", \\\"text\\\": \\\"packed_ref_cache: don't use mmap() for small files\\\"}\\nNew: {\\\"id\\\": \\\"N.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new approach to editing and applying hunks, specifically mentioning that the new GUI edits hunks and applies them without splitting. This change directly impacts the previous decision to avoid using `mmap()` for small packed-refs files, as the new method does not rely on the same assumptions about file sizes. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.\nRaw Passages:\nOld: {\"id\": \"O1.1.1\", \"speaker\": \"Kim Gybels\", \"text\": \"packed_ref_cache: don't use mmap() for small files\"}\nNew: {\"id\": \"N.",
+      "input_tokens": 953,
+      "output_tokens": 160
+    },
+    {
+      "id": "fresh-05/forward",
+      "sha256": "1c24c58c89529c10a620ace482035d3f477e4276e1d1253f7d620bf32addf5be",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where applying edited hunks results in incorrect offsets after a split, which directly impacts the reasoning behind the past choices related to handling edited hunks and their offsets.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a scenario where applying edited hunks results in incorrect offsets after a split, which directly impacts the reasoning behind the past choices related to handling edited hunks and their offsets.",
+      "input_tokens": 959,
+      "output_tokens": 64
+    },
+    {
+      "id": "fresh-05/reverse",
+      "sha256": "60f1e3b31012cd237411cb8778a999227648cb7378702b25bf34aaa94b2d9fb7",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where applying edited hunks results in incorrect offsets due to splits, which contradicts the original observation about handling empty packed-refs files. This new information suggests a different behavior that could impact the correctness of the original code, necessitating a reevaluation.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces a scenario where applying edited hunks results in incorrect offsets due to splits, which contradicts the original observation about handling empty packed-refs files. This new information suggests a different behavior that could impact the correctness of the original code, necessitating a reevaluation.",
+      "input_tokens": 959,
+      "output_tokens": 82
+    },
+    {
+      "id": "fresh-04/forward",
+      "sha256": "f3eae331fdc5f7bf99553b591ffdd55601eb80b49b59f59c22c58168fe62e6ab",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work does not directly address or change the reasons for past choices related to test automation or re-running failed tests. It introduces a new document update regarding the deprecation of `--rebase=preserve`. This change is tangential and does not alter the necessity or rationale behind previous decisions about testing practices.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work does not directly address or change the reasons for past choices related to test automation or re-running failed tests. It introduces a new document update regarding the deprecation of `--rebase=preserve`. This change is tangential and does not alter the necessity or rationale behind previous decisions about testing practices.",
+      "input_tokens": 961,
+      "output_tokens": 88
+    },
+    {
+      "id": "fresh-04/reverse",
+      "sha256": "776af34967435d510202eab171d18acfcf88c9aa4da7ffa5153626803882bed2",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work does not directly address the issue mentioned in O2.1.1, which concerns passing verbosity settings to submodules during a pull operation. While N.1.1 updates documentation regarding the deprecation of `--rebase=preserve`, it does not change the necessity or reason for maintaining the original verbosity settings in submodules. Therefore, the incoming work does not sufficiently alter the context or reasoning behind the original choice to warrant reopening or testing it.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work does not directly address the issue mentioned in O2.1.1, which concerns passing verbosity settings to submodules during a pull operation. While N.1.1 updates documentation regarding the deprecation of `--rebase=preserve`, it does not change the necessity or reason for maintaining the original verbosity settings in submodules. Therefore, the incoming work does not sufficiently alter the context or reasoning behind the original choice to warrant reopening or testing it.",
+      "input_tokens": 961,
+      "output_tokens": 119
+    },
+    {
+      "id": "unseen-2n/reverse",
+      "sha256": "1ae0eb577817768d8bb33cf54da3158d79d5260f292a1b43238499b2d30f16ab",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new documentation change for the `-d` option, which does not directly impact the optimization discussed in the original passage. However, since the optimization was based on a specific command (`git checkout -b <new_branch>`), the addition of a new documentation entry could potentially affect future decisions regarding the use of this command. Therefore, reviewing the original choice is necessary to ensure that the new documentation does not inadvertently alter the rationale behind the optimization.\\nO2.1.1 records the decision to optimize `git checkout -b <new_branch>`, while N.1.1 introduces a new documentation entry for the `-d` option. Although these changes are\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new documentation change for the `-d` option, which does not directly impact the optimization discussed in the original passage. However, since the optimization was based on a specific command (`git checkout -b <new_branch>`), the addition of a new documentation entry could potentially affect future decisions regarding the use of this command. Therefore, reviewing the original choice is necessary to ensure that the new documentation does not inadvertently alter the rationale behind the optimization.\nO2.1.1 records the decision to optimize `git checkout -b <new_branch>`, while N.1.1 introduces a new documentation entry for the `-d` option. Although these changes are",
+      "input_tokens": 973,
+      "output_tokens": 160
+    },
+    {
+      "id": "unseen-2n/forward",
+      "sha256": "cd18c451020e5523e2ca7aec473efd87c3caeb51a557e3e961db65b72781dfd4",
+      "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, which adds documentation for a new `-d` short option for `git checkout`, does not directly relate to the previous choices about patch processing (`add -p`) or checkout optimization (`checkout: optimize`). Therefore, it does not change the reason for any past choice enough to reopen or test them.\"}",
+      "transcript": "Action: keep\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, which adds documentation for a new `-d` short option for `git checkout`, does not directly relate to the previous choices about patch processing (`add -p`) or checkout optimization (`checkout: optimize`). Therefore, it does not change the reason for any past choice enough to reopen or test them.",
+      "input_tokens": 974,
+      "output_tokens": 89
+    },
+    {
+      "id": "fresh-02/forward",
+      "sha256": "cc1c9c7ac0d12c3a8cb5c214979cee29b32e67550ec70aca9a5d330a974977ec",
+      "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, which involves moving documentation about `core.excludesFile`, does not address or alter the conditions or reasoning behind the previous choices related to patch processing and offset calculations. Therefore, no changes are needed to review or test those past choices.\"}",
+      "transcript": "Action: keep\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, which involves moving documentation about `core.excludesFile`, does not address or alter the conditions or reasoning behind the previous choices related to patch processing and offset calculations. Therefore, no changes are needed to review or test those past choices.",
+      "input_tokens": 1011,
+      "output_tokens": 76
+    },
+    {
+      "id": "fresh-02/reverse",
+      "sha256": "dee0cefa358a3ef0ef337e5514fcb0666ba02695bdea56ddc23b562fd42acd33",
+      "raw": "{\"action\": \"keep\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work pertains to documentation changes and does not address or alter the conditions or logic related to handling empty packed-refs files as described in the original observations. Therefore, it does not change the reason for any past choices regarding the empty packed-refs file handling.\"}",
+      "transcript": "Action: keep\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work pertains to documentation changes and does not address or alter the conditions or logic related to handling empty packed-refs files as described in the original observations. Therefore, it does not change the reason for any past choices regarding the empty packed-refs file handling.",
+      "input_tokens": 1011,
+      "output_tokens": 80
+    },
+    {
+      "id": "unseen-2p/forward",
+      "sha256": "8feda16c6c8649fc3dd1295f2668dc3250cf67009641e5df42deeec1181c88bb",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.2\", \"reason\": \"The incoming work introduces a regression fix for the behavior of `git checkout -b` during an initial checkout, which directly impacts the reason for the past choice (O1.1.1). This new information suggests that the optimization previously made for `git checkout -b` was not applicable in certain edge cases, necessitating a different approach.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.2\nReason: The incoming work introduces a regression fix for the behavior of `git checkout -b` during an initial checkout, which directly impacts the reason for the past choice (O1.1.1). This new information suggests that the optimization previously made for `git checkout -b` was not applicable in certain edge cases, necessitating a different approach.",
+      "input_tokens": 1012,
+      "output_tokens": 95
+    },
+    {
+      "id": "unseen-2p/reverse",
+      "sha256": "cc9d1f1dce143fe3760ab7dbdb1676f84c2e9c6b6358b07cfb105daae6d17f93",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.2\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a regression in behavior related to `git checkout -b`, which directly impacts the initial checkout process. This change necessitates a reevaluation of the previous choices, particularly O2.2.2, as the new issue introduced by the incoming work changes the reason for the past choice.\"}",
+      "transcript": "Action: review\nOld: O2.2.2\nNew: N.1.1\nReason: The incoming work introduces a regression in behavior related to `git checkout -b`, which directly impacts the initial checkout process. This change necessitates a reevaluation of the previous choices, particularly O2.2.2, as the new issue introduced by the incoming work changes the reason for the past choice.",
+      "input_tokens": 1012,
+      "output_tokens": 87
+    },
+    {
+      "id": "scope-04/forward",
+      "sha256": "9d2313e09e9de6acc326bdf6c08a977e8fee9486418b0087e6ced38afea7b5ae",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a performance difference in handling packed-refs files, specifically mentioning that mmap outperforms read for large files, which could affect the reliability of the previous test automation. This new information suggests that the current test automation might not be sufficient for detecting issues with packed-refs files, especially in scenarios where the files are large. Therefore, the incoming work changes the context and reasons for the past choice, necessitating a review to ensure the test automation remains effective.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a performance difference in handling packed-refs files, specifically mentioning that mmap outperforms read for large files, which could affect the reliability of the previous test automation. This new information suggests that the current test automation might not be sufficient for detecting issues with packed-refs files, especially in scenarios where the files are large. Therefore, the incoming work changes the context and reasons for the past choice, necessitating a review to ensure the test automation remains effective.",
+      "input_tokens": 1084,
+      "output_tokens": 121
+    },
+    {
+      "id": "scope-04/reverse",
+      "sha256": "9548125e181f7c7f40d5f3545214fb7b74a52a648b7f6c131632ef35e37c1d54",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces new performance data indicating that mmap outperforms read for certain file sizes, specifically 128 MiB packed-refs files. This information challenges the original observation made by Michael Haggerty regarding the handling of zero-length `packed-refs` files, necessitating a reevaluation of the existing code to ensure it remains robust under these new conditions.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces new performance data indicating that mmap outperforms read for certain file sizes, specifically 128 MiB packed-refs files. This information challenges the original observation made by Michael Haggerty regarding the handling of zero-length `packed-refs` files, necessitating a reevaluation of the existing code to ensure it remains robust under these new conditions.",
+      "input_tokens": 1084,
+      "output_tokens": 101
+    },
+    {
+      "id": "scope-03/forward",
+      "sha256": "75b660c03c5934f7c56e4186513e3513e705a1d333b6580ffab88722ab3e40ca",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a performance difference between `mmap` and `read` for non-empty packed-refs files, which could affect the decision to re-run previously failed tests. Specifically, the new information suggests that zero-length files cause issues with `munmap`, potentially altering the strategy for identifying and re-running failed tests.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a performance difference between `mmap` and `read` for non-empty packed-refs files, which could affect the decision to re-run previously failed tests. Specifically, the new information suggests that zero-length files cause issues with `munmap`, potentially altering the strategy for identifying and re-running failed tests.",
+      "input_tokens": 1085,
+      "output_tokens": 91
+    },
+    {
+      "id": "scope-03/reverse",
+      "sha256": "c4700d59e4ae741349fcdc8bed420dcb511aba3ebdc6cc4af0bb78147e12d12e",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces evidence that zero-length `packed-refs` files can be handled more effectively by using `read()` instead of `mmap()`, which contradicts the original observation made in O2.2.1. This suggests that the current handling of such files may need reconsideration.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces evidence that zero-length `packed-refs` files can be handled more effectively by using `read()` instead of `mmap()`, which contradicts the original observation made in O2.2.1. This suggests that the current handling of such files may need reconsideration.",
+      "input_tokens": 1085,
+      "output_tokens": 86
+    },
+    {
+      "id": "unseen-3n/reverse",
+      "sha256": "0525aba2ac2696d108931ece22c58a97a05ff6abe8e7e89cc40661409c858b91",
+      "raw": "{\"action\": \"keep\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work focuses on fixing Asciidoc syntax and formatting in the git-rev-list.txt documentation, which is unrelated to the performance optimization discussed in the past choices. There is no overlap in the subject matter or impact between these two pieces of work.\"}",
+      "transcript": "Action: keep\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work focuses on fixing Asciidoc syntax and formatting in the git-rev-list.txt documentation, which is unrelated to the performance optimization discussed in the past choices. There is no overlap in the subject matter or impact between these two pieces of work.",
+      "input_tokens": 1126,
+      "output_tokens": 78
+    },
+    {
+      "id": "unseen-3n/forward",
+      "sha256": "f2b2f786eac5f2644a78b4c8f04dc27578e4485e0a8eb491de17d16d1646711b",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, while addressing a different aspect of Git's documentation (Asciidoc syntax), does not provide a reason to reopen or test the past choice about handling missing tree objects in rev-list. The two topics are unrelated and do not impact each other.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, while addressing a different aspect of Git's documentation (Asciidoc syntax), does not provide a reason to reopen or test the past choice about handling missing tree objects in rev-list. The two topics are unrelated and do not impact each other.",
+      "input_tokens": 1127,
+      "output_tokens": 79
+    },
+    {
+      "id": "historical-06/forward",
+      "sha256": "133202a99cbce5c5ad8253306cdec8861f4eae1fd719d881f7de68e9bc81c276",
+      "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, \\\"userdiff: fix grammar and style issues\\\" by Boxuan Li, does not address the reasons for past choices related to test automation or error handling. Johannes Schindelin's previous comments were about improving the test suite and reducing turnaround time, which are unrelated to fixing grammatical and stylistic issues in userdiff.\"}",
+      "transcript": "Action: keep\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, \"userdiff: fix grammar and style issues\" by Boxuan Li, does not address the reasons for past choices related to test automation or error handling. Johannes Schindelin's previous comments were about improving the test suite and reducing turnaround time, which are unrelated to fixing grammatical and stylistic issues in userdiff.",
+      "input_tokens": 1144,
+      "output_tokens": 94
+    },
+    {
+      "id": "historical-06/reverse",
+      "sha256": "a89a8b8403f433c624d23e87de32d3cce34f5b2335ce667ac6d136ac039521ae",
+      "raw": "{\"action\": \"keep\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, fixing grammar and style issues in userdiff, does not address or alter the reasons behind previous choices related to the convert_to_git() function or the checksafe parameter handling.\"}",
+      "transcript": "Action: keep\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work, fixing grammar and style issues in userdiff, does not address or alter the reasons behind previous choices related to the convert_to_git() function or the checksafe parameter handling.",
+      "input_tokens": 1144,
+      "output_tokens": 64
+    },
+    {
+      "id": "scope-06/reverse",
+      "sha256": "45510c9309deb554eb65bc6a4558103b37f8f56446421d563414f2d07ef37bea",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario (with grafts) that affects the performance and correctness of the original commit-graph operations, indicating a significant change in the context and thus requiring a thorough reevaluation of the past choices.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces a scenario (with grafts) that affects the performance and correctness of the original commit-graph operations, indicating a significant change in the context and thus requiring a thorough reevaluation of the past choices.",
+      "input_tokens": 1157,
+      "output_tokens": 69
+    },
+    {
+      "id": "scope-06/forward",
+      "sha256": "0fd9e06c34683437488fd55c8a1efe9361babfde6cc3a6d7dbcc2e50ddd81fb8",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario (repositories with grafts) that affects the compatibility of commit-graph files, which was not considered in the original observations. This new information suggests that the original decision to exclude commit-graph files in such repositories might need reconsideration.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a scenario (repositories with grafts) that affects the compatibility of commit-graph files, which was not considered in the original observations. This new information suggests that the original decision to exclude commit-graph files in such repositories might need reconsideration.",
+      "input_tokens": 1158,
+      "output_tokens": 77
+    },
+    {
+      "id": "scope-05/forward",
+      "sha256": "1a9fe5d42ec63ede532655aeb33a01e90972361f1c742b129d471fcba4d672be",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new approach to keying the commit graph by the active graft table, which affects the behavior of the commit-graph feature. This change implies that the commit-graph file compatibility checks need to be reconsidered, especially since the shipping graph format remains unchanged. Therefore, the incoming work changes the reason for the past choice about commit-graph compatibility, necessitating a review of the past decisions.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new approach to keying the commit graph by the active graft table, which affects the behavior of the commit-graph feature. This change implies that the commit-graph file compatibility checks need to be reconsidered, especially since the shipping graph format remains unchanged. Therefore, the incoming work changes the reason for the past choice about commit-graph compatibility, necessitating a review of the past decisions.",
+      "input_tokens": 1163,
+      "output_tokens": 106
+    },
+    {
+      "id": "scope-05/reverse",
+      "sha256": "5496c365a4a3a50bf12dc6fd9e2a01f2b4fe183eb003ed7988b447109ae7f605",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new approach to keying the commit graph by the active graft table, which changes the compatibility conditions for the commit-graph feature. This new approach affects the conditions under which the commit-graph is compatible with certain operations, thus requiring a thorough reevaluation of the past choices related to commit-graph compatibility.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces a new approach to keying the commit graph by the active graft table, which changes the compatibility conditions for the commit-graph feature. This new approach affects the conditions under which the commit-graph is compatible with certain operations, thus requiring a thorough reevaluation of the past choices related to commit-graph compatibility.",
+      "input_tokens": 1163,
+      "output_tokens": 89
+    },
+    {
+      "id": "scope-02/forward",
+      "sha256": "93164e9deae588ae3ca3a4a619a4807d2e50d65db2181a76f8b0b3567b68aae7",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new context (Linux native Perl workers completing 200 massively parallel prove runs with no crashes) that could affect the handling of merge conflicts in .gitmodules files, especially given the ongoing issues with native Perl on Windows. This new information suggests a potential resolution to the previous issue, warranting a review of the original decision.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new context (Linux native Perl workers completing 200 massively parallel prove runs with no crashes) that could affect the handling of merge conflicts in .gitmodules files, especially given the ongoing issues with native Perl on Windows. This new information suggests a potential resolution to the previous issue, warranting a review of the original decision.",
+      "input_tokens": 1171,
+      "output_tokens": 97
+    },
+    {
+      "id": "scope-02/reverse",
+      "sha256": "261bc58ea4ed5aa4efbda7d46344b0eda65e64975e217d304233fb9e954d079c",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new context regarding the successful completion of massively parallel prove runs with no crashes on Linux, while the same setup on Windows MSYS2 continues to experience unexplained crashes. This new information suggests that the original patch, which aimed to improve test automation and reduce turnaround time, may not fully address the issue on Windows due to the persistent crashes. Therefore, reviewing the original patch is necessary to assess whether it adequately addresses the underlying Windows-specific problem.\\nO2.1.1 records the addition of a rule to re-run previously-failed tests, which is part of the original patch. N.1.1 provides evidence of successful parallel prove runs on Linux without\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new context regarding the successful completion of massively parallel prove runs with no crashes on Linux, while the same setup on Windows MSYS2 continues to experience unexplained crashes. This new information suggests that the original patch, which aimed to improve test automation and reduce turnaround time, may not fully address the issue on Windows due to the persistent crashes. Therefore, reviewing the original patch is necessary to assess whether it adequately addresses the underlying Windows-specific problem.\nO2.1.1 records the addition of a rule to re-run previously-failed tests, which is part of the original patch. N.1.1 provides evidence of successful parallel prove runs on Linux without",
+      "input_tokens": 1171,
+      "output_tokens": 160
+    },
+    {
+      "id": "scope-01/forward",
+      "sha256": "6a49bafbfe3507480c6d9fc216375c30dc4be61e76373cfad2c56f2362ae9a80",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant improvement in the Windows build environment, reducing crash frequency and median turnaround time. This suggests that the original choice to avoid parsing .gitmodules during merge conflicts may not be necessary anymore due to the enhanced stability and performance improvements.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a significant improvement in the Windows build environment, reducing crash frequency and median turnaround time. This suggests that the original choice to avoid parsing .gitmodules during merge conflicts may not be necessary anymore due to the enhanced stability and performance improvements.",
+      "input_tokens": 1172,
+      "output_tokens": 76
+    },
+    {
+      "id": "scope-01/reverse",
+      "sha256": "a7d7328ccbf1fcc15f2576db7abfdbdbeb5a20a02dcc0d52a0f808b4b5551c10",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant improvement in the Windows build performance and crash rate, which could affect the rationale behind the previous choice to automate test re-runs. The new information suggests that the automated test re-run mechanism might not be necessary anymore due to the successful completion of 200 massively parallel prove runs without crashes, indicating a more reliable and efficient testing process.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a significant improvement in the Windows build performance and crash rate, which could affect the rationale behind the previous choice to automate test re-runs. The new information suggests that the automated test re-run mechanism might not be necessary anymore due to the successful completion of 200 massively parallel prove runs without crashes, indicating a more reliable and efficient testing process.",
+      "input_tokens": 1172,
+      "output_tokens": 100
+    },
+    {
+      "id": "fresh-01/reverse",
+      "sha256": "275c86a109a04558e13a598152daeb2a20e338d094b4c59318538605815d619b",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new feature related to counting context lines in edited patches, which directly impacts the functionality described in O2.2.1. Specifically, N.1.1 mentions adding \\\"-p\\\" to fix the issue with counting empty context lines, which is relevant to the previous suggestion to reconsider the \\\"--recount\\\" option.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces a new feature related to counting context lines in edited patches, which directly impacts the functionality described in O2.2.1. Specifically, N.1.1 mentions adding \"-p\" to fix the issue with counting empty context lines, which is relevant to the previous suggestion to reconsider the \"--recount\" option.",
+      "input_tokens": 1233,
+      "output_tokens": 94
+    },
+    {
+      "id": "fresh-01/forward",
+      "sha256": "8373e560b8323dbab5561e014d18fda8bb6346f64cbafc75fa51ef8f3e988397",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new feature related to patch editing, specifically addressing the issue of counting empty context lines in edited patches. This change impacts the functionality of the previous decision to use `read()` instead of `mmap()` for small packed-refs files, suggesting that the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new feature related to patch editing, specifically addressing the issue of counting empty context lines in edited patches. This change impacts the functionality of the previous decision to use `read()` instead of `mmap()` for small packed-refs files, suggesting that the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.",
+      "input_tokens": 1234,
+      "output_tokens": 97
+    },
+    {
+      "id": "historical-05/forward",
+      "sha256": "7911dfd0e7ca12798fc8ced580a956ed2d50a4adf6cb5497f79d6409c7395826",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, fixing a regression introduced by the previous commit, directly addresses a consequence of the change made in the past. While the new commit fixes a specific issue related to the `safecrlf` setting, it does not alter the fundamental decision to replace `safe_crlf` with `conv_flags`. Therefore, reopening or testing the past choice is necessary to ensure the overall impact of the change is fully understood and validated.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, fixing a regression introduced by the previous commit, directly addresses a consequence of the change made in the past. While the new commit fixes a specific issue related to the `safecrlf` setting, it does not alter the fundamental decision to replace `safe_crlf` with `conv_flags`. Therefore, reopening or testing the past choice is necessary to ensure the overall impact of the change is fully understood and validated.",
+      "input_tokens": 1247,
+      "output_tokens": 115
+    },
+    {
+      "id": "historical-05/reverse",
+      "sha256": "1d094501a312f9d6813fbaed01f0f40eaa46ca4034f25e28a2c5e860a042c555",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, fixing a regression related to `autocrlf rewrites`, introduces a new issue that affects the behavior of `safecrlf`. This change impacts the context in which the previous patch was made, specifically regarding the handling of `safecrlf` settings during the conversion process. The new issue necessitates a reassessment of the reasons behind the previous patch, as it now deals with a different aspect of the `convert_to_git()` function.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work, fixing a regression related to `autocrlf rewrites`, introduces a new issue that affects the behavior of `safecrlf`. This change impacts the context in which the previous patch was made, specifically regarding the handling of `safecrlf` settings during the conversion process. The new issue necessitates a reassessment of the reasons behind the previous patch, as it now deals with a different aspect of the `convert_to_git()` function.",
+      "input_tokens": 1247,
+      "output_tokens": 123
+    },
+    {
+      "id": "historical-02/forward",
+      "sha256": "a434dc40274808c419f2b0e7b5ac32f74995d58b92cf9858ac0675dee4197189",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, while related to pack-objects, addresses a different issue (a bug in the multi-pack-index description) that does not directly impact the packed_ref_cache optimization discussed in the old work. Therefore, the incoming change does not sufficiently alter the reasoning behind the past choice to warrant reopening or testing it.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, while related to pack-objects, addresses a different issue (a bug in the multi-pack-index description) that does not directly impact the packed_ref_cache optimization discussed in the old work. Therefore, the incoming change does not sufficiently alter the reasoning behind the past choice to warrant reopening or testing it.",
+      "input_tokens": 1293,
+      "output_tokens": 89
+    },
+    {
+      "id": "historical-02/reverse",
+      "sha256": "69c012273c7d523f8a22989b0ea07673e3ef3ef8a32c63ad870eb10f6a6c97b7",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming patch \\\"pack-format: correct multi-pack-index description\\\" addresses a different issue related to pack-format, specifically a bug in the description of the multi-pack-index. While it does not directly relate to the previous memory reduction patches in the series, it introduces a new topic that could affect how the system handles pack-format data structures. This change might influence future optimizations or debugging efforts related to pack-format, thus necessitating a review of the past choices to ensure compatibility and effectiveness.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming patch \"pack-format: correct multi-pack-index description\" addresses a different issue related to pack-format, specifically a bug in the description of the multi-pack-index. While it does not directly relate to the previous memory reduction patches in the series, it introduces a new topic that could affect how the system handles pack-format data structures. This change might influence future optimizations or debugging efforts related to pack-format, thus necessitating a review of the past choices to ensure compatibility and effectiveness.",
+      "input_tokens": 1293,
+      "output_tokens": 122
+    },
+    {
+      "id": "historical-04/forward",
+      "sha256": "a332b1ec6683ea5afd72ac74e6449c340551438bf23475ab7771d12bb9803e09",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, while related to commit-graph processing, does not introduce any changes to the core logic or reasoning behind the existing commits. It merely updates documentation regarding the terminology used for the commit-graph file. This update does not alter the fundamental reasons for past choices made in the original commits.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, while related to commit-graph processing, does not introduce any changes to the core logic or reasoning behind the existing commits. It merely updates documentation regarding the terminology used for the commit-graph file. This update does not alter the fundamental reasons for past choices made in the original commits.",
+      "input_tokens": 1319,
+      "output_tokens": 84
+    },
+    {
+      "id": "historical-04/reverse",
+      "sha256": "3a532ee85e313a1614bf849a51ee4a6c1d2eedce3f94c8bd12e43fe27e749aea",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, which focuses on updating documentation to include a dash in references to the \\\"commit-graph file,\\\" does not directly address or alter the core logic or reasoning behind the past choices related to handling empty packed-refs files or optimizing the `paint_down_to_common()` function. Therefore, while the documentation might benefit from the update, it does not necessitate reopening or testing the past choices.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work, which focuses on updating documentation to include a dash in references to the \"commit-graph file,\" does not directly address or alter the core logic or reasoning behind the past choices related to handling empty packed-refs files or optimizing the `paint_down_to_common()` function. Therefore, while the documentation might benefit from the update, it does not necessitate reopening or testing the past choices.",
+      "input_tokens": 1319,
+      "output_tokens": 105
+    },
+    {
+      "id": "fresh-03/forward",
+      "sha256": "1fbe59ff7e706450500144a6e5089fffe50b3289f0ad511eb7a3e4cb448b5088",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.2\", \"reason\": \"The incoming work introduces a new approach to handle the verbosity flag in the submodule shell script, which directly impacts the handling of verbosity settings in the pull command. This change suggests a new implementation strategy that affects the original observation about passing verbosity settings to submodules. Therefore, reviewing the original and new approaches is necessary to assess their implications and potential impact on the overall functionality and user experience.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.2\nReason: The incoming work introduces a new approach to handle the verbosity flag in the submodule shell script, which directly impacts the handling of verbosity settings in the pull command. This change suggests a new implementation strategy that affects the original observation about passing verbosity settings to submodules. Therefore, reviewing the original and new approaches is necessary to assess their implications and potential impact on the overall functionality and user experience.",
+      "input_tokens": 1371,
+      "output_tokens": 102
+    },
+    {
+      "id": "fresh-03/reverse",
+      "sha256": "2d36ac2d18c16d322ea4d2b999fc38a8684cc88afe8bffa2060cda5828b297a3",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.3\", \"reason\": \"The incoming work introduces a new command-line flag (`-v`) for `git pull --recurse-submodules`, which directly affects the behavior of the test suite execution. This new flag changes the verbosity level of the test suite, which is not addressed by the original patch. Therefore, the new work impacts the reason for the original choice, necessitating a review to ensure compatibility and correctness.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.3\nReason: The incoming work introduces a new command-line flag (`-v`) for `git pull --recurse-submodules`, which directly affects the behavior of the test suite execution. This new flag changes the verbosity level of the test suite, which is not addressed by the original patch. Therefore, the new work impacts the reason for the original choice, necessitating a review to ensure compatibility and correctness.",
+      "input_tokens": 1371,
+      "output_tokens": 104
+    },
+    {
+      "id": "unseen-1n/forward",
+      "sha256": "0f974e5ef1e0f17834c8bf149d8cd866312db90add6b960172ece8c0d902700f",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to Gmail security changes affecting `git-send-email`, which impacts the current configuration and parsing logic discussed in O1.1.1. Mentioning this new requirement necessitates a reevaluation of the existing parsing order to ensure compatibility with updated Gmail security settings.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new issue related to Gmail security changes affecting `git-send-email`, which impacts the current configuration and parsing logic discussed in O1.1.1. Mentioning this new requirement necessitates a reevaluation of the existing parsing order to ensure compatibility with updated Gmail security settings.",
+      "input_tokens": 1408,
+      "output_tokens": 85
+    },
+    {
+      "id": "unseen-1n/reverse",
+      "sha256": "bbb8e1815c92bbfeb96eb7eb73a7d8b49804bdf2bf050ec3c58142c314badbac",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to Gmail security changes, which impacts the functionality of `git-send-email`. This new information suggests a change in how users authenticate with Gmail, which could affect the behavior of `git-send-email` when used with Gmail. Since this new information directly relates to the current state of `git-send-email`, it necessitates a reevaluation of the existing choices, particularly O2.1.1, to ensure compatibility and correctness.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new issue related to Gmail security changes, which impacts the functionality of `git-send-email`. This new information suggests a change in how users authenticate with Gmail, which could affect the behavior of `git-send-email` when used with Gmail. Since this new information directly relates to the current state of `git-send-email`, it necessitates a reevaluation of the existing choices, particularly O2.1.1, to ensure compatibility and correctness.",
+      "input_tokens": 1409,
+      "output_tokens": 119
+    },
+    {
+      "id": "prior_git-03/forward",
+      "sha256": "74c62fe561091d056c6f2ba0ed2573f1a7094565f06c9afa3892ac703c376c75",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new test case related to a regression in `git show --word-diff --color-moved`. While the original observation pertained to `git-describe` and did not directly relate to `git show`, the new test highlights a potential issue that could affect the overall behavior of the command. Given the new test case, the original observation might need reconsideration in light of the broader implications for `git show`.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new test case related to a regression in `git show --word-diff --color-moved`. While the original observation pertained to `git-describe` and did not directly relate to `git show`, the new test highlights a potential issue that could affect the overall behavior of the command. Given the new test case, the original observation might need reconsideration in light of the broader implications for `git show`.",
+      "input_tokens": 1503,
+      "output_tokens": 114
+    },
+    {
+      "id": "prior_git-03/reverse",
+      "sha256": "bd3bfe70a2f85f041dd81678f28041332a48d93b518eb4183cd5475274514516",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new test case related to a regression in the `git show --word-diff --color-moved` command, which was previously tested for `git diff --word-diff --color-moved`. While the core issue involves memory management (`free` calls), the new test case does not directly relate to the original observation about freeing `buf` in `diff_words_flush()` in `diff.c`. However, it does introduce a new context where the freed memory might be problematic, thus potentially affecting the stability of the system. Given this, reopening or testing the original choice could provide insights into broader implications of the memory management changes.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new test case related to a regression in the `git show --word-diff --color-moved` command, which was previously tested for `git diff --word-diff --color-moved`. While the core issue involves memory management (`free` calls), the new test case does not directly relate to the original observation about freeing `buf` in `diff_words_flush()` in `diff.c`. However, it does introduce a new context where the freed memory might be problematic, thus potentially affecting the stability of the system. Given this, reopening or testing the original choice could provide insights into broader implications of the memory management changes.",
+      "input_tokens": 1503,
+      "output_tokens": 157
+    },
+    {
+      "id": "unseen-3p/forward",
+      "sha256": "9a30700311cc4fe7b2843ab23945008c23f36e4e201c84c9a93c1a416743ac4f",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.9\", \"reason\": \"The incoming work introduces a scenario where the commit-graph file might contain commits with generation numbers that are not relevant for certain operations, such as 'git branch --contains'. This directly impacts the reason for the past choice O1.1.1, which focused on improving the order of commits in `paint_down_to_common()` based on generation numbers. The new information suggests that the presence of unused generation numbers could lead to unnecessary walks during certain operations, thus changing the rationale behind the original choice.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.9\nReason: The incoming work introduces a scenario where the commit-graph file might contain commits with generation numbers that are not relevant for certain operations, such as 'git branch --contains'. This directly impacts the reason for the past choice O1.1.1, which focused on improving the order of commits in `paint_down_to_common()` based on generation numbers. The new information suggests that the presence of unused generation numbers could lead to unnecessary walks during certain operations, thus changing the rationale behind the original choice.",
+      "input_tokens": 1709,
+      "output_tokens": 124
+    },
+    {
+      "id": "unseen-3p/reverse",
+      "sha256": "ed298765b2d3d64ede13c8dd4383edb2b02a4806f781034acd93f77e14894a86",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.2\", \"reason\": \"The incoming work introduces a regression fix that affects the behavior of `rev-list` when handling missing tree objects, which directly impacts the reasoning behind the original choice (`O2.1.1`). The new information suggests that the original patch (`O2.1.1`) introduced a bug that was later fixed (`N.1.2`). Therefore, reopening or testing the original choice is necessary to ensure compatibility and correctness.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.2\nReason: The incoming work introduces a regression fix that affects the behavior of `rev-list` when handling missing tree objects, which directly impacts the reasoning behind the original choice (`O2.1.1`). The new information suggests that the original patch (`O2.1.1`) introduced a bug that was later fixed (`N.1.2`). Therefore, reopening or testing the original choice is necessary to ensure compatibility and correctness.",
+      "input_tokens": 1709,
+      "output_tokens": 111
+    },
+    {
+      "id": "prior_git-01/reverse",
+      "sha256": "97b498a6ebc17ae27ce994b6fb9f8dcc63aa7bb560a8446db98abfac1230f7c6",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to the disjoint-root handling in `git-describe`, which affects the behavior of `paint_down_to_common()` and `in_merge_bases_many()`. While the original observation about optimizing these functions remains valid, the new issue requires further investigation and potential changes to ensure robustness.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming work introduces a new issue related to the disjoint-root handling in `git-describe`, which affects the behavior of `paint_down_to_common()` and `in_merge_bases_many()`. While the original observation about optimizing these functions remains valid, the new issue requires further investigation and potential changes to ensure robustness.",
+      "input_tokens": 1972,
+      "output_tokens": 89
+    },
+    {
+      "id": "prior_git-01/forward",
+      "sha256": "3e34703d32054b4a00d267ccf194bd7333fe0134ebcd8022b74520a91d8eace5",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new scenario where `git-describe` might prematurely abort the search due to a disjoint history, which directly impacts the stopping condition discussed in the original observation. This new information suggests that the original observation needs to be reconsidered in light of the potential issues introduced by disjoint histories.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new scenario where `git-describe` might prematurely abort the search due to a disjoint history, which directly impacts the stopping condition discussed in the original observation. This new information suggests that the original observation needs to be reconsidered in light of the potential issues introduced by disjoint histories.",
+      "input_tokens": 1973,
+      "output_tokens": 86
+    },
+    {
+      "id": "unseen-4p/forward",
+      "sha256": "9914c51f52379c3293bfedf5129780eab92dfcaa80cc452728f215afdb7f3624",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a fix for a regression related to amending a commit, which affects the context of the original observation made by Phillip Wood. While the core functionality remains unchanged, the new issue impacts the scenario where a commit is amended, thus necessitating a review of the original observation to ensure its applicability and relevance in the broader context.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a fix for a regression related to amending a commit, which affects the context of the original observation made by Phillip Wood. While the core functionality remains unchanged, the new issue impacts the scenario where a commit is amended, thus necessitating a review of the original observation to ensure its applicability and relevance in the broader context.",
+      "input_tokens": 1998,
+      "output_tokens": 95
+    },
+    {
+      "id": "unseen-4p/reverse",
+      "sha256": "dc172f26adff752f8319371e393b4c879c5250085a3ff82ba7ebafba860049c6",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.4\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to amending commits during a rebase, which is distinct from the original problem described in O2.2.4. While both involve rebase operations, they address different aspects and thus do not directly impact the reasoning behind past choices regarding rebase --skip and commit message cleanup.\"}",
+      "transcript": "Action: review\nOld: O2.2.4\nNew: N.1.1\nReason: The incoming work introduces a new issue related to amending commits during a rebase, which is distinct from the original problem described in O2.2.4. While both involve rebase operations, they address different aspects and thus do not directly impact the reasoning behind past choices regarding rebase --skip and commit message cleanup.",
+      "input_tokens": 1998,
+      "output_tokens": 91
+    },
+    {
+      "id": "historical-08/forward",
+      "sha256": "b2518b22f8910447a81c6e05df49b10a17879d09af5b08d818def9231816d9e6",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, \\\"doc: improve readability of --rebase-merges in git-rebase\\\", does not address the reasons for past choices related to test automation or rebase operations. Therefore, it does not sufficiently change the context to reopen or test past decisions.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, \"doc: improve readability of --rebase-merges in git-rebase\", does not address the reasons for past choices related to test automation or rebase operations. Therefore, it does not sufficiently change the context to reopen or test past decisions.",
+      "input_tokens": 2041,
+      "output_tokens": 80
+    },
+    {
+      "id": "historical-08/reverse",
+      "sha256": "cb20e820109069f6cc5ccf0d4d6908da6aae26e7643a88a4ddabf953ede68ba8",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.4\", \"new\": \"N.1.1\", \"reason\": \"The incoming work focuses on improving the documentation related to `--rebase-merges` and does not address the specific issue described in the old passage regarding the cleanup of commit messages during rebase operations. Therefore, it does not change the reason for any past choices related to the old passage.\"}",
+      "transcript": "Action: review\nOld: O2.2.4\nNew: N.1.1\nReason: The incoming work focuses on improving the documentation related to `--rebase-merges` and does not address the specific issue described in the old passage regarding the cleanup of commit messages during rebase operations. Therefore, it does not change the reason for any past choices related to the old passage.",
+      "input_tokens": 2041,
+      "output_tokens": 85
+    },
+    {
+      "id": "unseen-1p/reverse",
+      "sha256": "5f4b54e22fcd4955b5e419e4fb369e1df072c26edf5875847eee3c921126c442",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to the `sendemail.identity` parsing, which changes the reasoning behind the original choice (`O2.1.1`). Specifically, the new work highlights a regression in how the `sendemail.identity` variable is handled, necessitating a different approach compared to the original plan.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new issue related to the `sendemail.identity` parsing, which changes the reasoning behind the original choice (`O2.1.1`). Specifically, the new work highlights a regression in how the `sendemail.identity` variable is handled, necessitating a different approach compared to the original plan.",
+      "input_tokens": 2049,
+      "output_tokens": 90
+    },
+    {
+      "id": "unseen-1p/forward",
+      "sha256": "7a4fe82113038df58cc43e21cd9a4a9709069fed5a1068f07649da14b83fba72",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.5\", \"new\": \"N.1.6\", \"reason\": \"The incoming work addresses a regression in the command-line parsing of `sendemail.identity`, which directly impacts the configuration handling logic. This change introduces a new state machine in `read_config()` to ensure that `sendemail.$identity.VAR` takes precedence over hardcoded defaults, thereby changing the configuration handling logic. This alteration necessitates a reevaluation of the past choices related to `conv_flags` and `sendemail.identity` parsing, as the new approach modifies the underlying behavior of how configuration settings are applied.\"}",
+      "transcript": "Action: review\nOld: O1.1.5\nNew: N.1.6\nReason: The incoming work addresses a regression in the command-line parsing of `sendemail.identity`, which directly impacts the configuration handling logic. This change introduces a new state machine in `read_config()` to ensure that `sendemail.$identity.VAR` takes precedence over hardcoded defaults, thereby changing the configuration handling logic. This alteration necessitates a reevaluation of the past choices related to `conv_flags` and `sendemail.identity` parsing, as the new approach modifies the underlying behavior of how configuration settings are applied.",
+      "input_tokens": 2050,
+      "output_tokens": 127
+    },
+    {
+      "id": "historical-07/forward",
+      "sha256": "dcf5811d216c98a6b3c4c9db099b6959459d1c6aba2c9047a6ae7602ae69e87c",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work addresses a different issue (commit message numbering) that does not directly relate to the past choices regarding test automation or rebase operations. While both patches aim to improve workflow efficiency, they address distinct aspects of Git functionality.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work addresses a different issue (commit message numbering) that does not directly relate to the past choices regarding test automation or rebase operations. While both patches aim to improve workflow efficiency, they address distinct aspects of Git functionality.",
+      "input_tokens": 2067,
+      "output_tokens": 72
+    },
+    {
+      "id": "historical-07/reverse",
+      "sha256": "4e4d51d8321f72c60e70a7590d21be2c795faef8343d5715fb4dccd3e93881d5",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.4\", \"new\": \"N.1.1\", \"reason\": \"The incoming work addresses a specific issue related to commit message numbering during squash, which is distinct from the original observation about commit message cleanup after a failed fixup/squash chain. Phillip Wood's commit focuses on a different aspect of the rebase -i functionality, making it insufficient to reopen or test the original past choice.\"}",
+      "transcript": "Action: review\nOld: O2.2.4\nNew: N.1.1\nReason: The incoming work addresses a specific issue related to commit message numbering during squash, which is distinct from the original observation about commit message cleanup after a failed fixup/squash chain. Phillip Wood's commit focuses on a different aspect of the rebase -i functionality, making it insufficient to reopen or test the original past choice.",
+      "input_tokens": 2067,
+      "output_tokens": 91
+    },
+    {
+      "id": "aimers/forward",
+      "sha256": "d9bbaa84701f2a03d1559b1f103b3d586582f6875043edd82dc43ced5c2f77b2",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new comparison between a clean-room implementation of TabM and the official TabM model, suggesting that the latter's performance does not improve with scaling. This new information challenges the original reasoning behind the rejection of TabM, warranting a review of the past decision.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new comparison between a clean-room implementation of TabM and the official TabM model, suggesting that the latter's performance does not improve with scaling. This new information challenges the original reasoning behind the rejection of TabM, warranting a review of the past decision.",
+      "input_tokens": 2098,
+      "output_tokens": 83
+    },
+    {
+      "id": "aimers/reverse",
+      "sha256": "56b35da55369ba54a516c82cca12442f612a14f96a7ed1398803f5883d7edd84",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new context (SH-TABM comparison and final retraining) that does not directly relate to the previous choice (adding a rule to re-run previously-failed tests). While both involve testing and automation, they address different aspects of the testing process and do not significantly overlap in terms of their impact or reasoning.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new context (SH-TABM comparison and final retraining) that does not directly relate to the previous choice (adding a rule to re-run previously-failed tests). While both involve testing and automation, they address different aspects of the testing process and do not significantly overlap in terms of their impact or reasoning.",
+      "input_tokens": 2098,
+      "output_tokens": 93
+    },
+    {
+      "id": "prior_git-02/forward",
+      "sha256": "07a2fef64185000697c7265fd2cf97f20a208b9e4c7567692753031cdf51f014",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to cloning mechanisms and transport selection, which is distinct from the original observation about parsing .gitmodules files during merge conflicts. The new issue impacts the overall cloning process and security, necessitating a thorough review to ensure compatibility and safety.\\nRaw Passages:\\nOld: {\\\"id\\\": \\\"O1.1.1\\\", \\\"speaker\\\": \\\"Jens Lehmann\\\", \\\"text\\\": \\\"Submodules: Don't parse .gitmodules when it contains, merge conflicts\\\"}\\nNew: {\\\"id\\\": \\\"N.1.1\\\", \\\"speaker\\\": \\\"Taylor Blau\\\", \\\"text\\\": \\\"t5619: demonstrate clone_local() with\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a new issue related to cloning mechanisms and transport selection, which is distinct from the original observation about parsing .gitmodules files during merge conflicts. The new issue impacts the overall cloning process and security, necessitating a thorough review to ensure compatibility and safety.\nRaw Passages:\nOld: {\"id\": \"O1.1.1\", \"speaker\": \"Jens Lehmann\", \"text\": \"Submodules: Don't parse .gitmodules when it contains, merge conflicts\"}\nNew: {\"id\": \"N.1.1\", \"speaker\": \"Taylor Blau\", \"text\": \"t5619: demonstrate clone_local() with",
+      "input_tokens": 2256,
+      "output_tokens": 160
+    },
+    {
+      "id": "prior_git-02/reverse",
+      "sha256": "3b8e2aca6d678f3617c2558b36335c093a92b2a7f6c659953307bc6743842d1d",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new scenario (cloning with ambiguous transport) that could affect the decision to use local cloning based on the conditions set in O2.1.1. This new information requires reassessment of the original decision.\\nRaw Passages:\\nOld: \\n- O2.1.1: \\\"use local cloning if insteadOf makes a local URL\\\"\\n- O2.1.2: \\\"Move the is_local logic to the place where origin remote has been setup and check if the remote url can be used to do local cloning.\\\"\\n- O2.1.3: \\\"This saves a lot of space (and time) in some of the mir\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work introduces a new scenario (cloning with ambiguous transport) that could affect the decision to use local cloning based on the conditions set in O2.1.1. This new information requires reassessment of the original decision.\nRaw Passages:\nOld: \n- O2.1.1: \"use local cloning if insteadOf makes a local URL\"\n- O2.1.2: \"Move the is_local logic to the place where origin remote has been setup and check if the remote url can be used to do local cloning.\"\n- O2.1.3: \"This saves a lot of space (and time) in some of the mir",
+      "input_tokens": 2256,
+      "output_tokens": 160
+    },
+    {
+      "id": "unseen-4n/forward",
+      "sha256": "637f25036c5c14d9e2fe7b778196a3f8f76aeed68f2f9d6ec93c39a0c11703ee",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, focused on normalizing the reference to \\\"Signed-off-by\\\" in documentation, does not directly address the core issues discussed in the previous commits related to rebase operations and commit messages. While both topics involve changes to commit messages, they serve different purposes and do not overlap significantly. Therefore, reopening or testing the past choices based solely on this new information would not provide substantial value.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work, focused on normalizing the reference to \"Signed-off-by\" in documentation, does not directly address the core issues discussed in the previous commits related to rebase operations and commit messages. While both topics involve changes to commit messages, they serve different purposes and do not overlap significantly. Therefore, reopening or testing the past choices based solely on this new information would not provide substantial value.",
+      "input_tokens": 2439,
+      "output_tokens": 105
+    },
+    {
+      "id": "unseen-4n/reverse",
+      "sha256": "2b605216182d2869b9021f627d64f38a5c4063be2630cdd76fedbb44d0678419",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, focused on normalizing the usage of \\\"Signed-off-by\\\" in documentation, does not directly relate to the original observation about optimizing the commit creation process in Git. While both address aspects of Git's documentation, they serve different purposes and do not overlap significantly in terms of functionality or impact.\"}",
+      "transcript": "Action: review\nOld: O2.1.1\nNew: N.1.1\nReason: The incoming work, focused on normalizing the usage of \"Signed-off-by\" in documentation, does not directly relate to the original observation about optimizing the commit creation process in Git. While both address aspects of Git's documentation, they serve different purposes and do not overlap significantly in terms of functionality or impact.",
+      "input_tokens": 2439,
+      "output_tokens": 87
+    },
+    {
+      "id": "historical-01/forward",
+      "sha256": "05fdb52afaf5fefeb10fa764c179b6c02a662424f213c986092744b94e7f74ed",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant change in handling small files by switching from `mmap()` to `read()`, which directly impacts the decision to use `packed_ref_cache`. The original observation focused on a different aspect of the codebase and does not address the specific change made in the incoming work. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant a review.\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming work introduces a significant change in handling small files by switching from `mmap()` to `read()`, which directly impacts the decision to use `packed_ref_cache`. The original observation focused on a different aspect of the codebase and does not address the specific change made in the incoming work. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant a review.",
+      "input_tokens": 2491,
+      "output_tokens": 104
+    },
+    {
+      "id": "historical-01/reverse",
+      "sha256": "83d43fe6de216d68ada8b9bc9d47be804c4fb2709dc3af9d12d94a238d292adf",
+      "raw": "{\"action\": \"review\", \"old\": \"O2.2.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming patch addresses performance issues related to large deltas, which were previously addressed by reducing the delta size field. This new patch introduces changes that affect the handling of large deltas differently, thus changing the reasoning behind the previous patch. The new patch aims to improve performance and pack file quality, which necessitates a review of the previous patch to ensure compatibility and effectiveness.\"}",
+      "transcript": "Action: review\nOld: O2.2.1\nNew: N.1.1\nReason: The incoming patch addresses performance issues related to large deltas, which were previously addressed by reducing the delta size field. This new patch introduces changes that affect the handling of large deltas differently, thus changing the reasoning behind the previous patch. The new patch aims to improve performance and pack file quality, which necessitates a review of the previous patch to ensure compatibility and effectiveness.",
+      "input_tokens": 2491,
+      "output_tokens": 98
+    },
+    {
+      "id": "historical-03/forward",
+      "sha256": "2b996523752ad7b677a6385526324aaeedd08d0d1e070e4026ba02673e2a6d01",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming change introduces a significant performance regression in certain topological cases, which affects the reasoning behind the original choice. Specifically, the new commit demonstrates that the order of commits in the queue can change due to the introduction of generation numbers, leading to a different number of iterations in the loop. This directly impacts the correctness and efficiency of the function, necessitating a reassessment of the original rationale.\\nConstrained form: review, O1.1.1, N.1.1, \\\"The new commit shows a performance regression due to changes in commit order, impacting the original reasoning.\\\"\"}",
+      "transcript": "Action: review\nOld: O1.1.1\nNew: N.1.1\nReason: The incoming change introduces a significant performance regression in certain topological cases, which affects the reasoning behind the original choice. Specifically, the new commit demonstrates that the order of commits in the queue can change due to the introduction of generation numbers, leading to a different number of iterations in the loop. This directly impacts the correctness and efficiency of the function, necessitating a reassessment of the original rationale.\nConstrained form: review, O1.1.1, N.1.1, \"The new commit shows a performance regression due to changes in commit order, impacting the original reasoning.\"",
+      "input_tokens": 2625,
+      "output_tokens": 144
+    },
+    {
+      "id": "historical-03/reverse",
+      "sha256": "80636daac2c6ec7c7b479881035cdd7b5199746e9f1ff94dbf8e262f3329c504",
+      "raw": "{\"action\": \"review\", \"old\": \"O1.2.4\", \"new\": \"N.1.16\", \"reason\": \"The incoming update introduces a significant performance regression due to a change in the commit inspection order, affecting the number of commits walked during the execution of paint_down_to_common(). This change alters the topology-sensitive behavior introduced in the original commit, making the performance impact concrete and observable.\"}",
+      "transcript": "Action: review\nOld: O1.2.4\nNew: N.1.16\nReason: The incoming update introduces a significant performance regression due to a change in the commit inspection order, affecting the number of commits walked during the execution of paint_down_to_common(). This change alters the topology-sensitive behavior introduced in the original commit, making the performance impact concrete and observable.",
+      "input_tokens": 2625,
+      "output_tokens": 81
+    }
+  ]
+}

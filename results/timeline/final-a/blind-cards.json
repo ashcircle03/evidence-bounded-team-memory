@@ -1,0 +1,74 @@
+{
+  "2a7fbbc15441": {
+    "kind": "reconsider",
+    "old": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU.",
+    "new": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement.",
+    "reason": "The previous decision to shelve GPU trials was based on the lack of GPUs in production workers. However, the new evidence shows that production workers now include a supported GPU, which significantly reduces the rendering time. This change in conditions warrants a reconsideration of whether to resume GPU trials.",
+    "old_source": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU. The evidence archive is Harbor-evidence.",
+    "new_source": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement."
+  },
+  "681779ac8ad9": {
+    "kind": "reconsider",
+    "old": "We shelved Harbor GPU trials because production workers have no GPU.",
+    "new": "Production workers now include a supported GPU.",
+    "reason": "The previous decision to shelve GPU trials was based on the absence of GPUs in production workers. However, the new information indicates that production workers now include a supported GPU, which changes the feasibility of conducting GPU trials.",
+    "old_source": "With the CPU-only worker, Harbor thumbnail rendering took 18 minutes per album. We shelved Harbor GPU trials because production workers have no GPU. The evidence archive is Harbor-evidence.",
+    "new_source": "Production workers now include a supported GPU. With the GPU-enabled worker, Harbor thumbnail rendering took 3 minutes per album. This does not revise the CPU-only measurement."
+  },
+  "41240e800419": {
+    "kind": "coexist",
+    "old": "On the indoor-camera set, Meadow object detection reached 94% recall.",
+    "new": "On the outdoor-camera set, Meadow object detection reached 81% recall.",
+    "reason": "The old quote reports the performance of Meadow object detection on the indoor camera set, while the new quote provides the performance on the outdoor camera set. These observations coexist under different conditions (indoor vs. outdoor settings) without contradicting each other.",
+    "old_source": "On the indoor-camera set, Meadow object detection reached 94% recall. The evidence archive is Meadow-evidence.",
+    "new_source": "On the outdoor-camera set, Meadow object detection reached 81% recall. The indoor set was not rerun."
+  },
+  "c2d77f0b0197": {
+    "kind": "correction",
+    "old": "For the F3 review round, the Flint submission deadline is 17:00 UTC.",
+    "new": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+    "reason": "The original deadline was incorrectly stated as 17:00 UTC due to copying the wrong hour. The corrected deadline is 15:00 UTC.",
+    "old_source": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+    "new_source": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC. The rest of the earlier note still applies."
+  },
+  "46d135521ac1": {
+    "kind": "correction",
+    "old": "For the F3 review round, the Flint submission deadline is 17:00 UTC.",
+    "new": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC.",
+    "reason": "The original statement about the Flint submission deadline was incorrect due to a mistake in copying the time. The new information explicitly corrects this error, specifying the correct deadline as 15:00 UTC.",
+    "old_source": "For the F3 review round, the Flint submission deadline is 17:00 UTC. The evidence archive is Flint-evidence.",
+    "new_source": "I retract the deadline in my earlier Flint note because I copied the wrong hour. For the same F3 review round, the submission deadline is 15:00 UTC. The rest of the earlier note still applies."
+  },
+  "e3a6fd06490d": {
+    "kind": "reconsider",
+    "old": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.",
+    "new": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.",
+    "reason": "The previous observation noted the performance and feasibility issues with the large-dictionary variant at a 256 MB memory cap. However, the new evidence shows that with a 2 GB memory cap, the large-dictionary variant performs well and fits within the memory limit. Therefore, the feasibility and performance considerations at the higher memory cap should be reviewed.",
+    "old_source": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+    "new_source": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory. The 256 MB observation remains valid."
+  },
+  "85773ac03ede": {
+    "kind": "reconsider",
+    "old": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap.",
+    "new": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory.",
+    "reason": "The previous observation noted that the large-dictionary variant was deferred due to the 256 MB memory limit. However, with the new deployment providing a 2 GB memory cap, the large-dictionary variant performs well and fits within the memory limit. This suggests that the original deferral decision may no longer be necessary under the new conditions.",
+    "old_source": "At the 256 MB memory cap, Granite compressed lookup took 9 seconds per request. We deferred the large-dictionary variant because its dictionary could not fit within that cap. The evidence archive is Granite-evidence.",
+    "new_source": "Deployment now provides a 2 GB memory cap. At the 2 GB memory cap, Granite large-dictionary compressed lookup took 2 seconds per request and the dictionary fit in memory. The 256 MB observation remains valid."
+  },
+  "eb4b16337d90": {
+    "kind": "correction",
+    "old": "Under policy H2, the Haven alert threshold is 0.75.",
+    "new": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+    "reason": "The original statement about the alert threshold under policy H2 was corrected due to a typographical error. The new threshold value is explicitly stated as 0.57.",
+    "old_source": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+    "new_source": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57. The policy itself did not change."
+  },
+  "16123d43ae1c": {
+    "kind": "correction",
+    "old": "Under policy H2, the Haven alert threshold is 0.75.",
+    "new": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57.",
+    "reason": "The old quote incorrectly stated the alert threshold as 0.75 under policy H2, while the new quote explicitly corrects this mistake to 0.57 under the same policy, indicating a typographical error in the original statement.",
+    "old_source": "Under policy H2, the Haven alert threshold is 0.75. The evidence archive is Haven-evidence.",
+    "new_source": "I correct the threshold in my earlier Haven policy note: the decimal value was mistyped. Under the same policy H2, the alert threshold is 0.57. The policy itself did not change."
+  }
+}

@@ -1,0 +1,513 @@
+{
+  "dev-1": {
+    "kind": "reconsider",
+    "old": "6aaa548a8cc35cd712e5b2b7",
+    "new": "af530c82f1bd9995d863c847",
+    "expected_review": true,
+    "expected_relation": "reconsider",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "067b77569680cf73f3b90cfb",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "aliases": [
+              "40 seconds"
+            ],
+            "condition": "single-process",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "aliases": [
+              "40 seconds"
+            ],
+            "condition": "single-process",
+            "status": "reported"
+          },
+          {
+            "source_id": "af530c82f1bd9995d863c847",
+            "aliases": [
+              "12 seconds"
+            ],
+            "condition": "four-process",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "067b77569680cf73f3b90cfb",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "aliases": [
+              "40 seconds"
+            ],
+            "condition": "single-process",
+            "status": "reported"
+          },
+          {
+            "source_id": "af530c82f1bd9995d863c847",
+            "aliases": [
+              "12 seconds"
+            ],
+            "condition": "four-process",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "6aaa548a8cc35cd712e5b2b7",
+            "aliases": [
+              "Cedar-audit"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "The single-process Cedar exporter took 40 seconds per batch. We suspended further Cedar trials because deployment permits only one process. The audit folder is Cedar-audit.",
+    "new_text": "Deployment now permits four processes. The four-process Cedar exporter took 12 seconds per batch. The old single-process measurement remains unchanged.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "dev-1-natural"
+  },
+  "dev-2": {
+    "kind": "coexist",
+    "old": "27f910dc20fc0bdfa99d7b99",
+    "new": "137ff3e629c456d8f64794e6",
+    "expected_review": false,
+    "expected_relation": "coexist",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a5b521acbeeb54b7d01a08b6",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "aliases": [
+              "40 seconds"
+            ],
+            "condition": "small-fixture",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "aliases": [
+              "40 seconds"
+            ],
+            "condition": "small-fixture",
+            "status": "reported"
+          },
+          {
+            "source_id": "137ff3e629c456d8f64794e6",
+            "aliases": [
+              "12 seconds"
+            ],
+            "condition": "wide-fixture",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "a5b521acbeeb54b7d01a08b6",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conditional",
+        "answers": [
+          {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "aliases": [
+              "40 seconds"
+            ],
+            "condition": "small-fixture",
+            "status": "reported"
+          },
+          {
+            "source_id": "137ff3e629c456d8f64794e6",
+            "aliases": [
+              "12 seconds"
+            ],
+            "condition": "wide-fixture",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "27f910dc20fc0bdfa99d7b99",
+            "aliases": [
+              "Birch-audit"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "With the small-fixture input, Birch parsing took 40 seconds. The audit folder is Birch-audit.",
+    "new_text": "With the wide-fixture input, Birch parsing took 12 seconds. These observations concern different inputs; neither log retracts the other.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "dev-2-natural"
+  },
+  "dev-3": {
+    "kind": "conflict",
+    "old": "add30efc1fcec1cd04e09735",
+    "new": "d577a58f55cc145828c70b78",
+    "expected_review": true,
+    "expected_relation": "conflict",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "c62ff5ba1d4477b17b68a782",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          },
+          {
+            "source_id": "d577a58f55cc145828c70b78",
+            "aliases": [
+              "12 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "c62ff5ba1d4477b17b68a782",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          },
+          {
+            "source_id": "d577a58f55cc145828c70b78",
+            "aliases": [
+              "12 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "add30efc1fcec1cd04e09735",
+            "aliases": [
+              "Maple-audit"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Under release R7 settings, the Maple queue limit is 40 items. The audit folder is Maple-audit.",
+    "new_text": "My independent reading under the same release R7 settings gives the Maple queue limit as 12 items. We have not resolved the disagreement with the earlier report.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "dev-3-natural"
+  },
+  "dev-4": {
+    "kind": "correction",
+    "old": "d283be49f06551ce4a19d5af",
+    "new": "1066864eff91c6e9b94b57a3",
+    "expected_review": true,
+    "expected_relation": "correction",
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "499b9d91b2f8bd705c7a04b0",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d283be49f06551ce4a19d5af",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "conflict",
+        "answers": [
+          {
+            "source_id": "d283be49f06551ce4a19d5af",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "release R7",
+            "status": "reported"
+          },
+          {
+            "source_id": "1066864eff91c6e9b94b57a3",
+            "aliases": [
+              "12 items"
+            ],
+            "condition": "release R7",
+            "status": "pending_correction"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "499b9d91b2f8bd705c7a04b0",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "1066864eff91c6e9b94b57a3",
+            "aliases": [
+              "12 items"
+            ],
+            "condition": "release R7",
+            "status": "approved_correction"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "d283be49f06551ce4a19d5af",
+            "aliases": [
+              "Pine-audit"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "Under release R7 settings, the Pine queue limit is 40 items. The audit folder is Pine-audit.",
+    "new_text": "I correct my earlier R7 Pine queue-limit note: I transposed the count. Under the same release R7 settings, the limit is 12 items.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "dev-4-natural"
+  },
+  "dev-5": {
+    "kind": "irrelevant",
+    "old": "070b6f61131bd0c7013128a9",
+    "new": "a7386a471e880f2281eebacb",
+    "expected_review": false,
+    "expected_relation": null,
+    "qa": {
+      "natural_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e5588c24695bbea44a34c82a",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "old_before": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "070b6f61131bd0c7013128a9",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "changed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "070b6f61131bd0c7013128a9",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "natural_after": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "e5588c24695bbea44a34c82a",
+            "aliases": [
+              "Orion"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "reviewed": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "070b6f61131bd0c7013128a9",
+            "aliases": [
+              "40 items"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      },
+      "other_preserved": {
+        "kind": "single",
+        "answers": [
+          {
+            "source_id": "070b6f61131bd0c7013128a9",
+            "aliases": [
+              "Oak-audit"
+            ],
+            "condition": "",
+            "status": "reported"
+          }
+        ]
+      }
+    },
+    "old_text": "The Oak batch limit is 40 items. We postponed Oak transport rollout because failover retries have not been validated. The audit folder is Oak-audit.",
+    "new_text": "The Oak user guide now has 12 pages after a heading cleanup. No transport run or failover test was performed.",
+    "source_kind": "synthetic workflow plus separate natural QA",
+    "natural_id": "dev-5-natural"
+  }
+}

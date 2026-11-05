@@ -1,0 +1,585 @@
+{
+  "defaults": [
+    {
+      "id": "unseen-1p/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "66b9eaa487ec84a76c67bb85",
+          "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 438,
+          "end": 609,
+          "quote": "That change\nbroke the reading of sendmail.transferencoding because it wasn't\ncareful to update the code to parse them in the previous \"defaults\n-> getopt -> config\" order.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "9bca990d88df82f00a92e7bb",
+          "location": "https://github.com/git/git/commit/3ff15040e22676db0b369efbd8b908b8fcc9b38d",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 374,
+          "end": 551,
+          "quote": "The sendemail.identity feature was added back in\n34cc60ce2b (\"send-email: Add support for SSL and SMTP-AUTH\",\n2007-09-03), there were no tests to assert that it worked properly.",
+          "status": "source_only"
+        },
+        "reviewer": "Ævar Arnfjörð Bjarmason",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-1p/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "66b9eaa487ec84a76c67bb85",
+          "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 438,
+          "end": 609,
+          "quote": "That change\nbroke the reading of sendmail.transferencoding because it wasn't\ncareful to update the code to parse them in the previous \"defaults\n-> getopt -> config\" order.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "9bca990d88df82f00a92e7bb",
+          "location": "https://github.com/git/git/commit/3ff15040e22676db0b369efbd8b908b8fcc9b38d",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 374,
+          "end": 551,
+          "quote": "The sendemail.identity feature was added back in\n34cc60ce2b (\"send-email: Add support for SSL and SMTP-AUTH\",\n2007-09-03), there were no tests to assert that it worked properly.",
+          "status": "source_only"
+        },
+        "reviewer": "Ævar Arnfjörð Bjarmason",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-1n/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "66b9eaa487ec84a76c67bb85",
+          "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 59,
+          "end": 177,
+          "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "afd54487ffcd85f069eb89c1",
+          "location": "https://github.com/git/git/commit/155067ab4f3ec8d7e38f7f86a3fcb446030afaac",
+          "speaker": "Vasyl Vavrychuk",
+          "start": 63,
+          "end": 242,
+          "quote": "Google may have changed Gmail security and now less secure app access\nneeds to be explicitly enabled if two-factor authentication is not in\nplace, otherwise send-email fails with:",
+          "status": "source_only"
+        },
+        "reviewer": "Ævar Arnfjörð Bjarmason",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-1n/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "66b9eaa487ec84a76c67bb85",
+          "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 59,
+          "end": 177,
+          "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "afd54487ffcd85f069eb89c1",
+          "location": "https://github.com/git/git/commit/155067ab4f3ec8d7e38f7f86a3fcb446030afaac",
+          "speaker": "Vasyl Vavrychuk",
+          "start": 63,
+          "end": 242,
+          "quote": "Google may have changed Gmail security and now less secure app access\nneeds to be explicitly enabled if two-factor authentication is not in\nplace, otherwise send-email fails with:",
+          "status": "source_only"
+        },
+        "reviewer": "Ævar Arnfjörð Bjarmason",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-2p/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 269,
+          "end": 580,
+          "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "0eb50c578a29e4b7fe4dd4de",
+          "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+          "speaker": "Ben Peart",
+          "start": 306,
+          "end": 429,
+          "quote": "This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+          "status": "source_only"
+        },
+        "reviewer": "Ben Peart",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-2p/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 269,
+          "end": 580,
+          "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "0eb50c578a29e4b7fe4dd4de",
+          "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+          "speaker": "Ben Peart",
+          "start": 306,
+          "end": 429,
+          "quote": "This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+          "status": "source_only"
+        },
+        "reviewer": "Ben Peart",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-2n/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 0,
+          "end": 49,
+          "quote": "checkout: optimize \"git checkout -b <new_branch>\"",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "76fb811eaa4af5789132b7b2",
+          "location": "https://github.com/git/git/commit/07351d98992ba17ee9249b80f325f7f2c56a2251",
+          "speaker": "Eric Sunshine",
+          "start": 57,
+          "end": 240,
+          "quote": "`git checkout` learned -d as short option for --detach in 163e3b2975\n(switch: add short option for --detach, 2019-03-29) but the\ndocumentation was never updated to reflect the change.",
+          "status": "source_only"
+        },
+        "reviewer": "Ben Peart",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-2n/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 0,
+          "end": 49,
+          "quote": "checkout: optimize \"git checkout -b <new_branch>\"",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "76fb811eaa4af5789132b7b2",
+          "location": "https://github.com/git/git/commit/07351d98992ba17ee9249b80f325f7f2c56a2251",
+          "speaker": "Eric Sunshine",
+          "start": 57,
+          "end": 240,
+          "quote": "`git checkout` learned -d as short option for --detach in 163e3b2975\n(switch: add short option for --detach, 2019-03-29) but the\ndocumentation was never updated to reflect the change.",
+          "status": "source_only"
+        },
+        "reviewer": "Ben Peart",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-3p/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "a5378477f9ed953e4ec4267e",
+          "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+          "speaker": "Matthew DeVore",
+          "start": 0,
+          "end": 46,
+          "quote": "rev-list: handle missing tree objects properly",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "9eae8e3e8db34330bc3ee8a7",
+          "location": "https://github.com/git/git/commit/f06ab027efd2cff4c4319354f1ad7d5f09e853a1",
+          "speaker": "Jeff King",
+          "start": 51,
+          "end": 245,
+          "quote": "This fixes a regression in 7c0fe330d5 (rev-list: handle missing tree\nobjects properly, 2018-10-05) where rev-list will now complain about the\nempty tree when it doesn't physically exist on disk.",
+          "status": "source_only"
+        },
+        "reviewer": "Matthew DeVore",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-3p/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "a5378477f9ed953e4ec4267e",
+          "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+          "speaker": "Matthew DeVore",
+          "start": 0,
+          "end": 46,
+          "quote": "rev-list: handle missing tree objects properly",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "9eae8e3e8db34330bc3ee8a7",
+          "location": "https://github.com/git/git/commit/f06ab027efd2cff4c4319354f1ad7d5f09e853a1",
+          "speaker": "Jeff King",
+          "start": 51,
+          "end": 245,
+          "quote": "This fixes a regression in 7c0fe330d5 (rev-list: handle missing tree\nobjects properly, 2018-10-05) where rev-list will now complain about the\nempty tree when it doesn't physically exist on disk.",
+          "status": "source_only"
+        },
+        "reviewer": "Matthew DeVore",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-3n/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "a5378477f9ed953e4ec4267e",
+          "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+          "speaker": "Matthew DeVore",
+          "start": 107,
+          "end": 173,
+          "quote": "This patch\nmakes rev-list handle missing trees like missing blobs.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "d5aedefef55fc984c36cb74e",
+          "location": "https://github.com/git/git/commit/8560723266f2cb49faf42710c7c380af8d7c0ffd",
+          "speaker": "Philippe Blain",
+          "start": 39,
+          "end": 221,
+          "quote": "Using '{caret}' inside double quotes and immediately following with a\nsingle quoted word does not create the desired output: '<commit1>'\nappears verbatim instead of being emphasized.",
+          "status": "source_only"
+        },
+        "reviewer": "Matthew DeVore",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-3n/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "a5378477f9ed953e4ec4267e",
+          "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+          "speaker": "Matthew DeVore",
+          "start": 107,
+          "end": 173,
+          "quote": "This patch\nmakes rev-list handle missing trees like missing blobs.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "d5aedefef55fc984c36cb74e",
+          "location": "https://github.com/git/git/commit/8560723266f2cb49faf42710c7c380af8d7c0ffd",
+          "speaker": "Philippe Blain",
+          "start": 39,
+          "end": 221,
+          "quote": "Using '{caret}' inside double quotes and immediately following with a\nsingle quoted word does not create the desired output: '<commit1>'\nappears verbatim instead of being emphasized.",
+          "status": "source_only"
+        },
+        "reviewer": "Matthew DeVore",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-4p/forward",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "b46715c62477968adfbeebaf",
+          "location": "https://github.com/git/git/commit/356ee4659bb551cd9464b317d691827276752c2d",
+          "speaker": "Phillip Wood",
+          "start": 793,
+          "end": 914,
+          "quote": "Even when not forking 'git commit' the commit message is written to a\nfile and CHERRY_PICK_HEAD is created unnecessarily.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "cf1ded03e972e4bb5beffbe5",
+          "location": "https://github.com/git/git/commit/2d05ef2778b99e05e6a8a40c5b8d59a3c4ab1274",
+          "speaker": "Phillip Wood",
+          "start": 169,
+          "end": 278,
+          "quote": "When amending a\ncommit try_to_commit() was using the wrong parent when checking if the\ncommit would be empty.",
+          "status": "source_only"
+        },
+        "reviewer": "Phillip Wood",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-4p/reverse",
+      "result": {
+        "action": "retest",
+        "previous": {
+          "source_id": "b46715c62477968adfbeebaf",
+          "location": "https://github.com/git/git/commit/356ee4659bb551cd9464b317d691827276752c2d",
+          "speaker": "Phillip Wood",
+          "start": 793,
+          "end": 914,
+          "quote": "Even when not forking 'git commit' the commit message is written to a\nfile and CHERRY_PICK_HEAD is created unnecessarily.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "cf1ded03e972e4bb5beffbe5",
+          "location": "https://github.com/git/git/commit/2d05ef2778b99e05e6a8a40c5b8d59a3c4ab1274",
+          "speaker": "Phillip Wood",
+          "start": 169,
+          "end": 278,
+          "quote": "When amending a\ncommit try_to_commit() was using the wrong parent when checking if the\ncommit would be empty.",
+          "status": "source_only"
+        },
+        "reviewer": "Phillip Wood",
+        "next_step": "Compare the reported change against the original conditions and retain both observations."
+      }
+    },
+    {
+      "id": "unseen-4n/forward",
+      "result": {
+        "action": "reassess",
+        "previous": {
+          "source_id": "e0942f0a38baa550d72242b6",
+          "location": "https://github.com/git/git/commit/15ef69314d54945471603223bef00091673b5725",
+          "speaker": "Johannes Schindelin",
+          "start": 429,
+          "end": 675,
+          "quote": "However, if the last fixup/squash command in such a chain fails with\nmerge conflicts, and if the user then decides to skip it (or resolve it\nto a clean worktree and then continue the rebase), the current code\nfails to clean up the commit message.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "c6b5f90954d706c1f9d5729f",
+          "location": "https://github.com/git/git/commit/3abd4a67d912e0c0980aa34def6ea55ebde84947",
+          "speaker": "Bradley M. Kuhn",
+          "start": 1333,
+          "end": 1529,
+          "quote": "Additionally, Junio argued that \"trailer\" is now the standard term to\nrefer to `Signed-off-by`, saying that \"becomes plenty clear that we\nare not talking about any random line in the log message\".",
+          "status": "source_only"
+        },
+        "reviewer": "Johannes Schindelin",
+        "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+      }
+    },
+    {
+      "id": "unseen-4n/reverse",
+      "result": {
+        "action": "reassess",
+        "previous": {
+          "source_id": "e0942f0a38baa550d72242b6",
+          "location": "https://github.com/git/git/commit/15ef69314d54945471603223bef00091673b5725",
+          "speaker": "Johannes Schindelin",
+          "start": 429,
+          "end": 675,
+          "quote": "However, if the last fixup/squash command in such a chain fails with\nmerge conflicts, and if the user then decides to skip it (or resolve it\nto a clean worktree and then continue the rebase), the current code\nfails to clean up the commit message.",
+          "status": "source_only"
+        },
+        "incoming": {
+          "source_id": "c6b5f90954d706c1f9d5729f",
+          "location": "https://github.com/git/git/commit/3abd4a67d912e0c0980aa34def6ea55ebde84947",
+          "speaker": "Bradley M. Kuhn",
+          "start": 1333,
+          "end": 1529,
+          "quote": "Additionally, Junio argued that \"trailer\" is now the standard term to\nrefer to `Signed-off-by`, saying that \"becomes plenty clear that we\nare not talking about any random line in the log message\".",
+          "status": "source_only"
+        },
+        "reviewer": "Johannes Schindelin",
+        "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+      }
+    }
+  ],
+  "status": "complete",
+  "job_id": "119293",
+  "input_sha256": "a7472c8d26fa7de5f069682cd5621b61328a4cafa5a03edc9ba20ceea0696040",
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "calls": [
+    {
+      "id": "prior_git-03",
+      "arrivals": [
+        {
+          "source_id": "33781ffdea5f6b0451862ddc",
+          "result": {
+            "action": "keep",
+            "basis": "no candidate with both a supported change and two supporting passages"
+          }
+        }
+      ],
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "de48a1fc5270998280c48e9d",
+            "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+            "speaker": "Ævar Arnfjörð Bjarmason",
+            "start": 42,
+            "end": 195,
+            "quote": "Amend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members.",
+            "status": "source_only",
+            "answer": "buf"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "de48a1fc5270998280c48e9d",
+            "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+            "speaker": "Ævar Arnfjörð Bjarmason",
+            "start": 42,
+            "end": 195,
+            "quote": "Amend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members.",
+            "status": "source_only",
+            "answer": "buf"
+          }
+        ]
+      },
+      "review_context": [],
+      "same_sources": true
+    },
+    {
+      "id": "unseen-2p",
+      "arrivals": [
+        {
+          "source_id": "0eb50c578a29e4b7fe4dd4de",
+          "result": {
+            "action": "reassess",
+            "previous": {
+              "source_id": "0790b8790ead045b7d97d5ea",
+              "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+              "speaker": "Ben Peart",
+              "start": 51,
+              "end": 267,
+              "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+              "status": "source_only"
+            },
+            "incoming": {
+              "source_id": "0eb50c578a29e4b7fe4dd4de",
+              "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+              "speaker": "Ben Peart",
+              "start": 62,
+              "end": 429,
+              "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+              "status": "source_only"
+            },
+            "prior_rationale": {
+              "source_id": "0790b8790ead045b7d97d5ea",
+              "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+              "speaker": "Ben Peart",
+              "start": 51,
+              "end": 267,
+              "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+              "status": "source_only"
+            },
+            "rationale": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" without affecting the working tree, but the new evidence indicates that filesystem access may occur during such checkouts, thus changing the applicability of the earlier result; the earlier decision remains valid for other checkout scenarios where no filesystem access is expected.",
+            "reviewer": "Ben Peart",
+            "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+            "id": "70b1cca6675df45bf9c38ce6"
+          }
+        }
+      ],
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "0790b8790ead045b7d97d5ea",
+            "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+            "speaker": "Ben Peart",
+            "start": 269,
+            "end": 580,
+            "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+            "status": "source_only",
+            "answer": "checkout.optimizeNewBranch"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "0790b8790ead045b7d97d5ea",
+            "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+            "speaker": "Ben Peart",
+            "start": 269,
+            "end": 580,
+            "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+            "status": "source_only",
+            "answer": "checkout.optimizeNewBranch"
+          }
+        ]
+      },
+      "review_context": [
+        {
+          "action": "reassess",
+          "goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+          "incoming": {
+            "end": 429,
+            "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+            "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+            "source_id": "0eb50c578a29e4b7fe4dd4de",
+            "speaker": "Ben Peart",
+            "start": 62,
+            "status": "source_only"
+          },
+          "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+          "previous": {
+            "end": 267,
+            "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+            "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+            "source_id": "0790b8790ead045b7d97d5ea",
+            "speaker": "Ben Peart",
+            "start": 51,
+            "status": "source_only"
+          },
+          "prior_rationale": {
+            "end": 267,
+            "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+            "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+            "source_id": "0790b8790ead045b7d97d5ea",
+            "speaker": "Ben Peart",
+            "start": 51,
+            "status": "source_only"
+          },
+          "rationale": "The earlier decision relied on the specific context of creating a new branch via \"git checkout -b <new_branch>\" without affecting the working tree, but the new evidence indicates that filesystem access may occur during such checkouts, thus changing the applicability of the earlier result; the earlier decision remains valid for other checkout scenarios where no filesystem access is expected.",
+          "reviewer": "Ben Peart",
+          "strategy": "pairwise",
+          "id": "70b1cca6675df45bf9c38ce6",
+          "proposal": "70b1cca6675df45bf9c38ce6",
+          "kind": "followup",
+          "status": "pending"
+        }
+      ],
+      "same_sources": true
+    }
+  ]
+}

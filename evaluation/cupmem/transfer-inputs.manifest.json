@@ -1,0 +1,3144 @@
+{
+  "actor_file": "evaluation/cupmem/transfer-inputs.json",
+  "actor_sha256": "1748653fae227f155ffc47ded6ddb33c7100bfc300d2fcb82eb7a4facf06a154",
+  "audience": "evaluator_only_never_model_input",
+  "counts": {
+    "deferred_owner_reviews": 12,
+    "git_cases": 60,
+    "git_qa_checkpoints": 6,
+    "git_source_arrivals": 180,
+    "timeline_qa_checkpoints": 140,
+    "timeline_source_arrivals": 100,
+    "timeline_streams": 20
+  },
+  "execution_rules": [
+    "Use attributed_session only for ingests; do not ingest QA questions or model answers.",
+    "Process sources in original arrival order and never reveal future source text.",
+    "Direct and CUPMem arms receive identical raw source history at each checkpoint.",
+    "Keep cases independent; opaque IDs never expose mixed/no-match or raw/hidden labels.",
+    "Preserve frozen hidden-view redactions and original author/date/location/text verbatim.",
+    "Native CUPMem has no owner-review API: record unsupported, do not inject approval.",
+    "Any labeled approval adapter must pass review_gate on actual arm proposals, log their model-request provenance, then record the owner action separately.",
+    "A skipped scripted review makes later QA a no-review state, not a post-approval QA failure.",
+    "A query explicitly asking for review is prompted review, not proactive write-time detection.",
+    "Natural QA, synthetic workflow QA, supplementary Git QA and legacy20 are distinct result groups."
+  ],
+  "exporter_sha256": "c235cfc83df691d2b1aab8aa3e2451cf3ca9a48575e8ffef594b2de42e83b424",
+  "git": {
+    "081907ef51e00db70a23d20e": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "freebsd-cwd/no-match/raw",
+      "original_id": "freebsd-cwd/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "fca81043b4cf07ddd121131f",
+          "source_sha256": "fca81043b4cf07ddd121131f8e25b07c74096144b27a3b65cfbdfc297ad20dc4"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "603aaa3c49414f84206c46f5",
+          "source_sha256": "603aaa3c49414f84206c46f5b5f2936029f550cf63b25469c0f5c8571ca73a30"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "ad8616faa45fa22c27edc5f4",
+          "source_sha256": "ad8616faa45fa22c27edc5f472c5de4acf436e23626a559c52b3aa320de2c770"
+        }
+      ]
+    },
+    "0c505d51d261e7278cb6cb64": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "commit-permissions/mixed/hidden",
+      "original_id": "commit-permissions/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "6be6488482f084e8d6ccd4e7",
+          "source_sha256": "6be6488482f084e8d6ccd4e7d3a8bc812d5b4ddaa1847640264313a8ea92fd0c"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "6e41f2f708ac441aacf1a36e",
+          "source_sha256": "6e41f2f708ac441aacf1a36ef00751bbf52b4d190fca8fd33cb0eac3d90ed611"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "035d8bd1d692376c207ba109",
+          "source_sha256": "035d8bd1d692376c207ba1092fed4d103e6be97e59e292f2abc3ebb79372a122"
+        }
+      ]
+    },
+    "101bb32fd29f56edd2da9381": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "fsck-empty/no-match/raw",
+      "original_id": "fsck-empty/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "738312b68cd1c639129d4649",
+          "source_sha256": "738312b68cd1c639129d46496d33e592ad0a3794223712bf53559aacac528180"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "8aa3f30af50c3876da9bf7ff",
+          "source_sha256": "8aa3f30af50c3876da9bf7ff89dfb630458f809a11365b4436a056827e1fb3ad"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "3d071ab3b30bc81067aace4b",
+          "source_sha256": "3d071ab3b30bc81067aace4be4ab51a096a1ba6fd569e200261cdb85296b2898"
+        }
+      ]
+    },
+    "107ea13fa40bbf282de50543": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "hook/no-match/hidden",
+      "original_id": "hook/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "0584b2bb0400a6de0335bb8e",
+          "source_sha256": "0584b2bb0400a6de0335bb8e6b20de5567347dcf0e5278757ecbd6e09dd01b53"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "6f17972ed54f58eeb0ac3d34",
+          "source_sha256": "6f17972ed54f58eeb0ac3d3455671e496ef189297c241cb5f2ccc03dd707bba9"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "90c37f2cef74b53eddb6d710",
+          "source_sha256": "90c37f2cef74b53eddb6d7109a2fd94d3dd16b917864c10af6b4aaed6e20c964"
+        }
+      ]
+    },
+    "127fa77942ffe254a1979e46": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "fsck-empty/mixed/raw",
+      "original_id": "fsck-empty/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "5a5b4fec44ad1b3bb4bab52d",
+          "source_sha256": "5a5b4fec44ad1b3bb4bab52d8e7d61c8f0ddc7d7662b2a216dad3937a301708d"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "738312b68cd1c639129d4649",
+          "source_sha256": "738312b68cd1c639129d46496d33e592ad0a3794223712bf53559aacac528180"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "3d071ab3b30bc81067aace4b",
+          "source_sha256": "3d071ab3b30bc81067aace4be4ab51a096a1ba6fd569e200261cdb85296b2898"
+        }
+      ]
+    },
+    "1637fd071100e25e89c5dc4d": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "hook/mixed/hidden",
+      "original_id": "hook/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "a34b553a893e479bbd728c90",
+          "source_sha256": "a34b553a893e479bbd728c9046306c6e70c8c0982011dadf170c0c09a2805793"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "6f17972ed54f58eeb0ac3d34",
+          "source_sha256": "6f17972ed54f58eeb0ac3d3455671e496ef189297c241cb5f2ccc03dd707bba9"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "90c37f2cef74b53eddb6d710",
+          "source_sha256": "90c37f2cef74b53eddb6d7109a2fd94d3dd16b917864c10af6b4aaed6e20c964"
+        }
+      ]
+    },
+    "180772bdba31e10e5d692ef3": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "range/mixed/raw",
+      "original_id": "range/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "80ed971283c9a3940d865c72",
+          "source_sha256": "80ed971283c9a3940d865c7260b875a34e99785b93d7af46a74604a4e9213cb2"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+          "source_sha256": "7a0aa1ae8de7b1cd43bafbfae495aab3b0e94df6c17b4901e2e4dd59c1f6d258"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "4d5631b0b4f7c930e2a94298",
+          "source_sha256": "4d5631b0b4f7c930e2a9429811b46d096570713216a0bcc39467ff2d04796781"
+        }
+      ]
+    },
+    "18082883d18db4fd43272c8c": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "dir-diff/no-match/hidden",
+      "original_id": "dir-diff/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "bce82ad179b881313d6e9bba",
+          "source_sha256": "bce82ad179b881313d6e9bbaa680a1877a7674e3a80866d12d54a79f16802395"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "c5ef72578d2c18ba5ff98f7a",
+          "source_sha256": "c5ef72578d2c18ba5ff98f7ac7847e761eb61c483aa91f6cd5eb8895eea93ecd"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "3fe4a2a9ae9a7133513c2efc",
+          "source_sha256": "3fe4a2a9ae9a7133513c2efcf3c8e2e3292a9e2a83f292213e5034d8d593559a"
+        }
+      ]
+    },
+    "1bebd66cb074bd6c643a9b26": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "help-spacing/mixed/raw",
+      "original_id": "help-spacing/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "4586b4a5728ee8be0308d0f7",
+          "source_sha256": "4586b4a5728ee8be0308d0f7cfec4b0883fb0cec93ae12298b6fa52ecdb00424"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "f75e27e4cf18fb975ab7ec10",
+          "source_sha256": "f75e27e4cf18fb975ab7ec10b5ef80335b2c073e2d4baea8b479f2f59c08b251"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "7e8110d78a077b61c3d77ffa",
+          "source_sha256": "7e8110d78a077b61c3d77ffa999a4e719cd1e5ca7fecd236033e10e9a5fc6001"
+        }
+      ]
+    },
+    "236b8870994176989ddc333b": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "http-index/no-match/hidden",
+      "original_id": "http-index/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "99a53a0c35960a828ecf1d19",
+          "source_sha256": "99a53a0c35960a828ecf1d19e579461114f17cad5d2f2d2a06292d82dc777629"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "3c0d4f5a7785728fc9ea0523",
+          "source_sha256": "3c0d4f5a7785728fc9ea0523032f99b7208313cfb8661cce5c05e28778b34b7b"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "7fa19233ac6240e33fd7b91d",
+          "source_sha256": "7fa19233ac6240e33fd7b91dbdf3e8cfd7f25e7280fd3ab190c6ede2d6790d70"
+        }
+      ]
+    },
+    "26bbcfd4eb4680ebbff44827": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "asan-preload/mixed/hidden",
+      "original_id": "asan-preload/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "5f1384b069b7a24ddbcf7591",
+          "source_sha256": "5f1384b069b7a24ddbcf7591913b8e1b707c57e701ee136c50b43f21ec5e02d2"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "05df7a58e9a8bdd5011fb265",
+          "source_sha256": "05df7a58e9a8bdd5011fb2653c4f1ad362022802dd836b68309ce79cfa3069fb"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "05b5e4ed464bbef36a0be088",
+          "source_sha256": "05b5e4ed464bbef36a0be08897d4749b62f646aa543252257a4a7808ef5d6506"
+        }
+      ]
+    },
+    "2e39d3cca2728f2acfec7f2a": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "dir-diff/mixed/raw",
+      "original_id": "dir-diff/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "c5ef72578d2c18ba5ff98f7a",
+          "source_sha256": "c5ef72578d2c18ba5ff98f7ac7847e761eb61c483aa91f6cd5eb8895eea93ecd"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "ea8afb3d136e3fa2b370966e",
+          "source_sha256": "ea8afb3d136e3fa2b370966e40fa0742b08614504ca6f4aeef03758c47f2f494"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "4aea3944f469757ceec86446",
+          "source_sha256": "4aea3944f469757ceec8644633a637a2eb1e300722910874d916c7957cfe5ad6"
+        }
+      ]
+    },
+    "3383bf4f925cf042eafd43e6": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "freebsd-cwd/no-match/hidden",
+      "original_id": "freebsd-cwd/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "603aaa3c49414f84206c46f5",
+          "source_sha256": "603aaa3c49414f84206c46f5b5f2936029f550cf63b25469c0f5c8571ca73a30"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "fca81043b4cf07ddd121131f",
+          "source_sha256": "fca81043b4cf07ddd121131f8e25b07c74096144b27a3b65cfbdfc297ad20dc4"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "7edcc9f24e2ce9c56c51bdcf",
+          "source_sha256": "7edcc9f24e2ce9c56c51bdcf9a090e726a095cc8d011cb8da0df8af498720328"
+        }
+      ]
+    },
+    "34bd85e0207d69711723649f": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "email-priority/no-match/raw",
+      "original_id": "email-priority/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "3baf20a428d2d600925c7c05",
+          "source_sha256": "3baf20a428d2d600925c7c0578fb3074267c1cf4123ebb14c4ceb45ec3b8241d"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "81ecbfb3c15a4e6c47f05332",
+          "source_sha256": "81ecbfb3c15a4e6c47f0533256d062f8a624257278199ad128bbccb1c8da8dfb"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "485dbfc2ec27e46c15d1f105",
+          "source_sha256": "485dbfc2ec27e46c15d1f1059af0c3de838067f750b1c5300cd81e49be6ad941"
+        }
+      ]
+    },
+    "34ff487ea6080bdd41c7d4cd": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "prompt/no-match/hidden",
+      "original_id": "prompt/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "d9f4305ea3dc08ae934a72e7",
+          "source_sha256": "d9f4305ea3dc08ae934a72e7d7ddcf3f669e62d08900ef1317d9eef5adeea67c"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "8b1d5f933be85480e0765203",
+          "source_sha256": "8b1d5f933be85480e07652037c4ece586b1ab3768474c7fbb39cc8009a7c6ebc"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "a69458de1e260363d61bd311",
+          "source_sha256": "a69458de1e260363d61bd311b15cf3b9df407f1e24f39166fc5d8ccb8760ff56"
+        }
+      ]
+    },
+    "437e56fa8cdc909580d0bcc7": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "header/mixed/hidden",
+      "original_id": "header/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "87ab8270bb000c1af92415d7",
+          "source_sha256": "87ab8270bb000c1af92415d742282ed9fee62bcef013545badc9b4bf1d2c08ab"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "7db4e979cb0de93c413be66c",
+          "source_sha256": "7db4e979cb0de93c413be66cd5866d75cd743f68a0e488eb6878091eb967f4aa"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "fbee95735e37be94c6e68bf6",
+          "source_sha256": "fbee95735e37be94c6e68bf63339fcaa77c71cb38fcc2eb0b759635eb42b28d9"
+        }
+      ]
+    },
+    "4bb86e090fd25a9d375ce941": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "patch-search/mixed/raw",
+      "original_id": "patch-search/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "478b6af338491647ef3f40f8",
+          "source_sha256": "478b6af338491647ef3f40f85aaeea94ded848ad6592bf73b64c879f83a25389"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "1a26df38575e0abb113443d3",
+          "source_sha256": "1a26df38575e0abb113443d3704ec826a36f398218e97f60fcfb838597063bbe"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "2edf0634b6db15a66c807eb5",
+          "source_sha256": "2edf0634b6db15a66c807eb50160929f2cf3800f9e0e077bf47210ceffc64e06"
+        }
+      ]
+    },
+    "567112969aabe8520463c968": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "http-index/mixed/raw",
+      "original_id": "http-index/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "3c0d4f5a7785728fc9ea0523",
+          "source_sha256": "3c0d4f5a7785728fc9ea0523032f99b7208313cfb8661cce5c05e28778b34b7b"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "26c432928f289ac97d989ab1",
+          "source_sha256": "26c432928f289ac97d989ab17f6f7375ab887d7953ec7d2e1514c878173d4ae4"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "4460998546f21ef8b70f83d6",
+          "source_sha256": "4460998546f21ef8b70f83d68b2d2ba7ac9fdc8ffcdad43aafda86750d6c050d"
+        }
+      ]
+    },
+    "57382c6af50a0d84eda6a211": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "commit-permissions/no-match/raw",
+      "original_id": "commit-permissions/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "6be6488482f084e8d6ccd4e7",
+          "source_sha256": "6be6488482f084e8d6ccd4e7d3a8bc812d5b4ddaa1847640264313a8ea92fd0c"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "53d0395a1ad627b867ac32bd",
+          "source_sha256": "53d0395a1ad627b867ac32bdeae91f373ac132e44c73c936265450d06db247c3"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "c5c9646e7f892ad8e7db7a63",
+          "source_sha256": "c5c9646e7f892ad8e7db7a63cde4d20438efad5b302bb2dc218932f7b2767446"
+        }
+      ]
+    },
+    "58cf1563e1835ddfcd0aedb3": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "patch-search/mixed/hidden",
+      "original_id": "patch-search/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "1a26df38575e0abb113443d3",
+          "source_sha256": "1a26df38575e0abb113443d3704ec826a36f398218e97f60fcfb838597063bbe"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "478b6af338491647ef3f40f8",
+          "source_sha256": "478b6af338491647ef3f40f85aaeea94ded848ad6592bf73b64c879f83a25389"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "cbf1ecdc79e1d03be7a5f236",
+          "source_sha256": "cbf1ecdc79e1d03be7a5f236d37d1a13b5490448694870c4de6aa02e332fe5e3"
+        }
+      ]
+    },
+    "610e83dbb72d904ca61e9f10": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "make-info/mixed/raw",
+      "original_id": "make-info/mixed/raw",
+      "queries": {
+        "1f44a6f06c08d3cbb70f3b7e": {
+          "original_label": "qa",
+          "source": "evaluation/design_review/inputs.json"
+        }
+      },
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "b4fae2dc27175b9d6d7e4428",
+          "source_sha256": "b4fae2dc27175b9d6d7e4428adc08808c0c03fb04f10ed31306a8ab258425678"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "c7189d6d1d4e0539269164d2",
+          "source_sha256": "c7189d6d1d4e0539269164d269a506dbb2717f65332508faf84d0b0b3df6fcbc"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "148a66eb9f811eddf8cdfa80",
+          "source_sha256": "148a66eb9f811eddf8cdfa80f235caf64f3539519cdbccabed7fc70537b53a74"
+        }
+      ]
+    },
+    "6bad3c9e7bd25e015cb8dc64": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "freebsd-cwd/mixed/raw",
+      "original_id": "freebsd-cwd/mixed/raw",
+      "queries": {
+        "ca81ebc251bffe8a5fee3473": {
+          "original_label": "qa",
+          "source": "evaluation/design_review/inputs.json"
+        }
+      },
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "603aaa3c49414f84206c46f5",
+          "source_sha256": "603aaa3c49414f84206c46f5b5f2936029f550cf63b25469c0f5c8571ca73a30"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "2402c0f38e793d9243f9eec4",
+          "source_sha256": "2402c0f38e793d9243f9eec448a14cccefacf63697c99e51ea53954336b035a9"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "ad8616faa45fa22c27edc5f4",
+          "source_sha256": "ad8616faa45fa22c27edc5f472c5de4acf436e23626a559c52b3aa320de2c770"
+        }
+      ]
+    },
+    "6e1b0b90b1a1ac0b5e08885a": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "help-spacing/no-match/raw",
+      "original_id": "help-spacing/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "a25dc9e8e683e9dd033a20e7",
+          "source_sha256": "a25dc9e8e683e9dd033a20e792277856422231ca97a115139a2b1a48ce8c8a8a"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "4586b4a5728ee8be0308d0f7",
+          "source_sha256": "4586b4a5728ee8be0308d0f7cfec4b0883fb0cec93ae12298b6fa52ecdb00424"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "7e8110d78a077b61c3d77ffa",
+          "source_sha256": "7e8110d78a077b61c3d77ffa999a4e719cd1e5ca7fecd236033e10e9a5fc6001"
+        }
+      ]
+    },
+    "6fe3ed9be5688c17d36cba47": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "range/mixed/hidden",
+      "original_id": "range/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "80ed971283c9a3940d865c72",
+          "source_sha256": "80ed971283c9a3940d865c7260b875a34e99785b93d7af46a74604a4e9213cb2"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "7a0aa1ae8de7b1cd43bafbfa",
+          "source_sha256": "7a0aa1ae8de7b1cd43bafbfae495aab3b0e94df6c17b4901e2e4dd59c1f6d258"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "f7f325a10ce563e0cec62a6d",
+          "source_sha256": "f7f325a10ce563e0cec62a6d945f3382cee947b4f1bdda5477748113488623ab"
+        }
+      ]
+    },
+    "70bef67f9798c0c536dbf71e": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "dir-diff/no-match/raw",
+      "original_id": "dir-diff/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "bce82ad179b881313d6e9bba",
+          "source_sha256": "bce82ad179b881313d6e9bbaa680a1877a7674e3a80866d12d54a79f16802395"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "c5ef72578d2c18ba5ff98f7a",
+          "source_sha256": "c5ef72578d2c18ba5ff98f7ac7847e761eb61c483aa91f6cd5eb8895eea93ecd"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "4aea3944f469757ceec86446",
+          "source_sha256": "4aea3944f469757ceec8644633a637a2eb1e300722910874d916c7957cfe5ad6"
+        }
+      ]
+    },
+    "751c2129f76aff0780eb3aae": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "make-info/mixed/hidden",
+      "original_id": "make-info/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "b4fae2dc27175b9d6d7e4428",
+          "source_sha256": "b4fae2dc27175b9d6d7e4428adc08808c0c03fb04f10ed31306a8ab258425678"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "c7189d6d1d4e0539269164d2",
+          "source_sha256": "c7189d6d1d4e0539269164d269a506dbb2717f65332508faf84d0b0b3df6fcbc"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "79986b9677938bda9b6f7731",
+          "source_sha256": "79986b9677938bda9b6f7731195d725761eac9c5c8abc4dfe800cb7a641aa570"
+        }
+      ]
+    },
+    "75a040d518adb07f472397dc": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "range/no-match/hidden",
+      "original_id": "range/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "d78e3865461b35e42817d1fd",
+          "source_sha256": "d78e3865461b35e42817d1fde686289716a2a110d74174f88ae80fd9aa30601f"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "80ed971283c9a3940d865c72",
+          "source_sha256": "80ed971283c9a3940d865c7260b875a34e99785b93d7af46a74604a4e9213cb2"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "f7f325a10ce563e0cec62a6d",
+          "source_sha256": "f7f325a10ce563e0cec62a6d945f3382cee947b4f1bdda5477748113488623ab"
+        }
+      ]
+    },
+    "77ab0ecf1baef273b136af7b": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "make-info/no-match/hidden",
+      "original_id": "make-info/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "38de610b177953398bd0e1b4",
+          "source_sha256": "38de610b177953398bd0e1b4da217b498a37780772867b264274e9679875d317"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "b4fae2dc27175b9d6d7e4428",
+          "source_sha256": "b4fae2dc27175b9d6d7e4428adc08808c0c03fb04f10ed31306a8ab258425678"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "79986b9677938bda9b6f7731",
+          "source_sha256": "79986b9677938bda9b6f7731195d725761eac9c5c8abc4dfe800cb7a641aa570"
+        }
+      ]
+    },
+    "7d5d7105c070c0cf7dcee1f5": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "header/no-match/raw",
+      "original_id": "header/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "87ab8270bb000c1af92415d7",
+          "source_sha256": "87ab8270bb000c1af92415d742282ed9fee62bcef013545badc9b4bf1d2c08ab"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "9d1948b2ba94516e35c93538",
+          "source_sha256": "9d1948b2ba94516e35c93538eab0a51f0b9c8cfcdaad8c6de2b0075e35a17b55"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "819fb2f5e1b20d4aacf0b47e",
+          "source_sha256": "819fb2f5e1b20d4aacf0b47edd7b34d7da17442ee67c5b51ed82f0cc4a69848f"
+        }
+      ]
+    },
+    "83450264e588aa4d3248ce3d": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "header/mixed/raw",
+      "original_id": "header/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "87ab8270bb000c1af92415d7",
+          "source_sha256": "87ab8270bb000c1af92415d742282ed9fee62bcef013545badc9b4bf1d2c08ab"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "7db4e979cb0de93c413be66c",
+          "source_sha256": "7db4e979cb0de93c413be66cd5866d75cd743f68a0e488eb6878091eb967f4aa"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "819fb2f5e1b20d4aacf0b47e",
+          "source_sha256": "819fb2f5e1b20d4aacf0b47edd7b34d7da17442ee67c5b51ed82f0cc4a69848f"
+        }
+      ]
+    },
+    "843ed1b315fa7843a1f87f8f": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "prompt/mixed/hidden",
+      "original_id": "prompt/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "8b1d5f933be85480e0765203",
+          "source_sha256": "8b1d5f933be85480e07652037c4ece586b1ab3768474c7fbb39cc8009a7c6ebc"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "6db8ff6203822e41b501adbc",
+          "source_sha256": "6db8ff6203822e41b501adbced932468a0579dbc37b067eab64e7c19e9973ca7"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "a69458de1e260363d61bd311",
+          "source_sha256": "a69458de1e260363d61bd311b15cf3b9df407f1e24f39166fc5d8ccb8760ff56"
+        }
+      ]
+    },
+    "874d91e14a4af16cd754136d": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "http-index/no-match/raw",
+      "original_id": "http-index/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "3c0d4f5a7785728fc9ea0523",
+          "source_sha256": "3c0d4f5a7785728fc9ea0523032f99b7208313cfb8661cce5c05e28778b34b7b"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "99a53a0c35960a828ecf1d19",
+          "source_sha256": "99a53a0c35960a828ecf1d19e579461114f17cad5d2f2d2a06292d82dc777629"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "4460998546f21ef8b70f83d6",
+          "source_sha256": "4460998546f21ef8b70f83d68b2d2ba7ac9fdc8ffcdad43aafda86750d6c050d"
+        }
+      ]
+    },
+    "8b94445a46044359d10111bd": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "hook/mixed/raw",
+      "original_id": "hook/mixed/raw",
+      "queries": {
+        "1886bbc17f5c1145e5088173": {
+          "original_label": "qa",
+          "source": "evaluation/design_review/inputs.json"
+        }
+      },
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "6f17972ed54f58eeb0ac3d34",
+          "source_sha256": "6f17972ed54f58eeb0ac3d3455671e496ef189297c241cb5f2ccc03dd707bba9"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "a34b553a893e479bbd728c90",
+          "source_sha256": "a34b553a893e479bbd728c9046306c6e70c8c0982011dadf170c0c09a2805793"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "70e69fa6714d47043c7063ef",
+          "source_sha256": "70e69fa6714d47043c7063ef9ee900ed8738c609da9937c6835055dc4b80836f"
+        }
+      ]
+    },
+    "908185f9570e67f48b036b98": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "prompt/mixed/raw",
+      "original_id": "prompt/mixed/raw",
+      "queries": {
+        "66041b3b67c8f6f24e94d69f": {
+          "original_label": "qa",
+          "source": "evaluation/design_review/inputs.json"
+        }
+      },
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "6db8ff6203822e41b501adbc",
+          "source_sha256": "6db8ff6203822e41b501adbced932468a0579dbc37b067eab64e7c19e9973ca7"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "8b1d5f933be85480e0765203",
+          "source_sha256": "8b1d5f933be85480e07652037c4ece586b1ab3768474c7fbb39cc8009a7c6ebc"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "1909756224e0c8a27b4bbeab",
+          "source_sha256": "1909756224e0c8a27b4bbeab174a2b9caea6e9499b39555f7174d08eb7e8560d"
+        }
+      ]
+    },
+    "9abff8f4ba5266dbf7f661c9": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "commit-permissions/mixed/raw",
+      "original_id": "commit-permissions/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "6e41f2f708ac441aacf1a36e",
+          "source_sha256": "6e41f2f708ac441aacf1a36ef00751bbf52b4d190fca8fd33cb0eac3d90ed611"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "6be6488482f084e8d6ccd4e7",
+          "source_sha256": "6be6488482f084e8d6ccd4e7d3a8bc812d5b4ddaa1847640264313a8ea92fd0c"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "c5c9646e7f892ad8e7db7a63",
+          "source_sha256": "c5c9646e7f892ad8e7db7a63cde4d20438efad5b302bb2dc218932f7b2767446"
+        }
+      ]
+    },
+    "a1d5bb9d9044cd58abe2fbb6": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "make-info/no-match/raw",
+      "original_id": "make-info/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "b4fae2dc27175b9d6d7e4428",
+          "source_sha256": "b4fae2dc27175b9d6d7e4428adc08808c0c03fb04f10ed31306a8ab258425678"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "38de610b177953398bd0e1b4",
+          "source_sha256": "38de610b177953398bd0e1b4da217b498a37780772867b264274e9679875d317"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "148a66eb9f811eddf8cdfa80",
+          "source_sha256": "148a66eb9f811eddf8cdfa80f235caf64f3539519cdbccabed7fc70537b53a74"
+        }
+      ]
+    },
+    "a4678793136c92e40c893202": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "header/no-match/hidden",
+      "original_id": "header/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "9d1948b2ba94516e35c93538",
+          "source_sha256": "9d1948b2ba94516e35c93538eab0a51f0b9c8cfcdaad8c6de2b0075e35a17b55"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "87ab8270bb000c1af92415d7",
+          "source_sha256": "87ab8270bb000c1af92415d742282ed9fee62bcef013545badc9b4bf1d2c08ab"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "fbee95735e37be94c6e68bf6",
+          "source_sha256": "fbee95735e37be94c6e68bf63339fcaa77c71cb38fcc2eb0b759635eb42b28d9"
+        }
+      ]
+    },
+    "a749b024e2c57d14c5e182fb": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "help-spacing/mixed/hidden",
+      "original_id": "help-spacing/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "4586b4a5728ee8be0308d0f7",
+          "source_sha256": "4586b4a5728ee8be0308d0f7cfec4b0883fb0cec93ae12298b6fa52ecdb00424"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "f75e27e4cf18fb975ab7ec10",
+          "source_sha256": "f75e27e4cf18fb975ab7ec10b5ef80335b2c073e2d4baea8b479f2f59c08b251"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "47023da0d94f1d8e770eda2e",
+          "source_sha256": "47023da0d94f1d8e770eda2edcf8bff83cff02e1d5818beebdcd87c9eeccdf4f"
+        }
+      ]
+    },
+    "af09957cae6d5045eb212049": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "help-spacing/no-match/hidden",
+      "original_id": "help-spacing/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "a25dc9e8e683e9dd033a20e7",
+          "source_sha256": "a25dc9e8e683e9dd033a20e792277856422231ca97a115139a2b1a48ce8c8a8a"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "4586b4a5728ee8be0308d0f7",
+          "source_sha256": "4586b4a5728ee8be0308d0f7cfec4b0883fb0cec93ae12298b6fa52ecdb00424"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "47023da0d94f1d8e770eda2e",
+          "source_sha256": "47023da0d94f1d8e770eda2edcf8bff83cff02e1d5818beebdcd87c9eeccdf4f"
+        }
+      ]
+    },
+    "b7f98eb7b9825715a697da16": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "asan-preload/no-match/hidden",
+      "original_id": "asan-preload/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "723420d47be74f4a9627c2da",
+          "source_sha256": "723420d47be74f4a9627c2da3fe76c26fc995903b0e1a656b4dfdb7e9ee08af5"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "5f1384b069b7a24ddbcf7591",
+          "source_sha256": "5f1384b069b7a24ddbcf7591913b8e1b707c57e701ee136c50b43f21ec5e02d2"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "05b5e4ed464bbef36a0be088",
+          "source_sha256": "05b5e4ed464bbef36a0be08897d4749b62f646aa543252257a4a7808ef5d6506"
+        }
+      ]
+    },
+    "b978073810029209d0303439": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "email-priority/mixed/hidden",
+      "original_id": "email-priority/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "e6d50326d46ee3fda4b083b4",
+          "source_sha256": "e6d50326d46ee3fda4b083b46fa35719c976f044174f0a6baa9bdc8d541b03d0"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "81ecbfb3c15a4e6c47f05332",
+          "source_sha256": "81ecbfb3c15a4e6c47f0533256d062f8a624257278199ad128bbccb1c8da8dfb"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "53149a89c89e58acdb995df1",
+          "source_sha256": "53149a89c89e58acdb995df10dee162c1421c01d397eecbc4c58d6b8f1b2d3ec"
+        }
+      ]
+    },
+    "bc0929b1eabb6e5c83e8acd1": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "email-priority/no-match/hidden",
+      "original_id": "email-priority/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "81ecbfb3c15a4e6c47f05332",
+          "source_sha256": "81ecbfb3c15a4e6c47f0533256d062f8a624257278199ad128bbccb1c8da8dfb"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "3baf20a428d2d600925c7c05",
+          "source_sha256": "3baf20a428d2d600925c7c0578fb3074267c1cf4123ebb14c4ceb45ec3b8241d"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "53149a89c89e58acdb995df1",
+          "source_sha256": "53149a89c89e58acdb995df10dee162c1421c01d397eecbc4c58d6b8f1b2d3ec"
+        }
+      ]
+    },
+    "bc93d31adadc7f6ed6ba90fb": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "prompt/no-match/raw",
+      "original_id": "prompt/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "8b1d5f933be85480e0765203",
+          "source_sha256": "8b1d5f933be85480e07652037c4ece586b1ab3768474c7fbb39cc8009a7c6ebc"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "d9f4305ea3dc08ae934a72e7",
+          "source_sha256": "d9f4305ea3dc08ae934a72e7d7ddcf3f669e62d08900ef1317d9eef5adeea67c"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "1909756224e0c8a27b4bbeab",
+          "source_sha256": "1909756224e0c8a27b4bbeab174a2b9caea6e9499b39555f7174d08eb7e8560d"
+        }
+      ]
+    },
+    "c294694082cd3d9c8b8ed4dc": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "patch-search/no-match/raw",
+      "original_id": "patch-search/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "478b6af338491647ef3f40f8",
+          "source_sha256": "478b6af338491647ef3f40f85aaeea94ded848ad6592bf73b64c879f83a25389"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "e7796be07d0bf39c1badfdeb",
+          "source_sha256": "e7796be07d0bf39c1badfdebf86d843ff9f24f1071b2431391ee172fe198ea9f"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "2edf0634b6db15a66c807eb5",
+          "source_sha256": "2edf0634b6db15a66c807eb50160929f2cf3800f9e0e077bf47210ceffc64e06"
+        }
+      ]
+    },
+    "c3dcbfd47180e5f37d4f6926": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "reflog/no-match/raw",
+      "original_id": "reflog/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "bb703cd6ace86fe12575f9d6",
+          "source_sha256": "bb703cd6ace86fe12575f9d62a828c4574bd5c46d2b8484e2deeb19ab0b8932e"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "5f4f0ef49720f8b3c7095600",
+          "source_sha256": "5f4f0ef49720f8b3c709560011764e06d9ee4af611edd8a032b1e7cbcdbd444e"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "a3040a8acbe2c17d874307fe",
+          "source_sha256": "a3040a8acbe2c17d874307feb84781cec493e2af3e833b60776e21cb38f726ca"
+        }
+      ]
+    },
+    "cc4368255621c252245986aa": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "asan-preload/no-match/raw",
+      "original_id": "asan-preload/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "5f1384b069b7a24ddbcf7591",
+          "source_sha256": "5f1384b069b7a24ddbcf7591913b8e1b707c57e701ee136c50b43f21ec5e02d2"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "723420d47be74f4a9627c2da",
+          "source_sha256": "723420d47be74f4a9627c2da3fe76c26fc995903b0e1a656b4dfdb7e9ee08af5"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "6548e41a144056601f1daeb4",
+          "source_sha256": "6548e41a144056601f1daeb4dd58dc1a168b6976ce19b0efeb43dcc8cdd88439"
+        }
+      ]
+    },
+    "dc3496ee5692a01a2ce5aca2": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "fsck-empty/no-match/hidden",
+      "original_id": "fsck-empty/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "8aa3f30af50c3876da9bf7ff",
+          "source_sha256": "8aa3f30af50c3876da9bf7ff89dfb630458f809a11365b4436a056827e1fb3ad"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "738312b68cd1c639129d4649",
+          "source_sha256": "738312b68cd1c639129d46496d33e592ad0a3794223712bf53559aacac528180"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "d26909e4c0536288cbdd89ad",
+          "source_sha256": "d26909e4c0536288cbdd89ad7811d0a4bc150fff2f31b0fa7b47f02d284a79d3"
+        }
+      ]
+    },
+    "dd703f6149b88123036aff20": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "reflog/mixed/hidden",
+      "original_id": "reflog/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "78bb626e939f997a7fbaa99a",
+          "source_sha256": "78bb626e939f997a7fbaa99a37cf2bbfb1924be67458789029bf59c770fea92a"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "5f4f0ef49720f8b3c7095600",
+          "source_sha256": "5f4f0ef49720f8b3c709560011764e06d9ee4af611edd8a032b1e7cbcdbd444e"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "9282aa1edabd35bed1594a15",
+          "source_sha256": "9282aa1edabd35bed1594a15dc2ddd4ac3591fdcb393bb5d7a7afb3b9e4c915e"
+        }
+      ]
+    },
+    "de033386755cfdbcc58f47de": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "reflog/no-match/hidden",
+      "original_id": "reflog/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "5f4f0ef49720f8b3c7095600",
+          "source_sha256": "5f4f0ef49720f8b3c709560011764e06d9ee4af611edd8a032b1e7cbcdbd444e"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "bb703cd6ace86fe12575f9d6",
+          "source_sha256": "bb703cd6ace86fe12575f9d62a828c4574bd5c46d2b8484e2deeb19ab0b8932e"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "9282aa1edabd35bed1594a15",
+          "source_sha256": "9282aa1edabd35bed1594a15dc2ddd4ac3591fdcb393bb5d7a7afb3b9e4c915e"
+        }
+      ]
+    },
+    "de0fc7e1977fa2ac9d1d65d4": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "email-priority/mixed/raw",
+      "original_id": "email-priority/mixed/raw",
+      "queries": {
+        "b5884f632d75b69772376ee6": {
+          "original_label": "qa",
+          "source": "evaluation/design_review/inputs.json"
+        }
+      },
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "81ecbfb3c15a4e6c47f05332",
+          "source_sha256": "81ecbfb3c15a4e6c47f0533256d062f8a624257278199ad128bbccb1c8da8dfb"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "e6d50326d46ee3fda4b083b4",
+          "source_sha256": "e6d50326d46ee3fda4b083b46fa35719c976f044174f0a6baa9bdc8d541b03d0"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "485dbfc2ec27e46c15d1f105",
+          "source_sha256": "485dbfc2ec27e46c15d1f1059af0c3de838067f750b1c5300cd81e49be6ad941"
+        }
+      ]
+    },
+    "deeeaf002f3adcc305fcd848": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "http-index/mixed/hidden",
+      "original_id": "http-index/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "26c432928f289ac97d989ab1",
+          "source_sha256": "26c432928f289ac97d989ab17f6f7375ab887d7953ec7d2e1514c878173d4ae4"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "3c0d4f5a7785728fc9ea0523",
+          "source_sha256": "3c0d4f5a7785728fc9ea0523032f99b7208313cfb8661cce5c05e28778b34b7b"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "7fa19233ac6240e33fd7b91d",
+          "source_sha256": "7fa19233ac6240e33fd7b91dbdf3e8cfd7f25e7280fd3ab190c6ede2d6790d70"
+        }
+      ]
+    },
+    "e51fb5b439eb17d6a2f71b62": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "freebsd-cwd/mixed/hidden",
+      "original_id": "freebsd-cwd/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "2402c0f38e793d9243f9eec4",
+          "source_sha256": "2402c0f38e793d9243f9eec448a14cccefacf63697c99e51ea53954336b035a9"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "603aaa3c49414f84206c46f5",
+          "source_sha256": "603aaa3c49414f84206c46f5b5f2936029f550cf63b25469c0f5c8571ca73a30"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "7edcc9f24e2ce9c56c51bdcf",
+          "source_sha256": "7edcc9f24e2ce9c56c51bdcf9a090e726a095cc8d011cb8da0df8af498720328"
+        }
+      ]
+    },
+    "e5e8580686f389625caf21ae": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "range/no-match/raw",
+      "original_id": "range/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "d78e3865461b35e42817d1fd",
+          "source_sha256": "d78e3865461b35e42817d1fde686289716a2a110d74174f88ae80fd9aa30601f"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "80ed971283c9a3940d865c72",
+          "source_sha256": "80ed971283c9a3940d865c7260b875a34e99785b93d7af46a74604a4e9213cb2"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "4d5631b0b4f7c930e2a94298",
+          "source_sha256": "4d5631b0b4f7c930e2a9429811b46d096570713216a0bcc39467ff2d04796781"
+        }
+      ]
+    },
+    "e61e953a1f04a2ff4a6e4068": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "reflog/mixed/raw",
+      "original_id": "reflog/mixed/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "5f4f0ef49720f8b3c7095600",
+          "source_sha256": "5f4f0ef49720f8b3c709560011764e06d9ee4af611edd8a032b1e7cbcdbd444e"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "78bb626e939f997a7fbaa99a",
+          "source_sha256": "78bb626e939f997a7fbaa99a37cf2bbfb1924be67458789029bf59c770fea92a"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "a3040a8acbe2c17d874307fe",
+          "source_sha256": "a3040a8acbe2c17d874307feb84781cec493e2af3e833b60776e21cb38f726ca"
+        }
+      ]
+    },
+    "e9ea7359764eda9848d01f22": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "dir-diff/mixed/hidden",
+      "original_id": "dir-diff/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "c5ef72578d2c18ba5ff98f7a",
+          "source_sha256": "c5ef72578d2c18ba5ff98f7ac7847e761eb61c483aa91f6cd5eb8895eea93ecd"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "ea8afb3d136e3fa2b370966e",
+          "source_sha256": "ea8afb3d136e3fa2b370966e40fa0742b08614504ca6f4aeef03758c47f2f494"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "3fe4a2a9ae9a7133513c2efc",
+          "source_sha256": "3fe4a2a9ae9a7133513c2efcf3c8e2e3292a9e2a83f292213e5034d8d593559a"
+        }
+      ]
+    },
+    "eb3b7b7f08e4c3ab765f16e2": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "fsck-empty/mixed/hidden",
+      "original_id": "fsck-empty/mixed/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "738312b68cd1c639129d4649",
+          "source_sha256": "738312b68cd1c639129d46496d33e592ad0a3794223712bf53559aacac528180"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "5a5b4fec44ad1b3bb4bab52d",
+          "source_sha256": "5a5b4fec44ad1b3bb4bab52d8e7d61c8f0ddc7d7662b2a216dad3937a301708d"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "d26909e4c0536288cbdd89ad",
+          "source_sha256": "d26909e4c0536288cbdd89ad7811d0a4bc150fff2f31b0fa7b47f02d284a79d3"
+        }
+      ]
+    },
+    "f110f2b81f245e841144b1c7": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "commit-permissions/no-match/hidden",
+      "original_id": "commit-permissions/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "53d0395a1ad627b867ac32bd",
+          "source_sha256": "53d0395a1ad627b867ac32bdeae91f373ac132e44c73c936265450d06db247c3"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "6be6488482f084e8d6ccd4e7",
+          "source_sha256": "6be6488482f084e8d6ccd4e7d3a8bc812d5b4ddaa1847640264313a8ea92fd0c"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "035d8bd1d692376c207ba109",
+          "source_sha256": "035d8bd1d692376c207ba1092fed4d103e6be97e59e292f2abc3ebb79372a122"
+        }
+      ]
+    },
+    "f43bffb28dae52beefcae104": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "hook/no-match/raw",
+      "original_id": "hook/no-match/raw",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "6f17972ed54f58eeb0ac3d34",
+          "source_sha256": "6f17972ed54f58eeb0ac3d3455671e496ef189297c241cb5f2ccc03dd707bba9"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "0584b2bb0400a6de0335bb8e",
+          "source_sha256": "0584b2bb0400a6de0335bb8e6b20de5567347dcf0e5278757ecbd6e09dd01b53"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "70e69fa6714d47043c7063ef",
+          "source_sha256": "70e69fa6714d47043c7063ef9ee900ed8738c609da9937c6835055dc4b80836f"
+        }
+      ]
+    },
+    "f43dfe23ee229a630b4bedf1": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "patch-search/no-match/hidden",
+      "original_id": "patch-search/no-match/hidden",
+      "queries": {},
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "e7796be07d0bf39c1badfdeb",
+          "source_sha256": "e7796be07d0bf39c1badfdebf86d843ff9f24f1071b2431391ee172fe198ea9f"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "478b6af338491647ef3f40f8",
+          "source_sha256": "478b6af338491647ef3f40f85aaeea94ded848ad6592bf73b64c879f83a25389"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "cbf1ecdc79e1d03be7a5f236",
+          "source_sha256": "cbf1ecdc79e1d03be7a5f236d37d1a13b5490448694870c4de6aa02e332fe5e3"
+        }
+      ]
+    },
+    "f6b423a52941dbb76182db13": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/design_review/key.json",
+      "key_id": "asan-preload/mixed/raw",
+      "original_id": "asan-preload/mixed/raw",
+      "queries": {
+        "ec2aadb16c25348bdf4c3917": {
+          "original_label": "qa",
+          "source": "evaluation/design_review/inputs.json"
+        }
+      },
+      "source": "evaluation/design_review/inputs.json",
+      "sources": [
+        {
+          "original_role": "prior",
+          "source_id": "5f1384b069b7a24ddbcf7591",
+          "source_sha256": "5f1384b069b7a24ddbcf7591913b8e1b707c57e701ee136c50b43f21ec5e02d2"
+        },
+        {
+          "original_role": "prior",
+          "source_id": "05df7a58e9a8bdd5011fb265",
+          "source_sha256": "05df7a58e9a8bdd5011fb2653c4f1ad362022802dd836b68309ce79cfa3069fb"
+        },
+        {
+          "original_role": "incoming",
+          "source_id": "6548e41a144056601f1daeb4",
+          "source_sha256": "6548e41a144056601f1daeb4dd58dc1a168b6976ce19b0efeb43dcc8cdd88439"
+        }
+      ]
+    }
+  },
+  "purpose": "previously exposed diagnostic cases; no held-out performance claim",
+  "schema": "cupmem-transfer-evaluator-manifest-v1",
+  "source_files": {
+    "evaluation/design_review/freeze.json": "824934018dfa2c9e13a2c741c141bea480099c0be62dfdb9296adca5d3daf6bf",
+    "evaluation/design_review/inputs.json": "d3dad721af2f7b83aeadbdc907a24c9f3a6d6550792d8321c6159b9b668ce324",
+    "evaluation/design_review/key.json": "695c3f1793e8d891e9e25ff6947b2333d1c6de7ea21f454406f6bd58e5a39457",
+    "evaluation/timeline/data-freeze.json": "a7d45c987ba2c8ad837548b0b8be19640ed99b0e41ddd4d164772955e91f4557",
+    "evaluation/timeline/final-key.json": "1d1ada299ed6803c1220b43f1e235f93240a0cdf9d801f0a1d6d8b9b59e9d559",
+    "evaluation/timeline/final.json": "42e4e6abf906f84ef3b226b98d817099d7a75e3371f5383efbfab0a64bbe5a59"
+  },
+  "source_freeze_sha256": "775305b5d2a31be9cf8f133901e07f9c00dae7ce6e7f37f94bd57e5c6c70ddac",
+  "timeline": {
+    "050ac0fd0cc845cc32f41f3d": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "7eb4a1f7eb2d04bf38ddfe7c",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-10",
+            "choice": "approve",
+            "incoming": "ed62ef51a136760b593c1b59",
+            "kind": "conflict",
+            "new_contains": "87%",
+            "old_contains": "83%",
+            "op": "review",
+            "previous": "4616eae74fa0d8c6335da14c"
+          },
+          "script_sha256": "f24d9862caa9525a8c950bcb370de33bf79226eaa87b171678e3ced60eb3a771"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-10",
+      "original_id": "final-10",
+      "queries": {
+        "0eca9cc0275726ceaa2b2570": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "243bdd10f3a9ee374d868bcc": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "25604a9750e58ef6427e5f8d": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "72762cfd90b3f1dc920cd5f8": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "7eb4a1f7eb2d04bf38ddfe7c": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "7f83c00116dda227d2cef677": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "acaee35b609e1ea511726d73": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "3c552b2aeab97d4f37c6f0f7",
+          "original_step_index": 0,
+          "source_id": "4b77961cd0854b7c674c72c8",
+          "source_sha256": "4b77961cd0854b7c674c72c88e590d3e01082a562a92e15b51a1e4bef360885a"
+        },
+        {
+          "event_id": "03a3f037df9c0a9c4042d70f",
+          "original_step_index": 2,
+          "source_id": "4616eae74fa0d8c6335da14c",
+          "source_sha256": "4616eae74fa0d8c6335da14c877598d68b2a52710aaffe0fd5a651267964ad81"
+        },
+        {
+          "event_id": "792a0aba5ec26bc03895d9bd",
+          "original_step_index": 4,
+          "source_id": "dc3eaf01ddff5295b9ad77d4",
+          "source_sha256": "dc3eaf01ddff5295b9ad77d4882cf1b45fcbb9b44065ce94e3b166637f96bc4e"
+        },
+        {
+          "event_id": "d33a2ab67ce012efa18b8f07",
+          "original_step_index": 5,
+          "source_id": "ed62ef51a136760b593c1b59",
+          "source_sha256": "ed62ef51a136760b593c1b598549b69dc0964f513caec2d2c73819b8209c8a81"
+        },
+        {
+          "event_id": "42a2f83544b5b9a72ce3cf14",
+          "original_step_index": 11,
+          "source_id": "27c9815e81ee0124b72c99cd",
+          "source_sha256": "27c9815e81ee0124b72c99cd683788d36bc8faef379cbbe1359e207986506ab8"
+        }
+      ]
+    },
+    "16289516fffa96250288267b": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-08",
+      "original_id": "final-08",
+      "queries": {
+        "0a40604e409ff9588d1038f6": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "1517926e31fd26ee388b1196": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "72b1529368357175bd54a87f": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "749d0b7bea4bb133ddb48bf0": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        },
+        "76c10f5a8f4e7777f75f08c2": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "dc26cb2ec813915dabbb02df": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "ed08c5be42eebf2966602920": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "96d0a57985c8973cb8b4eddb",
+          "original_step_index": 0,
+          "source_id": "d61b9380681071b2b0bcbd84",
+          "source_sha256": "d61b9380681071b2b0bcbd84c215d136f7a0bed2272414b215194d265c933b10"
+        },
+        {
+          "event_id": "64ed9e792c0b646ee1cc230b",
+          "original_step_index": 2,
+          "source_id": "03d56ffbcab7d4d7fe507edf",
+          "source_sha256": "03d56ffbcab7d4d7fe507edfbfeaabb209aded852b05c1904e257d8e7b979ed6"
+        },
+        {
+          "event_id": "d84e9756ee8c4f1405d436d6",
+          "original_step_index": 4,
+          "source_id": "93fe6bd80287ab2e0d45e034",
+          "source_sha256": "93fe6bd80287ab2e0d45e03452c1eba1f5dfd19c2ec1028e6d2df2439334ac96"
+        },
+        {
+          "event_id": "4266329212b3e74dce193006",
+          "original_step_index": 5,
+          "source_id": "d3058140ac03bc376c1d2a95",
+          "source_sha256": "d3058140ac03bc376c1d2a953d457d364eb262603c18122f723ec4a7e9f998c2"
+        },
+        {
+          "event_id": "d694660f9e0c0236c1893f0e",
+          "original_step_index": 10,
+          "source_id": "d71ab10c8aad27a89fbdf243",
+          "source_sha256": "d71ab10c8aad27a89fbdf2430c4edd707528fda7100d0aeadd8222d6447593d7"
+        }
+      ]
+    },
+    "1fcc0e277a75d62fbf9cfcc9": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "c05a01606ee550aac9a4bde9",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-15",
+            "choice": "approve",
+            "incoming": "4a87b5aea43f893fb8da2b78",
+            "kind": "correction",
+            "new_contains": "64 seconds",
+            "old_contains": "46 seconds",
+            "op": "review",
+            "previous": "47b5ee1b30f378b7f92e3e72"
+          },
+          "script_sha256": "c900edfbc555cce66d7af2a77664b7f52740b230cb39fedd73d660cb1ad40a38"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-15",
+      "original_id": "final-15",
+      "queries": {
+        "5d20dff60e5f374f6c250a73": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "8fae49016658f46928e16212": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "b42818b260ab99eed754288e": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "c05a01606ee550aac9a4bde9": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "ca43f77841857278650c85b6": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "d2412a36f39f78ed94f1ac5e": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "d600478ca3e7988a6828f80d": {
+          "original_label": "changed",
+          "original_step_index": 6
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "822d0df61beadb56a6e5fcd0",
+          "original_step_index": 0,
+          "source_id": "79948e794d224908195dfeee",
+          "source_sha256": "79948e794d224908195dfeee777bb9991ba990243e6c11311f6bee6cecbebeaf"
+        },
+        {
+          "event_id": "caf499b85932f77adfc5f461",
+          "original_step_index": 2,
+          "source_id": "47b5ee1b30f378b7f92e3e72",
+          "source_sha256": "47b5ee1b30f378b7f92e3e72b1c9049e46586d4a3ba9b4741dafc850efd74b3a"
+        },
+        {
+          "event_id": "5d5b6cc9244965caf1ed13fd",
+          "original_step_index": 4,
+          "source_id": "46ffd066f0999051cb11d95c",
+          "source_sha256": "46ffd066f0999051cb11d95cc267fc19d06ee02d037bb00129fc3d0ec69d4fdf"
+        },
+        {
+          "event_id": "37be2e106bcc03e47ebc326f",
+          "original_step_index": 5,
+          "source_id": "4a87b5aea43f893fb8da2b78",
+          "source_sha256": "4a87b5aea43f893fb8da2b789121630d03594dbf88cbdad1f4f2be4dcd845ceb"
+        },
+        {
+          "event_id": "48d445967ddefb386ab7abac",
+          "original_step_index": 11,
+          "source_id": "5857a4f66f770fc94ac7069e",
+          "source_sha256": "5857a4f66f770fc94ac7069e6fb61c576f9c38db7d599c397038db8b4a58d7f3"
+        }
+      ]
+    },
+    "261da9797a7f05824add95c9": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-20",
+      "original_id": "final-20",
+      "queries": {
+        "080219a2e1805e060891596b": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "151321406ceeedd0a465a850": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "185051fa7eb60f3d367b150f": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "65c029a007c2fb3af716b162": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "6e7f358b0452be7ab334d516": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "8141f9cee5412dff2a9ceefe": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        },
+        "ccce3fd74cab9d9dac4411b3": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "9a3ba29c52e9a60fc38de6c9",
+          "original_step_index": 0,
+          "source_id": "a1fe56cbb4435ea3ee9d3590",
+          "source_sha256": "a1fe56cbb4435ea3ee9d359048c5f7fa1d26bf21e52f3f6d66a661c2395b944b"
+        },
+        {
+          "event_id": "94b303e36cbf3cb0d9b29c50",
+          "original_step_index": 2,
+          "source_id": "4f1e64cd69c4b2f832a314fc",
+          "source_sha256": "4f1e64cd69c4b2f832a314fc5e01a2a64118adf4973542045eaeded4141a4b16"
+        },
+        {
+          "event_id": "d4b529ec6e64a50684134563",
+          "original_step_index": 4,
+          "source_id": "877addbb0dc7d165857c71a3",
+          "source_sha256": "877addbb0dc7d165857c71a32c19267392fd7ef4c640dffe5b2ca2556bdbd32e"
+        },
+        {
+          "event_id": "05266e9e2794e4a6fb4bf43c",
+          "original_step_index": 5,
+          "source_id": "761164951e5379d63ac994bb",
+          "source_sha256": "761164951e5379d63ac994bb703f02e781bd28e0197a523cbe57b98ca1235a26"
+        },
+        {
+          "event_id": "07b0c546aec70b0c4c3a1e27",
+          "original_step_index": 10,
+          "source_id": "58df2a8bdd3cdb2b6817e77c",
+          "source_sha256": "58df2a8bdd3cdb2b6817e77c7fc6efa362a9d80ca5540428fd996f0c524c5675"
+        }
+      ]
+    },
+    "2780c7310244cbc5f0860c97": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "3fc983c6a52ec7257b246a5d",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-12",
+            "choice": "approve",
+            "incoming": "b1f5b8f4cf4acdd11a776945",
+            "kind": "conflict",
+            "new_contains": "8092",
+            "old_contains": "8082",
+            "op": "review",
+            "previous": "147e740af432277535045201"
+          },
+          "script_sha256": "6cdcfe5a162293127b97e1c34eabad9d16734dc40e568f409ab1031db674638b"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-12",
+      "original_id": "final-12",
+      "queries": {
+        "00239d6e214e5c59dc9e07f2": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "0191cef2e9f7d8da6fb30e65": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "3fc983c6a52ec7257b246a5d": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "56a9c7c0bf7353f7a4e36d24": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "7b85b8342f00f907d1e630cd": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "949ec4a43ec1d5226dbdaab9": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "ea34468581e26df09a4773b5": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "1d16d7958d0ae7e505bd901d",
+          "original_step_index": 0,
+          "source_id": "31ebd089ee9f777346bd3d42",
+          "source_sha256": "31ebd089ee9f777346bd3d42459b5a1feef22e81109bd72a576d6b157abd33dc"
+        },
+        {
+          "event_id": "7de36d151ae75eb726fed072",
+          "original_step_index": 2,
+          "source_id": "147e740af432277535045201",
+          "source_sha256": "147e740af432277535045201e7abed6b4381152300a95476fcae21f80b9608a6"
+        },
+        {
+          "event_id": "719031d01bd0a7f554f11372",
+          "original_step_index": 4,
+          "source_id": "5d0be6727cd4b7f7dc3c3484",
+          "source_sha256": "5d0be6727cd4b7f7dc3c3484ee2c03abee78a2576a5ee36063446e93e053a2ab"
+        },
+        {
+          "event_id": "fcc7a04a53fbfb636d61fd97",
+          "original_step_index": 5,
+          "source_id": "b1f5b8f4cf4acdd11a776945",
+          "source_sha256": "b1f5b8f4cf4acdd11a776945aa5f44be834978a354ab82acba23257c94c04dbd"
+        },
+        {
+          "event_id": "803380c79c9ef9a8a11cb469",
+          "original_step_index": 11,
+          "source_id": "fe360003e79f7ebf079a01a6",
+          "source_sha256": "fe360003e79f7ebf079a01a650aeb5835bb18d1100dfe29f55c17fa070106d45"
+        }
+      ]
+    },
+    "29b5a7ff9d747df7e18d2536": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-17",
+      "original_id": "final-17",
+      "queries": {
+        "06f193274885ce7759af3928": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        },
+        "3af74a62cc5a8bc3310c8bd9": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "592b70779f619eb0a2c6b7b3": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "594a830a33726c34dfad10e1": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "5f9280c8efb2bf2490ada564": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "bc6e05d2559a803539655877": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "d1dd19baaf56763653045b49": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "45db341332762835dc20619c",
+          "original_step_index": 0,
+          "source_id": "3a81cbc1f34e14e7635029cf",
+          "source_sha256": "3a81cbc1f34e14e7635029cff8f2afb8af4227d064a4b1cfae7ddab4f54f5fea"
+        },
+        {
+          "event_id": "963a8ecf2f90335affb003a4",
+          "original_step_index": 2,
+          "source_id": "9dc0b2e4f9c6fdd67c0ff939",
+          "source_sha256": "9dc0b2e4f9c6fdd67c0ff939a4ff47cf5ca26a6f16c5c0b550215ea868455715"
+        },
+        {
+          "event_id": "4a0a99919c96fbed9e382932",
+          "original_step_index": 4,
+          "source_id": "c963eba7eddb3a01acf3f8a4",
+          "source_sha256": "c963eba7eddb3a01acf3f8a4474591734f29fe5f9329f7e51e25eb9893b452b4"
+        },
+        {
+          "event_id": "e3a0670dc7973864504d2527",
+          "original_step_index": 5,
+          "source_id": "874daa62025043d8e1b018a8",
+          "source_sha256": "874daa62025043d8e1b018a8d52936193947df690791b6237abff7d8c6fcd303"
+        },
+        {
+          "event_id": "ccecc6f868b07106636ea176",
+          "original_step_index": 10,
+          "source_id": "822630516667d146d1717bb7",
+          "source_sha256": "822630516667d146d1717bb7d0b761a9305413ddbc82172e311ffaa7fbe1e127"
+        }
+      ]
+    },
+    "2ce56ad1001d9d27f31aad49": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "af3061f8367d787af28ebc37",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-02",
+            "choice": "approve",
+            "incoming": "02eb3a6430df2570c25114fa",
+            "kind": "reconsider",
+            "new_contains": "88%",
+            "old_contains": "",
+            "op": "review",
+            "previous": "050480f532744b401bad884c"
+          },
+          "script_sha256": "647d818eac3390ce185a2709f617b118d3051f8c7bbf8d1900c453b3d05323ad"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-02",
+      "original_id": "final-02",
+      "queries": {
+        "0be8ce4a4c9e600abd8aad6d": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "20d7a1d048f6d59705da6c68": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "29826aa2070525825c70693d": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "606d467901f124b66062b743": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "af3061f8367d787af28ebc37": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "c84f04fff5b41a13330e34b0": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "cef16a7165dd4477cdd5536c": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "3d6a768f1bbf270741f23d37",
+          "original_step_index": 0,
+          "source_id": "4cdeeba9d16f8e3370eb35ed",
+          "source_sha256": "4cdeeba9d16f8e3370eb35ed750f4a14d401d3b745d20fdcf39ddc63bda7860d"
+        },
+        {
+          "event_id": "2fe8db21ba3e66592ba920db",
+          "original_step_index": 2,
+          "source_id": "050480f532744b401bad884c",
+          "source_sha256": "050480f532744b401bad884c3fffc7e3ee20d86a64c9c50484ca4765b732d405"
+        },
+        {
+          "event_id": "d0ee3afaf1c7827825e6141f",
+          "original_step_index": 4,
+          "source_id": "3429273d6267139729079965",
+          "source_sha256": "3429273d6267139729079965150d1f0817d818d4987867c6fae9e6fbd7722f0a"
+        },
+        {
+          "event_id": "2cb0a5155e53d95b3b80da40",
+          "original_step_index": 5,
+          "source_id": "02eb3a6430df2570c25114fa",
+          "source_sha256": "02eb3a6430df2570c25114fa0ca821a30cd18eeeea85cf38e0dee40180e4324e"
+        },
+        {
+          "event_id": "d3169950c20265778d2d0eb9",
+          "original_step_index": 11,
+          "source_id": "b6a9dc9cd91e87998d2c3e42",
+          "source_sha256": "b6a9dc9cd91e87998d2c3e427e87ba78d094a1993974a054598f7709ad3a38fe"
+        }
+      ]
+    },
+    "3fd07890ba40a2b95c6fe513": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "047dd3a5e856a2369442bb49",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-04",
+            "choice": "approve",
+            "incoming": "84890b5219375b618bfcc4a8",
+            "kind": "reconsider",
+            "new_contains": "11 minutes",
+            "old_contains": "",
+            "op": "review",
+            "previous": "f957dd9203a0268905db3b51"
+          },
+          "script_sha256": "dbb46d5a9ba8eb86d40da58912c9d94a85722bd94899c27b67e88303b2b50162"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-04",
+      "original_id": "final-04",
+      "queries": {
+        "047dd3a5e856a2369442bb49": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "3acd9c61db5b3cbd9532284d": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "44f6516b3e204bfe01e02d22": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "8a7ab71c5adc7035e58319f7": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "c9a061c9bf34275cd48bf33e": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "db09d164886c06f7626edcd8": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "e906961a88bba2e97acb841c": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "b648d5596b4fa03b39d2ca8a",
+          "original_step_index": 0,
+          "source_id": "8d173dfd85ae6fb5b273fdb5",
+          "source_sha256": "8d173dfd85ae6fb5b273fdb54e326b05f00ffbfab774cb8532eb7e2736c7e1bf"
+        },
+        {
+          "event_id": "72302c2902d06452f3406775",
+          "original_step_index": 2,
+          "source_id": "f957dd9203a0268905db3b51",
+          "source_sha256": "f957dd9203a0268905db3b512ef996ef1aa9bd91132127f3cdee4913f8179731"
+        },
+        {
+          "event_id": "f2b1f7c1c0dc0293cec2f586",
+          "original_step_index": 4,
+          "source_id": "746b7a3c240c5f91a4bc71af",
+          "source_sha256": "746b7a3c240c5f91a4bc71afc5e75351039d59da4b4c8ff791fed8f308a60288"
+        },
+        {
+          "event_id": "036364887164ca5f40e19b0d",
+          "original_step_index": 5,
+          "source_id": "84890b5219375b618bfcc4a8",
+          "source_sha256": "84890b5219375b618bfcc4a819d49d6ce1933aea975f8dd8b1b4ebae1215c1e6"
+        },
+        {
+          "event_id": "3dde85173449509a312dacb9",
+          "original_step_index": 11,
+          "source_id": "aa9417e69c0f425bd5264789",
+          "source_sha256": "aa9417e69c0f425bd5264789af772e46f6120c3dc694d59e740d397b89ad01c7"
+        }
+      ]
+    },
+    "46ebac066e8a003a2b801d8f": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "5ff56623c77a20280772b606",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-11",
+            "choice": "approve",
+            "incoming": "837577e87caaf27b9debe686",
+            "kind": "conflict",
+            "new_contains": "4170 rows",
+            "old_contains": "4200 rows",
+            "op": "review",
+            "previous": "7e826b2923a56e9125f87e18"
+          },
+          "script_sha256": "2785e393578240ea041b0abb48d4404191036f5a7b73cc28c7fae9bc5cb26843"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-11",
+      "original_id": "final-11",
+      "queries": {
+        "023b5421c5cc26db39d8a7e2": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "197887a1e70d847a89d0bdbb": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "5ff56623c77a20280772b606": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "82b3e4450037250f4eb9440a": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "a43267c7dc8a275c0dd44011": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "b703327f49f2451d3aaf87b1": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "be2fafe54094368e5feec0c8": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "2a09a50aa5026e61eeea77b9",
+          "original_step_index": 0,
+          "source_id": "a81e9fe96716ef6f05599bb8",
+          "source_sha256": "a81e9fe96716ef6f05599bb8e6bc9b848b307211be5b96cba87088f3edd2d2fc"
+        },
+        {
+          "event_id": "f07935c0d7a57b3ee013c084",
+          "original_step_index": 2,
+          "source_id": "7e826b2923a56e9125f87e18",
+          "source_sha256": "7e826b2923a56e9125f87e1834e6eec1c739e8eabbeb8d1ceb6d7a6a96899ef0"
+        },
+        {
+          "event_id": "47840f7d46e83879784de515",
+          "original_step_index": 4,
+          "source_id": "b63198d227e37be0d39bdc66",
+          "source_sha256": "b63198d227e37be0d39bdc669455991e11ac8888566621e3241e5a3de5faf4bd"
+        },
+        {
+          "event_id": "ab363ad698922a74adbecf7c",
+          "original_step_index": 5,
+          "source_id": "837577e87caaf27b9debe686",
+          "source_sha256": "837577e87caaf27b9debe6863bc3afae3badec2ef4a88c511ba150b5ca77c333"
+        },
+        {
+          "event_id": "1a9620c075b3ffe54c7cbc7e",
+          "original_step_index": 11,
+          "source_id": "17d472301c3dc8eff326200a",
+          "source_sha256": "17d472301c3dc8eff326200ae572a76a65adecbae44bf004d6d070cdfa561eb5"
+        }
+      ]
+    },
+    "596d1e9ef782e8a7b7822283": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "3a1ab2ac72a4f51e7b8e30b8",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-16",
+            "choice": "approve",
+            "incoming": "393b5b9f117378cf456ee70f",
+            "kind": "correction",
+            "new_contains": "0.57",
+            "old_contains": "0.75",
+            "op": "review",
+            "previous": "8b04c566642eee083097b7c6"
+          },
+          "script_sha256": "688f71fbd49a93fad0d8b08925a8f770016b1f3eba286236f117a9378f1020ca"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-16",
+      "original_id": "final-16",
+      "queries": {
+        "009f83d5128723f7a83c2ef7": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "046eb5b847408c35ebf93a7f": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "12a006df552459b71f192968": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "3a1ab2ac72a4f51e7b8e30b8": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "42a5fd5e35d69e4a88e6d49a": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "92301f514ce3b20dfc4eaff9": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "f96f68de33ca85089ba2d92e": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "ec373b075a5326038c1b312d",
+          "original_step_index": 0,
+          "source_id": "203c1918cd867209e7556af4",
+          "source_sha256": "203c1918cd867209e7556af484efcfdb77d6f40b80daf1b877f92097411aab99"
+        },
+        {
+          "event_id": "e1f5ff3034831d2409551012",
+          "original_step_index": 2,
+          "source_id": "8b04c566642eee083097b7c6",
+          "source_sha256": "8b04c566642eee083097b7c62c3ab92c19969c635dcfd0a1ba340bfb17cf0765"
+        },
+        {
+          "event_id": "ccf78cffbae4467abc76fa30",
+          "original_step_index": 4,
+          "source_id": "dc75b96c4c74fbf32f5a2e8b",
+          "source_sha256": "dc75b96c4c74fbf32f5a2e8b0ebd4837026976934b416a20e79ff658667ea724"
+        },
+        {
+          "event_id": "3630b09bcf3e7837380885f8",
+          "original_step_index": 5,
+          "source_id": "393b5b9f117378cf456ee70f",
+          "source_sha256": "393b5b9f117378cf456ee70fa59b8eee4925674270154f461c96f19f7a25c581"
+        },
+        {
+          "event_id": "61be7c45842e6f5598b17434",
+          "original_step_index": 11,
+          "source_id": "3a6c4ff0f1d72bc912ff0662",
+          "source_sha256": "3a6c4ff0f1d72bc912ff066266745622a97af687b1ec732cb97b4c153a25b4ea"
+        }
+      ]
+    },
+    "65b39c72e3e5ec350455f63f": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "3e7e177f133358bd69564cb6",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-14",
+            "choice": "approve",
+            "incoming": "0cfc6bd91368da0bac200b9c",
+            "kind": "correction",
+            "new_contains": "15:00 UTC",
+            "old_contains": "17:00 UTC",
+            "op": "review",
+            "previous": "72646eaf0ee3dba8123453fb"
+          },
+          "script_sha256": "764d4bf53f4fe4712948ee9c4911811485ffe8109ab8c18a46fbeef7cd20608a"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-14",
+      "original_id": "final-14",
+      "queries": {
+        "3e7e177f133358bd69564cb6": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "6730c02fd283fba5efaca5f0": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "79706ace6c0bf45151ee4936": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "8dcb3d97af4703184f7a02f7": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "c207a26b2f3953e094026294": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "ce6f82e14006dc0681c079e8": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "e8abbcac25606e0e909e782c": {
+          "original_label": "changed",
+          "original_step_index": 6
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "881461cb53ad5eaac412c1b7",
+          "original_step_index": 0,
+          "source_id": "ee4adb92d98af949eb65bf37",
+          "source_sha256": "ee4adb92d98af949eb65bf379f3a1d86ee9cf2676ee176c03bdc677d2b6f9402"
+        },
+        {
+          "event_id": "0bcdf451a32153d77531a5d8",
+          "original_step_index": 2,
+          "source_id": "72646eaf0ee3dba8123453fb",
+          "source_sha256": "72646eaf0ee3dba8123453fbf5c8cfb4f335997766ee88d4da7e7e24f8baecd2"
+        },
+        {
+          "event_id": "74f2c87914b5cada10818b46",
+          "original_step_index": 4,
+          "source_id": "aa44a4570bafb203e725a115",
+          "source_sha256": "aa44a4570bafb203e725a1154aba42e4681970208f5dfb710bca6bf53db63f26"
+        },
+        {
+          "event_id": "893794b8b0e54258b03c81d3",
+          "original_step_index": 5,
+          "source_id": "0cfc6bd91368da0bac200b9c",
+          "source_sha256": "0cfc6bd91368da0bac200b9cf64a055ced4c38ff275870b3de3337f04cc32bea"
+        },
+        {
+          "event_id": "c751908cac259bdaa2a836a9",
+          "original_step_index": 11,
+          "source_id": "b7a70e57166ae1ee7115ee55",
+          "source_sha256": "b7a70e57166ae1ee7115ee55c8cc440f6f37d61d62f3ca0a69283c9943ed4c42"
+        }
+      ]
+    },
+    "6edb1e2d3ae391dcadb7b96f": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-06",
+      "original_id": "final-06",
+      "queries": {
+        "373fdb33fe688cc80da7d103": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "68da2f77ca784641c6348392": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "69e3e191cbb84277fe1a11c9": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        },
+        "9e42d3e8b6e0c647ea6cb531": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "e4634e8f913e8f521eb36a11": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "e61b838dce4f300ecdb8fcf5": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "ec446b2b266d54c3e6bcf1f5": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "1eba7044baac8bce2016b349",
+          "original_step_index": 0,
+          "source_id": "974e12d5cf41b139d93f5a7d",
+          "source_sha256": "974e12d5cf41b139d93f5a7d9f09d5f67dd761b35ba048d88fec0879c6e0d7b4"
+        },
+        {
+          "event_id": "32be9c1e819a47b0f432d8bb",
+          "original_step_index": 2,
+          "source_id": "e64097386adb7851ac085f08",
+          "source_sha256": "e64097386adb7851ac085f082d650f0579cec9e901f4f53de1bbc2871931ebfd"
+        },
+        {
+          "event_id": "a3e89fd0f3038d096415e080",
+          "original_step_index": 4,
+          "source_id": "2abb7b99e2ac12c124732f09",
+          "source_sha256": "2abb7b99e2ac12c124732f098157a0fa63fac207b339cd156f64f35cf2b02d4e"
+        },
+        {
+          "event_id": "e1f0ab49aefd139f3afe05a7",
+          "original_step_index": 5,
+          "source_id": "6d5ac089de22699062db02c0",
+          "source_sha256": "6d5ac089de22699062db02c079528dafd99c085239a0c8ad9eb54491b77b6b83"
+        },
+        {
+          "event_id": "840c1b0706b97ef88259565a",
+          "original_step_index": 10,
+          "source_id": "9fdeef858d8fa806f8d407d6",
+          "source_sha256": "9fdeef858d8fa806f8d407d6f42bda4a9a47c8a7ba63096a38e3e42510f68732"
+        }
+      ]
+    },
+    "7c60841e5eba122512bad350": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-05",
+      "original_id": "final-05",
+      "queries": {
+        "37afa8634883a6b7e3bdb24b": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "a8c9b04a614e803fbcf75560": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        },
+        "a9fb9dae292fc86853fdab4e": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "dc120c2098032597cbd664ad": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "e8c4df5aa592332fd11bad69": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "edfbf3ce162d20ccbb061c69": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "ee01cf5871790dd09bb928a3": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "bb2c8d3b0b0c77bb14d74572",
+          "original_step_index": 0,
+          "source_id": "a4ca19f151ef554bfb1f83cf",
+          "source_sha256": "a4ca19f151ef554bfb1f83cf1e288eeecf2ac5f791d95ac5754e2255c95408be"
+        },
+        {
+          "event_id": "1e33f82bd00cb162f79df319",
+          "original_step_index": 2,
+          "source_id": "33f32b970ea4c6d63720ff7f",
+          "source_sha256": "33f32b970ea4c6d63720ff7f773a71f190de7a91328d9a15127f5f50434d2f85"
+        },
+        {
+          "event_id": "73e864a3de47006ce4dd8e93",
+          "original_step_index": 4,
+          "source_id": "f42f38f48f386d3c680c5f9b",
+          "source_sha256": "f42f38f48f386d3c680c5f9bd03267b3ccda729485aec42c4067b91b66595bc7"
+        },
+        {
+          "event_id": "29b0509b6fce698979194e44",
+          "original_step_index": 5,
+          "source_id": "372e805dfe27341c32a6619c",
+          "source_sha256": "372e805dfe27341c32a6619c4603e555434fd790df6b72e4cafbe137574ac5ec"
+        },
+        {
+          "event_id": "d02311ae2aff7c3212b7d92f",
+          "original_step_index": 10,
+          "source_id": "170b6f9893427d3ef1dbddfc",
+          "source_sha256": "170b6f9893427d3ef1dbddfcaa7a6cd9d51e8c456c189b57daabee5bf7b704dc"
+        }
+      ]
+    },
+    "9dc41ffebd2fdd9a0541fc4e": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-19",
+      "original_id": "final-19",
+      "queries": {
+        "2108e797c84dc8afd138f49d": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "442c62a148d70c47a857231d": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "44dec559481c5fdca730853b": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "4845c1e1484d29fc0da5cf05": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "ad80ec1d795238cabed16e78": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "e31401dab3be6728d55082b5": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "e92408dfb67b3e2e9740ca06": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "6a81094d4df6f2bf251571ae",
+          "original_step_index": 0,
+          "source_id": "e1e971dd574bf90f69129aab",
+          "source_sha256": "e1e971dd574bf90f69129aabd89ea67526782c16ff32711ac0b4d44077f97857"
+        },
+        {
+          "event_id": "7a5b672c9f0f71cd1fd5c16f",
+          "original_step_index": 2,
+          "source_id": "d80d47360c531a124e9217fd",
+          "source_sha256": "d80d47360c531a124e9217fd406ceefc8493d45e9faba56deccda7100eca9428"
+        },
+        {
+          "event_id": "d1432f08dbc6b365842274b4",
+          "original_step_index": 4,
+          "source_id": "0621504f23de1551f05ed0f9",
+          "source_sha256": "0621504f23de1551f05ed0f953c58595c0dd3872fb5fce227ecf7475eaeaf2de"
+        },
+        {
+          "event_id": "cf9ed4600dd98ccb82ef3fb3",
+          "original_step_index": 5,
+          "source_id": "e667c35ba3fe979d3f413887",
+          "source_sha256": "e667c35ba3fe979d3f41388795ae291ca62058406e21c375213e42bd43c2a516"
+        },
+        {
+          "event_id": "fa2979d530116899acd5a21b",
+          "original_step_index": 10,
+          "source_id": "46284cac2e5e6509bba5d740",
+          "source_sha256": "46284cac2e5e6509bba5d740d58d5b8d56c949a9de3ca4933cc2731c4594fc66"
+        }
+      ]
+    },
+    "bea160ace10c49a8d7d408e1": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "8192dc61aa7adf9a76f3768a",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-13",
+            "choice": "approve",
+            "incoming": "59261ebef9f950461bc01147",
+            "kind": "correction",
+            "new_contains": "105 records",
+            "old_contains": "150 records",
+            "op": "review",
+            "previous": "540eb85de6a0200d9433edc2"
+          },
+          "script_sha256": "2b474a0ef62b29e757433ad3d0fe59cd549dafe94b3bbe89170eb6a37ddc6247"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-13",
+      "original_id": "final-13",
+      "queries": {
+        "190f0e11e443bee2bdc6d660": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "3b4101a4ce9de477b6e2a466": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "519ad1252f4a603da50428bd": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "8192dc61aa7adf9a76f3768a": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "b6a20947afc3aad88a1c8e08": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "f3653b9c0755a92b520b178a": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "f447a4176441164e18ddb86b": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "f3ea1ddb6e2c67463b6e2ba7",
+          "original_step_index": 0,
+          "source_id": "5e4e5cbaf2a8c9eed4fc9463",
+          "source_sha256": "5e4e5cbaf2a8c9eed4fc9463e4cd33d28ae3816fd1c9f269cb03ca87ff9f3d8a"
+        },
+        {
+          "event_id": "20e35d41fb371ff3507a4c44",
+          "original_step_index": 2,
+          "source_id": "540eb85de6a0200d9433edc2",
+          "source_sha256": "540eb85de6a0200d9433edc261d1855974c3e181ffed746bc1fe2e97fb3a0278"
+        },
+        {
+          "event_id": "5b9fe76994037f7b7623cc69",
+          "original_step_index": 4,
+          "source_id": "d721dcc5a984670e00fc42bb",
+          "source_sha256": "d721dcc5a984670e00fc42bbefa3ffb6aedfca2a2e6e67609c8396142b8c4d08"
+        },
+        {
+          "event_id": "896c2de87d38ba96478c08e0",
+          "original_step_index": 5,
+          "source_id": "59261ebef9f950461bc01147",
+          "source_sha256": "59261ebef9f950461bc01147ba263b836dcdddac47c80a28d040d146f99c4297"
+        },
+        {
+          "event_id": "dd6b0f8ee399b94a259df6e5",
+          "original_step_index": 11,
+          "source_id": "359db929a23dc701a6cbee6b",
+          "source_sha256": "359db929a23dc701a6cbee6b065a0918871e4bb05affb323a61101a377c2b7d8"
+        }
+      ]
+    },
+    "c797d3c2192146796265fa55": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-07",
+      "original_id": "final-07",
+      "queries": {
+        "13ae974aff00cf4df04592b3": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "14853e87ec53aa82e0f47fdb": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "232390ce452b03cfa1950ac1": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "291ebe8503e3abfd12870f5c": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "4126670afcac12723acfbece": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "62c7e4371443804f26183b81": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        },
+        "65ff52a0bf950fba95081e65": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "dc4213ed442e1bb0efd7c5bd",
+          "original_step_index": 0,
+          "source_id": "c01049a55cb1461ab595968e",
+          "source_sha256": "c01049a55cb1461ab595968e35a2cd438e9ea0507746b578d9320dc521c98f77"
+        },
+        {
+          "event_id": "8ef77f52e656899e3af6fdf3",
+          "original_step_index": 2,
+          "source_id": "217c874b03b2b6d9905eb660",
+          "source_sha256": "217c874b03b2b6d9905eb660c15d6ec3078203d1bbf05c1d9f58b5e1e87f5cbb"
+        },
+        {
+          "event_id": "7d05e19d26ffa6d7acb7babf",
+          "original_step_index": 4,
+          "source_id": "b51d0d5215d101bc307be812",
+          "source_sha256": "b51d0d5215d101bc307be8125467076e81f330901bc05ff0e4d46a406e94a094"
+        },
+        {
+          "event_id": "490d6001abb8a6407799971f",
+          "original_step_index": 5,
+          "source_id": "57fce2f8a894f135d4ca987a",
+          "source_sha256": "57fce2f8a894f135d4ca987a682023baf8ca5281aa3a6a3706806270bb155c6d"
+        },
+        {
+          "event_id": "b745edba16300b9d4e04c5b5",
+          "original_step_index": 10,
+          "source_id": "85c13bc02d9b5e7d89de7f64",
+          "source_sha256": "85c13bc02d9b5e7d89de7f649bc2c582dfd7a5aed19b883f50eb818bcec28dc3"
+        }
+      ]
+    },
+    "c967920bb04cca900bbd925b": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "89b8bf78644802037321a135",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-09",
+            "choice": "approve",
+            "incoming": "b692843b01d7115d0f61741f",
+            "kind": "conflict",
+            "new_contains": "96 connections",
+            "old_contains": "64 connections",
+            "op": "review",
+            "previous": "63b7606d609cfdf518bf1bf9"
+          },
+          "script_sha256": "2b6d584c976e9ec8b28702e485932ff6fac1fdf886b5a370c95c74ad16b4f633"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-09",
+      "original_id": "final-09",
+      "queries": {
+        "62d80b2687f9474fd8ff9529": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "6b9490416238d7621004ea31": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "89b8bf78644802037321a135": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "9430f2ad8bb3ebe54de621b7": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "a16a42c263171f1b385a7237": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "b649714380f3c530c9412af9": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "d2b7c8b97849cbdafb06b651": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "bdfd27f5a0770314b7579634",
+          "original_step_index": 0,
+          "source_id": "8d66455d38a7a6ab390e5d7c",
+          "source_sha256": "8d66455d38a7a6ab390e5d7ce7e9332f00de362dc334f4090b4056cb2158dbbb"
+        },
+        {
+          "event_id": "f96b21ffb39daf0aa9033f86",
+          "original_step_index": 2,
+          "source_id": "63b7606d609cfdf518bf1bf9",
+          "source_sha256": "63b7606d609cfdf518bf1bf9d4a19e3e3fd6d2649463be4b2dd4761321badc6d"
+        },
+        {
+          "event_id": "c08dd5d04de6e26623c3debb",
+          "original_step_index": 4,
+          "source_id": "e7b3e8fafd42dbf7a5d86187",
+          "source_sha256": "e7b3e8fafd42dbf7a5d8618753fd6221f87d817a6a5e9ee45529fb5c6aa1b4c2"
+        },
+        {
+          "event_id": "9c35d16960a9919daac29976",
+          "original_step_index": 5,
+          "source_id": "b692843b01d7115d0f61741f",
+          "source_sha256": "b692843b01d7115d0f61741fa98db4f0c1d3a8190e5ae4a8177f0733b3246d70"
+        },
+        {
+          "event_id": "dfd5c67e78ba89846e4f55cf",
+          "original_step_index": 11,
+          "source_id": "13051f69b0767435e64a22d1",
+          "source_sha256": "13051f69b0767435e64a22d1c656704a0d2715d724ffc37bfd6769110444d750"
+        }
+      ]
+    },
+    "c9db3300283884070e72c0a0": {
+      "deferred_reviews": [],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-18",
+      "original_id": "final-18",
+      "queries": {
+        "25a5eb3b96027e04ccfcd32f": {
+          "original_label": "reviewed",
+          "original_step_index": 8
+        },
+        "45f35895d644542f968a802a": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "79f85c2481c75a63fa5744d3": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "a66bab9b2a2362b0000c3720": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "cdb823328a1c9670f9e87724": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "ee5eaa87e47f8af6f22ddf3c": {
+          "original_label": "other_preserved",
+          "original_step_index": 9
+        },
+        "ffb99b5ddf74270e6421fe5c": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 11
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "56376bb60c469f8b6edc581f",
+          "original_step_index": 0,
+          "source_id": "6c1c9fd1f9708dfb44243044",
+          "source_sha256": "6c1c9fd1f9708dfb44243044ff9d4a07ac7ef03c3e82e63d44fedcddf38d9245"
+        },
+        {
+          "event_id": "06850c84463c8b2ed1b8d58d",
+          "original_step_index": 2,
+          "source_id": "f16fc3de8a1cd0c18feb88d9",
+          "source_sha256": "f16fc3de8a1cd0c18feb88d992010ad7a8e5ac0171f6c9f9b8df62b10bfb1c39"
+        },
+        {
+          "event_id": "d02ac9bd26de0a183c14c162",
+          "original_step_index": 4,
+          "source_id": "85f3d2016aa8960875bdbfa0",
+          "source_sha256": "85f3d2016aa8960875bdbfa05b77aff5b94053c520ab2631f2652111c1a78f6b"
+        },
+        {
+          "event_id": "0eaabd950637240b630a5b7a",
+          "original_step_index": 5,
+          "source_id": "cfb9c21740e4da76c2d1847d",
+          "source_sha256": "cfb9c21740e4da76c2d1847de57379d95c30d006d322033838265e2d023658b4"
+        },
+        {
+          "event_id": "1349f8a41b9316d7394ce463",
+          "original_step_index": 10,
+          "source_id": "5f6ebd7a110fa2e3e9dca20d",
+          "source_sha256": "5f6ebd7a110fa2e3e9dca20df7f6625dc28d1c981677ad85e3335a3e9b709f5d"
+        }
+      ]
+    },
+    "d0082917e9714fb394e86e43": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "5ebb5efb73a3528e69c82ceb",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-03",
+            "choice": "approve",
+            "incoming": "cea9a67692219dac99127a1d",
+            "kind": "reconsider",
+            "new_contains": "2 seconds",
+            "old_contains": "",
+            "op": "review",
+            "previous": "8aac23fcdbbd6f514edc33a9"
+          },
+          "script_sha256": "cbfa756b5278c67275af28d2277cd23a48a6b20edc2d48aef846fac926aec122"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-03",
+      "original_id": "final-03",
+      "queries": {
+        "32aebdd10c597da620a16ee2": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "35664d81c637c346c84151b1": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "4ca8d4f5147a036c94322333": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "5ebb5efb73a3528e69c82ceb": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "630493ff21728e0d716f048e": {
+          "original_label": "changed",
+          "original_step_index": 6
+        },
+        "6a074a24092b3b51e664daa8": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "b2e84efcb7492710ae8623a8": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "ae4a3a5ba0dc7473fa0d4041",
+          "original_step_index": 0,
+          "source_id": "752e7f1537709812d5903ea0",
+          "source_sha256": "752e7f1537709812d5903ea0733ead22db31aba8080cadcb90b89d777ecb7f47"
+        },
+        {
+          "event_id": "ce43ed76ae6e4b7b3256d918",
+          "original_step_index": 2,
+          "source_id": "8aac23fcdbbd6f514edc33a9",
+          "source_sha256": "8aac23fcdbbd6f514edc33a99b052b62f430421e58624c27b270b30db792d029"
+        },
+        {
+          "event_id": "74506da7f5404441c9b0b36f",
+          "original_step_index": 4,
+          "source_id": "836971dc2f7676ae8ee3c2c1",
+          "source_sha256": "836971dc2f7676ae8ee3c2c10b3c7b463548add4d8fe3e0b2644b92f90a4d070"
+        },
+        {
+          "event_id": "cdde35bda68beb3204c45c0a",
+          "original_step_index": 5,
+          "source_id": "cea9a67692219dac99127a1d",
+          "source_sha256": "cea9a67692219dac99127a1dd01ec62122264d7845dfca18ec1d279bb980e98d"
+        },
+        {
+          "event_id": "18f42adf0e926c74f507b8dc",
+          "original_step_index": 11,
+          "source_id": "247212f04ed1332e0affbcd8",
+          "source_sha256": "247212f04ed1332e0affbcd8e3c47aedefe4aec3291350b5f296990a57a75372"
+        }
+      ]
+    },
+    "d281d3e27cca447d29a78d57": {
+      "deferred_reviews": [
+        {
+          "after_event_id": "3b2d09537df90cf87880e60b",
+          "original_step_index": 8,
+          "script": {
+            "actor": "Scenario author final-01",
+            "choice": "approve",
+            "incoming": "cbff269e582ebfb63286c73b",
+            "kind": "reconsider",
+            "new_contains": "3 minutes",
+            "old_contains": "",
+            "op": "review",
+            "previous": "cd0887237ecf6e222e64c927"
+          },
+          "script_sha256": "5d8f542c32f238ad5c7a79925d24acf8e50522f0b91bee0161928ece351a2dcb"
+        }
+      ],
+      "key_file": "evaluation/timeline/final-key.json",
+      "key_id": "final-01",
+      "original_id": "final-01",
+      "queries": {
+        "3b2d09537df90cf87880e60b": {
+          "original_label": "natural_after",
+          "original_step_index": 7
+        },
+        "528539ead48a3be00cdf209f": {
+          "original_label": "old_before",
+          "original_step_index": 3
+        },
+        "8c67d883eca21e453c18c1c6": {
+          "original_label": "other_preserved",
+          "original_step_index": 10
+        },
+        "96e31d93bc2da75616fd074c": {
+          "original_label": "natural_after_repeat",
+          "original_step_index": 12
+        },
+        "afeebbf22760ae1f51b4a730": {
+          "original_label": "natural_before",
+          "original_step_index": 1
+        },
+        "c571f42b3e5055d1b8e17506": {
+          "original_label": "reviewed",
+          "original_step_index": 9
+        },
+        "eb417d504afca555b9fde07d": {
+          "original_label": "changed",
+          "original_step_index": 6
+        }
+      },
+      "source": "evaluation/timeline/final.json",
+      "sources": [
+        {
+          "event_id": "ba611121d45fc8f0cfdb6ec2",
+          "original_step_index": 0,
+          "source_id": "0d038591cca032381faf04c8",
+          "source_sha256": "0d038591cca032381faf04c89978ad6f33cfe9dc398149ae0deed422c8d639e9"
+        },
+        {
+          "event_id": "185e0bbcd08acd8505a8d621",
+          "original_step_index": 2,
+          "source_id": "cd0887237ecf6e222e64c927",
+          "source_sha256": "cd0887237ecf6e222e64c92730e46c44934531e6484dc0a7efae8231e14e31e8"
+        },
+        {
+          "event_id": "ab434796e41d68a5d8413fb4",
+          "original_step_index": 4,
+          "source_id": "dc1fb5fba06303110ae99f76",
+          "source_sha256": "dc1fb5fba06303110ae99f7612c453c47e01b7419df4187d4138ccdb0f61aa50"
+        },
+        {
+          "event_id": "c49cec280ee658634238540a",
+          "original_step_index": 5,
+          "source_id": "cbff269e582ebfb63286c73b",
+          "source_sha256": "cbff269e582ebfb63286c73b997212f7a31b0a0853e423a4219f3fa0fd0ec0cd"
+        },
+        {
+          "event_id": "67e77cb165a3834e280e6c4e",
+          "original_step_index": 11,
+          "source_id": "d9ec391590b355bd4e099d25",
+          "source_sha256": "d9ec391590b355bd4e099d25715213afed0fd95c5aa6d4681ea1a1a0e9a6d15c"
+        }
+      ]
+    }
+  }
+}

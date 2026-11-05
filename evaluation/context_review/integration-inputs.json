@@ -1,0 +1,70 @@
+[
+  {
+    "id": "t10",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+          "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      },
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2014-08-26T18:06:04.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+          "text": "setup: convert setup_git_directory_gently_1 et al. to strbuf\n\nConvert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "check_order": true,
+    "qa": "Which error code can FreeBSD getcwd return when the buffer is too small and read permissions are missing?"
+  },
+  {
+    "id": "t15",
+    "prior": [
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2010-11-03T16:24:57.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+          "text": "A loose object is not corrupt if it cannot be read due to EMFILE\n\n\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2011-09-12T01:03:38.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+          "text": "fsck: do not abort upon finding an empty blob\n\nAsking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.\n\nNoticed and reported by BJ Hargrave."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "check_order": true,
+    "qa": "Which error value does mmap set when mapping the empty loose object file?"
+  }
+]

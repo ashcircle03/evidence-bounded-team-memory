@@ -1,0 +1,1993 @@
+{
+  "historical-01": {
+    "group": "historical",
+    "task": "review",
+    "expected": "The small-field design drops or repeatedly reads large deltas, hurting pack size or time for that workload.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant change in handling small files by switching from `mmap()` to `read()`, which directly impacts the decision to use `packed_ref_cache`. The original observation focused on a different aspect of the codebase and does not address the specific change in file handling methods. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant a review.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant change in handling small files by switching from `mmap()` to `read()`, which directly impacts the decision to use `packed_ref_cache`. The original observation focused on a different aspect of the codebase and does not address the specific change in file handling methods. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant a review."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "pack-objects: fix performance issues on packing large deltas",
+            "author": "Nguyễn Thái Ngọc Duy",
+            "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692"
+          }
+        },
+        "card": "33c05577e22d"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant change in how packed-refs files are handled, specifically by recommending the use of `read()` instead of `mmap()` for small files. This change impacts the decision made in O1.1.1 regarding the use of `mmap()` for small packed-refs files. The incoming work suggests a different approach that could affect the reasons for the past choice, necessitating a review to ensure the new method is appropriate and sufficient.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant change in how packed-refs files are handled, specifically by recommending the use of `read()` instead of `mmap()` for small files. This change impacts the decision made in O1.1.1 regarding the use of `mmap()` for small packed-refs files. The incoming work suggests a different approach that could affect the reasons for the past choice, necessitating a review to ensure the new method is appropriate and sufficient."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "pack-objects: fix performance issues on packing large deltas",
+            "author": "Nguyễn Thái Ngọc Duy",
+            "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692"
+          }
+        },
+        "card": "deed24c251e7"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant change in handling small packed-refs files, specifically by suggesting to use `read()` instead of `mmap()`. This change impacts the original reasoning behind the decision to avoid `mmap()` for small files, necessitating a review to assess the necessity and implications of this update.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant change in handling small packed-refs files, specifically by suggesting to use `read()` instead of `mmap()`. This change impacts the original reasoning behind the decision to avoid `mmap()` for small files, necessitating a review to assess the necessity and implications of this update."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "pack-objects: fix performance issues on packing large deltas",
+            "author": "Nguyễn Thái Ngọc Duy",
+            "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692"
+          }
+        },
+        "card": "309eb4f94429"
+      }
+    }
+  },
+  "historical-02": {
+    "group": "historical",
+    "task": "review",
+    "expected": "The corrected multi-pack-index offset encoding is separate from the in-memory delta-size choice.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, while related to pack-format, introduces a different issue (a bug in the multi-pack-index description) that does not directly address or modify the conditions or reasoning behind the packed_ref_cache change mentioned in O1.1.1. Therefore, reopening or testing the packed_ref_cache change based on the incoming work would not be sufficient.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, while related to pack-format, introduces a different issue (a bug in the multi-pack-index description) that does not directly address or modify the conditions or reasoning behind the packed_ref_cache change mentioned in O1.1.1. Therefore, reopening or testing the packed_ref_cache change based on the incoming work would not be sufficient."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "pack-format: correct multi-pack-index description",
+            "author": "Johannes Berg",
+            "location": "https://github.com/git/git/commit/eb31044ff793de9a8a093f567f5eb262ac196c24"
+          }
+        },
+        "card": "6db4f8eb5a27"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming note N.1.1 introduces a correction to the multi-pack-index description, which is unrelated to the original observation about packed-ref files. This new information changes the context and may require a different approach to handling multi-pack-indexes, thus necessitating a review of the original decision.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming note N.1.1 introduces a correction to the multi-pack-index description, which is unrelated to the original observation about packed-ref files. This new information changes the context and may require a different approach to handling multi-pack-indexes, thus necessitating a review of the original decision."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "pack-format: correct multi-pack-index description",
+            "author": "Johannes Berg",
+            "location": "https://github.com/git/git/commit/eb31044ff793de9a8a093f567f5eb262ac196c24"
+          }
+        },
+        "card": "2bdfa51453d6"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a correction to the multi-pack-index description, which is unrelated to the original observation about avoiding mmapping small files, especially those with zero size. While the new issue is significant, it does not directly address the original concern.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a correction to the multi-pack-index description, which is unrelated to the original observation about avoiding mmapping small files, especially those with zero size. While the new issue is significant, it does not directly address the original concern."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "pack-format: correct multi-pack-index description",
+            "author": "Johannes Berg",
+            "location": "https://github.com/git/git/commit/eb31044ff793de9a8a093f567f5eb262ac196c24"
+          }
+        },
+        "card": "dd99792a7eaf"
+      }
+    }
+  },
+  "historical-03": {
+    "group": "historical",
+    "task": "review",
+    "expected": "Generation-first ordering can increase walk count or time on certain topologies, contrary to the old claim.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming change introduces a significant performance regression in certain topological cases, which affects the original reasoning behind the commit. Specifically, the new commit demonstrates that the order of commits in the queue can change the number of iterations in the loop, thus altering the behavior of the function. This directly impacts the rationale for the original commit, necessitating a reevaluation.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming change introduces a significant performance regression in certain topological cases, which affects the original reasoning behind the commit. Specifically, the new commit demonstrates that the order of commits in the queue can change the number of iterations in the loop, thus altering the behavior of the function. This directly impacts the rationale for the original commit, necessitating a reevaluation."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "탐색량이 바뀐다는 설명은 있으나 양쪽 제목만으로 탐색량 전제와 반례를 확인할 수 없음.",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "commit: don't use generation numbers if not needed",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad"
+          }
+        },
+        "card": "3540908e90ac"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming change introduces a significant performance regression due to a change in the order of commits being inspected, which affects the number of commits walked during the execution of `paint_down_to_common()`. This directly impacts the decision made in the original commit regarding the use of generation numbers.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming change introduces a significant performance regression due to a change in the order of commits being inspected, which affects the number of commits walked during the execution of `paint_down_to_common()`. This directly impacts the decision made in the original commit regarding the use of generation numbers."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "탐색량이 바뀐다는 설명은 있으나 양쪽 제목만으로 탐색량 전제와 반례를 확인할 수 없음.",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "commit: don't use generation numbers if not needed",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad"
+          }
+        },
+        "card": "4f7abc3662d9"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant change to the order in which commits are inspected, affecting the number of commits walked during the execution of `paint_down_to_common()`. This alters the reasoning behind past choices related to the commit graph's topology and performance implications.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant change to the order in which commits are inspected, affecting the number of commits walked during the execution of `paint_down_to_common()`. This alters the reasoning behind past choices related to the commit graph's topology and performance implications."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "탐색량이 바뀐다는 설명은 있으나 양쪽 제목만으로 탐색량 전제와 반례를 확인할 수 없음.",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "commit: don't use generation numbers if not needed",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad"
+          }
+        },
+        "card": "bf1fb3d1f81d"
+      }
+    }
+  },
+  "historical-04": {
+    "group": "historical",
+    "task": "review",
+    "expected": "Hyphenation of the file name does not affect ordering or the walk.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, while related to commit-graph processing, does not introduce any changes to the core logic or reasoning behind the existing commits. It merely updates documentation regarding the terminology used for the commit-graph file. This update does not alter the fundamental reasons for past choices made in the original commits.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, while related to commit-graph processing, does not introduce any changes to the core logic or reasoning behind the existing commits. It merely updates documentation regarding the terminology used for the commit-graph file. This update does not alter the fundamental reasons for past choices made in the original commits."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "Doc: refer to the \"commit-graph file\" with dash",
+            "author": "Martin Ågren",
+            "location": "https://github.com/git/git/commit/4c399442f781f70a00273746ca6a0de9fef9b0d3"
+          }
+        },
+        "card": "cd8d31506d89"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, while related to commit-graph files, does not address the core optimization discussed in the past choices. It merely updates documentation regarding the file name convention used by `git commit-graph`. Therefore, it does not sufficiently alter the reasoning behind past choices to warrant reopening or testing them.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, while related to commit-graph files, does not address the core optimization discussed in the past choices. It merely updates documentation regarding the file name convention used by `git commit-graph`. Therefore, it does not sufficiently alter the reasoning behind past choices to warrant reopening or testing them."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "Doc: refer to the \"commit-graph file\" with dash",
+            "author": "Martin Ågren",
+            "location": "https://github.com/git/git/commit/4c399442f781f70a00273746ca6a0de9fef9b0d3"
+          }
+        },
+        "card": "e8502b9b21c8"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, which focuses on updating documentation regarding the \\\"commit-graph file\\\" and avoiding changes to the \\\"commit graph\\\" data structure, does not address the core functionality or rationale behind the original commit that introduced the use of generations in `paint_down_to_common()`. Therefore, reopening or testing the original commit based solely on the new documentation update is insufficient.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, which focuses on updating documentation regarding the \"commit-graph file\" and avoiding changes to the \"commit graph\" data structure, does not address the core functionality or rationale behind the original commit that introduced the use of generations in `paint_down_to_common()`. Therefore, reopening or testing the original commit based solely on the new documentation update is insufficient."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "Doc: refer to the \"commit-graph file\" with dash",
+            "author": "Martin Ågren",
+            "location": "https://github.com/git/git/commit/4c399442f781f70a00273746ca6a0de9fef9b0d3"
+          }
+        },
+        "card": "9c10b2409019"
+      }
+    }
+  },
+  "historical-05": {
+    "group": "historical",
+    "task": "review",
+    "expected": "safecrlf=false should suppress round-trip errors but the flag conversion can emit a warning.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, fixing a regression introduced by the previous commit, directly addresses a consequence of the change made in the past. While the new commit fixes a specific issue related to the `safecrlf` setting, it does not alter the fundamental decision to replace `safe_crlf` with `conv_flags`. Therefore, reopening or testing the past choice is necessary to ensure the overall impact of the change is fully understood and validated.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, fixing a regression introduced by the previous commit, directly addresses a consequence of the change made in the past. While the new commit fixes a specific issue related to the `safecrlf` setting, it does not alter the fundamental decision to replace `safe_crlf` with `conv_flags`. Therefore, reopening or testing the past choice is necessary to ensure the overall impact of the change is fully understood and validated."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "인용한 두 제목에는 false에서 경고가 나왔다는 구체적 증거가 없음.",
+        "cited": {
+          "old": {
+            "text": "convert_to_git(): safe_crlf/checksafe becomes int conv_flags",
+            "author": "Torsten Bögershausen",
+            "location": "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945"
+          },
+          "new": {
+            "text": "config.c: fix regression for core.safecrlf false",
+            "author": "Anthony Sottile",
+            "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5"
+          }
+        },
+        "card": "d6febba5e270"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a regression related to `core.safecrlf` false, which impacts the behavior of `convert_to_git()` function. This directly affects the functionality of the previous commit (O1.1.1) by introducing a new issue that needs to be addressed. The regression implies that the previous choice of converting `checksafe` to an integer bit pattern (`conv_flags`) did not fully resolve the underlying problem, necessitating a review and potential adjustment.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a regression related to `core.safecrlf` false, which impacts the behavior of `convert_to_git()` function. This directly affects the functionality of the previous commit (O1.1.1) by introducing a new issue that needs to be addressed. The regression implies that the previous choice of converting `checksafe` to an integer bit pattern (`conv_flags`) did not fully resolve the underlying problem, necessitating a review and potential adjustment."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "인용한 두 제목에는 false에서 경고가 나왔다는 구체적 증거가 없음.",
+        "cited": {
+          "old": {
+            "text": "convert_to_git(): safe_crlf/checksafe becomes int conv_flags",
+            "author": "Torsten Bögershausen",
+            "location": "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945"
+          },
+          "new": {
+            "text": "config.c: fix regression for core.safecrlf false",
+            "author": "Anthony Sottile",
+            "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5"
+          }
+        },
+        "card": "6d6b34492113"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, fixing a regression introduced by the previous commit, directly addresses a consequence of the change made in the previous commit. While the new commit fixes a specific issue, it does not alter the fundamental reason for the previous choice regarding the `checksafe` parameter.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, fixing a regression introduced by the previous commit, directly addresses a consequence of the change made in the previous commit. While the new commit fixes a specific issue, it does not alter the fundamental reason for the previous choice regarding the `checksafe` parameter."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "인용한 두 제목에는 false에서 경고가 나왔다는 구체적 증거가 없음.",
+        "cited": {
+          "old": {
+            "text": "convert_to_git(): safe_crlf/checksafe becomes int conv_flags",
+            "author": "Torsten Bögershausen",
+            "location": "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945"
+          },
+          "new": {
+            "text": "config.c: fix regression for core.safecrlf false",
+            "author": "Anthony Sottile",
+            "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5"
+          }
+        },
+        "card": "6e1d01ada279"
+      }
+    }
+  },
+  "historical-06": {
+    "group": "historical",
+    "task": "review",
+    "expected": "Grammar or style in userdiff leaves the line-ending flags and behavior untouched.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, \\\"userdiff: fix grammar and style issues\\\" by Boxuan Li, does not address the reasons for past choices related to test automation or test suite management. Johannes Schindelin's previous comments were focused on improving the test suite process and reducing turnaround times, which are unrelated to grammatical and stylistic improvements in userdiff.\"}",
+        "parsed": {
+          "action": "keep",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, \"userdiff: fix grammar and style issues\" by Boxuan Li, does not address the reasons for past choices related to test automation or test suite management. Johannes Schindelin's previous comments were focused on improving the test suite process and reducing turnaround times, which are unrelated to grammatical and stylistic improvements in userdiff."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "userdiff: fix grammar and style issues",
+            "author": "Boxuan Li",
+            "location": "https://github.com/git/git/commit/2731a7840a462a97b8afb5beadaf36c1db992ac7"
+          }
+        },
+        "card": "e0dae7aabb77"
+      },
+      "B": {
+        "raw": "{\"action\": \"keep\", \"old\": \"O1.1.2\", \"new\": \"N.1.1\", \"reason\": \"The incoming work focuses on improving userdiff by fixing grammar and style issues, which is unrelated to the decision to add a rule in the Makefile to re-run previously failed tests. The new information does not provide sufficient grounds to reopen or test the past choice about the Makefile rule.\"}",
+        "parsed": {
+          "action": "keep",
+          "old": "O1.1.2",
+          "new": "N.1.1",
+          "reason": "The incoming work focuses on improving userdiff by fixing grammar and style issues, which is unrelated to the decision to add a rule in the Makefile to re-run previously failed tests. The new information does not provide sufficient grounds to reopen or test the past choice about the Makefile rule."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "This patch automates the process of determining which tests failed\npreviously and re-running them.",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "userdiff: fix grammar and style issues",
+            "author": "Boxuan Li",
+            "location": "https://github.com/git/git/commit/2731a7840a462a97b8afb5beadaf36c1db992ac7"
+          }
+        },
+        "card": "714f455f00c1"
+      },
+      "C": {
+        "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, \\\"userdiff: fix grammar and style issues\\\" (N.1.1), does not introduce a change that would alter the necessity or reason behind the previous choice (O1.1.1) to automate the re-running of previously failed tests. The focus of N.1.1 is on improving the grammar and style of the userdiff code, which is unrelated to the testing process or the decision to re-run failed tests.\"}",
+        "parsed": {
+          "action": "keep",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, \"userdiff: fix grammar and style issues\" (N.1.1), does not introduce a change that would alter the necessity or reason behind the previous choice (O1.1.1) to automate the re-running of previously failed tests. The focus of N.1.1 is on improving the grammar and style of the userdiff code, which is unrelated to the testing process or the decision to re-run failed tests."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "userdiff: fix grammar and style issues",
+            "author": "Boxuan Li",
+            "location": "https://github.com/git/git/commit/2731a7840a462a97b8afb5beadaf36c1db992ac7"
+          }
+        },
+        "card": "638e2495722a"
+      }
+    }
+  },
+  "historical-07": {
+    "group": "historical",
+    "task": "review",
+    "expected": "Moving fixup/squash counting away from localized text caused an off-by-one in displayed message numbers.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work addresses a different issue (commit message numbering) that does not directly relate to the past choices regarding test automation or rebase operations. While both patches aim to improve workflow efficiency, they address distinct aspects of Git functionality.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work addresses a different issue (commit message numbering) that does not directly relate to the past choices regarding test automation or rebase operations. While both patches aim to improve workflow efficiency, they address distinct aspects of Git functionality."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "rebase -i: fix numbering in squash message",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e"
+          }
+        },
+        "card": "0acca9879b58"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.2\", \"new\": \"N.1.2\", \"reason\": \"The incoming update introduces a fix for a regression related to commit message numbering in squashed commits, which impacts a different aspect of the rebase process compared to the original decision. While it does not directly address the reasons for choosing the original patch (such as improving test suite execution times or reducing turn-around time), it introduces a new functionality that could be relevant in certain scenarios. Therefore, reopening or testing the original choice is necessary to ensure comprehensive coverage of the rebase process.\\nRaw Passages:\\nOld: {\\\"id\\\": \\\"O1.1.2\\\", \\\"speaker\\\": \\\"Johannes Schindelin\\\", \\\"text\\\": \\\"This patch automates the process of determining\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.2",
+          "new": "N.1.2",
+          "reason": "The incoming update introduces a fix for a regression related to commit message numbering in squashed commits, which impacts a different aspect of the rebase process compared to the original decision. While it does not directly address the reasons for choosing the original patch (such as improving test suite execution times or reducing turn-around time), it introduces a new functionality that could be relevant in certain scenarios. Therefore, reopening or testing the original choice is necessary to ensure comprehensive coverage of the rebase process.\nRaw Passages:\nOld: {\"id\": \"O1.1.2\", \"speaker\": \"Johannes Schindelin\", \"text\": \"This patch automates the process of determining"
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "This patch automates the process of determining which tests failed\npreviously and re-running them.",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "Commit e12a7ef597 (\"rebase -i: Handle \"combination of <n> commits\" with\nGETTEXT_POISON\", 2018-04-27) changed the way that individual commit\nmessages are labelled when squashing commits together. In doing so a\nregression was introduced where the numbering of the messages is off by\none. This commit fixes that and adds a test for the numbering.",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e"
+          }
+        },
+        "card": "e77689a37493"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a fix for a different issue (commit message numbering) that does not directly address the reason for the previous choice (automating test re-runs). While related, the changes are distinct and do not warrant reopening or testing the previous choice.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a fix for a different issue (commit message numbering) that does not directly address the reason for the previous choice (automating test re-runs). While related, the changes are distinct and do not warrant reopening or testing the previous choice."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "rebase -i: fix numbering in squash message",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e"
+          }
+        },
+        "card": "00e29cc0b126"
+      }
+    }
+  },
+  "historical-08": {
+    "group": "historical",
+    "task": "review",
+    "expected": "Wording about rebase-merges preserves its meaning and has no bearing on squash-message numbering.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, \\\"doc: improve readability of --rebase-merges in git-rebase\\\", does not address the reasons for past choices related to test automation or re-running failed tests. The new passage focuses on documentation improvements rather than addressing the testing practices discussed in the older choices.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, \"doc: improve readability of --rebase-merges in git-rebase\", does not address the reasons for past choices related to test automation or re-running failed tests. The new passage focuses on documentation improvements rather than addressing the testing practices discussed in the older choices."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "doc: improve readability of --rebase-merges in git-rebase",
+            "author": "Naveen Nathan",
+            "location": "https://github.com/git/git/commit/d3a8caebf38b42d8d8ca80cb1856ee2e54fb4c4d"
+          }
+        },
+        "card": "5eca203918ca"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.2\", \"new\": \"N.1.2\", \"reason\": \"The incoming update does not directly address the core functionality or reasoning behind the previous choices related to test re-running and rebase handling. While N.1.2 aims to improve documentation clarity, it does not alter the necessity or rationale for the original patches. Therefore, the incoming change does not necessitate reopening or testing the past choices.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.2",
+          "new": "N.1.2",
+          "reason": "The incoming update does not directly address the core functionality or reasoning behind the previous choices related to test re-running and rebase handling. While N.1.2 aims to improve documentation clarity, it does not alter the necessity or rationale for the original patches. Therefore, the incoming change does not necessitate reopening or testing the past choices."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "This patch automates the process of determining which tests failed\npreviously and re-running them.",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "When --preserve-merges was deprecated in 427c3bd28a a sentence\nwas introduced describing the difference between --rebase-merges and\n--preserve-merges which is a little unclear and difficult to parse.\nThis patch improves readability while retaining original meaning.",
+            "author": "Naveen Nathan",
+            "location": "https://github.com/git/git/commit/d3a8caebf38b42d8d8ca80cb1856ee2e54fb4c4d"
+          }
+        },
+        "card": "0ab6f44d1d3a"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, \\\"doc: improve readability of --rebase-merges in git-rebase\\\", does not directly address the functionality or reasoning behind the original patch \\\"t/Makefile: add a rule to re-run previously-failed tests\\\". Therefore, it does not change the reason for any past choice sufficiently to warrant reopening or testing the original patch.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, \"doc: improve readability of --rebase-merges in git-rebase\", does not directly address the functionality or reasoning behind the original patch \"t/Makefile: add a rule to re-run previously-failed tests\". Therefore, it does not change the reason for any past choice sufficiently to warrant reopening or testing the original patch."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "doc: improve readability of --rebase-merges in git-rebase",
+            "author": "Naveen Nathan",
+            "location": "https://github.com/git/git/commit/d3a8caebf38b42d8d8ca80cb1856ee2e54fb4c4d"
+          }
+        },
+        "card": "aaa0033bf77b"
+      }
+    }
+  },
+  "prior_git-01": {
+    "group": "prior_git",
+    "task": "review",
+    "expected": "The candidate limit still gives incorrect distance with disjoint roots.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new scenario where `git-describe` might prematurely abort the search due to a disjoint history, which directly impacts the stopping condition discussed in the original observation. This new information suggests that the original observation needs to be reconsidered in light of the potential issues introduced by disjoint histories.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new scenario where `git-describe` might prematurely abort the search due to a disjoint history, which directly impacts the stopping condition discussed in the original observation. This new information suggests that the original observation needs to be reconsidered in light of the potential issues introduced by disjoint histories."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "두 인용만으로는 후보 상한에서 잘못된 거리값이 남는 조건을 확인할 수 없음.",
+        "cited": {
+          "old": {
+            "text": "describe: don't abort too early when searching tags",
+            "author": "Benno Evers",
+            "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da"
+          },
+          "new": {
+            "text": "t6120: demonstrate weakness in disjoint-root handling",
+            "author": "Jeff King",
+            "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae"
+          }
+        },
+        "card": "6918b893f2e4"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.6\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where `git-describe` might prematurely abort the search due to a disjoint history, contradicting the original observation that it works well when all branches eventually connect back to a common root. This new information suggests that the stopping condition needs adjustment to ensure accuracy in multi-branch scenarios, necessitating a review of the original observation to incorporate the updated understanding.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.6",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a scenario where `git-describe` might prematurely abort the search due to a disjoint history, contradicting the original observation that it works well when all branches eventually connect back to a common root. This new information suggests that the stopping condition needs adjustment to ensure accuracy in multi-branch scenarios, necessitating a review of the original observation to incorporate the updated understanding."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "두 인용만으로는 후보 상한에서 잘못된 거리값이 남는 조건을 확인할 수 없음.",
+        "cited": {
+          "old": {
+            "text": "The help text of `git-describe` states pretty clearly that when\ndescribing a commit D, the number appended to the emitted tag X should\ncorrespond to the number of commits found by `git log X..D`.",
+            "author": "Benno Evers",
+            "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da"
+          },
+          "new": {
+            "text": "t6120: demonstrate weakness in disjoint-root handling",
+            "author": "Jeff King",
+            "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae"
+          }
+        },
+        "card": "488be4be75b8"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.6\", \"new\": \"N.1.2\", \"reason\": \"The incoming work introduces a new issue related to the stopping condition of `git-describe`, specifically addressing a scenario where the search might prematurely terminate due to disjoint histories. This new information directly impacts the reasoning behind the past choice, necessitating a review to ensure the updated stopping condition adequately addresses the new edge case.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.6",
+          "new": "N.1.2",
+          "reason": "The incoming work introduces a new issue related to the stopping condition of `git-describe`, specifically addressing a scenario where the search might prematurely terminate due to disjoint histories. This new information directly impacts the reasoning behind the past choice, necessitating a review to ensure the updated stopping condition adequately addresses the new edge case."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "두 인용만으로는 후보 상한에서 잘못된 거리값이 남는 조건을 확인할 수 없음.",
+        "cited": {
+          "old": {
+            "text": "The help text of `git-describe` states pretty clearly that when\ndescribing a commit D, the number appended to the emitted tag X should\ncorrespond to the number of commits found by `git log X..D`.",
+            "author": "Benno Evers",
+            "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da"
+          },
+          "new": {
+            "text": "Commit 30b1c7ad9d (describe: don't abort too early when searching tags,\n2020-02-26) tried to fix a problem that happens when there are disjoint\nhistories: to accurately compare the counts for different tags, we need\nto keep walking the history longer in order to find a common base.",
+            "author": "Jeff King",
+            "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae"
+          }
+        },
+        "card": "fbbb0500fb4a"
+      }
+    }
+  },
+  "prior_git-02": {
+    "group": "prior_git",
+    "task": "review",
+    "expected": "A nonlocal transport can be mistaken for a local clone despite the URL test.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to cloning mechanisms and transport selection, which is distinct from the original observation about handling merge conflicts in .gitmodules files. The new issue impacts the security and reliability of cloning operations, necessitating a thorough review to ensure the proposed solution addresses the current vulnerabilities effectively.\\nOLD:\\n\\\"Submodules: Don't parse .gitmodules when it contains, merge conflicts\\\"\\nNEW:\\n\\\"t5619: demonstrate clone_local() with ambiguous transport\\\"\\nRelation: The incoming work introduces a new issue related to cloning mechanisms and transport selection, which is distinct from the original observation about handling merge conflicts in .gitmodules files.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new issue related to cloning mechanisms and transport selection, which is distinct from the original observation about handling merge conflicts in .gitmodules files. The new issue impacts the security and reliability of cloning operations, necessitating a thorough review to ensure the proposed solution addresses the current vulnerabilities effectively.\nOLD:\n\"Submodules: Don't parse .gitmodules when it contains, merge conflicts\"\nNEW:\n\"t5619: demonstrate clone_local() with ambiguous transport\"\nRelation: The incoming work introduces a new issue related to cloning mechanisms and transport selection, which is distinct from the original observation about handling merge conflicts in .gitmodules files."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "t5619: demonstrate clone_local() with ambiguous transport",
+            "author": "Taylor Blau",
+            "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052"
+          }
+        },
+        "card": "a2bc46dccb29"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to determining the transport mechanism and local nature of repositories, which impacts the decision made in O1.1.1 regarding handling .gitmodules files during merge conflicts. The new information suggests that the current approach of not parsing .gitmodules during merge conflicts might no longer be sufficient due to potential misuse of local cloning optimizations, necessitating a reassessment of the original observation.\\nThe specific relation is that the new information highlights a broader context for the original observation, indicating that the decision to avoid parsing .gitmodules during merge conflicts may need reconsideration given the introduction of new vulnerabilities and complexities in repository management.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new issue related to determining the transport mechanism and local nature of repositories, which impacts the decision made in O1.1.1 regarding handling .gitmodules files during merge conflicts. The new information suggests that the current approach of not parsing .gitmodules during merge conflicts might no longer be sufficient due to potential misuse of local cloning optimizations, necessitating a reassessment of the original observation.\nThe specific relation is that the new information highlights a broader context for the original observation, indicating that the decision to avoid parsing .gitmodules during merge conflicts may need reconsideration given the introduction of new vulnerabilities and complexities in repository management."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "t5619: demonstrate clone_local() with ambiguous transport",
+            "author": "Taylor Blau",
+            "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052"
+          }
+        },
+        "card": "f3c0023e0b93"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new scenario related to cloning mechanisms and transport selection, which could affect the decision to use local cloning optimizations based on the presence of merge conflicts in .gitmodules files. This new information suggests that the original observation might need reconsideration in light of the updated context.\\nRaw Passages:\\nOld: {\\\"id\\\": \\\"O1.1.1\\\", \\\"speaker\\\": \\\"Jens Lehmann\\\", \\\"text\\\": \\\"Submodules: Don't parse .gitmodules when it contains, merge conflicts\\\"}\\nNew: {\\\"id\\\": \\\"N.1.1\\\", \\\"speaker\\\": \\\"Taylor Blau\\\", \\\"text\\\": \\\"t5619: demonstrate clone\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new scenario related to cloning mechanisms and transport selection, which could affect the decision to use local cloning optimizations based on the presence of merge conflicts in .gitmodules files. This new information suggests that the original observation might need reconsideration in light of the updated context.\nRaw Passages:\nOld: {\"id\": \"O1.1.1\", \"speaker\": \"Jens Lehmann\", \"text\": \"Submodules: Don't parse .gitmodules when it contains, merge conflicts\"}\nNew: {\"id\": \"N.1.1\", \"speaker\": \"Taylor Blau\", \"text\": \"t5619: demonstrate clone"
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "t5619: demonstrate clone_local() with ambiguous transport",
+            "author": "Taylor Blau",
+            "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052"
+          }
+        },
+        "card": "cfc21367e31e"
+      }
+    }
+  },
+  "prior_git-03": {
+    "group": "prior_git",
+    "task": "review",
+    "expected": "Freeing the containing buffer can double-free it with word-diff and color-moved together.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new test case related to a regression in `git show --word-diff --color-moved`. While the original observation pertained to `git-describe` and did not directly relate to `git show`, the new test highlights a potential issue that could affect the overall behavior of the command. Given the new test case, the original observation might need reconsideration in light of the broader implications for `git show`.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new test case related to a regression in `git show --word-diff --color-moved`. While the original observation pertained to `git-describe` and did not directly relate to `git show`, the new test highlights a potential issue that could affect the overall behavior of the command. Given the new test case, the original observation might need reconsideration in light of the broader implications for `git show`."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "describe: don't abort too early when searching tags",
+            "author": "Benno Evers",
+            "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da"
+          },
+          "new": {
+            "text": "tests: demonstrate \"show --word-diff --color-moved\" regression",
+            "author": "Michael J Gruber",
+            "location": "https://github.com/git/git/commit/b59ec03cb5f69d6a87dce8fc3ccbfd22d8de3c16"
+          }
+        },
+        "card": "08a6193f092d"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.7\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new test case demonstrating a regression in a specific git command (`git show --word-diff --color-moved`). This new information suggests that the previous decision to modify `git-describe`'s stopping condition might not fully address all edge cases, particularly those involving multi-branch scenarios where tags are found across independent branches. Therefore, reopening or testing the original decision is necessary to ensure its applicability and correctness in various repository structures.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.7",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new test case demonstrating a regression in a specific git command (`git show --word-diff --color-moved`). This new information suggests that the previous decision to modify `git-describe`'s stopping condition might not fully address all edge cases, particularly those involving multi-branch scenarios where tags are found across independent branches. Therefore, reopening or testing the original decision is necessary to ensure its applicability and correctness in various repository structures."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Thus, this commit modifies the stopping condition to only abort\nthe search when only one branch is left to search *and* all current\nbest candidates are descendants from that branch.",
+            "author": "Benno Evers",
+            "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da"
+          },
+          "new": {
+            "text": "tests: demonstrate \"show --word-diff --color-moved\" regression",
+            "author": "Michael J Gruber",
+            "location": "https://github.com/git/git/commit/b59ec03cb5f69d6a87dce8fc3ccbfd22d8de3c16"
+          }
+        },
+        "card": "41c69406cb24"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.7\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new test case demonstrating a regression in the `git-describe` functionality, which directly impacts the stopping condition described in the old observation. This new information suggests that the old observation's stopping condition might not always hold true, necessitating a reevaluation of the original observation.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.7",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new test case demonstrating a regression in the `git-describe` functionality, which directly impacts the stopping condition described in the old observation. This new information suggests that the old observation's stopping condition might not always hold true, necessitating a reevaluation of the original observation."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Thus, this commit modifies the stopping condition to only abort\nthe search when only one branch is left to search *and* all current\nbest candidates are descendants from that branch.",
+            "author": "Benno Evers",
+            "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da"
+          },
+          "new": {
+            "text": "tests: demonstrate \"show --word-diff --color-moved\" regression",
+            "author": "Michael J Gruber",
+            "location": "https://github.com/git/git/commit/b59ec03cb5f69d6a87dce8fc3ccbfd22d8de3c16"
+          }
+        },
+        "card": "cbc41396fc16"
+      }
+    }
+  },
+  "scope-01": {
+    "group": "controlled",
+    "task": "review",
+    "expected": "Re-test prove on the newly stable Windows Perl configuration. The old MSYS2 crashes remain valid.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant improvement in the Windows build environment, reducing crash frequency and median turnaround time. This suggests that the original choice to avoid using `prove` due to potential crashes may no longer be valid, especially given the successful results with a native Perl and Subversion bindings setup. The new information impacts the reason for avoiding `prove`, warranting a reevaluation of the original decision.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant improvement in the Windows build environment, reducing crash frequency and median turnaround time. This suggests that the original choice to avoid using `prove` due to potential crashes may no longer be valid, especially given the successful results with a native Perl and Subversion bindings setup. The new information impacts the reason for avoiding `prove`, warranting a reevaluation of the original decision."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/1"
+          }
+        },
+        "card": "3702b870ff91"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where a native Perl and Subversion bindings build completes 200 massively parallel prove runs without crashes, significantly reducing the median turnaround time. This suggests that the original decision to avoid parsing .gitmodules during merge conflicts may not be optimal in all environments, especially considering the improved performance reported. Therefore, reopening the original choice for reconsideration is necessary.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a scenario where a native Perl and Subversion bindings build completes 200 massively parallel prove runs without crashes, significantly reducing the median turnaround time. This suggests that the original decision to avoid parsing .gitmodules during merge conflicts may not be optimal in all environments, especially considering the improved performance reported. Therefore, reopening the original choice for reconsideration is necessary."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/1"
+          }
+        },
+        "card": "5ae5657aebe5"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant improvement in the Windows build environment, specifically addressing the issue of crashes during massive parallel testing. This new information suggests that the previous decision to avoid using `prove` due to potential crashes is no longer valid, as the controlled team report indicates successful completion of 200 massively parallel runs without crashes. Therefore, the reason for the past choice to avoid `prove` is no longer relevant given the updated context.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant improvement in the Windows build environment, specifically addressing the issue of crashes during massive parallel testing. This new information suggests that the previous decision to avoid using `prove` due to potential crashes is no longer valid, as the controlled team report indicates successful completion of 200 massively parallel runs without crashes. Therefore, the reason for the past choice to avoid `prove` is no longer relevant given the updated context."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/1"
+          }
+        },
+        "card": "9c2a38047c05"
+      }
+    }
+  },
+  "scope-02": {
+    "group": "controlled",
+    "task": "review",
+    "expected": "Linux success does not remove the Windows compatibility and crash reason.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new context (Linux native Perl workers completing 200 massively parallel prove runs with no crashes) that could affect the handling of merge conflicts in .gitmodules files, especially considering the ongoing issues with native Perl on Windows. This new information suggests a potential resolution to the previous issue, warranting a review of the original decision.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new context (Linux native Perl workers completing 200 massively parallel prove runs with no crashes) that could affect the handling of merge conflicts in .gitmodules files, especially considering the ongoing issues with native Perl on Windows. This new information suggests a potential resolution to the previous issue, warranting a review of the original decision."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "The Linux native Perl workers completed 200 massively parallel prove runs with no crashes. On the Windows MSYS2 pool the same unexplained crashes recurred, and there is still no native Perl with Subversion bindings.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/2"
+          }
+        },
+        "card": "c641630cb955"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new context regarding the successful completion of massive parallel prove runs on Linux but not on Windows using MSYS2. This suggests potential issues with the proposed solution on Windows, which could affect the overall usability and reliability of the system. Therefore, revisiting the decision to avoid parsing .gitmodules during merge conflicts is necessary to ensure it remains a viable and robust solution across different environments.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new context regarding the successful completion of massive parallel prove runs on Linux but not on Windows using MSYS2. This suggests potential issues with the proposed solution on Windows, which could affect the overall usability and reliability of the system. Therefore, revisiting the decision to avoid parsing .gitmodules during merge conflicts is necessary to ensure it remains a viable and robust solution across different environments."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "The Linux native Perl workers completed 200 massively parallel prove runs with no crashes. On the Windows MSYS2 pool the same unexplained crashes recurred, and there is still no native Perl with Subversion bindings.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/2"
+          }
+        },
+        "card": "ca87a82703f1"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new context regarding the successful completion of massive parallel prove runs on Linux without crashes, while Windows MSYS2 continues to experience unexplained crashes. This suggests that the issue with the original observation (submodule parsing during merge conflicts) may have been resolved on Linux, but remains unresolved on Windows. Therefore, reopening or testing the original choice is necessary to understand if the resolution applies universally or if further investigation is required.\\nRaw Passages:\\nOld: {\\\"id\\\": \\\"O1.1.1\\\", \\\"speaker\\\": \\\"Jens Lehmann\\\", \\\"text\\\": \\\"Submodules: Don't parse .gitmodules when it contains, merge conflicts\\\"}\\nNew:\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new context regarding the successful completion of massive parallel prove runs on Linux without crashes, while Windows MSYS2 continues to experience unexplained crashes. This suggests that the issue with the original observation (submodule parsing during merge conflicts) may have been resolved on Linux, but remains unresolved on Windows. Therefore, reopening or testing the original choice is necessary to understand if the resolution applies universally or if further investigation is required.\nRaw Passages:\nOld: {\"id\": \"O1.1.1\", \"speaker\": \"Jens Lehmann\", \"text\": \"Submodules: Don't parse .gitmodules when it contains, merge conflicts\"}\nNew:"
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "Submodules: Don't parse .gitmodules when it contains, merge conflicts",
+            "author": "Jens Lehmann",
+            "location": "https://github.com/git/git/commit/d4e98b581b5b3b70ca58cb6677ec02bee4ae7007"
+          },
+          "new": {
+            "text": "The Linux native Perl workers completed 200 massively parallel prove runs with no crashes. On the Windows MSYS2 pool the same unexplained crashes recurred, and there is still no native Perl with Subversion bindings.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/2"
+          }
+        },
+        "card": "0909ec8cd7d7"
+      }
+    }
+  },
+  "scope-03": {
+    "group": "controlled",
+    "task": "review",
+    "expected": "Re-test mmap for small nonempty files on the new kernel while keeping the empty-file exception.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new benchmark result that contradicts the original context of optimizing test re-runs, suggesting that mmap might be more efficient for non-empty files. This change implies that the reasons for the past choice (automating test re-runs) might need reconsideration based on the new performance data.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new benchmark result that contradicts the original context of optimizing test re-runs, suggesting that mmap might be more efficient for non-empty files. This change implies that the reasons for the past choice (automating test re-runs) might need reconsideration based on the new performance data."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/3"
+          }
+        },
+        "card": "cc8e20d7c499"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a performance difference between `mmap` and `read` for small packed-refs files, which impacts the decision to re-run previously failed tests. This new information suggests that the current conditions for choosing to re-run tests might need reconsideration based on the updated performance data.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a performance difference between `mmap` and `read` for small packed-refs files, which impacts the decision to re-run previously failed tests. This new information suggests that the current conditions for choosing to re-run tests might need reconsideration based on the updated performance data."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/3"
+          }
+        },
+        "card": "129beda86729"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new benchmark result showing that mmap is faster for non-empty packed-refs files, which could affect the rationale behind the previous decision to automate the re-running of previously-failed tests. This new information suggests that the current setup might not be optimal for detecting and fixing issues related to zero-length packed-refs files, which were previously excluded from timing comparisons. Therefore, the incoming work changes the context and reasons for the past choice, necessitating a review to ensure the automated test re-running mechanism remains effective and relevant.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new benchmark result showing that mmap is faster for non-empty packed-refs files, which could affect the rationale behind the previous decision to automate the re-running of previously-failed tests. This new information suggests that the current setup might not be optimal for detecting and fixing issues related to zero-length packed-refs files, which were previously excluded from timing comparisons. Therefore, the incoming work changes the context and reasons for the past choice, necessitating a review to ensure the automated test re-running mechanism remains effective and relevant."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/3"
+          }
+        },
+        "card": "b6f3bf2c64af"
+      }
+    }
+  },
+  "scope-04": {
+    "group": "controlled",
+    "task": "review",
+    "expected": "Large-file results do not overturn the small- or empty-file policy.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a performance difference in handling packed-refs files, specifically mentioning that mmap outperforms read for large files, which could affect the reliability of the previous test automation. This new information suggests that the current test automation might not be sufficient for detecting issues with packed-refs files, especially in scenarios where the files are large. Therefore, the incoming work changes the reason for the past choice by highlighting a potential limitation in the test automation that needs to be addressed.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a performance difference in handling packed-refs files, specifically mentioning that mmap outperforms read for large files, which could affect the reliability of the previous test automation. This new information suggests that the current test automation might not be sufficient for detecting issues with packed-refs files, especially in scenarios where the files are large. Therefore, the incoming work changes the reason for the past choice by highlighting a potential limitation in the test automation that needs to be addressed."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "On the new kernel mmap beat read in all ten runs on 128 MiB packed-refs files. For nonempty 2 KiB files read still won. Zero-length mappings still failed at munmap.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/4"
+          }
+        },
+        "card": "3dec09071d79"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a performance improvement by showing that `mmap()` beats `read()` in some cases, specifically for large packed-refs files. This suggests that the conditions under which the original patch was necessary may not always apply, necessitating a reevaluation of whether the patch is still relevant or if alternative strategies should be considered.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a performance improvement by showing that `mmap()` beats `read()` in some cases, specifically for large packed-refs files. This suggests that the conditions under which the original patch was necessary may not always apply, necessitating a reevaluation of whether the patch is still relevant or if alternative strategies should be considered."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "On the new kernel mmap beat read in all ten runs on 128 MiB packed-refs files. For nonempty 2 KiB files read still won. Zero-length mappings still failed at munmap.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/4"
+          }
+        },
+        "card": "8b88180c0411"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a performance improvement for mmap vs read in certain scenarios, which could affect the rationale behind the previous decision to automate test re-runs. Specifically, the new data suggests that mmap outperforms read in some cases, potentially reducing the need for frequent test re-runs. Therefore, the incoming work changes the context around the original decision, warranting a review.\\nOld: O2.2.1\\nNew: N.1.1\\nReason: Similar to the previous point, the new data indicates that mmap can be more efficient than read for certain file sizes, including zero-length files. This could imply that the original motivation for avoiding mmap in small\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a performance improvement for mmap vs read in certain scenarios, which could affect the rationale behind the previous decision to automate test re-runs. Specifically, the new data suggests that mmap outperforms read in some cases, potentially reducing the need for frequent test re-runs. Therefore, the incoming work changes the context around the original decision, warranting a review.\nOld: O2.2.1\nNew: N.1.1\nReason: Similar to the previous point, the new data indicates that mmap can be more efficient than read for certain file sizes, including zero-length files. This could imply that the original motivation for avoiding mmap in small"
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "On the new kernel mmap beat read in all ten runs on 128 MiB packed-refs files. For nonempty 2 KiB files read still won. Zero-length mappings still failed at munmap.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/4"
+          }
+        },
+        "card": "39a816b804fd"
+      }
+    }
+  },
+  "scope-05": {
+    "group": "controlled",
+    "task": "review",
+    "expected": "Test the graft-aware prototype separately. The original incompatibility of the shipping graph still holds.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a different approach to handling grafts in the commit graph, which is unrelated to the original focus on using generation numbers for ordering commits. This new approach shows that the shipping graph format remains unchanged, indicating that the original choice to optimize commit ordering based on generation numbers might not be necessary or sufficient for all scenarios, especially when grafts are involved.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a different approach to handling grafts in the commit graph, which is unrelated to the original focus on using generation numbers for ordering commits. This new approach shows that the shipping graph format remains unchanged, indicating that the original choice to optimize commit ordering based on generation numbers might not be necessary or sufficient for all scenarios, especially when grafts are involved."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/5"
+          }
+        },
+        "card": "6b566755d000"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a different approach to optimizing 'git branch --contains' using graft tables instead of generation numbers, which changes the core logic and reasoning behind the optimization. This new approach is not directly related to the original decision to use generations in paint_down_to_common() and add a min_generation parameter. Therefore, the original reasons for these decisions need to be reconsidered in light of the new information.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a different approach to optimizing 'git branch --contains' using graft tables instead of generation numbers, which changes the core logic and reasoning behind the optimization. This new approach is not directly related to the original decision to use generations in paint_down_to_common() and add a min_generation parameter. Therefore, the original reasons for these decisions need to be reconsidered in light of the new information."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/5"
+          }
+        },
+        "card": "463eb9862134"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new testing scenario involving grafts, which directly impacts the compatibility checks for commit-graphs. This suggests that the current reasoning about disabling optimizations based on commit-graph use might need reconsideration, especially since grafts can interfere with the immutability of object references.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new testing scenario involving grafts, which directly impacts the compatibility checks for commit-graphs. This suggests that the current reasoning about disabling optimizations based on commit-graph use might need reconsideration, especially since grafts can interfere with the immutability of object references."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit: use generations in paint_down_to_common()",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae"
+          },
+          "new": {
+            "text": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/5"
+          }
+        },
+        "card": "6be07cd6d50a"
+      }
+    }
+  },
+  "scope-06": {
+    "group": "controlled",
+    "task": "review",
+    "expected": "Ungrafted speed does not remove the correctness problem with active grafts.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario (repositories with grafts) that affects the compatibility of commit-graph files, which was not considered in the original observations. This change necessitates a reassessment of the original reasoning and tests to ensure they remain relevant and effective.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a scenario (repositories with grafts) that affects the compatibility of commit-graph files, which was not considered in the original observations. This change necessitates a reassessment of the original reasoning and tests to ensure they remain relevant and effective."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit-graph: not compatible with grafts",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec"
+          },
+          "new": {
+            "text": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/6"
+          }
+        },
+        "card": "17dc22356f29"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where repositories with commit grafts or shallow clones cause incorrect ancestor returns, indicating a need to revisit the decision on how to handle such cases. This new information suggests that the current implementation might not fully address the issue, necessitating a reevaluation.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a scenario where repositories with commit grafts or shallow clones cause incorrect ancestor returns, indicating a need to revisit the decision on how to handle such cases. This new information suggests that the current implementation might not fully address the issue, necessitating a reevaluation."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit-graph: not compatible with grafts",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec"
+          },
+          "new": {
+            "text": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/6"
+          }
+        },
+        "card": "b3f3a7d4affd"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where the commit-graph is incompatible with grafts, leading to incorrect ancestor resolution. This directly impacts the decision to disable optimizations based on commit-graph usage when grafts are present, suggesting a need to reassess the current implementation's compatibility and potential impact on past decisions.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a scenario where the commit-graph is incompatible with grafts, leading to incorrect ancestor resolution. This directly impacts the decision to disable optimizations based on commit-graph usage when grafts are present, suggesting a need to reassess the current implementation's compatibility and potential impact on past decisions."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "commit-graph: not compatible with grafts",
+            "author": "Derrick Stolee",
+            "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec"
+          },
+          "new": {
+            "text": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+            "author": "controlled team report",
+            "location": "fixture://changed-condition/6"
+          }
+        },
+        "card": "5c3cfdcd447d"
+      }
+    }
+  },
+  "aimers": {
+    "group": "prior_aimers",
+    "task": "review",
+    "expected": "Compare clean-room TM-S with the current blend under the new setup. The old official TabM result remains valid.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new comparison between a clean-room implementation of TabM and the official TabM model, suggesting that the latter's performance does not improve with scaling. This new information challenges the original reasoning behind the rejection of TabM, warranting a review of the past decision.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new comparison between a clean-room implementation of TabM and the official TabM model, suggesting that the latter's performance does not improve with scaling. This new information challenges the original reasoning behind the rejection of TabM, warranting a review of the past decision."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "두 제목만 인용해 블렌드 기각 조건과 새 TM-S의 비교 수치를 뒷받침하지 못함.",
+        "cited": {
+          "old": {
+            "text": "## 18. TabM / inner-val 기준 — 둘 다 기각, 그런데 구조가 하나 보인다 (2026-08-11)",
+            "author": "jaewon",
+            "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/a8e64a1d52a0daa1ee7bf4595a0dfe4e6acf49a3/jaewon/notes/findings.md#L484-L503"
+          },
+          "new": {
+            "text": "## SH-TABM 야간 비교 및 TM-S 최종 재학습 — 2026-08-11",
+            "author": "seonghun",
+            "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/9bf532cde00494dabb86076e16a07940a47400e3/seonghun/docs/experiment_log.md#L377-L403"
+          }
+        },
+        "card": "cb6397994ca4"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new comparison between SH-TABM and TM-S, suggesting that TM-S outperforms official TabM and clean-room BatchEnsemble MLP. This new information challenges the previous decision to reject TabM as a blend candidate, as it indicates potential benefits not previously observed. Therefore, reopening or testing the original choice based on this updated information is necessary.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new comparison between SH-TABM and TM-S, suggesting that TM-S outperforms official TabM and clean-room BatchEnsemble MLP. This new information challenges the previous decision to reject TabM as a blend candidate, as it indicates potential benefits not previously observed. Therefore, reopening or testing the original choice based on this updated information is necessary."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "두 제목만 인용해 블렌드 기각 조건과 새 TM-S의 비교 수치를 뒷받침하지 못함.",
+        "cited": {
+          "old": {
+            "text": "## 18. TabM / inner-val 기준 — 둘 다 기각, 그런데 구조가 하나 보인다 (2026-08-11)",
+            "author": "jaewon",
+            "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/a8e64a1d52a0daa1ee7bf4595a0dfe4e6acf49a3/jaewon/notes/findings.md#L484-L503"
+          },
+          "new": {
+            "text": "## SH-TABM 야간 비교 및 TM-S 최종 재학습 — 2026-08-11",
+            "author": "seonghun",
+            "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/9bf532cde00494dabb86076e16a07940a47400e3/seonghun/docs/experiment_log.md#L377-L403"
+          }
+        },
+        "card": "839b18c9c72f"
+      }
+    }
+  },
+  "fresh-01": {
+    "group": "fresh_git",
+    "task": "review",
+    "expected": "Recount missed empty context lines when an editor strips their leading space.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new feature related to patch editing, specifically addressing the issue of counting empty context lines in edited patches. This change impacts the functionality of the previous decision to use `read()` instead of `mmap()` for small packed-refs files, suggesting that the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new feature related to patch editing, specifically addressing the issue of counting empty context lines in edited patches. This change impacts the functionality of the previous decision to use `read()` instead of `mmap()` for small packed-refs files, suggesting that the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "add -p: fix counting empty context lines in edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308"
+          }
+        },
+        "card": "6787b02f36c8"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new issue related to counting context lines in edited patches, which impacts the functionality of the `-p` feature. This new issue necessitates a reevaluation of the decision made for the original `-p` feature implementation, specifically regarding the handling of empty context lines. Therefore, the original decision based on the conditions set in O1.1.2 and O1.2.2 may need reconsideration in light of the new observations.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new issue related to counting context lines in edited patches, which impacts the functionality of the `-p` feature. This new issue necessitates a reevaluation of the decision made for the original `-p` feature implementation, specifically regarding the handling of empty context lines. Therefore, the original decision based on the conditions set in O1.1.2 and O1.2.2 may need reconsideration in light of the new observations."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "add -p: fix counting empty context lines in edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308"
+          }
+        },
+        "card": "4f70973c74d5"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant change to the previous observation regarding the handling of empty context lines in edited patches, which impacts the behavior of the \\\"git add -p\\\" command. This change necessitates a reevaluation of the original decision to avoid mmaps for small packed-refs files, as it now affects the validity and correctness of these files.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant change to the previous observation regarding the handling of empty context lines in edited patches, which impacts the behavior of the \"git add -p\" command. This change necessitates a reevaluation of the original decision to avoid mmaps for small packed-refs files, as it now affects the validity and correctness of these files."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "add -p: fix counting empty context lines in edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308"
+          }
+        },
+        "card": "0c66fcf58db6"
+      }
+    }
+  },
+  "fresh-02": {
+    "group": "fresh_git",
+    "task": "review",
+    "expected": "Moving the excludesFile docs does not change hunk recounting.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, which involves moving documentation about `core.excludesFile`, does not address or alter the conditions or reasoning behind the previous choices related to patch processing (`add -p`). Therefore, it does not necessitate reopening or testing those past choices.\"}",
+        "parsed": {
+          "action": "keep",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, which involves moving documentation about `core.excludesFile`, does not address or alter the conditions or reasoning behind the previous choices related to patch processing (`add -p`). Therefore, it does not necessitate reopening or testing those past choices."
+        },
+        "valid": true,
+        "correct": true,
+        "basis": "패치 오프셋 계산과 excludesFile 문서 이동을 양쪽 근거에 맞게 구분.",
+        "cited": {
+          "old": {
+            "text": "add -p: calculate offset delta for edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e"
+          },
+          "new": {
+            "text": "docs: move core.excludesFile from git-add to gitignore",
+            "author": "Denton Liu",
+            "location": "https://github.com/git/git/commit/af91b0230ca9fb204aac04bd713ca0f420c8f8b1"
+          }
+        },
+        "card": "b1d939ede219"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work about moving documentation does not directly address the need for a sound original observation regarding the calculation of offset deltas for edited patches. While it pertains to the overall git add documentation, it does not change the necessity or impact of the original observation made in O1.1.1.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work about moving documentation does not directly address the need for a sound original observation regarding the calculation of offset deltas for edited patches. While it pertains to the overall git add documentation, it does not change the necessity or impact of the original observation made in O1.1.1."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "add -p: calculate offset delta for edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e"
+          },
+          "new": {
+            "text": "docs: move core.excludesFile from git-add to gitignore",
+            "author": "Denton Liu",
+            "location": "https://github.com/git/git/commit/af91b0230ca9fb204aac04bd713ca0f420c8f8b1"
+          }
+        },
+        "card": "26647ea3fdc2"
+      },
+      "C": {
+        "raw": "{\"action\": \"keep\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work, which involves moving documentation about `core.excludesFile` from `git-add` to `gitignore`, does not address the issue related to the preparation of patches for application (`git add -p`). Therefore, it does not change the reason for any past choice regarding the preparation of patches for application.\"}",
+        "parsed": {
+          "action": "keep",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work, which involves moving documentation about `core.excludesFile` from `git-add` to `gitignore`, does not address the issue related to the preparation of patches for application (`git add -p`). Therefore, it does not change the reason for any past choice regarding the preparation of patches for application."
+        },
+        "valid": true,
+        "correct": true,
+        "basis": "패치 오프셋 계산과 excludesFile 문서 이동을 양쪽 근거에 맞게 구분.",
+        "cited": {
+          "old": {
+            "text": "add -p: calculate offset delta for edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e"
+          },
+          "new": {
+            "text": "docs: move core.excludesFile from git-add to gitignore",
+            "author": "Denton Liu",
+            "location": "https://github.com/git/git/commit/af91b0230ca9fb204aac04bd713ca0f420c8f8b1"
+          }
+        },
+        "card": "221f2790889d"
+      }
+    }
+  },
+  "fresh-03": {
+    "group": "fresh_git",
+    "task": "review",
+    "expected": "Passing -v through to git-submodule fails because the script does not accept it.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.2\", \"reason\": \"The incoming work introduces a new approach to handle the verbosity flag in the submodule shell script, which directly impacts the handling of verbosity settings in the pull command. This change suggests a new implementation strategy that affects the original observation about passing verbosity settings to submodules. Therefore, reviewing the new approach is necessary to assess its impact and potential implications on the original issue.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.2",
+          "reason": "The incoming work introduces a new approach to handle the verbosity flag in the submodule shell script, which directly impacts the handling of verbosity settings in the pull command. This change suggests a new implementation strategy that affects the original observation about passing verbosity settings to submodules. Therefore, reviewing the new approach is necessary to assess its impact and potential implications on the original issue."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "새 인용에는 -v 미지원이 있지만 모델 설명은 구현 변경이라는 일반론에 그쳐 무엇이 실패했는지 특정하지 못함.",
+        "cited": {
+          "old": {
+            "text": "builtin/pull: respect verbosity settings in submodules",
+            "author": "Stefan Beller",
+            "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae"
+          },
+          "new": {
+            "text": "In a56771a668d (builtin/pull: respect verbosity settings in submodules,\n2018-01-25), we made sure to pass on both quiet and verbose flag from\nbuiltin/pull.c to the submodule shell script. However git-submodule doesn't\nunderstand a verbose flag, which results in a bug when invoking",
+            "author": "Stefan Beller",
+            "location": "https://github.com/git/git/commit/e84c3cf3dc3c3140d317f7ed0b18768adbec0401"
+          }
+        },
+        "card": "95e59175e4c1"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.2\", \"reason\": \"The incoming work introduces a new approach to handle verbosity settings in submodule updates, which directly impacts the decision made in O1.1.1. While O1.1.1 focused on respecting verbosity settings during submodule rebase, N.1.2 suggests a different implementation that affects the same core functionality. Therefore, revisiting the original decision is necessary to ensure consistency and correctness.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.2",
+          "reason": "The incoming work introduces a new approach to handle verbosity settings in submodule updates, which directly impacts the decision made in O1.1.1. While O1.1.1 focused on respecting verbosity settings during submodule rebase, N.1.2 suggests a different implementation that affects the same core functionality. Therefore, revisiting the original decision is necessary to ensure consistency and correctness."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "새 인용에는 -v 미지원이 있지만 모델 설명은 구현 변경이라는 일반론에 그쳐 무엇이 실패했는지 특정하지 못함.",
+        "cited": {
+          "old": {
+            "text": "builtin/pull: respect verbosity settings in submodules",
+            "author": "Stefan Beller",
+            "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae"
+          },
+          "new": {
+            "text": "In a56771a668d (builtin/pull: respect verbosity settings in submodules,\n2018-01-25), we made sure to pass on both quiet and verbose flag from\nbuiltin/pull.c to the submodule shell script. However git-submodule doesn't\nunderstand a verbose flag, which results in a bug when invoking",
+            "author": "Stefan Beller",
+            "location": "https://github.com/git/git/commit/e84c3cf3dc3c3140d317f7ed0b18768adbec0401"
+          }
+        },
+        "card": "09e7678db95f"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.2\", \"reason\": \"The incoming work addresses a specific issue related to passing verbosity settings to the submodule shell script, which directly impacts the behavior described in O1.1.1. While the core issue remains the same, the proposed solutions in N.1.2 and subsequent points provide a concrete approach to fixing the problem, necessitating a review to assess the best implementation strategy.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.2",
+          "reason": "The incoming work addresses a specific issue related to passing verbosity settings to the submodule shell script, which directly impacts the behavior described in O1.1.1. While the core issue remains the same, the proposed solutions in N.1.2 and subsequent points provide a concrete approach to fixing the problem, necessitating a review to assess the best implementation strategy."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "새 인용에는 -v 미지원이 있지만 모델 설명은 구현 변경이라는 일반론에 그쳐 무엇이 실패했는지 특정하지 못함.",
+        "cited": {
+          "old": {
+            "text": "builtin/pull: respect verbosity settings in submodules",
+            "author": "Stefan Beller",
+            "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae"
+          },
+          "new": {
+            "text": "In a56771a668d (builtin/pull: respect verbosity settings in submodules,\n2018-01-25), we made sure to pass on both quiet and verbose flag from\nbuiltin/pull.c to the submodule shell script. However git-submodule doesn't\nunderstand a verbose flag, which results in a bug when invoking",
+            "author": "Stefan Beller",
+            "location": "https://github.com/git/git/commit/e84c3cf3dc3c3140d317f7ed0b18768adbec0401"
+          }
+        },
+        "card": "1782970c6f77"
+      }
+    }
+  },
+  "fresh-04": {
+    "group": "fresh_git",
+    "task": "review",
+    "expected": "Deprecation of a rebase backend does not change how verbosity is forwarded to submodules.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work does not directly address or change the reasons for past choices related to test automation or re-running tests. It introduces a new document update regarding the deprecation of `--rebase=preserve`. This change is about documentation and does not impact the rationale behind previous decisions regarding test automation.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work does not directly address or change the reasons for past choices related to test automation or re-running tests. It introduces a new document update regarding the deprecation of `--rebase=preserve`. This change is about documentation and does not impact the rationale behind previous decisions regarding test automation."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "docs: say that `--rebase=preserve` is deprecated",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/7401ab92f8c9c9f7c81763d6f7da8a63a258eff2"
+          }
+        },
+        "card": "f8344ccdf98a"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new document stating that `--rebase=preserve` is deprecated, which does not directly relate to the original decision to add a rule in the Makefile to re-run previously failed tests. Therefore, the new information does not significantly alter the reasoning behind the past choice.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new document stating that `--rebase=preserve` is deprecated, which does not directly relate to the original decision to add a rule in the Makefile to re-run previously failed tests. Therefore, the new information does not significantly alter the reasoning behind the past choice."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "docs: say that `--rebase=preserve` is deprecated",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/7401ab92f8c9c9f7c81763d6f7da8a63a258eff2"
+          }
+        },
+        "card": "6004b699e336"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new document stating that `--rebase=preserve` is deprecated, which does not directly relate to the functionality of the previous patch about running only failed tests again. Therefore, it does not significantly alter the reasoning behind the past choice.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new document stating that `--rebase=preserve` is deprecated, which does not directly relate to the functionality of the previous patch about running only failed tests again. Therefore, it does not significantly alter the reasoning behind the past choice."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "t/Makefile: add a rule to re-run previously-failed tests",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde"
+          },
+          "new": {
+            "text": "docs: say that `--rebase=preserve` is deprecated",
+            "author": "Johannes Schindelin",
+            "location": "https://github.com/git/git/commit/7401ab92f8c9c9f7c81763d6f7da8a63a258eff2"
+          }
+        },
+        "card": "c99f43ba1853"
+      }
+    }
+  },
+  "fresh-05": {
+    "group": "fresh_controlled",
+    "task": "review",
+    "expected": "Revisit the accepted loss of offset correction after edited hunks are split; the old unsplit common-case finding remains valid.",
+    "action": "review",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a scenario where applying edited hunks results in incorrect offsets after a split, which directly impacts the reasoning behind the past choices related to handling edited hunks and their offsets.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a scenario where applying edited hunks results in incorrect offsets after a split, which directly impacts the reasoning behind the past choices related to handling edited hunks and their offsets."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "새 실패를 설명했지만 과거 인용은 제목뿐으로 미분할 조건과 알려진 제한이 없음.",
+        "cited": {
+          "old": {
+            "text": "add -p: calculate offset delta for edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e"
+          },
+          "new": {
+            "text": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+            "author": "controlled team report",
+            "location": "fixture://unseen/5"
+          }
+        },
+        "card": "5ed327273385"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.2\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant issue with the current implementation of applying edited hunks, specifically that it results in incorrect offsets in 18 out of 50 trials when splitting hunks. This directly impacts the functionality described in O1.1.2, which aims to improve patch handling without needing '--recount' or '--allow-overlap'. Therefore, revisiting and possibly updating O1.1.2 is necessary to account for these new findings.\\n\\nO1.1.2 discusses the importance of recounting lines to adjust offsets for subsequent hunks, while N.1.1 highlights a practical failure in this aspect due to the introduced bug. Thus,\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.2",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant issue with the current implementation of applying edited hunks, specifically that it results in incorrect offsets in 18 out of 50 trials when splitting hunks. This directly impacts the functionality described in O1.1.2, which aims to improve patch handling without needing '--recount' or '--allow-overlap'. Therefore, revisiting and possibly updating O1.1.2 is necessary to account for these new findings.\n\nO1.1.2 discusses the importance of recounting lines to adjust offsets for subsequent hunks, while N.1.1 highlights a practical failure in this aspect due to the introduced bug. Thus,"
+        },
+        "valid": true,
+        "correct": true,
+        "basis": "편집 후 분할하면 오프셋이 소실된다는 과거 본문과 분할 18/50 실패·미분할 0/50 보고를 연결.",
+        "cited": {
+          "old": {
+            "text": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e"
+          },
+          "new": {
+            "text": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+            "author": "controlled team report",
+            "location": "fixture://unseen/5"
+          }
+        },
+        "card": "503c6c317b2b"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a significant issue (\\\"In 18 of 50 trials we applied the selection to the wrong offset after a split\\\") that impacts the correctness of applying edited hunks, which is relevant to the original observation about \\\"git add -p\\\" handling split patches.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a significant issue (\"In 18 of 50 trials we applied the selection to the wrong offset after a split\") that impacts the correctness of applying edited hunks, which is relevant to the original observation about \"git add -p\" handling split patches."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "새 실패를 설명했지만 과거 인용은 제목뿐으로 미분할 조건과 알려진 제한이 없음.",
+        "cited": {
+          "old": {
+            "text": "add -p: calculate offset delta for edited patches",
+            "author": "Phillip Wood",
+            "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e"
+          },
+          "new": {
+            "text": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+            "author": "controlled team report",
+            "location": "fixture://unseen/5"
+          }
+        },
+        "card": "cbeeb2cc37e6"
+      }
+    }
+  },
+  "fresh-06": {
+    "group": "fresh_controlled",
+    "task": "review",
+    "expected": "The unsplit workload matches the old common case; no evidence the known split limitation has become material.",
+    "action": "keep",
+    "previously_correct": null,
+    "arms": {
+      "A": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new approach to editing and applying hunks, specifically mentioning that the new GUI edits hunks and applies them without splitting. This change directly impacts the previous decision to avoid using `mmap()` for small files, as the new method does not rely on the behavior of `mmap()` for small files. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.\\nRaw Passages:\\nOld: {\\\"id\\\": \\\"O1.1.1\\\", \\\"speaker\\\": \\\"Kim Gybels\\\", \\\"text\\\": \\\"packed_ref_cache: don't use mmap() for small files\\\"}\\nNew: {\\\"id\\\": \\\"N\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new approach to editing and applying hunks, specifically mentioning that the new GUI edits hunks and applies them without splitting. This change directly impacts the previous decision to avoid using `mmap()` for small files, as the new method does not rely on the behavior of `mmap()` for small files. Therefore, the incoming work changes the reason for the past choice sufficiently to warrant re-evaluation.\nRaw Passages:\nOld: {\"id\": \"O1.1.1\", \"speaker\": \"Kim Gybels\", \"text\": \"packed_ref_cache: don't use mmap() for small files\"}\nNew: {\"id\": \"N"
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "The new GUI edits hunks and applies them without splitting. All 50 trials applied at the correct offset. The optional edit-then-split path was disabled and accounted for no user traffic or test failures.",
+            "author": "controlled team report",
+            "location": "fixture://unseen/6"
+          }
+        },
+        "card": "87b577bc30e5"
+      },
+      "B": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new approach to handling small packed-refs files using `read()` instead of `mmap()`, which changes the conditions under which the original decision was made. This new method ensures no errors for empty files and allows for early exit, which were not explicitly addressed in the original observations. Therefore, the original decision needs to be reconsidered in light of these new practices.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new approach to handling small packed-refs files using `read()` instead of `mmap()`, which changes the conditions under which the original decision was made. This new method ensures no errors for empty files and allows for early exit, which were not explicitly addressed in the original observations. Therefore, the original decision needs to be reconsidered in light of these new practices."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "The new GUI edits hunks and applies them without splitting. All 50 trials applied at the correct offset. The optional edit-then-split path was disabled and accounted for no user traffic or test failures.",
+            "author": "controlled team report",
+            "location": "fixture://unseen/6"
+          }
+        },
+        "card": "4fc8bc40873e"
+      },
+      "C": {
+        "raw": "{\"action\": \"review\", \"old\": \"O1.1.1\", \"new\": \"N.1.1\", \"reason\": \"The incoming work introduces a new approach to handling packed-refs files, specifically focusing on avoiding mmapping small files, including those with zero size. This changes the approach taken in O1.1.1, which only mentions not using mmap() for small files without addressing zero-sized files. Therefore, the incoming work alters the reasoning behind the original choice enough to warrant re-evaluation.\"}",
+        "parsed": {
+          "action": "review",
+          "old": "O1.1.1",
+          "new": "N.1.1",
+          "reason": "The incoming work introduces a new approach to handling packed-refs files, specifically focusing on avoiding mmapping small files, including those with zero size. This changes the approach taken in O1.1.1, which only mentions not using mmap() for small files without addressing zero-sized files. Therefore, the incoming work alters the reasoning behind the original choice enough to warrant re-evaluation."
+        },
+        "valid": true,
+        "correct": false,
+        "basis": "조치 또는 인용 대상이 정답과 다름",
+        "cited": {
+          "old": {
+            "text": "packed_ref_cache: don't use mmap() for small files",
+            "author": "Kim Gybels",
+            "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2"
+          },
+          "new": {
+            "text": "The new GUI edits hunks and applies them without splitting. All 50 trials applied at the correct offset. The optional edit-then-split path was disabled and accounted for no user traffic or test failures.",
+            "author": "controlled team report",
+            "location": "fixture://unseen/6"
+          }
+        },
+        "card": "cac3c9f1720c"
+      }
+    }
+  }
+}

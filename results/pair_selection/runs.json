@@ -1,0 +1,155 @@
+{
+  "model": "Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "attempts": [
+    {
+      "job_id": "119286",
+      "source_version": "records-read-v5",
+      "source_sha256": {
+        "infer.py": "31dfabd788cef4ebab0256b8eff23d3b39c15e4dd793ca8b99a325f16b3f3de9",
+        "packets.json": "db84656aeb50994cf8b0fda9f42a649385f5cd973a65277f0903775a00089ffe",
+        "run.sbatch": "71526830e42c8647720a2c9592c0fd1de2ce918ec39324bedb398190b1e43f35"
+      },
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 240,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "joint decision and evidence",
+      "batch_maxrss": "946588K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "output": "joint.json",
+      "sha256": "5628767f2e6642da80f80e0cbe074d1a139fa1a22959956562b02ef7cf1928aa"
+    },
+    {
+      "job_id": "119288",
+      "source_version": "records-read-v6",
+      "source_sha256": {
+        "infer.py": "c577eb5d5031c14b868931ef277ed865ce66290a5a6a718d8aec6735ad013293",
+        "packets.json": "acea1540ad0e18fbbf64162039dd8d266025ce3b3fb166468fbbe8e6ca7365e3",
+        "run.sbatch": "ae5228139de1ed2556a261d82b1f75887677dab4234f0fd5b30f64f2b0b6044a"
+      },
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 101,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "candidate-local margins",
+      "batch_maxrss": "895304K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "output": "margins.json",
+      "sha256": "6c60e558089a47724a1438e31d5196229b3f5a546d52566a519a7ccaea748910"
+    },
+    {
+      "job_id": "119289",
+      "source_version": "records-read-v7",
+      "source_sha256": {
+        "infer.py": "6655898a2a6bd6e178bebb272465f8006daae58c02254dcdac10cc6c7915ead1",
+        "packets.json": "ab55c175c208261709c3bedd476eea97d438131e85d2c1cb5097c9d9299be179",
+        "run.sbatch": "0b1546ae2fd8d2e8d36f987fc1720a7b35ca2b363c8b3709c751dcba149697de"
+      },
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 101,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "selected-pair explanations and mixed QA batch",
+      "batch_maxrss": "966976K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "output": "generations.json",
+      "sha256": "a75747167bd4686e02f2c9adbcbd428558c56f3251cd6d59588615566c806a1a"
+    },
+    {
+      "job_id": "119290",
+      "source_version": "records-read-v9",
+      "source_sha256": {
+        "infer.py": "b609e144411f2963eeee498965c13c45d544f9e8ca580ad59ed20b070863262c",
+        "packets.json": "a7472c8d26fa7de5f069682cd5621b61328a4cafa5a03edc9ba20ceea0696040",
+        "run.sbatch": "46be23ce73441ab008367ab40c9884d2dfbab5a0d751c3c3591b70ed0b1ffbbd"
+      },
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 25,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "Git check failed before review: Git 2.25 lacks initial-branch flag",
+      "batch_maxrss": "356K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1"
+    },
+    {
+      "job_id": "119291",
+      "source_version": "records-read-v10",
+      "source_sha256": {
+        "infer.py": "1b16029cc3ca37fe2280324763542c2333c7f2770caebeb2b66c6cfb7524babf",
+        "packets.json": "6e2200e5297d3342fb1e61f372444f5316c3e9bc9c2cfcef2bf3aa6e014ec012",
+        "run.sbatch": "03e383a84e60cb3352e2b2f46a09b299279fe4675704d560f9125b74741b1740"
+      },
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 304,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "archived QA batch replay with original peers",
+      "batch_maxrss": "964056K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "output": "qa-original-batches.json",
+      "sha256": "79d3dec54d7c98dfe4fe7c0b3f8e3c332c6ee32029213291c496755cdd021afe"
+    },
+    {
+      "job_id": "119292",
+      "source_version": "records-read-v11",
+      "source_sha256": {
+        "infer.py": "2869bd541b11ac19ec5076c10695c128f07fa97d8a84f294da6f9f86919c9d45",
+        "packets.json": "a7472c8d26fa7de5f069682cd5621b61328a4cafa5a03edc9ba20ceea0696040",
+        "run.sbatch": "82df7ab530d684e675d60a16ce40ec07484e7eb8f54fff33cbf7c9f28d408abb"
+      },
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 20,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "Git check failed before review: old Git clone of empty remote used a different initial branch",
+      "batch_maxrss": "440K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1"
+    },
+    {
+      "job_id": "119293",
+      "source_version": "records-read-v12",
+      "source_sha256": {
+        "infer.py": "d8816e8753babf1766c5c0730cc2e5a7e7410da4de45195e8f982c064171f757",
+        "packets.json": "a7472c8d26fa7de5f069682cd5621b61328a4cafa5a03edc9ba20ceea0696040",
+        "run.sbatch": "cfedcde59542397f7c8f591854e4289cd3f9b66e63816e576cde1dbbcf9d631d"
+      },
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 36,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "Git end-to-end and shipped simple-strategy comparison",
+      "batch_maxrss": "1009236K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "output": "live.json",
+      "sha256": "0efadc6bdffe98aa9fa9f533d9e4cbab7f14a497c9963d26d7b452de88d96a09"
+    },
+    {
+      "job_id": "119294",
+      "source_version": "records-read-v13",
+      "source_sha256": {
+        "infer.py": "162e007fb1e67b8c61f0195a7eabfa8455e7517e4994e30aecc56500602053c4",
+        "packets.json": "6343688ce6248d780de27771e2c178e7656b2beba53265ca2e599195885911fa",
+        "run.sbatch": "8842da8e52047c26c8dc92c97486b2ffc4a93a76de01d80647a857a66515c3bc"
+      },
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 109,
+      "gpus": 1,
+      "wall_minutes": 15,
+      "purpose": "within-pair temporal-role fields reversed, identical padding peers",
+      "batch_maxrss": "888764K",
+      "slurm_alloc": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "output": "field-margins.json",
+      "sha256": "a2c88df562330500a6585aa46f4094c8e702bc40d2a3d28787d03454dde165e8"
+    }
+  ],
+  "elapsed_gpu_seconds": 936
+}

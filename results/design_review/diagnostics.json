@@ -1,0 +1,410 @@
+{
+  "stages": {
+    "3b/hidden/direct-full": {
+      "positive_opened": 11,
+      "positive_correct_target": 4,
+      "positive_semantic_eligible": 4,
+      "positive_grounded": 2,
+      "positive_wrong_target": 7,
+      "positive_keep": 3,
+      "positive_invalid": 1,
+      "negative_false_positive": 6,
+      "negative_invalid": 3,
+      "total_opened_without_strict_support": 15
+    },
+    "3b/hidden/direct-oracle": {
+      "positive_opened": 6,
+      "positive_correct_target": 4,
+      "positive_semantic_eligible": 4,
+      "positive_grounded": 1,
+      "positive_wrong_target": 2,
+      "positive_keep": 7,
+      "positive_invalid": 2,
+      "negative_false_positive": 6,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 11
+    },
+    "3b/hidden/module": {
+      "positive_opened": 0,
+      "positive_correct_target": 0,
+      "positive_semantic_eligible": 0,
+      "positive_grounded": 0,
+      "positive_wrong_target": 0,
+      "positive_keep": 15,
+      "positive_invalid": 0,
+      "negative_false_positive": 0,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 0
+    },
+    "3b/raw/direct-full": {
+      "positive_opened": 13,
+      "positive_correct_target": 3,
+      "positive_semantic_eligible": 3,
+      "positive_grounded": 1,
+      "positive_wrong_target": 10,
+      "positive_keep": 2,
+      "positive_invalid": 0,
+      "negative_false_positive": 9,
+      "negative_invalid": 1,
+      "total_opened_without_strict_support": 21
+    },
+    "3b/raw/module": {
+      "positive_opened": 8,
+      "positive_correct_target": 8,
+      "positive_semantic_eligible": 8,
+      "positive_grounded": 2,
+      "positive_wrong_target": 0,
+      "positive_keep": 7,
+      "positive_invalid": 0,
+      "negative_false_positive": 0,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 6
+    },
+    "14b/hidden/direct-full": {
+      "positive_opened": 12,
+      "positive_correct_target": 8,
+      "positive_semantic_eligible": 8,
+      "positive_grounded": 6,
+      "positive_wrong_target": 4,
+      "positive_keep": 3,
+      "positive_invalid": 0,
+      "negative_false_positive": 4,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 10
+    },
+    "14b/hidden/direct-oracle": {
+      "positive_opened": 13,
+      "positive_correct_target": 10,
+      "positive_semantic_eligible": 10,
+      "positive_grounded": 4,
+      "positive_wrong_target": 3,
+      "positive_keep": 2,
+      "positive_invalid": 0,
+      "negative_false_positive": 5,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 14
+    },
+    "14b/hidden/module": {
+      "positive_opened": 6,
+      "positive_correct_target": 6,
+      "positive_semantic_eligible": 6,
+      "positive_grounded": 3,
+      "positive_wrong_target": 0,
+      "positive_keep": 9,
+      "positive_invalid": 0,
+      "negative_false_positive": 2,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 5
+    },
+    "14b/raw/direct-full": {
+      "positive_opened": 15,
+      "positive_correct_target": 15,
+      "positive_semantic_eligible": 15,
+      "positive_grounded": 7,
+      "positive_wrong_target": 0,
+      "positive_keep": 0,
+      "positive_invalid": 0,
+      "negative_false_positive": 4,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 12
+    },
+    "14b/raw/module": {
+      "positive_opened": 12,
+      "positive_correct_target": 12,
+      "positive_semantic_eligible": 12,
+      "positive_grounded": 7,
+      "positive_wrong_target": 0,
+      "positive_keep": 3,
+      "positive_invalid": 0,
+      "negative_false_positive": 1,
+      "negative_invalid": 0,
+      "total_opened_without_strict_support": 6
+    }
+  },
+  "paired": {
+    "3b/raw": {
+      "both": [],
+      "direct_only": [
+        "prompt"
+      ],
+      "module_only": [
+        "fsck-empty",
+        "patch-search"
+      ]
+    },
+    "3b/hidden": {
+      "both": [],
+      "direct_only": [
+        "email-priority",
+        "patch-search"
+      ],
+      "module_only": []
+    },
+    "3b/hidden/oracle_vs_full": {
+      "both": [
+        "email-priority"
+      ],
+      "full_only": [
+        "patch-search"
+      ],
+      "oracle_only": []
+    },
+    "14b/raw": {
+      "both": [
+        "prompt",
+        "range"
+      ],
+      "direct_only": [
+        "email-priority",
+        "help-spacing",
+        "hook",
+        "http-index",
+        "reflog"
+      ],
+      "module_only": [
+        "commit-permissions",
+        "dir-diff",
+        "freebsd-cwd",
+        "fsck-empty",
+        "patch-search"
+      ]
+    },
+    "14b/hidden": {
+      "both": [
+        "dir-diff",
+        "prompt"
+      ],
+      "direct_only": [
+        "email-priority",
+        "hook",
+        "http-index",
+        "reflog"
+      ],
+      "module_only": [
+        "commit-permissions"
+      ]
+    },
+    "14b/hidden/oracle_vs_full": {
+      "both": [
+        "dir-diff",
+        "email-priority",
+        "hook",
+        "prompt"
+      ],
+      "full_only": [
+        "http-index",
+        "reflog"
+      ],
+      "oracle_only": []
+    }
+  },
+  "positive_module_exits": {
+    "3b/hidden/module": {
+      "no unique decision in the document comparison": 15
+    },
+    "3b/raw/module": {
+      "no supported observation with its condition in the report window": 4,
+      "reassess": 8,
+      "no unique decision in the document comparison": 3
+    },
+    "14b/hidden/module": {
+      "reassess": 6,
+      "no supported observation with its condition in the report window": 2,
+      "the exact passages did not reproduce the document judgment": 4,
+      "no unique decision in the document comparison": 3
+    },
+    "14b/raw/module": {
+      "no supported observation with its condition in the report window": 3,
+      "reassess": 12
+    }
+  },
+  "generation_at_cap": [],
+  "all_cases_within_budget": true,
+  "execution_errors": 0,
+  "invalid_outputs": 7,
+  "module_false_positives": {
+    "14b/range/no-match/raw/module": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 68,
+        "end": 347,
+        "quote": "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 315,
+        "quote": "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.\n\nFix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "80ed971283c9a3940d865c72",
+        "location": "https://github.com/git/git/commit/87f1b2d45ca7987cc6cc1a74eb66a77fa11fab94",
+        "speaker": "Eric Sunshine",
+        "start": 68,
+        "end": 347,
+        "quote": "The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well.",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “The actual diffs output by range-diff respect diff_option.file, which\nrange-diff passes down the call-chain, thus are destination-agnostic.\nHowever, output_pair_header() is hard-coded to emit to 'stdout'. Fix\nthis by making output_pair_header() respect diff_option.file, as well.”. The new report gives the following behavior and its conditions. “In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.\n\nFix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options.”",
+      "reviewer": "Eric Sunshine",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "alternative": {
+        "source_id": "d78e3865461b35e42817d1fd",
+        "location": "https://github.com/git/git/commit/8d5ccb59def8c1737b3e055a5984eaaa4e881ce9",
+        "speaker": "Stefan Beller",
+        "start": 53,
+        "end": 296,
+        "quote": "This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines.",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “This change itself only changes the internal communication and should\nhave no visible effect to the user. We instruct the diff code that\nproduces the inner diffs to use other markers instead of the\nusual markers for new, old and context lines.”. The reported observation is “In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.\n\nFix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options.”.",
+      "report_anchor": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 208,
+        "quote": "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "4d5631b0b4f7c930e2a94298",
+        "location": "https://github.com/git/git/commit/4624185a67aa17104762a4bbff2b05727ef4cd83",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 58,
+        "end": 315,
+        "quote": "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.\n\nFix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options.",
+        "status": "source_only"
+      }
+    },
+    "14b/asan-preload/no-match/hidden/module": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 57,
+        "end": 253,
+        "quote": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "05b5e4ed464bbef36a0be088",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 593,
+        "quote": "This fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "5f1384b069b7a24ddbcf7591",
+        "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 57,
+        "end": 253,
+        "quote": "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":”. The new report gives the following behavior and its conditions. “This fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "alternative": {
+        "source_id": "723420d47be74f4a9627c2da",
+        "location": "https://github.com/git/git/commit/49da4040701f6d3dd480c6d007109c9a2fc2cb7a",
+        "speaker": "Fabian Stelzer",
+        "start": 39,
+        "end": 603,
+        "quote": "When running the full test suite many tests can be skipped because of\nmissing prerequisites. It not easy right now to get an overview of which\nones are missing.\nWhen switching to a new machine or environment some libraries and tools\nmight be missing or maybe a dependency broke completely. In this case\nthe tests would indicate nothing since all dependant tests are simply\nskipped. This could hide broken behaviour or missing features in the\nbuild. Therefore this patch summarizes the missing prereqs at the end of\nthe test run making it easier to spot such cases.",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “When running the full test suite many tests can be skipped because of\nmissing prerequisites. It not easy right now to get an overview of which\nones are missing.\nWhen switching to a new machine or environment some libraries and tools\nmight be missing or maybe a dependency broke completely. In this case\nthe tests would indicate nothing since all dependant tests are simply\nskipped. This could hide broken behaviour or missing features in the\nbuild. Therefore this patch summarizes the missing prereqs at the end of\nthe test run making it easier to spot such cases.”. The reported observation is “This fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”.",
+      "report_anchor": {
+        "source_id": "05b5e4ed464bbef36a0be088",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 57,
+        "end": 297,
+        "quote": "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "05b5e4ed464bbef36a0be088",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "speaker": "Phillip Wood",
+        "start": 299,
+        "end": 593,
+        "quote": "This fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+        "status": "source_only"
+      }
+    },
+    "14b/header/no-match/hidden/module": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "9d1948b2ba94516e35c93538",
+        "location": "https://github.com/git/git/commit/d21f8426907e84465ab54df5b05bc81057f448d9",
+        "speaker": "Junio C Hamano",
+        "start": 1526,
+        "end": 1751,
+        "quote": "Essentially, this makes unpack_*() functions that are asked to\nunpack a loose object header to be a bit more strict and detect an\ninput that cannot possibly be a valid object header, even before the\nparsing function kicks in.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 222,
+        "end": 535,
+        "quote": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "9d1948b2ba94516e35c93538",
+        "location": "https://github.com/git/git/commit/d21f8426907e84465ab54df5b05bc81057f448d9",
+        "speaker": "Junio C Hamano",
+        "start": 1526,
+        "end": 1751,
+        "quote": "Essentially, this makes unpack_*() functions that are asked to\nunpack a loose object header to be a bit more strict and detect an\ninput that cannot possibly be a valid object header, even before the\nparsing function kicks in.",
+        "status": "source_only"
+      },
+      "rationale": "Reconsider the earlier decision “Essentially, this makes unpack_*() functions that are asked to\nunpack a loose object header to be a bit more strict and detect an\ninput that cannot possibly be a valid object header, even before the\nparsing function kicks in.”. The new report gives the following behavior and its conditions. “In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]”",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+      "alternative": {
+        "source_id": "87ab8270bb000c1af92415d7",
+        "location": "https://github.com/git/git/commit/5848fb11acd0b6aad6ba9e3e71bd91485e0d4c71",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 0,
+        "end": 56,
+        "quote": "object-file.c: return ULHR_TOO_LONG on \"header too long\"",
+        "status": "source_only"
+      },
+      "distinction": "The alternative addresses “object-file.c: return ULHR_TOO_LONG on \"header too long\"”. The reported observation is “In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]”.",
+      "report_anchor": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 222,
+        "end": 425,
+        "quote": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+        "status": "source_only"
+      },
+      "observation_evidence": {
+        "source_id": "fbee95735e37be94c6e68bf6",
+        "location": "https://github.com/git/git/commit/4627c67fa68d5669be511962a6437a11c0db3c99",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 222,
+        "end": 535,
+        "quote": "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]",
+        "status": "source_only"
+      }
+    }
+  }
+}

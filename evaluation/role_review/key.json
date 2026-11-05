@@ -1,0 +1,707 @@
+{
+  "t00": {
+    "topic": "http-index",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+    "alternative": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+    "report": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.",
+      "This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision."
+    ],
+    "new": [
+      "This patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "foil": [
+      "remote-curl: show progress for fetches over dumb HTTP",
+      "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+      "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+    ],
+    "rubric": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "distinction": "The alternative counts downloaded objects to display progress during dumb HTTP fetches; the regression concerns storing/overwriting the index.",
+    "masked": false
+  },
+  "t01": {
+    "topic": "http-index",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+    "alternative": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+    "report": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.",
+      "This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision."
+    ],
+    "new": [
+      "This patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "foil": [
+      "remote-curl: show progress for fetches over dumb HTTP",
+      "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+      "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+    ],
+    "rubric": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "distinction": "The alternative counts downloaded objects to display progress during dumb HTTP fetches; the regression concerns storing/overwriting the index.",
+    "masked": true
+  },
+  "t02": {
+    "topic": "http-index",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+    "alternative": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+    "report": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.",
+      "This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision."
+    ],
+    "new": [
+      "This patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "foil": [
+      "remote-curl: show progress for fetches over dumb HTTP",
+      "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+      "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+    ],
+    "rubric": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "distinction": "The alternative counts downloaded objects to display progress during dumb HTTP fetches; the regression concerns storing/overwriting the index.",
+    "masked": false
+  },
+  "t03": {
+    "topic": "http-index",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+    "alternative": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+    "report": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.",
+      "This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision."
+    ],
+    "new": [
+      "This patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "foil": [
+      "remote-curl: show progress for fetches over dumb HTTP",
+      "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+      "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+    ],
+    "rubric": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "distinction": "The alternative counts downloaded objects to display progress during dumb HTTP fetches; the regression concerns storing/overwriting the index.",
+    "masked": true
+  },
+  "t04": {
+    "topic": "http-index",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+    "alternative": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+    "report": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.",
+      "This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision."
+    ],
+    "new": [
+      "This patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "The core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "foil": [
+      "remote-curl: show progress for fetches over dumb HTTP",
+      "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.",
+      "We don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+    ],
+    "rubric": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "distinction": "The alternative counts downloaded objects to display progress during dumb HTTP fetches; the regression concerns storing/overwriting the index.",
+    "masked": false
+  },
+  "t05": {
+    "topic": "make-info",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+    "alternative": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+    "report": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+    "old": [
+      "Makefile: move \".SUFFIXES\" rule to shared.mak",
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+    ],
+    "new": [
+      "Fix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "If the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+      "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+    ],
+    "foil": [
+      "Documentation/Makefile: fix lint-docs mkdir dependency",
+      "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+      "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+      "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+      "The fix is easy: we just need to depend on the correct parent directory."
+    ],
+    "rubric": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "distinction": "The alternative establishes parent-directory prerequisites for parallel lint-docs directories; the regression is suffix expansion for make info.",
+    "masked": false
+  },
+  "t06": {
+    "topic": "make-info",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+    "alternative": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+    "report": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+    "old": [
+      "Makefile: move \".SUFFIXES\" rule to shared.mak",
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "If the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+      "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+    ],
+    "foil": [
+      "Documentation/Makefile: fix lint-docs mkdir dependency",
+      "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+      "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+      "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+      "The fix is easy: we just need to depend on the correct parent directory."
+    ],
+    "rubric": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "distinction": "The alternative establishes parent-directory prerequisites for parallel lint-docs directories; the regression is suffix expansion for make info.",
+    "masked": true
+  },
+  "t07": {
+    "topic": "make-info",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+    "alternative": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+    "report": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+    "old": [
+      "Makefile: move \".SUFFIXES\" rule to shared.mak",
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+    ],
+    "new": [
+      "Fix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "If the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+      "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+    ],
+    "foil": [
+      "Documentation/Makefile: fix lint-docs mkdir dependency",
+      "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+      "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+      "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+      "The fix is easy: we just need to depend on the correct parent directory."
+    ],
+    "rubric": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "distinction": "The alternative establishes parent-directory prerequisites for parallel lint-docs directories; the regression is suffix expansion for make info.",
+    "masked": false
+  },
+  "t08": {
+    "topic": "make-info",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+    "alternative": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+    "report": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+    "old": [
+      "Makefile: move \".SUFFIXES\" rule to shared.mak",
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "If the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+      "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+    ],
+    "foil": [
+      "Documentation/Makefile: fix lint-docs mkdir dependency",
+      "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+      "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+      "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+      "The fix is easy: we just need to depend on the correct parent directory."
+    ],
+    "rubric": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "distinction": "The alternative establishes parent-directory prerequisites for parallel lint-docs directories; the regression is suffix expansion for make info.",
+    "masked": true
+  },
+  "t09": {
+    "topic": "make-info",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+    "alternative": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+    "report": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+    "old": [
+      "Makefile: move \".SUFFIXES\" rule to shared.mak",
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+    ],
+    "new": [
+      "Fix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "If the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+      "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+    ],
+    "foil": [
+      "Documentation/Makefile: fix lint-docs mkdir dependency",
+      "Since 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:",
+      "where each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".",
+      "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.",
+      "The fix is easy: we just need to depend on the correct parent directory."
+    ],
+    "rubric": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "distinction": "The alternative establishes parent-directory prerequisites for parallel lint-docs directories; the regression is suffix expansion for make info.",
+    "masked": false
+  },
+  "t10": {
+    "topic": "freebsd-cwd",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+    "alternative": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+    "report": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "foil": [
+      "real_path(): properly handle nonexistent top-level paths",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+      "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+    ],
+    "rubric": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "distinction": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "masked": false
+  },
+  "t11": {
+    "topic": "freebsd-cwd",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+    "alternative": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+    "report": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "foil": [
+      "real_path(): properly handle nonexistent top-level paths",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+      "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+    ],
+    "rubric": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "distinction": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "masked": true
+  },
+  "t12": {
+    "topic": "freebsd-cwd",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+    "alternative": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+    "report": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "foil": [
+      "real_path(): properly handle nonexistent top-level paths",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+      "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+    ],
+    "rubric": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "distinction": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "masked": false
+  },
+  "t13": {
+    "topic": "freebsd-cwd",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+    "alternative": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+    "report": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "foil": [
+      "real_path(): properly handle nonexistent top-level paths",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+      "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+    ],
+    "rubric": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "distinction": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "masked": true
+  },
+  "t14": {
+    "topic": "freebsd-cwd",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+    "alternative": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+    "report": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "foil": [
+      "real_path(): properly handle nonexistent top-level paths",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.",
+      "2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+    ],
+    "rubric": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "distinction": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "masked": false
+  },
+  "t15": {
+    "topic": "fsck-empty",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+    "alternative": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+    "report": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE",
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+      "error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "foil": [
+      "fsck: do not abort upon finding an empty blob",
+      "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+    ],
+    "rubric": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "distinction": "Writing an empty blob with fwrite in the alternative is distinct from reading/mapping an empty loose object file to diagnose corruption.",
+    "masked": false
+  },
+  "t16": {
+    "topic": "fsck-empty",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+    "alternative": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+    "report": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE",
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+      "error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in [ref],\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "foil": [
+      "fsck: do not abort upon finding an empty blob",
+      "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+    ],
+    "rubric": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "distinction": "Writing an empty blob with fwrite in the alternative is distinct from reading/mapping an empty loose object file to diagnose corruption.",
+    "masked": true
+  },
+  "t17": {
+    "topic": "fsck-empty",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+    "alternative": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+    "report": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE",
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+      "error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "foil": [
+      "fsck: do not abort upon finding an empty blob",
+      "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+    ],
+    "rubric": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "distinction": "Writing an empty blob with fwrite in the alternative is distinct from reading/mapping an empty loose object file to diagnose corruption.",
+    "masked": false
+  },
+  "t18": {
+    "topic": "fsck-empty",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+    "alternative": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+    "report": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE",
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+      "error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in [ref],\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "foil": [
+      "fsck: do not abort upon finding an empty blob",
+      "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+    ],
+    "rubric": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "distinction": "Writing an empty blob with fwrite in the alternative is distinct from reading/mapping an empty loose object file to diagnose corruption.",
+    "masked": true
+  },
+  "t19": {
+    "topic": "fsck-empty",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+    "alternative": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+    "report": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE",
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+      "error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "foil": [
+      "fsck: do not abort upon finding an empty blob",
+      "Asking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero."
+    ],
+    "rubric": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "distinction": "Writing an empty blob with fwrite in the alternative is distinct from reading/mapping an empty loose object file to diagnose corruption.",
+    "masked": false
+  },
+  "t20": {
+    "topic": "dir-diff",
+    "scenario": "mixed",
+    "view": "raw",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+    "alternative": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+    "report": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "foil": [
+      "difftool: handle unmerged files in dir-diff mode",
+      "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+      "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+    ],
+    "rubric": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "distinction": "The alternative deduplicates unmerged and modified entries for one path in dir-diff; the new report concerns the directory used to construct the temporary index.",
+    "masked": false
+  },
+  "t21": {
+    "topic": "dir-diff",
+    "scenario": "mixed",
+    "view": "hidden",
+    "expected": "review",
+    "earlier": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+    "alternative": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+    "report": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "foil": [
+      "difftool: handle unmerged files in dir-diff mode",
+      "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+      "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+    ],
+    "rubric": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "distinction": "The alternative deduplicates unmerged and modified entries for one path in dir-diff; the new report concerns the directory used to construct the temporary index.",
+    "masked": true
+  },
+  "t22": {
+    "topic": "dir-diff",
+    "scenario": "no-match",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+    "alternative": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+    "report": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "foil": [
+      "difftool: handle unmerged files in dir-diff mode",
+      "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+      "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+    ],
+    "rubric": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "distinction": "The alternative deduplicates unmerged and modified entries for one path in dir-diff; the new report concerns the directory used to construct the temporary index.",
+    "masked": false
+  },
+  "t23": {
+    "topic": "dir-diff",
+    "scenario": "no-match",
+    "view": "hidden",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+    "alternative": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+    "report": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "foil": [
+      "difftool: handle unmerged files in dir-diff mode",
+      "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+      "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+    ],
+    "rubric": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "distinction": "The alternative deduplicates unmerged and modified entries for one path in dir-diff; the new report concerns the directory used to construct the temporary index.",
+    "masked": true
+  },
+  "t24": {
+    "topic": "dir-diff",
+    "scenario": "foil-only",
+    "view": "raw",
+    "expected": "keep",
+    "earlier": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+    "alternative": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+    "report": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "foil": [
+      "difftool: handle unmerged files in dir-diff mode",
+      "When files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.",
+      "Ensure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+    ],
+    "rubric": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "distinction": "The alternative deduplicates unmerged and modified entries for one path in dir-diff; the new report concerns the directory used to construct the temporary index.",
+    "masked": false
+  }
+}

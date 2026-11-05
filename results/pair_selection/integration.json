@@ -1,0 +1,160 @@
+{
+  "prior_git-03": {
+    "pull": [
+      {
+        "source_id": "33781ffdea5f6b0451862ddc",
+        "result": {
+          "action": "keep",
+          "basis": "no candidate with both a supported change and two supporting passages"
+        }
+      }
+    ],
+    "qa_control": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "de48a1fc5270998280c48e9d",
+          "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 42,
+          "end": 195,
+          "quote": "Amend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members.",
+          "status": "source_only",
+          "answer": "buf"
+        }
+      ]
+    },
+    "qa_with_review": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "de48a1fc5270998280c48e9d",
+          "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "start": 42,
+          "end": 195,
+          "quote": "Amend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members.",
+          "status": "source_only",
+          "answer": "buf"
+        }
+      ]
+    },
+    "same": true,
+    "review_context": [],
+    "same_sources": true
+  },
+  "unseen-2p": {
+    "pull": [
+      {
+        "source_id": "0eb50c578a29e4b7fe4dd4de",
+        "result": {
+          "action": "reassess",
+          "previous": {
+            "source_id": "0790b8790ead045b7d97d5ea",
+            "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+            "speaker": "Ben Peart",
+            "start": 51,
+            "end": 267,
+            "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+            "status": "source_only"
+          },
+          "incoming": {
+            "source_id": "0eb50c578a29e4b7fe4dd4de",
+            "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+            "speaker": "Ben Peart",
+            "start": 62,
+            "end": 429,
+            "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+            "status": "source_only"
+          },
+          "prior_rationale": {
+            "source_id": "0790b8790ead045b7d97d5ea",
+            "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+            "speaker": "Ben Peart",
+            "start": 51,
+            "end": 267,
+            "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+            "status": "source_only"
+          },
+          "rationale": "The earlier decision relied on the specific context of a \"checkout -b\" operation to determine whether to skip updates; the report introduces new evidence showing filesystem access during such operations, thus changing its applicability to include these cases in the initial checkout process, provided that alternative cheaper tests can still exit early.",
+          "reviewer": "Ben Peart",
+          "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+          "id": "ae4f372a013e38487d84627a"
+        }
+      }
+    ],
+    "qa_control": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 269,
+          "end": 580,
+          "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+          "status": "source_only",
+          "answer": "checkout.optimizeNewBranch"
+        }
+      ]
+    },
+    "qa_with_review": {
+      "status": "answered",
+      "answers": [
+        {
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "speaker": "Ben Peart",
+          "start": 269,
+          "end": 580,
+          "quote": "If sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.",
+          "status": "source_only",
+          "answer": "checkout.optimizeNewBranch"
+        }
+      ]
+    },
+    "same": true,
+    "review_context": [
+      {
+        "action": "reassess",
+        "goal": "Identify prior project decisions whose rationale should be revisited in light of new evidence.",
+        "incoming": {
+          "end": 429,
+          "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+          "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+          "source_id": "0eb50c578a29e4b7fe4dd4de",
+          "speaker": "Ben Peart",
+          "start": 62,
+          "status": "source_only"
+        },
+        "next_step": "Reassess the earlier decision against the changed constraint before replacing it.",
+        "previous": {
+          "end": 267,
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "speaker": "Ben Peart",
+          "start": 51,
+          "status": "source_only"
+        },
+        "prior_rationale": {
+          "end": 267,
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+          "source_id": "0790b8790ead045b7d97d5ea",
+          "speaker": "Ben Peart",
+          "start": 51,
+          "status": "source_only"
+        },
+        "rationale": "The earlier decision relied on the specific context of a \"checkout -b\" operation to determine whether to skip updates; the report introduces new evidence showing filesystem access during such operations, thus changing its applicability to include these cases in the initial checkout process, provided that alternative cheaper tests can still exit early.",
+        "reviewer": "Ben Peart",
+        "strategy": "pairwise",
+        "id": "ae4f372a013e38487d84627a",
+        "proposal": "ae4f372a013e38487d84627a",
+        "kind": "followup",
+        "status": "pending"
+      }
+    ],
+    "same_sources": true
+  }
+}

@@ -1,0 +1,777 @@
+[
+  {
+    "id": "git-alias-pos",
+    "prior": [
+      {
+        "owner": "Miklos Vajna",
+        "observed_at": "2008-07-01T05:45:50.000000+00:00",
+        "source": {
+          "speaker": "Miklos Vajna",
+          "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+          "text": "Move split_cmdline() to alias.c\n\nsplit_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+        }
+      },
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-06-15T19:31:50.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+          "text": "alias: use the early config machinery to expand aliases\n\nInstead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.\n\nIt may look like unnecessary work to discover the .git/ directory in the\nearly config machinery and then call setup_git_directory_gently() in the\ncase of a shell alias, repeating the very same discovery *again*.\nHowever, we have to do this as the early config machinery takes pains\n*not* to touch any global state, while shell aliases expect a possibly\nchanged working directory and at least the GIT_PREFIX and GIT_DIR\nvariables to be set.\n\nThis change also fixes a known issue where Git tried to read the pager\nconfig from an incorrect path in a subdirectory of a Git worktree if an\nalias expanded to a shell command."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2017-07-17T21:00:12.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+        "text": "alias: compare alias name *case-insensitively*\n\nIt is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter.\n\nTherefore, we must compare the alias name insensitively to the config\nkeys.\n\nThis fixes a regression introduced by a9bcf6586d1 (alias: use\nthe early config machinery to expand aliases, 2017-06-14)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    }
+  },
+  {
+    "id": "cross-alias",
+    "prior": [
+      {
+        "owner": "Miklos Vajna",
+        "observed_at": "2008-07-01T05:45:50.000000+00:00",
+        "source": {
+          "speaker": "Miklos Vajna",
+          "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+          "text": "Move split_cmdline() to alias.c\n\nsplit_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+        }
+      },
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-06-15T19:31:50.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+          "text": "alias: use the early config machinery to expand aliases\n\nInstead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.\n\nIt may look like unnecessary work to discover the .git/ directory in the\nearly config machinery and then call setup_git_directory_gently() in the\ncase of a shell alias, repeating the very same discovery *again*.\nHowever, we have to do this as the early config machinery takes pains\n*not* to touch any global state, while shell aliases expect a possibly\nchanged working directory and at least the GIT_PREFIX and GIT_DIR\nvariables to be set.\n\nThis change also fixes a known issue where Git tried to read the pager\nconfig from an incorrect path in a subdirectory of a Git worktree if an\nalias expanded to a shell command."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Johannes Schindelin",
+      "observed_at": "2017-07-17T21:00:12.000000+00:00",
+      "source": {
+        "speaker": "Johannes Schindelin",
+        "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+        "text": "alias: compare alias name *case-insensitively*\n\nIt is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter.\n\nTherefore, we must compare the alias name insensitively to the config\nkeys.\n\nThis fixes a regression introduced by a9bcf6586d1 (alias: use\nthe early config machinery to expand aliases, 2017-06-14)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+      "quote": "split_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/643df7e234dda47a4748311361a82df5415b7bc1",
+      "quote": "It is totally legitimate to add CamelCased aliases, but due to the way\nconfig keys are compared, the case does not matter."
+    },
+    "fixed_only": true
+  },
+  {
+    "id": "git-alias-neg",
+    "prior": [
+      {
+        "owner": "Miklos Vajna",
+        "observed_at": "2008-07-01T05:45:50.000000+00:00",
+        "source": {
+          "speaker": "Miklos Vajna",
+          "location": "https://github.com/git/git/commit/0989fe9623dc8d98033f6acdcc0c84ec28571b19",
+          "text": "Move split_cmdline() to alias.c\n\nsplit_cmdline() is currently used for aliases only, but later it can be\nuseful for other builtins as well. Move it to alias.c for now,\nindicating that originally it's for aliases, but we'll have it in libgit\nthis way."
+        }
+      },
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-06-15T19:31:50.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+          "text": "alias: use the early config machinery to expand aliases\n\nInstead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead.\n\nIt may look like unnecessary work to discover the .git/ directory in the\nearly config machinery and then call setup_git_directory_gently() in the\ncase of a shell alias, repeating the very same discovery *again*.\nHowever, we have to do this as the early config machinery takes pains\n*not* to touch any global state, while shell aliases expect a possibly\nchanged working directory and at least the GIT_PREFIX and GIT_DIR\nvariables to be set.\n\nThis change also fixes a known issue where Git tried to read the pager\nconfig from an incorrect path in a subdirectory of a Git worktree if an\nalias expanded to a shell command."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Rasmus Villemoes",
+      "observed_at": "2018-10-11T01:21:43.000000+00:00",
+      "source": {
+        "speaker": "Rasmus Villemoes",
+        "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+        "text": "git.c: handle_alias: prepend alias info when first argument is -h\n\nMost git commands respond to -h anywhere in the command line, or at\nleast as a first and lone argument, by printing the usage\ninformation. For aliases, we can provide a little more information that\nmight be useful in interpreting/understanding the following output by\nprepending a line telling that the command is an alias, and for what.\n\nWhen one invokes a simple alias, such as \"cp = cherry-pick\"\nwith -h, this results in\n\n$ git cp -h\n'cp' is aliased to 'cherry-pick'\nusage: git cherry-pick [<options>] <commit-ish>...\n...\n\nWhen the alias consists of more than one word, this provides the\nadditional benefit of informing the user which options are implicit in\nusing the alias, e.g. with \"cp = cherry-pick -n\":\n\n$ git cp -h\n'cp' is aliased to 'cherry-pick -n'\nusage: git cherry-pick [<options>] <commit-ish>...\n...\n\nFor shell commands, we cannot know how it responds to -h, but printing\nthis line to stderr should not hurt, and can help in figuring out what\nis happening in a case like\n\n$ git sc -h\n'sc' is aliased to '!somecommand'\nsomecommand: invalid option '-h'"
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/a9bcf6586d1a4888aea91553d73cda20494b8335",
+      "quote": "Instead of discovering the .git/ directory, reading the config and then\ntrying to painstakingly reset all the global state if we did not find a\nmatching alias, let's use the early config machinery instead."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/a9a60b94ccda5ff25faf51f39faeac11cac68346",
+      "quote": "Most git commands respond to -h anywhere in the command line, or at\nleast as a first and lone argument, by printing the usage\ninformation. For aliases, we can provide a little more information that\nmight be useful in interpreting/understanding the following output by\nprepending a line telling that the command is an alias, and for what."
+    }
+  },
+  {
+    "id": "git-cvs-pos",
+    "prior": [
+      {
+        "owner": "Pascal Obry",
+        "observed_at": "2009-09-06T05:34:27.000000+00:00",
+        "source": {
+          "speaker": "Pascal Obry",
+          "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+          "text": "Do not scramble password read from .cvspass\n\nPasswords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.\n\nThis fixes a regression introduced by b2139db (git-cvsimport: add support\nfor cvs pserver password scrambling., 2009-08-14)."
+        }
+      },
+      {
+        "owner": "Philippe Bruhat (BooK)",
+        "observed_at": "2008-06-11T05:24:01.000000+00:00",
+        "source": {
+          "speaker": "Philippe Bruhat (BooK)",
+          "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+          "text": "git-cvsimport: do not fail when CVSROOT is /\n\nFor CVS repositories with unusual CVSROOT, git-cvsimport would fail:\n\n    $ git-cvsimport -v -C foo -d :pserver:anon:@cvs.example.com:/ foo\n    AuthReply: error 0 : no such repository\n\nThis patch ensures that the path is never empty, but at least '/'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Clemens Buchacher",
+      "observed_at": "2009-09-17T07:38:49.000000+00:00",
+      "source": {
+        "speaker": "Clemens Buchacher",
+        "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+        "text": "cvs: initialize empty password\n\nIf we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\".\n\nThis fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    }
+  },
+  {
+    "id": "cross-cvs",
+    "prior": [
+      {
+        "owner": "Pascal Obry",
+        "observed_at": "2009-09-06T05:34:27.000000+00:00",
+        "source": {
+          "speaker": "Pascal Obry",
+          "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+          "text": "Do not scramble password read from .cvspass\n\nPasswords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.\n\nThis fixes a regression introduced by b2139db (git-cvsimport: add support\nfor cvs pserver password scrambling., 2009-08-14)."
+        }
+      },
+      {
+        "owner": "Philippe Bruhat (BooK)",
+        "observed_at": "2008-06-11T05:24:01.000000+00:00",
+        "source": {
+          "speaker": "Philippe Bruhat (BooK)",
+          "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+          "text": "git-cvsimport: do not fail when CVSROOT is /\n\nFor CVS repositories with unusual CVSROOT, git-cvsimport would fail:\n\n    $ git-cvsimport -v -C foo -d :pserver:anon:@cvs.example.com:/ foo\n    AuthReply: error 0 : no such repository\n\nThis patch ensures that the path is never empty, but at least '/'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Clemens Buchacher",
+      "observed_at": "2009-09-17T07:38:49.000000+00:00",
+      "source": {
+        "speaker": "Clemens Buchacher",
+        "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+        "text": "cvs: initialize empty password\n\nIf we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\".\n\nThis fixes a regression introduced by 3fb9d582 (Do not scramble\npassword read from .cvspass)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+      "quote": "For CVS repositories with unusual CVSROOT, git-cvsimport would fail:"
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/e481b1d8db9947681a5c124545ef06951f42155d",
+      "quote": "If we do not read a password from the command line, and there are no\npasswords stored in .cvspass, we have to initialize the password with\njust \"A\"."
+    },
+    "fixed_only": true
+  },
+  {
+    "id": "git-cvs-neg",
+    "prior": [
+      {
+        "owner": "Pascal Obry",
+        "observed_at": "2009-09-06T05:34:27.000000+00:00",
+        "source": {
+          "speaker": "Pascal Obry",
+          "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+          "text": "Do not scramble password read from .cvspass\n\nPasswords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled.\n\nThis fixes a regression introduced by b2139db (git-cvsimport: add support\nfor cvs pserver password scrambling., 2009-08-14)."
+        }
+      },
+      {
+        "owner": "Philippe Bruhat (BooK)",
+        "observed_at": "2008-06-11T05:24:01.000000+00:00",
+        "source": {
+          "speaker": "Philippe Bruhat (BooK)",
+          "location": "https://github.com/git/git/commit/8c372fb01dcd9da5e0e538943cc173941c03ef2d",
+          "text": "git-cvsimport: do not fail when CVSROOT is /\n\nFor CVS repositories with unusual CVSROOT, git-cvsimport would fail:\n\n    $ git-cvsimport -v -C foo -d :pserver:anon:@cvs.example.com:/ foo\n    AuthReply: error 0 : no such repository\n\nThis patch ensures that the path is never empty, but at least '/'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "brian m. carlson",
+      "observed_at": "2020-06-22T18:21:07.000000+00:00",
+      "source": {
+        "speaker": "brian m. carlson",
+        "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+        "text": "git-cvsimport: port to SHA-256\n\nInstead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/3fb9d58235ce4985689840b901aecacc6e3bd094",
+      "quote": "Passwords stored in .cvspass are already scrambled, we do not\nwant to scramble them twice. Only passwords read from the\ncommand line are scrambled."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/f3eaa09261c25813c84a0e47ce8a4dd1b9f5b717",
+      "quote": "Instead of calling the function is_sha1, call it is_oid and update it to\nmatch either a SHA-1 or a SHA-256 hex object ID."
+    }
+  },
+  {
+    "id": "git-svn-pos",
+    "prior": [
+      {
+        "owner": "Stephan Beyer",
+        "observed_at": "2008-07-13T20:21:26.000000+00:00",
+        "source": {
+          "speaker": "Stephan Beyer",
+          "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+          "text": "t/: Use \"test_must_fail git\" instead of \"! git\"\n\nThis patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".\n\nThis is useful to\n\n - make sure the test does not fail because of a signal,\n   e.g. SIGSEGV, and\n\n - advertise the use of \"test_must_fail\" for new tests."
+        }
+      },
+      {
+        "owner": "Ramkumar Ramachandra",
+        "observed_at": "2010-11-24T00:20:22.000000+00:00",
+        "source": {
+          "speaker": "Ramkumar Ramachandra",
+          "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+          "text": "t9010 (svn-fe): Eliminate dependency on svn perl bindings\n\nRunning test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Junio C Hamano",
+      "observed_at": "2010-12-09T17:26:07.000000+00:00",
+      "source": {
+        "speaker": "Junio C Hamano",
+        "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+        "text": "t9010 fails when no svn is available\n\nRunning test t9010 without svn currently errors out for no good reason.\n\nThe test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety.\n\nThis should fix it."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    }
+  },
+  {
+    "id": "cross-svn",
+    "prior": [
+      {
+        "owner": "Stephan Beyer",
+        "observed_at": "2008-07-13T20:21:26.000000+00:00",
+        "source": {
+          "speaker": "Stephan Beyer",
+          "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+          "text": "t/: Use \"test_must_fail git\" instead of \"! git\"\n\nThis patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".\n\nThis is useful to\n\n - make sure the test does not fail because of a signal,\n   e.g. SIGSEGV, and\n\n - advertise the use of \"test_must_fail\" for new tests."
+        }
+      },
+      {
+        "owner": "Ramkumar Ramachandra",
+        "observed_at": "2010-11-24T00:20:22.000000+00:00",
+        "source": {
+          "speaker": "Ramkumar Ramachandra",
+          "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+          "text": "t9010 (svn-fe): Eliminate dependency on svn perl bindings\n\nRunning test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Junio C Hamano",
+      "observed_at": "2010-12-09T17:26:07.000000+00:00",
+      "source": {
+        "speaker": "Junio C Hamano",
+        "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+        "text": "t9010 fails when no svn is available\n\nRunning test t9010 without svn currently errors out for no good reason.\n\nThe test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety.\n\nThis should fix it."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+      "quote": "This patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\"."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/8e9d453ce77b7942dd35c23e145981dc472fb8c8",
+      "quote": "The test uses \"svnadmin\" without checking if svn is available.  This was a\nregression introduced by b0ad24b (t9010 (svn-fe): Eliminate dependency on\nsvn perl bindings, 2010-10-10) when it stopped including ./lib-git-svn.sh\nthat had the safety."
+    },
+    "fixed_only": true
+  },
+  {
+    "id": "git-svn-neg",
+    "prior": [
+      {
+        "owner": "Stephan Beyer",
+        "observed_at": "2008-07-13T20:21:26.000000+00:00",
+        "source": {
+          "speaker": "Stephan Beyer",
+          "location": "https://github.com/git/git/commit/d492b31cafe9aa5ce001b1d48815f4c0bb40d01a",
+          "text": "t/: Use \"test_must_fail git\" instead of \"! git\"\n\nThis patch changes every occurrence of \"! git\" -- with the meaning\nthat a git call has to gracefully fail -- into \"test_must_fail git\".\n\nThis is useful to\n\n - make sure the test does not fail because of a signal,\n   e.g. SIGSEGV, and\n\n - advertise the use of \"test_must_fail\" for new tests."
+        }
+      },
+      {
+        "owner": "Ramkumar Ramachandra",
+        "observed_at": "2010-11-24T00:20:22.000000+00:00",
+        "source": {
+          "speaker": "Ramkumar Ramachandra",
+          "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+          "text": "t9010 (svn-fe): Eliminate dependency on svn perl bindings\n\nRunning test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2019-11-27T10:05:27.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+        "text": "test: use test_must_be_empty F instead of test_cmp empty F\n\nUse test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/b0ad24be8ca9acd86393ce099d3217872d838915",
+      "quote": "Running test t9010 without the SVN:: perl modules currently errors\nout, for no good reason.  We can make these tests easier to read and\nrun by not using the perl libsvn bindings and instead duplicating only\nthe relevant code from lib-git-svn.sh."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/ed254710eee0a5fcde1057593d181d40b02922e1",
+      "quote": "Use test_must_be_empty instead of comparing it to an empty file.  That's\nmore efficient, as the function only needs built-in meta-data only check\nin the usual case, and provides nicer debug output otherwise."
+    }
+  },
+  {
+    "id": "git-trash-pos",
+    "prior": [
+      {
+        "owner": "John Keeping",
+        "observed_at": "2013-04-15T06:30:21.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+          "text": "t/test-lib.sh: fix TRASH_DIRECTORY handling\n\nAfter the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).\n\nFix this by always referring to the trash directory as $TRASH_DIRECTORY."
+        }
+      },
+      {
+        "owner": "Bryan Donlan",
+        "observed_at": "2008-05-05T21:37:02.000000+00:00",
+        "source": {
+          "speaker": "Bryan Donlan",
+          "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+          "text": "Fix tests breaking when checkout path contains shell metacharacters\n\nThis fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters.\n\nThe majority of git svn tests used the idiom\n\n  test_expect_success \"title\" \"test script using $svnrepo\"\n\nThese were changed to have the test script in single-quotes:\n\n  test_expect_success \"title\" 'test script using \"$svnrepo\"'\n\nwhich unfortunately makes the patch appear larger than it really is.\n\nOne consequence of this change is that in the verbose test output the\nvalue of $svnrepo (and in some cases other variables, too) is no\nlonger expanded, i.e. previously we saw\n\n  * expecting success:\n\ttest script using /path/to/git/t/trash/svnrepo\n\nbut now it is:\n\n  * expecting success:\n\ttest script using \"$svnrepo\""
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2014-01-02T22:40:03.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+        "text": "t0000: set TEST_OUTPUT_DIRECTORY for sub-tests\n\nRunning t0000 produces more trash directories than expected and does\nnot clean up after itself:\n\n    $ ./t0000-basic.sh\n    [...]\n    $ ls -d trash\\ directory.*\n    trash directory.failing-cleanup\n    trash directory.mixed-results1\n    trash directory.mixed-results2\n    trash directory.partial-pass\n    trash directory.test-verbose\n    trash directory.test-verbose-only-2\n\nThese scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around.\n\nFix it by explicitly setting TEST_OUTPUT_DIRECTORY appropriately for\nsub-tests.\n\nAn alternative fix would be to pass the --root parameter that only\nspecifies where to put the trash directories, which would also work.\nHowever, using TEST_OUTPUT_DIRECTORY is more futureproof in case\ntests want to write more output in addition to the test-results/\n(which are already suppressed in sub-tests using the HARNESS_ACTIVE\nsetting) and trash directories.\n\nThis fixes a regression introduced by 38b074d (t/test-lib.sh: fix\nTRASH_DIRECTORY handling, 2013-04-14).  Before that commit, the\nTEST_OUTPUT_DIRECTORY setting was not respected consistently so most\ntests did their work in a \"trash\" subdirectory of the current\ndirectory instead of the output dir."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    }
+  },
+  {
+    "id": "cross-trash",
+    "prior": [
+      {
+        "owner": "John Keeping",
+        "observed_at": "2013-04-15T06:30:21.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+          "text": "t/test-lib.sh: fix TRASH_DIRECTORY handling\n\nAfter the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).\n\nFix this by always referring to the trash directory as $TRASH_DIRECTORY."
+        }
+      },
+      {
+        "owner": "Bryan Donlan",
+        "observed_at": "2008-05-05T21:37:02.000000+00:00",
+        "source": {
+          "speaker": "Bryan Donlan",
+          "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+          "text": "Fix tests breaking when checkout path contains shell metacharacters\n\nThis fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters.\n\nThe majority of git svn tests used the idiom\n\n  test_expect_success \"title\" \"test script using $svnrepo\"\n\nThese were changed to have the test script in single-quotes:\n\n  test_expect_success \"title\" 'test script using \"$svnrepo\"'\n\nwhich unfortunately makes the patch appear larger than it really is.\n\nOne consequence of this change is that in the verbose test output the\nvalue of $svnrepo (and in some cases other variables, too) is no\nlonger expanded, i.e. previously we saw\n\n  * expecting success:\n\ttest script using /path/to/git/t/trash/svnrepo\n\nbut now it is:\n\n  * expecting success:\n\ttest script using \"$svnrepo\""
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2014-01-02T22:40:03.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+        "text": "t0000: set TEST_OUTPUT_DIRECTORY for sub-tests\n\nRunning t0000 produces more trash directories than expected and does\nnot clean up after itself:\n\n    $ ./t0000-basic.sh\n    [...]\n    $ ls -d trash\\ directory.*\n    trash directory.failing-cleanup\n    trash directory.mixed-results1\n    trash directory.mixed-results2\n    trash directory.partial-pass\n    trash directory.test-verbose\n    trash directory.test-verbose-only-2\n\nThese scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around.\n\nFix it by explicitly setting TEST_OUTPUT_DIRECTORY appropriately for\nsub-tests.\n\nAn alternative fix would be to pass the --root parameter that only\nspecifies where to put the trash directories, which would also work.\nHowever, using TEST_OUTPUT_DIRECTORY is more futureproof in case\ntests want to write more output in addition to the test-results/\n(which are already suppressed in sub-tests using the HARNESS_ACTIVE\nsetting) and trash directories.\n\nThis fixes a regression introduced by 38b074d (t/test-lib.sh: fix\nTRASH_DIRECTORY handling, 2013-04-14).  Before that commit, the\nTEST_OUTPUT_DIRECTORY setting was not respected consistently so most\ntests did their work in a \"trash\" subdirectory of the current\ndirectory instead of the output dir."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+      "quote": "This fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/68830470712b370d5ea231f76babd60a8859c105",
+      "quote": "These scratch areas for sub-tests should be under the t0000 trash\ndirectory, but because TEST_OUTPUT_DIRECTORY defaults to\nTEST_DIRECTORY, which is exported to help sub-tests find\ntest-lib.sh, the sub-test trash directories are created under the\ntoplevel t/ directory instead.  Because some of the sub-tests\nsimulate failures, their trash directories are kept around."
+    },
+    "fixed_only": true
+  },
+  {
+    "id": "git-trash-neg",
+    "prior": [
+      {
+        "owner": "John Keeping",
+        "observed_at": "2013-04-15T06:30:21.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+          "text": "t/test-lib.sh: fix TRASH_DIRECTORY handling\n\nAfter the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY).\n\nFix this by always referring to the trash directory as $TRASH_DIRECTORY."
+        }
+      },
+      {
+        "owner": "Bryan Donlan",
+        "observed_at": "2008-05-05T21:37:02.000000+00:00",
+        "source": {
+          "speaker": "Bryan Donlan",
+          "location": "https://github.com/git/git/commit/f69e836fab2b634281d92a0d304de4d768e479cc",
+          "text": "Fix tests breaking when checkout path contains shell metacharacters\n\nThis fixes the remainder of the issues where the test script itself is at\nfault for failing when the git checkout path contains whitespace or other\nshell metacharacters.\n\nThe majority of git svn tests used the idiom\n\n  test_expect_success \"title\" \"test script using $svnrepo\"\n\nThese were changed to have the test script in single-quotes:\n\n  test_expect_success \"title\" 'test script using \"$svnrepo\"'\n\nwhich unfortunately makes the patch appear larger than it really is.\n\nOne consequence of this change is that in the verbose test output the\nvalue of $svnrepo (and in some cases other variables, too) is no\nlonger expanded, i.e. previously we saw\n\n  * expecting success:\n\ttest script using /path/to/git/t/trash/svnrepo\n\nbut now it is:\n\n  * expecting success:\n\ttest script using \"$svnrepo\""
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "John Cai",
+      "observed_at": "2023-05-19T17:08:10.000000+00:00",
+      "source": {
+        "speaker": "John Cai",
+        "location": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a",
+        "text": "t0000-basic: modernize test format\n\nSome tests in t0000-basic.sh used the older four space indent format.\nUpdate these to use tabs."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/38b074de80759c95fec20b0dbc30614caccdfd24",
+      "quote": "After the location of $TRASH_DIRECTORY is adjusted by\n$TEST_OUTPUT_DIRECTORY, we go on to use the $test variable to make the\ntrash directory and cd into it.  This means that when\n$TEST_OUTPUT_DIRECTORY is not \".\" and an absolute --root has not been\nspecified, we do not remove the trash directory once the tests are\ncomplete (remove_trash is set to $TRASH_DIRECTORY)."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/2f68c99a3beefa5556eca76811deb443599e214a",
+      "quote": "Some tests in t0000-basic.sh used the older four space indent format.\nUpdate these to use tabs."
+    }
+  },
+  {
+    "id": "git-symlink-pos",
+    "prior": [
+      {
+        "owner": "Richard Hartmann",
+        "observed_at": "2008-12-22T02:46:41.000000+00:00",
+        "source": {
+          "speaker": "Richard Hartmann",
+          "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+          "text": "Always show which directory is not a git repository\n\nUnify all\n\n  fatal: Not a git repository\n\nerror messages so they include path information."
+        }
+      },
+      {
+        "owner": "Carlo Marcelo Arenas Belon",
+        "observed_at": "2011-01-04T21:44:41.000000+00:00",
+        "source": {
+          "speaker": "Carlo Marcelo Arenas Belon",
+          "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+          "text": "setup: translate symlinks in filename when using absolute paths\n\notherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Junio C Hamano",
+      "observed_at": "2014-02-04T19:24:53.000000+00:00",
+      "source": {
+        "speaker": "Junio C Hamano",
+        "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+        "text": "t3004: add test for ls-files on symlinks via absolute paths\n\nWhen symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead.\n\nThis causes most high-level functions to misbehave when acting on\nsymlinks given via absolute paths. For example\n\n  $ git add /dir/repo/symlink\n\nattempts to add the target of the symlink rather than the symlink\nitself, which is usually not what the user intends to do.\n\nThis is a regression introduced by 18e051a:\n  setup: translate symlinks in filename when using absolute paths\n(which did not take symlinks inside the work tree into consideration).\n\nAdd a known-breakage test using the ls-files function, checking both if\nthe symlink leads to a target in the same directory, and a target in the\nabove directory."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    }
+  },
+  {
+    "id": "cross-symlink",
+    "prior": [
+      {
+        "owner": "Richard Hartmann",
+        "observed_at": "2008-12-22T02:46:41.000000+00:00",
+        "source": {
+          "speaker": "Richard Hartmann",
+          "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+          "text": "Always show which directory is not a git repository\n\nUnify all\n\n  fatal: Not a git repository\n\nerror messages so they include path information."
+        }
+      },
+      {
+        "owner": "Carlo Marcelo Arenas Belon",
+        "observed_at": "2011-01-04T21:44:41.000000+00:00",
+        "source": {
+          "speaker": "Carlo Marcelo Arenas Belon",
+          "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+          "text": "setup: translate symlinks in filename when using absolute paths\n\notherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Junio C Hamano",
+      "observed_at": "2014-02-04T19:24:53.000000+00:00",
+      "source": {
+        "speaker": "Junio C Hamano",
+        "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+        "text": "t3004: add test for ls-files on symlinks via absolute paths\n\nWhen symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead.\n\nThis causes most high-level functions to misbehave when acting on\nsymlinks given via absolute paths. For example\n\n  $ git add /dir/repo/symlink\n\nattempts to add the target of the symlink rather than the symlink\nitself, which is usually not what the user intends to do.\n\nThis is a regression introduced by 18e051a:\n  setup: translate symlinks in filename when using absolute paths\n(which did not take symlinks inside the work tree into consideration).\n\nAdd a known-breakage test using the ls-files function, checking both if\nthe symlink leads to a target in the same directory, and a target in the\nabove directory."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+      "quote": "Unify all"
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/f02033f1d02a55b32815a4702389e4d492f38bcc",
+      "quote": "When symlinks in the working tree are manipulated using the absolute\npath, git dereferences them, and tries to manipulate the link target\ninstead."
+    },
+    "fixed_only": true
+  },
+  {
+    "id": "git-symlink-neg",
+    "prior": [
+      {
+        "owner": "Richard Hartmann",
+        "observed_at": "2008-12-22T02:46:41.000000+00:00",
+        "source": {
+          "speaker": "Richard Hartmann",
+          "location": "https://github.com/git/git/commit/f66bc5f928194366ee5eb78ef18a3562fb1bb7cf",
+          "text": "Always show which directory is not a git repository\n\nUnify all\n\n  fatal: Not a git repository\n\nerror messages so they include path information."
+        }
+      },
+      {
+        "owner": "Carlo Marcelo Arenas Belon",
+        "observed_at": "2011-01-04T21:44:41.000000+00:00",
+        "source": {
+          "speaker": "Carlo Marcelo Arenas Belon",
+          "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+          "text": "setup: translate symlinks in filename when using absolute paths\n\notherwise, comparison to validate against work tree will fail when\nthe path includes a symlink and the name passed is not canonical."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Patrick Steinhardt",
+      "observed_at": "2024-04-16T22:01:25.000000+00:00",
+      "source": {
+        "speaker": "Patrick Steinhardt",
+        "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+        "text": "builtin/clone: stop resolving symlinks when copying files\n\nWhen a user performs a local clone without `--no-local`, then we end up\ncopying the source repository into the target repository directly. To\noptimize this even further, we try to hardlink files into place instead\nof copying data over, which helps both disk usage and speed.\n\nThere is an important edge case in this context though, namely when we\ntry to hardlink symlinks from the source repository into the target\nrepository. Depending on both platform and filesystem the resulting\nbehaviour here can be different:\n\n  - On macOS and NetBSD, calling link(3P) with a symlink target creates\n    a hardlink to the file pointed to by the symlink.\n\n  - On Linux, calling link(3P) instead creates a hardlink to the symlink\n    itself.\n\nTo unify this behaviour, 36596fd2df (clone: better handle symlinked\nfiles at .git/objects/, 2019-07-10) introduced logic to resolve symlinks\nbefore we try to link(3P) files. Consequently, the new behaviour was to\nalways create a hard link to the target of the symlink on all platforms.\n\nEventually though, we figured out that following symlinks like this can\ncause havoc when performing a local clone of a malicious repository,\nwhich resulted in CVE-2022-39253. This issue was fixed via 6f054f9fb3\n(builtin/clone.c: disallow `--local` clones with symlinks, 2022-07-28),\nby refusing symlinks in the source repository.\n\nBut even though we now shouldn't ever link symlinks anymore, the code\nthat resolves symlinks still exists. In the best case the code does not\nend up doing anything because there are no symlinks anymore. In the\nworst case though this can be abused by an adversary that rewrites the\nsource file after it has been checked not to be a symlink such that it\nactually is a symlink when we call link(3P). Thus, it is still possible\nto recreate CVE-2022-39253 due to this time-of-check-time-of-use bug.\n\nRemove the call to `realpath()`. This doesn't yet address the actual\nvulnerability, which will be handled in a subsequent commit."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/18e051a3981f38db08521bb61ccf7e4571335353",
+      "quote": "setup: translate symlinks in filename when using absolute paths"
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/150e6b0aedf57d224c3c49038c306477fa159886",
+      "quote": "Eventually though, we figured out that following symlinks like this can\ncause havoc when performing a local clone of a malicious repository,\nwhich resulted in CVE-2022-39253. This issue was fixed via 6f054f9fb3\n(builtin/clone.c: disallow `--local` clones with symlinks, 2022-07-28),\nby refusing symlinks in the source repository."
+    }
+  },
+  {
+    "id": "git-am-pos",
+    "prior": [
+      {
+        "owner": "Giuseppe Bilotta",
+        "observed_at": "2009-05-29T06:06:34.000000+00:00",
+        "source": {
+          "speaker": "Giuseppe Bilotta",
+          "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+          "text": "git-am foreign patch support: autodetect some patch formats\n\nDefault to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format.\n\nInclude checks for mailboxes, stgit patch series, stgit single patches\nand hg patches."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2008-12-06T04:02:10.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+          "text": "git-am: rename apply_opt_extra file to apply-opt\n\nAll other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Barr",
+      "observed_at": "2011-08-11T20:01:18.000000+00:00",
+      "source": {
+        "speaker": "David Barr",
+        "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+        "text": "am: ignore leading whitespace before patch\n\nSome web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.\n\nSo now you can apply patches from GMail with \"git am\" in three steps:\n\n 1. choose \"show original\"\n 2. tell the browser to \"save as\" (for example by pressing Ctrl+S)\n 3. run \"git am\" on the saved file\n\nThis fixes a regression introduced by v1.6.4-rc0~15^2~2 (git-am\nforeign patch support: autodetect some patch formats, 2009-05-27).\nGMail support was first introduced to \"git am\" by v1.5.4-rc0~274^2\n(Make mailsplit and mailinfo strip whitespace from the start of the\ninput, 2007-11-01)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    }
+  },
+  {
+    "id": "cross-am",
+    "prior": [
+      {
+        "owner": "Giuseppe Bilotta",
+        "observed_at": "2009-05-29T06:06:34.000000+00:00",
+        "source": {
+          "speaker": "Giuseppe Bilotta",
+          "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+          "text": "git-am foreign patch support: autodetect some patch formats\n\nDefault to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format.\n\nInclude checks for mailboxes, stgit patch series, stgit single patches\nand hg patches."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2008-12-06T04:02:10.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+          "text": "git-am: rename apply_opt_extra file to apply-opt\n\nAll other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Barr",
+      "observed_at": "2011-08-11T20:01:18.000000+00:00",
+      "source": {
+        "speaker": "David Barr",
+        "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+        "text": "am: ignore leading whitespace before patch\n\nSome web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace.\n\nSo now you can apply patches from GMail with \"git am\" in three steps:\n\n 1. choose \"show original\"\n 2. tell the browser to \"save as\" (for example by pressing Ctrl+S)\n 3. run \"git am\" on the saved file\n\nThis fixes a regression introduced by v1.6.4-rc0~15^2~2 (git-am\nforeign patch support: autodetect some patch formats, 2009-05-27).\nGMail support was first introduced to \"git am\" by v1.5.4-rc0~274^2\n(Make mailsplit and mailinfo strip whitespace from the start of the\ninput, 2007-11-01)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+      "quote": "All other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/0e8341f29d6541f661cc52f27f96877c0fd469c2",
+      "quote": "Some web-based email clients prepend whitespace to raw message\ntranscripts to workaround content-sniffing in some browsers.  Adjust\nthe patch format detection logic to ignore leading whitespace."
+    },
+    "fixed_only": true
+  },
+  {
+    "id": "git-am-neg",
+    "prior": [
+      {
+        "owner": "Giuseppe Bilotta",
+        "observed_at": "2009-05-29T06:06:34.000000+00:00",
+        "source": {
+          "speaker": "Giuseppe Bilotta",
+          "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+          "text": "git-am foreign patch support: autodetect some patch formats\n\nDefault to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format.\n\nInclude checks for mailboxes, stgit patch series, stgit single patches\nand hg patches."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2008-12-06T04:02:10.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/9b9f5a2258e6df611d2903d84fd8d41806ce0e00",
+          "text": "git-am: rename apply_opt_extra file to apply-opt\n\nAll other state files use dash in their names, not underscores.\nAlso, there is no reason to call this \"extra\".  Drop it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-06-06T17:07:41.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+        "text": "am: add explicit \"--retry\" option\n\nAfter a patch fails, you can ask \"git am\" to try applying it again with\nnew options by running without any of the resume options. E.g.:\n\n  git am <patch\n  # oops, it failed; let's try again\n  git am --3way\n\nBut since this second command has no explicit resume option (like\n\"--continue\"), it looks just like an invocation to read a fresh patch\nfrom stdin. To avoid confusing the two cases, there are some heuristics,\ncourtesy of 8d18550318 (builtin-am: reject patches when there's a\nsession in progress, 2015-08-04):\n\n\tif (in_progress) {\n\t\t/*\n\t\t * Catch user error to feed us patches when there is a session\n\t\t * in progress:\n\t\t *\n\t\t * 1. mbox path(s) are provided on the command-line.\n\t\t * 2. stdin is not a tty: the user is trying to feed us a patch\n\t\t *    from standard input. This is somewhat unreliable -- stdin\n\t\t *    could be /dev/null for example and the caller did not\n\t\t *    intend to feed us a patch but wanted to continue\n\t\t *    unattended.\n\t\t */\n\t\tif (argc || (resume_mode == RESUME_FALSE && !isatty(0)))\n\t\t\tdie(_(\"previous rebase directory %s still exists but mbox given.\"),\n\t\t\t\tstate.dir);\n\n\t\tif (resume_mode == RESUME_FALSE)\n\t\t\tresume_mode = RESUME_APPLY;\n\t\t[...]\n\nSo if no resume command is given, then we require that stdin be a tty,\nand otherwise complain about (potentially) receiving an mbox on stdin.\nBut of course you might not actually have a terminal available! And\nsadly there is no explicit way to hit this same code path; this is the\nonly place that sets RESUME_APPLY. So you're stuck, and scripts like our\ntest suite have to bend over backwards to create a pseudo-tty.\n\nLet's provide an explicit option to trigger this mode. The code turns\nout to be quite simple; just setting \"resume_mode\" to RESUME_FALSE is\nenough to dodge the tty check, and then our state is the same as it\nwould be with the heuristic case (which we'll continue to allow).\n\nWhen we don't have a session in progress, there's already code to\ncomplain when resume_mode is set (but we'll add a new test to cover\nthat).\n\nTo test the new option, we'll convert the existing tests that rely on\nthe fake stdin tty. That lets us test them on more platforms, and will\nlet us simplify test_terminal a bit in a future patch.\n\nIt does, however, mean we're not testing the tty heuristic at all."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/15ced753ac091314941abb28302f7109a9e86b81",
+      "quote": "Default to mbox format if input is from stdin. Otherwise, look at the\nfirst few lines of the first patch to try to guess its format."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/53ce2e3f0abf356fb0d2638783fe06711c5337d6",
+      "quote": "So if no resume command is given, then we require that stdin be a tty,\nand otherwise complain about (potentially) receiving an mbox on stdin.\nBut of course you might not actually have a terminal available! And\nsadly there is no explicit way to hit this same code path; this is the\nonly place that sets RESUME_APPLY. So you're stuck, and scripts like our\ntest suite have to bend over backwards to create a pseudo-tty."
+    }
+  },
+  {
+    "id": "development-checkout",
+    "prior": [
+      {
+        "owner": "Ben Peart",
+        "observed_at": "2018-08-16T18:54:57.000000+00:00",
+        "source": {
+          "speaker": "Ben Peart",
+          "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+          "text": "checkout: optimize \"git checkout -b <new_branch>\"\n\nSkip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.\n\nIf sparse_checkout is on, require the user to manually opt in to this\noptimzed behavior by setting the config setting checkout.optimizeNewBranch\nto true as we will no longer update the skip-worktree bit in the index, nor\nadd/remove files in the working directory to reflect the current sparse\ncheckout settings.\n\nFor comparison, running \"git checkout -b <new_branch>\" on a large repo takes:\n\n14.6 seconds - without this patch\n0.3 seconds - with this patch"
+        }
+      },
+      {
+        "owner": "Phillip Wood",
+        "observed_at": "2018-03-05T18:45:41.000000+00:00",
+        "source": {
+          "speaker": "Phillip Wood",
+          "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+          "text": "add -p: calculate offset delta for edited patches\n\nRecount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.\n\nThis is also a necessary step to removing '--recount' and\n'--allow-overlap' from the invocation of 'git apply'. Before\n'--recount' can be removed the splitting and coalescing counting needs\nto be fixed to handle a missing newline at the end of a file. In order\nto remove '--allow-overlap' there needs to be i) some way of verifying\nthe offset data in the edited hunk (probably by correlating the\npreimage (or postimage if the patch is going to be applied in reverse)\nlines of the edited and unedited versions to see if they are offset or\nif any leading/trailing context lines have been removed) and ii) a way of\ndealing with edited hunks that change context lines that are shared\nwith neighbouring hunks."
+        }
+      },
+      {
+        "owner": "Phillip Wood",
+        "observed_at": "2018-03-05T18:45:41.000000+00:00",
+        "source": {
+          "speaker": "Phillip Wood",
+          "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+          "text": "add -p: don't rely on apply's '--recount' option\n\nNow that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ben Peart",
+      "observed_at": "2019-01-23T21:22:48.000000+00:00",
+      "source": {
+        "speaker": "Ben Peart",
+        "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+        "text": "checkout: fix regression in checkout -b on intitial checkout\n\nWhen doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+      }
+    },
+    "fixed_old": {
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path."
+    },
+    "fixed_new": {
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16)."
+    }
+  }
+]

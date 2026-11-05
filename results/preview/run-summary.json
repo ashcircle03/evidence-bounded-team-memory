@@ -1,0 +1,32 @@
+{
+  "scope": "Quick view requested after long reproduction was paused; no claim to complete CUPMem goal",
+  "job_id": "119750",
+  "slurm_state": "COMPLETED",
+  "exit_code": "0:0",
+  "gpu_count": 1,
+  "elapsed_seconds": 204,
+  "model_startup_and_preparation_seconds": 113.53089995123446,
+  "inference_stream_seconds": 73.92390395514667,
+  "model": "Qwen/Qwen3-8B",
+  "new_training": false,
+  "model_calls": 27,
+  "qa_pass": 13,
+  "qa_total_checkpoints": 18,
+  "independent_streams": 3,
+  "dataset": "Existing synthetic development examples; no held-out generalization claim",
+  "qa_failure_causes": {
+    "condition_quote_mismatch": 3,
+    "answer_omitted_unit": 1,
+    "irrelevant_conflict_in_qa": 1
+  },
+  "proposal_source_review": {
+    "dev-1": "Correct prior decision and changed process availability, but reason incorrectly broadens reconsideration to audit folder and calls temporal update correction. Two unrelated coexist links also created. Not a fully grounded explanation pass.",
+    "dev-2": "Small versus wide fixture input correctly supports coexistence; source-grounded explanation.",
+    "dev-3": "Same release R7, 40 versus 12 items correctly identified as unresolved conflict."
+  },
+  "mechanical_checks": "27 exact prompts/responses replayed through real local Git clones; raw sources preserved and clones converged",
+  "viewer": "index.html",
+  "viewer_behavior": "Recorded real outputs, not free-text live inference. Previous 14B results separately labelled.",
+  "viewer_validation": "JavaScript syntax and call-to-step mapping checked; browser rendering not verified because app browser blocks local file URLs",
+  "followup_policy": "No further inference or budget expansion in this preview. Long reproduction not a prerequisite for short system iterations."
+}

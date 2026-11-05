@@ -1,0 +1,28 @@
+{
+  "failures": [
+    {
+      "job": "119437",
+      "source": "design-model-v1",
+      "kind": "download_connection_broken",
+      "resolution": "Resume same fixed revision with two download workers; succeeded as 119509.",
+      "resource_expansion": false
+    },
+    {
+      "job": "119514",
+      "source": "design-large-v2",
+      "kind": "model_not_visible_on_other_compute_node",
+      "resolution": "Publish SHA256-verified weights to shared Ceph model storage from a CPU allocation; retry identical inference payload on assigned GPU node.",
+      "resource_expansion": false
+    }
+  ],
+  "inference_retry": {
+    "version": "design-large-v3",
+    "same_runner": true,
+    "same_packets": true,
+    "same_model_revision": true,
+    "same_gpu_ram_wall_request": false,
+    "changed": "Shared model staging path and wall allowance 20 -> 40 based on observed storage time; inference payload unchanged.",
+    "same_gpu_and_ram_request": true,
+    "wall_minutes": 40
+  }
+}

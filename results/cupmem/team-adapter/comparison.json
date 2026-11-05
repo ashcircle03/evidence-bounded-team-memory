@@ -1,0 +1,329 @@
+[
+  {
+    "question": "Given the most recently ingested team report, does it provide evidence to reconsider an earlier decision? State the earlier decision and its original reason, the changed condition if any, and what should be reconsidered. Preserve earlier observations that remain true under their original conditions. If no relevant condition changed, say that no reconsideration is warranted. A recommendation is not an approval.",
+    "native_answer": {
+      "answer": "The most recent team report indicates that deployment now permits four processes instead of one, which invalidates the earlier decision based on the outdated condition that Cedar trials were suspended due to deployment constraints. The earlier decision should be reconsidered due to this change in deployment capability.",
+      "brief_rationale": "Deployment capability has changed, invalidating the original premise."
+    },
+    "source_readout": {
+      "status": "ok",
+      "kind": "conditional",
+      "question": "Given the most recently ingested team report, does it provide evidence to reconsider an earlier decision? State the earlier decision and its original reason, the changed condition if any, and what should be reconsidered. Preserve earlier observations that remain true under their original conditions. If no relevant condition changed, say that no reconsideration is warranted. A recommendation is not an approval.",
+      "answers": [
+        {
+          "text": "The earlier decision to suspend Cedar trials due to deployment constraints limiting to one process should be reconsidered. The changed condition is that deployment now permits four processes. The original reason was the limitation to one process, which is no longer valid. The four-process Cedar exporter took 12 seconds per batch, which is faster than the old single-process measurement of 40 seconds per batch.",
+          "evidence": [
+            {
+              "id": "af530c82f1bd9995d863c847:0",
+              "source_id": "af530c82f1bd9995d863c847",
+              "owner": "Scenario observer dev-1",
+              "speaker": "Scenario observer dev-1",
+              "location": "scenario://timeline/dev-1/3",
+              "observed_at": "2025-01-02T12:00:00.000000+00:00",
+              "start": 0,
+              "end": 38,
+              "quote": "Deployment now permits four processes.",
+              "review_status": []
+            },
+            {
+              "id": "af530c82f1bd9995d863c847:1",
+              "source_id": "af530c82f1bd9995d863c847",
+              "owner": "Scenario observer dev-1",
+              "speaker": "Scenario observer dev-1",
+              "location": "scenario://timeline/dev-1/3",
+              "observed_at": "2025-01-02T12:00:00.000000+00:00",
+              "start": 39,
+              "end": 97,
+              "quote": "The four-process Cedar exporter took 12 seconds per batch.",
+              "review_status": []
+            },
+            {
+              "id": "6aaa548a8cc35cd712e5b2b7:0",
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "owner": "Scenario author dev-1",
+              "speaker": "Scenario author dev-1",
+              "location": "scenario://timeline/dev-1/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 0,
+              "end": 60,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch.",
+              "review_status": []
+            },
+            {
+              "id": "6aaa548a8cc35cd712e5b2b7:1",
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "owner": "Scenario author dev-1",
+              "speaker": "Scenario author dev-1",
+              "location": "scenario://timeline/dev-1/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 61,
+              "end": 139,
+              "quote": "We suspended further Cedar trials because deployment permits only one process.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "warnings": [],
+      "rejected_answers": [],
+      "raw": "{\n  \"kind\": \"conditional\",\n  \"answers\": [\n    {\n      \"text\": \"The earlier decision to suspend Cedar trials due to deployment constraints limiting to one process should be reconsidered. The changed condition is that deployment now permits four processes. The original reason was the limitation to one process, which is no longer valid. The four-process Cedar exporter took 12 seconds per batch, which is faster than the old single-process measurement of 40 seconds per batch.\",\n      \"evidence\": [\"af530c82f1bd9995d863c847:0\", \"af530c82f1bd9995d863c847:1\", \"6aaa548a8cc35cd712e5b2b7:0\", \"6aaa548a8cc35cd712e5b2b7:1\"]\n    }\n  ]\n}",
+      "native_answer": {
+        "answer": "The most recent team report indicates that deployment now permits four processes instead of one, which invalidates the earlier decision based on the outdated condition that Cedar trials were suspended due to deployment constraints. The earlier decision should be reconsidered due to this change in deployment capability.",
+        "brief_rationale": "Deployment capability has changed, invalidating the original premise."
+      },
+      "readout": "CUPMem-selected original sources and status-cause links",
+      "source_scope": {
+        "af530c82f1bd9995d863c847": [
+          {
+            "binding_id": "decisive_basis:0",
+            "purpose": "value"
+          },
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "value"
+          },
+          {
+            "binding_id": "supporting_basis:1",
+            "purpose": "status_cause"
+          }
+        ],
+        "6aaa548a8cc35cd712e5b2b7": [
+          {
+            "binding_id": "supporting_basis:1",
+            "purpose": "value"
+          }
+        ]
+      }
+    },
+    "assessment": {
+      "answer_text_supported_in_this_case": true,
+      "sentence_citations_match_original": true,
+      "schema_warning": [],
+      "reviewer": "implementing assistant; not independent or benchmark scoring"
+    }
+  },
+  {
+    "question": "What batch runtimes were measured for the Cedar exporter under each process configuration?",
+    "native_answer": {
+      "answer": "The old premise about Cedar trials being suspended is outdated. The current setup allows deployment with four processes instead of one, but no specific batch runtime data is provided.",
+      "brief_rationale": "The premise is outdated, and the current setup permits four processes, but no runtime data is available."
+    },
+    "source_readout": {
+      "status": "partial",
+      "kind": "single",
+      "question": "What batch runtimes were measured for the Cedar exporter under each process configuration?",
+      "answers": [
+        {
+          "text": "The four-process Cedar exporter had a batch runtime of 12 seconds per batch.",
+          "evidence": [
+            {
+              "id": "af530c82f1bd9995d863c847:1",
+              "source_id": "af530c82f1bd9995d863c847",
+              "owner": "Scenario observer dev-1",
+              "speaker": "Scenario observer dev-1",
+              "location": "scenario://timeline/dev-1/3",
+              "observed_at": "2025-01-02T12:00:00.000000+00:00",
+              "start": 39,
+              "end": 97,
+              "quote": "The four-process Cedar exporter took 12 seconds per batch.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        },
+        {
+          "text": "The single-process Cedar exporter had a batch runtime of 40 seconds per batch.",
+          "evidence": [
+            {
+              "id": "6aaa548a8cc35cd712e5b2b7:0",
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "owner": "Scenario author dev-1",
+              "speaker": "Scenario author dev-1",
+              "location": "scenario://timeline/dev-1/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 0,
+              "end": 60,
+              "quote": "The single-process Cedar exporter took 40 seconds per batch.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "warnings": [
+        "single label with multiple answers; retain supported answers without guessing the relationship"
+      ],
+      "rejected_answers": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"The four-process Cedar exporter had a batch runtime of 12 seconds per batch.\",\n      \"evidence\": [\"af530c82f1bd9995d863c847:1\"]\n    },\n    {\n      \"text\": \"The single-process Cedar exporter had a batch runtime of 40 seconds per batch.\",\n      \"evidence\": [\"6aaa548a8cc35cd712e5b2b7:0\"]\n    }\n  ]\n}",
+      "native_answer": {
+        "answer": "The old premise about Cedar trials being suspended is outdated. The current setup allows deployment with four processes instead of one, but no specific batch runtime data is provided.",
+        "brief_rationale": "The premise is outdated, and the current setup permits four processes, but no runtime data is available."
+      },
+      "readout": "CUPMem-selected original sources and status-cause links",
+      "source_scope": {
+        "af530c82f1bd9995d863c847": [
+          {
+            "binding_id": "decisive_basis:0",
+            "purpose": "value"
+          },
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "status_cause"
+          }
+        ],
+        "6aaa548a8cc35cd712e5b2b7": [
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "value"
+          }
+        ]
+      }
+    },
+    "assessment": {
+      "answer_text_supported_in_this_case": true,
+      "sentence_citations_match_original": true,
+      "schema_warning": [
+        "single label with multiple answers; retain supported answers without guessing the relationship"
+      ],
+      "reviewer": "implementing assistant; not independent or benchmark scoring"
+    }
+  },
+  {
+    "question": "Which audit folder was recorded for the Cedar exporter?",
+    "native_answer": {
+      "answer": "The query's premise is outdated; the Cedar exporter's audit folder recording is no longer based on the old suspended trials setup.",
+      "brief_rationale": "The old premise about Cedar trials being suspended is outdated and no longer valid."
+    },
+    "source_readout": {
+      "status": "ok",
+      "kind": "single",
+      "question": "Which audit folder was recorded for the Cedar exporter?",
+      "answers": [
+        {
+          "text": "Cedar-audit",
+          "evidence": [
+            {
+              "id": "6aaa548a8cc35cd712e5b2b7:2",
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "owner": "Scenario author dev-1",
+              "speaker": "Scenario author dev-1",
+              "location": "scenario://timeline/dev-1/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 140,
+              "end": 172,
+              "quote": "The audit folder is Cedar-audit.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "warnings": [],
+      "rejected_answers": [],
+      "raw": "{\n  \"kind\": \"single\",\n  \"answers\": [\n    {\n      \"text\": \"Cedar-audit\",\n      \"evidence\": [\"6aaa548a8cc35cd712e5b2b7:2\"]\n    }\n  ]\n}",
+      "native_answer": {
+        "answer": "The query's premise is outdated; the Cedar exporter's audit folder recording is no longer based on the old suspended trials setup.",
+        "brief_rationale": "The old premise about Cedar trials being suspended is outdated and no longer valid."
+      },
+      "readout": "CUPMem-selected original sources and status-cause links",
+      "source_scope": {
+        "6aaa548a8cc35cd712e5b2b7": [
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "value"
+          }
+        ],
+        "af530c82f1bd9995d863c847": [
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "status_cause"
+          }
+        ]
+      }
+    },
+    "assessment": {
+      "answer_text_supported_in_this_case": true,
+      "sentence_citations_match_original": true,
+      "schema_warning": [],
+      "reviewer": "implementing assistant; not independent or benchmark scoring"
+    }
+  },
+  {
+    "question": "What was the original reason for suspending Cedar trials, and what changed in that condition?",
+    "native_answer": {
+      "answer": "The original reason for suspending Cedar trials was deployment constraints limiting to one process. However, this is outdated as deployment now permits four processes.",
+      "brief_rationale": "The suspension reason is outdated due to updated deployment constraints."
+    },
+    "source_readout": {
+      "status": "ok",
+      "kind": "conditional",
+      "question": "What was the original reason for suspending Cedar trials, and what changed in that condition?",
+      "answers": [
+        {
+          "text": "The original reason for suspending Cedar trials was due to deployment constraints limiting to one process. The condition changed when deployment permits now allow four processes.",
+          "evidence": [
+            {
+              "id": "6aaa548a8cc35cd712e5b2b7:1",
+              "source_id": "6aaa548a8cc35cd712e5b2b7",
+              "owner": "Scenario author dev-1",
+              "speaker": "Scenario author dev-1",
+              "location": "scenario://timeline/dev-1/1",
+              "observed_at": "2025-01-02T10:00:00.000000+00:00",
+              "start": 61,
+              "end": 139,
+              "quote": "We suspended further Cedar trials because deployment permits only one process.",
+              "review_status": []
+            },
+            {
+              "id": "af530c82f1bd9995d863c847:0",
+              "source_id": "af530c82f1bd9995d863c847",
+              "owner": "Scenario observer dev-1",
+              "speaker": "Scenario observer dev-1",
+              "location": "scenario://timeline/dev-1/3",
+              "observed_at": "2025-01-02T12:00:00.000000+00:00",
+              "start": 0,
+              "end": 38,
+              "quote": "Deployment now permits four processes.",
+              "review_status": []
+            }
+          ],
+          "source_linked": true,
+          "semantic_correctness": "not_automatically_verified"
+        }
+      ],
+      "warnings": [],
+      "rejected_answers": [],
+      "raw": "{\n  \"kind\": \"conditional\",\n  \"answers\": [\n    {\n      \"text\": \"The original reason for suspending Cedar trials was due to deployment constraints limiting to one process. The condition changed when deployment permits now allow four processes.\",\n      \"evidence\": [\"6aaa548a8cc35cd712e5b2b7:1\", \"af530c82f1bd9995d863c847:0\"]\n    }\n  ]\n}",
+      "native_answer": {
+        "answer": "The original reason for suspending Cedar trials was deployment constraints limiting to one process. However, this is outdated as deployment now permits four processes.",
+        "brief_rationale": "The suspension reason is outdated due to updated deployment constraints."
+      },
+      "readout": "CUPMem-selected original sources and status-cause links",
+      "source_scope": {
+        "6aaa548a8cc35cd712e5b2b7": [
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "value"
+          }
+        ],
+        "af530c82f1bd9995d863c847": [
+          {
+            "binding_id": "supporting_basis:0",
+            "purpose": "status_cause"
+          }
+        ]
+      }
+    },
+    "assessment": {
+      "answer_text_supported_in_this_case": true,
+      "sentence_citations_match_original": true,
+      "schema_warning": [],
+      "reviewer": "implementing assistant; not independent or benchmark scoring"
+    }
+  }
+]

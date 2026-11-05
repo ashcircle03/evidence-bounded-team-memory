@@ -1,0 +1,4873 @@
+{
+  "t00/pairwise": {
+    "cid": "t00",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/fixed-review": {
+    "cid": "t00",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "abf5b9a4e08669f871e34ba5",
+        "location": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+        "speaker": "Patrick Steinhardt",
+        "start": 55,
+        "end": 477,
+        "quote": "The `get_schedule_cmd()` function allows us to override the schedule\ncommand with a specific test command such that we can verify the\nunderlying logic in a platform-independent way. Its memory management is\nsomewhat wild though, because it basically gives up and assigns an\nallocated string to the string constant output pointer. While this part\nis marked with `UNLEAK()` to mask this, we also leak the local string\nlists.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b5aae1539fdbc73c31bf7d4",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 60,
+        "end": 402,
+        "quote": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "abf5b9a4e08669f871e34ba5",
+        "location": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+        "speaker": "Patrick Steinhardt",
+        "start": 55,
+        "end": 477,
+        "quote": "The `get_schedule_cmd()` function allows us to override the schedule\ncommand with a specific test command such that we can verify the\nunderlying logic in a platform-independent way. Its memory management is\nsomewhat wild though, because it basically gives up and assigns an\nallocated string to the string constant output pointer. While this part\nis marked with `UNLEAK()` to mask this, we also leak the local string\nlists.",
+        "status": "source_only"
+      },
+      "rationale": "The reported failure of `git maintenance start` immediately segfaulting starting with commit b6c3f8e12c (builtin/maintenance: fix leak in `get_schedule_cmd()`, 2024-09-26) reveals a prior decision to use `get_schedule_cmd()` for platform-independent verification, despite its memory management issues, necessitating a recheck of this decision's rationale.",
+      "change_sentence": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26).",
+      "reviewer": "Patrick Steinhardt",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/contrast-review": {
+    "cid": "t00",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/contrast-reversed": {
+    "cid": "t00",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/simple": {
+    "cid": "t00",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 44,
+        "end": 285,
+        "quote": "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b5aae1539fdbc73c31bf7d4",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 784,
+        "end": 1028,
+        "quote": "The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem.",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/pairwise": {
+    "cid": "t01",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/fixed-review": {
+    "cid": "t01",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "abf5b9a4e08669f871e34ba5",
+        "location": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+        "speaker": "Patrick Steinhardt",
+        "start": 479,
+        "end": 655,
+        "quote": "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "b344736910fe87b804d1b9cb",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 698,
+        "end": 1165,
+        "quote": "So why didn't we catch this trivial regression? The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem. But the faulty code where we don't set the `out` parameter will\nonly get hit in case that environment variable is _not_ set, which is\nnever the case when executing our tests.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "abf5b9a4e08669f871e34ba5",
+        "location": "https://github.com/git/git/commit/b6c3f8e12c0a521450923ddbcf7a19a81aa3c4e7",
+        "speaker": "Patrick Steinhardt",
+        "start": 479,
+        "end": 655,
+        "quote": "Rework the function such that it has a separate out parameter. If set,\nwe will assign it the final allocated command. Plug the other memory\nleaks and create a common exit path.",
+        "status": "source_only"
+      },
+      "rationale": "Prior project decision to set the \"GIT_TEST_MAINT_SCHEDULER\" environment variable via \"t/test-lib.sh\" to override the scheduler command should be reevaluated given the report reveals this setting prevents catching the regression.",
+      "change_sentence": "The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem.",
+      "reviewer": "Patrick Steinhardt",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/contrast-review": {
+    "cid": "t01",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/simple": {
+    "cid": "t01",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 44,
+        "end": 285,
+        "quote": "When running 'git maintenance start', the current pattern is to\nconfigure global config settings to enable maintenance on the current\nrepository and set 'maintenance.auto' to false and _then_ to set up the\nschedule with the system scheduler.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "b344736910fe87b804d1b9cb",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 746,
+        "end": 990,
+        "quote": "The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem.",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/pairwise": {
+    "cid": "t02",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/fixed-review": {
+    "cid": "t02",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2223b02f64f6d40eb656bd38",
+        "location": "https://github.com/git/git/commit/daa787010c82b32c3fdc8a2bf2a4ce90fff5d5b0",
+        "speaker": "Derrick Stolee",
+        "start": 53,
+        "end": 320,
+        "quote": "The get_random_minute() method was created to allow maintenance\nschedules to be fixed to a random minute of the hour. This randomness is\nonly intended to spread out the load from a number of clients, but each\nclient should have an hour between each maintenance cycle.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b5aae1539fdbc73c31bf7d4",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 60,
+        "end": 402,
+        "quote": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2223b02f64f6d40eb656bd38",
+        "location": "https://github.com/git/git/commit/daa787010c82b32c3fdc8a2bf2a4ce90fff5d5b0",
+        "speaker": "Derrick Stolee",
+        "start": 53,
+        "end": 320,
+        "quote": "The get_random_minute() method was created to allow maintenance\nschedules to be fixed to a random minute of the hour. This randomness is\nonly intended to spread out the load from a number of clients, but each\nclient should have an hour between each maintenance cycle.",
+        "status": "source_only"
+      },
+      "rationale": "The reported failure of `git maintenance start` immediately segfaulting starting with commit b6c3f8e12c (builtin/maintenance: fix leak in `get_schedule_cmd()`, 2024-09-26) reveals a need to revisit the rationale behind creating the `get_random_minute()` method, which was intended to spread out load from multiple clients.",
+      "change_sentence": "And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/contrast-review": {
+    "cid": "t02",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/contrast-reversed": {
+    "cid": "t02",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/simple": {
+    "cid": "t02",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 287,
+        "end": 459,
+        "quote": "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b5aae1539fdbc73c31bf7d4",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 60,
+        "end": 248,
+        "quote": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26).",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/pairwise": {
+    "cid": "t03",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/fixed-review": {
+    "cid": "t03",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2223b02f64f6d40eb656bd38",
+        "location": "https://github.com/git/git/commit/daa787010c82b32c3fdc8a2bf2a4ce90fff5d5b0",
+        "speaker": "Derrick Stolee",
+        "start": 511,
+        "end": 952,
+        "quote": "The previous implementation generated two template files with names\nof the form 'git-maintenance@.(timer|service)'. The '.timer' or\n'.service' indicates that this is a template that is picked up when we\nlater specify '...@<schedule>.timer' or '...@<schedule>.service'. The\n'<schedule>' string is then used to insert into the template both the\n'OnCalendar' schedule setting and the '--schedule' parameter of the\n'git maintenance run' command.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "b344736910fe87b804d1b9cb",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 60,
+        "end": 364,
+        "quote": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with [ref] ([referenced subject], 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2223b02f64f6d40eb656bd38",
+        "location": "https://github.com/git/git/commit/daa787010c82b32c3fdc8a2bf2a4ce90fff5d5b0",
+        "speaker": "Derrick Stolee",
+        "start": 511,
+        "end": 952,
+        "quote": "The previous implementation generated two template files with names\nof the form 'git-maintenance@.(timer|service)'. The '.timer' or\n'.service' indicates that this is a template that is picked up when we\nlater specify '...@<schedule>.timer' or '...@<schedule>.service'. The\n'<schedule>' string is then used to insert into the template both the\n'OnCalendar' schedule setting and the '--schedule' parameter of the\n'git maintenance run' command.",
+        "status": "source_only"
+      },
+      "rationale": "The previous implementation's decision to generate template files named 'git-maintenance@.(timer|service)' without thorough testing, as evidenced by the immediate segfault upon running `git maintenance start`, must be reevaluated.",
+      "change_sentence": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with [ref] ([referenced subject], 2024-09-26).",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/contrast-review": {
+    "cid": "t03",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/simple": {
+    "cid": "t03",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 287,
+        "end": 459,
+        "quote": "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "b344736910fe87b804d1b9cb",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 60,
+        "end": 210,
+        "quote": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with [ref] ([referenced subject], 2024-09-26).",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/pairwise": {
+    "cid": "t04",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/fixed-review": {
+    "cid": "t04",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 461,
+        "end": 595,
+        "quote": "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b5aae1539fdbc73c31bf7d4",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 60,
+        "end": 402,
+        "quote": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26). And indeed, this segfault is\ntrivial to reproduce up to a point where one is scratching their head\nwhy we didn't catch this regression in our test suite.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 461,
+        "end": 595,
+        "quote": "Fix this gap by swapping the order of operations. If Git fails to\ninitialize maintenance, then the config changes should never happen.",
+        "status": "source_only"
+      },
+      "rationale": "The reported failure of `git maintenance start` immediately segfaulting starting with commit b6c3f8e12c (builtin/maintenance: fix leak in `get_schedule_cmd()`, 2024-09-26) reveals a need to revisit the rationale behind the decision to swap the order of operations as per the earlier behavior.",
+      "change_sentence": "It was reported on the mailing list that running `git maintenance start`\nimmediately segfaults starting with b6c3f8e12c (builtin/maintenance: fix\nleak in `get_schedule_cmd()`, 2024-09-26).",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/contrast-review": {
+    "cid": "t04",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t04/simple": {
+    "cid": "t04",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e19a1967d48184ea69c40f8f",
+        "location": "https://github.com/git/git/commit/69ecfcacfd136810f2343b548174efe9ae3fdead",
+        "speaker": "Derrick Stolee",
+        "start": 287,
+        "end": 459,
+        "quote": "This has a problematic error condition: if the scheduler fails to\ninitialize, the repository still will not use automatic maintenance due\nto the 'maintenance.auto' setting.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b5aae1539fdbc73c31bf7d4",
+        "location": "https://github.com/git/git/commit/c95547a394a35dc26afa686454086d2db6e51ea4",
+        "speaker": "Patrick Steinhardt",
+        "start": 784,
+        "end": 1028,
+        "quote": "The reason is that our\ntests always set up the \"GIT_TEST_MAINT_SCHEDULER\" environment variable\nvia \"t/test-lib.sh\", which allows us to override the scheduler command\nwith a custom one so that we don't accidentally modify the developer's\nsystem.",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/pairwise": {
+    "cid": "t05",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/fixed-review": {
+    "cid": "t05",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "abd6beff451aac566fae0f9e",
+        "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+        "speaker": "Victoria Dye",
+        "start": 43,
+        "end": 220,
+        "quote": "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "32c6a3566bbeef9d0ab9b79d",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 855,
+        "end": 1025,
+        "quote": "As noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change. For now, just fix\nthe regression in cc75e556a9.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "abd6beff451aac566fae0f9e",
+        "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+        "speaker": "Victoria Dye",
+        "start": 43,
+        "end": 220,
+        "quote": "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+        "status": "source_only"
+      },
+      "rationale": "The report suggests revisiting the decision to update the regex matching commands in Git, particularly the addition of 'scalar' as a main porcelain command, as this change was deemed too extensive by Ævar [1].",
+      "change_sentence": "As noted by Ævar [1], we could even match any \"foo\" rather than just\n\"gitfoo\" and \"scalarfoo\", but that's a larger change.",
+      "reviewer": "Victoria Dye",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/contrast-review": {
+    "cid": "t05",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/contrast-reversed": {
+    "cid": "t05",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/simple": {
+    "cid": "t05",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "abd6beff451aac566fae0f9e",
+        "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+        "speaker": "Victoria Dye",
+        "start": 110,
+        "end": 220,
+        "quote": "Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "32c6a3566bbeef9d0ab9b79d",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 316,
+        "end": 482,
+        "quote": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "reviewer": "Victoria Dye",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/pairwise": {
+    "cid": "t06",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/fixed-review": {
+    "cid": "t06",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "f1725f7b6fb6",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "abd6beff451aac566fae0f9e",
+        "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+        "speaker": "Victoria Dye",
+        "start": 43,
+        "end": 220,
+        "quote": "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "988b397520475a25b70f71be",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 45,
+        "end": 456,
+        "quote": "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "abd6beff451aac566fae0f9e",
+        "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+        "speaker": "Victoria Dye",
+        "start": 43,
+        "end": 220,
+        "quote": "Add 'scalar' as a 'mainporcelain' command in the Git command list. Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+        "status": "source_only"
+      },
+      "rationale": "The original author's update to the regex for matching man sections in Git documentation commands failed to correctly handle the new structure where the man section is now located in `$2` instead of `$1`.",
+      "change_sentence": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "reviewer": "Victoria Dye",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": true,
+    "contrast": false
+  },
+  "t06/contrast-review": {
+    "cid": "t06",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/simple": {
+    "cid": "t06",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "abd6beff451aac566fae0f9e",
+        "location": "https://github.com/git/git/commit/cc75e556a9de5d62c1ca52db900b729fc830f378",
+        "speaker": "Victoria Dye",
+        "start": 110,
+        "end": 220,
+        "quote": "Update\nthe regex in 'cmd-list.perl' used to match the first line of command\ndocumentation to find 'scalar(1)'.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "988b397520475a25b70f71be",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 290,
+        "end": 456,
+        "quote": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "reviewer": "Victoria Dye",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/pairwise": {
+    "cid": "t07",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/fixed-review": {
+    "cid": "t07",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "b1d6fe0311e8c58f5c18d92f",
+        "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+        "speaker": "Johannes Schindelin",
+        "start": 41,
+        "end": 87,
+        "quote": "It is merely handing off to `git help scalar`.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "32c6a3566bbeef9d0ab9b79d",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 766,
+        "end": 853,
+        "quote": "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "b1d6fe0311e8c58f5c18d92f",
+        "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+        "speaker": "Johannes Schindelin",
+        "start": 41,
+        "end": 87,
+        "quote": "It is merely handing off to `git help scalar`.",
+        "status": "source_only"
+      },
+      "rationale": "The report suggests not capturing `git` or `scalar` into `$1`, revealing a prior decision to do so which may need revisiting given this new evidence.",
+      "change_sentence": "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/contrast-review": {
+    "cid": "t07",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/contrast-reversed": {
+    "cid": "t07",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/simple": {
+    "cid": "t07",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1069049f4525808e4ba41749",
+        "location": "https://github.com/git/git/commit/e7a9807a627772f795d5105be497fd648611bc70",
+        "speaker": "Junio C Hamano",
+        "start": 56,
+        "end": 310,
+        "quote": "Instead of hard-coding the list of command categories in both\n`Documentation/Makefile` and `Documentation/cmd-list.perl`, make the\nMakefile the authoritative source and tweak `cmd-list.perl` so that it\nreceives the list of command categories as argument.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "32c6a3566bbeef9d0ab9b79d",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 316,
+        "end": 482,
+        "quote": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "reviewer": "Junio C Hamano",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/pairwise": {
+    "cid": "t08",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/fixed-review": {
+    "cid": "t08",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "1069049f4525808e4ba41749",
+        "location": "https://github.com/git/git/commit/e7a9807a627772f795d5105be497fd648611bc70",
+        "speaker": "Junio C Hamano",
+        "start": 56,
+        "end": 310,
+        "quote": "Instead of hard-coding the list of command categories in both\n`Documentation/Makefile` and `Documentation/cmd-list.perl`, make the\nMakefile the authoritative source and tweak `cmd-list.perl` so that it\nreceives the list of command categories as argument.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "988b397520475a25b70f71be",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 45,
+        "end": 456,
+        "quote": "We attribute each documentation text file to a man section by finding a\nline in the file that looks like \"gitfoo(<digit>)\". Commit [ref]\n(\"[referenced subject]\", 2022-09-02) updated this\nlogic to look not only for \"gitfoo\" but also \"scalarfoo\". In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "1069049f4525808e4ba41749",
+        "location": "https://github.com/git/git/commit/e7a9807a627772f795d5105be497fd648611bc70",
+        "speaker": "Junio C Hamano",
+        "start": 56,
+        "end": 310,
+        "quote": "Instead of hard-coding the list of command categories in both\n`Documentation/Makefile` and `Documentation/cmd-list.perl`, make the\nMakefile the authoritative source and tweak `cmd-list.perl` so that it\nreceives the list of command categories as argument.",
+        "status": "source_only"
+      },
+      "rationale": "The original author's decision to update the logic for attributing documentation text files to a man section by expanding the regex to include \"scalarfoo\" should be reevaluated given that the man section is now located in `$2` post-match, not `$1`.",
+      "change_sentence": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+      "reviewer": "Junio C Hamano",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/contrast-review": {
+    "cid": "t08",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/simple": {
+    "cid": "t08",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "1069049f4525808e4ba41749",
+        "location": "https://github.com/git/git/commit/e7a9807a627772f795d5105be497fd648611bc70",
+        "speaker": "Junio C Hamano",
+        "start": 56,
+        "end": 310,
+        "quote": "Instead of hard-coding the list of command categories in both\n`Documentation/Makefile` and `Documentation/cmd-list.perl`, make the\nMakefile the authoritative source and tweak `cmd-list.perl` so that it\nreceives the list of command categories as argument.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "988b397520475a25b70f71be",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 290,
+        "end": 456,
+        "quote": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "reviewer": "Junio C Hamano",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/pairwise": {
+    "cid": "t09",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/fixed-review": {
+    "cid": "t09",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "b1d6fe0311e8c58f5c18d92f",
+        "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+        "speaker": "Johannes Schindelin",
+        "start": 41,
+        "end": 87,
+        "quote": "It is merely handing off to `git help scalar`.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "32c6a3566bbeef9d0ab9b79d",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 766,
+        "end": 853,
+        "quote": "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "b1d6fe0311e8c58f5c18d92f",
+        "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+        "speaker": "Johannes Schindelin",
+        "start": 41,
+        "end": 87,
+        "quote": "It is merely handing off to `git help scalar`.",
+        "status": "source_only"
+      },
+      "rationale": "The report suggests not capturing `git` or `scalar` into `$1`, revealing a prior decision to do so which may need revisiting given this new evidence.",
+      "change_sentence": "Restore the man sections by not capturing the (git|scalar) part of the\nmatch into `$1`.",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/contrast-review": {
+    "cid": "t09",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t09/simple": {
+    "cid": "t09",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "b1d6fe0311e8c58f5c18d92f",
+        "location": "https://github.com/git/git/commit/951759d3a5cb20ffeff4836aa0c4b793fa142b51",
+        "speaker": "Johannes Schindelin",
+        "start": 41,
+        "end": 87,
+        "quote": "It is merely handing off to `git help scalar`.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "32c6a3566bbeef9d0ab9b79d",
+        "location": "https://github.com/git/git/commit/32c6fff4b871e510b7d782a4f888609da0089c15",
+        "speaker": "Martin Ågren",
+        "start": 316,
+        "end": 482,
+        "quote": "In doing so,\nit forgot to account for the fact that after the updated regex has found\na match, the man section is no longer to be found in `$1` but now lives\nin `$2`.",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/pairwise": {
+    "cid": "t10",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "7d4b580224fd",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b687fa75cfa29ea66a427b4",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 350,
+        "quote": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the expectation that .rev files would be written, but the new evidence shows that this is no longer the case, thus changing its applicability; however, if future projects decide to write .rev files again, the earlier rationale may still apply.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/fixed-review": {
+    "cid": "t10",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "4c33ac7b48ab",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b687fa75cfa29ea66a427b4",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 350,
+        "quote": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to prepare for writing a .rev file by allocating and sorting the \"pack_order\" array appears flawed given the report revealing we are no longer writing *.rev files, necessitating a recheck of this assumption.",
+      "change_sentence": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/contrast-review": {
+    "cid": "t10",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/contrast-reversed": {
+    "cid": "t10",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/simple": {
+    "cid": "t10",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b687fa75cfa29ea66a427b4",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 350,
+        "quote": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "reviewer": "Taylor Blau",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/pairwise": {
+    "cid": "t11",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "93709a064d84",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "43b9dec28f0ae21e1e8049b5",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 321,
+        "quote": "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the necessity of writing a .rev file, which was based on the assumption that the multi-pack index would generate such a file. The report introduces new evidence indicating that *.rev files are not being written, thus changing the applicability of the earlier decision; however, the earlier result remains valid if the multi-pack index is configured to produce and utilize these files.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/fixed-review": {
+    "cid": "t11",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "7b6a20715cbb",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "43b9dec28f0ae21e1e8049b5",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 321,
+        "quote": "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 231,
+        "end": 402,
+        "quote": "Prepare for the multi-pack index to write a .rev file by providing a way\nto write the reverse index without an array of pack_idx_entry (which the\nMIDX code does not have).",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to prepare for writing a .rev file by allocating and sorting the \"pack_order\" array appears unnecessary given the report's revelation that *.rev files are no longer being written, necessitating a reevaluation of this project decision.",
+      "change_sentence": "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/contrast-review": {
+    "cid": "t11",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/simple": {
+    "cid": "t11",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "e9a3631a42a66a95158f03c6",
+        "location": "https://github.com/git/git/commit/a587b5a7869e9a399d4de6edea0b3f32a3548639",
+        "speaker": "Taylor Blau",
+        "start": 46,
+        "end": 229,
+        "quote": "Existing callers provide the reverse index code with an array of 'struct\npack_idx_entry *'s, which is then sorted by pack order (comparing the\noffsets of each object within the pack).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "43b9dec28f0ae21e1e8049b5",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 321,
+        "quote": "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "reviewer": "Taylor Blau",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/pairwise": {
+    "cid": "t12",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/fixed-review": {
+    "cid": "t12",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c0592155d987b97081a99a4c",
+        "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+        "speaker": "Taylor Blau",
+        "start": 73,
+        "end": 224,
+        "quote": "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b687fa75cfa29ea66a427b4",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 350,
+        "quote": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c0592155d987b97081a99a4c",
+        "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+        "speaker": "Taylor Blau",
+        "start": 73,
+        "end": 224,
+        "quote": "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a performance regression due to unnecessary allocation and sorting of the \"pack_order\" array, which was later found to be ineffective since *.rev files were no longer being written, necessitating a recheck of prior decisions regarding on-disk reverse index generation.",
+      "change_sentence": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/contrast-review": {
+    "cid": "t12",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/contrast-reversed": {
+    "cid": "t12",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/simple": {
+    "cid": "t12",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "cf14a74eabecd919f43194bd",
+        "location": "https://github.com/git/git/commit/66f52fa26b4facbf79e3f74d8bc95f8ac8535c50",
+        "speaker": "Taylor Blau",
+        "start": 0,
+        "end": 54,
+        "quote": "pack-revindex.c: don't close unopened file descriptors",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b687fa75cfa29ea66a427b4",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 350,
+        "quote": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "reviewer": "Taylor Blau",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/pairwise": {
+    "cid": "t13",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/fixed-review": {
+    "cid": "t13",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c0592155d987b97081a99a4c",
+        "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+        "speaker": "Taylor Blau",
+        "start": 73,
+        "end": 224,
+        "quote": "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "43b9dec28f0ae21e1e8049b5",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 323,
+        "end": 640,
+        "quote": "This redundant work was not present in the original version of this\ncode added in [ref] (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25). There we'd call write_rev_file() from\ne.g. finish_tmp_packfile(), but we'd \"return NULL\" early in\nwrite_rev_file() if not doing a \"WRITE_REV\" or \"WRITE_REV_VERIFY\".",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c0592155d987b97081a99a4c",
+        "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+        "speaker": "Taylor Blau",
+        "start": 73,
+        "end": 224,
+        "quote": "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+        "status": "source_only"
+      },
+      "rationale": "The original code in pack-write.c (2021-01-25) did not include redundant work of generating an on-disk reverse index in memory, which should be rechecked given the current evidence suggesting its unnecessary existence.",
+      "change_sentence": "This redundant work was not present in the original version of this\ncode added in [ref] (pack-write.c: prepare to write 'pack-*.rev'\nfiles, 2021-01-25).",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/contrast-review": {
+    "cid": "t13",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/simple": {
+    "cid": "t13",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "cf14a74eabecd919f43194bd",
+        "location": "https://github.com/git/git/commit/66f52fa26b4facbf79e3f74d8bc95f8ac8535c50",
+        "speaker": "Taylor Blau",
+        "start": 0,
+        "end": 54,
+        "quote": "pack-revindex.c: don't close unopened file descriptors",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "43b9dec28f0ae21e1e8049b5",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 321,
+        "quote": "Fix a performance regression introduced in [ref] ([referenced subject], 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "reviewer": "Taylor Blau",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/pairwise": {
+    "cid": "t14",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/fixed-review": {
+    "cid": "t14",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c0592155d987b97081a99a4c",
+        "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+        "speaker": "Taylor Blau",
+        "start": 73,
+        "end": 224,
+        "quote": "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "7b687fa75cfa29ea66a427b4",
+        "location": "https://github.com/git/git/commit/8fe8bae9d28e2b02ceb482ab89ea88bb20556f1d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 350,
+        "quote": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c0592155d987b97081a99a4c",
+        "location": "https://github.com/git/git/commit/ec8e7760ac38ef426f87ec738454e574be53a00e",
+        "speaker": "Taylor Blau",
+        "start": 73,
+        "end": 224,
+        "quote": "When an on-disk reverse index exists, there is no need to generate one\nin memory. In fact, doing so can be slow, and require large amounts of\nthe heap.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals a performance regression due to unnecessary allocation and sorting of the \"pack_order\" array, which was later found to be ineffective since *.rev files were no longer being written, necessitating a recheck of prior decisions regarding on-disk reverse index generation.",
+      "change_sentence": "Fix a performance regression introduced in a587b5a786 (pack-write.c:\nextract 'write_rev_file_order', 2021-03-30) and stop needlessly\nallocating the \"pack_order\" array and sorting it with\n\"pack_order_cmp()\", only to throw that work away when we discover that\nwe're not writing *.rev files after all.",
+      "reviewer": "Taylor Blau",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/contrast-review": {
+    "cid": "t14",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t14/simple": {
+    "cid": "t14",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/pairwise": {
+    "cid": "t15",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision rested on the introduction of a new, built-in difftool in Git for Windows v2.11.0 as an opt-in feature, which may now be reconsidered due to the new evidence showing that this change likely caused a regression affecting the tool's functionality outside of a Git worktree. The earlier result remains valid if the opt-in nature of the built-in difftool is maintained or if the regression is attributed solely to other factors unrelated to the",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/fixed-review": {
+    "cid": "t15",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "rationale": "This developer reports a failure where converting a Perl script difftool to a built-in caused the tool to no longer function outside of a Git worktree, indicating prior project decisions regarding tool integration may need reevaluation.",
+      "change_sentence": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/contrast-review": {
+    "cid": "t15",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "the exact passages did not reproduce the document judgment"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/contrast-reversed": {
+    "cid": "t15",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "the exact passages did not reproduce the document judgment"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/simple": {
+    "cid": "t15",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 538,
+        "end": 635,
+        "quote": "when\nreading the entire config every time `git config` is called to query a\nsingle config value).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/pairwise": {
+    "cid": "t16",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision rested on the introduction of a new, built-in difftool in Git for Windows v2.11.0 as an opt-in feature, which may now be reconsidered due to the new evidence showing that this change likely caused a regression affecting the tool's functionality outside of a Git worktree. The earlier result remains valid if the opt-in nature of the built-in difftool is maintained or if the regression is attributed solely to other factors unrelated to the",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/fixed-review": {
+    "cid": "t16",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 1010,
+        "end": 1187,
+        "quote": "The reason: this new, experimental, builtin difftool was shipped as part\nof Git for Windows v2.11.0, to allow for easier large-scale testing, but\nof course as an opt-in feature.",
+        "status": "source_only"
+      },
+      "rationale": "This developer reports a failure where converting a Perl script difftool to a built-in caused the tool to no longer function outside of a Git worktree, indicating prior project decisions regarding tool integration may need reevaluation.",
+      "change_sentence": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/contrast-review": {
+    "cid": "t16",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "the exact passages did not reproduce the document judgment"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/simple": {
+    "cid": "t16",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c82fcaf1ec5d1b2b144cacea",
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "speaker": "Johannes Schindelin",
+        "start": 538,
+        "end": 635,
+        "quote": "when\nreading the entire config every time `git config` is called to query a\nsingle config value).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/pairwise": {
+    "cid": "t17",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/fixed-review": {
+    "cid": "t17",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e8ef741a082f1dcfb0d2110a",
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "speaker": "David Aguilar",
+        "start": 180,
+        "end": 245,
+        "quote": "Capture the exit status and add a test to guarantee the behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e8ef741a082f1dcfb0d2110a",
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "speaker": "David Aguilar",
+        "start": 180,
+        "end": 245,
+        "quote": "Capture the exit status and add a test to guarantee the behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The developer reports a failure where converting a Perl script to a built-in caused a regression in the difftool, no longer running outside of a Git worktree (with `--no-index`, of course), suggesting prior decisions on script-to-built-in conversion should be reevaluated.",
+      "change_sentence": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+      "reviewer": "David Aguilar",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/contrast-review": {
+    "cid": "t17",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/contrast-reversed": {
+    "cid": "t17",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/simple": {
+    "cid": "t17",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "f3db72e6d7abbac4596034c1",
+        "location": "https://github.com/git/git/commit/9f6013a88d71860433a0c11571dc87aef3c9c809",
+        "speaker": "René Scharfe",
+        "start": 0,
+        "end": 52,
+        "quote": "difftool: remove angular brackets from argument help",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 0,
+        "end": 61,
+        "quote": "difftool: allow running outside Git worktrees with --no-index",
+        "status": "source_only"
+      },
+      "reviewer": "René Scharfe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/pairwise": {
+    "cid": "t18",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/fixed-review": {
+    "cid": "t18",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e8ef741a082f1dcfb0d2110a",
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "speaker": "David Aguilar",
+        "start": 180,
+        "end": 245,
+        "quote": "Capture the exit status and add a test to guarantee the behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e8ef741a082f1dcfb0d2110a",
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "speaker": "David Aguilar",
+        "start": 180,
+        "end": 245,
+        "quote": "Capture the exit status and add a test to guarantee the behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The developer reports a failure where converting a Perl script to a built-in caused a regression in the difftool, no longer running outside of a Git worktree (with `--no-index`, of course), suggesting prior decisions on script-to-built-in conversion should be reevaluated.",
+      "change_sentence": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+      "reviewer": "David Aguilar",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/contrast-review": {
+    "cid": "t18",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/simple": {
+    "cid": "t18",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "f3db72e6d7abbac4596034c1",
+        "location": "https://github.com/git/git/commit/9f6013a88d71860433a0c11571dc87aef3c9c809",
+        "speaker": "René Scharfe",
+        "start": 0,
+        "end": 52,
+        "quote": "difftool: remove angular brackets from argument help",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 0,
+        "end": 61,
+        "quote": "difftool: allow running outside Git worktrees with --no-index",
+        "status": "source_only"
+      },
+      "reviewer": "René Scharfe",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/pairwise": {
+    "cid": "t19",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/fixed-review": {
+    "cid": "t19",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "e8ef741a082f1dcfb0d2110a",
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "speaker": "David Aguilar",
+        "start": 180,
+        "end": 245,
+        "quote": "Capture the exit status and add a test to guarantee the behavior.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "a7f4d2eff07ab5edff7ada73",
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "speaker": "Johannes Schindelin",
+        "start": 63,
+        "end": 264,
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "e8ef741a082f1dcfb0d2110a",
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "speaker": "David Aguilar",
+        "start": 180,
+        "end": 245,
+        "quote": "Capture the exit status and add a test to guarantee the behavior.",
+        "status": "source_only"
+      },
+      "rationale": "The developer reports a failure where converting a Perl script to a built-in caused a regression in the difftool, no longer running outside of a Git worktree (with `--no-index`, of course), suggesting prior decisions on script-to-built-in conversion should be reevaluated.",
+      "change_sentence": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course).",
+      "reviewer": "David Aguilar",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/contrast-review": {
+    "cid": "t19",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t19/simple": {
+    "cid": "t19",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "invalid_output",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "invalid_output"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/pairwise": {
+    "cid": "t20",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/fixed-review": {
+    "cid": "t20",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "4f4df9b7e8a6",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2c593c093ef6906ab0bb110a",
+        "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 317,
+        "end": 729,
+        "quote": "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "8ec5ac80fec33a7dd30b9df9",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 240,
+        "quote": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2c593c093ef6906ab0bb110a",
+        "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 317,
+        "end": 729,
+        "quote": "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+        "status": "source_only"
+      },
+      "rationale": "The original author should revisit the decision to add progress output for \"commit-graph write\" without checking the --quiet option, as revealed by the reported regression in 7b0f229222 (\\\"commit-graph write: add progress output\\\", 2018-09-17).",
+      "change_sentence": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": true,
+    "contrast": false
+  },
+  "t20/contrast-review": {
+    "cid": "t20",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/contrast-reversed": {
+    "cid": "t20",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/simple": {
+    "cid": "t20",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2c593c093ef6906ab0bb110a",
+        "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 889,
+        "end": 1087,
+        "quote": "On larger repositories, such as linux.git the delayed progress bar(s)\nwill kick in, and we'll show what's going on instead of, as was\npreviously happening, printing nothing while we write the graph:",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "8ec5ac80fec33a7dd30b9df9",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 151,
+        "end": 240,
+        "quote": "The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/pairwise": {
+    "cid": "t21",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/fixed-review": {
+    "cid": "t21",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": false,
+    "rationale_card": "8a92e04b5200",
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "2c593c093ef6906ab0bb110a",
+        "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 317,
+        "end": 729,
+        "quote": "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "d3a849e701b98a3bf5372353",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 47,
+        "end": 211,
+        "quote": "Fix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "2c593c093ef6906ab0bb110a",
+        "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 317,
+        "end": 729,
+        "quote": "Furthermore, since the gc.writeCommitGraph setting was added in\nd5d5d7b641 (\"gc: automatically write commit-graph files\", 2018-06-27),\nthere was no indication at all from a \"git gc\" run that anything was\ndifferent. This why one of the progress bars being added here uses\nstart_progress() instead of start_delayed_progress(), so that it's\nguaranteed to be seen. E.g. on my tiny 867 commit dotfiles.git\nrepository:",
+        "status": "source_only"
+      },
+      "rationale": "The original author should revisit the decision to add progress output for \"commit-graph write\" without checking the --quiet option, as evidenced by the reported regression.",
+      "change_sentence": "The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": true,
+    "contrast": false
+  },
+  "t21/contrast-review": {
+    "cid": "t21",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/simple": {
+    "cid": "t21",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "2c593c093ef6906ab0bb110a",
+        "location": "https://github.com/git/git/commit/7b0f2292224cec841de78acc911e4c378ea79faa",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 889,
+        "end": 1087,
+        "quote": "On larger repositories, such as linux.git the delayed progress bar(s)\nwill kick in, and we'll show what's going on instead of, as was\npreviously happening, printing nothing while we write the graph:",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "d3a849e701b98a3bf5372353",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 122,
+        "end": 211,
+        "quote": "The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/pairwise": {
+    "cid": "t22",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/fixed-review": {
+    "cid": "t22",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "8ec5ac80fec33a7dd30b9df9",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 240,
+        "quote": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "rationale": "The addition of progress output for \"commit-graph write\" in commit 7b0f229222 (2018-09-17) did not account for the --quiet option, revealing a need to recheck the rationale behind this decision given the new evidence of its oversight.",
+      "change_sentence": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).",
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/contrast-review": {
+    "cid": "t22",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/contrast-reversed": {
+    "cid": "t22",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/simple": {
+    "cid": "t22",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "03becb73d663aadce69be7e9",
+        "location": "https://github.com/git/git/commit/859fdc0c3cf9ad8cdd5eacaa24aee481bc1e7bc1",
+        "speaker": "Derrick Stolee",
+        "start": 860,
+        "end": 1052,
+        "quote": "There is one test in t6024-recursive-merge.sh that relies on the\nmerge-base algorithm picking one of two ambiguous merge-bases, and\nthe commit-graph feature changes which merge-base is picked.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "8ec5ac80fec33a7dd30b9df9",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 149,
+        "quote": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/pairwise": {
+    "cid": "t23",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/fixed-review": {
+    "cid": "t23",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "d3a849e701b98a3bf5372353",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 47,
+        "end": 211,
+        "quote": "Fix a regression in my recent [ref] (\"[referenced subject]\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "rationale": "The addition of progress output for \"commit-graph write\" without checking the --quiet option in the recent commit graph feature modification may have been an oversight; this must be reevaluated given the reported regression.",
+      "change_sentence": "The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/contrast-review": {
+    "cid": "t23",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/simple": {
+    "cid": "t23",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "03becb73d663aadce69be7e9",
+        "location": "https://github.com/git/git/commit/859fdc0c3cf9ad8cdd5eacaa24aee481bc1e7bc1",
+        "speaker": "Derrick Stolee",
+        "start": 860,
+        "end": 1052,
+        "quote": "There is one test in t6024-recursive-merge.sh that relies on the\nmerge-base algorithm picking one of two ambiguous merge-bases, and\nthe commit-graph feature changes which merge-base is picked.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "d3a849e701b98a3bf5372353",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 122,
+        "end": 211,
+        "quote": "The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "reviewer": "Derrick Stolee",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/pairwise": {
+    "cid": "t24",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "pairwise",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/fixed-review": {
+    "cid": "t24",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "8ec5ac80fec33a7dd30b9df9",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 240,
+        "quote": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).  The newly added progress output for\n\"commit-graph write\" didn't check the --quiet option.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "rationale": "The addition of progress output for \"commit-graph write\" in commit 7b0f229222 (2018-09-17) did not account for the --quiet option, revealing a need to recheck the rationale behind this decision given the new evidence of its oversight.",
+      "change_sentence": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).",
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/contrast-review": {
+    "cid": "t24",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t24/simple": {
+    "cid": "t24",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "f0a1798658fa0b77c1703821",
+        "location": "https://github.com/git/git/commit/4f5b532d18ad61d8b96d65b4f8d2321cf154d066",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 0,
+        "end": 49,
+        "quote": "commit-graph.c: mark more strings for translation",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "8ec5ac80fec33a7dd30b9df9",
+        "location": "https://github.com/git/git/commit/6b89a34c89fc763292f06012318b852b74825619",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 52,
+        "end": 149,
+        "quote": "Fix a regression in my recent 7b0f229222 (\"commit-graph write: add\nprogress output\", 2018-09-17).",
+        "status": "source_only"
+      },
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t25/pairwise": {
+    "cid": "t25",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4335,
+        "end": 4742,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on a specific commit (957ba814bf) that cleared a global slab when closing the commit graph to avoid descriptor exhaustion in degenerate cases. However, the report suggests this is no longer necessary because the described scenario of needing to clear the slab has been addressed by calling `close_object_store()` directly, thus changing the applicability of the earlier result. The earlier result remains true if the scenario where descriptor exhaustion necessitates clearing the slab without",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t25/fixed-review": {
+    "cid": "t25",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4335,
+        "end": 4742,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The previous commit 957ba814bf cleared a global slab upon closing the commit graph, which may no longer be necessary given the new evidence suggesting this could lead to descriptor exhaustion in degenerate cases.",
+      "change_sentence": "This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t25/contrast-review": {
+    "cid": "t25",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t25/contrast-reversed": {
+    "cid": "t25",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t25/simple": {
+    "cid": "t25",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c2c5416f4354da5418064ab0",
+        "location": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+        "speaker": "Jeff King",
+        "start": 246,
+        "end": 464,
+        "quote": "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4744,
+        "end": 4975,
+        "quote": "So I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error).",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t26/pairwise": {
+    "cid": "t26",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0beb46f3a6e05aa1c97e98e4",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4284,
+        "end": 4686,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on [ref] for clearing a global slab when closing the commit graph to avoid descriptor exhaustion; however, the report introduces new evidence suggesting this practice is unnecessary because calling `close_object_store()` directly would suffice, thus changing its applicability. The earlier result remains valid if direct calls to `close_object_store()` are not made.",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t26/fixed-review": {
+    "cid": "t26",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0beb46f3a6e05aa1c97e98e4",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4284,
+        "end": 4686,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals that clearing a global slab when closing the commit graph was implemented to address a specific case requiring its closure, which suggests prior project decisions about descriptor management may need reevaluation given this new insight.",
+      "change_sentence": "This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t26/contrast-review": {
+    "cid": "t26",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t26/simple": {
+    "cid": "t26",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": true,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "c2c5416f4354da5418064ab0",
+        "location": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+        "speaker": "Jeff King",
+        "start": 246,
+        "end": 464,
+        "quote": "Commit 957ba814bf (commit-graph: when closing the graph, also release\nthe slab, 2021-09-08) put the call to clear the slab into the recursive\nfunction, but this is pointless: there's only a single global slab\nvariable.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0beb46f3a6e05aa1c97e98e4",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4688,
+        "end": 4919,
+        "quote": "So I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error).",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t27/pairwise": {
+    "cid": "t27",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d8993ed5c2f8b048eeba37aa",
+        "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+        "speaker": "Jonathan Tan",
+        "start": 34,
+        "end": 329,
+        "quote": "A fuzzer running on the entry point provided by fuzz-commit-graph.c\nrevealed a memory leak when parse_commit_graph() creates a struct\nbloom_filter_settings and then returns early due to error. Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 3478,
+        "end": 3936,
+        "quote": "Which at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d8993ed5c2f8b048eeba37aa",
+        "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+        "speaker": "Jonathan Tan",
+        "start": 34,
+        "end": 329,
+        "quote": "A fuzzer running on the entry point provided by fuzz-commit-graph.c\nrevealed a memory leak when parse_commit_graph() creates a struct\nbloom_filter_settings and then returns early due to error. Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on a memory leak detected when parse_commit_graph() creates and immediately discards a struct bloom_filter_settings due to an error. The report introduces new evidence suggesting the scenario where a non-NULL commit_graph might exist, potentially invalidating the condition under which the earlier fix was applied, as clearing the global slab could occur even without a submodule repository or commit graph. The earlier result remains true if the commit_graph is always checked for NULL before proceeding with slab clearing operations",
+      "reviewer": "Jonathan Tan",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t27/fixed-review": {
+    "cid": "t27",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d8993ed5c2f8b048eeba37aa",
+        "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+        "speaker": "Jonathan Tan",
+        "start": 34,
+        "end": 329,
+        "quote": "A fuzzer running on the entry point provided by fuzz-commit-graph.c\nrevealed a memory leak when parse_commit_graph() creates a struct\nbloom_filter_settings and then returns early due to error. Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 3478,
+        "end": 3936,
+        "quote": "Which at first glance seems like a bug we could already trigger. In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory). But what\nwould happen if there was one? Wouldn't we see a non-NULL commit_graph\nentry, and then clear the global slab anyway?",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d8993ed5c2f8b048eeba37aa",
+        "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+        "speaker": "Jonathan Tan",
+        "start": 34,
+        "end": 329,
+        "quote": "A fuzzer running on the entry point provided by fuzz-commit-graph.c\nrevealed a memory leak when parse_commit_graph() creates a struct\nbloom_filter_settings and then returns early due to error. Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier behavior of returning early without freeing the struct bloom_filter_settings must be rechecked given the new evidence suggesting potential issues with non-NULL commit_graph entries in submodule repositories.",
+      "change_sentence": "In the\nsituation described here, there is no commit graph in the submodule\nrepository, so our commit graph is NULL (in fact, in our test script\nthere is no submodule repo at all, so we immediately return from\nrepo_init() and call repo_clear() only to free up memory).",
+      "reviewer": "Jonathan Tan",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t27/contrast-review": {
+    "cid": "t27",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t27/contrast-reversed": {
+    "cid": "t27",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "contrast-reversed",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t27/simple": {
+    "cid": "t27",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "d8993ed5c2f8b048eeba37aa",
+        "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+        "speaker": "Jonathan Tan",
+        "start": 227,
+        "end": 329,
+        "quote": "Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4744,
+        "end": 4975,
+        "quote": "So I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error).",
+        "status": "source_only"
+      },
+      "reviewer": "Jonathan Tan",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t28/pairwise": {
+    "cid": "t28",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0beb46f3a6e05aa1c97e98e4",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4284,
+        "end": 4686,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on [ref] for clearing a global slab when closing the commit graph to avoid descriptor exhaustion; however, the report introduces new evidence suggesting this practice is unnecessary because calling `close_object_store()` directly would suffice, thus changing its applicability. The earlier result remains valid if direct calls to `close_object_store()` are not made.",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t28/fixed-review": {
+    "cid": "t28",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0beb46f3a6e05aa1c97e98e4",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4284,
+        "end": 4686,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The report reveals that clearing a global slab when closing the commit graph was implemented to address a specific case requiring its closure, which suggests prior project decisions about descriptor management may need reevaluation given this new insight.",
+      "change_sentence": "This clearing comes from [ref] (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t28/contrast-review": {
+    "cid": "t28",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t28/simple": {
+    "cid": "t28",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "d8993ed5c2f8b048eeba37aa",
+        "location": "https://github.com/git/git/commit/fbda77c6c00a7cec65c4f266b09252df73a9deff",
+        "speaker": "Jonathan Tan",
+        "start": 227,
+        "end": 329,
+        "quote": "Fix that\nerror by always freeing that struct first (if it exists) before\nreturning early due to error.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0beb46f3a6e05aa1c97e98e4",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4688,
+        "end": 4919,
+        "quote": "So I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error).",
+        "status": "source_only"
+      },
+      "reviewer": "Jonathan Tan",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t29/pairwise": {
+    "cid": "t29",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "pairwise",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4335,
+        "end": 4742,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on a specific commit (957ba814bf) that cleared a global slab when closing the commit graph to avoid descriptor exhaustion in degenerate cases. However, the report suggests this is no longer necessary because the described scenario of needing to clear the slab has been addressed by calling `close_object_store()` directly, thus changing the applicability of the earlier result. The earlier result remains true if the scenario where descriptor exhaustion necessitates clearing the slab without",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t29/fixed-review": {
+    "cid": "t29",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "fixed-review",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4335,
+        "end": 4742,
+        "quote": "So it happens to work out. But it still seems questionable to me that we\nwould clear a global slab (which might still be in use) when closing the\ncommit graph. This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 44,
+        "end": 252,
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible.",
+        "status": "source_only"
+      },
+      "rationale": "The previous commit 957ba814bf cleared a global slab upon closing the commit graph, which may no longer be necessary given the new evidence suggesting this could lead to descriptor exhaustion in degenerate cases.",
+      "change_sentence": "This clearing comes from 957ba814bf (commit-graph: when\nclosing the graph, also release the slab, 2021-09-08), and was fixing a\ncase where we really did need it to be closed (and in that case we\npresumably call close_object_store() more directly).",
+      "reviewer": "Jeff King",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t29/contrast-review": {
+    "cid": "t29",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "contrast-review",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep",
+      "basis": "no unique decision in the document comparison"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t29/simple": {
+    "cid": "t29",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "foil-only",
+    "method": "simple",
+    "action": "retest",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "retest",
+      "previous": {
+        "source_id": "8f119e587c12b7f80b001c9a",
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "speaker": "Jeff King",
+        "start": 101,
+        "end": 216,
+        "quote": "And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files).",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "5fc355632d3dced1d66a05ac",
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "speaker": "Jeff King",
+        "start": 4744,
+        "end": 4975,
+        "quote": "So I suspect there may still be a bug waiting to happen there, as any\nobject loaded before the call to close_object_store() may be stranded\nwith a bogus maybe_tree entry (and thus looking at it after the call\nmight cause an error).",
+        "status": "source_only"
+      },
+      "reviewer": "Jeff King",
+      "next_step": "Compare the reported change against the original conditions and retain both observations."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t00/fixed-witnesses": {
+    "cid": "t00",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t01/fixed-witnesses": {
+    "cid": "t01",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t02/fixed-witnesses": {
+    "cid": "t02",
+    "topic": "scheduler",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t03/fixed-witnesses": {
+    "cid": "t03",
+    "topic": "scheduler",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t05/fixed-witnesses": {
+    "cid": "t05",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t06/fixed-witnesses": {
+    "cid": "t06",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t07/fixed-witnesses": {
+    "cid": "t07",
+    "topic": "manual",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t08/fixed-witnesses": {
+    "cid": "t08",
+    "topic": "manual",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t10/fixed-witnesses": {
+    "cid": "t10",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t11/fixed-witnesses": {
+    "cid": "t11",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t12/fixed-witnesses": {
+    "cid": "t12",
+    "topic": "reverse-index",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t13/fixed-witnesses": {
+    "cid": "t13",
+    "topic": "reverse-index",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t15/fixed-witnesses": {
+    "cid": "t15",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "quote": "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller."
+      },
+      "alternative": {
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "quote": "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow."
+      },
+      "incoming": {
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+      },
+      "rationale": "The earlier `run_merge_tool()` operation failed to set `$status`, which now causes the difftool to not run outside of a Git worktree, as observed by the recent conversion to a built-in tool.",
+      "distinction": "The other decision addresses running the difftool outside of a Git worktree, which differs from the specific operation in the incoming report about its inability to run within a worktree."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t16/fixed-witnesses": {
+    "cid": "t16",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "quote": "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller."
+      },
+      "alternative": {
+        "location": "https://github.com/git/git/commit/03831ef7b5011cbedbcc67abe5f47762f37c6c21",
+        "quote": "The motivation for converting the difftool is that Perl scripts are not at\nall native on Windows, and that `git difftool` therefore is pretty slow on\nthat platform, when there is no good reason for it to be slow."
+      },
+      "incoming": {
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+      },
+      "rationale": "The earlier `run_merge_tool()` operation failed to set `$status`, which now causes the difftool to not run outside of a Git worktree, as observed by the recent conversion to a built-in tool.",
+      "distinction": "The other decision addresses running the difftool outside of a Git worktree, which differs from the specific operation in the incoming report about its inability to run within a worktree."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t17/fixed-witnesses": {
+    "cid": "t17",
+    "topic": "difftool",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "quote": "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller."
+      },
+      "alternative": {
+        "location": "https://github.com/git/git/commit/9f6013a88d71860433a0c11571dc87aef3c9c809",
+        "quote": "Parseopt wraps arguments in a pair of angular brackets by default,\nsignifying that the user needs to replace it with a value of the\ndocumented type.  Remove the pairs from the option definitions to\nduplication and confusion."
+      },
+      "incoming": {
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+      },
+      "rationale": "The earlier `run_merge_tool()` operation failed to set `$status`, which now causes the difftool to not run outside of a Git worktree, as observed by the recent conversion to a built-in tool.",
+      "distinction": "The other decision addresses parsing options differently, whereas the incoming report concerns the integration of a Perl script into a built-in tool causing a regression."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t18/fixed-witnesses": {
+    "cid": "t18",
+    "topic": "difftool",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "reassess",
+    "opened": true,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "location": "https://github.com/git/git/commit/99474b6340dbcbe58f6c256fdee231cbadb060f4",
+        "quote": "run_merge_tool() was not setting $status, which prevented the\nexit code for builtin tools from being forwarded to the caller."
+      },
+      "alternative": {
+        "location": "https://github.com/git/git/commit/9f6013a88d71860433a0c11571dc87aef3c9c809",
+        "quote": "Parseopt wraps arguments in a pair of angular brackets by default,\nsignifying that the user needs to replace it with a value of the\ndocumented type.  Remove the pairs from the option definitions to\nduplication and confusion."
+      },
+      "incoming": {
+        "location": "https://github.com/git/git/commit/20de316e33446f37200e51aa333ba7d824dfd478",
+        "quote": "As far as this developer can tell, the conversion from a Perl script to\na built-in caused the regression in the difftool that it no longer runs\noutside of a Git worktree (with `--no-index`, of course)."
+      },
+      "rationale": "The earlier `run_merge_tool()` operation failed to set `$status`, which now causes the difftool to not run outside of a Git worktree, as observed by the recent conversion to a built-in tool.",
+      "distinction": "The other decision addresses parsing options differently, whereas the incoming report concerns the integration of a Perl script into a built-in tool causing a regression."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t20/fixed-witnesses": {
+    "cid": "t20",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t21/fixed-witnesses": {
+    "cid": "t21",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t22/fixed-witnesses": {
+    "cid": "t22",
+    "topic": "quiet",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t23/fixed-witnesses": {
+    "cid": "t23",
+    "topic": "quiet",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t25/fixed-witnesses": {
+    "cid": "t25",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "25e5215eb24a",
+    "distinction_card": "a7f0930a66b6",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "location": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+        "quote": "commit-graph: move slab-clearing to close_commit_graph()"
+      },
+      "alternative": {
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+      },
+      "incoming": {
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "quote": "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to ac6d45d11f, we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct)."
+      },
+      "rationale": "The earlier decision to move slab-clearing to `close_commit_graph()` now fails because the commit introduces a scenario where the slab is cleared even when the repository does not have a commit graph struct, as seen with the observed condition of `ac6d45d11f`.",
+      "distinction": "The other decision addresses closing file descriptors immediately after use, whereas the incoming report discusses avoiding slab clearing in certain repository cleanup scenarios."
+    },
+    "grounded": true,
+    "contrast": true
+  },
+  "t26/fixed-witnesses": {
+    "cid": "t26",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "mixed",
+    "method": "fixed-witnesses",
+    "action": "reassess",
+    "opened": true,
+    "target": true,
+    "pair": true,
+    "other": true,
+    "rationale_card": "47a2d4b8d527",
+    "distinction_card": "2cee4b76215e",
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "location": "https://github.com/git/git/commit/ac6d45d11f24921ead899c74569b717a7895f4a5",
+        "quote": "commit-graph: move slab-clearing to close_commit_graph()"
+      },
+      "alternative": {
+        "location": "https://github.com/git/git/commit/c8828530b7797f5ab584c84dc2b86d3c14b39c8d",
+        "quote": "We don't ever refer to the descriptor after mmap-ing it. And keeping it\nopen means we can run out of descriptors in degenerate cases (e.g.,\nthousands of split chain files). Let's close it as soon as possible."
+      },
+      "incoming": {
+        "location": "https://github.com/git/git/commit/d70f554cdf38b0b05cfaa8e8eb9f80d54a5ae11c",
+        "quote": "The bug is in step (2) above. We should not be clearing the slab when\ncleaning up the submodule repository structs. Prior to [ref], we\ndid not do so because it was done inside a helper function that returned\nearly when it saw NULL. So the behavior change from that commit is that\nwe'll now _always_ clear the slab via repo_clear(), even if the\nrepository being closed did not have a commit graph (and thus would have\na NULL commit_graph struct)."
+      },
+      "rationale": "The earlier decision to move slab-clearing to `close_commit_graph()` now fails because the observed condition of not always having a `commit_graph` struct, as noted in the incoming change, causes `repo_clear()` to be called unnecessarily, leading to potential unintended side effects.",
+      "distinction": "The other decision addresses closing file descriptors immediately after use, whereas the incoming report discusses avoiding slab clearing in certain repository cleanup scenarios."
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t27/fixed-witnesses": {
+    "cid": "t27",
+    "topic": "slab",
+    "view": "raw",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  },
+  "t28/fixed-witnesses": {
+    "cid": "t28",
+    "topic": "slab",
+    "view": "hidden",
+    "scenario": "no-match",
+    "method": "fixed-witnesses",
+    "action": "keep",
+    "opened": false,
+    "target": false,
+    "pair": false,
+    "other": false,
+    "rationale_card": null,
+    "distinction_card": null,
+    "result": {
+      "action": "keep"
+    },
+    "grounded": false,
+    "contrast": false
+  }
+}

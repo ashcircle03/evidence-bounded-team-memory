@@ -11,6 +11,17 @@ python3 -m unittest discover -s tests -v
 python3 -m team_memory demo
 ```
 
+CUPMem 원형 직렬화·프롬프트 연결 검사까지 실행하려면 아래 고정 버전을 준비한다. CI도 같은 버전을 사용한다. 이 검사는 모델 추론이나 유료 API를 호출하지 않는다.
+
+```sh
+git clone https://github.com/icedreamc/STALE.git .cache/cupmem-upstream
+git -C .cache/cupmem-upstream checkout --detach ea7d391103a151927cd29d2f01d87597a782bdcb
+cp evaluation/cupmem/upstream-manifest.json .cache/cupmem-upstream/UPSTREAM_MANIFEST.json
+CUPMEM_UPSTREAM_ROOT="$PWD/.cache/cupmem-upstream" python3 -m unittest discover -s tests -v
+```
+
+원본이 없으면 해당 연결 검사는 명시적으로 건너뛴다. 별도 보관한 과거 캠페인 파일·데이터 캐시·대용량 원시 호출 로그가 필요한 검사도 `skipped`로 표시된다. 공개된 입력·출력·코드의 해시와 근거 경계 검사는 계속 실행한다. `results/`에는 개발 당시의 보고서도 포함되므로, 현재 구현과 확인 범위는 README의 **현재 개발 경로**를 기준으로 읽는다.
+
 ## 실험을 바꾸는 PR
 
 1. 바꾸려는 판단을 한 문장으로 적는다. 예를 들어 동일 조건의 상충 관측 두 개가 모두 답에 남아야 한다.

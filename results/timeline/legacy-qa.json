@@ -1,0 +1,836 @@
+{
+  "job_id": "119555",
+  "status": "complete",
+  "calls": 136,
+  "historical_cases": 20,
+  "preserved": 20,
+  "rows": {
+    "q04-ordinary/legacy": {
+      "question": "Which style does Git use by default for printing fetch ref update status?",
+      "before": {
+        "id": "db11b63031320d365a43bed6",
+        "field": "quote",
+        "answer": "Default value is `full`.",
+        "quote": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details.",
+        "speaker": "Git documentation contributors",
+        "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+        "scope": {},
+        "status": "source_only",
+        "date": "2025-03-14"
+      },
+      "after": {
+        "id": "db11b63031320d365a43bed6",
+        "field": "quote",
+        "answer": "Default value is `full`.",
+        "quote": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details.",
+        "speaker": "Git documentation contributors",
+        "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63",
+        "scope": {},
+        "status": "source_only",
+        "date": "2025-03-14"
+      },
+      "identical": true
+    },
+    "q05-ordinary/simple": {
+      "question": "Which alternate merge conflict style removes matching lines near either edge of the conflict region?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "2cd6e6057ddcdebd13c4efe5",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "speaker": "Git documentation contributors",
+            "start": 638,
+            "end": 852,
+            "quote": "Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region.",
+            "status": "source_only",
+            "answer": "zdiff3"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "2cd6e6057ddcdebd13c4efe5",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15",
+            "speaker": "Git documentation contributors",
+            "start": 638,
+            "end": 852,
+            "quote": "Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region.",
+            "status": "source_only",
+            "answer": "zdiff3"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "q06-ordinary/simple": {
+      "question": "What default subject prefix does format-patch put on its output?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "b33cab8c6b4353bf87cad57e",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "speaker": "Git documentation contributors",
+            "start": 0,
+            "end": 107,
+            "quote": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix.",
+            "status": "source_only",
+            "answer": "[PATCH]"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "b33cab8c6b4353bf87cad57e",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43",
+            "speaker": "Git documentation contributors",
+            "start": 0,
+            "end": 107,
+            "quote": "format.subjectPrefix::\n\tThe default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix.",
+            "status": "source_only",
+            "answer": "[PATCH]"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "q07-ordinary/premise": {
+      "question": "If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "844dbf9c27f11316fcd46ccc",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "speaker": "Git documentation contributors",
+            "start": 0,
+            "end": 395,
+            "quote": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1].",
+            "status": "source_only",
+            "answer": "manual"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "844dbf9c27f11316fcd46ccc",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9",
+            "speaker": "Git documentation contributors",
+            "start": 0,
+            "end": 395,
+            "quote": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.\n+\nThis setting can be overridden by passing the `--strategy` option to\nlinkgit:git-notes[1].",
+            "status": "source_only",
+            "answer": "manual"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "q08-ordinary/simple": {
+      "question": "Which Git configuration option chooses between basic and extended when grep.patternType is set to default?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "c7327b8bae355fdb222e5af1",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "speaker": "Git documentation contributors",
+            "start": 55,
+            "end": 338,
+            "quote": "Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'.",
+            "status": "source_only",
+            "answer": "grep.extendedRegexp"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "c7327b8bae355fdb222e5af1",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "speaker": "Git documentation contributors",
+            "start": 55,
+            "end": 338,
+            "quote": "Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'.",
+            "status": "source_only",
+            "answer": "grep.extendedRegexp"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "d01/premise": {
+      "question": "What name does a newly cloned repository give its remote by default?",
+      "before": {
+        "status": "unresolved",
+        "answers": [
+          {
+            "source_id": "f91f3a39ce0a320652cc0633",
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "speaker": "Eli",
+            "start": 0,
+            "end": 126,
+            "quote": "I checked the same unmodified release on the packaging job. The default remote name for a newly cloned repository is upstream.",
+            "status": "source_only",
+            "answer": "upstream"
+          },
+          {
+            "source_id": "878239f428b41a7f4b24f58a",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "speaker": "Git documentation contributors",
+            "start": 0,
+            "end": 335,
+            "quote": "`clone.defaultRemoteName`::\n\tThe name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.\nifdef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption.\nendif::[]\nifndef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption to linkgit:git-clone[1].\nendif::[]",
+            "status": "source_only",
+            "answer": "origin"
+          }
+        ]
+      },
+      "after": {
+        "status": "unresolved",
+        "answers": [
+          {
+            "source_id": "f91f3a39ce0a320652cc0633",
+            "location": "trial://worklog/646956c0e537938abf1125c2",
+            "speaker": "Eli",
+            "start": 0,
+            "end": 126,
+            "quote": "I checked the same unmodified release on the packaging job. The default remote name for a newly cloned repository is upstream.",
+            "status": "source_only",
+            "answer": "upstream"
+          },
+          {
+            "source_id": "878239f428b41a7f4b24f58a",
+            "location": "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12",
+            "speaker": "Git documentation contributors",
+            "start": 0,
+            "end": 335,
+            "quote": "`clone.defaultRemoteName`::\n\tThe name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.\nifdef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption.\nendif::[]\nifndef::git-clone[]\n\tIt can be overridden by passing the `--origin` command-line\n\toption to linkgit:git-clone[1].\nendif::[]",
+            "status": "source_only",
+            "answer": "origin"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "d07/premise": {
+      "question": "Which cartridge should each sampler use for collecting field water?",
+      "before": {
+        "status": "conditional",
+        "answers": [
+          {
+            "source_id": "f8ab786ad9476e4962f7a0d4",
+            "location": "trial://worklog/4aa08d0501e153ad28103fe5",
+            "speaker": "Kim",
+            "start": 0,
+            "end": 68,
+            "quote": "For freshwater sites the field water sampler uses the L-2 cartridge.",
+            "status": "source_only",
+            "answer": "L-2 cartridge",
+            "condition": "freshwater sites"
+          },
+          {
+            "source_id": "cb8639d64cb898545c782f15",
+            "location": "trial://worklog/e288efd3c457166052d3dc9a",
+            "speaker": "Uma",
+            "start": 0,
+            "end": 65,
+            "quote": "At brackish sites the field water sampler uses the B-8 cartridge.",
+            "status": "source_only",
+            "answer": "B-8 cartridge",
+            "condition": "brackish sites"
+          }
+        ]
+      },
+      "after": {
+        "status": "conditional",
+        "answers": [
+          {
+            "source_id": "f8ab786ad9476e4962f7a0d4",
+            "location": "trial://worklog/4aa08d0501e153ad28103fe5",
+            "speaker": "Kim",
+            "start": 0,
+            "end": 68,
+            "quote": "For freshwater sites the field water sampler uses the L-2 cartridge.",
+            "status": "source_only",
+            "answer": "L-2 cartridge",
+            "condition": "freshwater sites"
+          },
+          {
+            "source_id": "cb8639d64cb898545c782f15",
+            "location": "trial://worklog/e288efd3c457166052d3dc9a",
+            "speaker": "Uma",
+            "start": 0,
+            "end": 65,
+            "quote": "At brackish sites the field water sampler uses the B-8 cartridge.",
+            "status": "source_only",
+            "answer": "B-8 cartridge",
+            "condition": "brackish sites"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-615-clean/premise": {
+      "question": "If system time zone data is unavailable, which PyPI package supplies the fallback for zoneinfo?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "7e8c655d9ab964be2c9dd0f4",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+            "speaker": "PEP 615 contributors",
+            "start": 507,
+            "end": 714,
+            "quote": "By default,\n``zoneinfo`` will use the system's time zone data if available; if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI.",
+            "status": "source_only",
+            "answer": "tzdata"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "7e8c655d9ab964be2c9dd0f4",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst",
+            "speaker": "PEP 615 contributors",
+            "start": 507,
+            "end": 714,
+            "quote": "By default,\n``zoneinfo`` will use the system's time zone data if available; if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI.",
+            "status": "source_only",
+            "answer": "tzdata"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-572-clean/premise": {
+      "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "d60afae8bbc6e0863adaf8cf",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "speaker": "PEP 572 contributors",
+            "start": 4752,
+            "end": 4902,
+            "quote": "This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.",
+            "status": "source_only",
+            "answer": "NAME := expr"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "d60afae8bbc6e0863adaf8cf",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "speaker": "PEP 572 contributors",
+            "start": 4752,
+            "end": 4902,
+            "quote": "This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.",
+            "status": "source_only",
+            "answer": "NAME := expr"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-597-clean/premise": {
+      "question": "Which warning category signals omitted encoding when open uses the locale default?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "9cdf2a0f123965fbe7cbf525",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+            "speaker": "PEP 597 contributors",
+            "start": 4170,
+            "end": 4328,
+            "quote": "When the flag is set, ``io.TextIOWrapper()``, ``open()`` and other\nmodules using them will emit ``EncodingWarning`` when the ``encoding``\nargument is omitted.",
+            "status": "source_only",
+            "answer": "EncodingWarning"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "9cdf2a0f123965fbe7cbf525",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+            "speaker": "PEP 597 contributors",
+            "start": 4170,
+            "end": 4328,
+            "quote": "When the flag is set, ``io.TextIOWrapper()``, ``open()`` and other\nmodules using them will emit ``EncodingWarning`` when the ``encoding``\nargument is omitted.",
+            "status": "source_only",
+            "answer": "EncodingWarning"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-618-clean/premise": {
+      "question": "Which exception does strict zip raise when its iterables have different lengths?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "44d1a4fcadb2fbfbc6769c81",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "speaker": "PEP 618 contributors",
+            "start": 4121,
+            "end": 4386,
+            "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.",
+            "status": "source_only",
+            "answer": "ValueError"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "44d1a4fcadb2fbfbc6769c81",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "speaker": "PEP 618 contributors",
+            "start": 4121,
+            "end": 4386,
+            "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.",
+            "status": "source_only",
+            "answer": "ValueError"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-669-clean/premise": {
+      "question": "Which namespace exports the low-impact interpreter monitoring functions and constants?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "e994cfff4b43ae60a24855c6",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+            "speaker": "PEP 669 contributors",
+            "start": 1050,
+            "end": 1152,
+            "quote": "A ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.",
+            "status": "source_only",
+            "answer": "sys.monitoring"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "e994cfff4b43ae60a24855c6",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst",
+            "speaker": "PEP 669 contributors",
+            "start": 1050,
+            "end": 1152,
+            "quote": "A ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.",
+            "status": "source_only",
+            "answer": "sys.monitoring"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-654-clean/premise": {
+      "question": "What syntax handles exception groups in the proposal for multiple unrelated exceptions?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "08242b9ceb3b4388c7fb10f3",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+            "speaker": "PEP 654 contributors",
+            "start": 6733,
+            "end": 6886,
+            "quote": "The purpose of this PEP, then, is to add the ``ExceptionGroup`` builtin type\nand the ``except*`` syntax for handling exception groups in the interpreter.",
+            "status": "source_only",
+            "answer": "the ``except*`` syntax"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "08242b9ceb3b4388c7fb10f3",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+            "speaker": "PEP 654 contributors",
+            "start": 6733,
+            "end": 6886,
+            "quote": "The purpose of this PEP, then, is to add the ``ExceptionGroup`` builtin type\nand the ``except*`` syntax for handling exception groups in the interpreter.",
+            "status": "source_only",
+            "answer": "the ``except*`` syntax"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-553-clean/premise": {
+      "question": "What value of PYTHONBREAKPOINT makes the default breakpoint hook disable debugging?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "17eba532b6b8433f75abf6e9",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+            "speaker": "PEP 553 contributors",
+            "start": 4061,
+            "end": 4105,
+            "quote": "* ``PYTHONBREAKPOINT=0`` disables debugging.",
+            "status": "source_only",
+            "answer": "0"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "17eba532b6b8433f75abf6e9",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst",
+            "speaker": "PEP 553 contributors",
+            "start": 4061,
+            "end": 4105,
+            "quote": "* ``PYTHONBREAKPOINT=0`` disables debugging.",
+            "status": "source_only",
+            "answer": "0"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-572-conflict/premise": {
+      "question": "What notation assigns a name within a Python expression under the assignment expressions proposal?",
+      "before": {
+        "status": "unresolved",
+        "answers": [
+          {
+            "source_id": "d60afae8bbc6e0863adaf8cf",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "speaker": "PEP 572 contributors",
+            "start": 469,
+            "end": 587,
+            "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+            "status": "source_only",
+            "answer": "NAME := expr"
+          },
+          {
+            "source_id": "ec1d816197eea4516c748e72",
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "speaker": "Dee",
+            "start": 0,
+            "end": 138,
+            "quote": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions.",
+            "status": "source_only",
+            "answer": "NAME <- expr",
+            "condition": "language review"
+          }
+        ]
+      },
+      "after": {
+        "status": "unresolved",
+        "answers": [
+          {
+            "source_id": "d60afae8bbc6e0863adaf8cf",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "speaker": "PEP 572 contributors",
+            "start": 469,
+            "end": 587,
+            "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+            "status": "source_only",
+            "answer": "NAME := expr"
+          },
+          {
+            "source_id": "ec1d816197eea4516c748e72",
+            "location": "casebook://messages/53dfa0d0c6823f1309b5acff",
+            "speaker": "Dee",
+            "start": 0,
+            "end": 138,
+            "quote": "In our language review, assignment inside an expression uses NAME <- expr. That is the notation our review recorded for named expressions.",
+            "status": "source_only",
+            "answer": "NAME <- expr",
+            "condition": "language review"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "old-pep-618-conflict/premise": {
+      "question": "Which exception does strict zip raise when its iterables have different lengths?",
+      "before": {
+        "status": "unresolved",
+        "answers": [
+          {
+            "source_id": "80e3480fa35e216e36d37f05",
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "speaker": "Fay",
+            "start": 0,
+            "end": 137,
+            "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+            "status": "source_only",
+            "answer": "LengthMismatchError",
+            "condition": "strict zip unequal-lengths check"
+          },
+          {
+            "source_id": "44d1a4fcadb2fbfbc6769c81",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "speaker": "PEP 618 contributors",
+            "start": 4121,
+            "end": 4386,
+            "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.",
+            "status": "source_only",
+            "answer": "ValueError"
+          }
+        ]
+      },
+      "after": {
+        "status": "unresolved",
+        "answers": [
+          {
+            "source_id": "80e3480fa35e216e36d37f05",
+            "location": "casebook://messages/25ca492f2cdf17bdb4cce7bf",
+            "speaker": "Fay",
+            "start": 0,
+            "end": 137,
+            "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+            "status": "source_only",
+            "answer": "LengthMismatchError",
+            "condition": "strict zip unequal-lengths check"
+          },
+          {
+            "source_id": "44d1a4fcadb2fbfbc6769c81",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst",
+            "speaker": "PEP 618 contributors",
+            "start": 4121,
+            "end": 4386,
+            "quote": "When the built-in ``zip`` is called with the keyword-only argument\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\nthe arguments are exhausted at differing lengths.  This error will\noccur at the point when iteration would normally stop today.",
+            "status": "source_only",
+            "answer": "ValueError"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "F_SH_Top01_002/premise": {
+      "question": "In the competitive analysis task for the supply chain carbon footprint project, after Huilan Chen completed the analysis of key competitors (especially EcoTrace), which document management system did she upload the final report to?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "9eed399bd98e29b4f9abd153",
+            "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-31/Group 3/3",
+            "speaker": "Huilan Chen",
+            "start": 204,
+            "end": 342,
+            "quote": "The report has been uploaded to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report.",
+            "status": "source_only",
+            "answer": "Confluence"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "9eed399bd98e29b4f9abd153",
+            "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-31/Group 3/3",
+            "speaker": "Huilan Chen",
+            "start": 204,
+            "end": 342,
+            "quote": "The report has been uploaded to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report.",
+            "status": "source_only",
+            "answer": "Confluence"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "F_SH_Top01_013/premise": {
+      "question": "After conducting a technical assessment of the data quality of the production line energy management system, what is the preliminary estimated number of workdays required for data cleansing and initial verification in the report?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "59cc54ef610d1e0d90cfa5c1",
+            "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5",
+            "speaker": "Xuexin Yin",
+            "start": 182,
+            "end": 426,
+            "quote": "The core conclusion is that the automated cleaning of this data source is quite difficult, and it is initially estimated that at least 10 working days of data engineer input will be required for rule development and initial manual verification.",
+            "status": "source_only",
+            "answer": "at least 10 working days"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "59cc54ef610d1e0d90cfa5c1",
+            "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5",
+            "speaker": "Xuexin Yin",
+            "start": 182,
+            "end": 426,
+            "quote": "The core conclusion is that the automated cleaning of this data source is quite difficult, and it is initially estimated that at least 10 working days of data engineer input will be required for rule development and initial manual verification.",
+            "status": "source_only",
+            "answer": "at least 10 working days"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "F_SH_Top01_033/premise": {
+      "question": "When reviewing the first draft of the user interview outline for the carbon emissions management platform, who suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "a7c4bd0229d9d3643b13546f",
+            "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5",
+            "speaker": "Lizhen Zhou",
+            "start": 58,
+            "end": 222,
+            "quote": "Regarding the sections for managers and audit requirements, I suggest adding a question: \"What customizable dimensions would you like the generated reports to have?",
+            "status": "source_only",
+            "answer": "Lizhen Zhou"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "a7c4bd0229d9d3643b13546f",
+            "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5",
+            "speaker": "Lizhen Zhou",
+            "start": 58,
+            "end": 222,
+            "quote": "Regarding the sections for managers and audit requirements, I suggest adding a question: \"What customizable dimensions would you like the generated reports to have?",
+            "status": "source_only",
+            "answer": "Lizhen Zhou"
+          }
+        ]
+      },
+      "identical": true
+    },
+    "pep-680/clean/candidate": {
+      "question": "Which standard library module provides the TOML parser for Python packaging tools?",
+      "before": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "713c4e99e3b1918e5b6dcb9e",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+            "speaker": "PEP 680 contributors",
+            "start": 9,
+            "end": 73,
+            "quote": "Title: tomllib: Support for Parsing TOML in the Standard Library",
+            "status": "source_only",
+            "answer": "tomllib"
+          }
+        ]
+      },
+      "after": {
+        "status": "answered",
+        "answers": [
+          {
+            "source_id": "713c4e99e3b1918e5b6dcb9e",
+            "location": "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst",
+            "speaker": "PEP 680 contributors",
+            "start": 9,
+            "end": 73,
+            "quote": "Title: tomllib: Support for Parsing TOML in the Standard Library",
+            "status": "source_only",
+            "answer": "tomllib"
+          }
+        ]
+      },
+      "identical": true
+    }
+  },
+  "scope": "Unchanged legacy 3B QA reader, separate from new 14B timeline QA. Frozen 136-call batch includes historical 20-case parser inputs, not every later candidate in packets().",
+  "job": {
+    "source_version": "timeline-qa-v1",
+    "source_sha256": {
+      "infer.py": "1b16029cc3ca37fe2280324763542c2333c7f2770caebeb2b66c6cfb7524babf",
+      "packets.json": "a9a74ac3f50e865c1bf78ba0e4b570c55161463e7edb87a559c6a4c46aefb9da",
+      "run.sbatch": "f04df38018c22cf384adadf022ece518c5715e524b70823e62e14bcd4c6ff854"
+    },
+    "submission_intent": "submitted",
+    "job_id": "119555",
+    "gpus": 1,
+    "cpus": 8,
+    "ram_gb": 48,
+    "wall_minutes": 10,
+    "partition": "batch_ugrad",
+    "account": "ugrad",
+    "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-timeline-qa-v1",
+    "state": "COMPLETED",
+    "submitted_at": "2026-11-05T06:09:59.987556+00:00",
+    "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119555.json",
+    "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-119555.log",
+    "exit_code": "0:0",
+    "elapsed_seconds": 107,
+    "usage": [
+      {
+        "JobID": "119555",
+        "State": "COMPLETED",
+        "ExitCode": "0:0",
+        "Elapsed": "00:01:47",
+        "ElapsedRaw": "107",
+        "AllocCPUS": "8",
+        "ReqMem": "48G",
+        "MaxRSS": "",
+        "TotalCPU": "00:58.192",
+        "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+        "NodeList": "aurora-g5"
+      },
+      {
+        "JobID": "119555.batch",
+        "State": "COMPLETED",
+        "ExitCode": "0:0",
+        "Elapsed": "00:01:47",
+        "ElapsedRaw": "107",
+        "AllocCPUS": "8",
+        "ReqMem": "",
+        "MaxRSS": "937900K",
+        "TotalCPU": "00:58.190",
+        "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+        "NodeList": "aurora-g5"
+      },
+      {
+        "JobID": "119555.extern",
+        "State": "COMPLETED",
+        "ExitCode": "0:0",
+        "Elapsed": "00:01:47",
+        "ElapsedRaw": "107",
+        "AllocCPUS": "8",
+        "ReqMem": "",
+        "MaxRSS": "0",
+        "TotalCPU": "00:00.001",
+        "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+        "NodeList": "aurora-g5"
+      }
+    ],
+    "verified": true
+  },
+  "result_sha256": "13ea82d71de57749b50c24be203ad66e07e24219eee0b0bdba4a1f417381005c"
+}

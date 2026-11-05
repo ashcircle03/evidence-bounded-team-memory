@@ -6,6 +6,15 @@ __pycache__/
 .env.*
 !.env.example
 team-records/
+.timeline-client-*/
+.workbench/
 .cache/
 evaluation/cpython/inputs.json.gz
 evaluation/cpython/packets.json.gz
+
+# Local raw CUPMem traces and generated preview; publish reports, not bulk logs.
+results/cupmem/pilot-v5/http.jsonl
+results/cupmem/pilot-v5/*.cupmem.json
+results/cupmem/pilot-v5/*.cupmem.partial.json
+results/cupmem/local-pilot-v1/live/http.jsonl
+results/preview/index.html

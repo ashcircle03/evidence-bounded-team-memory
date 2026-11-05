@@ -1,0 +1,876 @@
+{
+  "071618182708": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD",
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "reason": "The incoming report introduces a new issue related to FreeBSD's implementation of getcwd(3), where FreeBSD uses a fallback method based on readdir(3) that requires read and execute permissions on path components. This contradicts the original decision in P0, which focused on converting functions to use strbuf without considering the specific behavior of FreeBSD's getcwd(3). The new evidence suggests that the original decision might not fully address the FreeBSD-specific issue."
+  },
+  "0ddaf8a5b177": {
+    "criterion": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "old": [
+      "range-diff: relieve callers of low-level configuration burden",
+      "There are a number of very low-level configuration details which need to\nbe managed precisely to generate a proper range-diff. In particular,\n'diff_options' output format, header suppression, indentation, and\ndual-color mode must all be set appropriately to ensure proper behavior.",
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded."
+    ],
+    "new": [
+      "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.",
+      "Fix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options."
+    ],
+    "reason": "The earlier decision P1 introduced changes to manage low-level configuration details within the range-diff backend, which inadvertently broke the passing of certain diff options like --no-patch and --stat. This regression necessitates a reevaluation of how these options are handled to restore their intended functionality."
+  },
+  "12fac7ece246": {
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "old": [
+      "For boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+      "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local."
+    ],
+    "reason": "The earlier optimization in P0:2 led to a regression where the last key wins semantics were not preserved, causing preference for global configurations over local ones."
+  },
+  "157354d5bd5a": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution."
+    ],
+    "new": [
+      "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "reason": "The new evidence indicates a regression where the 'invoked_hook' variable was not passed forward to run_hooks_opt(), leading to undefined behavior regarding whether the code was contingent on running the hook. This could result in the race condition described in P0:2, where the index might be modified by a pre-commit hook without calling discard_cache()."
+  },
+  "15f66e7aa5a6": {
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "old": [
+      "add -p: only bind search key if there's more than one hunk",
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+    ],
+    "new": [
+      "Fix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.",
+      "In Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+      "    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+      "I.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+    ],
+    "reason": "The regression introduced in P1 due to the modification of the code flow has caused the \"/\" feature to fail, as evidenced by the error messages and behavior described in N."
+  },
+  "1942af2d8467": {
+    "criterion": "Updating/writing the cache tree during commit leads to duplicate insufficient-permission errors when .git/objects cannot be written. prepare_index should be quiet; prepare_to_commit should report the error. State the duplication and unwritable condition without swapping which call should be silent.",
+    "old": [
+      "cache-tree: Write updated cache-tree after commit",
+      "During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands."
+    ],
+    "new": [
+      "commit: fix duplication regression in permission error output",
+      "Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.",
+      "The cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.",
+      "But with 9c4d6c0297b the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-9c4d6c0297b the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.",
+      "So let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+    ],
+    "reason": "The incoming report indicates that the regression in error output was introduced by the change in P0, specifically the addition of WRITE_TREE_SILENT flag without corresponding silent handling in the update_one() function of cache-tree.c. This change led to the emission of multiple 'insufficient permission' errors, contrary to the intended behavior of preparing the index silently."
+  },
+  "1e0fdb8af013": {
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "old": [
+      "send-email: move trivial config handling to Perl",
+      "Optimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.",
+      "For boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it.",
+      "The \"grep { defined } @values\" here covers a rather subtle case. For\nlist values such as sendemail.to it is possible as with any other\nconfig key to provide a plain \"-c sendemail.to\", i.e. to set the key\nas a boolean true. In that case the Git::config() API will return an\nempty string, but this new parser will correctly return \"undef\".",
+      "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+      "This brings the runtime of \"git send-email\" from ~60-~70ms to a very\nsteady ~40ms on my test box. We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config. I happen to have 8 of those set.",
+      "This brings the runtime of t9001-send-email.sh from ~13s down to ~12s\nfor me. The change there is less impressive as many of those tests set\nvarious config values, and we're also getting to the point of\ndiminishing returns for optimizing \"git send-email\" itself."
+    ],
+    "new": [
+      "send-email: fix a \"first config key wins\" regression in v2.33.0",
+      "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+      "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local."
+    ],
+    "reason": "The new evidence indicates a regression introduced in v2.33.0 where the first config key was incorrectly chosen instead of the last one, which affects the behavior of certain sendemail settings. This contradicts the expected behavior described in the earlier decision P0, which aimed to optimize the retrieval of config keys and values without altering their precedence rules."
+  },
+  "2234cd3491ee": {
+    "criterion": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "old": [
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.",
+      "This was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+    ],
+    "reason": "The earlier decision in P1 modified the Makefile to disable default implicit rules, which inadvertently caused a regression in the handling of explicit rules. The new evidence shows that an explicit rule relying on the default suffixes for \".texi\" files no longer works as expected after the change, necessitating a fix."
+  },
+  "2986a1046d46": {
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "old": [
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+    ],
+    "new": [
+      "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:",
+      "    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+      "I.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+    ],
+    "reason": "The earlier decision to disable searching when there is only a single hunk may no longer be relevant due to the reported issue where the '/regex' command fails and emits a warning even when multiple hunks are present. The new evidence shows that the '/regex' feature completely breaks, indicating a more fundamental issue with the implementation that affects all cases, not just single hunks."
+  },
+  "2b1afc557f31": {
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "old": [
+      "add -p: only bind search key if there's more than one hunk",
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+    ],
+    "new": [
+      "In Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+      "    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many"
+    ],
+    "reason": "The earlier decision in P0 introduced a feature to disable searching in single-hunk scenarios and to provide an error message if the user attempts to search. However, the new evidence shows that the '/regex' feature has broken due to a regression unrelated to the number of hunks, indicating that the issue lies elsewhere in the codebase. This suggests that the condition on which the earlier decision depended (the presence of multiple hunks for enabling search) is not the root cause of the current failure."
+  },
+  "307684109e7b": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "reason": "The new evidence indicates that FreeBSD's implementation of getcwd(3) can fail due to insufficient permissions, leading to EACCES errors for long paths. This contradicts the assumption made in P0 that PATH_MAX-sized buffers are sufficient without considering permission issues."
+  },
+  "33093002bba8": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "Fix a Time-of-check to time-of-use (TOCTOU) race in code added in\n680ee550d72 (commit: skip discarding the index if there is no\npre-commit hook, 2017-08-14).",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "The race condition itself probably doesn't matter, and users would\nhave been unlikely to run into it in practice. This problem has been\nnoted on-list when 680ee550d72 was discussed[1], but had not been\nfixed.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.",
+      "This leaves uses of hook_exists() in two places that matter. The\n\"reference-transaction\" check in refs.c, see 67541597670 (refs:\nimplement reference transaction hook, 2020-06-19), and the\n\"prepare-commit-msg\" hook, see 66618a50f9c (sequencer: run\n'prepare-commit-msg' hook, 2018-01-24).",
+      "In both of those cases we're saving ourselves CPU time by not\npreparing data for the hook that we'll then do nothing with if we\ndon't have the hook. So using this \"invoked_hook\" pattern doesn't make\nsense in those cases.",
+      "The \"reference-transaction\" and \"prepare-commit-msg\" hook also aren't\nracy. In those cases we'll skip the hook runs if we race with a new\nhook being added, whereas in the TOCTOU races being fixed here we were\nincorrectly skipping the required post-hook logic.",
+      "1. https://lore.kernel.org/git/20170810191613.kpmhzg4seyxy3cpq@sigill.intra.peff.net/"
+    ],
+    "new": [
+      "hooks: fix \"invoked hook\" regression in [ref]",
+      "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".",
+      "This bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:",
+      "    ==31275== Conditional jump or move depends on uninitialised value(s)\n    ==31275==    at 0x43C63F: prepare_to_commit (commit.c:1058)\n    ==31275==    by 0x4396A5: cmd_commit (commit.c:1722)\n    ==31275==    by 0x407C8A: run_builtin (git.c:465)\n    ==31275==    by 0x406741: handle_builtin (git.c:718)\n    ==31275==    by 0x407665: run_argv (git.c:785)\n    ==31275==    by 0x406500: cmd_main (git.c:916)\n    ==31275==    by 0x510839: main (common-main.c:56)\n    ==31275==  Uninitialised value was created by a stack allocation\n    ==31275==    at 0x43B344: prepare_to_commit (commit.c:719)"
+    ],
+    "reason": "The new evidence reveals a regression in the 'invoked hook' mechanism introduced in P1, specifically in the 'push-to-checkout' hook. This regression causes undefined behavior regarding whether the hook was executed based on the presence of the hook, leading to potential issues such as uninitialized values detected by Valgrind. The original decision in P0 aimed to improve readability and clarity of the code, but the new evidence shows that this change has unintended consequences."
+  },
+  "3a1e6464bf13": {
+    "criterion": "Updating/writing the cache tree during commit leads to duplicate insufficient-permission errors when .git/objects cannot be written. prepare_index should be quiet; prepare_to_commit should report the error. State the duplication and unwritable condition without swapping which call should be silent.",
+    "old": [
+      "During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands."
+    ],
+    "new": [
+      "Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again."
+    ],
+    "reason": "Reconsider the earlier decision “During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands.”. The new report gives the following behavior and its conditions. “Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.”"
+  },
+  "3cb2342f35aa": {
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "old": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features."
+    ],
+    "new": [
+      "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD."
+    ],
+    "reason": "Reconsider the earlier decision “In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.”. The new report gives the following behavior and its conditions. “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”"
+  },
+  "3dd263ed25ec": {
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "old": [
+      "test-lib.sh: Use GLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34",
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "Using the ordinary glibc system variable detect if this is glibc >= 2.34 and\nuse GLIBC_TUNABLES and the new library.",
+      "This patch was inspired by a Richard W.M. Jones ndbkit patch"
+    ],
+    "new": [
+      "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message",
+      "    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD."
+    ],
+    "reason": "The change introduced by P1 to use GLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34 has caused a regression when compiling with SANITIZE=address. The new evidence shows that tests now fail with an ASan runtime error message, indicating that the address sanitizer no longer works correctly due to the removal of MALLOC_CHECK_."
+  },
+  "3eff82839d9d": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution."
+    ],
+    "new": [
+      "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "reason": "The regression introduced by the change in P0 causes the 'invoked_hook' variable to not be properly passed forward, leading to undefined behavior whether the code contingent on running the hook executes or not. This undermines the clarity and reliability improvements aimed for in P0."
+  },
+  "4049b5295bab": {
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "old": [
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy."
+    ],
+    "new": [
+      "b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in 1190a1acf8 (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "reason": "Reconsider the earlier decision “We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.”. The new report gives the following behavior and its conditions. “b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in 1190a1acf8 (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.”"
+  },
+  "4c8e171dd4af": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "The change from using lookup_commit_reference_gently() to lookup_commit() introduced a regression where non-NULL values were returned for null_oid(), leading to errors when attempting to parse_commit(). This issue was not anticipated in the original decision."
+  },
+  "4e7b683d3400": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently()."
+    ],
+    "new": [
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "Reconsider the earlier decision “In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().”. The new report gives the following behavior and its conditions. “As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it.”"
+  },
+  "4f02e84ccf1d": {
+    "criterion": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "old": [
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index."
+    ],
+    "reason": "The change made in P1 to handle path arguments relative to the current directory introduced a regression where entries outside of the subdirectory are not properly handled by dir-diff. Specifically, the indexed paths are toplevel-relative and thus not added to the index when constructed from within the subdirectory."
+  },
+  "4ff8d4e15593": {
+    "criterion": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "When preparing the right-side of the diff we only include the\nchanged paths in the temporary area.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "reason": "The earlier decision P1 corrected how path arguments are handled in a subdirectory, but it introduced a regression where entries outside of the subdirectory were not properly handled by dir-diff. Specifically, the left side of the diff was constructed incorrectly due to the context of the subdirectory, leading to issues with toplevel-relative paths."
+  },
+  "5101420c9d8f": {
+    "criterion": "Moving guide output to section-printing code adds an unintended leading newline for git help --guides or other single-section output. Describe the newline and single-section condition; not missing or duplicated guide text.",
+    "old": [
+      "help: use command-list.txt for the source of guides",
+      "The help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow."
+    ],
+    "new": [
+      "help: don't print \"\\n\" before single-section output",
+      "Fix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+      "That we started printing an extra \"\\n\" in 1b81d8cb19d wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.",
+      "With 1b81d8cb19d we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in cfb22a02ab5 (help:\nuse command-list.h for common command list, 2018-05-10)."
+    ],
+    "reason": "The change introduced in P1 led to a formatting regression where an extra newline was inserted before the output of single-section commands like 'git help --guides'. This issue was identified and corrected in the incoming report."
+  },
+  "51fd1ec3553e": {
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "git-prompt.sh: don't assume the shell expands the value of PS1",
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "reason": "The new evidence indicates that not all shells expand the value of PS1 by default, contrary to the assumption made in P0. This change affects zsh, leading to prompts containing the literal string '${__git_ps1_branch_name}' instead of the actual branch name."
+  },
+  "5388f2e42a11": {
+    "criterion": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "old": [
+      "Makefile: move \".SUFFIXES\" rule to shared.mak",
+      "This was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.",
+      "This doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:",
+      "    $ git -c hyperfine.hook.setup= hyperfine -L rev HEAD~1,HEAD~0 -s 'make -C Documentation man' 'make -C Documentation -j1 man'\n    Benchmark 1: make -C Documentation -j1 man' in 'HEAD~1\n      Time (mean ± σ):     121.7 ms ±   8.8 ms    [User: 105.8 ms, System: 18.6 ms]\n      Range (min … max):   112.8 ms … 148.4 ms    26 runs",
+      "    Benchmark 2: make -C Documentation -j1 man' in 'HEAD~0\n      Time (mean ± σ):      97.5 ms ±   8.0 ms    [User: 80.1 ms, System: 20.1 ms]\n      Range (min … max):    89.8 ms … 111.8 ms    32 runs",
+      "    Summary\n      'make -C Documentation -j1 man' in 'HEAD~0' ran\n        1.25 ± 0.14 times faster than 'make -C Documentation -j1 man' in 'HEAD~1'",
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.",
+      "So this is causing us to omit a bunch of work we didn't need to\ndo. For making \"git-status.1\" the \"--debug=a\" output is reduced from\n~140k lines to ~6k.",
+      "1. https://lore.kernel.org/git/220222.86bkyz875k.gmgdl@evledraar.gmail.com/"
+    ],
+    "new": [
+      "Documentation/Makefile: fix \"make info\" regression in dad9cd7d518",
+      "Fix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:",
+      "\tinfo make --index-search='$*'",
+      "This rule relied on \".texi\" being in the default list of suffixes, as\nseen at:",
+      "\tmake -f/dev/null -p | grep -v -e ^# -e ^$|grep -F .SUFFIXES",
+      "The documentation explains what was going on here:",
+      "\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.",
+      "I.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite."
+    ],
+    "reason": "The incoming report indicates that the change made in P1 introduced a regression in the 'make info' command, specifically due to the removal of \".SUFFIXES\" from the main Makefile. This change affected the resolution of prerequisites in explicit rules, leading to issues with the 'gitman.info' target."
+  },
+  "558afbf954d7": {
+    "criterion": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "old": [
+      "difftool: fix argument handling in subdirs",
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.",
+      "The Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+    ],
+    "new": [
+      "[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.",
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.",
+      "Teach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid."
+    ],
+    "reason": "The earlier decision (P1) corrected how path arguments are handled in a subdirectory, but it introduced a regression where entries outside of the subdirectory were not properly included in the left side of the diff due to incorrect handling of toplevel-relative paths."
+  },
+  "567ee157971b": {
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "old": [
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "reason": "The earlier decision assumed that all shells perform parameter expansion on PS1, which led to a regression in zsh where prompts contained literal strings instead of expanded values. The new evidence shows that not all shells expand PS1, necessitating a conditional check."
+  },
+  "5abb4e989311": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "Fix a Time-of-check to time-of-use (TOCTOU) race in code added in\n680ee550d72 (commit: skip discarding the index if there is no\npre-commit hook, 2017-08-14).",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "hooks: fix \"invoked hook\" regression in [ref]",
+      "Fix a regression in [ref] ([referenced subject], 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\"."
+    ],
+    "reason": "The regression introduced in [ref] ([referenced subject], 2022-03-07) affects the 'invoked_hook' variable handling, which was part of the changes made in P0 to address TOCTOU race conditions. The failure to pass 'invoked_hook' forward to run_hooks_opt() leads to undefined behavior, indicating that the fix in P0 may have inadvertently introduced a new issue."
+  },
+  "62431f454b94": {
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "old": [
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "reason": "Reconsider the earlier decision “Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.”. The new report gives the following behavior and its conditions. “This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.”"
+  },
+  "64095020bcd0": {
+    "criterion": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "old": [
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]"
+    ],
+    "reason": "Reconsider the earlier decision “In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.”. The new report gives the following behavior and its conditions. “In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/[ref]\n\t+error: unable to parse header of ./objects/e6/[ref]”"
+  },
+  "665dde1e7296": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution."
+    ],
+    "new": [
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".\n\nThis bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:"
+    ],
+    "reason": "Reconsider the earlier decision “This change is mainly intended to improve the readability of the code\ninvolved, and to make reasoning about it more straightforward. It\nwasn't as obvious what we were trying to do here, but by having an\n\"invoked_hook\" it's clearer that e.g. our discard_cache() is happening\nbecause of the earlier hook execution.”. The new report gives the following behavior and its conditions. “Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".\n\nThis bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:”"
+  },
+  "713bc38c4113": {
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "So while it's a theoretical concern now, it hasn't been a priority.\nHowever, if we start using weaker hashes for pack checksums and names,\nthis will become a practical concern. So in preparation, let's actually\nimplement a byte-for-byte collision check.",
+      "    There is a collision check in index-pack via its `check_collision()`\n    function, but there isn't an analogous function in unpack-objects,\n    which just feeds the result to write_object_file().",
+      "    So skipping the collision check here does not change for better or\n    worse the hardness of loose object writes."
+    ],
+    "new": [
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.",
+      "  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.",
+      "The code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).",
+      "We also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use."
+    ],
+    "reason": "The collision check introduced in P0 causes issues during the dumb HTTP fetch process, as described in N. Specifically, the downloaded pack index file collides with the locally generated index file, leading to a failure in the fetch operation. This scenario highlights a condition not fully considered in P0, where the hash-based naming assumption does not hold for intermediate files during the fetch process."
+  },
+  "78fcc71b6f75": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "reason": "The conversion to use a struct strbuf in P0 removed a path length limitation, but introduced a regression for paths longer than 127 bytes with missing read or execute permissions, as noted in N."
+  },
+  "7c669c0062d0": {
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE",
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "  fatal: failed to read object <sha1>: Invalid argument",
+      "  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "reason": "The earlier decision in P0 aimed to prevent 'git fsck' from marking objects as corrupt when they cannot be read due to EMFILE. However, the new evidence shows that the change introduced in P0 has led to a different issue where 'git fsck' now gives an incorrect error message for empty loose object files, which should not be marked as corrupt. This indicates that the condition under which the earlier decision was made may need to be refined to avoid such unintended consequences."
+  },
+  "837847523ada": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race"
+    ],
+    "new": [
+      "This bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:\n\n    ==31275== Conditional jump or move depends on uninitialised value(s)\n    ==31275==    at 0x43C63F: prepare_to_commit (commit.c:1058)\n    ==31275==    by 0x4396A5: cmd_commit (commit.c:1722)\n    ==31275==    by 0x407C8A: run_builtin (git.c:465)\n    ==31275==    by 0x406741: handle_builtin (git.c:718)\n    ==31275==    by 0x407665: run_argv (git.c:785)\n    ==31275==    by 0x406500: cmd_main (git.c:916)\n    ==31275==    by 0x510839: main (common-main.c:56)\n    ==31275==  Uninitialised value was created by a stack allocation\n    ==31275==    at 0x43B344: prepare_to_commit (commit.c:719)"
+    ],
+    "reason": "Reconsider the earlier decision “hooks: fix an obscure TOCTOU \"did we just run a hook?\" race”. The new report gives the following behavior and its conditions. “This bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:\n\n    ==31275== Conditional jump or move depends on uninitialised value(s)\n    ==31275==    at 0x43C63F: prepare_to_commit (commit.c:1058)\n    ==31275==    by 0x4396A5: cmd_commit (commit.c:1722)\n    ==31275==    by 0x407C8A: run_builtin (git.c:465)\n    ==31275==    by 0x406741: handle_builtin (git.c:718)\n    ==31275==    by 0x407665: run_argv (git.c:785)\n    ==31275==    by 0x406500: cmd_main (git.c:916)\n    ==31275==    by 0x510839: main (common-main.c:56)\n    ==31275==  Uninitialised value was created by a stack allocation\n    ==31275==    at 0x43B344: prepare_to_commit (commit.c:719)”"
+  },
+  "847f3859653f": {
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "old": [
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.\n\nThis fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "reason": "Reconsider the earlier decision “Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'.”. The new report gives the following behavior and its conditions. “Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.\n\nThis fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name.”"
+  },
+  "84f3e52e8940": {
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "old": [
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+    ],
+    "new": [
+      "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many"
+    ],
+    "reason": "Reconsider the earlier decision “If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.”. The new report gives the following behavior and its conditions. “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”"
+  },
+  "84f6dd21c3a3": {
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "old": [
+      "A loose object is not corrupt if it cannot be read due to EMFILE"
+    ],
+    "new": [
+      "fsck: give accurate error message on empty loose object files",
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "  fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is",
+      "  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt",
+      "The second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+    ],
+    "reason": "The incoming report introduces a new error message for empty loose object files, contradicting the original decision that such objects are not corrupt if they cannot be read due to EMFILE. This change affects the error handling and reporting mechanism, which was previously correct."
+  },
+  "87e76647b664": {
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "old": [
+      "Optimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.",
+      "For boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+      "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local."
+    ],
+    "reason": "The new evidence indicates a regression in the handling of multiple config keys, specifically mentioning that the behavior changed in version 2.33.0 to prefer the global configuration over the local one. This contradicts the original decision in P0, which aimed to optimize the startup time by retrieving specific config keys and values without affecting the default behavior of 'last key wins'."
+  },
+  "88489857c97d": {
+    "criterion": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "old": [
+      "object-file.c: use \"enum\" return type for unpack_loose_header()",
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.",
+      "Let's add an \"enum unpack_loose_header_result\" type and use it for\nthese return values, and have the compiler assert that we're\nexhaustively covering all of them."
+    ],
+    "new": [
+      "object-file: fix a unpack_loose_header() regression in 3b6a8db3b03",
+      "Fix a regression in my 3b6a8db3b03 (object-file.c: use \"enum\" return\ntype for unpack_loose_header(), 2021-10-01) revealed both by running\nthe test suite with --valgrind, and with the amended \"git fsck\" test.",
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:",
+      "\t-error: unable to unpack header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391\n\t+error: unable to parse header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "I.e. we'd proceed to call parse_loose_header() on the uninitialized\n\"hdr\" value, and it would have been very unlikely for that\nuninitialized memory to be a valid git object.",
+      "The other callers of unpack_loose_header() were already checking the\nenum values exhaustively. See 3b6a8db3b03 and\n5848fb11acd (object-file.c: return ULHR_TOO_LONG on \"header too long\",\n2021-10-01)."
+    ],
+    "reason": "The change introduced in P1 altered the return type of unpack_loose_header() to an enum, but did not ensure all callers handled the new enum values correctly, leading to a regression where the header could not be parsed properly."
+  },
+  "9046f343f233": {
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "old": [
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place."
+    ],
+    "new": [
+      "This patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "reason": "The new evidence indicates a specific scenario where the collision check in finalize_object_file() causes a harmless but disruptive failure during fetching operations involving different versions of index files. This situation was not anticipated in the original decision, which assumed that collisions would always indicate identical on-disk contents."
+  },
+  "9a1681975f7c": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "The change from using `lookup_commit_reference_gently()` to `lookup_commit()` introduced a regression where non-NULL values were returned for `null_oid()`, leading to errors during subsequent operations."
+  },
+  "a1ddbcc6c22a": {
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "old": [
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument"
+    ],
+    "reason": "Reconsider the earlier decision “\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.”. The new report gives the following behavior and its conditions. “Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument”"
+  },
+  "aa179e93288d": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "The incoming report suggests that dereferencing commits in reflogs might lead to errors due to missing objects, which contradicts the original decision to change to a 'lookup commit' approach. The new evidence indicates that the current implementation returns non-NULL for null_oid(), leading to potential errors in the `mark_reachable` function."
+  },
+  "aa91fb19f270": {
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "old": [
+      "send-email: move trivial config handling to Perl",
+      "Optimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.",
+      "For boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it.",
+      "The \"grep { defined } @values\" here covers a rather subtle case. For\nlist values such as sendemail.to it is possible as with any other\nconfig key to provide a plain \"-c sendemail.to\", i.e. to set the key\nas a boolean true. In that case the Git::config() API will return an\nempty string, but this new parser will correctly return \"undef\".",
+      "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+      "This brings the runtime of \"git send-email\" from ~60-~70ms to a very\nsteady ~40ms on my test box. We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config. I happen to have 8 of those set.",
+      "This brings the runtime of t9001-send-email.sh from ~13s down to ~12s\nfor me. The change there is less impressive as many of those tests set\nvarious config values, and we're also getting to the point of\ndiminishing returns for optimizing \"git send-email\" itself."
+    ],
+    "new": [
+      "send-email: fix a \"first config key wins\" regression in v2.33.0",
+      "Fix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+      "The full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:",
+      "    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd",
+      "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.",
+      "To test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.",
+      "The \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.",
+      "The populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in 1ff750b128e (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+    ],
+    "reason": "The new evidence indicates that the changes made in P1 introduced a regression where the first config key out of multiple defined ones was picked instead of using the normal 'last key wins' semantics of 'git config --get'. This affected several sendemail.* configuration keys, leading to incorrect preference of global configurations over local ones."
+  },
+  "aedd0a74d2ab": {
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "old": [
+      "add -p: only bind search key if there's more than one hunk",
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+    ],
+    "new": [
+      "In Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.",
+      "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:",
+      "    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many"
+    ],
+    "reason": "The new evidence shows that the regression introduced in the commit referenced in P1 caused the issue described in N:2, N:3, and N:4. Specifically, the addition of a new regex match between the old match and the corresponding code that was expecting $1 made $1 always undefined, leading to the warning and the broken functionality of the '/regex' command."
+  },
+  "b6c6c30048f0": {
+    "criterion": "Moving diff configuration into range-diff stopped forwarding flags such as --no-patch or --stat; propagate caller options again.",
+    "old": [
+      "Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded."
+    ],
+    "new": [
+      "In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.\n\nFix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options."
+    ],
+    "reason": "Reconsider the earlier decision “Handle these details locally in the libified range-diff back-end rather\nthan forcing each caller to have specialized knowledge of these\nimplementation details, and to avoid duplication as new callers are\nadded.”. The new report gives the following behavior and its conditions. “In 73a834e9e2 (\"range-diff: relieve callers of low-level configuration\nburden\", 2018-07-22) we broke passing down options like --no-patch,\n--stat etc.\n\nFix that regression, and add a test asserting the pre-73a834e9e2\nbehavior for some of these diff options.”"
+  },
+  "c28a8850965e": {
+    "criterion": "Updating/writing the cache tree during commit leads to duplicate insufficient-permission errors when .git/objects cannot be written. prepare_index should be quiet; prepare_to_commit should report the error. State the duplication and unwritable condition without swapping which call should be silent.",
+    "old": [
+      "cache-tree: Write updated cache-tree after commit",
+      "During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands."
+    ],
+    "new": [
+      "Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.",
+      "The cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.",
+      "But with 9c4d6c0297b the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-9c4d6c0297b the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.",
+      "So let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+    ],
+    "reason": "The earlier decision P0 introduced a change to write the updated cache-tree during the commit process, which inadvertently led to duplicated permission error outputs due to the unclosed gap between the cache-tree API and the object store in terms of handling silent writes."
+  },
+  "c3e97155aa96": {
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "old": [
+      "send-email: move trivial config handling to Perl",
+      "Optimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.",
+      "For boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it.",
+      "The \"grep { defined } @values\" here covers a rather subtle case. For\nlist values such as sendemail.to it is possible as with any other\nconfig key to provide a plain \"-c sendemail.to\", i.e. to set the key\nas a boolean true. In that case the Git::config() API will return an\nempty string, but this new parser will correctly return \"undef\".",
+      "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+      "This brings the runtime of \"git send-email\" from ~60-~70ms to a very\nsteady ~40ms on my test box. We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config. I happen to have 8 of those set.",
+      "This brings the runtime of t9001-send-email.sh from ~13s down to ~12s\nfor me. The change there is less impressive as many of those tests set\nvarious config values, and we're also getting to the point of\ndiminishing returns for optimizing \"git send-email\" itself."
+    ],
+    "new": [
+      "send-email: fix a \"first config key wins\" regression in v2.33.0",
+      "Fix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+      "The full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:",
+      "    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd",
+      "I.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.",
+      "To test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.",
+      "The \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.",
+      "The populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in [ref] (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+    ],
+    "reason": "The incoming report introduces a regression where the first config key now takes precedence over subsequent ones, contrary to the intended last-key-wins behavior. This change affects multiple config keys listed in N:4, including sendemail.smtpserver, which could lead to misconfiguration if ~/.gitconfig overrides the repository-local settings. The earlier decision in P0 focused on optimizing the startup time and handling specific config types, but the new evidence shows a deviation from this intent."
+  },
+  "c6b861107e5c": {
+    "criterion": "Constructing the temporary left index from a subdirectory fails to add top-level-relative paths after the subdirectory argument change; distinguish the changed working directory from unmerged duplicate entries.",
+    "old": [
+      "When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree."
+    ],
+    "new": [
+      "The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index."
+    ],
+    "reason": "Reconsider the earlier decision “When in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.”. The new report gives the following behavior and its conditions. “The left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.”"
+  },
+  "cdac594ab511": {
+    "criterion": "The enum error from unpacking is mishandled: fsck/caller tries to parse an uninitialized header or reports a parse failure instead of an unpack failure.",
+    "old": [
+      "In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0."
+    ],
+    "new": [
+      "In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391\n\t+error: unable to parse header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    ],
+    "reason": "Reconsider the earlier decision “In a preceding commit we changed and documented unpack_loose_header()\nfrom its previous behavior of returning any negative value or zero, to\nonly -1 or 0.”. The new report gives the following behavior and its conditions. “In practice this regression in v2.34.0 caused us to claim that we\ncouldn't parse the header, as opposed to not being able to unpack\nit. Before the change in the C code the test_cmp added here would emit:\n\n\t-error: unable to unpack header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391\n\t+error: unable to parse header of ./objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391”"
+  },
+  "cf9985d1bf43": {
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "git-prompt.sh: don't assume the shell expands the value of PS1",
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit [ref] (\"[referenced subject]\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "reason": "The earlier decision in P1 aimed to prevent arbitrary code execution by ensuring branch names were not directly included in PS1. However, the new evidence indicates that not all shells expand PS1 values, leading to prompts displaying literal strings instead of actual branch names. This suggests that the approach taken in P1 needs to be reconsidered to account for different shell behaviors."
+  },
+  "d1498d5000e6": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "hooks: fix an obscure TOCTOU \"did we just run a hook?\" race",
+      "Fix a Time-of-check to time-of-use (TOCTOU) race in code added in\n680ee550d72 (commit: skip discarding the index if there is no\npre-commit hook, 2017-08-14).",
+      "This obscure race condition can occur if we e.g. ran the \"pre-commit\"\nhook and it modified the index, but hook_exists() returns false later\non (e.g., because the hook itself went away, the directory became\nunreadable, etc.). Then we won't call discard_cache() when we should\nhave.",
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "hooks: fix \"invoked hook\" regression in a8cc5943338",
+      "Fix a regression in a8cc5943338 (hooks: fix an obscure TOCTOU \"did we\njust run a hook?\" race, 2022-03-07): The \"invoked_hook\" variable\npassed to run_commit_hook() wasn't passed forward to run_hooks_opt(),\nas push_to_checkout() in that commit correctly did.",
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".",
+      "This bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:",
+      "    ==31275== Conditional jump or move depends on uninitialised value(s)\n    ==31275==    at 0x43C63F: prepare_to_commit (commit.c:1058)\n    ==31275==    by 0x4396A5: cmd_commit (commit.c:1722)\n    ==31275==    by 0x407C8A: run_builtin (git.c:465)\n    ==31275==    by 0x406741: handle_builtin (git.c:718)\n    ==31275==    by 0x407665: run_argv (git.c:785)\n    ==31275==    by 0x406500: cmd_main (git.c:916)\n    ==31275==    by 0x510839: main (common-main.c:56)\n    ==31275==  Uninitialised value was created by a stack allocation\n    ==31275==    at 0x43B344: prepare_to_commit (commit.c:719)"
+    ],
+    "reason": "The new evidence indicates a regression introduced by P1 where the 'invoked_hook' variable was not properly passed forward to run_hooks_opt(). This oversight led to undefined behavior, causing conditional jumps or moves to depend on uninitialized values, as revealed by valgrind testing."
+  },
+  "d6b490d3b857": {
+    "criterion": "The protected branch-name indirection assumes the shell expands PS1, but default zsh does not and shows the literal variable; condition the indirection on expansion.",
+    "old": [
+      "git-prompt.sh: don't put unsanitized branch names in $PS1",
+      "Both bash and zsh subject the value of PS1 to parameter expansion,\ncommand substitution, and arithmetic expansion.  Rather than include\nthe raw, unescaped branch name in PS1 when running in two- or\nthree-argument mode, construct PS1 to reference a variable that holds\nthe branch name.  Because the shells do not recursively expand, this\navoids arbitrary code execution by specially-crafted branch names such\nas '$(IFS=_;cmd=sudo_rm_-rf_/;$cmd)'."
+    ],
+    "new": [
+      "git-prompt.sh: don't assume the shell expands the value of PS1",
+      "Not all shells subject the prompt string to parameter expansion.  Test\nwhether the shell will expand the value of PS1, and use the result to\ncontrol whether raw ref names are included directly in PS1.",
+      "This fixes a regression introduced in commit 8976500 (\"git-prompt.sh:\ndon't put unsanitized branch names in $PS1\"):  zsh does not expand PS1\nby default, but that commit assumed it did.  The bug resulted in\nprompts containing the literal string '${__git_ps1_branch_name}'\ninstead of the actual branch name."
+    ],
+    "reason": "The original decision in P0 aimed to prevent unsanitized branch names from being included in PS1 due to potential security risks. However, the new evidence indicates that this change introduced a regression in zsh where PS1 is not expanded by default, leading to prompts displaying the literal string '${__git_ps1_branch_name}' instead of the actual branch name. This suggests that the condition under which the original decision was made (that all shells expand PS1) does not hold universally."
+  },
+  "dade20f8aa9b": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD",
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "reason": "The conversion to strbuf in P1 introduced a limitation on path lengths and permissions, causing issues for paths longer than 127 bytes with restricted permissions."
+  },
+  "df1695f7cd88": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue."
+    ],
+    "reason": "Reconsider the earlier decision “Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.”. The new report gives the following behavior and its conditions. “FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.”"
+  },
+  "e137d7a83f09": {
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "old": [
+      "finalize_object_file(): implement collision check",
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "One of the reasons we never implemented this is because the files it\nmoves are all named after the cryptographic hash of their contents\n(either loose objects, or packs which have their hash in the name these\ndays). So we are unlikely to see such a collision by accident. And even\nthough there are weaknesses in sha1, we assume they are mitigated by our\nuse of sha1dc.",
+      "So while it's a theoretical concern now, it hasn't been a priority.\nHowever, if we start using weaker hashes for pack checksums and names,\nthis will become a practical concern. So in preparation, let's actually\nimplement a byte-for-byte collision check.",
+      "The new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.",
+      "Note that this may cause some extra computation when the files are in\nfact identical, but this should happen rarely.",
+      "Loose objects are exempt from this check, and the collision check may be\nskipped by calling the _flags variant of this function with the\nFOF_SKIP_COLLISION_CHECK bit set. This is done for a couple of reasons:",
+      "  - We don't treat the hash of the loose object file's contents as a\n    checksum, since the same loose object can be stored using different\n    bytes on disk (e.g., when adjusting core.compression, using a\n    different version of zlib, etc.).",
+      "    This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision.",
+      "  - We already use the path of the loose object as its hash value /\n    object name, so checking for collisions at the content level doesn't\n    add anything.",
+      "    Adding a content-level collision check would have to happen at a\n    higher level than in finalize_object_file(), since (avoiding race\n    conditions) writing an object loose which already exists in the\n    repository will prevent us from even reaching finalize_object_file()\n    via the object freshening code.",
+      "    There is a collision check in index-pack via its `check_collision()`\n    function, but there isn't an analogous function in unpack-objects,\n    which just feeds the result to write_object_file().",
+      "    So skipping the collision check here does not change for better or\n    worse the hardness of loose object writes.",
+      "As a small note related to the latter bullet point above, we must teach\nthe tmp-objdir routines to similarly skip the content-level collision\nchecks when calling migrate_one() on a loose object file, which we do by\nsetting the FOF_SKIP_COLLISION_CHECK bit when we are inside of a loose\nobject shard."
+    ],
+    "new": [
+      "This patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.",
+      "  0. We realize we need some object X, which we don't have locally, and\n     nor does the other side have it as a loose object.",
+      "  1. We download the list of remote packs from objects/info/packs.",
+      "  2. For each entry in that file, we download each pack index and store\n     it locally in .git/objects/pack/pack-$hash.idx (the $hash is not\n     something we can verify yet and is given to us by the remote).",
+      "  3. We check each pack index we got to see if it has object X. When we\n     find a match, we download the matching .pack file from the remote\n     to a tempfile. We feed that to \"index-pack --stdin\", which\n     reindexes the pack, rather than trusting that it has what the other\n     side claims it does. In most cases, this will end up generating the\n     exact same (byte-for-byte) pack index which we'll store at the same\n     pack-$hash.idx path, because the index generation and $hash id are\n     computed based on what's in the packfile. But:",
+      "       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).",
+      "       b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in 1190a1acf8 (pack-objects: name pack files\n          after trailer hash, 2013-12-05).",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.",
+      "There are a few options to fix it:",
+      "  - we could teach index-pack a command-line option to ignore only pack\n    idx collisions, and use it when the dumb-http code invokes\n    index-pack. This would be an awkward thing to expose users to and\n    would involve a lot of boilerplate to get the option down to the\n    collision code.",
+      "  - we could delete the remote .idx file right before running\n    index-pack. It should be redundant at that point (since we've just\n    downloaded the matching pack). But it feels risky to delete\n    something from our own .git/objects based on what the other side has\n    said. I'm not entirely positive that a malicious server couldn't lie\n    about which pack-$hash.idx it has and get us to delete something\n    precious.",
+      "  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.",
+      "This patch implements the third option. The big design questions are:\nwhere do we store the downloaded files, and how do we manage their\nlifetimes?",
+      "There are some additional quirks to the dumb-http system we should\nconsider. Remember that in step 2 we downloaded every pack index, but in\nstep 3 we may only download some of the matching packs. What happens to\nthose other idx files now? They sit in the .git/objects/pack directory,\npossibly waiting to be used at a later date. That may save bandwidth for\na subsequent fetch, but it also creates a lot of weird corner cases:",
+      "  - our local object directory now has semi-untrusted .idx files sitting\n    around, without their matching .pack",
+      "  - in case 3b, we noted that we might not generate the same hash as the\n    other side. In that case even if we download the matching pack,\n    our index-pack invocation will store it in a different\n    pack-$hash.idx file. And the unmatched .idx will sit there forever.",
+      "  - if the server repacks, it may delete the old packs. Now we have\n    these orphaned .idx files sitting around locally that will never be\n    used (nor deleted).",
+      "  - if we repack locally we may delete our local version of the server's\n    pack index and not realize we have it. So we'll download it again,\n    even though we have all of the objects it mentions.",
+      "I think the right solution here is probably some more complex cache\nmanagement system: download the remote .idx files to their own storage\ndirectory, mark them as \"seen\" when we get their matching pack (to avoid\nre-downloading even if we repack), and then delete them when the\nserver's objects/info/refs no longer mentions them.",
+      "But since the dumb http protocol is so ancient and so inferior to the\nsmart http protocol, I don't think it's worth spending a lot of time\ncreating such a system. For this patch I'm just downloading the idx\nfiles to .git/objects/tmp_pack_*, and marking them as tempfiles to be\ndeleted when we exit (and due to the name, any we miss due to a crash,\netc, should eventually be removed by \"git gc\" runs based on timestamps).",
+      "That is slightly worse for one case: if we download an idx but not the\nmatching pack, we won't retain that idx for subsequent runs. But the\nflip side is that we're making other cases better (we never hold on to\nuseless idx files forever). I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).\nIf somebody really cares about that, I think the right path forward is a\nmanaged cache directory as above, and this patch is providing the first\nstep in that direction anyway (by moving things out of the objects/pack/\ndirectory).",
+      "There are two test changes. One demonstrates the broken v1 index case\n(it double-checks the resulting clone with fsck to be careful, but prior\nto this patch it actually fails at the clone step). The other tweaks the\nexpectation for a test that covers the \"slightly worse\" case to\naccommodate the extra index download.",
+      "The code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).",
+      "We also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use.",
+      "I was mildly surprised that this worked at all, since we call\nverify_pack_index() on the packed_git which mentions the final name\nbefore moving the file into place! But it works because\nparse_pack_index() leaves the mmap-ed data in the struct, so the\nlazy-open in verify_pack_index() never triggers, and we read from the\ntempfile, ignoring the filename in the struct completely. Hacky, but it\nworks.",
+      "After this patch, parse_pack_index() now uses the index filename we pass\nin to derive a matching .pack name. This is OK to change because there\nare only two callers, both in the dumb http code (and the other passes\nin an existing pack-$hash.idx name, so the derived name is going to be\npack-$hash.pack, which is what we were using anyway).",
+      "I'll follow up with some more cleanups in that area, but this patch is\nsufficient to fix the regression."
+    ],
+    "reason": "The new evidence shows that the implementation of the collision check in finalize_object_file() introduced a regression in fetching v1 pack idx files over dumb HTTP. Specifically, the downloaded idx file conflicts with the locally generated idx file, causing the fetch to fail due to the collision check. This issue arises because the downloaded idx file is stored at the same path as the final idx file, leading to a false collision detection."
+  },
+  "e15b6639bec6": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "reason": "Reconsider the earlier decision “Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.”. The new report gives the following behavior and its conditions. “Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.”"
+  },
+  "e53b7685bd89": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently()."
+    ],
+    "new": [
+      "Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().\n\nAs a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "Reconsider the earlier decision “In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().”. The new report gives the following behavior and its conditions. “Fix a regression in my daf1d8285ee (reflog expire: don't use\nlookup_commit_reference_gently(), 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().\n\nAs a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it.”"
+  },
+  "e63eaea3c35d": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently()."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().\n\nAs a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "Reconsider the earlier decision “In the initial implementation of \"git reflog\" in 4264dc15e19 (git\nreflog expire, 2006-12-19) we had this\nlookup_commit_reference_gently().”. The new report gives the following behavior and its conditions. “Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().\n\nAs a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it.”"
+  },
+  "e7c6bac8d1b2": {
+    "criterion": "Updating/writing the cache tree during commit leads to duplicate insufficient-permission errors when .git/objects cannot be written. prepare_index should be quiet; prepare_to_commit should report the error. State the duplication and unwritable condition without swapping which call should be silent.",
+    "old": [
+      "During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands."
+    ],
+    "new": [
+      "Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before [ref] ([referenced subject], 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again."
+    ],
+    "reason": "Reconsider the earlier decision “During the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands.”. The new report gives the following behavior and its conditions. “Fix a regression in the error output emitted when .git/objects can't\nbe written to. Before [ref] ([referenced subject], 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.”"
+  },
+  "ef85f398a6b0": {
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "old": [
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+    ],
+    "new": [
+      "Since [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message",
+      "  fatal: failed to read object <sha1>: Invalid argument",
+      "This comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is"
+    ],
+    "reason": "The new evidence shows that 'git fsck' fails with a specific error message related to reading an empty loose object file, which was not addressed by the previous decision P1. This indicates that the condition under which 'git fsck' incorrectly reports corruption needs further consideration."
+  },
+  "ef9a3e121d2f": {
+    "criterion": "The invoked_hook flag/output is not forwarded from run_commit_hook to run_hooks_opt; later code therefore cannot reliably tell if the hook ran.",
+    "old": [
+      "Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior."
+    ],
+    "new": [
+      "Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".\n\nThis bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:"
+    ],
+    "reason": "Reconsider the earlier decision “Let's also change this for the push-to-checkout hook. Now instead of\nchecking if the hook exists and either doing a push to checkout or a\npush to deploy we'll always attempt a push to checkout. If the hook\ndoesn't exist we'll fall back on push to deploy. The same behavior as\nbefore, without the TOCTOU race. See 0855331941b (receive-pack:\nsupport push-to-checkout hook, 2014-12-01) for the introduction of the\nprevious behavior.”. The new report gives the following behavior and its conditions. “Whether we ran the code contingent on having run the hook or not was\nthus undefined, but in practice on most (all?) modern platforms we'd\nhave run it (almost?) all the time, since stack variables will get\ninitialized to some random value, which most of the time isn't \"0\".\n\nThis bug was revealed by running e.g. \"t5537-fetch-shallow.sh\" with\nthe --valgrind option. Unfortunately running the whole test suite with\n--valgrind is really slow, so we didn't have a CI job that spotted\nthis. The --valgrind output was:”"
+  },
+  "f4a588e12a39": {
+    "criterion": "The switch to lookup_commit makes null_oid yield non-NULL for an empty reflog, leading to an erroneous parse/error; preserve empty reflog handling.",
+    "old": [
+      "I don't think we've ever found tags that we need to recursively\ndereference in reflogs, so this should at least be changed to a\n\"lookup commit\" as I'm doing here, although I can't think of a way\nwhere it mattered in practice.",
+      "I also think we'd probably like to just die here if we have a NULL\nobject, but as this code needs to handle potentially broken\nrepositories let's just show an \"error\" but continue, the non-quiet\nlookup_commit() will do for us. None of our tests cover the case where\n\"commit\" is NULL after this lookup."
+    ],
+    "new": [
+      "Fix a regression in my [ref] ([referenced subject], 2021-12-22), in changing from\nlookup_commit_reference_gently() to lookup_commit() we stopped trying\nto call deref_tag() and parse_object() on the provided OID, but we\nalso started returning non-NULL for the null_oid().",
+      "As a result we'd emit an error() via mark_reachable() later in this\nfunction as we tried to invoke parse_commit() on it."
+    ],
+    "reason": "The change from using lookup_commit_reference_gently() to lookup_commit() introduced a regression where an error was emitted due to attempting to parse a null_oid(). This contradicts the assumption that handling NULL objects by showing an 'error' but continuing would not cause practical issues."
+  },
+  "fd276aea4a22": {
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "old": [
+      "setup: convert setup_git_directory_gently_1 et al. to strbuf",
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+    ],
+    "new": [
+      "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD",
+      "FreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.",
+      "Keep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.",
+      "This fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "reason": "The conversion of setup_git_directory_gently_1 and related functions to use strbuf (P0) aimed to remove a path length limitation. However, the new evidence shows that this change introduced a regression for paths longer than 127 bytes with restricted permissions, indicating that the original path length limitation was circumvented but new issues arose due to permission handling."
+  }
+}

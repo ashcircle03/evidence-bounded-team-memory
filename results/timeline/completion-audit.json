@@ -1,0 +1,108 @@
+{
+  "status": "complete_for_implementation_comparison_and_design_selection",
+  "requirements": [
+    {
+      "id": "minimum_source_review_qa_system",
+      "status": "evidenced",
+      "evidence": "team_memory/timeline.py; team_memory/timeline_cli.py; 540 measured calls replayed through actual Git"
+    },
+    {
+      "id": "sequential_accumulation_without_future_or_gold_input",
+      "status": "evidenced",
+      "evidence": "independent call-by-call source/approval visibility audit above; frozen inputs contain only worklogs and event-time review fixtures"
+    },
+    {
+      "id": "all_five_requested_knowledge_events",
+      "status": "evidenced",
+      "evidence": "20 frozen streams, four per reconsider/coexist/conflict/correction/irrelevant type"
+    },
+    {
+      "id": "fair_fixed_comparison",
+      "status": "evidenced",
+      "evidence": "same pinned 14B model, common raw access and stream budgets, code/data freeze verified"
+    },
+    {
+      "id": "review_hits_and_false_requests_measured",
+      "status": "evidenced",
+      "evidence": "final/rows.json; final/ratings.json; diagnostics.json distinguish wrong kinds, negative cases and repeats"
+    },
+    {
+      "id": "old_and_new_qa_measured",
+      "status": "evidenced",
+      "evidence": "legacy-qa.json: 20/20 unchanged 3B results; final/rows.json: all 280 new 14B QA checkpoints retained"
+    },
+    {
+      "id": "raw_preservation_and_no_unreviewed_promotion",
+      "status": "evidenced",
+      "evidence": "each final source equals its input; every published approval state has a preceding exact source-bound review witness"
+    },
+    {
+      "id": "real_cost_all_attempts",
+      "status": "evidenced",
+      "evidence": "all five timeline Slurm jobs completed and source/results verified; 103.45 GPU minutes"
+    },
+    {
+      "id": "design_selection_and_runnable_documentation",
+      "status": "evidenced",
+      "evidence": "direct already is the CLI default; decision.json and interpretation.ko.md state retained/excluded components and failures"
+    },
+    {
+      "id": "no_final_case_tuning_or_extra_experiments",
+      "status": "evidenced",
+      "evidence": "frozen method/input/primary grading files unchanged; exactly the five planned data/development/legacy/final jobs"
+    }
+  ],
+  "source_files_checked": 38,
+  "final_stream_arms": 40,
+  "exact_model_calls_replayed": 540,
+  "published_answer_citations_verified": 263,
+  "explicit_review_events_verified": 14,
+  "raw_source_overwrites": 0,
+  "unreviewed_promotions": 0,
+  "goal_gpu_seconds": 6207,
+  "goal_cpu_only_seconds": 13,
+  "jobs": {
+    "timeline-data-v1": {
+      "job_id": "119546",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 13,
+      "gpus": 0
+    },
+    "timeline-dev-v1": {
+      "job_id": "119554",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 723,
+      "gpus": 2
+    },
+    "timeline-qa-v1": {
+      "job_id": "119555",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 107,
+      "gpus": 1
+    },
+    "timeline-final-a-v1": {
+      "job_id": "119572",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 1152,
+      "gpus": 2
+    },
+    "timeline-final-b-v1": {
+      "job_id": "119574",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 1175,
+      "gpus": 2
+    }
+  },
+  "limitations": [
+    "Performance is not error-free: strict new QA 111/140 per arm, false requests and output-contract failures remain.",
+    "Selected natural QA is support-selected; review scenarios are controlled synthetic records, not a real-team field trial.",
+    "One implementing AI graded semantics; one disputed rating and one alias strictness issue are disclosed.",
+    "Owner reviews are simulated field-matched actions, not authenticated GitHub users or independent human judgments.",
+    "Legacy 3B QA compatibility is distinct from new 14B timeline performance; no long-corpus retrieval or concurrent-writer guarantee."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "complete",
+  "verified_at": "2026-11-05T05:34:47.201808+00:00",
+  "decision": "Keep provenance, approval separation and QA; do not adopt current general reconsideration pipeline. Use stronger direct reader as comparison baseline and retain explicit-reference handling for scoped evaluation.",
+  "frozen_files_unchanged": 32,
+  "model_rows": {
+    "3b": 150,
+    "14b": 150
+  },
+  "paired_direct_prompts": 90,
+  "semantic_cards": 64,
+  "earlier_ratings_preserved": 37,
+  "qa_preserved": 20,
+  "git_pull_qa_preserved": 2,
+  "execution_errors": 0,
+  "generations_at_cap": 0,
+  "all_goal_jobs_terminal": true,
+  "goal_gpu_seconds": 3849,
+  "cumulative_gpu_seconds": 11496,
+  "gpu_budget_minutes": 300,
+  "artifact_sha256": {
+    "README.md": "7a678ed993322f4af794a7b8897f9fe977863e8bff0c95ee3277a6e6c2bd64ae",
+    "decision.ko.md": "7b828068f59c86d3888b0133960a7dde6c133b06b0b5fd44baf5b7e05376b73a",
+    "cases.ko.md": "298dd94eea7c7f05ef01dbe3b7704df265bfc0c7d96185a4b5d57616a76a1ff0",
+    "qa.ko.md": "97df7af43b82438503e51e54d6f51fa15100b7cbb78033e1a346fde5801a0eb0",
+    "rows.json": "099207fcf3cf84d570d9d2ca0505a27fb4f5867cf6bef86e8b4248c935ddc96d",
+    "counts.json": "9be3644bf81701c9f9509df998e711cb17e4751a352d7607d984b313f92357f0",
+    "ratings.json": "1d458e2b62554360543e8ac4a0e9c109df6f8aa91140e1d84a2b70c5601f1f24",
+    "diagnostics.json": "40dc236704d6e7fcc4d24e8f09796993df040f5256c5bd14ad1f15d20cee11a8",
+    "checks.json": "6b27968d12ba286f46d95be2d9b7b6dc9d33d2695b8019b82b19c901dc161d4b",
+    "runs.json": "08329ad81fbbd9b40a071facf8e295bc61b13b6b4985bde31e0f26b0fc7025bd"
+  },
+  "limitations": [
+    "15 previously exposed diagnostic events, not a fresh held-out test",
+    "single AI semantic rater; no independent agreement",
+    "oracle windows selected by Codex",
+    "QA preservation measured on 3B; not a 14B QA accuracy claim",
+    "methods have different realized costs",
+    "no production module/default changes in this goal",
+    "local result files; no claim of GitHub publication",
+    "no Notion write"
+  ]
+}

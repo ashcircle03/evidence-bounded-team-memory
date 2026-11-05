@@ -1,0 +1,29 @@
+{
+  "scope": "Headless core development; MCP and UI excluded at user request",
+  "job_id": "119751",
+  "new_gpu_jobs": 0,
+  "calls": 6,
+  "inputs": "development-smoke.json",
+  "observations": {
+    "reconsider": [
+      "reconsider",
+      "coexist"
+    ],
+    "different_conditions": [
+      "coexist"
+    ],
+    "same_condition_disagreement": [
+      "conflict"
+    ],
+    "irrelevant": [],
+    "qa_conditions": "40 seconds per batch / 12 seconds per batch, each with source passage",
+    "qa_unrelated": "Maple-audit, without importing queue-limit conflict"
+  },
+  "note": "Six previously available development inputs. Functional smoke only; not held-out performance evidence. No frozen evaluation result changed.",
+  "ui_server_stopped": true,
+  "interfaces": [
+    "team_memory.core.compare_records",
+    "team_memory.core.answer_question"
+  ],
+  "schema_version": "development-v1"
+}

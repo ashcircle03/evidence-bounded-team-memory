@@ -1,0 +1,2246 @@
+{
+  "historical-01/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d4f0c860706c55beec12df32",
+        "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 330,
+        "end": 470,
+        "quote": "Note, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f8570b300e6e36a8bdb7f777",
+        "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 3319,
+        "end": 3745,
+        "quote": "The area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d4f0c860706c55beec12df32",
+        "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 330,
+        "end": 470,
+        "quote": "Note, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that DELTA_SIZE() being thread-safe due to oe_size()'s guarantee sufficed for thread safety in try_delta(). However, the report introduces new evidence showing that the reduced lock usage in the updated implementation leads to a 33% increase in repacking time with 40 threads, indicating that while oe_size() ensures thread-safety, the updated design's impact on overall performance necessitates re-evaluation of the thread safety claim.",
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "d4f0c860706c55beec12df32",
+      "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+      "speaker": "Nguyễn Thái Ngọc Duy",
+      "start": 330,
+      "end": 470,
+      "quote": "Note, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "f8570b300e6e36a8bdb7f777",
+      "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+      "speaker": "Nguyễn Thái Ngọc Duy",
+      "start": 3319,
+      "end": 3745,
+      "quote": "The area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads.",
+      "status": "source_only"
+    },
+    "document_margin": 2.0,
+    "support_margin": 1.75
+  },
+  "historical-01/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "d4f0c860706c55beec12df32",
+        "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 330,
+        "end": 470,
+        "quote": "Note, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f8570b300e6e36a8bdb7f777",
+        "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 3319,
+        "end": 3745,
+        "quote": "The area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "d4f0c860706c55beec12df32",
+        "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+        "speaker": "Nguyễn Thái Ngọc Duy",
+        "start": 330,
+        "end": 470,
+        "quote": "Note, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that DELTA_SIZE() being thread-safe due to oe_size()'s guarantee sufficed for thread safety in try_delta(). However, the report introduces new evidence showing that the reduced lock usage in the updated implementation leads to a 33% increase in repacking time with 40 threads, indicating that while oe_size() ensures thread-safety, the updated design's impact on overall performance necessitates re-evaluation of the thread safety claim.",
+      "reviewer": "Nguyễn Thái Ngọc Duy",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "d4f0c860706c55beec12df32",
+      "location": "https://github.com/git/git/commit/0aca34e8269514ebb67676e0470a314615494ae8",
+      "speaker": "Nguyễn Thái Ngọc Duy",
+      "start": 330,
+      "end": 470,
+      "quote": "Note, since DELTA_SIZE() is used in try_delta() code, it must be\nthread-safe. Luckily oe_size() does guarantee this so we it is\nthread-safe.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "f8570b300e6e36a8bdb7f777",
+      "location": "https://github.com/git/git/commit/9ac3f0e5b3e4cebe5bc9a24e3adef8b8e64fe692",
+      "speaker": "Nguyễn Thái Ngọc Duy",
+      "start": 3319,
+      "end": 3745,
+      "quote": "The area under the new lock is as small as possible, avoiding locking\nat all in common case, since lock contention with high thread count\ncould be expensive (most blobs are small enough that delta compute\ntime is short and we end up taking the lock very often). The previous\nattempt to always hold a lock in oe_delta_size() and\noe_set_delta_size() increases execution time by 33% when repacking\nlinux.git with with 40 threads.",
+      "status": "source_only"
+    },
+    "document_margin": 2.0,
+    "support_margin": 1.75
+  },
+  "historical-02/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a22754cf61beac01b52da3e5",
+      "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+      "speaker": "Kim Gybels",
+      "start": 52,
+      "end": 209,
+      "quote": "Take a hint from commit ea68b0ce9f8 (hash-object: don't use mmap() for\nsmall files, 2010-02-21) and use read() instead of mmap() for small\npacked-refs files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "c98ba3548def4df06370c3ce",
+      "location": "https://github.com/git/git/commit/eb31044ff793de9a8a093f567f5eb262ac196c24",
+      "speaker": "Johannes Berg",
+      "start": 51,
+      "end": 292,
+      "quote": "The description of the multi-pack-index contains a small bug,\nif all offsets are < 2^32 then there will be no LOFF chunk,\nnot only if they're all < 2^31 (since the highest bit is only\nneeded as the \"LOFF-escape\" when that's actually needed.)",
+      "status": "source_only"
+    },
+    "document_margin": -9.5,
+    "support_margin": -10.25
+  },
+  "historical-02/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a22754cf61beac01b52da3e5",
+      "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+      "speaker": "Kim Gybels",
+      "start": 52,
+      "end": 209,
+      "quote": "Take a hint from commit ea68b0ce9f8 (hash-object: don't use mmap() for\nsmall files, 2010-02-21) and use read() instead of mmap() for small\npacked-refs files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "c98ba3548def4df06370c3ce",
+      "location": "https://github.com/git/git/commit/eb31044ff793de9a8a093f567f5eb262ac196c24",
+      "speaker": "Johannes Berg",
+      "start": 51,
+      "end": 292,
+      "quote": "The description of the multi-pack-index contains a small bug,\nif all offsets are < 2^32 then there will be no LOFF chunk,\nnot only if they're all < 2^31 (since the highest bit is only\nneeded as the \"LOFF-escape\" when that's actually needed.)",
+      "status": "source_only"
+    },
+    "document_margin": -9.5,
+    "support_margin": -10.25
+  },
+  "historical-03/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "07c977d046591a42c1ca1c78",
+        "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+        "speaker": "Derrick Stolee",
+        "start": 455,
+        "end": 987,
+        "quote": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "334f3169d8432d566a386e35",
+        "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+        "speaker": "Derrick Stolee",
+        "start": 2556,
+        "end": 3140,
+        "quote": "When paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "07c977d046591a42c1ca1c78",
+        "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+        "speaker": "Derrick Stolee",
+        "start": 455,
+        "end": 987,
+        "quote": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that exploring commits in topological order ensures all reachable commits are considered before processing a specific commit. However, the new evidence shows that using generation numbers instead of commit dates can lead to incorrect behavior if a commit reachable from an older version (like v4.8) can also reach the target commit (B), thus changing its applicability. This new evidence suggests that the earlier result holds true when generation numbers do not introduce such incorrect behaviors.",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "07c977d046591a42c1ca1c78",
+      "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+      "speaker": "Derrick Stolee",
+      "start": 455,
+      "end": 987,
+      "quote": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "334f3169d8432d566a386e35",
+      "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+      "speaker": "Derrick Stolee",
+      "start": 2556,
+      "end": 3140,
+      "quote": "When paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.",
+      "status": "source_only"
+    },
+    "document_margin": 3.5,
+    "support_margin": 2.75
+  },
+  "historical-03/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "07c977d046591a42c1ca1c78",
+        "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+        "speaker": "Derrick Stolee",
+        "start": 455,
+        "end": 987,
+        "quote": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "334f3169d8432d566a386e35",
+        "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+        "speaker": "Derrick Stolee",
+        "start": 2556,
+        "end": 3140,
+        "quote": "When paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "07c977d046591a42c1ca1c78",
+        "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+        "speaker": "Derrick Stolee",
+        "start": 455,
+        "end": 987,
+        "quote": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that exploring commits in topological order ensures all reachable commits are considered before processing a specific commit. However, the new evidence shows that using generation numbers instead of commit dates can lead to incorrect behavior if a commit reachable from an older version (like v4.8) can also reach the target commit (B), thus changing its applicability. This new evidence suggests that the earlier result holds true when generation numbers do not introduce such incorrect behaviors.",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "07c977d046591a42c1ca1c78",
+      "location": "https://github.com/git/git/commit/3afc679b3c13d99e4f02bceb686f11d51576d3ae",
+      "speaker": "Derrick Stolee",
+      "start": 455,
+      "end": 987,
+      "quote": "This change does not affect the number of commits that are walked during\nthe execution of paint_down_to_common(), only the order that those\ncommits are inspected. In the case that commit dates violate topological\norder (i.e. a parent is \"newer\" than a child), the previous code could\nwalk a commit twice: if a commit is reached with the PARENT1 bit, but\nlater is re-visited with the PARENT2 bit, then that PARENT2 bit must be\npropagated to its parents. Using generation numbers avoids this extra\neffort, even if it is somewhat rare.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "334f3169d8432d566a386e35",
+      "location": "https://github.com/git/git/commit/091f4cf3586957c3fd99d4c4c59c569d009137ad",
+      "speaker": "Derrick Stolee",
+      "start": 2556,
+      "end": 3140,
+      "quote": "When paint_down_to_common() is run using\ncompare_commits_by_gen_then_commit_date, B is removed from the\nqueue only after the many commits reachable from v4.8 are explored.\nThis causes the loop to run longer. The reason for this regression\nis simple: the queue order is intended to not explore a commit\nuntil everything that _could_ reach that commit is explored. From\nthe information gathered by the original ordering, we have no\nguarantee that there is not a commit D reachable from v4.8 that\ncan also reach B. We gained absolute correctness in exchange for\na performance regression.",
+      "status": "source_only"
+    },
+    "document_margin": 3.5,
+    "support_margin": 2.75
+  },
+  "historical-04/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a22754cf61beac01b52da3e5",
+      "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+      "speaker": "Kim Gybels",
+      "start": 52,
+      "end": 209,
+      "quote": "Take a hint from commit ea68b0ce9f8 (hash-object: don't use mmap() for\nsmall files, 2010-02-21) and use read() instead of mmap() for small\npacked-refs files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "4c7af835d9267b8ebc978ead",
+      "location": "https://github.com/git/git/commit/4c399442f781f70a00273746ca6a0de9fef9b0d3",
+      "speaker": "Martin Ågren",
+      "start": 323,
+      "end": 415,
+      "quote": "Do not change the references to the \"commit graph\" (without \"... file\")\nas a data structure.",
+      "status": "source_only"
+    },
+    "document_margin": -18.125,
+    "support_margin": -12.625
+  },
+  "historical-04/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a22754cf61beac01b52da3e5",
+      "location": "https://github.com/git/git/commit/ba41a8b600871b68680ff33de08012f4887133a2",
+      "speaker": "Kim Gybels",
+      "start": 52,
+      "end": 209,
+      "quote": "Take a hint from commit ea68b0ce9f8 (hash-object: don't use mmap() for\nsmall files, 2010-02-21) and use read() instead of mmap() for small\npacked-refs files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "4c7af835d9267b8ebc978ead",
+      "location": "https://github.com/git/git/commit/4c399442f781f70a00273746ca6a0de9fef9b0d3",
+      "speaker": "Martin Ågren",
+      "start": 323,
+      "end": 415,
+      "quote": "Do not change the references to the \"commit graph\" (without \"... file\")\nas a data structure.",
+      "status": "source_only"
+    },
+    "document_margin": -18.125,
+    "support_margin": -12.625
+  },
+  "historical-05/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "b8c9e86139b61b85d4f28e17",
+      "location": "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945",
+      "speaker": "Torsten Bögershausen",
+      "start": 62,
+      "end": 319,
+      "quote": "When calling convert_to_git(), the checksafe parameter defined what\nshould happen if the EOL conversion (CRLF --> LF --> CRLF) does not\nroundtrip cleanly. In addition, it also defined if line endings should\nbe renormalized (CRLF --> LF) or kept as they are.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "36cb2aa156b16e9e69b43754",
+      "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5",
+      "speaker": "Anthony Sottile",
+      "start": 50,
+      "end": 271,
+      "quote": "A regression introduced in 8462ff43 (\"convert_to_git():\nsafe_crlf/checksafe becomes int conv_flags\", 2018-01-13) back in Git\n2.17 cycle caused autocrlf rewrites to produce a warning message\ndespite setting safecrlf=false.",
+      "status": "source_only"
+    },
+    "document_margin": -2.25,
+    "support_margin": -0.25
+  },
+  "historical-05/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "b8c9e86139b61b85d4f28e17",
+      "location": "https://github.com/git/git/commit/8462ff43e42ab67cecd16fdfb59451a53cc8a945",
+      "speaker": "Torsten Bögershausen",
+      "start": 62,
+      "end": 319,
+      "quote": "When calling convert_to_git(), the checksafe parameter defined what\nshould happen if the EOL conversion (CRLF --> LF --> CRLF) does not\nroundtrip cleanly. In addition, it also defined if line endings should\nbe renormalized (CRLF --> LF) or kept as they are.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "36cb2aa156b16e9e69b43754",
+      "location": "https://github.com/git/git/commit/6cb09125bea69d9bdb461b8ecacd5c50c9e6a4f5",
+      "speaker": "Anthony Sottile",
+      "start": 50,
+      "end": 271,
+      "quote": "A regression introduced in 8462ff43 (\"convert_to_git():\nsafe_crlf/checksafe becomes int conv_flags\", 2018-01-13) back in Git\n2.17 cycle caused autocrlf rewrites to produce a warning message\ndespite setting safecrlf=false.",
+      "status": "source_only"
+    },
+    "document_margin": -2.25,
+    "support_margin": -0.25
+  },
+  "historical-06/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "4bd930c91ffc96d3b17489ef",
+      "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+      "speaker": "Johannes Schindelin",
+      "start": 158,
+      "end": 547,
+      "quote": "While developing patch series, it is a good practice to run the test\nsuite from time to time, just to make sure that obvious bugs are caught\nearly.  With complex patch series, it is common to run `make -j15 -k\ntest`, i.e.  run the tests in parallel and *not* stop at the first\nfailing test but continue. This has the advantage of identifying\npossibly multiple problems in one big test run.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "ffa49887c71c10777ef193cf",
+      "location": "https://github.com/git/git/commit/2731a7840a462a97b8afb5beadaf36c1db992ac7",
+      "speaker": "Boxuan Li",
+      "start": 0,
+      "end": 38,
+      "quote": "userdiff: fix grammar and style issues",
+      "status": "source_only"
+    },
+    "document_margin": -19.25,
+    "support_margin": -11.5
+  },
+  "historical-06/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "4bd930c91ffc96d3b17489ef",
+      "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+      "speaker": "Johannes Schindelin",
+      "start": 158,
+      "end": 547,
+      "quote": "While developing patch series, it is a good practice to run the test\nsuite from time to time, just to make sure that obvious bugs are caught\nearly.  With complex patch series, it is common to run `make -j15 -k\ntest`, i.e.  run the tests in parallel and *not* stop at the first\nfailing test but continue. This has the advantage of identifying\npossibly multiple problems in one big test run.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "ffa49887c71c10777ef193cf",
+      "location": "https://github.com/git/git/commit/2731a7840a462a97b8afb5beadaf36c1db992ac7",
+      "speaker": "Boxuan Li",
+      "start": 0,
+      "end": 38,
+      "quote": "userdiff: fix grammar and style issues",
+      "status": "source_only"
+    },
+    "document_margin": -19.25,
+    "support_margin": -11.5
+  },
+  "historical-07/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "c83eb978554a4c765477fbe6",
+      "location": "https://github.com/git/git/commit/e12a7ef5972423c822834f9c514a54e32ea99e65",
+      "speaker": "Johannes Schindelin",
+      "start": 431,
+      "end": 892,
+      "quote": "So let's decouple keeping track of the count from the (localized) commit\nmessages by introducing a new file called 'current-fixups' that keeps\ntrack of the current fixup/squash chain. This file contains a bit more\nthan just the count (it contains a list of \"fixup <commit>\"/\"squash\n<commit>\" lines). This is done on purpose, as it will come in handy for\na fix for the bug where `git rebase --skip` on a final fixup/squash will\nleave the commit message in limbo.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "8549a2c9f877e3ed33d140c5",
+      "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e",
+      "speaker": "Phillip Wood",
+      "start": 44,
+      "end": 387,
+      "quote": "Commit e12a7ef597 (\"rebase -i: Handle \"combination of <n> commits\" with\nGETTEXT_POISON\", 2018-04-27) changed the way that individual commit\nmessages are labelled when squashing commits together. In doing so a\nregression was introduced where the numbering of the messages is off by\none. This commit fixes that and adds a test for the numbering.",
+      "status": "source_only"
+    },
+    "document_margin": -5.75,
+    "support_margin": -2.0
+  },
+  "historical-07/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "c83eb978554a4c765477fbe6",
+      "location": "https://github.com/git/git/commit/e12a7ef5972423c822834f9c514a54e32ea99e65",
+      "speaker": "Johannes Schindelin",
+      "start": 431,
+      "end": 892,
+      "quote": "So let's decouple keeping track of the count from the (localized) commit\nmessages by introducing a new file called 'current-fixups' that keeps\ntrack of the current fixup/squash chain. This file contains a bit more\nthan just the count (it contains a list of \"fixup <commit>\"/\"squash\n<commit>\" lines). This is done on purpose, as it will come in handy for\na fix for the bug where `git rebase --skip` on a final fixup/squash will\nleave the commit message in limbo.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "8549a2c9f877e3ed33d140c5",
+      "location": "https://github.com/git/git/commit/dd2e36ebaccd6dc2ca4d37759248ce9bbdf9113e",
+      "speaker": "Phillip Wood",
+      "start": 44,
+      "end": 387,
+      "quote": "Commit e12a7ef597 (\"rebase -i: Handle \"combination of <n> commits\" with\nGETTEXT_POISON\", 2018-04-27) changed the way that individual commit\nmessages are labelled when squashing commits together. In doing so a\nregression was introduced where the numbering of the messages is off by\none. This commit fixes that and adds a test for the numbering.",
+      "status": "source_only"
+    },
+    "document_margin": -5.75,
+    "support_margin": -2.0
+  },
+  "historical-08/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "c83eb978554a4c765477fbe6",
+      "location": "https://github.com/git/git/commit/e12a7ef5972423c822834f9c514a54e32ea99e65",
+      "speaker": "Johannes Schindelin",
+      "start": 68,
+      "end": 117,
+      "quote": "We previously relied on the localized versions of",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "14faf8dce28fe5fa11e2f320",
+      "location": "https://github.com/git/git/commit/d3a8caebf38b42d8d8ca80cb1856ee2e54fb4c4d",
+      "speaker": "Naveen Nathan",
+      "start": 59,
+      "end": 324,
+      "quote": "When --preserve-merges was deprecated in 427c3bd28a a sentence\nwas introduced describing the difference between --rebase-merges and\n--preserve-merges which is a little unclear and difficult to parse.\nThis patch improves readability while retaining original meaning.",
+      "status": "source_only"
+    },
+    "document_margin": -19.875,
+    "support_margin": -13.0
+  },
+  "historical-08/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "c83eb978554a4c765477fbe6",
+      "location": "https://github.com/git/git/commit/e12a7ef5972423c822834f9c514a54e32ea99e65",
+      "speaker": "Johannes Schindelin",
+      "start": 68,
+      "end": 117,
+      "quote": "We previously relied on the localized versions of",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "14faf8dce28fe5fa11e2f320",
+      "location": "https://github.com/git/git/commit/d3a8caebf38b42d8d8ca80cb1856ee2e54fb4c4d",
+      "speaker": "Naveen Nathan",
+      "start": 59,
+      "end": 324,
+      "quote": "When --preserve-merges was deprecated in 427c3bd28a a sentence\nwas introduced describing the difference between --rebase-merges and\n--preserve-merges which is a little unclear and difficult to parse.\nThis patch improves readability while retaining original meaning.",
+      "status": "source_only"
+    },
+    "document_margin": -19.875,
+    "support_margin": -13.0
+  },
+  "prior_git-01/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "ca0f8b3e2ce025eaace92ada",
+        "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+        "speaker": "Benno Evers",
+        "start": 1152,
+        "end": 1488,
+        "quote": "For repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f4e633da80c4dc22c7a6ee22",
+        "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae",
+        "speaker": "Jeff King",
+        "start": 339,
+        "end": 827,
+        "quote": "But its fix misses a case: we may still bail early if we hit the\nmax_candidates limit, producing suboptimal output. You can see this in\naction by adding \"--candidates=2\" to the tests; we'll stop traversing as\nsoon as we see the second tag and will produce the wrong answer. I hit\nthis in practice while trying to teach git-describe not to keep looking\nfor candidates after we've seen all tags in the repo (effectively adding\n--candidates=2, since these toy repos have only two tags each).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "ca0f8b3e2ce025eaace92ada",
+        "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+        "speaker": "Benno Evers",
+        "start": 1152,
+        "end": 1488,
+        "quote": "For repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that when searching for tag candidates in a repository with a single root, the current commit must be an ancestor of all tag candidates, ensuring no performance impact. However, the new evidence shows that this condition does not hold when the `--candidates` limit is reached, leading to potential suboptimal output and necessitating a reevaluation of the performance guarantees. The earlier result remains valid when `--candidates` is not specified or set to a value",
+      "reviewer": "Benno Evers",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "ca0f8b3e2ce025eaace92ada",
+      "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+      "speaker": "Benno Evers",
+      "start": 1152,
+      "end": 1488,
+      "quote": "For repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "f4e633da80c4dc22c7a6ee22",
+      "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae",
+      "speaker": "Jeff King",
+      "start": 339,
+      "end": 827,
+      "quote": "But its fix misses a case: we may still bail early if we hit the\nmax_candidates limit, producing suboptimal output. You can see this in\naction by adding \"--candidates=2\" to the tests; we'll stop traversing as\nsoon as we see the second tag and will produce the wrong answer. I hit\nthis in practice while trying to teach git-describe not to keep looking\nfor candidates after we've seen all tags in the repo (effectively adding\n--candidates=2, since these toy repos have only two tags each).",
+      "status": "source_only"
+    },
+    "document_margin": 6.0,
+    "support_margin": 5.25
+  },
+  "prior_git-01/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "ca0f8b3e2ce025eaace92ada",
+        "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+        "speaker": "Benno Evers",
+        "start": 1152,
+        "end": 1488,
+        "quote": "For repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "f4e633da80c4dc22c7a6ee22",
+        "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae",
+        "speaker": "Jeff King",
+        "start": 339,
+        "end": 827,
+        "quote": "But its fix misses a case: we may still bail early if we hit the\nmax_candidates limit, producing suboptimal output. You can see this in\naction by adding \"--candidates=2\" to the tests; we'll stop traversing as\nsoon as we see the second tag and will produce the wrong answer. I hit\nthis in practice while trying to teach git-describe not to keep looking\nfor candidates after we've seen all tags in the repo (effectively adding\n--candidates=2, since these toy repos have only two tags each).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "ca0f8b3e2ce025eaace92ada",
+        "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+        "speaker": "Benno Evers",
+        "start": 1152,
+        "end": 1488,
+        "quote": "For repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that when searching for tag candidates in a repository with a single root, the current commit must be an ancestor of all tag candidates, ensuring no performance impact. However, the new evidence shows that this condition does not hold when the `--candidates` limit is reached, leading to potential suboptimal output and necessitating a reevaluation of the performance guarantees. The earlier result remains valid when `--candidates` is not specified or set to a value",
+      "reviewer": "Benno Evers",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "ca0f8b3e2ce025eaace92ada",
+      "location": "https://github.com/git/git/commit/30b1c7ad9d64695a65c23f922e6ffd2fd35660da",
+      "speaker": "Benno Evers",
+      "start": 1152,
+      "end": 1488,
+      "quote": "For repositories with a single root, this condition is always\ntrue: When the search is reduced to a single active branch, the\ncurrent commit must be an ancestor of *all* tag candidates. This\nmeans that in the common case, this change will have no negative\nperformance impact since the same number of commits as before will\nbe traversed.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "f4e633da80c4dc22c7a6ee22",
+      "location": "https://github.com/git/git/commit/d0e52c1728bdab27f7ca61ee0d4ff91055646bae",
+      "speaker": "Jeff King",
+      "start": 339,
+      "end": 827,
+      "quote": "But its fix misses a case: we may still bail early if we hit the\nmax_candidates limit, producing suboptimal output. You can see this in\naction by adding \"--candidates=2\" to the tests; we'll stop traversing as\nsoon as we see the second tag and will produce the wrong answer. I hit\nthis in practice while trying to teach git-describe not to keep looking\nfor candidates after we've seen all tags in the repo (effectively adding\n--candidates=2, since these toy repos have only two tags each).",
+      "status": "source_only"
+    },
+    "document_margin": 6.0,
+    "support_margin": 5.25
+  },
+  "prior_git-02/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7834329f0592297967c84cba",
+        "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+        "speaker": "Michael Barabanov",
+        "start": 50,
+        "end": 182,
+        "quote": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2f74bf3914391d5834e44512",
+        "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052",
+        "speaker": "Taylor Blau",
+        "start": 560,
+        "end": 991,
+        "quote": "However, with a specially crafted repository, Git can be tricked into\nusing a non-local transport while still setting `is_local` to \"1\" and\nusing the `clone_local()` optimization. The below test case\ndemonstrates such an instance, and shows that it can be used to include\narbitrary (known) paths in the working copy of a cloned repository on a\nvictim's machine[^1], even if local file clones are forbidden by\n`protocol.file.allow`.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7834329f0592297967c84cba",
+        "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+        "speaker": "Michael Barabanov",
+        "start": 50,
+        "end": 182,
+        "quote": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that `is_local` accurately reflects whether a clone was performed locally or remotely, but this is undermined by new evidence showing Git can be manipulated to bypass this check and include arbitrary paths in the working copy, thus changing its applicability; however, if `protocol.file.allow` is strictly enforced, the earlier result remains valid.",
+      "reviewer": "Michael Barabanov",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "7834329f0592297967c84cba",
+      "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+      "speaker": "Michael Barabanov",
+      "start": 50,
+      "end": 182,
+      "quote": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "2f74bf3914391d5834e44512",
+      "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052",
+      "speaker": "Taylor Blau",
+      "start": 560,
+      "end": 991,
+      "quote": "However, with a specially crafted repository, Git can be tricked into\nusing a non-local transport while still setting `is_local` to \"1\" and\nusing the `clone_local()` optimization. The below test case\ndemonstrates such an instance, and shows that it can be used to include\narbitrary (known) paths in the working copy of a cloned repository on a\nvictim's machine[^1], even if local file clones are forbidden by\n`protocol.file.allow`.",
+      "status": "source_only"
+    },
+    "document_margin": 1.25,
+    "support_margin": 5.25
+  },
+  "prior_git-02/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7834329f0592297967c84cba",
+        "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+        "speaker": "Michael Barabanov",
+        "start": 50,
+        "end": 182,
+        "quote": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "2f74bf3914391d5834e44512",
+        "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052",
+        "speaker": "Taylor Blau",
+        "start": 560,
+        "end": 991,
+        "quote": "However, with a specially crafted repository, Git can be tricked into\nusing a non-local transport while still setting `is_local` to \"1\" and\nusing the `clone_local()` optimization. The below test case\ndemonstrates such an instance, and shows that it can be used to include\narbitrary (known) paths in the working copy of a cloned repository on a\nvictim's machine[^1], even if local file clones are forbidden by\n`protocol.file.allow`.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7834329f0592297967c84cba",
+        "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+        "speaker": "Michael Barabanov",
+        "start": 50,
+        "end": 182,
+        "quote": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that `is_local` accurately reflects whether a clone was performed locally or remotely, but this is undermined by new evidence showing Git can be manipulated to bypass this check and include arbitrary paths in the working copy, thus changing its applicability; however, if `protocol.file.allow` is strictly enforced, the earlier result remains valid.",
+      "reviewer": "Michael Barabanov",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "7834329f0592297967c84cba",
+      "location": "https://github.com/git/git/commit/f38aa83f9a20765d4617c46283a13684597512e6",
+      "speaker": "Michael Barabanov",
+      "start": 50,
+      "end": 182,
+      "quote": "Move the is_local logic to the place where origin remote has been setup and\ncheck if the remote url can be used to do local cloning.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "2f74bf3914391d5834e44512",
+      "location": "https://github.com/git/git/commit/58325b93c5b6212697b088371809e9948fee8052",
+      "speaker": "Taylor Blau",
+      "start": 560,
+      "end": 991,
+      "quote": "However, with a specially crafted repository, Git can be tricked into\nusing a non-local transport while still setting `is_local` to \"1\" and\nusing the `clone_local()` optimization. The below test case\ndemonstrates such an instance, and shows that it can be used to include\narbitrary (known) paths in the working copy of a cloned repository on a\nvictim's machine[^1], even if local file clones are forbidden by\n`protocol.file.allow`.",
+      "status": "source_only"
+    },
+    "document_margin": 1.25,
+    "support_margin": 5.25
+  },
+  "prior_git-03/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "de48a1fc5270998280c48e9d",
+      "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 42,
+      "end": 195,
+      "quote": "Amend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "33781ffdea5f6b0451862ddc",
+      "location": "https://github.com/git/git/commit/b59ec03cb5f69d6a87dce8fc3ccbfd22d8de3c16",
+      "speaker": "Michael J Gruber",
+      "start": 64,
+      "end": 337,
+      "quote": "Add a failing test which demonstrates a regression in\na18d66cefb (\"diff.c: free \"buf\" in diff_words_flush()\", 2022-03-04),\nthe regression is discussed in detail in the subsequent commit. With\nit running `git show --word-diff --color-moved` with SANITIZE=address\nwould emit:",
+      "status": "source_only"
+    },
+    "document_margin": 3.75,
+    "support_margin": -3.5
+  },
+  "prior_git-03/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "de48a1fc5270998280c48e9d",
+      "location": "https://github.com/git/git/commit/a18d66cefb9e5ee4fd49be1d60e90523cd89ca0f",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 42,
+      "end": 195,
+      "quote": "Amend the freeing logic added in e6e045f8031 (diff.c: buffer all\noutput if asked to, 2017-06-29) to free the containing \"buf\" in\naddition to its members.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "33781ffdea5f6b0451862ddc",
+      "location": "https://github.com/git/git/commit/b59ec03cb5f69d6a87dce8fc3ccbfd22d8de3c16",
+      "speaker": "Michael J Gruber",
+      "start": 64,
+      "end": 337,
+      "quote": "Add a failing test which demonstrates a regression in\na18d66cefb (\"diff.c: free \"buf\" in diff_words_flush()\", 2022-03-04),\nthe regression is discussed in detail in the subsequent commit. With\nit running `git show --word-diff --color-moved` with SANITIZE=address\nwould emit:",
+      "status": "source_only"
+    },
+    "document_margin": 3.75,
+    "support_margin": -3.5
+  },
+  "scope-01/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "4bd930c91ffc96d3b17489ef",
+        "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+        "speaker": "Johannes Schindelin",
+        "start": 1178,
+        "end": 1831,
+        "quote": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fae1d5992fba04804eb9bf9e",
+        "location": "fixture://changed-condition/1",
+        "speaker": "controlled team report",
+        "start": 0,
+        "end": 216,
+        "quote": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "4bd930c91ffc96d3b17489ef",
+        "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+        "speaker": "Johannes Schindelin",
+        "start": 1178,
+        "end": 1831,
+        "quote": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to reject `prove` due to frequent crashes was based on empirical evidence of crashes under stress; however, the new evidence shows that with a native Perl and Subversion bindings, 200 massively parallel prove runs completed successfully without crashes, thus changing the applicability of the earlier decision under these conditions.",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "4bd930c91ffc96d3b17489ef",
+      "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+      "speaker": "Johannes Schindelin",
+      "start": 1178,
+      "end": 1831,
+      "quote": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "fae1d5992fba04804eb9bf9e",
+      "location": "fixture://changed-condition/1",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 216,
+      "quote": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+      "status": "source_only"
+    },
+    "document_margin": 0.25,
+    "support_margin": 1.5
+  },
+  "scope-01/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "4bd930c91ffc96d3b17489ef",
+        "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+        "speaker": "Johannes Schindelin",
+        "start": 1178,
+        "end": 1831,
+        "quote": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "fae1d5992fba04804eb9bf9e",
+        "location": "fixture://changed-condition/1",
+        "speaker": "controlled team report",
+        "start": 0,
+        "end": 216,
+        "quote": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "4bd930c91ffc96d3b17489ef",
+        "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+        "speaker": "Johannes Schindelin",
+        "start": 1178,
+        "end": 1831,
+        "quote": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision to reject `prove` due to frequent crashes was based on empirical evidence of crashes under stress; however, the new evidence shows that with a native Perl and Subversion bindings, 200 massively parallel prove runs completed successfully without crashes, thus changing the applicability of the earlier decision under these conditions.",
+      "reviewer": "Johannes Schindelin",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "4bd930c91ffc96d3b17489ef",
+      "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+      "speaker": "Johannes Schindelin",
+      "start": 1178,
+      "end": 1831,
+      "quote": "Please note that the often-recommended `prove` tool requires Perl, and\nthat opens a whole new can of worms on Windows. As no native Windows Perl\ncomes with Subversion bindings, we have to use a Perl in Git for Windows\nthat uses the POSIX emulation layer named MSYS2 (which is a portable\nversion of Cygwin). When using this emulation layer under stress, e.g.\nwhen running massively-parallel tests, unexplicable crashes occur quite\nfrequently, and instead of having a solution to the original problem, the\ndeveloper now has an additional, quite huge problem. For that reason, this\ndeveloper rejected `prove` as a solution and went with this patch instead.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "fae1d5992fba04804eb9bf9e",
+      "location": "fixture://changed-condition/1",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 216,
+      "quote": "Our Windows build with a native Perl and the required Subversion bindings completed 200 massively parallel prove runs with no crashes. For the same failed-test subset the median turnaround fell from 19 to 11 minutes.",
+      "status": "source_only"
+    },
+    "document_margin": 0.25,
+    "support_margin": 1.5
+  },
+  "scope-02/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "4bd930c91ffc96d3b17489ef",
+      "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+      "speaker": "Johannes Schindelin",
+      "start": 549,
+      "end": 717,
+      "quote": "It is particularly important to reduce the turn-around time thusly on\nWindows, where the test suite spends 45 minutes on the computer on which\nthis patch was developed.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "3d30cc34fff3bdb63fb65f3c",
+      "location": "fixture://changed-condition/2",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 215,
+      "quote": "The Linux native Perl workers completed 200 massively parallel prove runs with no crashes. On the Windows MSYS2 pool the same unexplained crashes recurred, and there is still no native Perl with Subversion bindings.",
+      "status": "source_only"
+    },
+    "document_margin": -3.0,
+    "support_margin": 3.5
+  },
+  "scope-02/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "4bd930c91ffc96d3b17489ef",
+      "location": "https://github.com/git/git/commit/93a04bb105f30f5578a187c49066ccda71fe7cde",
+      "speaker": "Johannes Schindelin",
+      "start": 549,
+      "end": 717,
+      "quote": "It is particularly important to reduce the turn-around time thusly on\nWindows, where the test suite spends 45 minutes on the computer on which\nthis patch was developed.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "3d30cc34fff3bdb63fb65f3c",
+      "location": "fixture://changed-condition/2",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 215,
+      "quote": "The Linux native Perl workers completed 200 massively parallel prove runs with no crashes. On the Windows MSYS2 pool the same unexplained crashes recurred, and there is still no native Perl with Subversion bindings.",
+      "status": "source_only"
+    },
+    "document_margin": -3.0,
+    "support_margin": 3.5
+  },
+  "scope-03/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "f12c8efc68e771650479de67",
+      "location": "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3",
+      "speaker": "Michael Haggerty",
+      "start": 50,
+      "end": 382,
+      "quote": "We don't actually create zero-length `packed-refs` files, but they are\nvalid and we should handle them correctly. The old code `xmmap()`ed\nsuch files, which led to an error when `munmap()` was called. So, if\nthe `packed-refs` file is empty, leave the snapshot at its zero values\nand return 0 without trying to read or mmap the file.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "15361ea0771ef72d98652e93",
+      "location": "fixture://changed-condition/3",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 198,
+      "quote": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+      "status": "source_only"
+    },
+    "document_margin": -5.0,
+    "support_margin": 4.75
+  },
+  "scope-03/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "f12c8efc68e771650479de67",
+      "location": "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3",
+      "speaker": "Michael Haggerty",
+      "start": 50,
+      "end": 382,
+      "quote": "We don't actually create zero-length `packed-refs` files, but they are\nvalid and we should handle them correctly. The old code `xmmap()`ed\nsuch files, which led to an error when `munmap()` was called. So, if\nthe `packed-refs` file is empty, leave the snapshot at its zero values\nand return 0 without trying to read or mmap the file.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "15361ea0771ef72d98652e93",
+      "location": "fixture://changed-condition/3",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 198,
+      "quote": "On the new kernel we benchmarked nonempty 2 KiB packed-refs files. mmap was faster than read in all ten runs. Zero-length files still failed at munmap; they were excluded from the timing comparison.",
+      "status": "source_only"
+    },
+    "document_margin": -5.0,
+    "support_margin": 4.75
+  },
+  "scope-04/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "f12c8efc68e771650479de67",
+      "location": "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3",
+      "speaker": "Michael Haggerty",
+      "start": 50,
+      "end": 382,
+      "quote": "We don't actually create zero-length `packed-refs` files, but they are\nvalid and we should handle them correctly. The old code `xmmap()`ed\nsuch files, which led to an error when `munmap()` was called. So, if\nthe `packed-refs` file is empty, leave the snapshot at its zero values\nand return 0 without trying to read or mmap the file.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "a2f47f80218ee9b61c244392",
+      "location": "fixture://changed-condition/4",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 164,
+      "quote": "On the new kernel mmap beat read in all ten runs on 128 MiB packed-refs files. For nonempty 2 KiB files read still won. Zero-length mappings still failed at munmap.",
+      "status": "source_only"
+    },
+    "document_margin": -4.25,
+    "support_margin": 5.75
+  },
+  "scope-04/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "f12c8efc68e771650479de67",
+      "location": "https://github.com/git/git/commit/01caf20d57aea73e67337ba1d396dd80a76d9dc3",
+      "speaker": "Michael Haggerty",
+      "start": 50,
+      "end": 382,
+      "quote": "We don't actually create zero-length `packed-refs` files, but they are\nvalid and we should handle them correctly. The old code `xmmap()`ed\nsuch files, which led to an error when `munmap()` was called. So, if\nthe `packed-refs` file is empty, leave the snapshot at its zero values\nand return 0 without trying to read or mmap the file.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "a2f47f80218ee9b61c244392",
+      "location": "fixture://changed-condition/4",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 164,
+      "quote": "On the new kernel mmap beat read in all ten runs on 128 MiB packed-refs files. For nonempty 2 KiB files read still won. Zero-length mappings still failed at munmap.",
+      "status": "source_only"
+    },
+    "document_margin": -4.25,
+    "support_margin": 5.75
+  },
+  "scope-05/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "9790c959b6b51bd5e3da4e60",
+      "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+      "speaker": "Derrick Stolee",
+      "start": 42,
+      "end": 273,
+      "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "2a450558e39870d9de9c161b",
+      "location": "fixture://changed-condition/5",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 212,
+      "quote": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+      "status": "source_only"
+    },
+    "document_margin": -10.5,
+    "support_margin": -8.0
+  },
+  "scope-05/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "9790c959b6b51bd5e3da4e60",
+      "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+      "speaker": "Derrick Stolee",
+      "start": 42,
+      "end": 273,
+      "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "2a450558e39870d9de9c161b",
+      "location": "fixture://changed-condition/5",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 212,
+      "quote": "We tested a prototype that keys the graph by the active graft table. On the grafted repository all 800 ancestry queries matched a raw walk and were faster. The shipping graph format and its results are unchanged.",
+      "status": "source_only"
+    },
+    "document_margin": -10.5,
+    "support_margin": -8.0
+  },
+  "scope-06/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "9790c959b6b51bd5e3da4e60",
+        "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+        "speaker": "Derrick Stolee",
+        "start": 42,
+        "end": 273,
+        "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6ff1361e02712b2fc1de2aef",
+        "location": "fixture://changed-condition/6",
+        "speaker": "controlled team report",
+        "start": 0,
+        "end": 193,
+        "quote": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "9790c959b6b51bd5e3da4e60",
+        "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+        "speaker": "Derrick Stolee",
+        "start": 42,
+        "end": 273,
+        "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the absence of commit grafts ensuring accurate ancestry queries through raw walks; the presence of active grafts in the repository now introduces concrete new evidence that changes its applicability, as grafts can alter the commit graph structure, potentially leading to incorrect results even if the commit-graph file is present.",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "9790c959b6b51bd5e3da4e60",
+      "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+      "speaker": "Derrick Stolee",
+      "start": 42,
+      "end": 273,
+      "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "6ff1361e02712b2fc1de2aef",
+      "location": "fixture://changed-condition/6",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 193,
+      "quote": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+      "status": "source_only"
+    },
+    "document_margin": 5.25,
+    "support_margin": 4.75
+  },
+  "scope-06/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "9790c959b6b51bd5e3da4e60",
+        "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+        "speaker": "Derrick Stolee",
+        "start": 42,
+        "end": 273,
+        "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "6ff1361e02712b2fc1de2aef",
+        "location": "fixture://changed-condition/6",
+        "speaker": "controlled team report",
+        "start": 0,
+        "end": 193,
+        "quote": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "9790c959b6b51bd5e3da4e60",
+        "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+        "speaker": "Derrick Stolee",
+        "start": 42,
+        "end": 273,
+        "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the absence of commit grafts ensuring accurate ancestry queries through raw walks; the presence of active grafts in the repository now introduces concrete new evidence that changes its applicability, as grafts can alter the commit graph structure, potentially leading to incorrect results even if the commit-graph file is present.",
+      "reviewer": "Derrick Stolee",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "9790c959b6b51bd5e3da4e60",
+      "location": "https://github.com/git/git/commit/20fd6d57996e33c30b6bb030329523d0116f15ec",
+      "speaker": "Derrick Stolee",
+      "start": 42,
+      "end": 273,
+      "quote": "Augment commit_graph_compatible(r) to return false when the given\nrepository r has commit grafts or is a shallow clone. Test that in these\nsituations we ignore existing commit-graph files and we do not write new\ncommit-graph files.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "6ff1361e02712b2fc1de2aef",
+      "location": "fixture://changed-condition/6",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 193,
+      "quote": "On the repository without grafts all 800 ancestry queries matched a raw walk and were faster. With active grafts the prototype still used the original parent links and returned wrong ancestors.",
+      "status": "source_only"
+    },
+    "document_margin": 5.25,
+    "support_margin": 4.75
+  },
+  "aimers/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "b4f9fd7b84bc04c8d52f50a8",
+      "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/a8e64a1d52a0daa1ee7bf4595a0dfe4e6acf49a3/jaewon/notes/findings.md#L484-L503",
+      "speaker": "jaewon",
+      "start": 642,
+      "end": 741,
+      "quote": "부수 확인: 멤버 앙상블 기제는 실제로 작동한다 (개별 평균 720 → 앙상블 753).\n그리고 **속도는 FT 의 9.6배**다. 블렌드에는 못 들어가지만 이 사실은 남겨둔다.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "8de9a44fb3fda127fe8ad557",
+      "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/9bf532cde00494dabb86076e16a07940a47400e3/seonghun/docs/experiment_log.md#L377-L403",
+      "speaker": "seonghun",
+      "start": 690,
+      "end": 1027,
+      "quote": "- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]",
+      "status": "source_only"
+    },
+    "document_margin": -2.5,
+    "support_margin": 0.0
+  },
+  "aimers/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "b4f9fd7b84bc04c8d52f50a8",
+      "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/a8e64a1d52a0daa1ee7bf4595a0dfe4e6acf49a3/jaewon/notes/findings.md#L484-L503",
+      "speaker": "jaewon",
+      "start": 642,
+      "end": 741,
+      "quote": "부수 확인: 멤버 앙상블 기제는 실제로 작동한다 (개별 평균 720 → 앙상블 753).\n그리고 **속도는 FT 의 9.6배**다. 블렌드에는 못 들어가지만 이 사실은 남겨둔다.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "8de9a44fb3fda127fe8ad557",
+      "location": "https://github.com/ashcircle03/Aimers9th-KHU-swcon22/blob/9bf532cde00494dabb86076e16a07940a47400e3/seonghun/docs/experiment_log.md#L377-L403",
+      "speaker": "seonghun",
+      "start": 690,
+      "end": 1027,
+      "quote": "- CPU CB4 + TM-S 50:50: SEL 1017.138 / CONF 697.487\n- GPU CB4 + TM-S 50:50: SEL 1016.392 / CONF 694.240\n- 기존 global CB+FT에 TM-S 45%: SEL 1039.244 / CONF 701.514\n- 기존 game-type CB+FT에 TM-S 40%: **SEL 1045.348 / CONF 704.199**\n- 마지막 후보의 기존 game-type CB+FT 대비 paired 차이: SEL +12.615,\n  CI [+1.076,+23.882], CONF +14.975, CI [+2.730,+26.952]",
+      "status": "source_only"
+    },
+    "document_margin": -2.5,
+    "support_margin": 0.0
+  },
+  "fresh-01/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "1e9df966b20925c5c7fb6012",
+        "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+        "speaker": "Phillip Wood",
+        "start": 50,
+        "end": 172,
+        "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3b95fb9709e025964210b042",
+        "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 776,
+        "quote": "recount_edited_hunk() introduced in commit 2b8ea7f3c7 (\"add -p:\ncalculate offset delta for edited patches\", 2018-03-05) required all\ncontext lines to start with a space, empty lines are not counted. This\nwas intended to avoid any recounting problems if the user had\nintroduced empty lines at the end when editing the patch. However this\nintroduced a regression into 'git add -p' as it seems it is common for\neditors to strip the trailing whitespace from empty context lines when\npatches are edited thereby introducing empty lines that should be\ncounted. 'git apply' knows how to deal with such empty lines and POSIX\nstates that whether or not there is an space on an empty context line\nis implementation defined [1].",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "1e9df966b20925c5c7fb6012",
+        "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+        "speaker": "Phillip Wood",
+        "start": 50,
+        "end": 172,
+        "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the requirement that all context lines starting with a space should be counted to avoid recounting issues; however, the introduction of empty lines stripped by editors now affects this rule, making the previous recommendation inapplicable given that 'git apply' can handle such cases according to POSIX standards [1], unless the editor behavior is consistently known to always preserve leading spaces on empty lines.",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "1e9df966b20925c5c7fb6012",
+      "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+      "speaker": "Phillip Wood",
+      "start": 50,
+      "end": 172,
+      "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "3b95fb9709e025964210b042",
+      "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308",
+      "speaker": "Phillip Wood",
+      "start": 60,
+      "end": 776,
+      "quote": "recount_edited_hunk() introduced in commit 2b8ea7f3c7 (\"add -p:\ncalculate offset delta for edited patches\", 2018-03-05) required all\ncontext lines to start with a space, empty lines are not counted. This\nwas intended to avoid any recounting problems if the user had\nintroduced empty lines at the end when editing the patch. However this\nintroduced a regression into 'git add -p' as it seems it is common for\neditors to strip the trailing whitespace from empty context lines when\npatches are edited thereby introducing empty lines that should be\ncounted. 'git apply' knows how to deal with such empty lines and POSIX\nstates that whether or not there is an space on an empty context line\nis implementation defined [1].",
+      "status": "source_only"
+    },
+    "document_margin": 2.75,
+    "support_margin": 2.5
+  },
+  "fresh-01/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "1e9df966b20925c5c7fb6012",
+        "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+        "speaker": "Phillip Wood",
+        "start": 50,
+        "end": 172,
+        "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "3b95fb9709e025964210b042",
+        "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308",
+        "speaker": "Phillip Wood",
+        "start": 60,
+        "end": 776,
+        "quote": "recount_edited_hunk() introduced in commit 2b8ea7f3c7 (\"add -p:\ncalculate offset delta for edited patches\", 2018-03-05) required all\ncontext lines to start with a space, empty lines are not counted. This\nwas intended to avoid any recounting problems if the user had\nintroduced empty lines at the end when editing the patch. However this\nintroduced a regression into 'git add -p' as it seems it is common for\neditors to strip the trailing whitespace from empty context lines when\npatches are edited thereby introducing empty lines that should be\ncounted. 'git apply' knows how to deal with such empty lines and POSIX\nstates that whether or not there is an space on an empty context line\nis implementation defined [1].",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "1e9df966b20925c5c7fb6012",
+        "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+        "speaker": "Phillip Wood",
+        "start": 50,
+        "end": 172,
+        "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the requirement that all context lines starting with a space should be counted to avoid recounting issues; however, the introduction of empty lines stripped by editors now affects this rule, making the previous recommendation inapplicable given that 'git apply' can handle such cases according to POSIX standards [1], unless the editor behavior is consistently known to always preserve leading spaces on empty lines.",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "1e9df966b20925c5c7fb6012",
+      "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+      "speaker": "Phillip Wood",
+      "start": 50,
+      "end": 172,
+      "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "3b95fb9709e025964210b042",
+      "location": "https://github.com/git/git/commit/f4d35a6b49621348c73222e7017a434551799308",
+      "speaker": "Phillip Wood",
+      "start": 60,
+      "end": 776,
+      "quote": "recount_edited_hunk() introduced in commit 2b8ea7f3c7 (\"add -p:\ncalculate offset delta for edited patches\", 2018-03-05) required all\ncontext lines to start with a space, empty lines are not counted. This\nwas intended to avoid any recounting problems if the user had\nintroduced empty lines at the end when editing the patch. However this\nintroduced a regression into 'git add -p' as it seems it is common for\neditors to strip the trailing whitespace from empty context lines when\npatches are edited thereby introducing empty lines that should be\ncounted. 'git apply' knows how to deal with such empty lines and POSIX\nstates that whether or not there is an space on an empty context line\nis implementation defined [1].",
+      "status": "source_only"
+    },
+    "document_margin": 2.75,
+    "support_margin": 2.5
+  },
+  "fresh-02/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "7707ebe2196afce6e89ab3d2",
+      "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+      "speaker": "Phillip Wood",
+      "start": 519,
+      "end": 1223,
+      "quote": "This is also a necessary step to removing '--recount' and\n'--allow-overlap' from the invocation of 'git apply'. Before\n'--recount' can be removed the splitting and coalescing counting needs\nto be fixed to handle a missing newline at the end of a file. In order\nto remove '--allow-overlap' there needs to be i) some way of verifying\nthe offset data in the edited hunk (probably by correlating the\npreimage (or postimage if the patch is going to be applied in reverse)\nlines of the edited and unedited versions to see if they are offset or\nif any leading/trailing context lines have been removed) and ii) a way of\ndealing with edited hunks that change context lines that are shared\nwith neighbouring hunks.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "df21f5a893a905e8711dd979",
+      "location": "https://github.com/git/git/commit/af91b0230ca9fb204aac04bd713ca0f420c8f8b1",
+      "speaker": "Denton Liu",
+      "start": 56,
+      "end": 187,
+      "quote": "A section in \"git add\" documentation mentions core.excludesFile and\nexplains how it works, but this is not specific to the command.",
+      "status": "source_only"
+    },
+    "document_margin": -14.125,
+    "support_margin": -13.125
+  },
+  "fresh-02/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "7707ebe2196afce6e89ab3d2",
+      "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+      "speaker": "Phillip Wood",
+      "start": 519,
+      "end": 1223,
+      "quote": "This is also a necessary step to removing '--recount' and\n'--allow-overlap' from the invocation of 'git apply'. Before\n'--recount' can be removed the splitting and coalescing counting needs\nto be fixed to handle a missing newline at the end of a file. In order\nto remove '--allow-overlap' there needs to be i) some way of verifying\nthe offset data in the edited hunk (probably by correlating the\npreimage (or postimage if the patch is going to be applied in reverse)\nlines of the edited and unedited versions to see if they are offset or\nif any leading/trailing context lines have been removed) and ii) a way of\ndealing with edited hunks that change context lines that are shared\nwith neighbouring hunks.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "df21f5a893a905e8711dd979",
+      "location": "https://github.com/git/git/commit/af91b0230ca9fb204aac04bd713ca0f420c8f8b1",
+      "speaker": "Denton Liu",
+      "start": 56,
+      "end": 187,
+      "quote": "A section in \"git add\" documentation mentions core.excludesFile and\nexplains how it works, but this is not specific to the command.",
+      "status": "source_only"
+    },
+    "document_margin": -14.125,
+    "support_margin": -13.125
+  },
+  "fresh-03/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "3ff225d38ba61099ab09be99",
+      "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae",
+      "speaker": "Stefan Beller",
+      "start": 56,
+      "end": 254,
+      "quote": "In a6d7eb2c7a (pull: optionally rebase submodules (remote submodule\nchanges only), 2017-06-23), we taught Git how to rebase submodules in\na pull. However we missed to pass on the verbosity settings.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "1fe000feaf0663143808e41c",
+      "location": "https://github.com/git/git/commit/e84c3cf3dc3c3140d317f7ed0b18768adbec0401",
+      "speaker": "Stefan Beller",
+      "start": 354,
+      "end": 392,
+      "quote": "git pull --recurse-submodules -v [...]",
+      "status": "source_only"
+    },
+    "document_margin": 1.0,
+    "support_margin": -6.25
+  },
+  "fresh-03/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "3ff225d38ba61099ab09be99",
+      "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae",
+      "speaker": "Stefan Beller",
+      "start": 56,
+      "end": 254,
+      "quote": "In a6d7eb2c7a (pull: optionally rebase submodules (remote submodule\nchanges only), 2017-06-23), we taught Git how to rebase submodules in\na pull. However we missed to pass on the verbosity settings.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "1fe000feaf0663143808e41c",
+      "location": "https://github.com/git/git/commit/e84c3cf3dc3c3140d317f7ed0b18768adbec0401",
+      "speaker": "Stefan Beller",
+      "start": 354,
+      "end": 392,
+      "quote": "git pull --recurse-submodules -v [...]",
+      "status": "source_only"
+    },
+    "document_margin": 1.0,
+    "support_margin": -6.25
+  },
+  "fresh-04/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "3ff225d38ba61099ab09be99",
+      "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae",
+      "speaker": "Stefan Beller",
+      "start": 56,
+      "end": 254,
+      "quote": "In a6d7eb2c7a (pull: optionally rebase submodules (remote submodule\nchanges only), 2017-06-23), we taught Git how to rebase submodules in\na pull. However we missed to pass on the verbosity settings.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "c2d8a3d2ee41ff5c4602bcbe",
+      "location": "https://github.com/git/git/commit/7401ab92f8c9c9f7c81763d6f7da8a63a258eff2",
+      "speaker": "Johannes Schindelin",
+      "start": 50,
+      "end": 279,
+      "quote": "As of Git v2.22.0, the `--preserve-merges` backend of `git rebase` will\nbe officially deprecated in favor of the `--rebase-merges` backend.\nConsequently, `git pull --rebase=preserve` will also be deprected. State\nthis explicitly.",
+      "status": "source_only"
+    },
+    "document_margin": -7.5,
+    "support_margin": -14.125
+  },
+  "fresh-04/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "3ff225d38ba61099ab09be99",
+      "location": "https://github.com/git/git/commit/a56771a668dd4963675914bc5da0e1e015952dae",
+      "speaker": "Stefan Beller",
+      "start": 56,
+      "end": 254,
+      "quote": "In a6d7eb2c7a (pull: optionally rebase submodules (remote submodule\nchanges only), 2017-06-23), we taught Git how to rebase submodules in\na pull. However we missed to pass on the verbosity settings.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "c2d8a3d2ee41ff5c4602bcbe",
+      "location": "https://github.com/git/git/commit/7401ab92f8c9c9f7c81763d6f7da8a63a258eff2",
+      "speaker": "Johannes Schindelin",
+      "start": 50,
+      "end": 279,
+      "quote": "As of Git v2.22.0, the `--preserve-merges` backend of `git rebase` will\nbe officially deprecated in favor of the `--rebase-merges` backend.\nConsequently, `git pull --rebase=preserve` will also be deprected. State\nthis explicitly.",
+      "status": "source_only"
+    },
+    "document_margin": -7.5,
+    "support_margin": -14.125
+  },
+  "fresh-05/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7707ebe2196afce6e89ab3d2",
+        "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+        "speaker": "Phillip Wood",
+        "start": 51,
+        "end": 517,
+        "quote": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "99f608715cc39c92a6c0a798",
+        "location": "fixture://unseen/5",
+        "speaker": "controlled team report",
+        "start": 0,
+        "end": 217,
+        "quote": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7707ebe2196afce6e89ab3d2",
+        "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+        "speaker": "Phillip Wood",
+        "start": 51,
+        "end": 517,
+        "quote": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the infrequent occurrence of hunk splits not affecting the accuracy of offset corrections, but the new evidence shows that in 18 out of 50 trials with GUI edits, the selection resulted in incorrect offset corrections after a split, thus changing its applicability.",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "7707ebe2196afce6e89ab3d2",
+      "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+      "speaker": "Phillip Wood",
+      "start": 51,
+      "end": 517,
+      "quote": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "99f608715cc39c92a6c0a798",
+      "location": "fixture://unseen/5",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 217,
+      "quote": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+      "status": "source_only"
+    },
+    "document_margin": 5.0,
+    "support_margin": 3.75
+  },
+  "fresh-05/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "7707ebe2196afce6e89ab3d2",
+        "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+        "speaker": "Phillip Wood",
+        "start": 51,
+        "end": 517,
+        "quote": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "99f608715cc39c92a6c0a798",
+        "location": "fixture://unseen/5",
+        "speaker": "controlled team report",
+        "start": 0,
+        "end": 217,
+        "quote": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "7707ebe2196afce6e89ab3d2",
+        "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+        "speaker": "Phillip Wood",
+        "start": 51,
+        "end": 517,
+        "quote": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the infrequent occurrence of hunk splits not affecting the accuracy of offset corrections, but the new evidence shows that in 18 out of 50 trials with GUI edits, the selection resulted in incorrect offset corrections after a split, thus changing its applicability.",
+      "reviewer": "Phillip Wood",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "7707ebe2196afce6e89ab3d2",
+      "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+      "speaker": "Phillip Wood",
+      "start": 51,
+      "end": 517,
+      "quote": "Recount the number of preimage and postimage lines in a hunk after it\nhas been edited so any change in the number of insertions or deletions\ncan be used to adjust the offsets of subsequent hunks. If an edited\nhunk is subsequently split then the offset correction will be lost. It\nwould be possible to fix this if it is a problem, however the code\nhere is still an improvement on the status quo for the common case\nwhere an edited hunk is applied without being split.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "99f608715cc39c92a6c0a798",
+      "location": "fixture://unseen/5",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 217,
+      "quote": "The new GUI edits then splits every selected hunk. In 18 of 50 trials we applied the selection to the wrong offset after a split. The 50 control trials that applied edited hunks without splitting all landed correctly.",
+      "status": "source_only"
+    },
+    "document_margin": 5.0,
+    "support_margin": 3.75
+  },
+  "fresh-06/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "7707ebe2196afce6e89ab3d2",
+      "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+      "speaker": "Phillip Wood",
+      "start": 519,
+      "end": 1223,
+      "quote": "This is also a necessary step to removing '--recount' and\n'--allow-overlap' from the invocation of 'git apply'. Before\n'--recount' can be removed the splitting and coalescing counting needs\nto be fixed to handle a missing newline at the end of a file. In order\nto remove '--allow-overlap' there needs to be i) some way of verifying\nthe offset data in the edited hunk (probably by correlating the\npreimage (or postimage if the patch is going to be applied in reverse)\nlines of the edited and unedited versions to see if they are offset or\nif any leading/trailing context lines have been removed) and ii) a way of\ndealing with edited hunks that change context lines that are shared\nwith neighbouring hunks.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "25557268d89b4f220780e0ad",
+      "location": "fixture://unseen/6",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 203,
+      "quote": "The new GUI edits hunks and applies them without splitting. All 50 trials applied at the correct offset. The optional edit-then-split path was disabled and accounted for no user traffic or test failures.",
+      "status": "source_only"
+    },
+    "document_margin": -2.0,
+    "support_margin": 3.25
+  },
+  "fresh-06/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "7707ebe2196afce6e89ab3d2",
+      "location": "https://github.com/git/git/commit/2b8ea7f3c7d8dfd4f1eddaef6688b51f8106767e",
+      "speaker": "Phillip Wood",
+      "start": 519,
+      "end": 1223,
+      "quote": "This is also a necessary step to removing '--recount' and\n'--allow-overlap' from the invocation of 'git apply'. Before\n'--recount' can be removed the splitting and coalescing counting needs\nto be fixed to handle a missing newline at the end of a file. In order\nto remove '--allow-overlap' there needs to be i) some way of verifying\nthe offset data in the edited hunk (probably by correlating the\npreimage (or postimage if the patch is going to be applied in reverse)\nlines of the edited and unedited versions to see if they are offset or\nif any leading/trailing context lines have been removed) and ii) a way of\ndealing with edited hunks that change context lines that are shared\nwith neighbouring hunks.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "25557268d89b4f220780e0ad",
+      "location": "fixture://unseen/6",
+      "speaker": "controlled team report",
+      "start": 0,
+      "end": 203,
+      "quote": "The new GUI edits hunks and applies them without splitting. All 50 trials applied at the correct offset. The optional edit-then-split path was disabled and accounted for no user traffic or test failures.",
+      "status": "source_only"
+    },
+    "document_margin": -2.0,
+    "support_margin": 3.25
+  },
+  "unseen-1p/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "66b9eaa487ec84a76c67bb85",
+        "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 323,
+        "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9bca990d88df82f00a92e7bb",
+        "location": "https://github.com/git/git/commit/3ff15040e22676db0b369efbd8b908b8fcc9b38d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 917,
+        "end": 1255,
+        "quote": "In just fixing the --identity command-line parsing bug I discovered\nthat a narrow fix to that wouldn't do. In read_config() we had a state\nmachine that would only set config values if they weren't set already,\nand thus by proxy we wouldn't e.g. set \"to\" based on sendemail.to if\nwe'd seen sendemail.gmail.to before, with --identity=gmail.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "66b9eaa487ec84a76c67bb85",
+        "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 323,
+        "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that setting configuration values in the order of hardcoded defaults, followed by reading configuration files, and finally command-line arguments would ensure that later settings override earlier ones. However, the new evidence shows that this is not sufficient because the current implementation uses a state machine that only updates configuration values if they are not already set, potentially leading to unintended behavior when command-line arguments override hardcoded defaults. This change applies as long as the state machine's behavior for updating configuration",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "66b9eaa487ec84a76c67bb85",
+      "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 59,
+      "end": 323,
+      "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "9bca990d88df82f00a92e7bb",
+      "location": "https://github.com/git/git/commit/3ff15040e22676db0b369efbd8b908b8fcc9b38d",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 917,
+      "end": 1255,
+      "quote": "In just fixing the --identity command-line parsing bug I discovered\nthat a narrow fix to that wouldn't do. In read_config() we had a state\nmachine that would only set config values if they weren't set already,\nand thus by proxy we wouldn't e.g. set \"to\" based on sendemail.to if\nwe'd seen sendemail.gmail.to before, with --identity=gmail.",
+      "status": "source_only"
+    },
+    "document_margin": 2.5,
+    "support_margin": 4.5
+  },
+  "unseen-1p/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "66b9eaa487ec84a76c67bb85",
+        "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 323,
+        "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "9bca990d88df82f00a92e7bb",
+        "location": "https://github.com/git/git/commit/3ff15040e22676db0b369efbd8b908b8fcc9b38d",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 917,
+        "end": 1255,
+        "quote": "In just fixing the --identity command-line parsing bug I discovered\nthat a narrow fix to that wouldn't do. In read_config() we had a state\nmachine that would only set config values if they weren't set already,\nand thus by proxy we wouldn't e.g. set \"to\" based on sendemail.to if\nwe'd seen sendemail.gmail.to before, with --identity=gmail.",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "66b9eaa487ec84a76c67bb85",
+        "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "start": 59,
+        "end": 323,
+        "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the assumption that setting configuration values in the order of hardcoded defaults, followed by reading configuration files, and finally command-line arguments would ensure that later settings override earlier ones. However, the new evidence shows that this is not sufficient because the current implementation uses a state machine that only updates configuration values if they are not already set, potentially leading to unintended behavior when command-line arguments override hardcoded defaults. This change applies as long as the state machine's behavior for updating configuration",
+      "reviewer": "Ævar Arnfjörð Bjarmason",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "66b9eaa487ec84a76c67bb85",
+      "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 59,
+      "end": 323,
+      "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "9bca990d88df82f00a92e7bb",
+      "location": "https://github.com/git/git/commit/3ff15040e22676db0b369efbd8b908b8fcc9b38d",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 917,
+      "end": 1255,
+      "quote": "In just fixing the --identity command-line parsing bug I discovered\nthat a narrow fix to that wouldn't do. In read_config() we had a state\nmachine that would only set config values if they weren't set already,\nand thus by proxy we wouldn't e.g. set \"to\" based on sendemail.to if\nwe'd seen sendemail.gmail.to before, with --identity=gmail.",
+      "status": "source_only"
+    },
+    "document_margin": 2.5,
+    "support_margin": 4.5
+  },
+  "unseen-1n/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "66b9eaa487ec84a76c67bb85",
+      "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 59,
+      "end": 323,
+      "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "afd54487ffcd85f069eb89c1",
+      "location": "https://github.com/git/git/commit/155067ab4f3ec8d7e38f7f86a3fcb446030afaac",
+      "speaker": "Vasyl Vavrychuk",
+      "start": 63,
+      "end": 242,
+      "quote": "Google may have changed Gmail security and now less secure app access\nneeds to be explicitly enabled if two-factor authentication is not in\nplace, otherwise send-email fails with:",
+      "status": "source_only"
+    },
+    "document_margin": -14.25,
+    "support_margin": -6.25
+  },
+  "unseen-1n/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "66b9eaa487ec84a76c67bb85",
+      "location": "https://github.com/git/git/commit/3494dfd3ee058bbeab6a462673d9184dcd694a8b",
+      "speaker": "Ævar Arnfjörð Bjarmason",
+      "start": 59,
+      "end": 323,
+      "quote": "Change the git-send-email command-line argument parsing and config\nreading code to parse those two in the right order. I.e. first we set\nour hardcoded defaults, then we read our config, and finally we read\nthe command-line, with later sets overriding earlier sets.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "afd54487ffcd85f069eb89c1",
+      "location": "https://github.com/git/git/commit/155067ab4f3ec8d7e38f7f86a3fcb446030afaac",
+      "speaker": "Vasyl Vavrychuk",
+      "start": 63,
+      "end": 242,
+      "quote": "Google may have changed Gmail security and now less secure app access\nneeds to be explicitly enabled if two-factor authentication is not in\nplace, otherwise send-email fails with:",
+      "status": "source_only"
+    },
+    "document_margin": -14.25,
+    "support_margin": -6.25
+  },
+  "unseen-2p/forward": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "0790b8790ead045b7d97d5ea",
+        "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+        "speaker": "Ben Peart",
+        "start": 51,
+        "end": 267,
+        "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0eb50c578a29e4b7fe4dd4de",
+        "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+        "speaker": "Ben Peart",
+        "start": 62,
+        "end": 429,
+        "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "0790b8790ead045b7d97d5ea",
+        "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+        "speaker": "Ben Peart",
+        "start": 51,
+        "end": 267,
+        "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the specific context of a \"checkout -b\" operation to determine whether to skip updates; the report introduces new evidence showing filesystem access during such operations, thus changing its applicability to include these cases in the initial checkout process, provided that alternative cheaper tests can still exit early.",
+      "reviewer": "Ben Peart",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "0790b8790ead045b7d97d5ea",
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "speaker": "Ben Peart",
+      "start": 51,
+      "end": 267,
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "0eb50c578a29e4b7fe4dd4de",
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "speaker": "Ben Peart",
+      "start": 62,
+      "end": 429,
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+      "status": "source_only"
+    },
+    "document_margin": 0.75,
+    "support_margin": 2.5
+  },
+  "unseen-2p/reverse": {
+    "result": {
+      "action": "reassess",
+      "previous": {
+        "source_id": "0790b8790ead045b7d97d5ea",
+        "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+        "speaker": "Ben Peart",
+        "start": 51,
+        "end": 267,
+        "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+        "status": "source_only"
+      },
+      "incoming": {
+        "source_id": "0eb50c578a29e4b7fe4dd4de",
+        "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+        "speaker": "Ben Peart",
+        "start": 62,
+        "end": 429,
+        "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+        "status": "source_only"
+      },
+      "prior_rationale": {
+        "source_id": "0790b8790ead045b7d97d5ea",
+        "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+        "speaker": "Ben Peart",
+        "start": 51,
+        "end": 267,
+        "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+        "status": "source_only"
+      },
+      "rationale": "The earlier decision relied on the specific context of a \"checkout -b\" operation to determine whether to skip updates; the report introduces new evidence showing filesystem access during such operations, thus changing its applicability to include these cases in the initial checkout process, provided that alternative cheaper tests can still exit early.",
+      "reviewer": "Ben Peart",
+      "next_step": "Reassess the earlier decision against the changed constraint before replacing it."
+    },
+    "chosen_old": {
+      "source_id": "0790b8790ead045b7d97d5ea",
+      "location": "https://github.com/git/git/commit/fa655d8411cc2d7ffcf898e53a1493c737d7de68",
+      "speaker": "Ben Peart",
+      "start": 51,
+      "end": 267,
+      "quote": "Skip merging the commit, updating the index and working directory if and\nonly if we are creating a new branch via \"git checkout -b <new_branch>.\"\nAny other checkout options will still go through the former code path.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "0eb50c578a29e4b7fe4dd4de",
+      "location": "https://github.com/git/git/commit/8424bfd45b291a56594f0289dc6af22e900a1d88",
+      "speaker": "Ben Peart",
+      "start": 62,
+      "end": 429,
+      "quote": "When doing a 'checkout -b' do a full checkout including updating the working\ntree when doing the initial checkout. As the new test involves an filesystem\naccess, do it later in the sequence to give chance to other cheaper tests to\nleave early. This fixes the regression in behavior caused by fa655d8411\n(checkout: optimize \"git checkout -b <new_branch>\", 2018-08-16).",
+      "status": "source_only"
+    },
+    "document_margin": 0.75,
+    "support_margin": 2.5
+  },
+  "unseen-2n/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "1e9df966b20925c5c7fb6012",
+      "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+      "speaker": "Phillip Wood",
+      "start": 50,
+      "end": 172,
+      "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "76fb811eaa4af5789132b7b2",
+      "location": "https://github.com/git/git/commit/07351d98992ba17ee9249b80f325f7f2c56a2251",
+      "speaker": "Eric Sunshine",
+      "start": 57,
+      "end": 240,
+      "quote": "`git checkout` learned -d as short option for --detach in 163e3b2975\n(switch: add short option for --detach, 2019-03-29) but the\ndocumentation was never updated to reflect the change.",
+      "status": "source_only"
+    },
+    "document_margin": -15.875,
+    "support_margin": -9.5
+  },
+  "unseen-2n/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "1e9df966b20925c5c7fb6012",
+      "location": "https://github.com/git/git/commit/3a8522f41ff45b16e06888d2b164252c9aeeaa03",
+      "speaker": "Phillip Wood",
+      "start": 50,
+      "end": 172,
+      "quote": "Now that add -p counts patches properly it should be possible to turn\noff the '--recount' option when invoking 'git apply'",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "76fb811eaa4af5789132b7b2",
+      "location": "https://github.com/git/git/commit/07351d98992ba17ee9249b80f325f7f2c56a2251",
+      "speaker": "Eric Sunshine",
+      "start": 57,
+      "end": 240,
+      "quote": "`git checkout` learned -d as short option for --detach in 163e3b2975\n(switch: add short option for --detach, 2019-03-29) but the\ndocumentation was never updated to reflect the change.",
+      "status": "source_only"
+    },
+    "document_margin": -15.875,
+    "support_margin": -9.5
+  },
+  "unseen-3p/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a5378477f9ed953e4ec4267e",
+      "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+      "speaker": "Matthew DeVore",
+      "start": 48,
+      "end": 306,
+      "quote": "Previously, we assumed only blob objects could be missing. This patch\nmakes rev-list handle missing trees like missing blobs. The --missing=*\nand --exclude-promisor-objects flags now work for trees as they already\ndo for blobs. This is demonstrated in t6112.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "9eae8e3e8db34330bc3ee8a7",
+      "location": "https://github.com/git/git/commit/f06ab027efd2cff4c4319354f1ad7d5f09e853a1",
+      "speaker": "Jeff King",
+      "start": 51,
+      "end": 245,
+      "quote": "This fixes a regression in 7c0fe330d5 (rev-list: handle missing tree\nobjects properly, 2018-10-05) where rev-list will now complain about the\nempty tree when it doesn't physically exist on disk.",
+      "status": "source_only"
+    },
+    "document_margin": -4.75,
+    "support_margin": 2.0
+  },
+  "unseen-3p/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a5378477f9ed953e4ec4267e",
+      "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+      "speaker": "Matthew DeVore",
+      "start": 48,
+      "end": 306,
+      "quote": "Previously, we assumed only blob objects could be missing. This patch\nmakes rev-list handle missing trees like missing blobs. The --missing=*\nand --exclude-promisor-objects flags now work for trees as they already\ndo for blobs. This is demonstrated in t6112.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "9eae8e3e8db34330bc3ee8a7",
+      "location": "https://github.com/git/git/commit/f06ab027efd2cff4c4319354f1ad7d5f09e853a1",
+      "speaker": "Jeff King",
+      "start": 51,
+      "end": 245,
+      "quote": "This fixes a regression in 7c0fe330d5 (rev-list: handle missing tree\nobjects properly, 2018-10-05) where rev-list will now complain about the\nempty tree when it doesn't physically exist on disk.",
+      "status": "source_only"
+    },
+    "document_margin": -4.75,
+    "support_margin": 2.0
+  },
+  "unseen-3n/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a5378477f9ed953e4ec4267e",
+      "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+      "speaker": "Matthew DeVore",
+      "start": 48,
+      "end": 306,
+      "quote": "Previously, we assumed only blob objects could be missing. This patch\nmakes rev-list handle missing trees like missing blobs. The --missing=*\nand --exclude-promisor-objects flags now work for trees as they already\ndo for blobs. This is demonstrated in t6112.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "d5aedefef55fc984c36cb74e",
+      "location": "https://github.com/git/git/commit/8560723266f2cb49faf42710c7c380af8d7c0ffd",
+      "speaker": "Philippe Blain",
+      "start": 223,
+      "end": 258,
+      "quote": "Use a litteral caret ('^') instead.",
+      "status": "source_only"
+    },
+    "document_margin": -17.875,
+    "support_margin": -11.75
+  },
+  "unseen-3n/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "a5378477f9ed953e4ec4267e",
+      "location": "https://github.com/git/git/commit/7c0fe330d5f3d2fc7aac57a19c7580ea2543c799",
+      "speaker": "Matthew DeVore",
+      "start": 48,
+      "end": 306,
+      "quote": "Previously, we assumed only blob objects could be missing. This patch\nmakes rev-list handle missing trees like missing blobs. The --missing=*\nand --exclude-promisor-objects flags now work for trees as they already\ndo for blobs. This is demonstrated in t6112.",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "d5aedefef55fc984c36cb74e",
+      "location": "https://github.com/git/git/commit/8560723266f2cb49faf42710c7c380af8d7c0ffd",
+      "speaker": "Philippe Blain",
+      "start": 223,
+      "end": 258,
+      "quote": "Use a litteral caret ('^') instead.",
+      "status": "source_only"
+    },
+    "document_margin": -17.875,
+    "support_margin": -11.75
+  },
+  "unseen-4p/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "b46715c62477968adfbeebaf",
+      "location": "https://github.com/git/git/commit/356ee4659bb551cd9464b317d691827276752c2d",
+      "speaker": "Phillip Wood",
+      "start": 538,
+      "end": 791,
+      "quote": "The code to create the commit is based on builtin/commit.c. It is\nsimplified as it doesn't have to deal with merges and modified so that\nit does not die but returns an error to make sure the sequencer exits\ncleanly, as it would when forking 'git commit'",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "cf1ded03e972e4bb5beffbe5",
+      "location": "https://github.com/git/git/commit/2d05ef2778b99e05e6a8a40c5b8d59a3c4ab1274",
+      "speaker": "Phillip Wood",
+      "start": 49,
+      "end": 333,
+      "quote": "This fixes a regression introduced in 356ee4659b (\"sequencer: try to\ncommit without forking 'git commit'\", 2017-11-24). When amending a\ncommit try_to_commit() was using the wrong parent when checking if the\ncommit would be empty. When amending we need to check against HEAD^ not\nHEAD.",
+      "status": "source_only"
+    },
+    "document_margin": -4.0,
+    "support_margin": -5.25
+  },
+  "unseen-4p/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "b46715c62477968adfbeebaf",
+      "location": "https://github.com/git/git/commit/356ee4659bb551cd9464b317d691827276752c2d",
+      "speaker": "Phillip Wood",
+      "start": 538,
+      "end": 791,
+      "quote": "The code to create the commit is based on builtin/commit.c. It is\nsimplified as it doesn't have to deal with merges and modified so that\nit does not die but returns an error to make sure the sequencer exits\ncleanly, as it would when forking 'git commit'",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "cf1ded03e972e4bb5beffbe5",
+      "location": "https://github.com/git/git/commit/2d05ef2778b99e05e6a8a40c5b8d59a3c4ab1274",
+      "speaker": "Phillip Wood",
+      "start": 49,
+      "end": 333,
+      "quote": "This fixes a regression introduced in 356ee4659b (\"sequencer: try to\ncommit without forking 'git commit'\", 2017-11-24). When amending a\ncommit try_to_commit() was using the wrong parent when checking if the\ncommit would be empty. When amending we need to check against HEAD^ not\nHEAD.",
+      "status": "source_only"
+    },
+    "document_margin": -4.0,
+    "support_margin": -5.25
+  },
+  "unseen-4n/forward": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "e0942f0a38baa550d72242b6",
+      "location": "https://github.com/git/git/commit/15ef69314d54945471603223bef00091673b5725",
+      "speaker": "Johannes Schindelin",
+      "start": 1135,
+      "end": 1230,
+      "quote": "For example, in this case we will want to fix the commit message, but\nnot open it in an editor:",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "c6b5f90954d706c1f9d5729f",
+      "location": "https://github.com/git/git/commit/3abd4a67d912e0c0980aa34def6ea55ebde84947",
+      "speaker": "Bradley M. Kuhn",
+      "start": 667,
+      "end": 1073,
+      "quote": "The original phrasing, in Commit 3f971fc425b (Documentation updates,\n2005-08-14), is \"Add Signed-off-by line\".  Commit 6f855371a53 (Add\n--signoff, --check, and long option-names. 2005-12-09) switched to\nusing \"Add `Signed-off-by:` line\", but didn't normalize the former\ncommit to match.  Later commits seem to have cut and pasted from one\nor the other, which is likely how the usage became so inconsistent.",
+      "status": "source_only"
+    },
+    "document_margin": -18.5,
+    "support_margin": -5.25
+  },
+  "unseen-4n/reverse": {
+    "result": {
+      "action": "keep",
+      "basis": "no candidate with both a supported change and two supporting passages"
+    },
+    "chosen_old": {
+      "source_id": "e0942f0a38baa550d72242b6",
+      "location": "https://github.com/git/git/commit/15ef69314d54945471603223bef00091673b5725",
+      "speaker": "Johannes Schindelin",
+      "start": 1135,
+      "end": 1230,
+      "quote": "For example, in this case we will want to fix the commit message, but\nnot open it in an editor:",
+      "status": "source_only"
+    },
+    "chosen_new": {
+      "source_id": "c6b5f90954d706c1f9d5729f",
+      "location": "https://github.com/git/git/commit/3abd4a67d912e0c0980aa34def6ea55ebde84947",
+      "speaker": "Bradley M. Kuhn",
+      "start": 667,
+      "end": 1073,
+      "quote": "The original phrasing, in Commit 3f971fc425b (Documentation updates,\n2005-08-14), is \"Add Signed-off-by line\".  Commit 6f855371a53 (Add\n--signoff, --check, and long option-names. 2005-12-09) switched to\nusing \"Add `Signed-off-by:` line\", but didn't normalize the former\ncommit to match.  Later commits seem to have cut and pasted from one\nor the other, which is likely how the usage became so inconsistent.",
+      "status": "source_only"
+    },
+    "document_margin": -18.5,
+    "support_margin": -5.25
+  }
+}

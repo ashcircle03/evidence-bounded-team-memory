@@ -1,0 +1,769 @@
+[
+  {
+    "id": "t00",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:20.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+          "text": "add--interactive: quote commentChar regex\n\nSince c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:\n\n  /^$commentChar/\n\nIf your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).\n\nWe can fix that by telling perl not to respect\nmetacharacters."
+        }
+      },
+      {
+        "owner": "Phillip Wood",
+        "observed_at": "2018-02-13T21:01:56.000000+00:00",
+        "source": {
+          "speaker": "Phillip Wood",
+          "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+          "text": "add -p: only bind search key if there's more than one hunk\n\nIf there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-04-01T04:54:28.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "text": "add -p: fix 2.17.0-rc* regression due to moved code\n\nFix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.\n\nIn Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.\n\nAs a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many\n\nI.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t01",
+    "prior": [
+      {
+        "owner": "Phillip Wood",
+        "observed_at": "2018-02-13T21:01:56.000000+00:00",
+        "source": {
+          "speaker": "Phillip Wood",
+          "location": "https://github.com/git/git/commit/88f6ffc1c256ef241cbed33dabbdd23c1a7ac6a9",
+          "text": "add -p: only bind search key if there's more than one hunk\n\nIf there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings."
+        }
+      },
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:20.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+          "text": "add--interactive: quote commentChar regex\n\nSince c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:\n\n  /^$commentChar/\n\nIf your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).\n\nWe can fix that by telling perl not to respect\nmetacharacters."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-04-01T04:54:28.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "text": "add -p: fix 2.17.0-rc* regression due to moved code\n\nFix a regression in [ref] (\"[referenced subject]\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.\n\nIn Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.\n\nAs a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many\n\nI.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+      }
+    }
+  },
+  {
+    "id": "t02",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:20.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+          "text": "add--interactive: quote commentChar regex\n\nSince c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:\n\n  /^$commentChar/\n\nIf your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).\n\nWe can fix that by telling perl not to respect\nmetacharacters."
+        }
+      },
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:09.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d5addcf522deb05d259ecbc0946584d977879565",
+          "text": "add--interactive: handle EOF in prompt_yesno\n\nThe prompt_yesno function loops indefinitely waiting for a\n\"y\" or \"n\" response. But it doesn't handle EOF, meaning\nthat we can end up in an infinite loop of reading EOF from\nstdin. One way to simulate that is with:\n\n  echo e | GIT_EDITOR='echo corrupt >' git add -p\n\nLet's break out of the loop and propagate the undef to the\ncaller. Without modifying the callers that effectively turns\nit into a \"no\" response. This is reasonable for both of the\ncurrent callers, and it leaves room for any future caller to\ncheck for undef explicitly."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-04-01T04:54:28.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "text": "add -p: fix 2.17.0-rc* regression due to moved code\n\nFix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.\n\nIn Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.\n\nAs a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many\n\nI.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t03",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:09.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d5addcf522deb05d259ecbc0946584d977879565",
+          "text": "add--interactive: handle EOF in prompt_yesno\n\nThe prompt_yesno function loops indefinitely waiting for a\n\"y\" or \"n\" response. But it doesn't handle EOF, meaning\nthat we can end up in an infinite loop of reading EOF from\nstdin. One way to simulate that is with:\n\n  echo e | GIT_EDITOR='echo corrupt >' git add -p\n\nLet's break out of the loop and propagate the undef to the\ncaller. Without modifying the callers that effectively turns\nit into a \"no\" response. This is reasonable for both of the\ncurrent callers, and it leaves room for any future caller to\ncheck for undef explicitly."
+        }
+      },
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:20.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+          "text": "add--interactive: quote commentChar regex\n\nSince c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:\n\n  /^$commentChar/\n\nIf your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).\n\nWe can fix that by telling perl not to respect\nmetacharacters."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-04-01T04:54:28.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "text": "add -p: fix 2.17.0-rc* regression due to moved code\n\nFix a regression in [ref] (\"[referenced subject]\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.\n\nIn Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.\n\nAs a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many\n\nI.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+      }
+    }
+  },
+  {
+    "id": "t04",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2017-06-21T21:06:20.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/d85d7ecb80ebc93f7380b4196c303756ee051668",
+          "text": "add--interactive: quote commentChar regex\n\nSince c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:\n\n  /^$commentChar/\n\nIf your chosen comment character is a regex metacharacter,\nthen that will behave in a confusing manner (\"$\", for\ninstance, would only eliminate blank lines, not actual\ncomment lines).\n\nWe can fix that by telling perl not to respect\nmetacharacters."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2018-04-01T04:54:28.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/fd2fb4aa0cc2a25a8e4ddf3f3c48880f317edcf4",
+        "text": "add -p: fix 2.17.0-rc* regression due to moved code\n\nFix a regression in 88f6ffc1c2 (\"add -p: only bind search key if\nthere's more than one hunk\", 2018-02-13) which is present in\n2.17.0-rc*, but not 2.16.0.\n\nIn Perl, regex variables like $1 always refer to the last regex\nmatch. When the aforementioned change added a new regex match between\nthe old match and the corresponding code that was expecting $1, the $1\nvariable would always be undef, since the newly inserted regex match\ndoesn't have any captures.\n\nAs a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many\n\nI.e. the initial \"/regex\" command wouldn't work, and would always emit\na warning and ask again for a regex, now it works as intended again."
+      }
+    }
+  },
+  {
+    "id": "t05",
+    "prior": [
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-02-28T21:35:56.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+          "text": "test-lib: add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS\n\nAdd \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":\n\n    $ ASAN_OPTIONS=detect_leaks=1 ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x488b94 in strdup (t/helper/test-tool+0x488b94)\n        #1 0x9444a4 in xstrdup wrapper.c:29:14\n        #2 0x5995fa in parse_date_format date.c:991:24\n        #3 0x4d2056 in show_dates t/helper/test-date.c:39:2\n        #4 0x4d174a in cmd__date t/helper/test-date.c:116:3\n        #5 0x4cce89 in cmd_main t/helper/test-tool.c:127:11\n        #6 0x4cd1e3 in main common-main.c:52:11\n        #7 0x7fef3c695e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #8 0x422b09 in _start (t/helper/test-tool+0x422b09)\n\n    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nWhereas LSAN would emit this instead:\n\n    $ ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f2be1d614aa in strdup string/strdup.c:42:15\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nNow we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:\n\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f012af5c4aa in strdup string/strdup.c:42:15\n        #2 0x5cb164 in xstrdup wrapper.c:29:14\n        #3 0x495ee9 in parse_date_format date.c:991:24\n        #4 0x453aac in show_dates t/helper/test-date.c:39:2\n        #5 0x453782 in cmd__date t/helper/test-date.c:116:3\n        #6 0x451d95 in cmd_main t/helper/test-tool.c:127:11\n        #7 0x451f1e in main common-main.c:52:11\n        #8 0x7f012aef5e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #9 0x42e0a9 in _start (t/helper/test-tool+0x42e0a9)\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nAs the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:\n\n    $ hyperfine -L v 0,1 'LSAN_OPTIONS=fast_unwind_on_malloc={v} make T=t0001-init.sh' -r 3\n    Benchmark 1: LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh\n      Time (mean ± σ):      2.135 s ±  0.015 s    [User: 1.951 s, System: 0.554 s]\n      Range (min … max):    2.122 s …  2.152 s    3 runs\n\n    Benchmark 2: LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh\n      Time (mean ± σ):      1.981 s ±  0.055 s    [User: 1.769 s, System: 0.488 s]\n      Range (min … max):    1.941 s …  2.044 s    3 runs\n\n    Summary\n      'LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh' ran\n        1.08 ± 0.03 times faster than 'LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh'\n\nI think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      },
+      {
+        "owner": "Elia Pinto",
+        "observed_at": "2022-03-04T19:58:30.000000+00:00",
+        "source": {
+          "speaker": "Elia Pinto",
+          "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+          "text": "test-lib.sh: Use GLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\n\nIn glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.\n\nUsing the ordinary glibc system variable detect if this is glibc >= 2.34 and\nuse GLIBC_TUNABLES and the new library.\n\nThis patch was inspired by a Richard W.M. Jones ndbkit patch"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Phillip Wood",
+      "observed_at": "2022-04-11T19:12:02.000000+00:00",
+      "source": {
+        "speaker": "Phillip Wood",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "text": "tests: make SANITIZE=address imply TEST_NO_MALLOC_CHECK\n\nAs the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.\n\nThis fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.\n\nwhen git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+      }
+    },
+    "check_order": true,
+    "qa": "Which SANITIZE setting makes the tests fail on glibc >= 2.34?"
+  },
+  {
+    "id": "t06",
+    "prior": [
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-02-28T21:35:56.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+          "text": "test-lib: add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS\n\nAdd \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":\n\n    $ ASAN_OPTIONS=detect_leaks=1 ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x488b94 in strdup (t/helper/test-tool+0x488b94)\n        #1 0x9444a4 in xstrdup wrapper.c:29:14\n        #2 0x5995fa in parse_date_format date.c:991:24\n        #3 0x4d2056 in show_dates t/helper/test-date.c:39:2\n        #4 0x4d174a in cmd__date t/helper/test-date.c:116:3\n        #5 0x4cce89 in cmd_main t/helper/test-tool.c:127:11\n        #6 0x4cd1e3 in main common-main.c:52:11\n        #7 0x7fef3c695e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #8 0x422b09 in _start (t/helper/test-tool+0x422b09)\n\n    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nWhereas LSAN would emit this instead:\n\n    $ ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f2be1d614aa in strdup string/strdup.c:42:15\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nNow we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:\n\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f012af5c4aa in strdup string/strdup.c:42:15\n        #2 0x5cb164 in xstrdup wrapper.c:29:14\n        #3 0x495ee9 in parse_date_format date.c:991:24\n        #4 0x453aac in show_dates t/helper/test-date.c:39:2\n        #5 0x453782 in cmd__date t/helper/test-date.c:116:3\n        #6 0x451d95 in cmd_main t/helper/test-tool.c:127:11\n        #7 0x451f1e in main common-main.c:52:11\n        #8 0x7f012aef5e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #9 0x42e0a9 in _start (t/helper/test-tool+0x42e0a9)\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nAs the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:\n\n    $ hyperfine -L v 0,1 'LSAN_OPTIONS=fast_unwind_on_malloc={v} make T=t0001-init.sh' -r 3\n    Benchmark 1: LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh\n      Time (mean ± σ):      2.135 s ±  0.015 s    [User: 1.951 s, System: 0.554 s]\n      Range (min … max):    2.122 s …  2.152 s    3 runs\n\n    Benchmark 2: LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh\n      Time (mean ± σ):      1.981 s ±  0.055 s    [User: 1.769 s, System: 0.488 s]\n      Range (min … max):    1.941 s …  2.044 s    3 runs\n\n    Summary\n      'LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh' ran\n        1.08 ± 0.03 times faster than 'LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh'\n\nI think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      },
+      {
+        "owner": "Elia Pinto",
+        "observed_at": "2022-03-04T19:58:30.000000+00:00",
+        "source": {
+          "speaker": "Elia Pinto",
+          "location": "https://github.com/git/git/commit/131b94a10a77e40eb3b3ba276d07fb663e220cd1",
+          "text": "test-lib.sh: Use GLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\n\nIn glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.\n\nUsing the ordinary glibc system variable detect if this is glibc >= 2.34 and\nuse GLIBC_TUNABLES and the new library.\n\nThis patch was inspired by a Richard W.M. Jones ndbkit patch"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Phillip Wood",
+      "observed_at": "2022-04-11T19:12:02.000000+00:00",
+      "source": {
+        "speaker": "Phillip Wood",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "text": "tests: make SANITIZE=address imply TEST_NO_MALLOC_CHECK\n\nAs the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.\n\nThis fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.\n\nwhen git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+      }
+    }
+  },
+  {
+    "id": "t07",
+    "prior": [
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-02-28T21:35:56.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+          "text": "test-lib: add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS\n\nAdd \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":\n\n    $ ASAN_OPTIONS=detect_leaks=1 ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x488b94 in strdup (t/helper/test-tool+0x488b94)\n        #1 0x9444a4 in xstrdup wrapper.c:29:14\n        #2 0x5995fa in parse_date_format date.c:991:24\n        #3 0x4d2056 in show_dates t/helper/test-date.c:39:2\n        #4 0x4d174a in cmd__date t/helper/test-date.c:116:3\n        #5 0x4cce89 in cmd_main t/helper/test-tool.c:127:11\n        #6 0x4cd1e3 in main common-main.c:52:11\n        #7 0x7fef3c695e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #8 0x422b09 in _start (t/helper/test-tool+0x422b09)\n\n    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nWhereas LSAN would emit this instead:\n\n    $ ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f2be1d614aa in strdup string/strdup.c:42:15\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nNow we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:\n\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f012af5c4aa in strdup string/strdup.c:42:15\n        #2 0x5cb164 in xstrdup wrapper.c:29:14\n        #3 0x495ee9 in parse_date_format date.c:991:24\n        #4 0x453aac in show_dates t/helper/test-date.c:39:2\n        #5 0x453782 in cmd__date t/helper/test-date.c:116:3\n        #6 0x451d95 in cmd_main t/helper/test-tool.c:127:11\n        #7 0x451f1e in main common-main.c:52:11\n        #8 0x7f012aef5e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #9 0x42e0a9 in _start (t/helper/test-tool+0x42e0a9)\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nAs the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:\n\n    $ hyperfine -L v 0,1 'LSAN_OPTIONS=fast_unwind_on_malloc={v} make T=t0001-init.sh' -r 3\n    Benchmark 1: LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh\n      Time (mean ± σ):      2.135 s ±  0.015 s    [User: 1.951 s, System: 0.554 s]\n      Range (min … max):    2.122 s …  2.152 s    3 runs\n\n    Benchmark 2: LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh\n      Time (mean ± σ):      1.981 s ±  0.055 s    [User: 1.769 s, System: 0.488 s]\n      Range (min … max):    1.941 s …  2.044 s    3 runs\n\n    Summary\n      'LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh' ran\n        1.08 ± 0.03 times faster than 'LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh'\n\nI think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      },
+      {
+        "owner": "Fabian Stelzer",
+        "observed_at": "2021-11-21T07:24:11.000000+00:00",
+        "source": {
+          "speaker": "Fabian Stelzer",
+          "location": "https://github.com/git/git/commit/49da4040701f6d3dd480c6d007109c9a2fc2cb7a",
+          "text": "test-lib: show missing prereq summary\n\nWhen running the full test suite many tests can be skipped because of\nmissing prerequisites. It not easy right now to get an overview of which\nones are missing.\nWhen switching to a new machine or environment some libraries and tools\nmight be missing or maybe a dependency broke completely. In this case\nthe tests would indicate nothing since all dependant tests are simply\nskipped. This could hide broken behaviour or missing features in the\nbuild. Therefore this patch summarizes the missing prereqs at the end of\nthe test run making it easier to spot such cases.\n\n - Add failed prereqs to the test results.\n - Aggregate and then show them with the totals."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Phillip Wood",
+      "observed_at": "2022-04-11T19:12:02.000000+00:00",
+      "source": {
+        "speaker": "Phillip Wood",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "text": "tests: make SANITIZE=address imply TEST_NO_MALLOC_CHECK\n\nAs the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.\n\nThis fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.\n\nwhen git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t08",
+    "prior": [
+      {
+        "owner": "Fabian Stelzer",
+        "observed_at": "2021-11-21T07:24:11.000000+00:00",
+        "source": {
+          "speaker": "Fabian Stelzer",
+          "location": "https://github.com/git/git/commit/49da4040701f6d3dd480c6d007109c9a2fc2cb7a",
+          "text": "test-lib: show missing prereq summary\n\nWhen running the full test suite many tests can be skipped because of\nmissing prerequisites. It not easy right now to get an overview of which\nones are missing.\nWhen switching to a new machine or environment some libraries and tools\nmight be missing or maybe a dependency broke completely. In this case\nthe tests would indicate nothing since all dependant tests are simply\nskipped. This could hide broken behaviour or missing features in the\nbuild. Therefore this patch summarizes the missing prereqs at the end of\nthe test run making it easier to spot such cases.\n\n - Add failed prereqs to the test results.\n - Aggregate and then show them with the totals."
+        }
+      },
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-02-28T21:35:56.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+          "text": "test-lib: add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS\n\nAdd \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":\n\n    $ ASAN_OPTIONS=detect_leaks=1 ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x488b94 in strdup (t/helper/test-tool+0x488b94)\n        #1 0x9444a4 in xstrdup wrapper.c:29:14\n        #2 0x5995fa in parse_date_format date.c:991:24\n        #3 0x4d2056 in show_dates t/helper/test-date.c:39:2\n        #4 0x4d174a in cmd__date t/helper/test-date.c:116:3\n        #5 0x4cce89 in cmd_main t/helper/test-tool.c:127:11\n        #6 0x4cd1e3 in main common-main.c:52:11\n        #7 0x7fef3c695e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #8 0x422b09 in _start (t/helper/test-tool+0x422b09)\n\n    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nWhereas LSAN would emit this instead:\n\n    $ ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f2be1d614aa in strdup string/strdup.c:42:15\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nNow we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:\n\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f012af5c4aa in strdup string/strdup.c:42:15\n        #2 0x5cb164 in xstrdup wrapper.c:29:14\n        #3 0x495ee9 in parse_date_format date.c:991:24\n        #4 0x453aac in show_dates t/helper/test-date.c:39:2\n        #5 0x453782 in cmd__date t/helper/test-date.c:116:3\n        #6 0x451d95 in cmd_main t/helper/test-tool.c:127:11\n        #7 0x451f1e in main common-main.c:52:11\n        #8 0x7f012aef5e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #9 0x42e0a9 in _start (t/helper/test-tool+0x42e0a9)\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nAs the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:\n\n    $ hyperfine -L v 0,1 'LSAN_OPTIONS=fast_unwind_on_malloc={v} make T=t0001-init.sh' -r 3\n    Benchmark 1: LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh\n      Time (mean ± σ):      2.135 s ±  0.015 s    [User: 1.951 s, System: 0.554 s]\n      Range (min … max):    2.122 s …  2.152 s    3 runs\n\n    Benchmark 2: LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh\n      Time (mean ± σ):      1.981 s ±  0.055 s    [User: 1.769 s, System: 0.488 s]\n      Range (min … max):    1.941 s …  2.044 s    3 runs\n\n    Summary\n      'LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh' ran\n        1.08 ± 0.03 times faster than 'LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh'\n\nI think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Phillip Wood",
+      "observed_at": "2022-04-11T19:12:02.000000+00:00",
+      "source": {
+        "speaker": "Phillip Wood",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "text": "tests: make SANITIZE=address imply TEST_NO_MALLOC_CHECK\n\nAs the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.\n\nThis fixes a regression introduced by [ref] (\"[referenced subject]\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.\n\nwhen git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+      }
+    }
+  },
+  {
+    "id": "t09",
+    "prior": [
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-02-28T21:35:56.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/71f26798f24b69b5c7dc29fd169ebcc2a730b5e5",
+          "text": "test-lib: add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS\n\nAdd \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":\n\n    $ ASAN_OPTIONS=detect_leaks=1 ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x488b94 in strdup (t/helper/test-tool+0x488b94)\n        #1 0x9444a4 in xstrdup wrapper.c:29:14\n        #2 0x5995fa in parse_date_format date.c:991:24\n        #3 0x4d2056 in show_dates t/helper/test-date.c:39:2\n        #4 0x4d174a in cmd__date t/helper/test-date.c:116:3\n        #5 0x4cce89 in cmd_main t/helper/test-tool.c:127:11\n        #6 0x4cd1e3 in main common-main.c:52:11\n        #7 0x7fef3c695e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #8 0x422b09 in _start (t/helper/test-tool+0x422b09)\n\n    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nWhereas LSAN would emit this instead:\n\n    $ ./t0006-date.sh -vixd\n    [...]\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f2be1d614aa in strdup string/strdup.c:42:15\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nNow we'll instead git this sensible stack trace under\nLSAN. I.e. almost the same one (but starting with \"malloc\", as is\nusual for LSAN) as under ASAN:\n\n    Direct leak of 3 byte(s) in 1 object(s) allocated from:\n        #0 0x4323b8 in malloc (t/helper/test-tool+0x4323b8)\n        #1 0x7f012af5c4aa in strdup string/strdup.c:42:15\n        #2 0x5cb164 in xstrdup wrapper.c:29:14\n        #3 0x495ee9 in parse_date_format date.c:991:24\n        #4 0x453aac in show_dates t/helper/test-date.c:39:2\n        #5 0x453782 in cmd__date t/helper/test-date.c:116:3\n        #6 0x451d95 in cmd_main t/helper/test-tool.c:127:11\n        #7 0x451f1e in main common-main.c:52:11\n        #8 0x7f012aef5e49 in __libc_start_main csu/../csu/libc-start.c:314:16\n        #9 0x42e0a9 in _start (t/helper/test-tool+0x42e0a9)\n\n    SUMMARY: LeakSanitizer: 3 byte(s) leaked in 1 allocation(s).\n    Aborted\n\nAs the option name suggests this does make things slower, e.g. for\nt0001-init.sh we're around 10% slower:\n\n    $ hyperfine -L v 0,1 'LSAN_OPTIONS=fast_unwind_on_malloc={v} make T=t0001-init.sh' -r 3\n    Benchmark 1: LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh\n      Time (mean ± σ):      2.135 s ±  0.015 s    [User: 1.951 s, System: 0.554 s]\n      Range (min … max):    2.122 s …  2.152 s    3 runs\n\n    Benchmark 2: LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh\n      Time (mean ± σ):      1.981 s ±  0.055 s    [User: 1.769 s, System: 0.488 s]\n      Range (min … max):    1.941 s …  2.044 s    3 runs\n\n    Summary\n      'LSAN_OPTIONS=fast_unwind_on_malloc=1 make T=t0001-init.sh' ran\n        1.08 ± 0.03 times faster than 'LSAN_OPTIONS=fast_unwind_on_malloc=0 make T=t0001-init.sh'\n\nI think that's more than worth it to get the more meaningful stack\ntraces, we can always provide LSAN_OPTIONS=fast_unwind_on_malloc=0 for\none-off \"fast\" runs."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Phillip Wood",
+      "observed_at": "2022-04-11T19:12:02.000000+00:00",
+      "source": {
+        "speaker": "Phillip Wood",
+        "location": "https://github.com/git/git/commit/067109a5e7db3fdffc25240bfc3b350962cd6bd6",
+        "text": "tests: make SANITIZE=address imply TEST_NO_MALLOC_CHECK\n\nAs the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.\n\nThis fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.\n\nwhen git is compiled with SANITIZE=address on systems with glibc >=\n2.34. I have tested SANITIZE=leak and SANITIZE=undefined and they do\nnot suffer from this regression so the fix in this patch should be\nsufficient."
+      }
+    }
+  },
+  {
+    "id": "t10",
+    "prior": [
+      {
+        "owner": "Robert Foss",
+        "observed_at": "2021-03-23T22:02:52.000000+00:00",
+        "source": {
+          "speaker": "Robert Foss",
+          "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+          "text": "git-send-email: Respect core.hooksPath setting\n\nget-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.\n\nSince the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.\n\nInstead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      },
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2021-05-28T09:38:07.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+          "text": "send-email: move trivial config handling to Perl\n\nOptimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.\n\nFor boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it.\n\nThe \"grep { defined } @values\" here covers a rather subtle case. For\nlist values such as sendemail.to it is possible as with any other\nconfig key to provide a plain \"-c sendemail.to\", i.e. to set the key\nas a boolean true. In that case the Git::config() API will return an\nempty string, but this new parser will correctly return \"undef\".\n\nHowever, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.\n\nThis brings the runtime of \"git send-email\" from ~60-~70ms to a very\nsteady ~40ms on my test box. We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config. I happen to have 8 of those set.\n\nThis brings the runtime of t9001-send-email.sh from ~13s down to ~12s\nfor me. The change there is less impressive as many of those tests set\nvarious config values, and we're also getting to the point of\ndiminishing returns for optimizing \"git send-email\" itself."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-07T20:18:55.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "text": "send-email: fix a \"first config key wins\" regression in v2.33.0\n\nFix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".\n\nThis broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.\n\nThe full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:\n\n    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd\n\nI.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.\n\nTo test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.\n\nThe \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.\n\nThe populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in 1ff750b128e (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+      }
+    },
+    "check_order": true,
+    "qa": "Which configuration file incorrectly won over .git/config in this regression?"
+  },
+  {
+    "id": "t11",
+    "prior": [
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2021-05-28T09:38:07.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/c95e3a3f0b8107b5dc7eac9dfdb9e5238280c9fb",
+          "text": "send-email: move trivial config handling to Perl\n\nOptimize the startup time of git-send-email by using an amended\nconfig_regexp() function to retrieve the list of config keys and\nvalues we're interested in.\n\nFor boolean keys we can handle the [true|false] case ourselves, and\nthe \"--get\" case didn't need any parsing. Let's leave \"--path\" and\nother \"--bool\" cases to \"git config\". I'm not bothering with the\n\"undef\" or \"\" case (true and false, respectively), let's just punt on\nthose and others and have \"git config --type=bool\" handle it.\n\nThe \"grep { defined } @values\" here covers a rather subtle case. For\nlist values such as sendemail.to it is possible as with any other\nconfig key to provide a plain \"-c sendemail.to\", i.e. to set the key\nas a boolean true. In that case the Git::config() API will return an\nempty string, but this new parser will correctly return \"undef\".\n\nHowever, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.\n\nThis brings the runtime of \"git send-email\" from ~60-~70ms to a very\nsteady ~40ms on my test box. We now run just one \"git config\"\ninvocation on startup instead of 8, the exact number will differ based\non the local sendemail.* config. I happen to have 8 of those set.\n\nThis brings the runtime of t9001-send-email.sh from ~13s down to ~12s\nfor me. The change there is less impressive as many of those tests set\nvarious config values, and we're also getting to the point of\ndiminishing returns for optimizing \"git send-email\" itself."
+        }
+      },
+      {
+        "owner": "Robert Foss",
+        "observed_at": "2021-03-23T22:02:52.000000+00:00",
+        "source": {
+          "speaker": "Robert Foss",
+          "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+          "text": "git-send-email: Respect core.hooksPath setting\n\nget-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.\n\nSince the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.\n\nInstead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-07T20:18:55.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "text": "send-email: fix a \"first config key wins\" regression in v2.33.0\n\nFix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".\n\nThis broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.\n\nThe full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:\n\n    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd\n\nI.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.\n\nTo test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.\n\nThe \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.\n\nThe populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in [ref] (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+      }
+    }
+  },
+  {
+    "id": "t12",
+    "prior": [
+      {
+        "owner": "Drew DeVault",
+        "observed_at": "2020-07-24T01:00:34.000000+00:00",
+        "source": {
+          "speaker": "Drew DeVault",
+          "location": "https://github.com/git/git/commit/dd84e528a34c3822e7ab0473a95e411665b37681",
+          "text": "git-send-email: die if sendmail.* config is set\n\nI've seen several people mis-configure git send-email on their first\nattempt because they set the sendmail.* config options - not\nsendemail.*. This patch detects this mistake and bails out with a\nfriendly warning."
+        }
+      },
+      {
+        "owner": "Robert Foss",
+        "observed_at": "2021-03-23T22:02:52.000000+00:00",
+        "source": {
+          "speaker": "Robert Foss",
+          "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+          "text": "git-send-email: Respect core.hooksPath setting\n\nget-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.\n\nSince the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.\n\nInstead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-07T20:18:55.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "text": "send-email: fix a \"first config key wins\" regression in v2.33.0\n\nFix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".\n\nThis broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.\n\nThe full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:\n\n    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd\n\nI.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.\n\nTo test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.\n\nThe \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.\n\nThe populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in 1ff750b128e (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t13",
+    "prior": [
+      {
+        "owner": "Robert Foss",
+        "observed_at": "2021-03-23T22:02:52.000000+00:00",
+        "source": {
+          "speaker": "Robert Foss",
+          "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+          "text": "git-send-email: Respect core.hooksPath setting\n\nget-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.\n\nSince the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.\n\nInstead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      },
+      {
+        "owner": "Drew DeVault",
+        "observed_at": "2020-07-24T01:00:34.000000+00:00",
+        "source": {
+          "speaker": "Drew DeVault",
+          "location": "https://github.com/git/git/commit/dd84e528a34c3822e7ab0473a95e411665b37681",
+          "text": "git-send-email: die if sendmail.* config is set\n\nI've seen several people mis-configure git send-email on their first\nattempt because they set the sendmail.* config options - not\nsendemail.*. This patch detects this mistake and bails out with a\nfriendly warning."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-07T20:18:55.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "text": "send-email: fix a \"first config key wins\" regression in v2.33.0\n\nFix a regression in my [ref] ([referenced subject], 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".\n\nThis broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.\n\nThe full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:\n\n    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd\n\nI.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.\n\nTo test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.\n\nThe \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.\n\nThe populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in [ref] (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+      }
+    }
+  },
+  {
+    "id": "t14",
+    "prior": [
+      {
+        "owner": "Robert Foss",
+        "observed_at": "2021-03-23T22:02:52.000000+00:00",
+        "source": {
+          "speaker": "Robert Foss",
+          "location": "https://github.com/git/git/commit/c8243933c74e0bebcc617f750ae3990ecca47759",
+          "text": "git-send-email: Respect core.hooksPath setting\n\nget-send-email currently makes the assumption that the\n'sendemail-validate' hook exists inside of the repository.\n\nSince the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true.\n\nInstead of assuming a hardcoded repo relative path, query\ngit for the actual path of the hooks directory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-09-07T20:18:55.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/b996f84989f78c8f6d2429b5f0b9785e13f7af23",
+        "text": "send-email: fix a \"first config key wins\" regression in v2.33.0\n\nFix a regression in my c95e3a3f0b8 (send-email: move trivial config\nhandling to Perl, 2021-05-28) where we'd pick the first config key out\nof multiple defined ones, instead of using the normal \"last key wins\"\nsemantics of \"git config --get\".\n\nThis broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.\n\nThe full list of impacted config keys (the %config_settings values\nwhich are references to scalars, not arrays) is:\n\n    sendemail.smtpencryption\n    sendemail.smtpserver\n    sendemail.smtpserverport\n    sendemail.smtpuser\n    sendemail.smtppass\n    sendemail.smtpdomain\n    sendemail.smtpauth\n    sendemail.smtpbatchsize\n    sendemail.smtprelogindelay\n    sendemail.tocmd\n    sendemail.cccmd\n    sendemail.aliasfiletype\n    sendemail.envelopesender\n    sendemail.confirm\n    sendemail.from\n    sendemail.assume8bitencoding\n    sendemail.composeencoding\n    sendemail.transferencoding\n    sendemail.sendmailcmd\n\nI.e. having any of these set in say ~/.gitconfig and in-repo\n.git/config regressed in v2.33.0 to prefer the --global one over the\n--local.\n\nTo test this add a test of config priority to one of these config\nvariables, most don't have tests at all, but there was an existing one\nfor sendemail.8bitEncoding.\n\nThe \"git config\" (instead of \"test_config\") is somewhat of an\nanti-pattern, but follows established conventions in\nt9001-send-email.sh, likewise with any other pattern or idiom in this\ntest.\n\nThe populating of home/.gitconfig and setting of HOME= is copied from\na test in t0017-env-helper.sh added in 1ff750b128e (tests: make\nGIT_TEST_GETTEXT_POISON a boolean, 2019-06-21). This test fails\nwithout this bugfix, but now it works."
+      }
+    }
+  },
+  {
+    "id": "t15",
+    "prior": [
+      {
+        "owner": "David Turner",
+        "observed_at": "2014-07-14T19:34:51.000000+00:00",
+        "source": {
+          "speaker": "David Turner",
+          "location": "https://github.com/git/git/commit/9c4d6c0297b7d6167bf330853139b0515b351b89",
+          "text": "cache-tree: Write updated cache-tree after commit\n\nDuring the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands.\n\nAdd test code which demonstrates that git commit now writes the cache\ntree.  Make all tests test the entire cache-tree, not just the root\nlevel."
+        }
+      },
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:26.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+          "text": "cache_tree_find(): use path variable when passing over slashes\n\nThe search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-10-12T18:16:59.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "text": "commit: fix duplication regression in permission error output\n\nFix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.\n\nBut with 9c4d6c0297b the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-9c4d6c0297b the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.\n\nSo let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t16",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:26.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+          "text": "cache_tree_find(): use path variable when passing over slashes\n\nThe search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      },
+      {
+        "owner": "David Turner",
+        "observed_at": "2014-07-14T19:34:51.000000+00:00",
+        "source": {
+          "speaker": "David Turner",
+          "location": "https://github.com/git/git/commit/9c4d6c0297b7d6167bf330853139b0515b351b89",
+          "text": "cache-tree: Write updated cache-tree after commit\n\nDuring the commit process, update the cache-tree. Write this updated\ncache-tree so that it's ready for subsequent commands.\n\nAdd test code which demonstrates that git commit now writes the cache\ntree.  Make all tests test the entire cache-tree, not just the root\nlevel."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-10-12T18:16:59.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "text": "commit: fix duplication regression in permission error output\n\nFix a regression in the error output emitted when .git/objects can't\nbe written to. Before [ref] ([referenced subject], 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.\n\nBut with [ref] the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-[ref] the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.\n\nSo let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+      }
+    }
+  },
+  {
+    "id": "t17",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:26.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+          "text": "cache_tree_find(): use path variable when passing over slashes\n\nThe search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      },
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:05.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/8b7e5f79723b0f2e1d3dca4e959ad2a2041e9453",
+          "text": "cache_tree_find(): remove early return\n\nThere is no need for an early\n\n    return it;\n\nfrom the loop if slash points at the end of the string, because that\nis exactly what will happen when the while condition fails at the\nstart of the next iteration."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-10-12T18:16:59.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "text": "commit: fix duplication regression in permission error output\n\nFix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.\n\nBut with 9c4d6c0297b the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-9c4d6c0297b the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.\n\nSo let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t18",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:05.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/8b7e5f79723b0f2e1d3dca4e959ad2a2041e9453",
+          "text": "cache_tree_find(): remove early return\n\nThere is no need for an early\n\n    return it;\n\nfrom the loop if slash points at the end of the string, because that\nis exactly what will happen when the while condition fails at the\nstart of the next iteration."
+        }
+      },
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:26.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+          "text": "cache_tree_find(): use path variable when passing over slashes\n\nThe search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-10-12T18:16:59.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "text": "commit: fix duplication regression in permission error output\n\nFix a regression in the error output emitted when .git/objects can't\nbe written to. Before [ref] ([referenced subject], 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.\n\nBut with [ref] the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-[ref] the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.\n\nSo let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+      }
+    }
+  },
+  {
+    "id": "t19",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2014-03-05T20:34:26.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3491047e14532f4c01e3459d59d914d9598721c5",
+          "text": "cache_tree_find(): use path variable when passing over slashes\n\nThe search for the end of the slashes is part of the update of the\npath variable for the next iteration as opposed to an update of the\nslash variable.  So iterate using path rather than slash."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2021-10-12T18:16:59.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/4ef91a2d795c424eda2bec1bfbbd0c813bcc978a",
+        "text": "commit: fix duplication regression in permission error output\n\nFix a regression in the error output emitted when .git/objects can't\nbe written to. Before 9c4d6c0297b (cache-tree: Write updated\ncache-tree after commit, 2014-07-13) we'd emit only one \"insufficient\npermission\" error, now we'll do so again.\n\nThe cause is rather straightforward, we've got WRITE_TREE_SILENT for\nthe use-case of wanting to prepare an index silently, quieting any\npermission etc. error output. Then when we attempt to update to\nthat (possibly broken) index we'll run into the same errors again.\n\nBut with 9c4d6c0297b the gap between the cache-tree API and the object\nstore wasn't closed in terms of asking write_object_file() to be\nsilent. I.e. post-9c4d6c0297b the first call is to prepare_index(),\nand after that we'll call prepare_to_commit(). We only want verbose\nerror output from the latter.\n\nSo let's add and use that facility with a corresponding HASH_SILENT\nflag, its only user is cache-tree.c's update_one(), which will set it\nif its \"WRITE_TREE_SILENT\" flag is set."
+      }
+    }
+  },
+  {
+    "id": "t20",
+    "prior": [
+      {
+        "owner": "Marc Branchaud",
+        "observed_at": "2017-06-21T20:53:37.000000+00:00",
+        "source": {
+          "speaker": "Marc Branchaud",
+          "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+          "text": "auto-correct: tweak phrasing\n\nWhen help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n   in 1.5 seconds automatically...\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n\nThe continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      },
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-05-21T04:23:14.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/1b81d8cb19d8da6d865b7fca5a095dd5fec8d209",
+          "text": "help: use command-list.txt for the source of guides\n\nThe help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-02-23T21:41:37.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "text": "help: don't print \"\\n\" before single-section output\n\nFix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.\n\nThis changes the output from:\n\n    $ git help --guides\n\n    The Git concept guides are:\n    [...]\n\nTo:\n\n    $ git help --guides\n    The Git concept guides are:\n    [...]\n\nThat we started printing an extra \"\\n\" in 1b81d8cb19d wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.\n\nWith 1b81d8cb19d we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in cfb22a02ab5 (help:\nuse command-list.h for common command list, 2018-05-10).\n\nFixing this formatting nit is easy enough. Let's have all of the\noutput that would like to be \"\\n\"-separated from other lines emit its\nown \"\\n\". We then adjust \"print_cmd_by_category()\" to only print a\n\"\\n\" to delimit the sections it's printing out."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t21",
+    "prior": [
+      {
+        "owner": "Marc Branchaud",
+        "observed_at": "2017-06-21T20:53:37.000000+00:00",
+        "source": {
+          "speaker": "Marc Branchaud",
+          "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+          "text": "auto-correct: tweak phrasing\n\nWhen help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n   in 1.5 seconds automatically...\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n\nThe continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      },
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2018-05-21T04:23:14.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/1b81d8cb19d8da6d865b7fca5a095dd5fec8d209",
+          "text": "help: use command-list.txt for the source of guides\n\nThe help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-02-23T21:41:37.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "text": "help: don't print \"\\n\" before single-section output\n\nFix a formatting regression in [ref] ([referenced subject], 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.\n\nThis changes the output from:\n\n    $ git help --guides\n\n    The Git concept guides are:\n    [...]\n\nTo:\n\n    $ git help --guides\n    The Git concept guides are:\n    [...]\n\nThat we started printing an extra \"\\n\" in [ref] wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.\n\nWith [ref] we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in [ref] (help:\nuse command-list.h for common command list, 2018-05-10).\n\nFixing this formatting nit is easy enough. Let's have all of the\noutput that would like to be \"\\n\"-separated from other lines emit its\nown \"\\n\". We then adjust \"print_cmd_by_category()\" to only print a\n\"\\n\" to delimit the sections it's printing out."
+      }
+    }
+  },
+  {
+    "id": "t22",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-06-15T19:31:43.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/659fef199fb52d4a5cb24f1dfd2b272980fc5038",
+          "text": "help: use early config when autocorrecting aliases\n\nGit has this feature which suggests similar commands (including aliases)\nin case the user specified an unknown command.\n\nThis feature currently relies on a side effect of the way we expand\naliases right now: when a command is not a builtin, we use the regular\nconfig machinery (meaning: discovering the .git/ directory and\ninitializing global state such as the config cache) to see whether the\ncommand refers to an alias.\n\nHowever, we will change the way aliases are expanded in the next\ncommits, to use the early config instead. That means that the\nautocorrect feature can no longer discover the available aliases by\nlooking at the config cache (because it has not yet been initialized).\n\nSo let's just use the early config machinery instead.\n\nThis is slightly less performant than the previous way, as the early\nconfig is used *twice*: once to see whether the command refers to an\nalias, and then to see what aliases are most similar. However, this is\nhardly a performance-critical code path, so performance is less important\nhere."
+        }
+      },
+      {
+        "owner": "Marc Branchaud",
+        "observed_at": "2017-06-21T20:53:37.000000+00:00",
+        "source": {
+          "speaker": "Marc Branchaud",
+          "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+          "text": "auto-correct: tweak phrasing\n\nWhen help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n   in 1.5 seconds automatically...\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n\nThe continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-02-23T21:41:37.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "text": "help: don't print \"\\n\" before single-section output\n\nFix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.\n\nThis changes the output from:\n\n    $ git help --guides\n\n    The Git concept guides are:\n    [...]\n\nTo:\n\n    $ git help --guides\n    The Git concept guides are:\n    [...]\n\nThat we started printing an extra \"\\n\" in 1b81d8cb19d wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.\n\nWith 1b81d8cb19d we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in cfb22a02ab5 (help:\nuse command-list.h for common command list, 2018-05-10).\n\nFixing this formatting nit is easy enough. Let's have all of the\noutput that would like to be \"\\n\"-separated from other lines emit its\nown \"\\n\". We then adjust \"print_cmd_by_category()\" to only print a\n\"\\n\" to delimit the sections it's printing out."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t23",
+    "prior": [
+      {
+        "owner": "Johannes Schindelin",
+        "observed_at": "2017-06-15T19:31:43.000000+00:00",
+        "source": {
+          "speaker": "Johannes Schindelin",
+          "location": "https://github.com/git/git/commit/659fef199fb52d4a5cb24f1dfd2b272980fc5038",
+          "text": "help: use early config when autocorrecting aliases\n\nGit has this feature which suggests similar commands (including aliases)\nin case the user specified an unknown command.\n\nThis feature currently relies on a side effect of the way we expand\naliases right now: when a command is not a builtin, we use the regular\nconfig machinery (meaning: discovering the .git/ directory and\ninitializing global state such as the config cache) to see whether the\ncommand refers to an alias.\n\nHowever, we will change the way aliases are expanded in the next\ncommits, to use the early config instead. That means that the\nautocorrect feature can no longer discover the available aliases by\nlooking at the config cache (because it has not yet been initialized).\n\nSo let's just use the early config machinery instead.\n\nThis is slightly less performant than the previous way, as the early\nconfig is used *twice*: once to see whether the command refers to an\nalias, and then to see what aliases are most similar. However, this is\nhardly a performance-critical code path, so performance is less important\nhere."
+        }
+      },
+      {
+        "owner": "Marc Branchaud",
+        "observed_at": "2017-06-21T20:53:37.000000+00:00",
+        "source": {
+          "speaker": "Marc Branchaud",
+          "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+          "text": "auto-correct: tweak phrasing\n\nWhen help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n   in 1.5 seconds automatically...\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n\nThe continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-02-23T21:41:37.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "text": "help: don't print \"\\n\" before single-section output\n\nFix a formatting regression in [ref] ([referenced subject], 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.\n\nThis changes the output from:\n\n    $ git help --guides\n\n    The Git concept guides are:\n    [...]\n\nTo:\n\n    $ git help --guides\n    The Git concept guides are:\n    [...]\n\nThat we started printing an extra \"\\n\" in [ref] wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.\n\nWith [ref] we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in [ref] (help:\nuse command-list.h for common command list, 2018-05-10).\n\nFixing this formatting nit is easy enough. Let's have all of the\noutput that would like to be \"\\n\"-separated from other lines emit its\nown \"\\n\". We then adjust \"print_cmd_by_category()\" to only print a\n\"\\n\" to delimit the sections it's printing out."
+      }
+    }
+  },
+  {
+    "id": "t24",
+    "prior": [
+      {
+        "owner": "Marc Branchaud",
+        "observed_at": "2017-06-21T20:53:37.000000+00:00",
+        "source": {
+          "speaker": "Marc Branchaud",
+          "location": "https://github.com/git/git/commit/968b1fe263f9dfec65be4598e4f0dd76f1692551",
+          "text": "auto-correct: tweak phrasing\n\nWhen help.autoCorrect is enabled, an invalid git command prints a\nwarning and a continuation message, which differs depending on\nwhether or not the value of help.autoCorrect is positive or\nnegative.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n   in 1.5 seconds automatically...\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'\n\nThe continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier.\n\nWith help.autoCorrect = 15:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing in 1.5 seconds, assuming that you meant 'log'.\n\nWith help.autoCorrect < 0:\n\n   WARNING: You called a Git command named 'lgo', which does not exist.\n   Continuing under the assumption that you meant 'log'."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-02-23T21:41:37.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/93de1b6999898079f521afd73d6a4ae9d5f9aaea",
+        "text": "help: don't print \"\\n\" before single-section output\n\nFix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.\n\nThis changes the output from:\n\n    $ git help --guides\n\n    The Git concept guides are:\n    [...]\n\nTo:\n\n    $ git help --guides\n    The Git concept guides are:\n    [...]\n\nThat we started printing an extra \"\\n\" in 1b81d8cb19d wasn't intended,\nbut an emergent effect of moving all of the printing of \"git help\"\noutput to code that was ready to handle printing N sections.\n\nWith 1b81d8cb19d we started using the \"print_cmd_by_category()\"\nfunction added earlier in the same series, or in cfb22a02ab5 (help:\nuse command-list.h for common command list, 2018-05-10).\n\nFixing this formatting nit is easy enough. Let's have all of the\noutput that would like to be \"\\n\"-separated from other lines emit its\nown \"\\n\". We then adjust \"print_cmd_by_category()\" to only print a\n\"\\n\" to delimit the sections it's printing out."
+      }
+    }
+  }
+]

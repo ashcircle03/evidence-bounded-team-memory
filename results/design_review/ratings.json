@@ -1,0 +1,258 @@
+{
+  "071618182708": {
+    "ok": false,
+    "reason": "긴 경로에서 작은 버퍼가 EACCES를 유발한다는 동작 연결을 설명하지 않고 FreeBSD 고려 부족으로 일반화한다."
+  },
+  "157354d5bd5a": {
+    "ok": false,
+    "reason": "전달 누락은 맞지만 기존 TOCTOU 경합이 다시 발생한다는 원문에 없는 결과를 덧붙인다."
+  },
+  "1942af2d8467": {
+    "ok": false,
+    "reason": ".git/objects 쓰기 불가 조건을 설명에서 누락하고 WRITE_TREE_SILENT 추가를 원인으로 단정한다."
+  },
+  "307684109e7b": {
+    "ok": false,
+    "reason": "이전 결정이 PATH_MAX 버퍼를 충분하다고 가정했다며 실제 strbuf 전환 방향을 뒤집는다."
+  },
+  "33093002bba8": {
+    "ok": false,
+    "reason": "정상 전달한 push_to_checkout를 회귀 발생 경로로 잘못 지목한다."
+  },
+  "3cb2342f35aa": {
+    "ok": false,
+    "reason": "ASan 오류와 glibc 버전은 있으나 SANITIZE=address 발동 조건이 인용과 설명에 없다."
+  },
+  "4049b5295bab": {
+    "ok": false,
+    "reason": "v1/v2 충돌 결과는 맞지만 이전 근거가 충돌 검사 도입 결정이 아니라 그 이전의 무검사 동작 설명이다."
+  },
+  "4e7b683d3400": {
+    "ok": false,
+    "reason": "lookup_commit 전환과 null_oid 또는 빈 reflog 조건이 빠져 있다."
+  },
+  "51fd1ec3553e": {
+    "ok": true,
+    "reason": "PS1 확장 가정, 기본 zsh 비확장과 리터럴 변수 표시를 정확히 연결한다."
+  },
+  "84f3e52e8940": {
+    "ok": true,
+    "reason": "검색 변경과 네 hunk에서 /Many가 경고 후 다시 정규식을 묻는 실제 동작을 함께 인용한다."
+  },
+  "84f6dd21c3a3": {
+    "ok": false,
+    "reason": "빈 파일의 잘못된 read 오류를 설명하지 않고 EMFILE 판단과 새 오류 메시지가 모순이라고 잘못 설명한다."
+  },
+  "87e76647b664": {
+    "ok": true,
+    "reason": "복수 설정값에서 global이 local보다 우선하는 잘못된 방향을 이전 설정 처리 최적화와 연결한다."
+  },
+  "a1ddbcc6c22a": {
+    "ok": true,
+    "reason": "기존 EMFILE 분류 변경과 빈 loose 파일에서 Invalid argument를 내는 동작을 함께 보존한다."
+  },
+  "aa179e93288d": {
+    "ok": false,
+    "reason": "null_oid의 non-NULL 반환은 찾지만 없는 객체의 역참조 오류로 원인을 바꾸고 빈 reflog 조건도 설명하지 않는다."
+  },
+  "aedd0a74d2ab": {
+    "ok": true,
+    "reason": "새 정규식 삽입이 $1을 undef로 만들고 /regex 검색을 망가뜨리는 인과를 원문으로 뒷받침한다."
+  },
+  "c3e97155aa96": {
+    "ok": true,
+    "reason": "first/last 우선순위 역전과 global/local 중복 설정 조건을 올바르게 설명하고 인용한다."
+  },
+  "cdac594ab511": {
+    "ok": false,
+    "reason": "선택한 이전 문단은 enum 도입 자체가 아니라 선행 반환값 변경이다. enum 처리 오류의 연결 근거가 빠진다."
+  },
+  "e15b6639bec6": {
+    "ok": false,
+    "reason": "재시도 수정과 경로 조건은 있지만 작은 버퍼로 EACCES가 발생하는 실제 실패 설명을 선택하지 못했다."
+  },
+  "ef9a3e121d2f": {
+    "ok": false,
+    "reason": "이전 근거는 정상인 push_to_checkout 경로이고 새 근거에는 run_commit_hook에서 run_hooks_opt로의 누락이 없다."
+  },
+  "12fac7ece246": {
+    "ok": true,
+    "reason": "last-key-wins 위반과 global이 local보다 우선하는 방향을 이전 설정 처리 변경과 연결하며 인용에 중복 키 조건이 있다."
+  },
+  "1e0fdb8af013": {
+    "ok": true,
+    "reason": "설정 처리 최적화 이후 first/last 우선순위가 역전된 실제 동작을 설명하고 global/local 중복 조건을 인용한다."
+  },
+  "2234cd3491ee": {
+    "ok": false,
+    "reason": "명시 규칙의 .texi suffix 의존성은 찾았지만 $*가 인식된 suffix에 의존해 비게 되는 실제 실패 동작을 설명하지 않는다. 엄격 기준의 부분 성공이다."
+  },
+  "2986a1046d46": {
+    "ok": false,
+    "reason": "다중 hunk의 검색 실패는 찾았으나 단일 hunk 검색 제한 정책이 무의미해졌다고 해석하고 모든 경우로 일반화한다."
+  },
+  "2b1afc557f31": {
+    "ok": false,
+    "reason": "올바른 regex 근거를 인용했지만 설명은 원인을 코드베이스의 다른 곳으로 돌리며 실제 $1 덮어쓰기나 재질문 동작을 짚지 않는다."
+  },
+  "3eff82839d9d": {
+    "ok": true,
+    "reason": "invoked_hook 전달 누락으로 후속 분기 실행 여부가 불명확해진다는 동작을 잘못된 경로를 덧붙이지 않고 설명한다."
+  },
+  "4c8e171dd4af": {
+    "ok": true,
+    "reason": "lookup_commit 변경, null_oid에서 non-NULL 반환, parse_commit 오류의 인과를 정확히 연결한다. 실제 입력 조건 null_oid를 명시한다."
+  },
+  "4f02e84ccf1d": {
+    "ok": true,
+    "reason": "하위 디렉터리에서 임시 인덱스를 구성해 최상위 기준 경로가 추가되지 않는 조건과 동작을 보존한다."
+  },
+  "558afbf954d7": {
+    "ok": true,
+    "reason": "하위 디렉터리 경로 처리 변경과 left diff에서 최상위 기준 경로가 누락되는 실제 결과를 연결한다."
+  },
+  "567ee157971b": {
+    "ok": true,
+    "reason": "PS1 확장 가정과 zsh의 리터럴 표시 오류를 연결하고 조건부 처리가 필요함을 원문으로 뒷받침한다."
+  },
+  "5abb4e989311": {
+    "ok": true,
+    "reason": "TOCTOU 수정의 invoked_hook가 run_hooks_opt에 전달되지 않아 후속 동작이 불명확한 회귀를 정확히 설명한다."
+  },
+  "713bc38c4113": {
+    "ok": true,
+    "reason": "충돌 검사 도입이 dumb HTTP의 다운로드/로컬 인덱스 충돌과 fetch 실패를 만든다고 설명한다. v1/v2 조건은 선택한 관측 문단에 명시되어 있다."
+  },
+  "78fcc71b6f75": {
+    "ok": false,
+    "reason": "strbuf 전환과 긴 경로·권한 조건은 맞지만 결과를 regression이라고만 부르며 getcwd의 EACCES/작은 버퍼 실패 동작을 설명하지 않는다. 부분 성공이다."
+  },
+  "9046f343f233": {
+    "ok": false,
+    "reason": "새 충돌 검사 도입 결정이 동일한 디스크 내용만을 가정했다고 설명하여, 도입 전의 가정을 새 결정의 가정으로 뒤집는다."
+  },
+  "cf9985d1bf43": {
+    "ok": true,
+    "reason": "변수 간접 참조로 보호한 PS1이 확장하지 않는 셸에서 리터럴을 표시하는 문제를 정확히 설명하고 zsh 조건을 인용한다."
+  },
+  "ef85f398a6b0": {
+    "ok": false,
+    "reason": "빈 파일 read 오류를 찾았지만 여전히 잘못된 corruption 보고가 문제라고 설명하여 현재 회귀의 오류 분류 방향을 뒤집는다."
+  },
+  "f4a588e12a39": {
+    "ok": false,
+    "reason": "null_oid의 parse 오류는 찾았으나 NULL 객체를 오류 표시 후 계속 처리하는 정책의 가정이 깨졌다고 해석한다. 실제 원인은 null_oid가 non-NULL 객체로 바뀐 것이다."
+  },
+  "fd276aea4a22": {
+    "ok": false,
+    "reason": "긴 경로·권한 조건과 strbuf 변경은 맞지만 실제 getcwd 실패나 EACCES 동작을 설명하지 않고 새 이슈라고만 표현한다. 부분 성공이다."
+  },
+  "0ddaf8a5b177": {
+    "ok": true,
+    "reason": "설정을 range-diff 내부로 옮긴 결정과 --no-patch/--stat 전달 중단을 정확히 연결한다."
+  },
+  "15f66e7aa5a6": {
+    "ok": false,
+    "reason": "/ 기능 실패라는 요약은 있지만 초기 검색의 경고·재질문 또는 새 무캡처 정규식에 의한 $1 손실을 설명하지 않는다. 인용은 충분하나 설명은 부분 성공이다."
+  },
+  "3a1e6464bf13": {
+    "ok": true,
+    "reason": "commit의 cache-tree 쓰기와 .git/objects 쓰기 불가 시 같은 권한 오류가 반복되는 동작을 설명에 인용하여 보존한다."
+  },
+  "3dd263ed25ec": {
+    "ok": false,
+    "reason": "라이브러리 preload 순서 문제를 MALLOC_CHECK_ 제거 때문이라고 설명하며 SANITIZE=address 조건을 뒷받침하는 구절도 선택하지 않았다."
+  },
+  "4ff8d4e15593": {
+    "ok": false,
+    "reason": "하위 디렉터리와 left index 문맥은 맞지만 실제 최상위 기준 경로의 인덱스 추가 누락을 설명하지 않고 경로 관련 이슈라고만 요약한다. 부분 성공이다."
+  },
+  "5101420c9d8f": {
+    "ok": true,
+    "reason": "단일 섹션인 git help --guides 출력 앞에 의도하지 않은 개행이 붙는 동작과 이전 변경을 정확히 연결한다."
+  },
+  "5388f2e42a11": {
+    "ok": false,
+    "reason": "공유 Makefile에 빈 suffix 목록을 적용한 일을 주 Makefile에서 제거한 일로 설명한다. 명시적 규칙의 $*가 인식된 suffix에 의존한다는 핵심도 설명하지 않는다."
+  },
+  "62431f454b94": {
+    "ok": true,
+    "reason": "PS1 간접 참조 결정과 기본 zsh 비확장 때문에 변수 문자열이 그대로 출력되는 실패를 함께 보존한다."
+  },
+  "64095020bcd0": {
+    "ok": false,
+    "reason": "선택한 과거 구절은 앞선 -1/0 반환 정리이고 이번 enum 반환 변경이 아니다. 새 오류 문구만으로 올바른 과거 근거가 되지 않는다."
+  },
+  "665dde1e7296": {
+    "ok": false,
+    "reason": "과거의 가독성 설명과 새 미초기화 분기 현상만 남겨 invoked_hook을 run_commit_hook에서 run_hooks_opt로 전달하지 않은 핵심 경로를 설명·인용하지 못한다."
+  },
+  "7c669c0062d0": {
+    "ok": false,
+    "reason": "빈 loose 객체 파일을 corrupt로 표시해서는 안 된다고 덧붙여 원문의 오류 분류 방향을 뒤집는다. 실제 회귀는 Invalid argument 읽기 오류로 잘못 표시한 것이다."
+  },
+  "837847523ada": {
+    "ok": false,
+    "reason": "과거 근거가 TOCTOU 제목뿐이고 새 근거는 Valgrind 추적이다. 누락된 invoked_hook 전달 경로와 이전 결정의 구체적 변경을 복구하지 못한다."
+  },
+  "847f3859653f": {
+    "ok": true,
+    "reason": "PS1 확장 가정, 기본 zsh 비확장, 리터럴 변수 표시와 조건 검사 방향이 인용을 포함한 설명에 모두 남는다."
+  },
+  "88489857c97d": {
+    "ok": false,
+    "reason": "enum 처리 누락은 짚지만 실패를 헤더가 제대로 파싱되지 않는 문제로 요약한다. 미초기화 헤더를 파싱하거나 unpack 실패를 parse 실패로 오보한다는 실제 동작을 설명하지 않는다. 부분 성공이다."
+  },
+  "9a1681975f7c": {
+    "ok": true,
+    "reason": "lookup_commit 전환이 null_oid에 non-NULL을 반환해 후속 오류를 일으키는 구체적 조건과 동작을 설명하고 parse_commit 원문으로 뒷받침한다."
+  },
+  "aa91fb19f270": {
+    "ok": true,
+    "reason": "동일 키가 여러 번 정의됐을 때 first-key-wins가 되어 global이 local보다 우선하는 방향을 보존한다."
+  },
+  "b6c6c30048f0": {
+    "ok": true,
+    "reason": "호출자 설정을 내부로 옮긴 결정과 --no-patch/--stat 전달 실패가 설명에 인용되어 있다."
+  },
+  "c28a8850965e": {
+    "ok": false,
+    "reason": "cache-tree 쓰기와 권한 오류 중복 원인은 맞지만 .git/objects를 쓸 수 없을 때라는 발동 조건을 설명에서 생략한다. 선택 근거는 충분하나 설명은 부분 성공이다."
+  },
+  "c6b861107e5c": {
+    "ok": true,
+    "reason": "현재 하위 디렉터리 기준 경로 처리와 임시 left index에 최상위 기준 경로가 추가되지 않는 동작을 인용하여 연결한다."
+  },
+  "d1498d5000e6": {
+    "ok": true,
+    "reason": "invoked_hook을 run_hooks_opt로 전달하지 않은 변경과 미초기화 값에 따른 분기를 정확히 설명하며 호출 경로도 인용으로 확인된다."
+  },
+  "d6b490d3b857": {
+    "ok": true,
+    "reason": "기존 PS1 간접 참조 가정과 기본 zsh의 비확장으로 변수 문자열이 출력되는 실패를 정확히 설명한다."
+  },
+  "dade20f8aa9b": {
+    "ok": false,
+    "reason": "긴 경로·권한 조건은 언급하나 strbuf가 경로 길이 제한을 도입했다고 부정확하게 요약하고 실제 getcwd/EACCES 실패를 설명하지 않는다."
+  },
+  "df1695f7cd88": {
+    "ok": true,
+    "reason": "strbuf 변경과 FreeBSD에서 작은 버퍼·권한 부족 때문에 EACCES가 나고 더 큰 버퍼는 성공할 수 있다는 동작을 설명에 인용하여 보존한다."
+  },
+  "e137d7a83f09": {
+    "ok": true,
+    "reason": "기존 충돌 검사와 dumb HTTP의 원격 v1 idx/로컬 재생성 idx 충돌로 fetch가 실패하는 조건·동작을 정확히 연결한다."
+  },
+  "e53b7685bd89": {
+    "ok": false,
+    "reason": "과거 근거가 최초 lookup_commit_reference_gently 사용 이력뿐이다. 재검토 대상인 lookup_commit으로의 전환 결정을 잘못 고른다."
+  },
+  "e63eaea3c35d": {
+    "ok": false,
+    "reason": "새 null_oid 회귀 구절은 맞지만 과거에는 최초 구현 이력만 골라 lookup_commit 전환 결정의 근거를 잃었다."
+  },
+  "e7c6bac8d1b2": {
+    "ok": true,
+    "reason": "cache-tree 쓰기와 .git/objects 쓰기 불가 시 중복 권한 오류를 인용한 설명에 함께 보존한다."
+  }
+}

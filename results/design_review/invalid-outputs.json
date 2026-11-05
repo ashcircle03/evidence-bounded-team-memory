@@ -1,0 +1,30 @@
+{
+  "3b/commit-permissions/no-match/raw/direct-full": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P1\",\n  \"old_evidence\": [\"P0:0\", \"P0:1\", \"P1:0\", \"P1:1\", \"P1:2\", \"P1:3\"],\n  \"new_evidence\": [\"N:0\", \"N:1\", \"N:2\", \"N:3\", \"N:4\"],\n  \"reason\": \"The incoming report suggests a regression in permission error output due to the lack of silent flag in `write_object_file()` after `cache-tree` API and object store separation. This contradicts the earlier decision to remove the early return in `cache_tree_find()` without addressing the silent flag issue.\"\n}"
+  },
+  "3b/prompt/mixed/hidden/direct-oracle": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P1\",\n  \"old_evidence\": [\"P0:1\", \"P0:2\"],\n  \"new_evidence\": [\"N:1\", \"N:2\"],\n  \"reason\": \"The new evidence indicates that not all shells expand the value of PS1 by default, contrary to the assumption made in P1's commit. This change affects zsh, which does not expand PS1 by default, leading to the regression where prompts contain the literal string '${__git_ps1_branch_name}' instead of the actual branch name.\"\n}"
+  },
+  "3b/commit-permissions/mixed/hidden/direct-full": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P1\",\n  \"old_evidence\": [\"P0:1\", \"P1:0\", \"P1:1\", \"P1:2\"],\n  \"new_evidence\": [\"N:0\", \"N:1\", \"N:2\", \"N:3\", \"N:4\"],\n  \"reason\": \"The new evidence indicates that the regression in permission error output was introduced by the change in P1, specifically the addition of WRITE_TREE_SILENT flag without corresponding silent handling in update_one(). This change led to duplicated permission error messages during commit, contradicting the intention of P1 to ensure the cache-tree is updated correctly.\"\n}"
+  },
+  "3b/email-priority/no-match/hidden/direct-full": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P1\",\n  \"old_evidence\": [\"P0:3\"],\n  \"new_evidence\": [\"N:1\", \"N:2\", \"N:4\", \"N:5\", \"N:6\", \"N:7\", \"N:8\"],\n  \"reason\": \"The incoming report identifies a regression in v2.33.0 where the 'git config' behavior changed, favoring global configurations over local ones for certain sendemail configuration keys. This contradicts the earlier decision in P0, which addressed a different issue related to the hooksPath configuration. The new evidence shows that the current configuration settings are being incorrectly prioritized, leading to potential misconfiguration issues.\"\n}"
+  },
+  "3b/commit-permissions/no-match/hidden/direct-full": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P1\",\n  \"old_evidence\": [\"P0:3\"],\n  \"new_evidence\": [\"N:1\", \"N:2\", \"N:3\", \"N:4\"],\n  \"reason\": \"The new evidence indicates that the regression in permission error output was introduced by the commit referenced in N. The earlier decision in P1 did not address the issue of silent error handling for the object store, leading to the current problem where permission errors are not being silenced as intended. The earlier decision in P0 removed an early return condition but did not resolve the silent error handling issue in the object store.\"\n}"
+  },
+  "3b/header/no-match/hidden/direct-full": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P0\",\n  \"old_evidence\": [\"P0\"],\n  \"new_evidence\": [\"N\"],\n  \"reason\": \"The incoming report reveals a regression where the test suite incorrectly reported 'unable to parse header' instead of 'unable to unpack header'. This suggests that the stricter checks introduced in P0 did not prevent the issue, indicating that the original decision to tighten unpack_sha1_header() was not fully effective.\"\n}"
+  },
+  "3b/patch-search/mixed/hidden/direct-oracle": {
+    "action": "invalid_output",
+    "raw": "{\n  \"target\": \"P1\",\n  \"old_evidence\": [\"P0:1\", \"P1:1\", \"P1:3\", \"P1:4\"],\n  \"new_evidence\": [\"N:2\", \"N:3\", \"N:4\", \"N:5\"],\n  \"reason\": \"The new evidence shows that the change in P1 introduced a bug where the regex search feature in git-add--interactive stopped working due to undefined values in $1, which was caused by an unexpected regex match being inserted between the old and new matches. This contradicts the original intent of respecting core.commentChar in generating edit instructions without causing confusion.\"\n}"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "0d7e98f28489": {
+    "task": "changed condition",
+    "criterion": "The Perl config reader takes the first rather than the last scalar key when repeated across config scopes, preferring global over local values. Preserve this direction and the conflicting/multiple-key condition.",
+    "source": [
+      "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc."
+    ],
+    "answer": "The regression occurred when the decision to initialize boolean values as undef was applied, leading to misinterpretation of repository-specific configurations over system-wide defaults, such as differing smtpServer settings between .git/config and ~/.gitconfig files."
+  },
+  "2e614d26ade5": {
+    "task": "changed condition",
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "source": [
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+      "$ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many"
+    ],
+    "answer": "The regression occurred because attempting to search for \"Many\" failed due to an uninitialized value, which specifically went wrong when trying to search with \"/\" after splitting into four hunks, despite there being only one hunk available for search."
+  },
+  "42c1f4f9b4b0": {
+    "task": "difference from alternative",
+    "criterion": "The alternative improves LSAN stack traces with fast_unwind_on_malloc, not the GLIBC_TUNABLES/malloc-check preload ordering of ASan.",
+    "source": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+      "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":"
+    ],
+    "answer": "The alternative addresses “Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful stack traces from LSAN. This isn't required under ASAN which will emit traces such as this one for a leak in \"t/t0006-date.sh\":”, while the new report concerns “As the address sanitizer checks for a superset of the issues detected by setting MALLOC_CHECK_ (which tries to detect things like double frees and off-by-one errors) there is no need to set the latter when compiling with -fsanitize=address.”."
+  },
+  "6951a2078e80": {
+    "task": "changed condition",
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "source": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address."
+    ],
+    "answer": "Revisit the earlier decision reported as “In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment variables have been replaced by GLIBC_TUNABLES. Also the new glibc requires that you preload a library called libc_malloc_debug.so to get these features.”. The incoming evidence gives the reason. As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address."
+  },
+  "6e8475906415": {
+    "task": "difference from alternative",
+    "criterion": "The alternative escapes commentChar metacharacters when stripping comments from manually edited hunks, not the capture used for hunk search.",
+    "source": [
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+      "$ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+      "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:"
+    ],
+    "answer": "The other decision addresses editing a hunk manually, differing from the specific operation in the incoming report which involves searching for a regex pattern \"/Many\" after splitting into multiple hunks."
+  },
+  "789c7519b30d": {
+    "task": "changed condition",
+    "criterion": "The search-key change inserted a captureless regex, making $1 undef. Initial /regex search now warns and asks for the expression again. Identify either this actual failed search behavior or the capture overwrite and its triggering inserted regex.",
+    "source": [
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+      "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many"
+    ],
+    "answer": "Reconsider the earlier decision “If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.”. The new report gives the following behavior and its conditions. “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”"
+  },
+  "8120bcea48dc": {
+    "task": "difference from alternative",
+    "criterion": "The alternative changes the phrasing of help.autoCorrect warnings for unknown commands, not spacing before guide sections.",
+    "source": [
+      "The help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow.",
+      "Fix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed.",
+      "The continuation message's phrasing is awkward.  This commit cleans it up.\nAs a bonus, we now use full-sentence strings which make translation easier."
+    ],
+    "answer": "The other decision addresses improving the phrasing of continuation messages, which differs from the incoming report's focus on adjusting newline insertion in help command outputs."
+  },
+  "986c2185e184": {
+    "task": "changed condition",
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "source": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD."
+    ],
+    "answer": "Reconsider the earlier decision “In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.”. The new report gives the following behavior and its conditions. “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”"
+  },
+  "9be2ca317054": {
+    "task": "difference from alternative",
+    "criterion": "The alternative improves LSAN stack traces with fast_unwind_on_malloc, not the GLIBC_TUNABLES/malloc-check preload ordering of ASan.",
+    "source": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address.",
+      "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":"
+    ],
+    "answer": "The other decision addresses disabling MALLOC_CHECK_ for ASAN compatibility, differing from the incoming report's recommendation to use GLIBC_TUNABLES for glibc >= 2.34."
+  },
+  "a9212f49695d": {
+    "task": "changed condition",
+    "criterion": "Moving guide output to section-printing code adds an unintended leading newline for git help --guides or other single-section output. Describe the newline and single-section condition; not missing or duplicated guide text.",
+    "source": [
+      "The help command currently hard codes the list of guides and their\nsummary in C. Let's move this list to command-list.txt. This lets us\nextract summary lines from Documentation/git*.txt. This also\npotentially lets us list guides in git.txt, but I'll leave that for\nnow.",
+      "Fix a formatting regression in 1b81d8cb19d (help: use command-list.txt\nfor the source of guides, 2018-05-20). Adjust the output of \"git help\n--guides\" and any other future single-section commands so that a\nnewline isn't inserted before the only section being printed."
+    ],
+    "answer": "The regression occurred because adjusting the output of \"git help --guides\" led to an unintended newline being inserted before the only section when there are no sections to separate, contrary to the expectation of a single guide section without additional whitespace."
+  },
+  "b3612d3a50ec": {
+    "task": "changed condition",
+    "criterion": "The glibc malloc-check preload change causes ASan test startup failure because ASan runtime is not first in the library list, specifically SANITIZE=address on glibc >=2.34. Include the failure and both sanitizer and version constraints. Leak/undefined are unaffected.",
+    "source": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "As the address sanitizer checks for a superset of the issues detected\nby setting MALLOC_CHECK_ (which tries to detect things like double\nfrees and off-by-one errors) there is no need to set the latter when\ncompiling with -fsanitize=address."
+    ],
+    "answer": "Setting MALLOC_CHECK_ when compiling with -fsanitize=address went wrong because it conflicts with the requirement in glibc >= 2.34 to use GLIBC_TUNABLES instead, leading to undefined behavior and potential false negatives in address sanitization."
+  },
+  "e2a8547e982c": {
+    "task": "difference from alternative",
+    "criterion": "The alternative improves LSAN stack traces with fast_unwind_on_malloc, not the GLIBC_TUNABLES/malloc-check preload ordering of ASan.",
+    "source": [
+      "In glibc >= 2.34 MALLOC_CHECK_ and MALLOC_PERTURB_ environment\nvariables have been replaced by GLIBC_TUNABLES.  Also the new\nglibc requires that you preload a library called libc_malloc_debug.so\nto get these features.",
+      "This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.",
+      "Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":"
+    ],
+    "answer": "The alternative addresses “Add \"fast_unwind_on_malloc=0\" to LSAN_OPTIONS to get more meaningful\nstack traces from LSAN. This isn't required under ASAN which will emit\ntraces such as this one for a leak in \"t/t0006-date.sh\":”. The reported observation is “This fixes a regression introduced by 131b94a10a (\"test-lib.sh: Use\nGLIBC_TUNABLES instead of MALLOC_CHECK_ on glibc >= 2.34\", 2022-03-04)\nwhich causes all the tests to fail with the message\n\n    ASan runtime does not come first in initial library list;\n    you should either link runtime to your application or\n    manually preload it with LD_PRELOAD.”."
+  },
+  "f61afc88a548": {
+    "task": "difference from alternative",
+    "criterion": "The alternative escapes commentChar metacharacters when stripping comments from manually edited hunks, not the capture used for hunk search.",
+    "source": [
+      "If there is only a single hunk then disable searching as there is\nnothing to search for. Also print a specific error message if the user\ntries to search with '/' when there's only a single hunk rather than\njust listing the key bindings.",
+      "As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many",
+      "Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:"
+    ],
+    "answer": "The alternative addresses “Since c9d961647 (i18n: add--interactive: mark\nedit_hunk_manually message for translation, 2016-12-14),\nwhen the user asks to edit a hunk manually, we respect\ncore.commentChar in generating the edit instructions.\nHowever, when we then strip out comment lines, we use a\nsimple regex like:”. The reported observation is “As a result the \"/\" feature to search for a string in a hunk by regex\ncompletely broke, on git.git:\n\n    $ perl -pi -e 's/Git/Tig/g' README.md\n    $ ./git --exec-path=$PWD add -p\n    [..]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? s\n    Split into 4 hunks.\n    [...]\n    Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]? /Many\n    Use of uninitialized value $1 in string eq at /home/avar/g/git/git-add--interactive line 1568, <STDIN> line 1.\n    search for regex? Many”."
+  },
+  "f662a7eb2a23": {
+    "task": "difference from alternative",
+    "criterion": "The alternative locates validation hooks with core.hooksPath, not scalar configuration precedence.",
+    "source": [
+      "However, that means we can end up with \"undef\" in the middle of a\nlist. E.g. for sendemail.smtpserveroption in conjuction with\nsendemail.smtpserver as a path this would have produce a warning. For\nmost of the other keys we'd behave the same despite the subtle change\nin the value, e.g. sendemail.to would behave the same because\nMail::Address->parse() happens to return an empty list if fed\n\"undef\". For the boolean values we were already prepared to handle\nthese variables being initialized as undef anyway.",
+      "This broke e.g. cases where a .git/config would have a different\nsendemail.smtpServer than ~/.gitconfig. We'd pick the ~/.gitconfig\nover .git/config, instead of preferring the repository-local\nversion. The same would go for /etc/gitconfig etc.",
+      "Since the introduction of 'core.hooksPath' configuration option in\n867ad08a261 (hooks: allow customizing where the hook directory is,\n2016-05-04), this is no longer true."
+    ],
+    "answer": "The other decision addresses the change in `core.hooksPath` which affects how configuration options like `sendemail.smtpserver` are loaded, differing from the specific issue with `undef` values in `sendemail.smtpserveroption`."
+  }
+}

@@ -1,0 +1,769 @@
+[
+  {
+    "id": "t00",
+    "prior": [
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2020-03-03T21:15:40.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+          "text": "remote-curl: show progress for fetches over dumb HTTP\n\nFetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.\n\nWe don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      },
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2024-09-27T18:27:47.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+          "text": "finalize_object_file(): implement collision check\n\nWe've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.\n\nOne of the reasons we never implemented this is because the files it\nmoves are all named after the cryptographic hash of their contents\n(either loose objects, or packs which have their hash in the name these\ndays). So we are unlikely to see such a collision by accident. And even\nthough there are weaknesses in sha1, we assume they are mitigated by our\nuse of sha1dc.\n\nSo while it's a theoretical concern now, it hasn't been a priority.\nHowever, if we start using weaker hashes for pack checksums and names,\nthis will become a practical concern. So in preparation, let's actually\nimplement a byte-for-byte collision check.\n\nThe new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.\n\nNote that this may cause some extra computation when the files are in\nfact identical, but this should happen rarely.\n\nLoose objects are exempt from this check, and the collision check may be\nskipped by calling the _flags variant of this function with the\nFOF_SKIP_COLLISION_CHECK bit set. This is done for a couple of reasons:\n\n  - We don't treat the hash of the loose object file's contents as a\n    checksum, since the same loose object can be stored using different\n    bytes on disk (e.g., when adjusting core.compression, using a\n    different version of zlib, etc.).\n\n    This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision.\n\n  - We already use the path of the loose object as its hash value /\n    object name, so checking for collisions at the content level doesn't\n    add anything.\n\n    Adding a content-level collision check would have to happen at a\n    higher level than in finalize_object_file(), since (avoiding race\n    conditions) writing an object loose which already exists in the\n    repository will prevent us from even reaching finalize_object_file()\n    via the object freshening code.\n\n    There is a collision check in index-pack via its `check_collision()`\n    function, but there isn't an analogous function in unpack-objects,\n    which just feeds the result to write_object_file().\n\n    So skipping the collision check here does not change for better or\n    worse the hardness of loose object writes.\n\nAs a small note related to the latter bullet point above, we must teach\nthe tmp-objdir routines to similarly skip the content-level collision\nchecks when calling migrate_one() on a loose object file, which we do by\nsetting the FOF_SKIP_COLLISION_CHECK bit when we are inside of a loose\nobject shard."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-10-25T21:35:46.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "text": "dumb-http: store downloaded pack idx as tempfile\n\nThis patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.\n\nThe core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:\n\n  0. We realize we need some object X, which we don't have locally, and\n     nor does the other side have it as a loose object.\n\n  1. We download the list of remote packs from objects/info/packs.\n\n  2. For each entry in that file, we download each pack index and store\n     it locally in .git/objects/pack/pack-$hash.idx (the $hash is not\n     something we can verify yet and is given to us by the remote).\n\n  3. We check each pack index we got to see if it has object X. When we\n     find a match, we download the matching .pack file from the remote\n     to a tempfile. We feed that to \"index-pack --stdin\", which\n     reindexes the pack, rather than trusting that it has what the other\n     side claims it does. In most cases, this will end up generating the\n     exact same (byte-for-byte) pack index which we'll store at the same\n     pack-$hash.idx path, because the index generation and $hash id are\n     computed based on what's in the packfile. But:\n\n       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).\n\n       b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in 1190a1acf8 (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.\n\nThere are a few options to fix it:\n\n  - we could teach index-pack a command-line option to ignore only pack\n    idx collisions, and use it when the dumb-http code invokes\n    index-pack. This would be an awkward thing to expose users to and\n    would involve a lot of boilerplate to get the option down to the\n    collision code.\n\n  - we could delete the remote .idx file right before running\n    index-pack. It should be redundant at that point (since we've just\n    downloaded the matching pack). But it feels risky to delete\n    something from our own .git/objects based on what the other side has\n    said. I'm not entirely positive that a malicious server couldn't lie\n    about which pack-$hash.idx it has and get us to delete something\n    precious.\n\n  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.\n\nThis patch implements the third option. The big design questions are:\nwhere do we store the downloaded files, and how do we manage their\nlifetimes?\n\nThere are some additional quirks to the dumb-http system we should\nconsider. Remember that in step 2 we downloaded every pack index, but in\nstep 3 we may only download some of the matching packs. What happens to\nthose other idx files now? They sit in the .git/objects/pack directory,\npossibly waiting to be used at a later date. That may save bandwidth for\na subsequent fetch, but it also creates a lot of weird corner cases:\n\n  - our local object directory now has semi-untrusted .idx files sitting\n    around, without their matching .pack\n\n  - in case 3b, we noted that we might not generate the same hash as the\n    other side. In that case even if we download the matching pack,\n    our index-pack invocation will store it in a different\n    pack-$hash.idx file. And the unmatched .idx will sit there forever.\n\n  - if the server repacks, it may delete the old packs. Now we have\n    these orphaned .idx files sitting around locally that will never be\n    used (nor deleted).\n\n  - if we repack locally we may delete our local version of the server's\n    pack index and not realize we have it. So we'll download it again,\n    even though we have all of the objects it mentions.\n\nI think the right solution here is probably some more complex cache\nmanagement system: download the remote .idx files to their own storage\ndirectory, mark them as \"seen\" when we get their matching pack (to avoid\nre-downloading even if we repack), and then delete them when the\nserver's objects/info/refs no longer mentions them.\n\nBut since the dumb http protocol is so ancient and so inferior to the\nsmart http protocol, I don't think it's worth spending a lot of time\ncreating such a system. For this patch I'm just downloading the idx\nfiles to .git/objects/tmp_pack_*, and marking them as tempfiles to be\ndeleted when we exit (and due to the name, any we miss due to a crash,\netc, should eventually be removed by \"git gc\" runs based on timestamps).\n\nThat is slightly worse for one case: if we download an idx but not the\nmatching pack, we won't retain that idx for subsequent runs. But the\nflip side is that we're making other cases better (we never hold on to\nuseless idx files forever). I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).\nIf somebody really cares about that, I think the right path forward is a\nmanaged cache directory as above, and this patch is providing the first\nstep in that direction anyway (by moving things out of the objects/pack/\ndirectory).\n\nThere are two test changes. One demonstrates the broken v1 index case\n(it double-checks the resulting clone with fsck to be careful, but prior\nto this patch it actually fails at the clone step). The other tweaks the\nexpectation for a test that covers the \"slightly worse\" case to\naccommodate the extra index download.\n\nThe code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).\n\nWe also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use.\n\nI was mildly surprised that this worked at all, since we call\nverify_pack_index() on the packed_git which mentions the final name\nbefore moving the file into place! But it works because\nparse_pack_index() leaves the mmap-ed data in the struct, so the\nlazy-open in verify_pack_index() never triggers, and we read from the\ntempfile, ignoring the filename in the struct completely. Hacky, but it\nworks.\n\nAfter this patch, parse_pack_index() now uses the index filename we pass\nin to derive a matching .pack name. This is OK to change because there\nare only two callers, both in the dumb http code (and the other passes\nin an existing pack-$hash.idx name, so the derived name is going to be\npack-$hash.pack, which is what we were using anyway).\n\nI'll follow up with some more cleanups in that area, but this patch is\nsufficient to fix the regression."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t01",
+    "prior": [
+      {
+        "owner": "Taylor Blau",
+        "observed_at": "2024-09-27T18:27:47.000000+00:00",
+        "source": {
+          "speaker": "Taylor Blau",
+          "location": "https://github.com/git/git/commit/b1b8dfde6929ec9463eca0a858c4adb9786d7c93",
+          "text": "finalize_object_file(): implement collision check\n\nWe've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.\n\nOne of the reasons we never implemented this is because the files it\nmoves are all named after the cryptographic hash of their contents\n(either loose objects, or packs which have their hash in the name these\ndays). So we are unlikely to see such a collision by accident. And even\nthough there are weaknesses in sha1, we assume they are mitigated by our\nuse of sha1dc.\n\nSo while it's a theoretical concern now, it hasn't been a priority.\nHowever, if we start using weaker hashes for pack checksums and names,\nthis will become a practical concern. So in preparation, let's actually\nimplement a byte-for-byte collision check.\n\nThe new check will cause the write of new differing content to be a\nfailure, rather than a silent noop, and we'll retain the temporary file\non disk. If there's no collision present, we'll clean up the temporary\nfile as usual after either rename()-ing or link()-ing it into place.\n\nNote that this may cause some extra computation when the files are in\nfact identical, but this should happen rarely.\n\nLoose objects are exempt from this check, and the collision check may be\nskipped by calling the _flags variant of this function with the\nFOF_SKIP_COLLISION_CHECK bit set. This is done for a couple of reasons:\n\n  - We don't treat the hash of the loose object file's contents as a\n    checksum, since the same loose object can be stored using different\n    bytes on disk (e.g., when adjusting core.compression, using a\n    different version of zlib, etc.).\n\n    This is fundamentally different from cases where\n    finalize_object_file() is operating over a file which uses the hash\n    value as a checksum of the contents. In other words, a pair of\n    identical loose objects can be stored using different bytes on disk,\n    and that should not be treated as a collision.\n\n  - We already use the path of the loose object as its hash value /\n    object name, so checking for collisions at the content level doesn't\n    add anything.\n\n    Adding a content-level collision check would have to happen at a\n    higher level than in finalize_object_file(), since (avoiding race\n    conditions) writing an object loose which already exists in the\n    repository will prevent us from even reaching finalize_object_file()\n    via the object freshening code.\n\n    There is a collision check in index-pack via its `check_collision()`\n    function, but there isn't an analogous function in unpack-objects,\n    which just feeds the result to write_object_file().\n\n    So skipping the collision check here does not change for better or\n    worse the hardness of loose object writes.\n\nAs a small note related to the latter bullet point above, we must teach\nthe tmp-objdir routines to similarly skip the content-level collision\nchecks when calling migrate_one() on a loose object file, which we do by\nsetting the FOF_SKIP_COLLISION_CHECK bit when we are inside of a loose\nobject shard."
+        }
+      },
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2020-03-03T21:15:40.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+          "text": "remote-curl: show progress for fetches over dumb HTTP\n\nFetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.\n\nWe don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-10-25T21:35:46.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "text": "dumb-http: store downloaded pack idx as tempfile\n\nThis patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.\n\nThe core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:\n\n  0. We realize we need some object X, which we don't have locally, and\n     nor does the other side have it as a loose object.\n\n  1. We download the list of remote packs from objects/info/packs.\n\n  2. For each entry in that file, we download each pack index and store\n     it locally in .git/objects/pack/pack-$hash.idx (the $hash is not\n     something we can verify yet and is given to us by the remote).\n\n  3. We check each pack index we got to see if it has object X. When we\n     find a match, we download the matching .pack file from the remote\n     to a tempfile. We feed that to \"index-pack --stdin\", which\n     reindexes the pack, rather than trusting that it has what the other\n     side claims it does. In most cases, this will end up generating the\n     exact same (byte-for-byte) pack index which we'll store at the same\n     pack-$hash.idx path, because the index generation and $hash id are\n     computed based on what's in the packfile. But:\n\n       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).\n\n       b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in [ref] (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.\n\nThere are a few options to fix it:\n\n  - we could teach index-pack a command-line option to ignore only pack\n    idx collisions, and use it when the dumb-http code invokes\n    index-pack. This would be an awkward thing to expose users to and\n    would involve a lot of boilerplate to get the option down to the\n    collision code.\n\n  - we could delete the remote .idx file right before running\n    index-pack. It should be redundant at that point (since we've just\n    downloaded the matching pack). But it feels risky to delete\n    something from our own .git/objects based on what the other side has\n    said. I'm not entirely positive that a malicious server couldn't lie\n    about which pack-$hash.idx it has and get us to delete something\n    precious.\n\n  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.\n\nThis patch implements the third option. The big design questions are:\nwhere do we store the downloaded files, and how do we manage their\nlifetimes?\n\nThere are some additional quirks to the dumb-http system we should\nconsider. Remember that in step 2 we downloaded every pack index, but in\nstep 3 we may only download some of the matching packs. What happens to\nthose other idx files now? They sit in the .git/objects/pack directory,\npossibly waiting to be used at a later date. That may save bandwidth for\na subsequent fetch, but it also creates a lot of weird corner cases:\n\n  - our local object directory now has semi-untrusted .idx files sitting\n    around, without their matching .pack\n\n  - in case 3b, we noted that we might not generate the same hash as the\n    other side. In that case even if we download the matching pack,\n    our index-pack invocation will store it in a different\n    pack-$hash.idx file. And the unmatched .idx will sit there forever.\n\n  - if the server repacks, it may delete the old packs. Now we have\n    these orphaned .idx files sitting around locally that will never be\n    used (nor deleted).\n\n  - if we repack locally we may delete our local version of the server's\n    pack index and not realize we have it. So we'll download it again,\n    even though we have all of the objects it mentions.\n\nI think the right solution here is probably some more complex cache\nmanagement system: download the remote .idx files to their own storage\ndirectory, mark them as \"seen\" when we get their matching pack (to avoid\nre-downloading even if we repack), and then delete them when the\nserver's objects/info/refs no longer mentions them.\n\nBut since the dumb http protocol is so ancient and so inferior to the\nsmart http protocol, I don't think it's worth spending a lot of time\ncreating such a system. For this patch I'm just downloading the idx\nfiles to .git/objects/tmp_pack_*, and marking them as tempfiles to be\ndeleted when we exit (and due to the name, any we miss due to a crash,\netc, should eventually be removed by \"git gc\" runs based on timestamps).\n\nThat is slightly worse for one case: if we download an idx but not the\nmatching pack, we won't retain that idx for subsequent runs. But the\nflip side is that we're making other cases better (we never hold on to\nuseless idx files forever). I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).\nIf somebody really cares about that, I think the right path forward is a\nmanaged cache directory as above, and this patch is providing the first\nstep in that direction anyway (by moving things out of the objects/pack/\ndirectory).\n\nThere are two test changes. One demonstrates the broken v1 index case\n(it double-checks the resulting clone with fsck to be careful, but prior\nto this patch it actually fails at the clone step). The other tweaks the\nexpectation for a test that covers the \"slightly worse\" case to\naccommodate the extra index download.\n\nThe code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).\n\nWe also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use.\n\nI was mildly surprised that this worked at all, since we call\nverify_pack_index() on the packed_git which mentions the final name\nbefore moving the file into place! But it works because\nparse_pack_index() leaves the mmap-ed data in the struct, so the\nlazy-open in verify_pack_index() never triggers, and we read from the\ntempfile, ignoring the filename in the struct completely. Hacky, but it\nworks.\n\nAfter this patch, parse_pack_index() now uses the index filename we pass\nin to derive a matching .pack name. This is OK to change because there\nare only two callers, both in the dumb http code (and the other passes\nin an existing pack-$hash.idx name, so the derived name is going to be\npack-$hash.pack, which is what we were using anyway).\n\nI'll follow up with some more cleanups in that area, but this patch is\nsufficient to fix the regression."
+      }
+    }
+  },
+  {
+    "id": "t02",
+    "prior": [
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2020-03-03T21:15:40.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+          "text": "remote-curl: show progress for fetches over dumb HTTP\n\nFetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.\n\nWe don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      },
+      {
+        "owner": "Eric Wong",
+        "observed_at": "2019-05-28T18:02:52.000000+00:00",
+        "source": {
+          "speaker": "Eric Wong",
+          "location": "https://github.com/git/git/commit/e941c48d49ebe24404515acf258d8003f2374627",
+          "text": "server-info: do not list unlinked packs\n\nHaving non-existent packs in objects/info/packs causes\ndumb HTTP clients to abort.\n\nv2: use single loop with ALLOC_GROW as suggested by Jeff King"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-10-25T21:35:46.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "text": "dumb-http: store downloaded pack idx as tempfile\n\nThis patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.\n\nThe core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:\n\n  0. We realize we need some object X, which we don't have locally, and\n     nor does the other side have it as a loose object.\n\n  1. We download the list of remote packs from objects/info/packs.\n\n  2. For each entry in that file, we download each pack index and store\n     it locally in .git/objects/pack/pack-$hash.idx (the $hash is not\n     something we can verify yet and is given to us by the remote).\n\n  3. We check each pack index we got to see if it has object X. When we\n     find a match, we download the matching .pack file from the remote\n     to a tempfile. We feed that to \"index-pack --stdin\", which\n     reindexes the pack, rather than trusting that it has what the other\n     side claims it does. In most cases, this will end up generating the\n     exact same (byte-for-byte) pack index which we'll store at the same\n     pack-$hash.idx path, because the index generation and $hash id are\n     computed based on what's in the packfile. But:\n\n       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).\n\n       b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in 1190a1acf8 (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.\n\nThere are a few options to fix it:\n\n  - we could teach index-pack a command-line option to ignore only pack\n    idx collisions, and use it when the dumb-http code invokes\n    index-pack. This would be an awkward thing to expose users to and\n    would involve a lot of boilerplate to get the option down to the\n    collision code.\n\n  - we could delete the remote .idx file right before running\n    index-pack. It should be redundant at that point (since we've just\n    downloaded the matching pack). But it feels risky to delete\n    something from our own .git/objects based on what the other side has\n    said. I'm not entirely positive that a malicious server couldn't lie\n    about which pack-$hash.idx it has and get us to delete something\n    precious.\n\n  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.\n\nThis patch implements the third option. The big design questions are:\nwhere do we store the downloaded files, and how do we manage their\nlifetimes?\n\nThere are some additional quirks to the dumb-http system we should\nconsider. Remember that in step 2 we downloaded every pack index, but in\nstep 3 we may only download some of the matching packs. What happens to\nthose other idx files now? They sit in the .git/objects/pack directory,\npossibly waiting to be used at a later date. That may save bandwidth for\na subsequent fetch, but it also creates a lot of weird corner cases:\n\n  - our local object directory now has semi-untrusted .idx files sitting\n    around, without their matching .pack\n\n  - in case 3b, we noted that we might not generate the same hash as the\n    other side. In that case even if we download the matching pack,\n    our index-pack invocation will store it in a different\n    pack-$hash.idx file. And the unmatched .idx will sit there forever.\n\n  - if the server repacks, it may delete the old packs. Now we have\n    these orphaned .idx files sitting around locally that will never be\n    used (nor deleted).\n\n  - if we repack locally we may delete our local version of the server's\n    pack index and not realize we have it. So we'll download it again,\n    even though we have all of the objects it mentions.\n\nI think the right solution here is probably some more complex cache\nmanagement system: download the remote .idx files to their own storage\ndirectory, mark them as \"seen\" when we get their matching pack (to avoid\nre-downloading even if we repack), and then delete them when the\nserver's objects/info/refs no longer mentions them.\n\nBut since the dumb http protocol is so ancient and so inferior to the\nsmart http protocol, I don't think it's worth spending a lot of time\ncreating such a system. For this patch I'm just downloading the idx\nfiles to .git/objects/tmp_pack_*, and marking them as tempfiles to be\ndeleted when we exit (and due to the name, any we miss due to a crash,\netc, should eventually be removed by \"git gc\" runs based on timestamps).\n\nThat is slightly worse for one case: if we download an idx but not the\nmatching pack, we won't retain that idx for subsequent runs. But the\nflip side is that we're making other cases better (we never hold on to\nuseless idx files forever). I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).\nIf somebody really cares about that, I think the right path forward is a\nmanaged cache directory as above, and this patch is providing the first\nstep in that direction anyway (by moving things out of the objects/pack/\ndirectory).\n\nThere are two test changes. One demonstrates the broken v1 index case\n(it double-checks the resulting clone with fsck to be careful, but prior\nto this patch it actually fails at the clone step). The other tweaks the\nexpectation for a test that covers the \"slightly worse\" case to\naccommodate the extra index download.\n\nThe code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).\n\nWe also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use.\n\nI was mildly surprised that this worked at all, since we call\nverify_pack_index() on the packed_git which mentions the final name\nbefore moving the file into place! But it works because\nparse_pack_index() leaves the mmap-ed data in the struct, so the\nlazy-open in verify_pack_index() never triggers, and we read from the\ntempfile, ignoring the filename in the struct completely. Hacky, but it\nworks.\n\nAfter this patch, parse_pack_index() now uses the index filename we pass\nin to derive a matching .pack name. This is OK to change because there\nare only two callers, both in the dumb http code (and the other passes\nin an existing pack-$hash.idx name, so the derived name is going to be\npack-$hash.pack, which is what we were using anyway).\n\nI'll follow up with some more cleanups in that area, but this patch is\nsufficient to fix the regression."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t03",
+    "prior": [
+      {
+        "owner": "Eric Wong",
+        "observed_at": "2019-05-28T18:02:52.000000+00:00",
+        "source": {
+          "speaker": "Eric Wong",
+          "location": "https://github.com/git/git/commit/e941c48d49ebe24404515acf258d8003f2374627",
+          "text": "server-info: do not list unlinked packs\n\nHaving non-existent packs in objects/info/packs causes\ndumb HTTP clients to abort.\n\nv2: use single loop with ALLOC_GROW as suggested by Jeff King"
+        }
+      },
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2020-03-03T21:15:40.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+          "text": "remote-curl: show progress for fetches over dumb HTTP\n\nFetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.\n\nWe don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-10-25T21:35:46.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "text": "dumb-http: store downloaded pack idx as tempfile\n\nThis patch fixes a regression in [ref] ([referenced subject], 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.\n\nThe core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:\n\n  0. We realize we need some object X, which we don't have locally, and\n     nor does the other side have it as a loose object.\n\n  1. We download the list of remote packs from objects/info/packs.\n\n  2. For each entry in that file, we download each pack index and store\n     it locally in .git/objects/pack/pack-$hash.idx (the $hash is not\n     something we can verify yet and is given to us by the remote).\n\n  3. We check each pack index we got to see if it has object X. When we\n     find a match, we download the matching .pack file from the remote\n     to a tempfile. We feed that to \"index-pack --stdin\", which\n     reindexes the pack, rather than trusting that it has what the other\n     side claims it does. In most cases, this will end up generating the\n     exact same (byte-for-byte) pack index which we'll store at the same\n     pack-$hash.idx path, because the index generation and $hash id are\n     computed based on what's in the packfile. But:\n\n       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).\n\n       b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in [ref] (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.\n\nThere are a few options to fix it:\n\n  - we could teach index-pack a command-line option to ignore only pack\n    idx collisions, and use it when the dumb-http code invokes\n    index-pack. This would be an awkward thing to expose users to and\n    would involve a lot of boilerplate to get the option down to the\n    collision code.\n\n  - we could delete the remote .idx file right before running\n    index-pack. It should be redundant at that point (since we've just\n    downloaded the matching pack). But it feels risky to delete\n    something from our own .git/objects based on what the other side has\n    said. I'm not entirely positive that a malicious server couldn't lie\n    about which pack-$hash.idx it has and get us to delete something\n    precious.\n\n  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.\n\nThis patch implements the third option. The big design questions are:\nwhere do we store the downloaded files, and how do we manage their\nlifetimes?\n\nThere are some additional quirks to the dumb-http system we should\nconsider. Remember that in step 2 we downloaded every pack index, but in\nstep 3 we may only download some of the matching packs. What happens to\nthose other idx files now? They sit in the .git/objects/pack directory,\npossibly waiting to be used at a later date. That may save bandwidth for\na subsequent fetch, but it also creates a lot of weird corner cases:\n\n  - our local object directory now has semi-untrusted .idx files sitting\n    around, without their matching .pack\n\n  - in case 3b, we noted that we might not generate the same hash as the\n    other side. In that case even if we download the matching pack,\n    our index-pack invocation will store it in a different\n    pack-$hash.idx file. And the unmatched .idx will sit there forever.\n\n  - if the server repacks, it may delete the old packs. Now we have\n    these orphaned .idx files sitting around locally that will never be\n    used (nor deleted).\n\n  - if we repack locally we may delete our local version of the server's\n    pack index and not realize we have it. So we'll download it again,\n    even though we have all of the objects it mentions.\n\nI think the right solution here is probably some more complex cache\nmanagement system: download the remote .idx files to their own storage\ndirectory, mark them as \"seen\" when we get their matching pack (to avoid\nre-downloading even if we repack), and then delete them when the\nserver's objects/info/refs no longer mentions them.\n\nBut since the dumb http protocol is so ancient and so inferior to the\nsmart http protocol, I don't think it's worth spending a lot of time\ncreating such a system. For this patch I'm just downloading the idx\nfiles to .git/objects/tmp_pack_*, and marking them as tempfiles to be\ndeleted when we exit (and due to the name, any we miss due to a crash,\netc, should eventually be removed by \"git gc\" runs based on timestamps).\n\nThat is slightly worse for one case: if we download an idx but not the\nmatching pack, we won't retain that idx for subsequent runs. But the\nflip side is that we're making other cases better (we never hold on to\nuseless idx files forever). I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).\nIf somebody really cares about that, I think the right path forward is a\nmanaged cache directory as above, and this patch is providing the first\nstep in that direction anyway (by moving things out of the objects/pack/\ndirectory).\n\nThere are two test changes. One demonstrates the broken v1 index case\n(it double-checks the resulting clone with fsck to be careful, but prior\nto this patch it actually fails at the clone step). The other tweaks the\nexpectation for a test that covers the \"slightly worse\" case to\naccommodate the extra index download.\n\nThe code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).\n\nWe also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use.\n\nI was mildly surprised that this worked at all, since we call\nverify_pack_index() on the packed_git which mentions the final name\nbefore moving the file into place! But it works because\nparse_pack_index() leaves the mmap-ed data in the struct, so the\nlazy-open in verify_pack_index() never triggers, and we read from the\ntempfile, ignoring the filename in the struct completely. Hacky, but it\nworks.\n\nAfter this patch, parse_pack_index() now uses the index filename we pass\nin to derive a matching .pack name. This is OK to change because there\nare only two callers, both in the dumb http code (and the other passes\nin an existing pack-$hash.idx name, so the derived name is going to be\npack-$hash.pack, which is what we were using anyway).\n\nI'll follow up with some more cleanups in that area, but this patch is\nsufficient to fix the regression."
+      }
+    }
+  },
+  {
+    "id": "t04",
+    "prior": [
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2020-03-03T21:15:40.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7655b4119d49844e6ebc62da571e5f18528dbde8",
+          "text": "remote-curl: show progress for fetches over dumb HTTP\n\nFetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck.\n\nWe don't know the number of objects to fetch at the outset, but we can\ncount the ones we got.  Show an open-ended progress indicator based on\nthat number if the user asked for it."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Jeff King",
+      "observed_at": "2024-10-25T21:35:46.000000+00:00",
+      "source": {
+        "speaker": "Jeff King",
+        "location": "https://github.com/git/git/commit/63aca3f7f14e01cabccf2165b941205a8a9a01dc",
+        "text": "dumb-http: store downloaded pack idx as tempfile\n\nThis patch fixes a regression in b1b8dfde69 (finalize_object_file():\nimplement collision check, 2024-09-26) where fetching a v1 pack idx file\nover the dumb-http protocol would cause the fetch to fail.\n\nThe core of the issue is that dumb-http stores the idx we fetch from the\nremote at the same path that will eventually hold the idx we generate\nfrom \"index-pack --stdin\". The sequence is something like this:\n\n  0. We realize we need some object X, which we don't have locally, and\n     nor does the other side have it as a loose object.\n\n  1. We download the list of remote packs from objects/info/packs.\n\n  2. For each entry in that file, we download each pack index and store\n     it locally in .git/objects/pack/pack-$hash.idx (the $hash is not\n     something we can verify yet and is given to us by the remote).\n\n  3. We check each pack index we got to see if it has object X. When we\n     find a match, we download the matching .pack file from the remote\n     to a tempfile. We feed that to \"index-pack --stdin\", which\n     reindexes the pack, rather than trusting that it has what the other\n     side claims it does. In most cases, this will end up generating the\n     exact same (byte-for-byte) pack index which we'll store at the same\n     pack-$hash.idx path, because the index generation and $hash id are\n     computed based on what's in the packfile. But:\n\n       a. The other side might have used other options to generate the\n          index. For instance we use index v2 by default, but long ago\n          it was v1 (and you can still ask for v1 explicitly).\n\n       b. The other side might even use a different mechanism to\n          determine $hash. E.g., long ago it was based on the sorted\n          list of objects in the packfile, but we switched to using the\n          pack checksum in 1190a1acf8 (pack-objects: name pack files\n          after trailer hash, 2013-12-05).\n\nThe regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.\n\nThere are a few options to fix it:\n\n  - we could teach index-pack a command-line option to ignore only pack\n    idx collisions, and use it when the dumb-http code invokes\n    index-pack. This would be an awkward thing to expose users to and\n    would involve a lot of boilerplate to get the option down to the\n    collision code.\n\n  - we could delete the remote .idx file right before running\n    index-pack. It should be redundant at that point (since we've just\n    downloaded the matching pack). But it feels risky to delete\n    something from our own .git/objects based on what the other side has\n    said. I'm not entirely positive that a malicious server couldn't lie\n    about which pack-$hash.idx it has and get us to delete something\n    precious.\n\n  - we can stop co-mingling the downloaded idx files in our local\n    objects directory. This is a slightly bigger change but I think\n    fixes the root of the problem more directly.\n\nThis patch implements the third option. The big design questions are:\nwhere do we store the downloaded files, and how do we manage their\nlifetimes?\n\nThere are some additional quirks to the dumb-http system we should\nconsider. Remember that in step 2 we downloaded every pack index, but in\nstep 3 we may only download some of the matching packs. What happens to\nthose other idx files now? They sit in the .git/objects/pack directory,\npossibly waiting to be used at a later date. That may save bandwidth for\na subsequent fetch, but it also creates a lot of weird corner cases:\n\n  - our local object directory now has semi-untrusted .idx files sitting\n    around, without their matching .pack\n\n  - in case 3b, we noted that we might not generate the same hash as the\n    other side. In that case even if we download the matching pack,\n    our index-pack invocation will store it in a different\n    pack-$hash.idx file. And the unmatched .idx will sit there forever.\n\n  - if the server repacks, it may delete the old packs. Now we have\n    these orphaned .idx files sitting around locally that will never be\n    used (nor deleted).\n\n  - if we repack locally we may delete our local version of the server's\n    pack index and not realize we have it. So we'll download it again,\n    even though we have all of the objects it mentions.\n\nI think the right solution here is probably some more complex cache\nmanagement system: download the remote .idx files to their own storage\ndirectory, mark them as \"seen\" when we get their matching pack (to avoid\nre-downloading even if we repack), and then delete them when the\nserver's objects/info/refs no longer mentions them.\n\nBut since the dumb http protocol is so ancient and so inferior to the\nsmart http protocol, I don't think it's worth spending a lot of time\ncreating such a system. For this patch I'm just downloading the idx\nfiles to .git/objects/tmp_pack_*, and marking them as tempfiles to be\ndeleted when we exit (and due to the name, any we miss due to a crash,\netc, should eventually be removed by \"git gc\" runs based on timestamps).\n\nThat is slightly worse for one case: if we download an idx but not the\nmatching pack, we won't retain that idx for subsequent runs. But the\nflip side is that we're making other cases better (we never hold on to\nuseless idx files forever). I suspect that worse case does not even come\nup often, since it implies that the packs are generated to match\ndistinct parts of history (i.e., in practice even in a repo with many\npacks you're going to end up grabbing all of those packs to do a clone).\nIf somebody really cares about that, I think the right path forward is a\nmanaged cache directory as above, and this patch is providing the first\nstep in that direction anyway (by moving things out of the objects/pack/\ndirectory).\n\nThere are two test changes. One demonstrates the broken v1 index case\n(it double-checks the resulting clone with fsck to be careful, but prior\nto this patch it actually fails at the clone step). The other tweaks the\nexpectation for a test that covers the \"slightly worse\" case to\naccommodate the extra index download.\n\nThe code changes are fairly simple. We stop using finalize_object_file()\nto copy the remote's index file into place, and leave it as a tempfile.\nWe give the tempfile a real \".idx\" name, since the packfile code expects\nthat, and thus we make sure it is out of the usual packs/ directory (so\nwe'd never mistake it for a real local .idx).\n\nWe also have to change parse_pack_index(), which creates a temporary\npacked_git to access our index (we need this because all of the pack idx\ncode assumes we have that struct). It reads the index data from the\ntempfile, but prior to this patch would speculatively write the\nfinalized name into the packed_git struct using the pack-$hash we expect\nto use.\n\nI was mildly surprised that this worked at all, since we call\nverify_pack_index() on the packed_git which mentions the final name\nbefore moving the file into place! But it works because\nparse_pack_index() leaves the mmap-ed data in the struct, so the\nlazy-open in verify_pack_index() never triggers, and we read from the\ntempfile, ignoring the filename in the struct completely. Hacky, but it\nworks.\n\nAfter this patch, parse_pack_index() now uses the index filename we pass\nin to derive a matching .pack name. This is OK to change because there\nare only two callers, both in the dumb http code (and the other passes\nin an existing pack-$hash.idx name, so the derived name is going to be\npack-$hash.pack, which is what we were using anyway).\n\nI'll follow up with some more cleanups in that area, but this patch is\nsufficient to fix the regression."
+      }
+    }
+  },
+  {
+    "id": "t05",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2021-10-27T23:57:14.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+          "text": "Documentation/Makefile: fix lint-docs mkdir dependency\n\nSince 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:\n\n  .build/lint-docs: | .build\n          $(QUIET)mkdir $@\n  .build/lint-docs/gitlink: | .build/lint-docs\n          $(QUIET)mkdir $@\n\nwhere each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".\n\nThis usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.\n\nIf you stick a \"sleep 1\" in the rule to build \"gitlink\" like this:\n\n   ## Lint: gitlink\n   .build/lint-docs/gitlink: | .build/lint-docs\n  -\t$(QUIET)mkdir $@\n  +\t$(QUIET)sleep 1 && mkdir $@\n\nthen \"make clean; make lint-docs\" will fail reliably. Or you can see it\nas-is just by building the directory in isolation:\n\n  $ make clean\n  [...]\n  $ make .build/lint-docs/gitlink/howto\n      GEN mergetools-list.made\n      GEN cmd-list.made\n      GEN doc.dep\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n  mkdir: cannot create directory ‘.build/lint-docs/gitlink/howto’: No such file or directory\n  make: *** [Makefile:476: .build/lint-docs/gitlink/howto] Error 1\n\nThe fix is easy: we just need to depend on the correct parent directory."
+        }
+      },
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-03-03T22:14:55.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+          "text": "Makefile: move \".SUFFIXES\" rule to shared.mak\n\nThis was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.\n\nThis doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:\n\n    $ git -c hyperfine.hook.setup= hyperfine -L rev HEAD~1,HEAD~0 -s 'make -C Documentation man' 'make -C Documentation -j1 man'\n    Benchmark 1: make -C Documentation -j1 man' in 'HEAD~1\n      Time (mean ± σ):     121.7 ms ±   8.8 ms    [User: 105.8 ms, System: 18.6 ms]\n      Range (min … max):   112.8 ms … 148.4 ms    26 runs\n\n    Benchmark 2: make -C Documentation -j1 man' in 'HEAD~0\n      Time (mean ± σ):      97.5 ms ±   8.0 ms    [User: 80.1 ms, System: 20.1 ms]\n      Range (min … max):    89.8 ms … 111.8 ms    32 runs\n\n    Summary\n      'make -C Documentation -j1 man' in 'HEAD~0' ran\n        1.25 ± 0.14 times faster than 'make -C Documentation -j1 man' in 'HEAD~1'\n\nThe reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.\n\nSo this is causing us to omit a bunch of work we didn't need to\ndo. For making \"git-status.1\" the \"--debug=a\" output is reduced from\n~140k lines to ~6k.\n\n1. https://lore.kernel.org/git/220222.86bkyz875k.gmgdl@evledraar.gmail.com/"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-04-06T16:43:48.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "text": "Documentation/Makefile: fix \"make info\" regression in dad9cd7d518\n\nFix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:\n\n\tinfo make --index-search='$*'\n\nThis rule relied on \".texi\" being in the default list of suffixes, as\nseen at:\n\n\tmake -f/dev/null -p | grep -v -e ^# -e ^$|grep -F .SUFFIXES\n\nThe documentation explains what was going on here:\n\n\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.\n\n\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.\n\nI.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.\n\nThis was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+      }
+    },
+    "check_order": true,
+    "qa": "Which suffix did the make info rule expect to be in the default list?"
+  },
+  {
+    "id": "t06",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2021-10-27T23:57:14.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+          "text": "Documentation/Makefile: fix lint-docs mkdir dependency\n\nSince 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:\n\n  .build/lint-docs: | .build\n          $(QUIET)mkdir $@\n  .build/lint-docs/gitlink: | .build/lint-docs\n          $(QUIET)mkdir $@\n\nwhere each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".\n\nThis usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.\n\nIf you stick a \"sleep 1\" in the rule to build \"gitlink\" like this:\n\n   ## Lint: gitlink\n   .build/lint-docs/gitlink: | .build/lint-docs\n  -\t$(QUIET)mkdir $@\n  +\t$(QUIET)sleep 1 && mkdir $@\n\nthen \"make clean; make lint-docs\" will fail reliably. Or you can see it\nas-is just by building the directory in isolation:\n\n  $ make clean\n  [...]\n  $ make .build/lint-docs/gitlink/howto\n      GEN mergetools-list.made\n      GEN cmd-list.made\n      GEN doc.dep\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n  mkdir: cannot create directory ‘.build/lint-docs/gitlink/howto’: No such file or directory\n  make: *** [Makefile:476: .build/lint-docs/gitlink/howto] Error 1\n\nThe fix is easy: we just need to depend on the correct parent directory."
+        }
+      },
+      {
+        "owner": "Ævar Arnfjörð Bjarmason",
+        "observed_at": "2022-03-03T22:14:55.000000+00:00",
+        "source": {
+          "speaker": "Ævar Arnfjörð Bjarmason",
+          "location": "https://github.com/git/git/commit/dad9cd7d518375799413b5a3af179f4cd95cfbe4",
+          "text": "Makefile: move \".SUFFIXES\" rule to shared.mak\n\nThis was added in 30248886ce8 (Makefile: disable default implicit\nrules, 2010-01-26), let's move it to the top of \"shared.mak\" so it'll\napply to all our Makefiles.\n\nThis doesn't benefit the main Makefile at all, since it already had\nthe rule, but since we're including shared.mak in other Makefiles\nstarts to benefit them. E.g. running the 'man\" target is now faster:\n\n    $ git -c hyperfine.hook.setup= hyperfine -L rev HEAD~1,HEAD~0 -s 'make -C Documentation man' 'make -C Documentation -j1 man'\n    Benchmark 1: make -C Documentation -j1 man' in 'HEAD~1\n      Time (mean ± σ):     121.7 ms ±   8.8 ms    [User: 105.8 ms, System: 18.6 ms]\n      Range (min … max):   112.8 ms … 148.4 ms    26 runs\n\n    Benchmark 2: make -C Documentation -j1 man' in 'HEAD~0\n      Time (mean ± σ):      97.5 ms ±   8.0 ms    [User: 80.1 ms, System: 20.1 ms]\n      Range (min … max):    89.8 ms … 111.8 ms    32 runs\n\n    Summary\n      'make -C Documentation -j1 man' in 'HEAD~0' ran\n        1.25 ± 0.14 times faster than 'make -C Documentation -j1 man' in 'HEAD~1'\n\nThe reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.\n\nSo this is causing us to omit a bunch of work we didn't need to\ndo. For making \"git-status.1\" the \"--debug=a\" output is reduced from\n~140k lines to ~6k.\n\n1. https://lore.kernel.org/git/220222.86bkyz875k.gmgdl@evledraar.gmail.com/"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-04-06T16:43:48.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "text": "Documentation/Makefile: fix \"make info\" regression in [ref]\n\nFix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:\n\n\tinfo make --index-search='$*'\n\nThis rule relied on \".texi\" being in the default list of suffixes, as\nseen at:\n\n\tmake -f/dev/null -p | grep -v -e ^# -e ^$|grep -F .SUFFIXES\n\nThe documentation explains what was going on here:\n\n\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.\n\n\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.\n\nI.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.\n\nThis was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+      }
+    }
+  },
+  {
+    "id": "t07",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2021-10-27T23:57:14.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+          "text": "Documentation/Makefile: fix lint-docs mkdir dependency\n\nSince 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:\n\n  .build/lint-docs: | .build\n          $(QUIET)mkdir $@\n  .build/lint-docs/gitlink: | .build/lint-docs\n          $(QUIET)mkdir $@\n\nwhere each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".\n\nThis usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.\n\nIf you stick a \"sleep 1\" in the rule to build \"gitlink\" like this:\n\n   ## Lint: gitlink\n   .build/lint-docs/gitlink: | .build/lint-docs\n  -\t$(QUIET)mkdir $@\n  +\t$(QUIET)sleep 1 && mkdir $@\n\nthen \"make clean; make lint-docs\" will fail reliably. Or you can see it\nas-is just by building the directory in isolation:\n\n  $ make clean\n  [...]\n  $ make .build/lint-docs/gitlink/howto\n      GEN mergetools-list.made\n      GEN cmd-list.made\n      GEN doc.dep\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n  mkdir: cannot create directory ‘.build/lint-docs/gitlink/howto’: No such file or directory\n  make: *** [Makefile:476: .build/lint-docs/gitlink/howto] Error 1\n\nThe fix is easy: we just need to depend on the correct parent directory."
+        }
+      },
+      {
+        "owner": "Felipe Contreras",
+        "observed_at": "2021-05-24T09:08:22.000000+00:00",
+        "source": {
+          "speaker": "Felipe Contreras",
+          "location": "https://github.com/git/git/commit/56da21392b10ebe161dbf426f170e74f800178cf",
+          "text": "doc: improve asciidoc dependencies\n\nasciidoc needs asciidoc.conf, asciidoctor asciidoctor-extensions.rb.\n\nNeither needs the other."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-04-06T16:43:48.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "text": "Documentation/Makefile: fix \"make info\" regression in dad9cd7d518\n\nFix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:\n\n\tinfo make --index-search='$*'\n\nThis rule relied on \".texi\" being in the default list of suffixes, as\nseen at:\n\n\tmake -f/dev/null -p | grep -v -e ^# -e ^$|grep -F .SUFFIXES\n\nThe documentation explains what was going on here:\n\n\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.\n\n\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.\n\nI.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.\n\nThis was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t08",
+    "prior": [
+      {
+        "owner": "Felipe Contreras",
+        "observed_at": "2021-05-24T09:08:22.000000+00:00",
+        "source": {
+          "speaker": "Felipe Contreras",
+          "location": "https://github.com/git/git/commit/56da21392b10ebe161dbf426f170e74f800178cf",
+          "text": "doc: improve asciidoc dependencies\n\nasciidoc needs asciidoc.conf, asciidoctor asciidoctor-extensions.rb.\n\nNeither needs the other."
+        }
+      },
+      {
+        "owner": "Jeff King",
+        "observed_at": "2021-10-27T23:57:14.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+          "text": "Documentation/Makefile: fix lint-docs mkdir dependency\n\nSince 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:\n\n  .build/lint-docs: | .build\n          $(QUIET)mkdir $@\n  .build/lint-docs/gitlink: | .build/lint-docs\n          $(QUIET)mkdir $@\n\nwhere each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".\n\nThis usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.\n\nIf you stick a \"sleep 1\" in the rule to build \"gitlink\" like this:\n\n   ## Lint: gitlink\n   .build/lint-docs/gitlink: | .build/lint-docs\n  -\t$(QUIET)mkdir $@\n  +\t$(QUIET)sleep 1 && mkdir $@\n\nthen \"make clean; make lint-docs\" will fail reliably. Or you can see it\nas-is just by building the directory in isolation:\n\n  $ make clean\n  [...]\n  $ make .build/lint-docs/gitlink/howto\n      GEN mergetools-list.made\n      GEN cmd-list.made\n      GEN doc.dep\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n  mkdir: cannot create directory ‘.build/lint-docs/gitlink/howto’: No such file or directory\n  make: *** [Makefile:476: .build/lint-docs/gitlink/howto] Error 1\n\nThe fix is easy: we just need to depend on the correct parent directory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-04-06T16:43:48.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "text": "Documentation/Makefile: fix \"make info\" regression in [ref]\n\nFix a regression in my [ref] ([referenced subject], 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:\n\n\tinfo make --index-search='$*'\n\nThis rule relied on \".texi\" being in the default list of suffixes, as\nseen at:\n\n\tmake -f/dev/null -p | grep -v -e ^# -e ^$|grep -F .SUFFIXES\n\nThe documentation explains what was going on here:\n\n\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.\n\n\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.\n\nI.e. this rule added back in [ref] (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.\n\nThis was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+      }
+    }
+  },
+  {
+    "id": "t09",
+    "prior": [
+      {
+        "owner": "Jeff King",
+        "observed_at": "2021-10-27T23:57:14.000000+00:00",
+        "source": {
+          "speaker": "Jeff King",
+          "location": "https://github.com/git/git/commit/4c64fb5aad93dd2efe07bce943852ba4ce41ed26",
+          "text": "Documentation/Makefile: fix lint-docs mkdir dependency\n\nSince 8650c6298c (doc lint: make \"lint-docs\" non-.PHONY, 2021-10-15), we\nput the output for gitlink linter into .build/lint-docs/gitlink. There\nare order-only dependencies to create the sequence of subdirs like:\n\n  .build/lint-docs: | .build\n          $(QUIET)mkdir $@\n  .build/lint-docs/gitlink: | .build/lint-docs\n          $(QUIET)mkdir $@\n\nwhere each level has to depend on the prior one (since the parent\ndirectory must exist for us to create something inside it). But the\n\"howto\" and \"config\" subdirectories of gitlink have the wrong\ndependency; they depend on \"lint-docs\", not \"lint-docs/gitlink\".\n\nThis usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order.\n\nIf you stick a \"sleep 1\" in the rule to build \"gitlink\" like this:\n\n   ## Lint: gitlink\n   .build/lint-docs/gitlink: | .build/lint-docs\n  -\t$(QUIET)mkdir $@\n  +\t$(QUIET)sleep 1 && mkdir $@\n\nthen \"make clean; make lint-docs\" will fail reliably. Or you can see it\nas-is just by building the directory in isolation:\n\n  $ make clean\n  [...]\n  $ make .build/lint-docs/gitlink/howto\n      GEN mergetools-list.made\n      GEN cmd-list.made\n      GEN doc.dep\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n      SUBDIR ../\n  make[1]: 'GIT-VERSION-FILE' is up to date.\n  mkdir: cannot create directory ‘.build/lint-docs/gitlink/howto’: No such file or directory\n  make: *** [Makefile:476: .build/lint-docs/gitlink/howto] Error 1\n\nThe fix is easy: we just need to depend on the correct parent directory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Ævar Arnfjörð Bjarmason",
+      "observed_at": "2022-04-06T16:43:48.000000+00:00",
+      "source": {
+        "speaker": "Ævar Arnfjörð Bjarmason",
+        "location": "https://github.com/git/git/commit/8af0699b7a86a6f3c2fe9b745bcbe56ec777feac",
+        "text": "Documentation/Makefile: fix \"make info\" regression in dad9cd7d518\n\nFix a regression in my dad9cd7d518 (Makefile: move \".SUFFIXES\" rule to\nshared.mak, 2022-03-03). As explained in the GNU make documentation\nfor the $* variable, available at:\n\n\tinfo make --index-search='$*'\n\nThis rule relied on \".texi\" being in the default list of suffixes, as\nseen at:\n\n\tmake -f/dev/null -p | grep -v -e ^# -e ^$|grep -F .SUFFIXES\n\nThe documentation explains what was going on here:\n\n\tIn an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.\n\n\tIf the target name in an explicit rule does not end with a\n\trecognized suffix, '$*' is set to the empty string for that rule.\n\nI.e. this rule added back in 5cefc33bffd (Documentation: add\ngitman.info target, 2007-12-10) was resolving gitman.texi from\ngitman.info. We can instead just use the more obvious $< variable\nreferring to the prerequisite.\n\nThis was the only use of $* in our Makefiles in an explicit rule, the\nthree remaining ones are all implicit rules, and therefore didn't\ndepend on the \".SUFFIXES\" list."
+      }
+    }
+  },
+  {
+    "id": "t10",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+          "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      },
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2014-08-26T18:06:04.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+          "text": "setup: convert setup_git_directory_gently_1 et al. to strbuf\n\nConvert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "check_order": true,
+    "qa": "Which error code can FreeBSD getcwd return when the buffer is too small and read permissions are missing?"
+  },
+  {
+    "id": "t11",
+    "prior": [
+      {
+        "owner": "René Scharfe",
+        "observed_at": "2014-08-26T18:06:04.000000+00:00",
+        "source": {
+          "speaker": "René Scharfe",
+          "location": "https://github.com/git/git/commit/7333ed1788b4f2b162a35003044d77a716732a1f",
+          "text": "setup: convert setup_git_directory_gently_1 et al. to strbuf\n\nConvert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd."
+        }
+      },
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+          "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    }
+  },
+  {
+    "id": "t12",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3efe5d1d32fde899b23ebbb1fde499a0897e1c4e",
+          "text": "real_path(): reject the empty string"
+        }
+      },
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+          "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t13",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+          "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      },
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/3efe5d1d32fde899b23ebbb1fde499a0897e1c4e",
+          "text": "real_path(): reject the empty string"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with [ref] ([referenced subject], 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    }
+  },
+  {
+    "id": "t14",
+    "prior": [
+      {
+        "owner": "Michael Haggerty",
+        "observed_at": "2012-09-06T23:19:58.000000+00:00",
+        "source": {
+          "speaker": "Michael Haggerty",
+          "location": "https://github.com/git/git/commit/f4c21e89d7c6b578140e90c02b40eccb51ab8428",
+          "text": "real_path(): properly handle nonexistent top-level paths\n\nThe change has two points:\n\n1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path.\n\n2. Do not remove slashes from groups of multiple slashes; instead let\n   chdir() handle them.  It could be, for example, that it wants to\n   leave leading double-slashes alone."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "René Scharfe",
+      "observed_at": "2017-03-27T00:41:05.000000+00:00",
+      "source": {
+        "speaker": "René Scharfe",
+        "location": "https://github.com/git/git/commit/a54e938e5b53c76ebcd5c068a4f74739c1c68bac",
+        "text": "strbuf: support long paths w/o read rights in strbuf_getcwd() on FreeBSD\n\nFreeBSD implements getcwd(3) as a syscall, but falls back to a version\nbased on readdir(3) if it fails for some reason.  The latter requires\npermissions to read and execute path components, while the former does\nnot.  That means that if our buffer is too small and we're missing\nrights we could get EACCES, but we may succeed with a bigger buffer.\n\nKeep retrying if getcwd(3) indicates lack of permissions until our\nbuffer can fit PATH_MAX bytes, as that's the maximum supported by the\nsyscall on FreeBSD anyway.  This way we do what we can to be able to\nbenefit from the syscall, but we also won't loop forever if there is a\nreal permission issue.\n\nThis fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+      }
+    }
+  },
+  {
+    "id": "t15",
+    "prior": [
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2010-11-03T16:24:57.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+          "text": "A loose object is not corrupt if it cannot be read due to EMFILE\n\n\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2011-09-12T01:03:38.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+          "text": "fsck: do not abort upon finding an empty blob\n\nAsking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.\n\nNoticed and reported by BJ Hargrave."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t16",
+    "prior": [
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2011-09-12T01:03:38.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+          "text": "fsck: do not abort upon finding an empty blob\n\nAsking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.\n\nNoticed and reported by BJ Hargrave."
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2010-11-03T16:24:57.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/3ba7a065527a27f45659398e882feaa1165cbb4c",
+          "text": "A loose object is not corrupt if it cannot be read due to EMFILE\n\n\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in [ref],\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    }
+  },
+  {
+    "id": "t17",
+    "prior": [
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2011-09-12T01:03:38.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+          "text": "fsck: do not abort upon finding an empty blob\n\nAsking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.\n\nNoticed and reported by BJ Hargrave."
+        }
+      },
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2011-11-07T04:31:28.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/a3ed7552d6c800b476a3bdfec5fa575295ea4bdf",
+          "text": "fsck: return error code when verify_pack() goes wrong"
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t18",
+    "prior": [
+      {
+        "owner": "Nguyễn Thái Ngọc Duy",
+        "observed_at": "2011-11-07T04:31:28.000000+00:00",
+        "source": {
+          "speaker": "Nguyễn Thái Ngọc Duy",
+          "location": "https://github.com/git/git/commit/a3ed7552d6c800b476a3bdfec5fa575295ea4bdf",
+          "text": "fsck: return error code when verify_pack() goes wrong"
+        }
+      },
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2011-09-12T01:03:38.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+          "text": "fsck: do not abort upon finding an empty blob\n\nAsking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.\n\nNoticed and reported by BJ Hargrave."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince [ref] ([referenced subject]), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in [ref],\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    }
+  },
+  {
+    "id": "t19",
+    "prior": [
+      {
+        "owner": "Junio C Hamano",
+        "observed_at": "2011-09-12T01:03:38.000000+00:00",
+        "source": {
+          "speaker": "Junio C Hamano",
+          "location": "https://github.com/git/git/commit/eb726f2d760dd78915e4a24f014ab411a165daa3",
+          "text": "fsck: do not abort upon finding an empty blob\n\nAsking fwrite() to write one item of size bytes results in fwrite()\nreporting \"I wrote zero item\", when size is zero. Instead, we could\nask it to write \"size\" items of 1 byte and expect it to report that\n\"I wrote size items\" when it succeeds, with any value of size,\nincluding zero.\n\nNoticed and reported by BJ Hargrave."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "Matthieu Moy",
+      "observed_at": "2012-02-06T19:05:36.000000+00:00",
+      "source": {
+        "speaker": "Matthieu Moy",
+        "location": "https://github.com/git/git/commit/33e42de0d21a8365496e904235bd32fd4659300d",
+        "text": "fsck: give accurate error message on empty loose object files\n\nSince 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message\n\n  fatal: failed to read object <sha1>: Invalid argument\n\nThis comes from a failure of mmap on this empty file, which sets errno to\nEINVAL. Instead of calling xmmap on empty file, we display a clean error\nmessage ourselves, and return a NULL pointer. The new message is\n\n  error: object file .git/objects/09/<rest-of-sha1> is empty\n  fatal: loose object <sha1> (stored in .git/objects/09/<rest-of-sha1>) is corrupt\n\nThe second line was already there before the regression in 3ba7a065527a,\nand the first is an additional message, that should help diagnosing the\nproblem for the user."
+      }
+    }
+  },
+  {
+    "id": "t20",
+    "prior": [
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2016-05-16T21:53:05.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+          "text": "difftool: handle unmerged files in dir-diff mode\n\nWhen files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.\n\nEnsure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      },
+      {
+        "owner": "John Keeping",
+        "observed_at": "2016-07-19T18:12:27.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+          "text": "difftool: fix argument handling in subdirs\n\nWhen in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.\n\nThe Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Aguilar",
+      "observed_at": "2016-12-12T00:18:31.000000+00:00",
+      "source": {
+        "speaker": "David Aguilar",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "text": "difftool: fix dir-diff index creation when in a subdirectory\n\n9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.\n\nWhen preparing the right-side of the diff we only include the\nchanged paths in the temporary area.\n\nThe left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.\n\nTeach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid.\n\nAdd test cases to more thoroughly exercise this scenario."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t21",
+    "prior": [
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2016-05-16T21:53:05.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+          "text": "difftool: handle unmerged files in dir-diff mode\n\nWhen files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.\n\nEnsure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      },
+      {
+        "owner": "John Keeping",
+        "observed_at": "2016-07-19T18:12:27.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/9ec26e797781239b36ebccb87c590e5778358007",
+          "text": "difftool: fix argument handling in subdirs\n\nWhen in a subdirectory of a repository, path arguments should be\ninterpreted relative to the current directory not the root of the\nworking tree.\n\nThe Git::repository object passed into setup_dir_diff() is configured to\nhandle this correctly but we create a new Git::repository here without\nsetting the WorkingSubdir argument.  By simply using the existing\nrepository, path arguments are handled relative to the current\ndirectory."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Aguilar",
+      "observed_at": "2016-12-12T00:18:31.000000+00:00",
+      "source": {
+        "speaker": "David Aguilar",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "text": "difftool: fix dir-diff index creation when in a subdirectory\n\n[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.\n\nWhen preparing the right-side of the diff we only include the\nchanged paths in the temporary area.\n\nThe left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.\n\nTeach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid.\n\nAdd test cases to more thoroughly exercise this scenario."
+      }
+    }
+  },
+  {
+    "id": "t22",
+    "prior": [
+      {
+        "owner": "John Keeping",
+        "observed_at": "2013-05-17T18:46:53.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/1f197a1de497db8898c9920fab77533dab34a03c",
+          "text": "difftool: fix dir-diff when file does not exist in working tree\n\nCommit 02c5631 (difftool --dir-diff: symlink all files matching the\nworking tree, 2013-03-14) does not handle the case where a file that is\nbeing compared does not exist in the working tree.  Fix this by checking\nfor existence explicitly before running git-hash-object."
+        }
+      },
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2016-05-16T21:53:05.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+          "text": "difftool: handle unmerged files in dir-diff mode\n\nWhen files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.\n\nEnsure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Aguilar",
+      "observed_at": "2016-12-12T00:18:31.000000+00:00",
+      "source": {
+        "speaker": "David Aguilar",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "text": "difftool: fix dir-diff index creation when in a subdirectory\n\n9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.\n\nWhen preparing the right-side of the diff we only include the\nchanged paths in the temporary area.\n\nThe left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.\n\nTeach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid.\n\nAdd test cases to more thoroughly exercise this scenario."
+      }
+    },
+    "check_order": true
+  },
+  {
+    "id": "t23",
+    "prior": [
+      {
+        "owner": "John Keeping",
+        "observed_at": "2013-05-17T18:46:53.000000+00:00",
+        "source": {
+          "speaker": "John Keeping",
+          "location": "https://github.com/git/git/commit/1f197a1de497db8898c9920fab77533dab34a03c",
+          "text": "difftool: fix dir-diff when file does not exist in working tree\n\nCommit 02c5631 (difftool --dir-diff: symlink all files matching the\nworking tree, 2013-03-14) does not handle the case where a file that is\nbeing compared does not exist in the working tree.  Fix this by checking\nfor existence explicitly before running git-hash-object."
+        }
+      },
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2016-05-16T21:53:05.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+          "text": "difftool: handle unmerged files in dir-diff mode\n\nWhen files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.\n\nEnsure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Aguilar",
+      "observed_at": "2016-12-12T00:18:31.000000+00:00",
+      "source": {
+        "speaker": "David Aguilar",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "text": "difftool: fix dir-diff index creation when in a subdirectory\n\n[ref] ([referenced subject], 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.\n\nWhen preparing the right-side of the diff we only include the\nchanged paths in the temporary area.\n\nThe left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.\n\nTeach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid.\n\nAdd test cases to more thoroughly exercise this scenario."
+      }
+    }
+  },
+  {
+    "id": "t24",
+    "prior": [
+      {
+        "owner": "David Aguilar",
+        "observed_at": "2016-05-16T21:53:05.000000+00:00",
+        "source": {
+          "speaker": "David Aguilar",
+          "location": "https://github.com/git/git/commit/366f9cea18fbb7ebb0a75735da8c2a9d5a916809",
+          "text": "difftool: handle unmerged files in dir-diff mode\n\nWhen files are unmerged they can show up as both unmerged and\nmodified in the output of `git diff --raw`.  This causes\ndifftool's dir-diff to create filesystem entries for the same\npath twice, which fails when it encounters a duplicate path.\n\nEnsure that each worktree path is only processed once.\nAdd a test to demonstrate the breakage."
+        }
+      }
+    ],
+    "incoming": {
+      "owner": "David Aguilar",
+      "observed_at": "2016-12-12T00:18:31.000000+00:00",
+      "source": {
+        "speaker": "David Aguilar",
+        "location": "https://github.com/git/git/commit/86defcbe3f6c54a31dc898cb3adb4a3b25f1eb1a",
+        "text": "difftool: fix dir-diff index creation when in a subdirectory\n\n9ec26e7977 (difftool: fix argument handling in subdirs, 2016-07-18)\ncorrected how path arguments are handled in a subdirectory, but\nit introduced a regression in how entries outside of the\nsubdirectory are handled by dir-diff.\n\nWhen preparing the right-side of the diff we only include the\nchanged paths in the temporary area.\n\nThe left side of the diff is constructed from a temporary\nindex that is built from the same set of changed files, but it\nwas being constructed from within the subdirectory.  This is a\nproblem because the indexed paths are toplevel-relative, and\nthus they were not getting added to the index.\n\nTeach difftool to chdir to the toplevel of the repository before\npreparing its temporary indexes.  This ensures that all of the\ntoplevel-relative paths are valid.\n\nAdd test cases to more thoroughly exercise this scenario."
+      }
+    }
+  }
+]

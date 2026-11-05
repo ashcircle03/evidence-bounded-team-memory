@@ -1,0 +1,96 @@
+{
+  "0614929197ee": {
+    "task": "changed condition",
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "source": [
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message"
+    ],
+    "answer": "Revisit the earlier decision reported as “\"git fsck\" bails out with a claim that a loose object that cannot be read but exists on the filesystem to be corrupt, which is wrong when read_object() failed due to e.g. EMFILE.”. The incoming evidence gives the reason. Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message"
+  },
+  "22a75ad9c054": {
+    "task": "difference from alternative",
+    "criterion": "The alternative establishes parent-directory prerequisites for parallel lint-docs directories; the regression is suffix expansion for make info.",
+    "source": [
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules.",
+      "This usually works out, because the LINT_DOCS_GITLINK targets which\ndepend on \"gitlink/howto\" also depend on just \"gitlink\", so the\ndirectory gets created anyway. But since we haven't given make an\nexplicit ordering, things can racily happen out of order."
+    ],
+    "answer": "The other decision addresses implicit rules, whereas the incoming report discusses the behavior of '$*' in explicit rules."
+  },
+  "32650fd09f28": {
+    "task": "changed condition",
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "source": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "answer": "The regression occurred because using a struct strbuf instead of a fixed-size PATH_MAX-sized buffer allowed handling longer paths, but the earlier commit did not account for cases where the strbuf could still be insufficiently large, leading to failures with paths longer than 127 bytes."
+  },
+  "45b2611164ca": {
+    "task": "difference from alternative",
+    "criterion": "The alternative counts downloaded objects to display progress during dumb HTTP fetches; the regression concerns storing/overwriting the index.",
+    "source": [
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat.",
+      "Fetching over dumb HTTP transport doesn't show any progress, even with\nthe option --progress.  If the connection is slow or there is a lot of\ndata to get then this can take a long time while the user is left to\nwonder if git got stuck."
+    ],
+    "answer": "\"The other decision addresses the collision check in finalize_object_file(), which differs from the specific operation in the incoming report by not recognizing the replacement of the remote version with the local one in a file collision scenario.\""
+  },
+  "566413e785c2": {
+    "task": "difference from alternative",
+    "criterion": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "source": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path."
+    ],
+    "answer": "The alternative addresses “1. Do not strip off a leading slash, because that erroneously turns an absolute path into a relative path.”, while the new report concerns “This fixes a regression introduced with 7333ed17 (setup: convert setup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths longer than 127 bytes with components that miss read or execute permissions (e.g. 0711 on /home for privacy reasons); we used a fixed PATH_MAX-sized buffer before.”."
+  },
+  "598ce6371226": {
+    "task": "changed condition",
+    "criterion": "Sharing the cleared suffix list breaks make info's explicit rule because its use of $* depended on a recognized suffix. Must identify that dependency, not merely show a Makefile regression.",
+    "source": [
+      "The reason for that can be seen when comparing that run with\n\"--debug=a\". Without this change making a target like \"git-status.1\"\nwill cause \"make\" to consider not only \"git-status.txt\", but\n\"git-status.txt.o\", as well as numerous other implicit suffixes such\nas \".c\", \".cc\", \".cpp\" etc. See [1] for a more detailed before/after\nexample.",
+      "In an explicit rule, there is no stem; so '$*' cannot be determined\n\tin that way.  Instead, if the target name ends with a recognized\n\tsuffix (*note Old-Fashioned Suffix Rules: Suffix Rules.), '$*' is\n\tset to the target name minus the suffix.  For example, if the\n\ttarget name is 'foo.c', then '$*' is set to 'foo', since '.c' is a\n\tsuffix.  GNU 'make' does this bizarre thing only for compatibility\n\twith other implementations of 'make'.  You should generally avoid\n\tusing '$*' except in implicit rules or static pattern rules."
+    ],
+    "answer": "The regression occurred because the explicit rule did not correctly handle the suffix stripping as expected, leading to the inclusion of unintended targets like \"git-status.txt.o\" instead of just \"git-status.1\"."
+  },
+  "813787288739": {
+    "task": "changed condition",
+    "criterion": "A dumb HTTP fetch with a remote v1 pack index fails after collision checks; the local index can conflict with the downloaded one. At minimum connect the failure/condition and prior collision check.",
+    "source": [
+      "We've had \"FIXME!!! Collision check here ?\" in finalize_object_file()\nsince aac1794132 (Improve sha1 object file writing., 2005-05-03). That\nis, when we try to write a file with the same name, we assume the\non-disk contents are the same and blindly throw away the new copy.",
+      "The regression we saw in the real world was (3a). A recent client\nfetching from a server with a v1 index downloaded that index, then\ncomplained about trying to overwrite it with its own v2 index. This\ncollision is otherwise harmless; we know we want to replace the remote\nversion with our local one, but the collision check doesn't realize\nthat."
+    ],
+    "answer": "The incoming collision check failed to recognize the difference between an outdated version of the index file and a newly fetched updated version, thus incorrectly assuming the on-disk contents were identical and discarding the new file."
+  },
+  "90bee98c0778": {
+    "task": "changed condition",
+    "criterion": "Changing read-error/corruption classification leads fsck to misreport empty loose object files as a read/invalid argument error. Empty loose file, reporting behavior, and connection to the earlier decision are required.",
+    "source": [
+      "\"git fsck\" bails out with a claim that a loose object that cannot be\nread but exists on the filesystem to be corrupt, which is wrong when\nread_object() failed due to e.g. EMFILE.",
+      "Since 3ba7a065527a (A loose object is not corrupt if it\ncannot be read due to EMFILE), \"git fsck\" on a repository with an empty\nloose object file complains with the error message"
+    ],
+    "answer": "Reading the empty loose object file failed with EMFILE, causing read_object() to return without attempting to read the object data, leading to \"git fsck\" incorrectly reporting the object as corrupt."
+  },
+  "b1bc6c3d600a": {
+    "task": "changed condition",
+    "criterion": "Changing the old cwd buffer to strbuf causes failure on long, permission-restricted FreeBSD paths; a smaller buffer can hit EACCES even though a larger one succeeds. Link the buffer change, condition and result.",
+    "source": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+    ],
+    "answer": "Revisit the earlier decision reported as “Convert setup_git_directory_gently_1() and its helper functions setup_explicit_git_dir(), setup_discovered_git_dir() and setup_bare_git_dir() to use a struct strbuf to hold the current working directory. Replacing the PATH_MAX-sized buffer used before removes a path length limition on some file systems. The functions are converted all in one go because they all read and write the variable cwd.”. The incoming evidence gives the reason. This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before."
+  },
+  "b4aab82fa10e": {
+    "task": "difference from alternative",
+    "criterion": "The alternative handles slashes in nonexistent top-level paths; it does not set the getcwd buffer or retry limit.",
+    "source": [
+      "Convert setup_git_directory_gently_1() and its helper functions\nsetup_explicit_git_dir(), setup_discovered_git_dir() and\nsetup_bare_git_dir() to use a struct strbuf to hold the current working\ndirectory.  Replacing the PATH_MAX-sized buffer used before removes a\npath length limition on some file systems.  The functions are converted\nall in one go because they all read and write the variable cwd.",
+      "This fixes a regression introduced with 7333ed17 (setup: convert\nsetup_git_directory_gently_1 et al. to strbuf, 2014-07-28) for paths\nlonger than 127 bytes with components that miss read or execute\npermissions (e.g. 0711 on /home for privacy reasons); we used a fixed\nPATH_MAX-sized buffer before.",
+      "1. Do not strip off a leading slash, because that erroneously turns an\n   absolute path into a relative path."
+    ],
+    "answer": "The other decision addresses not stripping off a leading slash, differing from the specific operation in the incoming report which fixes a regression for paths longer than 127 bytes with permission issues."
+  }
+}
