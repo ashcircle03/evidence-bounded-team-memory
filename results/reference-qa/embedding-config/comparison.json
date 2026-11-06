@@ -1,0 +1,16 @@
+{
+  "model_config": "nreimers/MiniLM-L6-H384-uncased; same existing local model directory",
+  "old_encoder": {
+    "implementation": "CUPMem TransformerRetriever",
+    "pooling": "masked mean",
+    "normalize": "L2",
+    "max_length": 256
+  },
+  "reference_encoder": {
+    "implementation": "LlamaIndex HuggingFaceEmbedding / SentenceTransformer",
+    "pooling": "mean per1_Pooling/config.json",
+    "normalize": "2_Normalize plus adapter normalization",
+    "max_length": 256
+  },
+  "limitation": "Reader chunks use Qwen tokens; embedding limit uses a different tokenizer and256 positions. Long chunks can be truncated for retrieval even though the reader sees the full chunk. This run does not isolate chunking from all other pipeline changes."
+}

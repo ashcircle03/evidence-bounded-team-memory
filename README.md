@@ -10,6 +10,8 @@
 
 ## 현재 구현과 확인 범위
 
+후속 원문 QA는 **LlamaIndex 공식 혼합 검색·작성자 메타데이터·인용 QA와 ConflictScore 공식 문서 판정**을 연결한 `--profile checked` 경로다. 같은 Qwen3-8B와 고정20문항에서 첫 공개 QA 연결의 **15/20 → 19/20**, 기존 정답 **15/15 유지**를 확인했다. 남은 strict zip 상충1건은 한쪽 답을 누락한다. 마지막 한 건을 고치려던 Accumulate 대안은 일반 질문을 망쳐18/20으로 떨어졌으므로 채택하지 않았다. 이미 본 개발 문항의 회귀 검사이며, 일부 실제 호출을 고정 재생했다. [문항별 결과·비용·한계](results/reference-qa/README.md) · [재사용한 구현·설계 근거·사용법](docs/reference-team-profile.md)
+
 호출 경로는 `team_memory.cupmem_practical.PracticalCUPMemService`다. `strategy='simple'`은 원문 검색·독해를 사용하며, 실험 후보 `strategy='cupmem'`은 공식 기억 작성·후보 검색과 후보별 재검토를 연결한다. QA는 두 경로 모두 원문과 실제 검토 상태를 받아 한 번 독해한다. [모듈별 책임과 고정 명세](docs/cupmem-practical-v2.md) · [Python·JSONL 사용법](docs/practical-usage.md)
 
 알려진 Cedar 개발 흐름에서는 후보 QA 5/5, 무관한 입력의 제안 0건, QA당 모델 호출 1회를 확인했다. 실제 Qwen3-8B JSONL 예제도 실행했다. 고정 평가의 결과는 다음과 같다.

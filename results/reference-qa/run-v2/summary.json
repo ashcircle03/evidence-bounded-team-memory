@@ -1,0 +1,87 @@
+{
+  "scope": "Exposed development diagnostic; historical controls, not a new paired holdout",
+  "answer_correct": 15,
+  "answer_and_citation": 15,
+  "total": 20,
+  "simple_answer_and_citation": 7,
+  "cupmem_answer_and_citation": 7,
+  "lost_simple_successes": [
+    "F_SH_Top01_002/premise",
+    "F_SH_Top01_033/premise"
+  ],
+  "gained_over_simple": [
+    "q05-ordinary/simple",
+    "old-pep-615-clean/premise",
+    "old-pep-572-clean/premise",
+    "old-pep-597-clean/premise",
+    "old-pep-618-clean/premise",
+    "old-pep-669-clean/premise",
+    "old-pep-654-clean/premise",
+    "old-pep-553-clean/premise",
+    "pep-680/clean/candidate",
+    "F_SH_Top01_013/premise"
+  ],
+  "by_corpus": {
+    "public_git": {
+      "total": 5,
+      "simple": 4,
+      "cupmem": 4,
+      "reference": 5
+    },
+    "controlled_with_public_source": {
+      "total": 1,
+      "simple": 0,
+      "cupmem": 0,
+      "reference": 0
+    },
+    "controlled": {
+      "total": 1,
+      "simple": 1,
+      "cupmem": 1,
+      "reference": 1
+    },
+    "PEP public source": {
+      "total": 8,
+      "simple": 0,
+      "cupmem": 0,
+      "reference": 8
+    },
+    "PEP public source with controlled counterstatement": {
+      "total": 2,
+      "simple": 0,
+      "cupmem": 0,
+      "reference": 0
+    },
+    "natural EverMemBench-Dynamic QA": {
+      "total": 3,
+      "simple": 2,
+      "cupmem": 2,
+      "reference": 1
+    }
+  },
+  "verification": {
+    "program_complete": true,
+    "planned_qa": 20,
+    "observed_qa": 20,
+    "input_sha256": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+    "originals_preserved": true,
+    "all_returned_offsets_valid": true,
+    "raw_answers_match_physical_model_responses": true,
+    "selected_quotes_present_in_actual_inputs": true,
+    "calls": 20,
+    "max_rendered_prompt_tokens": 2059,
+    "max_output_reservation": 1024,
+    "statuses": {
+      "ok": 20
+    },
+    "unfinished_generations": 0,
+    "result_sha256": "a7256a7410d18a30440c96173e555a14b672f18f02c80c82c5157f6135b8a926",
+    "calls_sha256": "28065f4d7cf20b90a8808283a5b9cda07f6f148c35c048ebc6eb89713c94d406"
+  },
+  "limitations": [
+    "One developer AI rated meaning against original sources; no independent human adjudication.",
+    "Chunking, context size, prompting, metadata visibility and output cap changed together.",
+    "ALCE-compatible export exists; AutoAIS was not run.",
+    "This run does not test new Git reconsideration or owner approval semantics."
+  ]
+}

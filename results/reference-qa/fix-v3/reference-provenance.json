@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/microsoft/ConflictScore",
+  "revision": "a8868e5cd98bff81935a1766b54a02ad3eab9e8f",
+  "upstream_path": "src/eval_with_conflict_score/eval_all_calibration.py",
+  "local_path": "team_memory/_vendor/conflictscore/eval_all_calibration.py",
+  "license": "MIT",
+  "source_sha256": "12c8001d0f70171c7a806ed26958cdc692afeb50c30ed29c247ed19cde4e6888",
+  "used": "evaluate_document_support, unchanged function",
+  "adapter_changes": [
+    "OpenAI transport replaced by existing loopback Qwen adapter",
+    "max_completion_tokens4096 mapped to max_tokens384",
+    "Retrieved chunks grouped by original source ID",
+    "Whole answer checked directly; no claim-decomposition score reported",
+    "Document calls scheduled concurrently; judgments and raw responses retained"
+  ],
+  "feedback": "R-RAG pattern; binary-choice output replaced with source-record QA contract"
+}

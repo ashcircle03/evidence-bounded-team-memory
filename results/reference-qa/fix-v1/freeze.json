@@ -1,0 +1,32 @@
+{
+  "source_version": "cup-ref-fix-v1",
+  "profile": "team",
+  "input_sha256": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+  "files_sha256": {
+    "run.sbatch": "8dccf491cf1157d0052b0fd83f7300b785f915fd704784fd18edbdf266a75227",
+    "config.json": "6fd540d16c6baeed149e3a7a103cbb0fabab06f5a7e8db3147c077ab7f8a262f",
+    "serve.py": "fde459178abe972467f0e03e7a087f304a9a0edb5706c56f56e4a28c5cb6ba5e",
+    "service.py": "52f191c5d400175e60757880d338459f604e1d4f85af3efda7bbba0b4c3a39c5",
+    "inputs.json": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+    "code.tar.gz": "dde5f35b1579bea23fe1b8587f8cd17e80714538a39224aff86be17d2126fa1d",
+    "requirements-extra.txt": "aa4a14fbf311183f021d48c4b72eab84f466c087f171d26e4b1a6ad514568d33",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245"
+  },
+  "previous_result_sha256": "a7256a7410d18a30440c96173e555a14b672f18f02c80c82c5157f6135b8a926",
+  "previous_ratings_sha256": "944edf6d1d19d373d8616dbb301be0dd3561cda0866b328ce51097ae5edd5790",
+  "key_sha256": "3ea20cd9fe22eef8ed6f35b6875738bea313e01df340a2904cb5f5df992bc690",
+  "primary": "Answer correct AND citations support answer AND no unsupported extra claims",
+  "target": {
+    "total": 20,
+    "previous_successes_to_preserve": 15,
+    "failures_to_recover": 5
+  },
+  "interpretation": "Exposed development repair. No holdout or independent human evaluation.",
+  "model_input": "Original histories and questions only; answer keys and ratings excluded",
+  "budget": {
+    "gpus": 1,
+    "wall_minutes": 20,
+    "existing_phase_cap_gpu_minutes": 30
+  },
+  "submit_command": "python3 -m evaluation.cupmem.dispatch submit cup-ref-fix-v1 1 20 run.sbatch config.json serve.py service.py inputs.json code.tar.gz requirements-extra.txt prepare_nltk.py"
+}

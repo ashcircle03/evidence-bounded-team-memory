@@ -1,0 +1,113 @@
+{
+  "status": "partially_resolved",
+  "checked_at": "2026-11-06T01:53:10.634758+00:00",
+  "source_version": "cup-ref-parse-v1",
+  "job_id": "119928",
+  "latest_completed_job": "119944",
+  "selected_results": "results/reference-qa/parse-v1",
+  "rejected_results": "results/reference-qa/accumulate-v1",
+  "semantic_results_available": true,
+  "answer_and_citation": 19,
+  "total": 20,
+  "previous_answer_and_citation": 15,
+  "preserved_previous": 15,
+  "recovered": 4,
+  "remaining": 1,
+  "full_task_completed": false,
+  "remaining_case": "legacy-c000762632771ec9/qa-0",
+  "remaining_problem": "Correct opposing source and label reach revision, but Qwen omits LengthMismatchError.",
+  "claim_level_citation_gap_cases": [
+    "legacy-702e9009795b2802/qa-3",
+    "legacy-702e9009795b2802/qa-7"
+  ],
+  "adopted_profile": "checked",
+  "cli_default": "standard",
+  "accumulate_adopted": false,
+  "all_jobs_terminal": true,
+  "do_not_resubmit": true,
+  "phase_gpu_minutes_cap": 50,
+  "actual_gpu_minutes": 45.55,
+  "additional_approval_gpu_minutes": 20,
+  "next": "No new job scheduled. Preserve19/20 and15/15 required-answer regression result. Last conflict and2 extra-sentence citation gaps remain; irrelevant-record answering must be addressed before using the rejected accumulator.",
+  "baseline_history": {
+    "status": "evaluation_complete",
+    "submitted": true,
+    "job_id": "119845",
+    "source_version": "cup-ref-qa-v2",
+    "planned_gpus": 1,
+    "planned_wall_minutes": 20,
+    "phase_gpu_minutes_cap": 30,
+    "semantic_results_available": true,
+    "program": "/Users/ashcircle/Dev/데캡디/campaigns/speakermem-dev/source/cup-ref-qa-v2/run.sbatch",
+    "files_sha256": {
+      "run.sbatch": "880fbc3fa7f17e42cc1f6f2b2e539882e54037996bce304d2d4e1e450b8179f5",
+      "config.json": "3a39c2f8cba9bef41540501cfe1105b16ca3f882bbb3a956eae8504ee4e1a72f",
+      "serve.py": "fde459178abe972467f0e03e7a087f304a9a0edb5706c56f56e4a28c5cb6ba5e",
+      "service.py": "32bf11d9f9a7b658034f14ca0f0c669410f5316f5fe7fa6e2326d159d7d2e018",
+      "inputs.json": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+      "code.tar.gz": "73589dd14fbf36e5da4acdab4a2c5dcbb9eaf8717eb9efbc62a4e6de9717c8b5",
+      "requirements-reference.txt": "d5beee6c6d4c45d2d2668de6a42273cec257efc9d733bd034bd5bfa03ec12847",
+      "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245"
+    },
+    "checks": {
+      "integration_tests_passed": 5,
+      "legacy_tests_passed": 223,
+      "originals": 786,
+      "chunks": 832,
+      "invalid_original_offsets": 0,
+      "max_chunk_tokens": 506
+    },
+    "next": "No further jobs scheduled. Keep upstream QA components as a development base; retain explicit failures in retrieval, speaker attribution and unresolved-conflict handling.",
+    "checked_at": "2026-11-05T23:51:04.542597+00:00",
+    "attempts": [
+      {
+        "version": "cup-ref-qa-v1",
+        "job_id": "119844",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed_seconds": 430
+      },
+      {
+        "version": "cup-ref-qa-v2",
+        "job_id": "119845",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed_seconds": 159
+      }
+    ],
+    "first_attempt_error": "NLTK stopwords rejected group-writable bundled data cache for first QA",
+    "recovery": "Fresh official NLTK data in private compute-node directory. No actor/prompt/input/model changes.",
+    "adopted_as_default": false,
+    "actual_gpu_minutes": 9.816666666666666,
+    "answer_and_citation": 15,
+    "total": 20,
+    "lost_simple_successes": [
+      "F_SH_Top01_002/premise",
+      "F_SH_Top01_033/premise"
+    ],
+    "do_not_resubmit": true,
+    "followup": {
+      "source_version": "cup-ref-acc-v1",
+      "job_id": "119944",
+      "status": "accumulate_replay_submitted",
+      "results": "results/reference-qa/accumulate-v1",
+      "submitted": true,
+      "previous_answer_and_citation": 15,
+      "goal": "recover5 while retaining15 on the same20",
+      "checked_at": "2026-11-06T01:32:11.789384+00:00",
+      "previous_failed_attempt": "119861",
+      "phase_gpu_minutes_cap": 50,
+      "previous_attempts": [
+        "119861",
+        "119864"
+      ],
+      "server_state": "SUBMITTED",
+      "next": "Check119944 and score all20; retain119872/119928 physical traces.",
+      "source_freeze_reverified": true,
+      "verified_full_run_job": "119872",
+      "verified_answer_and_citation": 19,
+      "preserved_previous": 15,
+      "remaining_failure": "Qwen revision still omits one opposing record; upstream Accumulate fallback under evaluation"
+    }
+  }
+}

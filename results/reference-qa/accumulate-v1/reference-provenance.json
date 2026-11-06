@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/microsoft/ConflictScore",
+  "revision": "a8868e5cd98bff81935a1766b54a02ad3eab9e8f",
+  "upstream_path": "src/eval_with_conflict_score/eval_all_calibration.py",
+  "local_path": "team_memory/_vendor/conflictscore/eval_all_calibration.py",
+  "license": "MIT",
+  "source_sha256": "12c8001d0f70171c7a806ed26958cdc692afeb50c30ed29c247ed19cde4e6888",
+  "used": "evaluate_document_support, unchanged function",
+  "adapter_changes": [
+    "OpenAI transport replaced by existing loopback Qwen adapter",
+    "max_completion_tokens4096 mapped to max_tokens384",
+    "Retrieved chunks grouped by original source ID",
+    "Whole answer checked directly; no claim-decomposition score reported",
+    "Document calls scheduled concurrently; judgments and raw responses retained"
+  ],
+  "feedback": "R-RAG pattern; binary-choice output replaced with source-record QA contract",
+  "parser": "Upstream JSON, explicit label and XML fallback; unrecognized label is ERROR instead of IRRELEVANT",
+  "accumulate": {
+    "distribution": "llama-index-core",
+    "version": "0.14.25",
+    "module": "llama_index.core.response_synthesizers.accumulate",
+    "source_sha256": "5f3c85cbaf6390e59a3f2e12e40c05dd6eaabcc5a713236c76847038f5c68a35",
+    "url": "https://github.com/run-llama/llama_index/blob/main/llama-index-core/llama_index/core/response_synthesizers/accumulate.py",
+    "modifications": "Subclass captures constituent outputs; generation and concatenation inherited unchanged. Official Citation QA template.",
+    "trigger": "A CONTRADICTS document is absent from returned evidence; use all SUPPORTS/CONTRADICTS source groups"
+  }
+}

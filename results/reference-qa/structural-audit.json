@@ -1,0 +1,20 @@
+{
+  "scope": "Structural audit only: no real embeddings, Qwen generations or semantic QA scores",
+  "upstream": "llama-index-core==0.14.25",
+  "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "legacy_input_sha256": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+  "unique_originals": 786,
+  "nodes": 832,
+  "invalid_original_offsets": [],
+  "max_chunk_tokens": 506,
+  "chunk_size": 512,
+  "chunk_overlap": 64,
+  "previously_broken_ValueError": [
+    {
+      "source_id": "44d1a4fcadb2fbfbc6769c81",
+      "quote": "PEP: 618\nTitle: Add Optional Length-Checking To zip\nAuthor: Brandt Bucher <brandt@python.org>\nSponsor: Antoine Pitrou <antoine@python.org>\nBDFL-Delegate: Guido van Rossum <guido@python.org>\nStatus: Final\nType: Standards Track\nCreated: 01-May-2020\nPython-Version: 3.10\nPost-History: 01-May-2020, 10-May-2020, 16-Jun-2020\nResolution: https://mail.python.org/archives/list/python-dev@python.org/message/NLWB7FVJGMBBMCF4P3ZKUIE53JPDOWJ3\n\n\nAbstract\n========\n\nThis PEP proposes adding an optional ``strict`` boolean keyword\nparameter to the built-in ``zip``.  When enabled, a ``ValueError`` is\nraised if one of the arguments is exhausted before the others.\n\n\nMotivation\n==========\n\nIt is clear from the author's personal experience and a `survey of the\nstandard library <examples_>`_ that much (if not most) ``zip`` usage\ninvolves iterables that *must* be of equal length.  Sometimes this\ninvariant is proven true from the context of the surrounding code, but\noften the data being zipped is passed from the caller, sourced\nseparately, or generated in some fashion.  In any of these cases, the\ndefault behavior of ``zip`` means that faulty refactoring or logic\nerrors could easily result in silently losing data.  These bugs are\nnot only difficult to diagnose, but difficult to even detect at all.\n\nIt is easy to come up with simple cases where this could be a problem.\nFor example, the following code may work fine when ``items`` is a\nsequence, but silently start producing shortened, mismatched results\nif ``items`` is refactored by the caller to be a consumable iterator::\n\n    def apply_calculations(items):\n        transformed = transform(items)\n        for i, t in zip(items, transformed):\n            yield calculate(i, t)\n\nThere are several other ways in which ``zip`` is commonly used.\nIdiomatic tricks are especially susceptible, because they are often\nemployed by users who lack a complete understanding of how the code\nworks.",
+      "start": 0,
+      "end": 1930
+    }
+  ]
+}
