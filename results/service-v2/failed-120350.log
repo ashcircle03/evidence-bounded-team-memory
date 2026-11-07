@@ -1,0 +1,45 @@
+/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/tokenize/punkt.py:1821: RuntimeWarning: NLTK will not read data from '/local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk/120350': it is writable by, or owned by, another account, so a planted or rewritten file would be loaded as trusted data. Make it private to its owner (chmod go-w).
+  lang_dir = find(f"tokenizers/punkt_tab/{lang}/")
+/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/data.py:1531: RuntimeWarning: NLTK will not read data from '/local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk/120350': it is writable by, or owned by, another account, so a planted or rewritten file would be loaded as trusted data. Make it private to its owner (chmod go-w).
+  return find(modified_name, paths)
+Traceback (most recent call last):
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-service-v2-v2/prepare_nltk.py", line 15, in <module>
+    assert len(sent_tokenize('One sentence. Another sentence.'))==2
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/tokenize/__init__.py", line 143, in sent_tokenize
+    tokenizer = _get_punkt_tokenizer(language)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/tokenize/__init__.py", line 105, in _get_punkt_tokenizer
+    return PunktTokenizer(language)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/tokenize/punkt.py", line 1812, in __init__
+    self.load_lang(lang)
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/tokenize/punkt.py", line 1821, in load_lang
+    lang_dir = find(f"tokenizers/punkt_tab/{lang}/")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/lib/python3.11/site-packages/nltk/data.py", line 1636, in find
+    raise exc
+LookupError: 
+**********************************************************************
+  Resource 'punkt_tab' not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  >>> import nltk
+  >>> nltk.download('punkt_tab')
+
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load 'tokenizers/punkt_tab/english/'
+
+  Refused, writable by other accounts (a file planted or
+  rewritten there would be loaded as trusted data):
+    - '/local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk/120350'
+  Make each one private to its owner, e.g.:
+    chmod go-w '/local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk/120350'
+  then download the packages it holds again (force=True): a
+  file changed while it was writable keeps the change.
+
+  Searched in:
+    - '/local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk/120350'
+**********************************************************************
+

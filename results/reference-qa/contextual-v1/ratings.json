@@ -1,0 +1,1795 @@
+{
+  "reviewer": "implementing Codex assistant, source-based review",
+  "independent_human": false,
+  "ratings": {
+    "legacy/legacy-d474ab3d7822c8ac/qa-0/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "fetch.output 원문이 full을 기본값으로 명시한다.",
+      "claim_reviews": [
+        {
+          "text": "Git uses the `full` style by default for printing fetch ref update status.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/fetch.adoc#L59-L63"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "db11b63031320d365a43bed6",
+              "quote": "fetch.output::\n\tControl how ref update status is printed. Valid values are\n\t`full` and `compact`. Default value is `full`. See the\n\tOUTPUT section in linkgit:git-fetch[1] for details.",
+              "start": 0,
+              "end": 183
+            }
+          ],
+          "reason": "fetch.output 원문이 full을 기본값으로 명시한다."
+        }
+      ],
+      "reviewed_output_sha256": "b83a9b55a0da5099c6c5606068e9a61bc9809e024e13ab6d1ae261e011007b68"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-1/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "zdiff3가 양쪽 경계의 일치 행을 제거한다는 문장을 그대로 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The alternate merge conflict style that removes matching lines near either edge of the conflict region is \"zdiff3\".",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/merge.adoc#L1-L15"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "2cd6e6057ddcdebd13c4efe5",
+              "quote": "Another alternate style, \"zdiff3\", is\n\tsimilar to diff3 but removes matching lines on the two sides from\n\tthe conflict region when those matching lines appear near either\n\tthe beginning or end of a conflict region.",
+              "start": 638,
+              "end": 852
+            }
+          ],
+          "reason": "zdiff3가 양쪽 경계의 일치 행을 제거한다는 문장을 그대로 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "469636b21605ab2a08e4f840089a9b0583605296708cdf51cf8c72a47fe2f2fa"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-2/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "format.subjectPrefix 원문이 [PATCH]를 명시한다.",
+      "claim_reviews": [
+        {
+          "text": "The default subject prefix that format-patch puts on its output is '[PATCH]'.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/format.adoc#L40-L43"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "b33cab8c6b4353bf87cad57e",
+              "quote": "The default for format-patch is to output files with the '[PATCH]'\n\tsubject prefix.",
+              "start": 24,
+              "end": 107
+            }
+          ],
+          "reason": "format.subjectPrefix 원문이 [PATCH]를 명시한다."
+        }
+      ],
+      "reviewed_output_sha256": "56347e332953be6fdc1b62c7ada9205727f98ec787be2cc01ab6bfe5eff22d49"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-3/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "notes.mergeStrategy와 기본값 manual이 같은 인용에 있다.",
+      "claim_reviews": [
+        {
+          "text": "The default strategy for resolving notes conflicts when nobody specifies a notes merge strategy is `manual`.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/notes.adoc#L1-L9"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "844dbf9c27f11316fcd46ccc",
+              "quote": "`notes.mergeStrategy`::\n\tWhich merge strategy to choose by default when resolving notes\n\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\n\t`cat_sort_uniq`.  Defaults to `manual`.  See the \"NOTES MERGE STRATEGIES\"\n\tsection of linkgit:git-notes[1] for more information on each strategy.",
+              "start": 0,
+              "end": 302
+            }
+          ],
+          "reason": "notes.mergeStrategy와 기본값 manual이 같은 인용에 있다."
+        }
+      ],
+      "reviewed_output_sha256": "f770a39035bc3c398b3f858ab8c86c39e2119597a15077b9bc51f6296c5c513b"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-4/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "grep.patternType의 default 분기와 grep.extendedRegexp 선택 관계가 인용에 있다.",
+      "claim_reviews": [
+        {
+          "text": "The Git configuration option `grep.extendedRegexp` chooses between 'basic' and 'extended' when `grep.patternType` is set to 'default'.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L7-L13",
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/grep.adoc#L14-L18"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "c7327b8bae355fdb222e5af1",
+              "quote": "grep.patternType::\n\tSet the default matching behavior. Using a value of 'basic', 'extended',\n\t'fixed', or 'perl' will enable the `--basic-regexp`, `--extended-regexp`,\n\t`--fixed-strings`, or `--perl-regexp` option accordingly, while the\n\tvalue 'default' will use the `grep.extendedRegexp` option to choose\n\tbetween 'basic' and 'extended'.",
+              "start": 0,
+              "end": 338
+            },
+            {
+              "source_number": 2,
+              "source_id": "9ea76fc93e05c8ea6b56b946",
+              "quote": "grep.extendedRegexp::\n\tIf set to true, enable `--extended-regexp` option by default. This\n\toption is ignored when the `grep.patternType` option is set to a value\n\tother than 'default'.",
+              "start": 0,
+              "end": 184
+            }
+          ],
+          "reason": "grep.patternType의 default 분기와 grep.extendedRegexp 선택 관계가 인용에 있다."
+        }
+      ],
+      "reviewed_output_sha256": "7a7cff5d0b1cbc3e5b95207495d855e4cdff48fba8f50d48bbf7b3bf308674d8"
+    },
+    "legacy/legacy-ae24415845ae48a7/qa-0/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "upstream과 origin을 각 기록의 근거로 함께 반환한다.",
+      "claim_reviews": [
+        {
+          "text": "The default remote name for a newly cloned repository is upstream.",
+          "supported": true,
+          "source_locations": [
+            "trial://worklog/646956c0e537938abf1125c2"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "f91f3a39ce0a320652cc0633",
+              "quote": "The default remote name for a newly cloned repository is upstream.",
+              "start": 60,
+              "end": 126
+            }
+          ],
+          "reason": "upstream과 origin을 각 기록의 근거로 함께 반환한다."
+        },
+        {
+          "text": "The name of the remote to create when cloning a repository. Defaults to `origin`.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/git/git/blob/683c54c999c301c2cd6f715c411407c413b1d84e/Documentation/config/clone.adoc#L1-L12"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 2,
+              "source_id": "878239f428b41a7f4b24f58a",
+              "quote": "The name of the remote to create when cloning a repository.  Defaults to\n\t`origin`.",
+              "start": 29,
+              "end": 112
+            }
+          ],
+          "reason": "upstream과 origin을 각 기록의 근거로 함께 반환한다."
+        }
+      ],
+      "reviewed_output_sha256": "0ce8a3028e595f511f3b7129200b0d80d7219f0be9b4262489250ad62b85fd2e"
+    },
+    "legacy/legacy-d30bb1f10fe4bfe8/qa-0/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "freshwater→L-2와 brackish→B-8 조건을 각 원문에 연결한다.",
+      "claim_reviews": [
+        {
+          "text": "Each sampler should use the L-2 cartridge for freshwater sites.",
+          "supported": true,
+          "source_locations": [
+            "trial://worklog/4aa08d0501e153ad28103fe5"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "f8ab786ad9476e4962f7a0d4",
+              "quote": "For freshwater sites the field water sampler uses the L-2 cartridge.",
+              "start": 0,
+              "end": 68
+            }
+          ],
+          "reason": "freshwater→L-2와 brackish→B-8 조건을 각 원문에 연결한다."
+        },
+        {
+          "text": "Each sampler should use the B-8 cartridge for brackish sites.",
+          "supported": true,
+          "source_locations": [
+            "trial://worklog/e288efd3c457166052d3dc9a"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 2,
+              "source_id": "cb8639d64cb898545c782f15",
+              "quote": "At brackish sites the field water sampler uses the B-8 cartridge.",
+              "start": 0,
+              "end": 65
+            }
+          ],
+          "reason": "freshwater→L-2와 brackish→B-8 조건을 각 원문에 연결한다."
+        }
+      ],
+      "reviewed_output_sha256": "c99ce19cf8ccf87c24eb1c8dc80c37a21531aa47355b2a696cbe87d987c41cc6"
+    },
+    "legacy/legacy-702e9009795b2802/qa-0/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "시스템 시간대 데이터 부재 시 first-party tzdata 사용을 명시한 구절이다.",
+      "claim_reviews": [
+        {
+          "text": "The PyPI package that supplies the fallback for zoneinfo when system time zone data is unavailable is ``tzdata``.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0615.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "7e8c655d9ab964be2c9dd0f4",
+              "quote": "if no system\ntime zone data is available, the library will fall back to using the\nfirst-party package ``tzdata``, deployed on PyPI.",
+              "start": 583,
+              "end": 714
+            }
+          ],
+          "reason": "시스템 시간대 데이터 부재 시 first-party tzdata 사용을 명시한 구절이다."
+        }
+      ],
+      "reviewed_output_sha256": "4a07f327641487a5af62de30e3f5de4e183ec4e715f97ac18b22cc18582c441a"
+    },
+    "legacy/legacy-702e9009795b2802/qa-1/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "NAME := expr와 표현식 내 대입 관계를 함께 인용한다. 추가로 제안한 범위 밖 출처는 경고로 거절됐고 반환 근거는 유효하다.",
+      "claim_reviews": [
+        {
+          "text": "The notation that assigns a name within a Python expression under the assignment expressions proposal is ``NAME := expr``.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "d60afae8bbc6e0863adaf8cf",
+              "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+              "start": 469,
+              "end": 587
+            }
+          ],
+          "reason": "NAME := expr와 표현식 내 대입 관계를 함께 인용한다. 추가로 제안한 범위 밖 출처는 경고로 거절됐고 반환 근거는 유효하다."
+        }
+      ],
+      "reviewed_output_sha256": "3268edc21eadda01216158e7edf05d5a06d716509e7c7fe9ed228d06045d117f"
+    },
+    "legacy/legacy-702e9009795b2802/qa-2/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "open의 encoding 생략과 locale 기본값에 EncodingWarning을 내는 구절을 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The warning category that signals omitted encoding when open uses the locale default is ``EncodingWarning``.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst",
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0597.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "9cdf2a0f123965fbe7cbf525",
+              "quote": "Add a new warning category ``EncodingWarning``. It is emitted when the\n``encoding`` argument to ``open()`` is omitted and the default\nlocale-specific encoding is used.",
+              "start": 189,
+              "end": 356
+            },
+            {
+              "source_number": 2,
+              "source_id": "9cdf2a0f123965fbe7cbf525",
+              "quote": "Add a new ``EncodingWarning`` warning class as a subclass of\n``Warning``. It is emitted when the ``encoding`` argument is omitted and\nthe default locale-specific encoding is used.",
+              "start": 3665,
+              "end": 3844
+            },
+            {
+              "source_number": 3,
+              "source_id": "9cdf2a0f123965fbe7cbf525",
+              "quote": "Add a new ``EncodingWarning`` warning class as a subclass of\n``Warning``. It is emitted when the ``encoding`` argument is omitted and\nthe default locale-specific encoding is used.",
+              "start": 3665,
+              "end": 3844
+            }
+          ],
+          "reason": "open의 encoding 생략과 locale 기본값에 EncodingWarning을 내는 구절을 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "24a0b91e7705087d09864be9e365029fdc6605d53387b984007281b7bfd880b5"
+    },
+    "legacy/legacy-702e9009795b2802/qa-3/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "ValueError와 길이 불일치는 반환된 PEP 원문이 지지한다. 좁은 인용의 When enabled는 단독으로 strict 조건을 식별하지 못하며 추가 범위 밖 출처도 거절됐다.",
+      "claim_reviews": [
+        {
+          "text": "strict zip raises a ValueError when its iterables have different lengths.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0618.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "44d1a4fcadb2fbfbc6769c81",
+              "quote": "When enabled, a ``ValueError`` is\nraised if one of the arguments is exhausted before the others.",
+              "start": 554,
+              "end": 650
+            }
+          ],
+          "reason": "ValueError와 길이 불일치는 반환된 PEP 원문이 지지한다. 좁은 인용의 When enabled는 단독으로 strict 조건을 식별하지 못하며 추가 범위 밖 출처도 거절됐다."
+        }
+      ],
+      "reviewed_output_sha256": "b3277b30119cccfed793307f7b08d2e56726c8c259b43b878f9d6ee67eca8900"
+    },
+    "legacy/legacy-702e9009795b2802/qa-4/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "sys.monitoring namespace에 관련 함수·상수를 둔다는 문장이다.",
+      "claim_reviews": [
+        {
+          "text": "The namespace that exports the low-impact interpreter monitoring functions and constants is ``sys.monitoring``.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0669.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "e994cfff4b43ae60a24855c6",
+              "quote": "A ``sys.monitoring`` namespace will be added, which will contain\nthe relevant functions and constants.",
+              "start": 1050,
+              "end": 1152
+            }
+          ],
+          "reason": "sys.monitoring namespace에 관련 함수·상수를 둔다는 문장이다."
+        }
+      ],
+      "reviewed_output_sha256": "08560cd1fc8299dfef13db4a9df423afd1dd148ef0b31a237fd7dfd57347d1a1"
+    },
+    "legacy/legacy-702e9009795b2802/qa-5/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "ExceptionGroup과 except* 처리 문법의 관계를 원문이 명시한다.",
+      "claim_reviews": [
+        {
+          "text": "The syntax that handles exception groups in the proposal for multiple unrelated exceptions is ``except*``.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst",
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0654.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "08242b9ceb3b4388c7fb10f3",
+              "quote": "The purpose of this PEP, then, is to add the ``ExceptionGroup`` builtin type\nand the ``except*`` syntax for handling exception groups in the interpreter.",
+              "start": 6733,
+              "end": 6886
+            },
+            {
+              "source_number": 2,
+              "source_id": "08242b9ceb3b4388c7fb10f3",
+              "quote": "A new syntax ``except*`` for handling ``ExceptionGroups``.",
+              "start": 1288,
+              "end": 1346
+            }
+          ],
+          "reason": "ExceptionGroup과 except* 처리 문법의 관계를 원문이 명시한다."
+        }
+      ],
+      "reviewed_output_sha256": "848ae757f802ead1317856e2e7cb120f4caa5938919856c941b288513c24ea15"
+    },
+    "legacy/legacy-702e9009795b2802/qa-6/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "PYTHONBREAKPOINT=0 disables debugging 및 즉시 None 반환을 그대로 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The value of PYTHONBREAKPOINT that makes the default breakpoint hook disable debugging is '0'.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0553.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "17eba532b6b8433f75abf6e9",
+              "quote": "* ``PYTHONBREAKPOINT=0`` disables debugging.  Specifically, with this value\n  ``sys.breakpointhook()`` returns ``None`` immediately.",
+              "start": 4061,
+              "end": 4193
+            }
+          ],
+          "reason": "PYTHONBREAKPOINT=0 disables debugging 및 즉시 None 반환을 그대로 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "c470b213a1fd961165169fa56a66302f27123ba25f66a809714e2d9bf0e4b00f"
+    },
+    "legacy/legacy-702e9009795b2802/qa-7/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "tomllib를 표준 라이브러리 TOML 파서로 추가한다는 원문이다.",
+      "claim_reviews": [
+        {
+          "text": "The standard library module that provides the TOML parser for Python packaging tools is ``tomllib``.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0680.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "713c4e99e3b1918e5b6dcb9e",
+              "quote": "This PEP proposes adding the ``tomllib`` module to the standard library for\nparsing TOML (Tom's Obvious Minimal Language,\n`https://toml.io <https://toml.io/en/>`_).",
+              "start": 757,
+              "end": 921
+            }
+          ],
+          "reason": "tomllib를 표준 라이브러리 TOML 파서로 추가한다는 원문이다."
+        }
+      ],
+      "reviewed_output_sha256": "2f903f25833d6a5332083a9499ae2c024127630f2fe6070645e9ec903d2eaca6"
+    },
+    "legacy/legacy-1d2a1e3271adf133/qa-0/contextual": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "NAME := expr만 답하고 상대 기록의 NAME <- expr를 누락했다. 반환한 한쪽 주장은 원문이 지지하지만 필수 양쪽 답은 보존하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The notation that assigns a name within a Python expression under the assignment expressions proposal is NAME := expr.",
+          "supported": true,
+          "source_locations": [
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst",
+            "https://github.com/python/peps/blob/16991a9ce7b223b38f0b473f51a8a7d94c8b9249/peps/pep-0572.rst"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "d60afae8bbc6e0863adaf8cf",
+              "quote": "This is a proposal for creating a way to assign to variables within an\nexpression using the notation ``NAME := expr``.",
+              "start": 469,
+              "end": 587
+            },
+            {
+              "source_number": 3,
+              "source_id": "d60afae8bbc6e0863adaf8cf",
+              "quote": "This is of the form ``NAME := expr``\nwhere ``expr`` is any valid Python expression other than an\nunparenthesized tuple, and ``NAME`` is an identifier.",
+              "start": 4752,
+              "end": 4902
+            }
+          ],
+          "reason": "NAME := expr만 답하고 상대 기록의 NAME <- expr를 누락했다. 반환한 한쪽 주장은 원문이 지지하지만 필수 양쪽 답은 보존하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "67228a415d0ccd05fbf830b9c827b5f068e65a46a389b848014c6a469d7eebbd"
+    },
+    "legacy/legacy-c000762632771ec9/qa-0/contextual": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Fay의 LengthMismatchError만 답하고 PEP의 ValueError를 누락했다. 한쪽 인용은 맞지만 상충의 양쪽 근거를 보존하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "strict zip raises a LengthMismatchError when its iterables have different lengths.",
+          "supported": true,
+          "source_locations": [
+            "casebook://messages/25ca492f2cdf17bdb4cce7bf"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "80e3480fa35e216e36d37f05",
+              "quote": "Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.",
+              "start": 0,
+              "end": 137
+            }
+          ],
+          "reason": "Fay의 LengthMismatchError만 답하고 PEP의 ValueError를 누락했다. 한쪽 인용은 맞지만 상충의 양쪽 근거를 보존하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "7c084dcd2a8a24bf394383aad975b26975752bf8ed512e5c70feaa126eeb172c"
+    },
+    "legacy/legacy-34429cce545ccddd/qa-0/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Huilan Chen 작성 기록에 EcoTrace 분석과 Confluence 업로드가 함께 있다.",
+      "claim_reviews": [
+        {
+          "text": "Huilan Chen uploaded the final report to Confluence.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-31/Group 3/3"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "9eed399bd98e29b4f9abd153",
+              "quote": "@all Good morning, I have completed the analysis report on our main competitors. It focuses on EcoTrace's features, pricing, and market strategy, especially their Freemium model and user conversion path. The report has been uploaded to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report. @Weihua Zhang @Jianguo Huang @Guohua Han The core conclusion is that they use a minimalist free collaboration feature as a traffic entry point, and then set up a paywall through powerful data analysis and reporting functions. This strategy is very much worth learning from.",
+              "start": 0,
+              "end": 616
+            }
+          ],
+          "reason": "Huilan Chen 작성 기록에 EcoTrace 분석과 Confluence 업로드가 함께 있다."
+        }
+      ],
+      "reviewed_output_sha256": "2d5bdc279e14b37f13ef9d8a68007deacceea589ce0254466f46e3b8f04b182d"
+    },
+    "legacy/legacy-34429cce545ccddd/qa-1/contextual": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "기술평가 보고서에서 데이터 정제·검증에 적어도10영업일이 든다는 문장을 작업명과 함께 반환한다.",
+      "claim_reviews": [
+        {
+          "text": "The preliminary estimated number of workdays required for data cleansing and initial verification is at least 10 working days of data engineer input.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-14/Group 1/5"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "59cc54ef610d1e0d90cfa5c1",
+              "quote": "@Mingzhi Li Boss Li, the draft technical evaluation report on the data quality of the production line energy management system has been completed and uploaded to the project folder. The core conclusion is that the automated cleaning of this data source is quite difficult, and it is initially estimated that at least 10 working days of data engineer input will be required for rule development and initial manual verification.",
+              "start": 0,
+              "end": 426
+            }
+          ],
+          "reason": "기술평가 보고서에서 데이터 정제·검증에 적어도10영업일이 든다는 문장을 작업명과 함께 반환한다."
+        }
+      ],
+      "reviewed_output_sha256": "86c27bf466ad1c6ffb8f5ac43ecc77a89b982f791dfe6a0efbfaa842922346b8"
+    },
+    "legacy/legacy-34429cce545ccddd/qa-2/contextual": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "실제 작성자는 Lizhen Zhou인데 @수신자 Luhao Zhao를 제안자로 답했다. 인용은 이 이름 귀속을 지지하지 않는다.",
+      "claim_reviews": [
+        {
+          "text": "Luhao Zhao suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-24/Group 1/5"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "a7c4bd0229d9d3643b13546f",
+              "quote": "@Luhao Zhao I've read the outline, and it's well-written. Regarding the sections for managers and audit requirements, I suggest adding a question: \"What customizable dimensions would you like the generated reports to have? For example, by time, by emission source, by branch company, etc.\" This is crucial for our subsequent report design.",
+              "start": 0,
+              "end": 339
+            }
+          ],
+          "reason": "실제 작성자는 Lizhen Zhou인데 @수신자 Luhao Zhao를 제안자로 답했다. 인용은 이 이름 귀속을 지지하지 않는다."
+        }
+      ],
+      "reviewed_output_sha256": "4a3eb2bda91f3af91f2431a93dcc1c92e0661d1348f5d902d4d91363ef974aaa"
+    },
+    "ever/F_SH_Top01_026/reader_only": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "경보 규칙 검증 완료와 Confluence 업로드를 한 원문 문단으로 반환한다. 선택 구절의 지시 대상이 복구됐다.",
+      "claim_reviews": [
+        {
+          "text": "The final test report was uploaded to Confluence.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "52942185cf33f9834cb9621c",
+              "quote": "@all [Task Completed] Hello everyone, the task \"Verify the accuracy of alarm rule creation and trigger logic\" for the Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System has been completed. All test cases have passed, including various single conditions, combined conditions, and boundary value scenarios. The few issues discovered yesterday have also all been regression verified and passed. The final test report has been uploaded to Confluence. 🎉",
+              "start": 0,
+              "end": 473
+            }
+          ],
+          "reason": "경보 규칙 검증 완료와 Confluence 업로드를 한 원문 문단으로 반환한다. 선택 구절의 지시 대상이 복구됐다."
+        }
+      ],
+      "reviewed_output_sha256": "6f7c90eab559cca8db8069678e1c5c1b9344996e38a295554b0fb6ac2bd5b71c"
+    },
+    "ever/F_SH_Top01_026/combined": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "경보 규칙 검증 완료와 Confluence 업로드를 한 원문 문단으로 반환한다. 선택 구절의 지시 대상이 복구됐다.",
+      "claim_reviews": [
+        {
+          "text": "The final test report was uploaded to Confluence.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "52942185cf33f9834cb9621c",
+              "quote": "@all [Task Completed] Hello everyone, the task \"Verify the accuracy of alarm rule creation and trigger logic\" for the Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System has been completed. All test cases have passed, including various single conditions, combined conditions, and boundary value scenarios. The few issues discovered yesterday have also all been regression verified and passed. The final test report has been uploaded to Confluence. 🎉",
+              "start": 0,
+              "end": 473
+            }
+          ],
+          "reason": "경보 규칙 검증 완료와 Confluence 업로드를 한 원문 문단으로 반환한다. 선택 구절의 지시 대상이 복구됐다."
+        }
+      ],
+      "reviewed_output_sha256": "8567d72efeee5f089acf95729102ea7a4f4a1668f649c0d1a80b661803a6e2e6"
+    },
+    "ever/F_SH_Top01_026/retrieval_only": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "목적지 Confluence는 맞지만 해당 작업을 명시한 부분을 버려 final test report의 지시 대상을 반환 근거에서 확인할 수 없다. 다른 보고서 관련 부연은 그 구절 자체만 지지된다.",
+      "claim_reviews": [
+        {
+          "text": "After the alarm rule verification task for the energy consumption monitoring system is completed, the final test report was uploaded to Confluence.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "52942185cf33f9834cb9621c",
+              "speaker": "Xinmeng Tian",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8",
+              "start": 417,
+              "end": 471,
+              "quote": "The final test report has been uploaded to Confluence.",
+              "retrieval_number": 1,
+              "observed_at": "2025-10-23 16:45:30"
+            }
+          ],
+          "reason": "목적지 Confluence는 맞지만 해당 작업을 명시한 부분을 버려 final test report의 지시 대상을 반환 근거에서 확인할 수 없다. 다른 보고서 관련 부연은 그 구절 자체만 지지된다."
+        },
+        {
+          "text": "Related documentation and Grafana dashboard addresses have been updated to Confluence.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-27/Group 2/9"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "26fae172d18b686ada5795c9",
+              "speaker": "Lujian Gao",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-27/Group 2/9",
+              "start": 384,
+              "end": 470,
+              "quote": "Related documentation and Grafana dashboard addresses have been updated to Confluence.",
+              "retrieval_number": 2,
+              "observed_at": "2025-11-27 16:45:00"
+            }
+          ],
+          "reason": "목적지 Confluence는 맞지만 해당 작업을 명시한 부분을 버려 final test report의 지시 대상을 반환 근거에서 확인할 수 없다. 다른 보고서 관련 부연은 그 구절 자체만 지지된다."
+        },
+        {
+          "text": "The \"72-Hour Monitoring Summary Report for the Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System After Go-Live\" was uploaded to Confluence.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-18/Group 2/31"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "24caf43aa13e07380be0286d",
+              "speaker": "Yanxuan Luo",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-18/Group 2/31",
+              "start": 106,
+              "end": 274,
+              "quote": "I have uploaded the \"72-Hour Monitoring Summary Report for the Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System After Go-Live\" to Confluence.",
+              "retrieval_number": 3,
+              "observed_at": "2025-12-18 17:30:15"
+            }
+          ],
+          "reason": "목적지 Confluence는 맞지만 해당 작업을 명시한 부분을 버려 final test report의 지시 대상을 반환 근거에서 확인할 수 없다. 다른 보고서 관련 부연은 그 구절 자체만 지지된다."
+        }
+      ],
+      "reviewed_output_sha256": "bd3a6688949e4d5a52dc7471eac801fa845212586e04a77441fe33cc320b12d8"
+    },
+    "ever/F_MH_Top01_015/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "다음 독립 업무 시작이 없다는 기권은 제공된 기록에 부합하나 필수45일 답은 없다. combined는10월24일 완료를 찾았어도12월8일 착수를 찾지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide the required information to determine how long it took the colleague to start the next independent task after completing the performance bottlenecks analysis of the dashboard data query interface in the Carbon Footprint System Group.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-04/Group 1/2"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "af3948e649d0cfb453fc7cd9",
+              "quote": "Morning. I'm on standby. After Hongxin Ding's optimization and deployment, I will immediately perform the final performance verification on all data query APIs for the dashboard. This is the final step of my analysis task.",
+              "start": 0,
+              "end": 222
+            },
+            {
+              "source_number": 2,
+              "source_id": "59f854fbf597c84fac8a8288",
+              "quote": "Good morning everyone, I have some preliminary results from the performance analysis of the dashboard data query API. Currently, I've identified three APIs during dashboard loading that have significantly longer response times, especially with large data volumes, where they can take over 2 seconds. These mainly involve queries for the \"Supplier Performance Trend\" and \"Material Carbon Footprint Traceability\" modules.",
+              "start": 0,
+              "end": 419
+            },
+            {
+              "source_number": 3,
+              "source_id": "ddf388a1032880dc431e391b",
+              "quote": "Morning~ Starting today, I'll be performing a performance analysis on the Kanban data query API. I'll begin by using browser developer tools and Postman to identify all APIs called when the main Kanban board loads. Then, I'll analyze each API's response time and data packet size to pinpoint potential bottlenecks.",
+              "start": 0,
+              "end": 314
+            },
+            {
+              "source_number": 4,
+              "source_id": "509cd8c94992d16454d93d9a",
+              "quote": "Good morning everyone, starting today I will be responsible for analyzing and optimizing database query performance. From a business perspective, the page response is particularly slow when generating group summary reports at the end of the month and when performing multi-dimensional drill-down analysis in the cockpit. @Hong Gong @Xuexin Yin Can we find some time to meet? I can provide you with the specific operation paths and scenarios to help you pinpoint slow queries.",
+              "start": 0,
+              "end": 475
+            }
+          ],
+          "reason": "다음 독립 업무 시작이 없다는 기권은 제공된 기록에 부합하나 필수45일 답은 없다. combined는10월24일 완료를 찾았어도12월8일 착수를 찾지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "e4304139dba1391f4c01189fce5c2ba5e5d36d82bfd2c5c555d9f8af3c62affd"
+    },
+    "ever/F_MH_Top01_015/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "다음 독립 업무 시작이 없다는 기권은 제공된 기록에 부합하나 필수45일 답은 없다. combined는10월24일 완료를 찾았어도12월8일 착수를 찾지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide information about the time it took for the colleague to start the next independent task after completing the performance bottlenecks analysis.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/10",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 3/3"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "af3948e649d0cfb453fc7cd9",
+              "quote": "Morning. I'm on standby. After Hongxin Ding's optimization and deployment, I will immediately perform the final performance verification on all data query APIs for the dashboard. This is the final step of my analysis task.",
+              "start": 0,
+              "end": 222
+            },
+            {
+              "source_number": 2,
+              "source_id": "13c7e878118bc5781c45a471",
+              "quote": "🎉🎉【Good news!】@all The performance test results are out, and the effect is very significant! The average response time of the \"Supplier Performance Trend\" API has dropped directly from over 2 seconds to about 300 milliseconds, and the dashboard loads as smooth as silk. @Hongxin Ding Your optimization is awesome! My dashboard API performance analysis task is hereby successfully completed, and the final report has been uploaded.",
+              "start": 0,
+              "end": 430
+            },
+            {
+              "source_number": 3,
+              "source_id": "ddf388a1032880dc431e391b",
+              "quote": "Morning~ Starting today, I'll be performing a performance analysis on the Kanban data query API. I'll begin by using browser developer tools and Postman to identify all APIs called when the main Kanban board loads. Then, I'll analyze each API's response time and data packet size to pinpoint potential bottlenecks.",
+              "start": 0,
+              "end": 314
+            }
+          ],
+          "reason": "다음 독립 업무 시작이 없다는 기권은 제공된 기록에 부합하나 필수45일 답은 없다. combined는10월24일 완료를 찾았어도12월8일 착수를 찾지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "27b31b7d4629ceb6de51246019a3bffe06d6cd86d1d915184d77f6b0a29573c5"
+    },
+    "ever/F_MH_Top01_015/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "동일 작업의 최종 검증과 완료를 다음 독립 업무 착수로 바꾸어 즉시라고 답했다.45일의 두 번째 끝점은 없다.",
+      "claim_reviews": [
+        {
+          "text": "After completing the performance analysis task on the dashboard data query interface, the colleague started the next independent task immediately.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/10"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "af3948e649d0cfb453fc7cd9",
+              "speaker": "Zixuan Qin",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2",
+              "start": 0,
+              "end": 222,
+              "quote": "Morning. I'm on standby. After Hongxin Ding's optimization and deployment, I will immediately perform the final performance verification on all data query APIs for the dashboard. This is the final step of my analysis task.",
+              "retrieval_number": 1,
+              "observed_at": "2025-10-24 09:10:05"
+            },
+            {
+              "source_id": "13c7e878118bc5781c45a471",
+              "speaker": "Zixuan Qin",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/10",
+              "start": 0,
+              "end": 430,
+              "quote": "🎉🎉【Good news!】@all The performance test results are out, and the effect is very significant! The average response time of the \"Supplier Performance Trend\" API has dropped directly from over 2 seconds to about 300 milliseconds, and the dashboard loads as smooth as silk. @Hongxin Ding Your optimization is awesome! My dashboard API performance analysis task is hereby successfully completed, and the final report has been uploaded.",
+              "retrieval_number": 3,
+              "observed_at": "2025-10-24 15:00:00"
+            }
+          ],
+          "reason": "동일 작업의 최종 검증과 완료를 다음 독립 업무 착수로 바꾸어 즉시라고 답했다.45일의 두 번째 끝점은 없다."
+        }
+      ],
+      "reviewed_output_sha256": "20fcd11872d0f28c40dfd6d6895f12b9d03e6712800591eecac5f63854e5d706"
+    },
+    "ever/F_TP_Top01_002/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "4월7일의 지난 금요일 평가와4월10일 완료로 기간을 추론할 수 있지만 구체적 일수를 알 수 없다고 답했다. 정답7일과 날짜 연결을 보존하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide the specific number of days it took for Lujian Gao to plan the AWS S3 storage solution and design the tenant isolation strategy for the supply chain system.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "b5817b32727ac1fc70c4b6f6",
+              "quote": "Good morning everyone. Regarding the design of our file storage solution, I conducted a preliminary evaluation of Azure Blob and AWS S3 last Friday. From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage, and our other projects are also on AWS. Today, I will start designing the Bucket Policy and directory structure based on S3, for example, isolating by tenant and file type.",
+              "start": 0,
+              "end": 408
+            },
+            {
+              "source_number": 2,
+              "source_id": "4db43b62f9940641bfcb0cac",
+              "quote": "I'm updating you on the progress of the file storage solution. The technical selection has been finalized as AWS S3. Today, I am designing the Bucket Policy to ensure that sensitive files (such as audit reports, certification documents) uploaded by different enterprise tenants are physically isolated and invisible to each other. I am also planning the lifecycle policy to automatically transfer archived files older than one year to a lower-cost storage tier.",
+              "start": 0,
+              "end": 461
+            },
+            {
+              "source_number": 3,
+              "source_id": "7e02728e6d0504090f3ebba3",
+              "quote": "Good morning everyone, regarding the file storage solution, the complete technical design document (based on AWS S3) has been uploaded to Confluence. It includes three main parts: bucket permission policies, lifecycle rules, and recommended directory structure. @Mingzhi Li Boss Li, please review it.",
+              "start": 0,
+              "end": 300
+            }
+          ],
+          "reason": "4월7일의 지난 금요일 평가와4월10일 완료로 기간을 추론할 수 있지만 구체적 일수를 알 수 없다고 답했다. 정답7일과 날짜 연결을 보존하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "612ec60990dd340cdc278c0783479098537621830d44099a594cecb40d8bbe08"
+    },
+    "ever/F_TP_Top01_002/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "4월7일의 지난 금요일 평가와4월10일 완료로 기간을 추론할 수 있지만 구체적 일수를 알 수 없다고 답했다. 정답7일과 날짜 연결을 보존하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide the specific number of days it took for Lujian Gao to plan the AWS S3 storage solution and design the tenant isolation strategy for the supply chain system.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 3/4",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-09/Group 3/2",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "f55d2a622236ecd74f3bcd25",
+              "quote": "@Mingzhi Li Regarding the VPC design for multi-tenant SaaS applications on AWS, I've researched several mainstream patterns: VPC sharing, one VPC per tenant, and hybrid models. Considering our business scenarios and cost control, my preliminary recommendation is to adopt a \"pooled model\" (Siloed Account with Pooled VPC), where all tenants share one application VPC, but strict logical isolation is maintained at the application and data layers. This solution offers a good balance between cost and management complexity. I am currently compiling a detailed comparative analysis report.",
+              "start": 0,
+              "end": 587
+            },
+            {
+              "source_number": 2,
+              "source_id": "b5817b32727ac1fc70c4b6f6",
+              "quote": "Good morning everyone. Regarding the design of our file storage solution, I conducted a preliminary evaluation of Azure Blob and AWS S3 last Friday. From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage, and our other projects are also on AWS. Today, I will start designing the Bucket Policy and directory structure based on S3, for example, isolating by tenant and file type.",
+              "start": 0,
+              "end": 408
+            },
+            {
+              "source_number": 3,
+              "source_id": "4db43b62f9940641bfcb0cac",
+              "quote": "I'm updating you on the progress of the file storage solution. The technical selection has been finalized as AWS S3. Today, I am designing the Bucket Policy to ensure that sensitive files (such as audit reports, certification documents) uploaded by different enterprise tenants are physically isolated and invisible to each other. I am also planning the lifecycle policy to automatically transfer archived files older than one year to a lower-cost storage tier.",
+              "start": 0,
+              "end": 461
+            },
+            {
+              "source_number": 4,
+              "source_id": "178e4781050df72ca2475e33",
+              "quote": "Morning. I've completed the draft design for our file storage solution (AWS S3), specifically regarding bucket permission policies and lifecycle rules, ensuring data isolation between different tenants. Today, I'm mainly working on writing the accompanying documentation, explaining our recommended directory structure, such as how to organize voucher files from different vendors and years. I expect to have the complete solution ready by tomorrow.",
+              "start": 0,
+              "end": 449
+            },
+            {
+              "source_number": 5,
+              "source_id": "7e02728e6d0504090f3ebba3",
+              "quote": "Good morning everyone, regarding the file storage solution, the complete technical design document (based on AWS S3) has been uploaded to Confluence. It includes three main parts: bucket permission policies, lifecycle rules, and recommended directory structure. @Mingzhi Li Boss Li, please review it.",
+              "start": 0,
+              "end": 300
+            }
+          ],
+          "reason": "4월7일의 지난 금요일 평가와4월10일 완료로 기간을 추론할 수 있지만 구체적 일수를 알 수 없다고 답했다. 정답7일과 날짜 연결을 보존하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "a80089b56e42604dd9ea3b3c423ec4a4536c223d9b4d930f763a749abe84989b"
+    },
+    "ever/F_TP_Top01_002/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "5일은 정답의4월4일~10일 양끝 포함7일과 다르며 인용한 진행 보고는5일 기간을 지지하지 않는다.",
+      "claim_reviews": [
+        {
+          "text": "Lujian Gao planned the AWS S3 storage solution and designed the tenant isolation strategy for the supply chain system over a period of 5 days.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-09/Group 3/2",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "b5817b32727ac1fc70c4b6f6",
+              "speaker": "Lujian Gao",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3",
+              "start": 0,
+              "end": 408,
+              "quote": "Good morning everyone. Regarding the design of our file storage solution, I conducted a preliminary evaluation of Azure Blob and AWS S3 last Friday. From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage, and our other projects are also on AWS. Today, I will start designing the Bucket Policy and directory structure based on S3, for example, isolating by tenant and file type.",
+              "retrieval_number": 3,
+              "observed_at": "2025-04-07 09:20:50"
+            },
+            {
+              "source_id": "4db43b62f9940641bfcb0cac",
+              "speaker": "Lujian Gao",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3",
+              "start": 0,
+              "end": 461,
+              "quote": "I'm updating you on the progress of the file storage solution. The technical selection has been finalized as AWS S3. Today, I am designing the Bucket Policy to ensure that sensitive files (such as audit reports, certification documents) uploaded by different enterprise tenants are physically isolated and invisible to each other. I am also planning the lifecycle policy to automatically transfer archived files older than one year to a lower-cost storage tier.",
+              "retrieval_number": 4,
+              "observed_at": "2025-04-08 10:33:45"
+            },
+            {
+              "source_id": "178e4781050df72ca2475e33",
+              "speaker": "Lujian Gao",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-09/Group 3/2",
+              "start": 0,
+              "end": 449,
+              "quote": "Morning. I've completed the draft design for our file storage solution (AWS S3), specifically regarding bucket permission policies and lifecycle rules, ensuring data isolation between different tenants. Today, I'm mainly working on writing the accompanying documentation, explaining our recommended directory structure, such as how to organize voucher files from different vendors and years. I expect to have the complete solution ready by tomorrow.",
+              "retrieval_number": 5,
+              "observed_at": "2025-04-09 09:40:10"
+            },
+            {
+              "source_id": "7e02728e6d0504090f3ebba3",
+              "speaker": "Lujian Gao",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1",
+              "start": 0,
+              "end": 300,
+              "quote": "Good morning everyone, regarding the file storage solution, the complete technical design document (based on AWS S3) has been uploaded to Confluence. It includes three main parts: bucket permission policies, lifecycle rules, and recommended directory structure. @Mingzhi Li Boss Li, please review it.",
+              "retrieval_number": 7,
+              "observed_at": "2025-04-10 09:05:55"
+            }
+          ],
+          "reason": "5일은 정답의4월4일~10일 양끝 포함7일과 다르며 인용한 진행 보고는5일 기간을 지지하지 않는다."
+        }
+      ],
+      "reviewed_output_sha256": "5c551773584f62bee127c5de3b0d32290141450226b01222d33ec2af4b2fe60a"
+    },
+    "ever/MA_U_Top01_005/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "A를 선택했다. 일반 계정 존재 여부의 모호한 응답 정책만으로 잠긴 계정에도 예외가 없다는 결론은 지지되지 않는다. D의 잠금·이메일 중단 규칙은 검색되지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "A",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "873186c5dcd7ab1dc7caec69",
+              "quote": "Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\" Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\"",
+              "start": 26,
+              "end": 421
+            }
+          ],
+          "reason": "A를 선택했다. 일반 계정 존재 여부의 모호한 응답 정책만으로 잠긴 계정에도 예외가 없다는 결론은 지지되지 않는다. D의 잠금·이메일 중단 규칙은 검색되지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "2a014283aa2f9ecc78300d8e724eb2f5c60ca760f0a0dbfddbc8ff82384ab1a9"
+    },
+    "ever/MA_U_Top01_005/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "A를 선택했다. 일반 계정 존재 여부의 모호한 응답 정책만으로 잠긴 계정에도 예외가 없다는 결론은 지지되지 않는다. D의 잠금·이메일 중단 규칙은 검색되지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "A",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "873186c5dcd7ab1dc7caec69",
+              "quote": "Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\" Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\"",
+              "start": 26,
+              "end": 421
+            }
+          ],
+          "reason": "A를 선택했다. 일반 계정 존재 여부의 모호한 응답 정책만으로 잠긴 계정에도 예외가 없다는 결론은 지지되지 않는다. D의 잠금·이메일 중단 규칙은 검색되지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "8d72e0efdf64779b644f3872b15f27d13a0aed3f76f55b3cd1ab1d923fdcd83c"
+    },
+    "ever/MA_U_Top01_005/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "잠긴 계정까지 무조건 통일 응답이라고 확장하고 원문에 없는 정책 식별자·일반 오류코드를 덧붙였다. 마지막 불명확한 잠금 안내의 버그 보고만 원문과 일치한다.",
+      "claim_reviews": [
+        {
+          "text": "The system should return a vague prompt regardless of the account status to prevent user enumeration attacks.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "873186c5dcd7ab1dc7caec69",
+              "speaker": "Guohua Yin",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8",
+              "start": 26,
+              "end": 421,
+              "quote": "Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\" Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\"",
+              "retrieval_number": 1,
+              "observed_at": "2025-05-02 10:15:00"
+            }
+          ],
+          "reason": "잠긴 계정까지 무조건 통일 응답이라고 확장하고 원문에 없는 정책 식별자·일반 오류코드를 덧붙였다. 마지막 불명확한 잠금 안내의 버그 보고만 원문과 일치한다."
+        },
+        {
+          "text": "The front-end feedback logic should ensure that all requests are processed through the `ERR_POLICY_UNIFIED_RESPONSE_V1` policy, uniformly returning the vague prompt \"If this account is registered, you will receive an email.\"",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "873186c5dcd7ab1dc7caec69",
+              "speaker": "Guohua Yin",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8",
+              "start": 26,
+              "end": 421,
+              "quote": "Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\" Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\"",
+              "retrieval_number": 1,
+              "observed_at": "2025-05-02 10:15:00"
+            }
+          ],
+          "reason": "잠긴 계정까지 무조건 통일 응답이라고 확장하고 원문에 없는 정책 식별자·일반 오류코드를 덧붙였다. 마지막 불명확한 잠금 안내의 버그 보고만 원문과 일치한다."
+        },
+        {
+          "text": "The system should not set exceptions for any account status, including when an enterprise account is marked as a 'risky account' and temporarily frozen due to multiple failed password attempts.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "873186c5dcd7ab1dc7caec69",
+              "speaker": "Guohua Yin",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8",
+              "start": 26,
+              "end": 421,
+              "quote": "Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\" Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\"",
+              "retrieval_number": 1,
+              "observed_at": "2025-05-02 10:15:00"
+            }
+          ],
+          "reason": "잠긴 계정까지 무조건 통일 응답이라고 확장하고 원문에 없는 정책 식별자·일반 오류코드를 덧붙였다. 마지막 불명확한 잠금 안내의 버그 보고만 원문과 일치한다."
+        },
+        {
+          "text": "The front-end should return a generic error code that contains no status information when the account is marked as a 'risky account' and temporarily frozen.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-16/Group 2/2"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "deb36ce66eeb308e3934c4ac",
+              "speaker": "Minghua Wei",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-16/Group 2/2",
+              "start": 93,
+              "end": 465,
+              "quote": "Yesterday, I ran through various exceptions and edge cases and found two minor issues: one is that the frontend prompt message is not clear enough when an account is locked due to too many incorrect password attempts; the other is that the email format validation incorrectly flags some uncommon but legitimate email suffixes (like .plus). Both have been recorded in Jira.",
+              "retrieval_number": 8,
+              "observed_at": "2025-10-16 09:18:30"
+            }
+          ],
+          "reason": "잠긴 계정까지 무조건 통일 응답이라고 확장하고 원문에 없는 정책 식별자·일반 오류코드를 덧붙였다. 마지막 불명확한 잠금 안내의 버그 보고만 원문과 일치한다."
+        },
+        {
+          "text": "The front-end prompt message is not clear enough when an account is locked due to too many incorrect password attempts.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-16/Group 2/2"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "deb36ce66eeb308e3934c4ac",
+              "speaker": "Minghua Wei",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-16/Group 2/2",
+              "start": 93,
+              "end": 465,
+              "quote": "Yesterday, I ran through various exceptions and edge cases and found two minor issues: one is that the frontend prompt message is not clear enough when an account is locked due to too many incorrect password attempts; the other is that the email format validation incorrectly flags some uncommon but legitimate email suffixes (like .plus). Both have been recorded in Jira.",
+              "retrieval_number": 8,
+              "observed_at": "2025-10-16 09:18:30"
+            }
+          ],
+          "reason": "잠긴 계정까지 무조건 통일 응답이라고 확장하고 원문에 없는 정책 식별자·일반 오류코드를 덧붙였다. 마지막 불명확한 잠금 안내의 버그 보고만 원문과 일치한다."
+        }
+      ],
+      "reviewed_output_sha256": "69fd61970c721791410a5b88c380abfe887e9b9bae205939ac2a2ec262933e18"
+    },
+    "ever/MA_P_Top01_014/reader_only": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "C의 회계·원가 배분 매핑이 감사 요건이라는 내용을 Lizhen Zhou의 원문으로 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/8"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "78a4f43d3d668e223bf3174f",
+              "quote": "Please make sure that the \"Carbon Asset Management\" module can clearly map the accounting subjects and cost allocation logic that the finance department cares about, which is crucial for subsequent compliance audits.",
+              "start": 79,
+              "end": 295
+            }
+          ],
+          "reason": "C의 회계·원가 배분 매핑이 감사 요건이라는 내용을 Lizhen Zhou의 원문으로 지지한다."
+        }
+      ],
+      "reviewed_output_sha256": "a023b79b464566541ac302af0e9a5f3ea60674f36325becfd93bea320369df5e"
+    },
+    "ever/MA_P_Top01_014/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "원출력에는 C와 올바른 회계 매핑 구절이 있으나 선택 단계가 답·설명 뒤 JSON을 붙여 스키마 파싱에 실패했다. 최종 반환 답은 없다. 검색·독해 지식 부재와 분리한다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "8fe6acdcccfc0707b96aec8e87b6faeaf1d93a2cbba66bf575fc320ea34d9a47"
+    },
+    "ever/MA_P_Top01_014/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "원출력에는 C와 올바른 회계 매핑 구절이 있으나 선택 단계가 답·설명 뒤 JSON을 붙여 스키마 파싱에 실패했다. 최종 반환 답은 없다. 검색·독해 지식 부재와 분리한다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "a5c2881b2e5c984a7e408b9accc26e0abd125722ec1a4ba738198ee77f3cb62e"
+    },
+    "ever/F_SH_Top02_014/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "완료 보고 작성자는 Hanqiang Liang이지만 @수신자 Weijun Xue를 담당자로 답했다.",
+      "claim_reviews": [
+        {
+          "text": "Weijun Xue is responsible for the medication check-in module that needs to be delivered by September 18.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/11"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "cff7fa48fa9f17eeaea22163",
+              "quote": "The front-end development of the medication plan check-in module has been completed. Self-testing passed, and the code has been submitted and a merge requested. @Weijun Xue @Mingzhi Li, please check. The Jira task status has been updated.",
+              "start": 0,
+              "end": 238
+            }
+          ],
+          "reason": "완료 보고 작성자는 Hanqiang Liang이지만 @수신자 Weijun Xue를 담당자로 답했다."
+        }
+      ],
+      "reviewed_output_sha256": "dc63b5c3fb9ab284b14515f941591b4e7a9850b2ce6e2f678fccaec98babf0f2"
+    },
+    "ever/F_SH_Top02_014/retrieval_only": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "9월18일 Mingzhi Li가 Hanqiang Liang의 약물 체크인 모듈을 당일 마감으로 명시한 기록을 찾아 담당자 답을 복구했다. combined는 본인의 완료 보고도 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "Hanqiang Liang is responsible for the medication check-in module that needs to be delivered by September 18.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "76206348f40ec00e9457073d",
+              "speaker": "Mingzhi Li",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/1",
+              "start": 0,
+              "end": 230,
+              "quote": "Good morning everyone. Today is Thursday. Just a reminder to @Hanqiang Liang and @Huihong Tian, your medication check-in module and family member invitation interface are due today. Please make sure to complete the delivery today.",
+              "retrieval_number": 3,
+              "observed_at": "2025-09-18 09:05:30"
+            }
+          ],
+          "reason": "9월18일 Mingzhi Li가 Hanqiang Liang의 약물 체크인 모듈을 당일 마감으로 명시한 기록을 찾아 담당자 답을 복구했다. combined는 본인의 완료 보고도 함께 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "19d66ae46e568edaf934fcc56f3a5fc21fd1a04cb06a757b743050439050e370"
+    },
+    "ever/F_SH_Top02_014/combined": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "9월18일 Mingzhi Li가 Hanqiang Liang의 약물 체크인 모듈을 당일 마감으로 명시한 기록을 찾아 담당자 답을 복구했다. combined는 본인의 완료 보고도 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "Hanqiang Liang is responsible for the medication check-in module.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/11"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "76206348f40ec00e9457073d",
+              "quote": "Good morning everyone. Today is Thursday. Just a reminder to @Hanqiang Liang and @Huihong Tian, your medication check-in module and family member invitation interface are due today. Please make sure to complete the delivery today.",
+              "start": 0,
+              "end": 230
+            },
+            {
+              "source_number": 2,
+              "source_id": "cff7fa48fa9f17eeaea22163",
+              "quote": "The front-end development of the medication plan check-in module has been completed. Self-testing passed, and the code has been submitted and a merge requested. @Weijun Xue @Mingzhi Li, please check. The Jira task status has been updated.",
+              "start": 0,
+              "end": 238
+            }
+          ],
+          "reason": "9월18일 Mingzhi Li가 Hanqiang Liang의 약물 체크인 모듈을 당일 마감으로 명시한 기록을 찾아 담당자 답을 복구했다. combined는 본인의 완료 보고도 함께 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "a9a2c461d8637a207b17da36a8991f3c57e8ddcb501af5a377cafeca37a107ae"
+    },
+    "ever/F_MH_Top02_033/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "다음 독립 작업의 기간을 알 수 없다고 기권했다. 제공된 입력에는2월12일 착수 기록이 없으며 필수19일 답은 없다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide the specific duration or timeline of when the colleague responsible for the competitive product analysis started their next independent task in other project groups.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-29/Group 3/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-04/Group 2/17"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "7079d106e302f1052a6aa1eb",
+              "quote": "The competitive product analysis task is now complete, and everyone is welcome to review it.",
+              "start": 617,
+              "end": 709
+            },
+            {
+              "source_number": 2,
+              "source_id": "d6e2f667d34316616780045c",
+              "quote": "Our \"Real-time Online Diagnosis and Treatment Service System\" has been running for some time, and last Friday @Jianguo Huang also led the completion of the user feedback analysis report for the initial launch phase. I believe it's time to start the project review, systematically summarize experiences, identify problems, and plan for the next phase of iteration.",
+              "start": 23,
+              "end": 386
+            },
+            {
+              "source_number": 3,
+              "source_id": "c0f429df6ca6a67ccd5d8c36",
+              "quote": "Today, I focused on referencing the best practices from the 'Real-time Online Diagnosis and Treatment Service System' project that Boss Li mentioned earlier. I've completed the first draft of the emergency handling section, especially the plans for database master-slave switching and core service degradation.",
+              "start": 76,
+              "end": 386
+            }
+          ],
+          "reason": "다음 독립 작업의 기간을 알 수 없다고 기권했다. 제공된 입력에는2월12일 착수 기록이 없으며 필수19일 답은 없다."
+        }
+      ],
+      "reviewed_output_sha256": "d182c50b07034fc4cfe50b8118c74fa64a5755f91b837432efb9eebfd7dd0ffe"
+    },
+    "ever/F_MH_Top02_033/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "Guoxin Pan의1월24일 완료와 다른 사람 Si Jia의5월7일 착수를 묶어4개월19일이라고 답했다. 인물과 기간 모두 맞지 않는다.",
+      "claim_reviews": [
+        {
+          "text": "The colleague responsible for the in-depth analysis of market competitors started their next independent task in other project groups 4 months and 19 days after completing the competitive product analysis task.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-07/Group 2/4"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "7079d106e302f1052a6aa1eb",
+              "speaker": "Guoxin Pan",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1",
+              "start": 617,
+              "end": 709,
+              "quote": "The competitive product analysis task is now complete, and everyone is welcome to review it.",
+              "retrieval_number": 1,
+              "observed_at": "2025-01-24 09:40:10"
+            },
+            {
+              "source_id": "85a2e426d52909f2787caf77",
+              "speaker": "Si Jia",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-07/Group 2/4",
+              "start": 0,
+              "end": 106,
+              "quote": "Good morning everyone, today I'm officially starting the setup of our project's front-end basic framework.",
+              "retrieval_number": 5,
+              "observed_at": "2025-05-07 09:30:00"
+            }
+          ],
+          "reason": "Guoxin Pan의1월24일 완료와 다른 사람 Si Jia의5월7일 착수를 묶어4개월19일이라고 답했다. 인물과 기간 모두 맞지 않는다."
+        }
+      ],
+      "reviewed_output_sha256": "09dbf6cd560eee7ff7ab6271ab324a83308f8f4ced053b1db7303753c9147d8d"
+    },
+    "ever/F_MH_Top02_033/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "Guoxin Pan의 완료에 다른 사람·프로젝트의5월7일 및9월8일 기록을 묶어124일이라고 답했다. 같은 사람의 다음 업무와 정답19일을 지지하지 못한다.",
+      "claim_reviews": [
+        {
+          "text": "The colleague responsible for the research started their next independent task in other project groups 124 days after completing the in-depth analysis of market competitors.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-07/Group 2/4",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-08/Group 1/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "7079d106e302f1052a6aa1eb",
+              "quote": "The competitive product analysis task is now complete, and everyone is welcome to review it.",
+              "start": 617,
+              "end": 709
+            },
+            {
+              "source_number": 2,
+              "source_id": "c53ea0e702e32ec4cfbff3f6",
+              "quote": "I will compile a detailed comparison table, and the first draft is expected by Thursday.",
+              "start": 474,
+              "end": 562
+            },
+            {
+              "source_number": 3,
+              "source_id": "85a2e426d52909f2787caf77",
+              "quote": "Good morning everyone, today I'm officially starting the setup of our project's front-end basic framework.",
+              "start": 0,
+              "end": 106
+            },
+            {
+              "source_number": 4,
+              "source_id": "c225cfa9e8f5d22b7d5dbc10",
+              "quote": "We have two new tasks starting today.",
+              "start": 51,
+              "end": 88
+            }
+          ],
+          "reason": "Guoxin Pan의 완료에 다른 사람·프로젝트의5월7일 및9월8일 기록을 묶어124일이라고 답했다. 같은 사람의 다음 업무와 정답19일을 지지하지 못한다."
+        }
+      ],
+      "reviewed_output_sha256": "568de7f49ff8dbfe794057f7447012feb4954e95820f79a7a475e99a07f57060"
+    },
+    "ever/F_TP_Top02_048/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "업무 기간을 알 수 없다고 기권했다. 등록 화면의 전체 시작·완료가 빠져10영업일 답을 완성하지 못한다. combined에서는 첫 작업의 완료 기록도 순위에서 빠졌다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide the required information about the number of working days needed for the two tasks.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/21",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-04/Group 3/6"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "596e949d98e434174b4d92c2",
+              "quote": "@Mingzhi Li Here's an end-of-day progress update: The static page framework for the registration and login pages has been built, and the routes have been configured. The interface location for the graphical CAPTCHA has also been reserved. Starting next Monday, we will implement the form validation logic and interface docking.",
+              "start": 0,
+              "end": 327
+            },
+            {
+              "source_number": 2,
+              "source_id": "55e142b88e96e5bef4b20026",
+              "quote": "@all Hello everyone. Today we are officially launching a new project – the \"Personal Health Record and Chronic Disease Management System.\" This project aims to provide users with a comprehensive and continuous health management tool. Our primary task today is to jointly discuss and define the overall vision and scope of the project.",
+              "start": 0,
+              "end": 334
+            },
+            {
+              "source_number": 3,
+              "source_id": "92c680bdc7c3e4f9669d9617",
+              "quote": "@all After a day of discussion and rapid revisions by Huilan Chen, we have reached a clear consensus on the project's vision and scope. It is now officially confirmed: the project vision is \"Empowering individuals, connecting care, and building a new digital health ecosystem.\" The first phase of the project will focus on core personal health record management and initially establish basic institutional functions under the B2B2C model. Data security will be the highest principle throughout.",
+              "start": 0,
+              "end": 494
+            },
+            {
+              "source_number": 4,
+              "source_id": "2afb2d9a6a9add646315e303",
+              "quote": "Good morning everyone, today we are officially launching the business model canvas design for the \"Online Diagnosis and Treatment Service System\". Last week, we had a successful practice with the \"Smart IoT\" project, and we can draw on that experience this time, but we also need to pay attention to the core differences between the two projects. This work is crucial for me, as it will define how we create, deliver, and capture value.",
+              "start": 0,
+              "end": 436
+            }
+          ],
+          "reason": "업무 기간을 알 수 없다고 기권했다. 등록 화면의 전체 시작·완료가 빠져10영업일 답을 완성하지 못한다. combined에서는 첫 작업의 완료 기록도 순위에서 빠졌다."
+        }
+      ],
+      "reviewed_output_sha256": "96de6ac8056b7bbfc12a2a58eb3ef5ed8a321b2e34a06c91eaecddb1cbe4bb68"
+    },
+    "ever/F_TP_Top02_048/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "업무 기간을 알 수 없다고 기권했다. 등록 화면의 전체 시작·완료가 빠져10영업일 답을 완성하지 못한다. 새 top8의1위에는 첫 작업의1월20일 완료가 있지만 구절 선택 단계에서 빠졌다.",
+      "claim_reviews": [
+        {
+          "text": "The records do not provide the required information about the number of working days needed for the two tasks.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/16",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-28/Group 1/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 1,
+              "source_id": "596e949d98e434174b4d92c2",
+              "quote": "@Mingzhi Li Here's an end-of-day progress update: The static page framework for the registration and login pages has been built, and the routes have been configured. The interface location for the graphical CAPTCHA has also been reserved. Starting next Monday, we will implement the form validation logic and interface docking.",
+              "start": 0,
+              "end": 327
+            },
+            {
+              "source_number": 2,
+              "source_id": "aed376b546d98089cbec606d",
+              "quote": "Before knocking off, here's a progress update: The form validation logic for the registration page has been fully completed, and the backend interface has been successfully called to retrieve and display the graphical verification code. Tomorrow, I plan to implement the \"send SMS verification code\" interaction and anti-spam logic, and complete the final registration submission function. The development of the login page will follow closely. Progress is smooth so far.",
+              "start": 0,
+              "end": 471
+            },
+            {
+              "source_number": 3,
+              "source_id": "55e142b88e96e5bef4b20026",
+              "quote": "@all Hello everyone. Today we are officially launching a new project – the \"Personal Health Record and Chronic Disease Management System.\" This project aims to provide users with a comprehensive and continuous health management tool. Our primary task today is to jointly discuss and define the overall vision and scope of the project.",
+              "start": 0,
+              "end": 334
+            },
+            {
+              "source_number": 4,
+              "source_id": "102bae5ae76292da1157493a",
+              "quote": "This is a very challenging project. Technically, the first two things that come to mind are: First, data security and privacy are the lifeline, and the highest standards of design must be adopted. All storage, transmission, and access of Protected Health Information (PHI) require strict encryption and access control. Second, we should consider the synergy between this system and the 'Smart IoT Health Monitoring System' to achieve data interoperability between the two systems. Data generated by users in the monitoring system can directly flow into health records, forming a complete health profile. This scalability needs to be reserved during the initial architectural design phase.",
+              "start": 0,
+              "end": 688
+            },
+            {
+              "source_number": 5,
+              "source_id": "8dd295aa0e32e5f0e21c32cd",
+              "quote": "Good morning, everyone. Today, we are officially launching another critical task for the \"Smart IoT\" project: building the initial Business Model Canvas. This will help us systematically think about how to create, deliver, and capture value, ensuring the project's commercial viability.",
+              "start": 0,
+              "end": 286
+            }
+          ],
+          "reason": "업무 기간을 알 수 없다고 기권했다. 등록 화면의 전체 시작·완료가 빠져10영업일 답을 완성하지 못한다. 새 top8의1위에는 첫 작업의1월20일 완료가 있지만 구절 선택 단계에서 빠졌다."
+        }
+      ],
+      "reviewed_output_sha256": "d6f843523294a79733ab3ad6e1d69f4bd0d52386bc54ed03fb872efa74e6d2c0"
+    },
+    "ever/F_TP_Top02_048/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "등록 화면의7월25·28일 진행 보고만으로2영업일이라고 계산했다. 정답의7영업일과 첫 작업3영업일 합계10을 답하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The development of the user registration page for the health monitoring system, including graphical CAPTCHA and form validation logic, requires a total of 2 working days.",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/16"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "596e949d98e434174b4d92c2",
+              "speaker": "Hanqiang Liang",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26",
+              "start": 0,
+              "end": 327,
+              "quote": "@Mingzhi Li Here's an end-of-day progress update: The static page framework for the registration and login pages has been built, and the routes have been configured. The interface location for the graphical CAPTCHA has also been reserved. Starting next Monday, we will implement the form validation logic and interface docking.",
+              "retrieval_number": 2,
+              "observed_at": "2025-07-25 17:30:50"
+            },
+            {
+              "source_id": "aed376b546d98089cbec606d",
+              "speaker": "Hanqiang Liang",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/16",
+              "start": 0,
+              "end": 471,
+              "quote": "Before knocking off, here's a progress update: The form validation logic for the registration page has been fully completed, and the backend interface has been successfully called to retrieve and display the graphical verification code. Tomorrow, I plan to implement the \"send SMS verification code\" interaction and anti-spam logic, and complete the final registration submission function. The development of the login page will follow closely. Progress is smooth so far.",
+              "retrieval_number": 6,
+              "observed_at": "2025-07-28 17:50:25"
+            }
+          ],
+          "reason": "등록 화면의7월25·28일 진행 보고만으로2영업일이라고 계산했다. 정답의7영업일과 첫 작업3영업일 합계10을 답하지 못했다."
+        },
+        {
+          "text": "The definition of the project vision, technical strategy, and business model during the initial phase of the health records system is a task that is being discussed and planned.",
+          "supported": true,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5",
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-28/Group 1/1"
+          ],
+          "quoted_spans": [
+            {
+              "source_id": "55e142b88e96e5bef4b20026",
+              "speaker": "Weihua Zhang",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1",
+              "start": 0,
+              "end": 334,
+              "quote": "@all Hello everyone. Today we are officially launching a new project – the \"Personal Health Record and Chronic Disease Management System.\" This project aims to provide users with a comprehensive and continuous health management tool. Our primary task today is to jointly discuss and define the overall vision and scope of the project.",
+              "retrieval_number": 3,
+              "observed_at": "2025-01-16 10:00:00"
+            },
+            {
+              "source_id": "102bae5ae76292da1157493a",
+              "speaker": "Mingzhi Li",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5",
+              "start": 0,
+              "end": 688,
+              "quote": "This is a very challenging project. Technically, the first two things that come to mind are: First, data security and privacy are the lifeline, and the highest standards of design must be adopted. All storage, transmission, and access of Protected Health Information (PHI) require strict encryption and access control. Second, we should consider the synergy between this system and the 'Smart IoT Health Monitoring System' to achieve data interoperability between the two systems. Data generated by users in the monitoring system can directly flow into health records, forming a complete health profile. This scalability needs to be reserved during the initial architectural design phase.",
+              "retrieval_number": 4,
+              "observed_at": "2025-01-16 10:40:36"
+            },
+            {
+              "source_id": "8dd295aa0e32e5f0e21c32cd",
+              "speaker": "Weihua Zhang",
+              "location": "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-28/Group 1/1",
+              "start": 0,
+              "end": 286,
+              "quote": "Good morning, everyone. Today, we are officially launching another critical task for the \"Smart IoT\" project: building the initial Business Model Canvas. This will help us systematically think about how to create, deliver, and capture value, ensuring the project's commercial viability.",
+              "retrieval_number": 8,
+              "observed_at": "2025-01-28 09:30:15"
+            }
+          ],
+          "reason": "등록 화면의7월25·28일 진행 보고만으로2영업일이라고 계산했다. 정답의7영업일과 첫 작업3영업일 합계10을 답하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "714ab6ea39cfab1bc9c540b5c6ba170661f71a6dfa2ba531ff2762b27eec35eb"
+    },
+    "ever/MA_U_Top02_034/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "선택 단계가 JSON 계약을 지키지 않아 최종 답이 없다. 새 검색도 일반 보안 회귀 기록에 머물러 P0_SECURITY 예외 발동 규칙을 찾지 못했다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "e89cd08257925bd18245708c252a3afec56e781a90ca2f88d1481c60494556c6"
+    },
+    "ever/MA_U_Top02_034/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "선택 단계가 JSON 계약을 지키지 않아 최종 답이 없다. 새 검색도 일반 보안 회귀 기록에 머물러 P0_SECURITY 예외 발동 규칙을 찾지 못했다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "45ae6677ebf5a8b0f3d61443d40319c4731af4a3abc0714156aa3a8fae45f4bf"
+    },
+    "ever/MA_U_Top02_034/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "선택 단계가 JSON 계약을 지키지 않아 최종 답이 없다. 새 검색도 일반 보안 회귀 기록에 머물러 P0_SECURITY 예외 발동 규칙을 찾지 못했다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "f3756125f04b1f6c209877a75c9154fc5a8bf5afc5b708c76caafd7b1b4833be"
+    },
+    "ever/MA_P_Top02_083/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "C를 선택했지만9월23일 집계 인터페이스 구현 기록은10월8일 WebSocket 전환 승인을 지지하지 않는다. 정답은 polling 유지인 D다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": false,
+          "source_locations": [
+            "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-23/Group 1/2"
+          ],
+          "quoted_spans": [
+            {
+              "source_number": 3,
+              "source_id": "55c05084d4d16f91cbd1a7f5",
+              "quote": "Good morning, Boss Li. Regarding the real-time health data aggregation interface, the interface design and preliminary planning for the database query solution were completed yesterday. Today, we're officially entering the coding phase. I'll start by implementing a basic version that can aggregate real-time heart rate and blood pressure data in minute-level windows. I'm currently writing the SQL for data queries.",
+              "start": 0,
+              "end": 416
+            }
+          ],
+          "reason": "C를 선택했지만9월23일 집계 인터페이스 구현 기록은10월8일 WebSocket 전환 승인을 지지하지 않는다. 정답은 polling 유지인 D다."
+        }
+      ],
+      "reviewed_output_sha256": "0aa89100e9b5265777ef47b3dc0886bf7c4f01e749bda15e57981f9913e48304"
+    },
+    "ever/MA_P_Top02_083/retrieval_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "선택 단계가 JSON 계약을 지키지 않아 최종 답이 없다. 검색된 관련 기술 기록에도 polling 유지·안정화 후 일괄 전환 결정은 없다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "d51e2b2552f8814feb5f39f89d85a12f5db4dd71c32740c229aab607dfa33908"
+    },
+    "ever/MA_P_Top02_083/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "선택 단계가 JSON 계약을 지키지 않아 최종 답이 없다. 검색된 관련 기술 기록에도 polling 유지·안정화 후 일괄 전환 결정은 없다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "010f30d28996bf5aea5dd94fba63dd59463d94f392aac43b8a5cb4411fe86a77"
+    }
+  }
+}

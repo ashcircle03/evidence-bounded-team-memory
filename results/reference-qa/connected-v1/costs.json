@@ -1,0 +1,30 @@
+{
+  "physical_call_groups": {
+    "legacy/connected": {
+      "calls": 40,
+      "prompt_tokens": 102357,
+      "completion_tokens": 5610
+    },
+    "ever/joint": {
+      "calls": 10,
+      "prompt_tokens": 16258,
+      "completion_tokens": 2126
+    },
+    "ever/plan": {
+      "calls": 10,
+      "prompt_tokens": 18051,
+      "completion_tokens": 3761
+    },
+    "ever/reader_only": {
+      "calls": 10,
+      "prompt_tokens": 21141,
+      "completion_tokens": 1680
+    },
+    "ever/combined": {
+      "calls": 10,
+      "prompt_tokens": 24362,
+      "completion_tokens": 2185
+    }
+  },
+  "note": "Ever plan10 is physically shared by reader_only and combined. Add that bucket to either arm for deployment cost; do not count it twice in actual total."
+}

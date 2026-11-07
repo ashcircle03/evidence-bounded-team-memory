@@ -1,0 +1,33 @@
+{
+  "source_version": "cup-ref-simple-v2",
+  "files_sha256": {
+    "run.sbatch": "79caed53ae1a04a1bc26042ef2aa43bd2f6de808d2909fd9c701e433f9e8fd15",
+    "config.json": "df197f7c0e7699aabd82c0aaf86a12ebd6c98ec01147a278cc1dd7a29252a363",
+    "serve.py": "1a4b247799cb7cd2b1bb2c67b50738ea818ae6fcb924ae203f6ed5c2dac154d7",
+    "service.py": "c6c17cbdfd99b83e187a1b62afbe3c6c1d0cecc1d32673b0e21245c791aad71c",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+    "code.tar.gz": "75522ad60950f5be6cfa1be084d2d1661144a6156a07e45815c454df33f6818e",
+    "legacy-contexts.json": "282ca03b6a7321780ecc647a04fd18832419e1284c3d6fa182ae394883cb817a",
+    "transfer-inputs.json": "9145c6be34e29e280f05065344058c23f24d7ab900b6bd3ab9d824662d9f4859"
+  },
+  "evaluation_sha256": {
+    "evaluation/cupmem/practical/legacy.json": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+    "evaluation/cupmem/practical/legacy-key.json": "3ea20cd9fe22eef8ed6f35b6875738bea313e01df340a2904cb5f5df992bc690",
+    "evaluation/reference_qa/simplify/inputs.json": "9145c6be34e29e280f05065344058c23f24d7ab900b6bd3ab9d824662d9f4859",
+    "evaluation/reference_qa/simplify/key.json": "fccc9223d494a23fc7db9672bde7755e2c7e2565a3cb5ba14417d3c0279888bf",
+    "evaluation/reference_qa/simplify/PROTOCOL.md": "705c9ae37b78d90d323d8011f6aea296a1ca2f2f3be7ac7d0375af8dbcd7ce7d"
+  },
+  "previous_sha256": {
+    "cards.json": "9afd0481577434bd43fe2126cf9162598d4a8846623da0de0286c2d5b21b2225",
+    "ratings.json": "ac0cbf8b2577ddd708ec17d2843ffc30fef3c55c48a74029747f44a659edf8e0"
+  },
+  "budget": {
+    "gpus": 1,
+    "wall_minutes": 14,
+    "phase_cap": 90,
+    "cup_cap": 460,
+    "campaign_cap": 760
+  },
+  "submit_command": "python3 -m evaluation.cupmem.dispatch submit cup-ref-simple-v2 1 14 run.sbatch config.json serve.py service.py prepare_nltk.py code.tar.gz legacy-contexts.json transfer-inputs.json",
+  "recovery_change": "evaluation/reference_qa/simplify/run.py: only HTTP extension key"
+}

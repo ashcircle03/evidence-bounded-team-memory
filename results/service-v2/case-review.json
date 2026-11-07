@@ -1,0 +1,69 @@
+{
+  "reviewer": "implementation agent; not independent human evaluation",
+  "scope": "One fixed synthetic three-record stream; seven QA states, not seven independent benchmark questions",
+  "cases": [
+    {
+      "label": "ordinary_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "ok",
+      "strict_claim_attribution_complete": true,
+      "reason": "Same answer and evidence as standalone attributed: Orion.",
+      "raw": "The archive name is Orion [1]."
+    },
+    {
+      "label": "conditions_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "ok",
+      "strict_claim_attribution_complete": true,
+      "reason": "A=10 seconds and B=20 seconds, both original sources retained.",
+      "raw": "Source 1: Under configuration A, a timeout of 10 seconds was reported [1].  \nSource 2: Under configuration B, a timeout of 20 seconds was reported [2]."
+    },
+    {
+      "label": "pending_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "partial",
+      "strict_claim_attribution_complete": false,
+      "reason": "10 remains the reported value;12 explicitly a pending proposal. Two state/history sentences lack document quotes; exact assertion statuses are present.",
+      "raw": "Source 1:  \nUnder configuration A, the timeout was originally reported as 10 seconds [1]. This assertion is pending correction, as Bob explicitly states that the timeout is 12 seconds under the same settings for configuration A [2]. The correction is pending, and the original report remains in the record as an unresolved assertion.  \n\nSource 2:  \nThe correction to the timeout for configuration A is pending, with the proposed value of 12 seconds [2]. The original assertion of 10 seconds is still considered part of the historical record and has not been erased or rejected.  \n\nAnswer: The timeout for configuration A is currently pending correction, with the original reported value of 10 seconds [1] and a proposed correction of 12 seconds [2]."
+    },
+    {
+      "label": "current_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "partial",
+      "strict_claim_attribution_complete": false,
+      "reason": "12 is current after owner approval;10 retained as historical. One approval-state sentence lacks a document quote.",
+      "raw": "Source 1:  \nThe timeout for configuration A was initially reported as 10 seconds [1]. This assertion has been explicitly corrected by Bob, who states that the timeout is 12 seconds under the same settings [2]. The correction has been approved.  \n\nAnswer: The current timeout for configuration A is 12 seconds [2]."
+    },
+    {
+      "label": "unrelated_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "ok",
+      "strict_claim_attribution_complete": true,
+      "reason": "Orion remains answerable despite the timeout correction.",
+      "raw": "The archive name is Orion [1]."
+    },
+    {
+      "label": "historical_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "ok",
+      "strict_claim_attribution_complete": true,
+      "reason": "Alice originally reported10; correct citation, no spurious N1 marker.",
+      "raw": "Alice originally reported a timeout of 10 seconds for configuration A [1]."
+    },
+    {
+      "label": "restart_qa",
+      "primary_answer_supported": true,
+      "primary_original_citations_supported": true,
+      "status": "ok",
+      "strict_claim_attribution_complete": true,
+      "reason": "Orion and review state survive restart.",
+      "raw": "The archive name is Orion [1]."
+    }
+  ]
+}

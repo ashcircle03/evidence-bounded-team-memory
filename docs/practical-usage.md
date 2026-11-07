@@ -1,4 +1,6 @@
-# 원문 입력과 JSON 응답 사용하기
+# 이전 practical 경로 재현
+
+새 팀 연결에는 [service-v2](service-v2.md)를 사용한다. 아래는 이전 고정 실험의 경로다.
 
 이 경로는 UI나 MCP 서버를 만들지 않는다. 호출자는 원문을 보내고 `answers`,
 `proposals`, `status`를 받는다. 고정 평가 후 원문 검색·독해 경로를 개발 기반으로

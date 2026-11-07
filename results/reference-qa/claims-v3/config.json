@@ -1,0 +1,81 @@
+{
+  "project": "/ceph_data/pjw031003/capstone-shared-knowledge",
+  "conda_prefix": "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/cupmem-qwen3-v1",
+  "model_path": "/local_datasets/pjw031003/capstone-shared-knowledge/models/Qwen3-8B/b968826d9c46dd6066d109eabc6255188de91218-http",
+  "model_shared": "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/models/qwen3-8b-b968826d",
+  "model_repo": "Qwen/Qwen3-8B",
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "model_files_sha256": {
+    "config.json": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "model-00001-of-00005.safetensors": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+    "model-00002-of-00005.safetensors": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+    "model-00003-of-00005.safetensors": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+    "model-00004-of-00005.safetensors": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+    "model-00005-of-00005.safetensors": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+    "model.safetensors.index.json": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "embedding": "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/speakermem-v1/models/embed",
+  "python_client": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-qa-v1/reference-env/bin/python",
+  "reference_extras": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-quote-v2/reference-extra:/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-fix-v1/reference-extra",
+  "source_version": "cup-ref-claims-v3",
+  "resources": {
+    "gpus": 1,
+    "cpus": 8,
+    "ram_gb": 48,
+    "wall_minutes": 45
+  },
+  "client_seconds": 2200,
+  "serve_seconds": 2250,
+  "max_calls": 220,
+  "expected_max_calls": 172,
+  "expected_output_rows": 104,
+  "profile": "attribute-first-claims-vs-joint",
+  "excluded_ever_ids": [
+    "F_SH_Top01_002",
+    "F_SH_Top01_013",
+    "F_SH_Top01_033",
+    "F_TP_Top01_018",
+    "MA_P_Top01_001"
+  ],
+  "ever_revision": "a6b210a32248e841967b7b64a64281d2ff3f669d",
+  "wiki_revision": "c20e361f985ed480a659b35d98b49f2311fcd174",
+  "code_sha256": {
+    "team_memory/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "team_memory/store.py": "7a1ecc38dfeacc4a508ff6714d2ce8fd25341e052dba4bab789f1dc490e762ff",
+    "team_memory/reference_qa.py": "85ff16b408f72a7fbdc255f8fd395f2192b886a5f6d9cadde2469701f9eb9b7d",
+    "team_memory/reference_prompts.py": "d269f5082faae1aaab738b11e1b2d54c01100b3d375fef89ce384b212cf03a57",
+    "team_memory/reference_joint.py": "2632992d18bc4662487f7fee53b9fe6a02d00fa7490b59aaf06a7d64235e7054",
+    "team_memory/reference_claims.py": "f4a1d4dd607ce4c292c04710720e2f181471cca682eaba5e56e89f78b0f3b527",
+    "team_memory/reference_quotes.py": "bf20634526ce6129a7a33c53b0d989cc22d010f311b4291a77d3f499df529b0c",
+    "team_memory/reference_fallback.py": "089f26ed86a052de453e166fc789ed98944f5ee7d9fa5fa7e91c566a256fceda",
+    "team_memory/_vendor/langchain_citation/__init__.py": "a654e1dad66b4e506cd1757a594ea4d3a8a001173c075203d9b17cb8b4014ee8",
+    "team_memory/_vendor/langchain_citation/quoted_answer.py": "915ad3d731bffc29742ba34271de006eb4608974f2ad5c6ec573a0e864c2c7a0",
+    "team_memory/_vendor/langchain_citation/LICENSE": "f8eb3fceacf11e506c177df85bfbf4397fd067e2919b87062803b6fc09bf5580",
+    "team_memory/_vendor/attribute_first/prompts.json": "2f517f5a3048c9be6b35063891c362f95dce809a0a8b5baa5ba16e41f82eac16",
+    "team_memory/_vendor/attribute_first/LICENSE": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+    "team_memory/_vendor/attribute_first/NOTICE.md": "5bda5f5444edb3913fa8fa906b807e4d44262f6a61eea65969c32983402f6a4c",
+    "evaluation/reference_qa/expanded/run.py": "f85f6dd63b7736c9b9593ea2a497fd3256374aaef1c19888b6e241bad67c0e1b"
+  },
+  "data_sha256": {
+    "regressions.json": "4c0c90d1e4c3061cba52183d1f1c4b695f73384965479e46ce74074723ebc9d2",
+    "manifest.json": "a5f8543bc227caf634c629af99a1291faba42e4a1cc1065ba38e64a4735e2685",
+    "PROTOCOL.md": "eaedf432796ef52fc4ad00fc9b59779bd8b43870ad3c55ee7298e5c942e1fefb"
+  },
+  "scope": "32 fixed-retrieval historical regressions, pure order pair,10 native Ever development QA,8 Wiki unique questions in3 supplied-context conditions. Not merge/full benchmark evaluation.",
+  "execution_changes": {
+    "model": "Unchanged Qwen3-8B BF16/nonthinking/temperature0/output1024/context32768",
+    "reader": "Attribute First selection then fusion with typed claim-evidence units; no iterative revision or document judge",
+    "retrieval": "Native Ever: whole-topic BM25 top8,512/64; other inputs fixed. Identical witnesses between arms.",
+    "timestamp": "Native unspecified timezone preserved as text; Wiki date unknown. No approval semantics inferred.",
+    "recovery": "Skip native null message groups; resume36 completed outputs with byte-identical physical calls. No actor, prompt, question, seed, model, retrieval or score changes."
+  },
+  "resume_sha256": {
+    "prior-result.json": "f29ec35a398daef1be4a4281660790c1075a32a5845afec19019211d2bbe42e0",
+    "prior-calls.jsonl": "ffbeaec26bbf08180d149014879359fba74040686e8cd25b9dcfe35989dba26b"
+  }
+}

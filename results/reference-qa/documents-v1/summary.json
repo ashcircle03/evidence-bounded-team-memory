@@ -1,0 +1,118 @@
+{
+  "summary": {
+    "legacy/direct": {
+      "n": 20,
+      "answer_correct": 19,
+      "returned_evidence_supports_all_claims": 20,
+      "required_evidence_complete": 19,
+      "all_citations_relevant": 19,
+      "unsupported_extra": 0,
+      "success": 18
+    },
+    "legacy/con": {
+      "n": 20,
+      "answer_correct": 19,
+      "returned_evidence_supports_all_claims": 19,
+      "required_evidence_complete": 19,
+      "all_citations_relevant": 19,
+      "unsupported_extra": 1,
+      "success": 17
+    },
+    "ever/bm25_direct": {
+      "n": 10,
+      "answer_correct": 3,
+      "returned_evidence_supports_all_claims": 2,
+      "required_evidence_complete": 3,
+      "all_citations_relevant": 5,
+      "unsupported_extra": 8,
+      "success": 2
+    },
+    "ever/bm25_con": {
+      "n": 10,
+      "answer_correct": 2,
+      "returned_evidence_supports_all_claims": 2,
+      "required_evidence_complete": 2,
+      "all_citations_relevant": 4,
+      "unsupported_extra": 7,
+      "success": 2
+    },
+    "ever/dense_direct": {
+      "n": 10,
+      "answer_correct": 3,
+      "returned_evidence_supports_all_claims": 3,
+      "required_evidence_complete": 2,
+      "all_citations_relevant": 1,
+      "unsupported_extra": 6,
+      "success": 1
+    },
+    "ever/dense_con": {
+      "n": 10,
+      "answer_correct": 2,
+      "returned_evidence_supports_all_claims": 5,
+      "required_evidence_complete": 2,
+      "all_citations_relevant": 3,
+      "unsupported_extra": 5,
+      "success": 1
+    }
+  },
+  "criteria": {
+    "direct": {
+      "legacy20_preserved": false,
+      "prior_ever_preserved": false,
+      "ever_more_than_prior_best": false,
+      "dense_beats_same_reader_bm25": false,
+      "no_contract_errors": false,
+      "legacy_losses": [
+        "legacy/legacy-ae24415845ae48a7/qa-0/direct",
+        "legacy/legacy-c000762632771ec9/qa-0/direct"
+      ],
+      "ever_losses": [
+        "MA_P_Top01_014",
+        "F_SH_Top02_014"
+      ]
+    },
+    "con": {
+      "legacy20_preserved": false,
+      "prior_ever_preserved": false,
+      "ever_more_than_prior_best": false,
+      "dense_beats_same_reader_bm25": false,
+      "no_contract_errors": false,
+      "legacy_losses": [
+        "legacy/legacy-ae24415845ae48a7/qa-0/con",
+        "legacy/legacy-1d2a1e3271adf133/qa-0/con",
+        "legacy/legacy-c000762632771ec9/qa-0/con"
+      ],
+      "ever_losses": [
+        "MA_P_Top01_014",
+        "F_SH_Top02_014"
+      ]
+    }
+  },
+  "adopt_documents": false,
+  "selected_reading": null,
+  "verification": {
+    "job_id": "120296",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "fixed_hashes_verified": true,
+    "original_all_stop_check_passed": false,
+    "non_stop_calls": [
+      {
+        "split": "ever",
+        "case_id": "MA_P_Top02_083",
+        "arm": "bm25_con"
+      }
+    ],
+    "requests_replayed": 80,
+    "outputs_replayed": 80,
+    "source_bindings_verified": 151,
+    "original_top8_preserved": 10,
+    "prompt_tokens": 230514,
+    "completion_tokens": 11207,
+    "gpu_minutes": 12.483333333333333,
+    "external_model_calls": 0
+  },
+  "reviewer": "implementing Codex, original-source review; not independent or blinded",
+  "independent_human": false,
+  "limitations": "Exposed development, fixed legacy sources, implementing AI source review; not generalization, whole benchmark or merge evaluation."
+}

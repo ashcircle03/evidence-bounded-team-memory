@@ -1,0 +1,34 @@
+{
+  "source_version": "cup-ref-claims-v1",
+  "submission_status": "prepared_not_submitted_budget_approval_required",
+  "files_sha256": {
+    "run.sbatch": "767deb94b156f725242719269d48882d9f9297a34e550c3de61e5d4314aba6b2",
+    "config.json": "2e005010dbe6541f244b58e4ca2cc8a662982a6df0554f796f5a906551707188",
+    "serve.py": "fce6810b4aee5ace0b0aa875c95f45555ce2e68c6ef9c12ff442396810513ddf",
+    "service.py": "d6142d6d2f6cd02f984d75c2023d09ec59ba60c5b4072c4f6c7fb9343cbd5325",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+    "download.py": "4961389d869b4f7159c417060b61ea7a621ac7cebd9e76f12255c29d1de7b01b",
+    "manifest.json": "a5f8543bc227caf634c629af99a1291faba42e4a1cc1065ba38e64a4735e2685",
+    "PROTOCOL.md": "eaedf432796ef52fc4ad00fc9b59779bd8b43870ad3c55ee7298e5c942e1fefb",
+    "regressions.json": "4c0c90d1e4c3061cba52183d1f1c4b695f73384965479e46ce74074723ebc9d2",
+    "code.tar.gz": "0b17f95aa651ee61e7f7257da5bd5d74d6c7f53562f0d16c641b75b8a655b108"
+  },
+  "evaluation_sha256": {
+    "evaluation/cupmem/practical/legacy-key.json": "3ea20cd9fe22eef8ed6f35b6875738bea313e01df340a2904cb5f5df992bc690",
+    "evaluation/reference_qa/simplify/key.json": "fccc9223d494a23fc7db9672bde7755e2c7e2565a3cb5ba14417d3c0279888bf",
+    "evaluation/reference_qa/expanded/PROTOCOL.md": "eaedf432796ef52fc4ad00fc9b59779bd8b43870ad3c55ee7298e5c942e1fefb"
+  },
+  "prior_sha256": {
+    "results/reference-qa/quote-normalized-v1/cards.json": "9afd0481577434bd43fe2126cf9162598d4a8846623da0de0286c2d5b21b2225",
+    "results/reference-qa/quote-normalized-v1/ratings.json": "ac0cbf8b2577ddd708ec17d2843ffc30fef3c55c48a74029747f44a659edf8e0",
+    "results/reference-qa/simplify-v2/cards.json": "71a537f0efc7c183a1ef3fe190cac4e4e14f09901650d6446350f4586cad9510",
+    "results/reference-qa/simplify-v2/ratings.json": "e68f7c430f0e3478df42b367f8c91762ef4ed12fd6615f1dbf1f7c3e2f06a141"
+  },
+  "requested_resources": {
+    "gpus": 1,
+    "wall_minutes": 45,
+    "additional_budget_gpu_minutes": 60,
+    "includes_failures": true
+  },
+  "submit_command": "python -m evaluation.cupmem.dispatch submit cup-ref-claims-v1 1 45 run.sbatch config.json serve.py service.py prepare_nltk.py download.py manifest.json PROTOCOL.md regressions.json code.tar.gz"
+}

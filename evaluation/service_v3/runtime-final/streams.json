@@ -1,0 +1,281 @@
+{
+  "cases": [
+    {
+      "id": "release-correction",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://release-correction/1/Mina",
+            "text": "For release Cedar, the upload cap is 500 MB. The release owner is Hana."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://release-correction/2/Jun",
+          "text": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending",
+          "operation": "ask",
+          "question": "What upload cap currently applies to release Cedar, and is the correction approved?",
+          "temporal_scope": "current"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "approved",
+          "operation": "ask",
+          "question": "What upload cap currently applies to release Cedar, and is the correction approved?",
+          "temporal_scope": "current"
+        },
+        {
+          "label": "historical",
+          "operation": "ask",
+          "question": "What upload cap did Mina originally report for release Cedar?",
+          "temporal_scope": "historical"
+        },
+        {
+          "label": "unrelated",
+          "operation": "ask",
+          "question": "Who is the release owner?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "rejected-calendar",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://rejected-calendar/1/Mina",
+            "text": "For the Delta release, the review meeting is on Monday."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://rejected-calendar/2/Jun",
+          "text": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday."
+        }
+      },
+      "steps": [
+        {
+          "label": "reject",
+          "operation": "review_fixture",
+          "choice": "reject"
+        },
+        {
+          "label": "rejected",
+          "operation": "ask",
+          "question": "What meeting day remains established for the Delta release after owner review?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "compression-conditions",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://compression-conditions/1/Mina",
+            "text": "On the archive benchmark, JPEG quality80 produced files of 600 KB."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://compression-conditions/2/Jun",
+          "text": "On the same archive benchmark, lossless PNG produced files of 900 KB. This used a different encoding from JPEG quality80."
+        }
+      },
+      "steps": [
+        {
+          "label": "both",
+          "operation": "ask",
+          "question": "What file sizes were reported for each encoding on the archive benchmark?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "queue-disagreement",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://queue-disagreement/1/Mina",
+            "text": "For queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://queue-disagreement/2/Jun",
+          "text": "For queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7. I am reporting an independent measurement, not correcting the earlier report."
+        }
+      },
+      "steps": [
+        {
+          "label": "both",
+          "operation": "ask",
+          "question": "What P95 latency measurements were reported for Nimbus under workload W, one worker, build7?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "writer-reopen",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://writer-reopen/1/Mina",
+            "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://writer-reopen/2/Jun",
+          "text": "Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently."
+        }
+      },
+      "steps": [
+        {
+          "label": "plan",
+          "operation": "ask",
+          "question": "Why were parallel writes postponed, and what new evidence warrants revisiting that decision?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "writer-near-miss",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://writer-near-miss/1/Mina",
+            "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://writer-near-miss/2/Jun",
+          "text": "Ledger version4 now completes each serial write in 8 ms after index tuning. It still permits only one writer; no concurrency change was made."
+        }
+      },
+      "steps": [
+        {
+          "label": "plan",
+          "operation": "ask",
+          "question": "Does the new report remove the reason parallel writes were postponed?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "cache-reopen",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://cache-reopen/1/Mina",
+            "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://cache-reopen/2/Jun",
+          "text": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. The new cache deletes entries after 20 seconds."
+        }
+      },
+      "steps": [
+        {
+          "label": "plan",
+          "operation": "ask",
+          "question": "What changed that makes reviewing the earlier session-cache decision warranted?",
+          "temporal_scope": "current"
+        }
+      ]
+    },
+    {
+      "id": "cache-near-miss",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://cache-near-miss/1/Mina",
+            "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://cache-near-miss/2/Jun",
+          "text": "A cache of public product images improved page speed by 15 percent. The session-identifier retention policy has not changed."
+        }
+      },
+      "steps": [
+        {
+          "label": "plan",
+          "operation": "ask",
+          "question": "Does the product-image cache result remove the reason user-session caching was disabled?",
+          "temporal_scope": "current"
+        }
+      ]
+    }
+  ],
+  "scope": "New authored controlled streams; not natural Git"
+}

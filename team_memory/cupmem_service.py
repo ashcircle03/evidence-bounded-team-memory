@@ -14,15 +14,7 @@ from .cupmem_review import review_sources
 from .store import Store, capture, digest, source_envelope
 
 
-TEMPORAL_POLICY = '''Use temporal_scope explicitly. For historical questions retain what was reported
-under its original conditions and identify later corrections as corrections, not erased history.
-For current questions use an approved correction for ONLY its exact old assertion. Unapproved or
-disputed corrections remain unresolved and their approval status must be stated if relevant.
-Approval of reconsideration authorizes reconsideration, not rejection of the earlier measurement.
-Unrelated review links do not affect an answer. Original-search hits are candidates, not verified support.
-Give one answer item per distinct conditional measurement; use kind conditional for multiple settings.
-Do not label two independently reported conditions single. A concise combined answer is allowed when
-it explains one decision and its changed premise. Do not treat native STALE annotations as whole-record deletion.'''
+from .review_policy import TEMPORAL_POLICY
 
 
 def response(operation, status='ok', **fields):

@@ -1,0 +1,41 @@
+{
+  "source_version": "cup-ref-attr-nli-v1",
+  "profile": "attributed",
+  "input_sha256": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+  "files_sha256": {
+    "run.sbatch": "0f4d01156b28c690514476ff523b3c089671705d9b1cf0b6572a0529ed3a0f2b",
+    "config.json": "f4eef9d84336ef2b57648d40feb72a9867d94a15163412040407ec18f9073d77",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+    "inputs.json": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+    "code.tar.gz": "07d868edcbd86cf98f6a887c1c59c4b3688c159fd838ab2c2952707202b3c812",
+    "prior-result.json": "496675f5324f88e571e2150d7e2f7980983c1bfb2bb60afda2f6f0c208e97da5",
+    "prior-calls.jsonl": "e1bda4661acd607916aae240d95cb2b8b4151a27f0dfe0a717f44196338aa661"
+  },
+  "previous_result_sha256": "a7256a7410d18a30440c96173e555a14b672f18f02c80c82c5157f6135b8a926",
+  "previous_ratings_sha256": "944edf6d1d19d373d8616dbb301be0dd3561cda0866b328ce51097ae5edd5790",
+  "key_sha256": "3ea20cd9fe22eef8ed6f35b6875738bea313e01df340a2904cb5f5df992bc690",
+  "primary": "Answer correct AND citations support answer AND no unsupported extra claims",
+  "target": {
+    "total": 20,
+    "previous_successes_to_preserve": 15,
+    "failures_to_recover": 5
+  },
+  "interpretation": "Exposed development repair. No holdout or independent human evaluation.",
+  "model_input": "Original histories and questions only; answer keys and ratings excluded",
+  "budget": {
+    "gpus": 1,
+    "wall_minutes": 12,
+    "approved_phase_cap_gpu_minutes": 70,
+    "project_cap_unchanged": 440
+  },
+  "submit_command": "python3 -m evaluation.cupmem.dispatch submit cup-ref-attr-nli-v1 1 12 run.sbatch config.json prepare_nltk.py inputs.json code.tar.gz prior-result.json prior-calls.jsonl",
+  "prior_failed_attempt": "119861, preserved in fix-v1",
+  "prior_attempt": "119864",
+  "validation": "All20 answer strings must remain exact after removing newly inserted citation prefixes. Audit all NLI choices against original sources, retain19 earlier successes and the recovered conflict.",
+  "expected_new_calls": 0,
+  "checked_reference_sha256": {
+    "result.json": "94ab35bbace3a716c4882ecdc3397a1dc6330746e2d6faf4557839756470a366",
+    "ratings.json": "c69803fabb98ddb379ee84af7ddd18dd96883429415bd199753eddf66acda7b4"
+  },
+  "expected_nli_pairs": 136
+}

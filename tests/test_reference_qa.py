@@ -58,6 +58,43 @@ class ReferenceQAIntegration(unittest.TestCase):
         restarted = ReferenceQA(self.temp.name, **self.options)
         self.assertEqual(restarted.ask('When does it raise?')['citation_sources'], result['citation_sources'])
 
+    def test_joint_profile_uses_existing_retrieval_and_one_generation(self):
+        from team_memory.reference_joint import JointSourceQA
+        service=JointSourceQA(self.temp.name,**self.options)
+        service.import_history([self.source('The color is amber. The second observation reports blue.')])
+        self.output=json.dumps(dict(answers=[dict(answer='The first observation is amber',citations=[dict(source_id=1,quote='The color is amber.')]),dict(answer='The second observation is blue',citations=[dict(source_id=1,quote='The second observation reports blue.')])]))
+        result=service.ask('What colors are recorded?')
+        self.assertEqual(result['status'],'ok')
+        self.assertEqual(len(result['answers']),2)
+        self.assertEqual(len(self.calls),1)
+
+    def test_document_judge_failure_returns_existing_draft(self):
+        from unittest.mock import patch
+        from team_memory.reference_checked import ConflictCheckedQA
+        service=ConflictCheckedQA(self.temp.name,**self.options)
+        service.import_history([self.source('The color is amber.')])
+        self.output='The color is amber [1].'
+        with patch('team_memory.reference_checked.evaluate_document_support',side_effect=TimeoutError('injected')):
+            result=service.ask('What color?')
+        self.assertEqual(result['raw'],self.output)
+        self.assertTrue(result['answers'][0]['evidence'])
+        self.assertEqual(result['status'],'partial')
+        self.assertEqual(result['stage_failures'][0]['stage'],'document_review')
+
+    def test_claims_profile_runs_selection_then_generation_with_provenance(self):
+        from team_memory.reference_claims import ClaimEvidenceQA
+        service=ClaimEvidenceQA(self.temp.name,**self.options)
+        service.import_history([self.source('Amber is recorded. Blue is recorded.')])
+        selection=dict(segments=[dict(source_id=1,quote='Amber is recorded.'),dict(source_id=1,quote='Blue is recorded.')])
+        generated=dict(claims=[dict(text='Amber is recorded.',evidence=[1]),dict(text='Blue is recorded.',evidence=[2])])
+        self.responder=lambda body:json.dumps(selection if len(self.calls)==1 else generated)
+        result=service.ask('What is recorded?')
+        self.assertEqual(result['status'],'ok');self.assertEqual(len(self.calls),2)
+        self.assertEqual(len(result['claims']),2)
+        self.assertIn('record_author',str(self.calls[0]['messages']))
+        self.assertIn('2026-01-01',str(self.calls[1]['messages']))
+        self.assertEqual(result['claims'][0]['evidence'][0]['quote'],'Amber is recorded.')
+
     def test_whole_document_is_not_expanded_and_exact_chat_fits(self):
         text = '\n'.join(f'Record {i}: the platform has a different documented configuration and behavior.'
                          for i in range(4000))
@@ -192,6 +229,96 @@ class ReferenceQAIntegration(unittest.TestCase):
         self.assertEqual(out['generation_segments'],['The value is amber [1].','The value is blue [2].'])
         self.assertEqual(out['cited_numbers'],[1,2])
         self.assertEqual(out['generation_kind'],'llama-index-accumulate')
+
+    @unittest.skipUnless(importlib.util.find_spec('sklearn'), 'Optional ALCE retrieval dependency required')
+    def test_alce_addition_preserves_answer_bytes_and_existing_sources(self):
+        from team_memory.reference_attributed import add_missing_citations
+        from team_memory.reference_qa import format_response
+        import nltk
+        nltk.data.path.insert(0,str(TOKENIZER.parent/'reference-nltk'))
+        w=[dict(source_id='a',quote='The drawing color is amber.',speaker='A',location='test:a',start=0,end=27),
+           dict(source_id='b',quote='The configured delay is seven days.',speaker='B',location='test:b',start=0,end=35)]
+        raw='The drawing color is amber [1].\nThe configured delay is seven days.'
+        before=format_response('What color and delay?',raw,w)
+        out=add_missing_citations(before)
+        self.assertEqual(out['raw'],'The drawing color is amber [1].\n[2] The configured delay is seven days.')
+        self.assertEqual(out['pre_citation_raw'],raw)
+        self.assertEqual(out['cited_numbers'],[1,2])
+        self.assertEqual(before['raw'],raw)
+        self.assertFalse(out['citation_entailment_verified'])
+        self.assertEqual(self.calls,[])
+
+    @unittest.skipUnless(importlib.util.find_spec('sklearn'), 'Optional ALCE retrieval dependency required')
+    def test_aqa_uses_all_contexts_and_rejects_lost_original_evidence(self):
+        from team_memory.reference_attributed import repair_omitted_answer
+        from team_memory.reference_qa import format_response
+        w=[dict(source_id='a',quote='The value is amber.',speaker='A',location='test:a',start=0,end=19),
+           dict(source_id='b',quote='The value is blue.',speaker='B',location='test:b',start=0,end=18)]
+        before=format_response('What value?','The value is amber [1].',w)
+        before.update(draft_raw=before['raw'],revised=True,document_judgments=[
+            dict(source_id='a',label='SUPPORTS',citation_numbers=[1]),
+            dict(source_id='b',label='CONTRADICTS',citation_numbers=[2])])
+        self.output='The value is blue [2].'
+        rejected=repair_omitted_answer('What value?',before,self.llm)
+        self.assertFalse(rejected['aqa_candidate_accepted'])
+        self.assertEqual(rejected['raw'],before['raw'])
+        self.output='Source1 gives amber [1]; Source2 gives blue [2].'
+        accepted=repair_omitted_answer('What value?',before,self.llm)
+        self.assertTrue(accepted['aqa_candidate_accepted'])
+        prompt=str(self.calls[-1]['messages'])
+        for witness in w:self.assertIn(witness['quote'],prompt)
+        self.assertNotIn('gold',prompt)
+
+    def test_quote_attribution_preserves_answer_and_rejects_fabricated_quote(self):
+        from team_memory.reference_quotes import add_quote_citations
+        from team_memory.reference_qa import format_response
+        import nltk
+        nltk.data.path.insert(0,str(TOKENIZER.parent/'reference-nltk'))
+        w=[dict(source_id='a',quote='The color is amber.',speaker='A',location='test:a',start=0,end=19),
+           dict(source_id='b',quote='The delay is seven days.',speaker='B',location='test:b',start=0,end=24)]
+        raw='The color is amber [1]. The delay is seven days.'
+        self.output=json.dumps(dict(question='Color and delay?',answer=[dict(fact='The delay is seven days.',substring_quote=['The delay is seven days.'])]))
+        out=add_quote_citations('Color and delay?',format_response('Color and delay?',raw,w),self.llm)
+        self.assertEqual(out['raw'],'The color is amber [1]. [2] The delay is seven days.')
+        self.assertIn(raw,str(self.calls[-1]['messages']))
+        self.assertEqual(out['cited_numbers'],[1,2])
+        self.output=self.output.replace('"substring_quote": ["The delay is seven days."]','"substring_quote": ["The delay is eight days."]')
+        bad=add_quote_citations('Color and delay?',format_response('Color and delay?',raw,w),self.llm)
+        self.assertEqual(bad['raw'],raw)
+        self.assertEqual(bad['attribution_status'],'partial')
+        self.output='not JSON'
+        malformed=add_quote_citations('Color and delay?',format_response('Color and delay?',raw,w),self.llm)
+        self.assertEqual(malformed['raw'],raw)
+        self.assertTrue(malformed['quote_attribution_error'])
+
+    def test_quote_offsets_tolerate_layout_but_not_changed_code(self):
+        from team_memory.reference_quotes import quote_span
+        source='Setting: ``sample[3]``\n  enables the amber\n mode.'
+        quote='``sample[3]`` enables the amber mode.'
+        span=quote_span(quote,source)
+        self.assertIsNotNone(span)
+        self.assertEqual(source[span[0]:span[1]].split(),quote.split())
+        self.assertIsNone(quote_span(quote.replace('sample[3]','sample3'),source))
+        self.assertIsNone(quote_span(quote.replace('amber','blue'),source))
+
+    @unittest.skipUnless(importlib.util.find_spec('sklearn'), 'Optional ALCE retrieval dependency required')
+    def test_nli_filters_attribution_without_editing_answer(self):
+        from team_memory.reference_attributed import add_missing_citations
+        from team_memory.reference_qa import format_response
+        import nltk
+        nltk.data.path.insert(0,str(TOKENIZER.parent/'reference-nltk'))
+        w=[dict(source_id='a',quote='Amber drawing color mentioned in an unrelated question.',speaker='A',location='test:a',start=0,end=58),
+           dict(source_id='b',quote='The actual drawing color is amber.',speaker='B',location='test:b',start=0,end=33)]
+        class Verifier:
+            def verify(self,docs,claim):
+                return [dict(label='neutral',probabilities=[.01,.01,.98],truncated=False),
+                        dict(label='entailment',probabilities=[.01,.98,.01],truncated=False)]
+        raw='The drawing color is amber.'
+        out=add_missing_citations(format_response('Color?',raw,w),Verifier())
+        self.assertEqual(out['raw'],'[2] '+raw)
+        self.assertEqual(out['pre_citation_raw'],raw)
+        self.assertEqual(out['nli_citation_reviews'][0]['judgments'][1]['label'],'entailment')
+        self.assertFalse(out['citation_entailment_verified'])
 
 
 if __name__ == '__main__':

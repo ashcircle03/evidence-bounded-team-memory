@@ -1,0 +1,30 @@
+{
+  "physical_call_groups": {
+    "legacy/demonstrated": {
+      "calls": 40,
+      "prompt_tokens": 251847,
+      "completion_tokens": 3745
+    },
+    "ever/direct": {
+      "calls": 10,
+      "prompt_tokens": 56831,
+      "completion_tokens": 1635
+    },
+    "ever/select": {
+      "calls": 10,
+      "prompt_tokens": 52781,
+      "completion_tokens": 1805
+    },
+    "ever/reader_only": {
+      "calls": 10,
+      "prompt_tokens": 59602,
+      "completion_tokens": 501
+    },
+    "ever/combined": {
+      "calls": 10,
+      "prompt_tokens": 59602,
+      "completion_tokens": 501
+    }
+  },
+  "note": "Ever select10 is shared by reader_only and combined. Deployment reader_only adds select; combined adds select and retrieve. Do not double count shared selection in physical total."
+}

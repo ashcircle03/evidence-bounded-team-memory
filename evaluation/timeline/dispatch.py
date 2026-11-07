@@ -26,6 +26,21 @@ def save(data):
     tmp=LEDGER.with_suffix('.tmp');tmp.write_text(json.dumps(data,indent=2)+'\n');tmp.replace(LEDGER)
 def mirror():subprocess.run(SCP+[str(LEDGER),HOST+':'+REMOTE_LEDGER],check=True)
 
+def scheduler_max_policy(data, minutes, script):
+    """User-authorized walltime policy, bounded by the live account maximum."""
+    policy=data.get('execution_time_policy',{})
+    if policy.get('mode') not in ('scheduler_account_maximum','fixed_walltime'):
+        return None
+    if not policy.get('authorized_by_user') or policy.get('enforce_cumulative_gpu_caps') is not False:
+        raise RuntimeError('Incomplete scheduler maximum policy')
+    required=policy.get('wall_minutes',policy['max_wall_minutes'])
+    if minutes!=required or required>policy['max_wall_minutes']:
+        raise RuntimeError('User requires the configured walltime for every new allocation')
+    for option,value in [('qos',policy['qos']),('time',policy.get('walltime',policy['max_wall']))]:
+        if not re.search(r'^#SBATCH\s+--'+option+'='+re.escape(value)+r'\s*$',script,re.M):
+            raise RuntimeError('Missing explicit time policy '+option)
+    return policy
+
 def queue_gpu_requests(queue):
     """Reserve all current user jobs, including jobs outside this campaign."""
     rows={}
@@ -47,6 +62,12 @@ def submit(version,gpus,minutes,files):
         if any(p!=lock for p in CAMPAIGN.glob('*.lock')):raise RuntimeError('Another campaign lock exists')
         data=json.loads(LEDGER.read_text())
         if version in data['jobs']:raise RuntimeError('Version already has a dispatch entry; reconcile before retry')
+        policy=scheduler_max_policy(data,minutes,(CAMPAIGN/'source'/version/'run.sbatch').read_text())
+        if policy:
+            live=ssh('sacctmgr -n -P show qos where name='+shlex.quote(policy['qos'])+' format=Name,MaxWall,Flags')
+            fields=live.splitlines()[0].split('|')
+            if fields[:2]!=[policy['qos'],policy['max_wall']] or 'OverPartQOS' not in fields[2].split(','):
+                raise RuntimeError('Account QOS changed; refresh scheduler time policy before submission')
         queue=ssh('squeue -r -h -u pjw031003 -o "%i|%T|%b"')
         print('queue',queue or '(empty)',flush=True)
         running=sum('RUNNING' in line for line in queue.splitlines())
@@ -67,9 +88,9 @@ def submit(version,gpus,minutes,files):
         spent=sum((j.get('elapsed_seconds',0) if j not in open_jobs else j['wall_minutes']*60)*j['gpus'] for j in data['jobs'].values())
         cpu_spent=sum((j.get('elapsed_seconds',0) if j not in open_jobs else j['wall_minutes']*60) for j in data['jobs'].values() if j['gpus']==0)
         if gpus==0 and cpu_spent+60*minutes>60*data['budget']['cpu_only_minutes']:raise RuntimeError('CPU budget exceeded')
-        if spent+60*minutes*gpus>60*data['budget']['single_gpu_minutes']:raise RuntimeError('GPU budget exceeded')
+        if not policy and spent+60*minutes*gpus>60*data['budget']['single_gpu_minutes']:raise RuntimeError('GPU budget exceeded')
         goal=data.get('goal_budgets',{}).get('timeline')
-        if goal and version.startswith(goal['prefix']):
+        if not policy and goal and version.startswith(goal['prefix']):
             used=sum((j.get('elapsed_seconds',0) if j not in open_jobs else j['wall_minutes']*60)*j['gpus']
                      for v,j in data['jobs'].items() if v.startswith(goal['prefix']))
             if used+60*minutes*gpus>60*goal['gpu_minutes']:raise RuntimeError('Timeline goal GPU budget exceeded')
@@ -80,6 +101,7 @@ def submit(version,gpus,minutes,files):
         row=dict(source_version=version,source_sha256=hashes,submission_intent='prepared',job_id=None,
                  gpus=gpus,cpus=8 if gpus<2 else 16,ram_gb=16 if gpus==0 else 48*gpus,
                  wall_minutes=minutes,partition='batch_ugrad',account='ugrad',source_path=dest,state='PREPARED')
+        if policy:row.update(qos=policy['qos'],time_policy=policy['mode'])
         data['jobs'][version]=row;save(data)
         ssh('mkdir -p '+shlex.quote(dest)+' '+REMOTE+'/logs '+REMOTE+'/results')
         subprocess.run(SCP+[str(src/name) for name in files]+[HOST+':'+dest+'/'],check=True)

@@ -1,0 +1,165 @@
+{
+  "scope": "Posthoc source review of already-recorded draft/final pairs; not a new preregistered ablation or independent benchmark",
+  "rater": "Same developer AI re-audit",
+  "draft_score": 6,
+  "final_score": 7,
+  "gained": [
+    "new-conflict-separate",
+    "new-conflict-stat"
+  ],
+  "lost": [
+    "new-author"
+  ],
+  "stage_calls": {
+    "draft": 12,
+    "document_judge": 27,
+    "quote_attribution": 7,
+    "revision": 5
+  },
+  "rows": [
+    {
+      "case_id": "new-rebase",
+      "draft_required_answer_and_source": false,
+      "final_required_answer_and_source": false,
+      "draft": "With `rebase.missingCommitsCheck` set to `error`, if a commit is removed from the interactive todo list, Git will print a warning and stop the rebase process. This prevents the rebase from proceeding until the issue is resolved. To correct the todo list, you can use `git rebase --edit-todo` to manually adjust the list and ensure all commits are accounted for before continuing the rebase.\n\nSource 2:  \nWhen `rebase.missingCommitsCheck` is set to \"error\", git rebase -i will print a warning if some commits are removed (e.g. a line was deleted), however the rebase will still proceed. If set to \"error\", it will print the previous warning and stop the rebase, 'git rebase --edit-todo' can then be used to correct the error.",
+      "final": "[2] With `rebase.missingCommitsCheck` set to `error`, if a commit is removed from the interactive todo list, Git will print a warning and stop the rebase process. [2] This prevents the rebase from proceeding until the issue is resolved. [2] To correct the todo list, you can use `git rebase --edit-todo` to manually adjust the list and ensure all commits are accounted for before continuing the rebase.\n\nSource 2:  \nWhen `rebase.missingCommitsCheck` is set to \"error\", git rebase -i will print a warning if some commits are removed (e.g. [2] a line was deleted), however the rebase will still proceed. [2] If set to \"error\", it will print the previous warning and stop the rebase, 'git rebase --edit-todo' can then be used to correct the error.",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    },
+    {
+      "case_id": "new-pull",
+      "draft_required_answer_and_source": true,
+      "final_required_answer_and_source": true,
+      "draft": "When `pull.ff=only` is set, it allows only fast-forward merges when pulling, which is equivalent to using the `--ff-only` option from the command line. Additionally, the `pull.ff` setting overrides the `merge.ff` setting when pulling.\n\nAnswer: `pull.ff=only` allows only fast-forward merges when pulling [1]. This setting overrides the `merge.ff` merge setting when pulling [1].",
+      "final": "[1] When `pull.ff=only` is set, it allows only fast-forward merges when pulling, which is equivalent to using the `--ff-only` option from the command line. [1] Additionally, the `pull.ff` setting overrides the `merge.ff` setting when pulling.\n\nAnswer: `pull.ff=only` allows only fast-forward merges when pulling [1]. This setting overrides the `merge.ff` merge setting when pulling [1].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    },
+    {
+      "case_id": "new-push",
+      "draft_required_answer_and_source": true,
+      "final_required_answer_and_source": true,
+      "draft": "When `push.autoSetupRemote` is set to \"true\" and the current branch has no upstream tracking, it assumes `--set-upstream` on a default push. This option takes effect with the `push.default` options 'simple', 'upstream', and 'current' [1].",
+      "final": "[1] When `push.autoSetupRemote` is set to \"true\" and the current branch has no upstream tracking, it assumes `--set-upstream` on a default push. This option takes effect with the `push.default` options 'simple', 'upstream', and 'current' [1].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    },
+    {
+      "case_id": "new-rerere",
+      "draft_required_answer_and_source": true,
+      "final_required_answer_and_source": true,
+      "draft": "The default of `rerere.autoUpdate` is false. Enabling it allows `git-rerere` to update the index with the resulting contents after it cleanly resolves conflicts using previously recorded resolutions [1]. \n\nSource 1:  \nThe default value for `rerere.autoUpdate` is false, and when enabled, it updates the index with the resulting contents after conflicts are resolved using previously recorded resolutions [1].",
+      "final": "The default of `rerere.autoUpdate` is false. Enabling it allows `git-rerere` to update the index with the resulting contents after it cleanly resolves conflicts using previously recorded resolutions [1]. \n\nSource 1:  \nThe default value for `rerere.autoUpdate` is false, and when enabled, it updates the index with the resulting contents after conflicts are resolved using previously recorded resolutions [1].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    },
+    {
+      "case_id": "new-conflict-separate",
+      "draft_required_answer_and_source": false,
+      "final_required_answer_and_source": true,
+      "draft": "Source 1:\nThe default for `rerere.autoUpdate` is stated as true when the setting is unset [1].",
+      "final": "Source 1: The default for `rerere.autoUpdate` is stated as true when the setting is unset [1].  \nSource 2: The default for `rerere.autoUpdate` is stated as false when the setting is unset [2].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 3,
+        "revision": 1
+      }
+    },
+    {
+      "case_id": "new-conflict-one-source",
+      "draft_required_answer_and_source": false,
+      "final_required_answer_and_source": false,
+      "draft": "Source 1:\nThe default for `rerere.autoUpdate` is stated as true when the setting is unset [1]. \n\nSource 2:\nNo specific information about `rerere.autoUpdate` is provided in this source. \n\nAnswer: The default for `rerere.autoUpdate` is stated as true when the setting is unset [1].",
+      "final": "Source 1: The default for `rerere.autoUpdate` is stated as false when the setting is unset [1]. \n\nSource 2: No specific information about `rerere.autoUpdate` is provided in this source. \n\nAnswer: The default for `rerere.autoUpdate` is stated as false when the setting is unset [1].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "revision": 1
+      }
+    },
+    {
+      "case_id": "new-conflict-one-source-reversed",
+      "draft_required_answer_and_source": false,
+      "final_required_answer_and_source": false,
+      "draft": "Source 1:\nThe default for `rerere.autoUpdate` is stated as true when the setting is unset [1].",
+      "final": "Source 1: The default for `rerere.autoUpdate` is stated as false when the setting is unset [1].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "revision": 1
+      }
+    },
+    {
+      "case_id": "new-conflict-stat",
+      "draft_required_answer_and_source": false,
+      "final_required_answer_and_source": true,
+      "draft": "Source 1:\nThe default value for `rebase.stat` is set to `true` according to the lab report, while the manual does not explicitly mention the default value for `rebase.stat` [1]. However, based on the context provided in the lab report, it can be inferred that the default value for `rebase.stat` is `true`.",
+      "final": "Source 1: The default value for `rebase.stat` is `true` [1]. Source 2: The default value for `rebase.stat` is `false` [2].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 3,
+        "revision": 1
+      }
+    },
+    {
+      "case_id": "new-conditions",
+      "draft_required_answer_and_source": false,
+      "final_required_answer_and_source": false,
+      "draft": "For a removed todo entry, in local reviews the procedure uses `rebase.missingCommitsCheck=warn`, which prints a warning but allows the rebase to proceed. In CI, the procedure uses `rebase.missingCommitsCheck=error`, which prints a warning and stops the rebase, requiring the user to correct the error using `git rebase --edit-todo` [1].",
+      "final": "[1] For a removed todo entry, in local reviews the procedure uses `rebase.missingCommitsCheck=warn`, which prints a warning but allows the rebase to proceed. In CI, the procedure uses `rebase.missingCommitsCheck=error`, which prints a warning and stops the rebase, requiring the user to correct the error using `git rebase --edit-todo` [1].",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    },
+    {
+      "case_id": "new-unrelated",
+      "draft_required_answer_and_source": true,
+      "final_required_answer_and_source": true,
+      "draft": "The documented default of `rerere.autoUpdate` is false. This is indicated in the description of `rerere.autoUpdate`, which states that it defaults to false [2]. \n\nSource 2:\nrerere.autoUpdate:: When set to true, `git-rerere` updates the index with the resulting contents after it cleanly resolves conflicts using previously recorded resolutions. Defaults to false.",
+      "final": "[2] The documented default of `rerere.autoUpdate` is false. This is indicated in the description of `rerere.autoUpdate`, which states that it defaults to false [2]. \n\nSource 2:\nrerere.autoUpdate:: When set to true, `git-rerere` updates the index with the resulting contents after it cleanly resolves conflicts using previously recorded resolutions. [2] Defaults to false.",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    },
+    {
+      "case_id": "new-author",
+      "draft_required_answer_and_source": true,
+      "final_required_answer_and_source": false,
+      "draft": "Source 1:\nThe report confirming push.autoSetupRemote and --set-upstream was written by Mira.",
+      "final": "Source 1: The report confirming push.autoSetupRemote and --set-upstream was written by Mira. [1]  \nSource 2: The report confirming push.autoSetupRemote and --set-upstream was written by Git documentation. [2]  \nSource 4: The report confirming push.autoSetupRemote and --set-upstream was written by Eli. [4]",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 3,
+        "revision": 1
+      }
+    },
+    {
+      "case_id": "new-no-answer",
+      "draft_required_answer_and_source": true,
+      "final_required_answer_and_source": true,
+      "draft": "None of the provided sources mention the default value of `gc.auto`. Therefore, it is not possible to answer the query based on the given information.",
+      "final": "None of the provided sources mention the default value of `gc.auto`. Therefore, it is not possible to answer the query based on the given information.",
+      "stage_calls": {
+        "draft": 1,
+        "document_judge": 2,
+        "quote_attribution": 1
+      }
+    }
+  ]
+}

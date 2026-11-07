@@ -1,0 +1,149 @@
+{
+  "state": [
+    {
+      "id": "release-correction/pending",
+      "arm": "direct",
+      "initial_call": 266,
+      "review_context": {
+        "temporal_scope": "current",
+        "relations": [
+          {
+            "history": [
+              "eb65c257995f86bfa60fab11"
+            ],
+            "incoming": {
+              "end": 121,
+              "location": "synthetic-state://release-correction/2/Jun",
+              "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner.",
+              "source_id": "23844b2e07c75d46794d9b50",
+              "speaker": "Jun",
+              "start": 0
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 71,
+              "location": "synthetic-state://release-correction/1/Mina",
+              "quote": "For release Cedar, the upload cap is 500 MB. The release owner is Hana.",
+              "source_id": "eb65c257995f86bfa60fab11",
+              "speaker": "Mina",
+              "start": 0
+            },
+            "reason": "The earlier source stated the upload cap for Cedar release is 500 MB, but the incoming source explicitly corrects it to 480 MB under the same conditions. The release owner remains unchanged, so only the upload cap is corrected.",
+            "reviewer": "Mina",
+            "id": "d8ba419d3d4edf4c30bd9952",
+            "status": "pending"
+          }
+        ]
+      },
+      "answer": "The current upload cap for release Cedar is 480 MB, as explicitly corrected by Jun [2]. The correction is pending approval, and the earlier assertion of 500 MB is considered an unresolved correction [1]. [1] [2] [3] The release owner remains Hana in both assertions.",
+      "observation": "Pending metadata present but answer still promotes proposed value to current"
+    },
+    {
+      "id": "release-correction/pending",
+      "arm": "attributed",
+      "initial_call": 268,
+      "review_context": {
+        "temporal_scope": "current",
+        "relations": [
+          {
+            "history": [
+              "eb65c257995f86bfa60fab11"
+            ],
+            "incoming": {
+              "end": 121,
+              "location": "synthetic-state://release-correction/2/Jun",
+              "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner.",
+              "source_id": "23844b2e07c75d46794d9b50",
+              "speaker": "Jun",
+              "start": 0
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 71,
+              "location": "synthetic-state://release-correction/1/Mina",
+              "quote": "For release Cedar, the upload cap is 500 MB. The release owner is Hana.",
+              "source_id": "eb65c257995f86bfa60fab11",
+              "speaker": "Mina",
+              "start": 0
+            },
+            "reason": "The earlier source stated the upload cap for Cedar release is 500 MB, but the incoming source explicitly corrects it to 480 MB under the same conditions. The release owner remains unchanged, so only the upload cap is corrected.",
+            "reviewer": "Mina",
+            "id": "d8ba419d3d4edf4c30bd9952",
+            "status": "pending"
+          }
+        ]
+      },
+      "answer": "The current upload cap for release Cedar is 500 MB [1]. The current upload cap for release Cedar is 480 MB [2]. The correction is pending approval [2].",
+      "observation": "Pending metadata present but answer still promotes proposed value to current"
+    },
+    {
+      "id": "rejected-calendar/rejected",
+      "arm": "direct",
+      "initial_call": 292,
+      "review_context": null,
+      "answer": "[2] The meeting day for the Delta release remains established as Tuesday after the owner review. \n\nSource 2:  \nI explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.",
+      "observation": "Rejected relation removed from reader context"
+    },
+    {
+      "id": "rejected-calendar/rejected",
+      "arm": "attributed",
+      "initial_call": 288,
+      "review_context": null,
+      "answer": "The meeting day for the Delta release remains established as Monday after the owner review [1]. The meeting day for the Delta release remains established as Tuesday after the owner review [2].",
+      "observation": "Rejected relation removed from reader context"
+    }
+  ],
+  "temporal_judge_inputs": [
+    {
+      "call": 18,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 16,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 17,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 15,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 19,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 20,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 21,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    },
+    {
+      "call": 22,
+      "recorded_at_header_present": false,
+      "april18_present": false,
+      "april15_present": false
+    }
+  ],
+  "paired_stream_initial_requests_equal": 11,
+  "scope_error": "release-correction previous quote includes unchangedHana owner assertion",
+  "untouched_frozen_actor": true
+}

@@ -3,6 +3,7 @@ import json
 import os
 from tqdm import tqdm
 import re
+import logging
 
 
 def evaluate_document_support(openai_client, document, claim, question, model):
@@ -63,7 +64,8 @@ Please be precise and follow the decision rules. Do not include any additional t
         return result
 
     except Exception as e:
-        print(f"Error evaluating document support: {e}")
+        # Local transport patch: stdout is reserved for the JSONL API.
+        logging.getLogger(__name__).warning("Document support evaluation failed (%s)", type(e).__name__)
         return "<answer>ERROR</answer>"
 
 

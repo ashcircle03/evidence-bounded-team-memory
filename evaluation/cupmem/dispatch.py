@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import re
 import sys
-from evaluation.timeline.dispatch import LEDGER, submit, status
+from evaluation.timeline.dispatch import LEDGER, submit, status, scheduler_max_policy
 
 
 def validate_submission(script, gpus):
@@ -25,6 +25,10 @@ def dispatch(version, gpus, minutes, files):
     script=LEDGER.parent/'source'/version/'run.sbatch'
     validate_submission(script.read_text(),gpus)
     data=json.loads(LEDGER.read_text())
+    # Explicit user instruction supersedes historical campaign/goal time caps.
+    # The underlying dispatcher still checks live QOS and user-wide concurrency.
+    if scheduler_max_policy(data,minutes,script.read_text()):
+        return submit(version,gpus,minutes,files)
     goal=data['goal_budgets']['cupmem']
     terminal={'COMPLETED','FAILED','TIMEOUT','OUT_OF_MEMORY','CANCELLED'}
     used=sum((j.get('elapsed_seconds',0) if j.get('state') in terminal else j['wall_minutes']*60)

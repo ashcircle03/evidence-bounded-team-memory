@@ -1,0 +1,586 @@
+{
+  "reviewer": "Implementing Codex assistant; source-based development review, not independent or effectively blinded",
+  "independent_human": false,
+  "ratings": {
+    "legacy/legacy-d474ab3d7822c8ac/qa-0/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "The full default and fetch-update subject are present in the attached source span.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-1/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "The zdiff3 name and both boundary conditions are explicitly in the selected source.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-2/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "[PATCH] and the default subject-prefix behavior are explicitly quoted.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-3/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "No answer: evidence-selection JSON contains literal control characters and fails schema parsing, although the source contains manual.",
+      "claim_reviews": []
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-4/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "grep.extendedRegexp is correctly selected; the extra non-default exception is also supported by the attached neighboring config description.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-ae24415845ae48a7/qa-0/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Both origin and upstream survive with separate source-bound evidence; neither is silently promoted over the other.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-d30bb1f10fe4bfe8/qa-0/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Freshwater L-2 and brackish B-8 are both preserved with their own explicit condition-bearing quotes.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-0/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "The no-system-zone-data condition and first-party tzdata fallback are in the attached quote.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-1/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "NAME := expr and its assignment-expression meaning are directly supported by both PEP572 passages.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-2/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "EncodingWarning and the omitted-encoding/locale-default conditions are directly in both selected passages.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-3/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "No answer: selection removes RST code backticks from two otherwise relevant ValueError passages, so neither quote can be located. The decoder recognizes the answer but the strict evidence gate loses it.",
+      "claim_reviews": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-4/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "sys.monitoring and its functions/constants are directly supported.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Claim and attached quote inspected in the same question context."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-5/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "except* is correctly linked to two explicit exception-group passages. An unused selected span causes partial but does not invalidate the supported answer.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "except* is correctly linked to two explicit exception-group passages. An unused selected span causes partial but does not invalidate the supported answer."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-6/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "No answer survives literal quote binding for PYTHONBREAKPOINT=0.",
+      "claim_reviews": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-7/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "tomllib is correct; the added tomli implementation fact has its own explicit supporting span, correcting the earlier misplaced extra citation.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "tomllib is correct; the added tomli implementation fact has its own explicit supporting span, correcting the earlier misplaced extra citation."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "tomllib is correct; the added tomli implementation fact has its own explicit supporting span, correcting the earlier misplaced extra citation."
+        }
+      ]
+    },
+    "legacy/legacy-1d2a1e3271adf133/qa-0/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Both notation values are preserved, but the := claim cites only the isolated string NAME := expr twice, without the assignment-expression relationship. The <- side retains its explicit relationship. Answer content passes; full claim evidence fails.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": false,
+          "reason": "Both notation values are preserved, but the := claim cites only the isolated string NAME := expr twice, without the assignment-expression relationship. The <- side retains its explicit relationship. Answer content passes; full claim evidence fails."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Both notation values are preserved, but the := claim cites only the isolated string NAME := expr twice, without the assignment-expression relationship. The <- side retains its explicit relationship. Answer content passes; full claim evidence fails."
+        }
+      ]
+    },
+    "legacy/legacy-c000762632771ec9/qa-0/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "LengthMismatchError is supported by Fay, but the required ValueError alternative is lost after quote binding.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "LengthMismatchError is supported by Fay, but the required ValueError alternative is lost after quote binding."
+        }
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-0/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Confluence upload and Huilan author metadata are both in the attached report.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Confluence upload and Huilan author metadata are both in the attached report."
+        }
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-1/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Required at-least10 working days is replaced by an insufficient-evidence answer. The cited general cleaning difficulty does not establish the requested duration or corpus-wide absence.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": false,
+          "reason": "Required at-least10 working days is replaced by an insufficient-evidence answer. The cited general cleaning difficulty does not establish the requested duration or corpus-wide absence."
+        }
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-2/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "The quote contains the customizable-reporting-dimensions suggestion and source metadata identifies Lizhen Zhou, not the mentioned recipient.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "The quote contains the customizable-reporting-dimensions suggestion and source metadata identifies Lizhen Zhou, not the mentioned recipient."
+        }
+      ]
+    },
+    "transfer/new-rebase/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "No answer: the chosen quote cannot be bound to the original rebase paragraph.",
+      "claim_reviews": []
+    },
+    "transfer/new-pull/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Both fast-forward-only behavior and override of merge.ff are preserved with separate adjacent source spans.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Both fast-forward-only behavior and override of merge.ff are preserved with separate adjacent source spans."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Both fast-forward-only behavior and override of merge.ff are preserved with separate adjacent source spans."
+        }
+      ]
+    },
+    "transfer/new-push/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Default push, missing upstream and the three supported modes are retained in condition-bearing passages.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Default push, missing upstream and the three supported modes are retained in condition-bearing passages."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Default push, missing upstream and the three supported modes are retained in condition-bearing passages."
+        }
+      ]
+    },
+    "transfer/new-rerere/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "False default and post-clean-resolution index update are both supported. The unused selected span is not required to answer this question.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "False default and post-clean-resolution index update are both supported. The unused selected span is not required to answer this question."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "False default and post-clean-resolution index update are both supported. The unused selected span is not required to answer this question."
+        }
+      ]
+    },
+    "transfer/new-conflict-separate/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Both values are returned, but the false claim cites only Defaults to false, omitting which setting/source claim the fragment describes. Its recorded source ID alone is not claim-level support.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Both values are returned, but the false claim cites only Defaults to false, omitting which setting/source claim the fragment describes. Its recorded source ID alone is not claim-level support."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "reason": "Both values are returned, but the false claim cites only Defaults to false, omitting which setting/source claim the fragment describes. Its recorded source ID alone is not claim-level support."
+        }
+      ]
+    },
+    "transfer/new-conflict-one-source/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Only the true observation survives; the manual false claim is absent despite both being in the same source.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Only the true observation survives; the manual false claim is absent despite both being in the same source."
+        }
+      ]
+    },
+    "transfer/new-conflict-one-source-reversed/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Both true report and false manual survive with distinct condition-bearing spans within one source. API evidence carries their original offsets.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Both true report and false manual survive with distinct condition-bearing spans within one source. API evidence carries their original offsets."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Both true report and false manual survive with distinct condition-bearing spans within one source. API evidence carries their original offsets."
+        }
+      ]
+    },
+    "transfer/new-conflict-stat/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "The true lab observation is incorrectly called as per the manual; its citation author is Synthetic team recorder. The false manual answer is otherwise correct.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "The true lab observation is incorrectly called as per the manual; its citation author is Synthetic team recorder. The false manual answer is otherwise correct."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "reason": "The true lab observation is incorrectly called as per the manual; its citation author is Synthetic team recorder. The false manual answer is otherwise correct."
+        }
+      ]
+    },
+    "transfer/new-conditions/claims": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Only the procedure mapping local=warn/CI=error is given. Missing the required actual actions warning+continue versus warning+stop and the rebase behavior evidence.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Only the procedure mapping local=warn/CI=error is given. Missing the required actual actions warning+continue versus warning+stop and the rebase behavior evidence."
+        }
+      ]
+    },
+    "transfer/new-unrelated/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "False autoUpdate default is preserved; enabled=true is not manufactured into another answer.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "False autoUpdate default is preserved; enabled=true is not manufactured into another answer."
+        }
+      ]
+    },
+    "transfer/new-author/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Mira is correctly taken from record_author; Noah addressee and Eli are excluded.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Mira is correctly taken from record_author; Noah addressee and Eli are excluded."
+        }
+      ]
+    },
+    "transfer/new-no-answer/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Structured insufficient with no fabricated gc.auto value or unrelated citation is the required abstention.",
+      "claim_reviews": []
+    },
+    "order/forward/joint": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "True report only; the manual false alternative is absent.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "True report only; the manual false alternative is absent."
+        }
+      ]
+    },
+    "order/reversed/joint": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Both alternatives are present, and the two located quotes retain report and manual subjects/conditions.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Both alternatives are present, and the two located quotes retain report and manual subjects/conditions."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Both alternatives are present, and the two located quotes retain report and manual subjects/conditions."
+        }
+      ]
+    },
+    "order/forward/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Both alternatives survive with separate original spans; the report remains an observation rather than approved correction.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Both alternatives survive with separate original spans; the report remains an observation rather than approved correction."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "reason": "Both alternatives survive with separate original spans; the report remains an observation rather than approved correction."
+        }
+      ]
+    },
+    "order/reversed/claims": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Both answer values survive, but the false claim is linked only to Defaults to false. Its subject and source-claim context were discarded, so citation support is incomplete.",
+      "claim_reviews": [
+        {
+          "index": 0,
+          "supported": true,
+          "reason": "Both answer values survive, but the false claim is linked only to Defaults to false. Its subject and source-claim context were discarded, so citation support is incomplete."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "reason": "Both answer values survive, but the false claim is linked only to Defaults to false. Its subject and source-claim context were discarded, so citation support is incomplete."
+        }
+      ]
+    }
+  }
+}

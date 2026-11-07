@@ -1,0 +1,29 @@
+{
+  "approach": "AQA source-specific answers + LangChain QuotedAnswer in one generation over unchanged LlamaIndex retrieval; stage-level fallback for optional old modules",
+  "references": [
+    {
+      "url": "https://aclanthology.org/2024.emnlp-main.956/",
+      "reuse": "Source-specific answers under conflicting contexts, paraphrased figure1 example, same previous local Qwen adaptation; not original training/model reproduction"
+    },
+    {
+      "url": "https://github.com/langchain-ai/langchain/blob/langchain%3D%3D0.3.27/docs/docs/how_to/qa_citations.ipynb",
+      "reuse": "Citation(source_id,quote) and QuotedAnswer schema copied under MIT; source-specific list around it; Qwen schema prompt instead of OpenAI bind_tools"
+    },
+    {
+      "url": "https://github.com/langchain-ai/langchain/blob/langchain%3D%3D0.3.27/libs/core/langchain_core/runnables/fallbacks.py",
+      "reuse": "Stage-level with_fallbacks pattern adapted to last-successful-answer fallback; no extra provider or retry; errors explicit"
+    }
+  ],
+  "intent": {
+    "retrieval": "Keep same source recall and metadata, isolating reader changes",
+    "joint_generation": "Keep answer and its evidence together from first generation; remove dependence on whole-document conflict gates",
+    "quote_binding": "Return exact original offsets; quote mismatch visible without manufacturing a substring",
+    "fallback": "Optional enrichment cannot discard the last complete answer",
+    "unchanged": "Source store, approval semantics, existing20 inputs/key; no new hidden case exception"
+  },
+  "limits": [
+    "Source-ID and offset checks are not semantic proof",
+    "Quoting an irrelevant source remains possible and must fail evaluation",
+    "New12 authored diagnostics, not independent benchmark"
+  ]
+}

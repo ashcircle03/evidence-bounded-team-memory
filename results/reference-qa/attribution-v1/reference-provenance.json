@@ -1,0 +1,22 @@
+{
+  "AQA": {
+    "paper": "https://aclanthology.org/2024.emnlp-main.956/",
+    "code": "https://github.com/Shaier/Adaptive_QA/blob/f72bdb3e5d1f4bf83a3dd84596039b67ddd145e8/experiments/few_shot.py",
+    "reuse": "Section3.4.1 and appendixA.1 conflict-aware example format; paraphrase of figure1 as one disjoint example.",
+    "changes": "Qwen3-8B, one figure demonstration rather than original3 training examples; numbered Source citations; conditional invocation and source coverage guard.",
+    "unavailable": "Official Drive dataset link returned404 through connected Drive and was unavailable via web. No claim of original dataset/model reproduction."
+  },
+  "ALCE": {
+    "repository": "https://github.com/princeton-nlp/ALCE",
+    "revision": "246c476a4edfc564266b7346b6e29ef4861ae937",
+    "license": "MIT",
+    "reuse": "SearcherWithinDocs TF-IDF branch and post_hoc_cite sentence-level top1 attribution.",
+    "changes": "Lazy torch import for unused dense branch; explicit Source N recognized as an existing citation; no overwrite; preserve original bytes with insertions instead of joining sentences. TF-IDF is candidate attribution, not entailment certification.",
+    "implementation_sha256": {
+      "searcher.py": "d4467ae1735d0cb167b2a7fb1ed5123c80e97681428028fb2c1e66d14577ac71",
+      "post_hoc_cite_original.py": "b2e9afb23f8e6421aa3d0d3a16573a6c3eefe27a87642ee181d6de647a728991",
+      "LICENSE": "8872dbf8660b00890b5e07ce1ea1f7a44fa7ae4e1857da56caba172b51dab3cb"
+    }
+  },
+  "author_defined_glue": "Generic missing-opponent source accounting, immutable witness mapping and append-only citation edits. No case IDs, gold answers or subject-specific rules in actor."
+}

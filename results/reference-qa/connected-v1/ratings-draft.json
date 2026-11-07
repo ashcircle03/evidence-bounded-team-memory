@@ -1,0 +1,311 @@
+{
+  "reviewer": "implementing Codex assistant, source-based review",
+  "independent_human": false,
+  "ratings": {
+    "legacy/legacy-d474ab3d7822c8ac/qa-0/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "full 기본값을 fetch.output 원문 전체 구절로 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "Git uses the `full` style by default for printing fetch ref update status.",
+          "supported": true,
+          "reason": "full 기본값을 fetch.output 원문 전체 구절로 지지한다."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-1/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "zdiff3 및 충돌 양끝의 일치 행 제거가 같은 원문 인용에 있다.",
+      "claim_reviews": [
+        {
+          "text": "The alternate merge conflict style that removes matching lines near either edge of the conflict region is \"zdiff3\".",
+          "supported": true,
+          "reason": "zdiff3 및 충돌 양끝의 일치 행 제거가 같은 원문 인용에 있다."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-2/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "format-patch 기본 subject prefix [PATCH]를 명시한 구절을 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The default subject prefix that format-patch puts on its output is '[PATCH]'.",
+          "supported": true,
+          "reason": "format-patch 기본 subject prefix [PATCH]를 명시한 구절을 인용한다."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-3/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "notes.mergeStrategy 및 기본 manual이 같은 인용에 있다.",
+      "claim_reviews": [
+        {
+          "text": "If nobody specifies a notes merge strategy, the default strategy is `manual`.",
+          "supported": true,
+          "reason": "notes.mergeStrategy 및 기본 manual이 같은 인용에 있다."
+        }
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-4/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "patternType default가 extendedRegexp를 사용한다는 연결과 해당 설정의 적용 범위를 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The Git configuration option `grep.extendedRegexp` is used to choose between 'basic' and 'extended' when `grep.patternType` is set to 'default'.",
+          "supported": true,
+          "reason": "patternType default가 extendedRegexp를 사용한다는 연결과 해당 설정의 적용 범위를 함께 인용한다."
+        }
+      ]
+    },
+    "legacy/legacy-ae24415845ae48a7/qa-0/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "origin과 upstream을 각각 별도 답 및 해당 출처 인용으로 보존한다.",
+      "claim_reviews": [
+        {
+          "text": "The default remote name for a newly cloned repository is 'origin'.",
+          "supported": true,
+          "reason": "origin과 upstream을 각각 별도 답 및 해당 출처 인용으로 보존한다."
+        },
+        {
+          "text": "The default remote name for a newly cloned repository is 'upstream'.",
+          "supported": true,
+          "reason": "origin과 upstream을 각각 별도 답 및 해당 출처 인용으로 보존한다."
+        }
+      ]
+    },
+    "legacy/legacy-d30bb1f10fe4bfe8/qa-0/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "freshwater L-2와 brackish B-8의 서로 다른 조건 및 각 인용을 함께 보존한다.",
+      "claim_reviews": [
+        {
+          "text": "For freshwater sites, the field water sampler should use the L-2 cartridge. For brackish sites, the field water sampler should use the B-8 cartridge.",
+          "supported": true,
+          "reason": "freshwater L-2와 brackish B-8의 서로 다른 조건 및 각 인용을 함께 보존한다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-0/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "시스템 시간대 데이터 부재 때 PyPI tzdata로 fallback한다는 조건과 결과를 원문으로 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "If system time zone data is unavailable, the PyPI package that supplies the fallback for zoneinfo is tzdata.",
+          "supported": true,
+          "reason": "시스템 시간대 데이터 부재 때 PyPI tzdata로 fallback한다는 조건과 결과를 원문으로 지지한다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-1/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "NAME := expr를 이름 대입 문법의 정의 구절로 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "The notation used to assign a name within a Python expression under the assignment expressions proposal is NAME := expr.",
+          "supported": true,
+          "reason": "NAME := expr를 이름 대입 문법의 정의 구절로 지지한다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-2/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "open 인코딩 생략 및 locale 기본값 사용 조건과 EncodingWarning을 명시한 구절이 있다.",
+      "claim_reviews": [
+        {
+          "text": "The warning category 'EncodingWarning' signals omitted encoding when open uses the locale default.",
+          "supported": true,
+          "reason": "open 인코딩 생략 및 locale 기본값 사용 조건과 EncodingWarning을 명시한 구절이 있다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-3/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "strict=True와 길이 불일치, ValueError가 같은 인용에 있다.",
+      "claim_reviews": [
+        {
+          "text": "strict zip raises a ValueError when its iterables have different lengths.",
+          "supported": true,
+          "reason": "strict=True와 길이 불일치, ValueError가 같은 인용에 있다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-4/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "sys.monitoring에 함수와 상수를 담는다는 PEP 문맥 및 namespace 구절을 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The namespace that exports the low-impact interpreter monitoring functions and constants is ``sys.monitoring``.",
+          "supported": true,
+          "reason": "sys.monitoring에 함수와 상수를 담는다는 PEP 문맥 및 namespace 구절을 인용한다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-5/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "ExceptionGroups를 처리하는 except* 구문을 직접 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The syntax for handling exception groups in the proposal for multiple unrelated exceptions is ``except*``.",
+          "supported": true,
+          "reason": "ExceptionGroups를 처리하는 except* 구문을 직접 인용한다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-6/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "PYTHONBREAKPOINT=0의 debugging 비활성화와 sys.breakpointhook 반환 동작을 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The value of PYTHONBREAKPOINT that makes the default breakpoint hook disable debugging is '0'.",
+          "supported": true,
+          "reason": "PYTHONBREAKPOINT=0의 debugging 비활성화와 sys.breakpointhook 반환 동작을 함께 인용한다."
+        }
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-7/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "표준 라이브러리 TOML 파싱 모듈 tomllib을 명시하는 구절을 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The standard library module that provides the TOML parser for Python packaging tools is tomllib.",
+          "supported": true,
+          "reason": "표준 라이브러리 TOML 파싱 모듈 tomllib을 명시하는 구절을 인용한다."
+        }
+      ]
+    },
+    "legacy/legacy-1d2a1e3271adf133/qa-0/connected": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "반환한 NAME := expr는 지지되지만 상대 기록의 NAME <- expr를 답과 인용에서 누락했다.",
+      "claim_reviews": [
+        {
+          "text": "The notation used to assign a name within a Python expression under the assignment expressions proposal is NAME := expr.",
+          "supported": true,
+          "reason": "반환한 NAME := expr는 지지되지만 상대 기록의 NAME <- expr를 답과 인용에서 누락했다."
+        }
+      ]
+    },
+    "legacy/legacy-c000762632771ec9/qa-0/connected": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "반환한 LengthMismatchError는 관측 기록으로 지지되지만 PEP의 ValueError를 답과 인용에서 누락했다.",
+      "claim_reviews": [
+        {
+          "text": "The exception raised by strict zip when its iterables have different lengths is LengthMismatchError.",
+          "supported": true,
+          "reason": "반환한 LengthMismatchError는 관측 기록으로 지지되지만 PEP의 ValueError를 답과 인용에서 누락했다."
+        }
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-0/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Huilan Chen의 해당 경쟁사 보고서 원문이 Confluence 업로드를 직접 명시한다.",
+      "claim_reviews": [
+        {
+          "text": "Huilan Chen uploaded the final report to Confluence.",
+          "supported": true,
+          "reason": "Huilan Chen의 해당 경쟁사 보고서 원문이 Confluence 업로드를 직접 명시한다."
+        }
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-1/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "해당 데이터 품질 평가의 at least 10 working days와 초기 검증 내용을 함께 보존한다.",
+      "claim_reviews": [
+        {
+          "text": "The preliminary estimated number of workdays required for data cleansing and initial verification in the report is at least 10 working days.",
+          "supported": true,
+          "reason": "해당 데이터 품질 평가의 at least 10 working days와 초기 검증 내용을 함께 보존한다."
+        }
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-2/connected": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "요구사항 제안 원문을 인용하며 @수신자가 아닌 record_author Lizhen Zhou를 정확하게 답한다.",
+      "claim_reviews": [
+        {
+          "text": "Lizhen Zhou suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors in the first draft of the user interview outline for the carbon emissions management platform.",
+          "supported": true,
+          "reason": "요구사항 제안 원문을 인용하며 @수신자가 아닌 record_author Lizhen Zhou를 정확하게 답한다."
+        }
+      ]
+    }
+  }
+}

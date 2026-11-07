@@ -1,0 +1,70 @@
+{
+  "source_version": "cup-ref-quote-v1",
+  "source_sha256": {
+    "run.sbatch": "eddf6124a9f8a7dde6ae01cf5d1c4feade16bbea6688add5ebe5c6049f3c8dde",
+    "config.json": "8bdcba9a76513a5d991f35e7a3d91303ab62fdbcff4e2e3e28a14cc9f1e0b141",
+    "serve.py": "1a4b247799cb7cd2b1bb2c67b50738ea818ae6fcb924ae203f6ed5c2dac154d7",
+    "service.py": "2fb47ba2357acf6c91a08d9233738b0d6d007f51c3aefabeacd4fdbd2daf7be8",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+    "inputs.json": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+    "code.tar.gz": "a35aa5782c8fd9faf5625c7da692b8b02ad245f066a02d0e957c287de3bcf78f",
+    "prior-result.json": "496675f5324f88e571e2150d7e2f7980983c1bfb2bb60afda2f6f0c208e97da5",
+    "prior-calls.jsonl": "e1bda4661acd607916aae240d95cb2b8b4151a27f0dfe0a717f44196338aa661"
+  },
+  "submission_intent": "submitted",
+  "job_id": "119957",
+  "gpus": 1,
+  "cpus": 8,
+  "ram_gb": 48,
+  "wall_minutes": 6,
+  "partition": "batch_ugrad",
+  "account": "ugrad",
+  "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-quote-v1",
+  "state": "TIMEOUT",
+  "submitted_at": "2026-11-06T02:43:27.868176+00:00",
+  "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119957.json",
+  "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-119957.log",
+  "exit_code": "0:0",
+  "elapsed_seconds": 388,
+  "usage": [
+    {
+      "JobID": "119957",
+      "State": "TIMEOUT",
+      "ExitCode": "0:0",
+      "Elapsed": "00:06:28",
+      "ElapsedRaw": "388",
+      "AllocCPUS": "8",
+      "ReqMem": "48G",
+      "MaxRSS": "",
+      "TotalCPU": "01:07.569",
+      "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "NodeList": "aurora-g5"
+    },
+    {
+      "JobID": "119957.batch",
+      "State": "CANCELLED",
+      "ExitCode": "0:15",
+      "Elapsed": "00:06:29",
+      "ElapsedRaw": "389",
+      "AllocCPUS": "8",
+      "ReqMem": "",
+      "MaxRSS": "2083584K",
+      "TotalCPU": "01:07.567",
+      "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+      "NodeList": "aurora-g5"
+    },
+    {
+      "JobID": "119957.extern",
+      "State": "COMPLETED",
+      "ExitCode": "0:0",
+      "Elapsed": "00:06:28",
+      "ElapsedRaw": "388",
+      "AllocCPUS": "8",
+      "ReqMem": "",
+      "MaxRSS": "0",
+      "TotalCPU": "00:00.001",
+      "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "NodeList": "aurora-g5"
+    }
+  ]
+}

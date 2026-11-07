@@ -52,9 +52,10 @@ class ReferenceQA:
     def import_history(self, records):
         # Validate the complete input before capturing anything. This operation
         # does not invoke either an LLM or CUPMem. Indexing can be retried later.
-        envs = [source_envelope(e) for e in records]
+        validate = getattr(self.store, 'source_envelope', source_envelope)
+        envs = [validate(e) for e in records]
         with self.lock:
-            ids = [capture(self.store, e) for e in envs]
+            ids = [self.store.put('sources', e) for e in envs]
         return dict(status='ok', source_ids=ids, llm_calls=0)
 
     def _index(self, sources):
@@ -108,12 +109,14 @@ class ReferenceQA:
         if not quote or start < 0:
             raise ValueError('Citation text is not verbatim inside its original parent chunk')
         return dict(source_id=sid, quote=quote, start=start, end=start+len(quote),
-                    location=src['location'], speaker=src['speaker'])
+                    location=src['location'], speaker=src['speaker'],
+                    observed_at=sources[sid]['observed_at'])
 
     def ask(self, question):
         if not isinstance(question, str) or not question.strip():
             raise ValueError('Nonempty question required')
         with self.lock:
+            self.active_review_context = None
             sources = self.store.load('sources')
             if not sources:
                 return dict(status='insufficient', answers=[], citation_sources=[], raw='')
@@ -141,15 +144,32 @@ class ReferenceQA:
                 citation_splitter = SentenceSplitter(chunk_size=1024, chunk_overlap=0,
                     tokenizer=lambda t: self.tokenizer.encode(t, add_special_tokens=False),
                     include_metadata=False)
+            selected_nodes = None
+            if getattr(self, 'review_relations', None):
+                from .review_context import expand_review_context, contextual_templates
+                selected_nodes, context = expand_review_context(
+                    retriever.retrieve(question), sources, self.review_relations,
+                    getattr(self, 'temporal_scope', 'current'))
+                self.active_review_context = context
+                if context:
+                    qa_template, refine_template = contextual_templates(
+                        (qa_template, refine_template), context)
             synthesizer = get_response_synthesizer(llm=self.llm, prompt_helper=helper,
                 text_qa_template=qa_template, refine_template=refine_template,
                 response_mode='compact')
             engine = CitationQueryEngine(retriever, llm=self.llm,
                 response_synthesizer=synthesizer, text_splitter=citation_splitter, metadata_mode=metadata_mode)
-            result = engine.query(question)
+            if selected_nodes is None:
+                result = engine.query(question)
+            else:
+                from llama_index.core.schema import QueryBundle
+                result = engine.synthesize(QueryBundle(question), selected_nodes)
             raw = str(result)
             witnesses = [self._witness(n.node, sources, i) for i, n in enumerate(result.source_nodes, 1)]
-            return format_response(question, raw, witnesses, allow_source_labels=self.profile=='team')
+            return self._format_response(question, raw, witnesses)
+
+    def _format_response(self,question,raw,witnesses):
+        return format_response(question,raw,witnesses,allow_source_labels=self.profile=='team')
 
     def _team_templates(self):
         from .reference_prompts import TEAM_QA_TEMPLATE, TEAM_REFINE_TEMPLATE
@@ -223,31 +243,51 @@ def main():
     """A JSON-lines source QA process for callers; no web UI/MCP server."""
     import argparse
     import sys
+    from contextlib import redirect_stdout
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--store', required=True)
     parser.add_argument('--model-path', required=True)
     parser.add_argument('--embedding-path', required=True)
     parser.add_argument('--api-base', required=True)
-    parser.add_argument('--profile', choices=['standard', 'team', 'checked'], default='standard')
+    parser.add_argument('--profile', choices=['standard', 'team', 'checked', 'attributed', 'joint', 'claims', 'contextual', 'connected'], default='standard')
     args = parser.parse_args()
-    parts = local_components(args.model_path, args.embedding_path, args.api_base)
-    if args.profile == 'checked':
-        from .reference_checked import ConflictCheckedQA
-        service = ConflictCheckedQA(args.store, **parts)
-    else:
-        service = ReferenceQA(args.store, profile=args.profile, **parts)
-    for line in sys.stdin:
-        try:
-            req = json.loads(line)
-            if req['operation'] == 'import_history':
-                result = service.import_history(req['records'])
-            elif req['operation'] == 'ask':
-                result = service.ask(req['question'])
-            else:
-                raise ValueError('Only import_history and source QA are supported')
-        except Exception as exc:
-            result = dict(status='error', error_type=type(exc).__name__, error=str(exc))
-        print(json.dumps(result, ensure_ascii=False), flush=True)
+    output = sys.stdout
+    # Process boundary only: this CLI owns a sequential request loop. Library
+    # classes never redirect global stdout around concurrent caller operations.
+    with redirect_stdout(sys.stderr):
+        parts = local_components(args.model_path, args.embedding_path, args.api_base)
+        if args.profile == 'connected':
+            from .reference_connected import ConnectedQA
+            service = ConnectedQA(args.store, **parts)
+        elif args.profile == 'contextual':
+            from .reference_contextual import ContextualQA
+            service = ContextualQA(args.store, **parts)
+        elif args.profile == 'claims':
+            from .reference_claims import ClaimEvidenceQA
+            service = ClaimEvidenceQA(args.store,**parts)
+        elif args.profile == 'joint':
+            from .reference_joint import JointSourceQA
+            service = JointSourceQA(args.store,**parts)
+        elif args.profile == 'attributed':
+            from .reference_attributed import AttributedQA
+            service = AttributedQA(args.store,**parts)
+        elif args.profile == 'checked':
+            from .reference_checked import ConflictCheckedQA
+            service = ConflictCheckedQA(args.store, **parts)
+        else:
+            service = ReferenceQA(args.store, profile=args.profile, **parts)
+        for line in sys.stdin:
+            try:
+                req = json.loads(line)
+                if req['operation'] == 'import_history':
+                    result = service.import_history(req['records'])
+                elif req['operation'] == 'ask':
+                    result = service.ask(req['question'])
+                else:
+                    raise ValueError('Only import_history and source QA are supported')
+            except Exception as exc:
+                result = dict(status='error', error_type=type(exc).__name__, error=str(exc))
+            print(json.dumps(result, ensure_ascii=False), file=output, flush=True)
 
 
 if __name__ == '__main__':

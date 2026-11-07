@@ -1,0 +1,843 @@
+{
+  "reviewer": "implementing Codex assistant, source-based review",
+  "independent_human": false,
+  "ratings": {
+    "legacy/legacy-d474ab3d7822c8ac/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "fetch.output 원문이 기본값 full을 명시한다.",
+      "claim_reviews": [
+        {
+          "text": "The default style for printing fetch ref update status is `full`.",
+          "supported": true,
+          "reason": "fetch.output 원문이 기본값 full을 명시한다."
+        }
+      ],
+      "reviewed_output_sha256": "77815f8c63d1b2886cd4758c3c9aaf6e83c9aae94dfbf50d451818889f4ad575"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-1/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "zdiff3가 충돌 영역 양끝의 일치 행을 제거한다는 원문 구절에 대응한다.",
+      "claim_reviews": [
+        {
+          "text": "The alternate merge conflict style that removes matching lines near either edge of the conflict region is \"zdiff3\".",
+          "supported": true,
+          "reason": "zdiff3가 충돌 영역 양끝의 일치 행을 제거한다는 원문 구절에 대응한다."
+        }
+      ],
+      "reviewed_output_sha256": "66075f709eab11c11f8415472c1a21861d6a7fbb73e51ef295229e53a956681f"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-2/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "format-patch 기본 subject prefix [PATCH]가 원문에 있다.",
+      "claim_reviews": [
+        {
+          "text": "The default subject prefix that format-patch puts on its output is '[PATCH]'.",
+          "supported": true,
+          "reason": "format-patch 기본 subject prefix [PATCH]가 원문에 있다."
+        }
+      ],
+      "reviewed_output_sha256": "b9db9e65da00bc4532d5eea4dc0dc8a3fbef3561873938f91e20948c5c79740f"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-3/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "notes merge strategy 기본 manual이 해당 원문 문단에서 지지된다.",
+      "claim_reviews": [
+        {
+          "text": "The default strategy for resolving notes conflicts is `manual`.",
+          "supported": true,
+          "reason": "notes merge strategy 기본 manual이 해당 원문 문단에서 지지된다."
+        }
+      ],
+      "reviewed_output_sha256": "3b1bfd4e7b5de9614e215ee2a1d5904d30f52dd7bba8f22e7309712cc32ae4eb"
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-4/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "grep.patternType=default가 grep.extendedRegexp로 basic/extended를 선택함을 두 인용이 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "The Git configuration option that chooses between basic and extended when grep.patternType is set to default is grep.extendedRegexp.",
+          "supported": true,
+          "reason": "grep.patternType=default가 grep.extendedRegexp로 basic/extended를 선택함을 두 인용이 지지한다."
+        }
+      ],
+      "reviewed_output_sha256": "3890651171f50fecf328fbfea5d36d0b7fd407b58a5e1b8bf10408cf56dc4b31"
+    },
+    "legacy/legacy-ae24415845ae48a7/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "통제 기록의 upstream과 Git 원문의 origin을 모두 보존한다. 추가 fetching 기본값 설명도 반환 원문에서 지지되지만 좁은 세 번째 인용은 no remote 조건을 빠뜨린다.",
+      "claim_reviews": [
+        {
+          "text": "The default remote name for a newly cloned repository is upstream.",
+          "supported": true,
+          "reason": "통제 기록의 upstream과 Git 원문의 origin을 모두 보존한다. 추가 fetching 기본값 설명도 반환 원문에서 지지되지만 좁은 세 번째 인용은 no remote 조건을 빠뜨린다."
+        },
+        {
+          "text": "The name of the remote to create when cloning a repository defaults to `origin`.",
+          "supported": true,
+          "reason": "통제 기록의 upstream과 Git 원문의 origin을 모두 보존한다. 추가 fetching 기본값 설명도 반환 원문에서 지지되지만 좁은 세 번째 인용은 no remote 조건을 빠뜨린다."
+        },
+        {
+          "text": "If no remote is configured, it defaults to `origin` for fetching.",
+          "supported": true,
+          "reason": "통제 기록의 upstream과 Git 원문의 origin을 모두 보존한다. 추가 fetching 기본값 설명도 반환 원문에서 지지되지만 좁은 세 번째 인용은 no remote 조건을 빠뜨린다."
+        }
+      ],
+      "reviewed_output_sha256": "7d8376b94e5a81b9793fa02312bfe69b57896df94b288971b1a6e03c66054c4c"
+    },
+    "legacy/legacy-d30bb1f10fe4bfe8/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "freshwater L-2와 brackish B-8을 조건과 함께 각각 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "For freshwater sites, the field water sampler should use the L-2 cartridge.",
+          "supported": true,
+          "reason": "freshwater L-2와 brackish B-8을 조건과 함께 각각 인용한다."
+        },
+        {
+          "text": "At brackish sites, the field water sampler should use the B-8 cartridge.",
+          "supported": true,
+          "reason": "freshwater L-2와 brackish B-8을 조건과 함께 각각 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "56096cc08cd94c9f18cf35c319c96d0136130382aef45b6a16e6fbafb4c71dde"
+    },
+    "legacy/legacy-702e9009795b2802/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "system timezone 부재 시 first-party PyPI tzdata fallback을 직접 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The PyPI package that supplies the fallback for zoneinfo when system time zone data is unavailable is tzdata.",
+          "supported": true,
+          "reason": "system timezone 부재 시 first-party PyPI tzdata fallback을 직접 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "05a7d699d1153903d79b6d440df3e8d8dfa05b96936a6051df4f51551e9eac6f"
+    },
+    "legacy/legacy-702e9009795b2802/qa-1/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "NAME := expr 및 walrus 명칭을 유효 인용으로 지지한다. 선택 단계의 다른 잘못된 구절은 제외되어 경고가 남지만 반환 답의 근거는 있다.",
+      "claim_reviews": [
+        {
+          "text": "The notation that assigns a name within a Python expression under the assignment expressions proposal is ``NAME := expr``.",
+          "supported": true,
+          "reason": "NAME := expr 및 walrus 명칭을 유효 인용으로 지지한다. 선택 단계의 다른 잘못된 구절은 제외되어 경고가 남지만 반환 답의 근거는 있다."
+        },
+        {
+          "text": "This notation is also informally known as \"the walrus operator\".",
+          "supported": true,
+          "reason": "NAME := expr 및 walrus 명칭을 유효 인용으로 지지한다. 선택 단계의 다른 잘못된 구절은 제외되어 경고가 남지만 반환 답의 근거는 있다."
+        }
+      ],
+      "reviewed_output_sha256": "ddeddcf40fef056f0b964e80f84f6197d7493975a0a449b88912d359ad3ddea7"
+    },
+    "legacy/legacy-702e9009795b2802/qa-2/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "encoding 인자 생략 및 locale default에서 EncodingWarning을 발생시킨다는 인용을 보존한다.",
+      "claim_reviews": [
+        {
+          "text": "The warning category that signals omitted encoding when open uses the locale default is EncodingWarning.",
+          "supported": true,
+          "reason": "encoding 인자 생략 및 locale default에서 EncodingWarning을 발생시킨다는 인용을 보존한다."
+        }
+      ],
+      "reviewed_output_sha256": "716e8d3cd54fc3f5f733d058357b34082abb53f9ddce77066c241241ad40e71b"
+    },
+    "legacy/legacy-702e9009795b2802/qa-3/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "strict=True와 길이 불일치 시 ValueError를 같은 구절로 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "Strict zip raises a ValueError when its iterables have different lengths.",
+          "supported": true,
+          "reason": "strict=True와 길이 불일치 시 ValueError를 같은 구절로 지지한다."
+        }
+      ],
+      "reviewed_output_sha256": "c6d8b8d67332488210cdac4c995349e9603447f683073a766f5bbfba25be66bd"
+    },
+    "legacy/legacy-702e9009795b2802/qa-4/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "sys.monitoring이 functions/constants namespace임을 유효 구절로 지지한다. 별도 선택 오류 경고는 답 정답과 구분한다.",
+      "claim_reviews": [
+        {
+          "text": "The namespace that exports the low-impact interpreter monitoring functions and constants is ``sys.monitoring``.",
+          "supported": true,
+          "reason": "sys.monitoring이 functions/constants namespace임을 유효 구절로 지지한다. 별도 선택 오류 경고는 답 정답과 구분한다."
+        }
+      ],
+      "reviewed_output_sha256": "d1970f79d838feeced99ced1e8aaf8cb2a6ef1589bc718376ef3107c1fc3c0cb"
+    },
+    "legacy/legacy-702e9009795b2802/qa-5/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "ExceptionGroup과 except*를 연결한 인용이 있다. 두 답은 중복이지만 서로 모순되거나 근거 없는 주장은 아니다.",
+      "claim_reviews": [
+        {
+          "text": "The syntax that handles exception groups in the proposal for multiple unrelated exceptions is ``except*``.",
+          "supported": true,
+          "reason": "ExceptionGroup과 except*를 연결한 인용이 있다. 두 답은 중복이지만 서로 모순되거나 근거 없는 주장은 아니다."
+        },
+        {
+          "text": "The ``except*`` syntax is used for handling ``ExceptionGroups``.",
+          "supported": true,
+          "reason": "ExceptionGroup과 except*를 연결한 인용이 있다. 두 답은 중복이지만 서로 모순되거나 근거 없는 주장은 아니다."
+        }
+      ],
+      "reviewed_output_sha256": "56f12cae2238dba6d4a096a2ee571c7a5cb4cb6634665d6a772a0650cfa0f765"
+    },
+    "legacy/legacy-702e9009795b2802/qa-6/demonstrated": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "모델 원출력은 정답 0을 말했지만 highlight_id=2가 존재하지 않아 최종 답이 제거됐다. 선택은 backtick을 생략한 구절과 원문에 없는 empty-value disables 구절을 반환해 모두 거절됐다. 최종 답·근거 보존 실패다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "417c7b0f2d42f3279287267d7afcb766384494ffc3b5980e6e38cb346861f438"
+    },
+    "legacy/legacy-702e9009795b2802/qa-7/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "tomllib과 기반 라이브러리 tomli를 각각 원문으로 지지한다.",
+      "claim_reviews": [
+        {
+          "text": "The standard library module that provides the TOML parser for Python packaging tools is tomllib.",
+          "supported": true,
+          "reason": "tomllib과 기반 라이브러리 tomli를 각각 원문으로 지지한다."
+        },
+        {
+          "text": "The tomllib module is based on the third-party library tomli.",
+          "supported": true,
+          "reason": "tomllib과 기반 라이브러리 tomli를 각각 원문으로 지지한다."
+        }
+      ],
+      "reviewed_output_sha256": "70f01a656c73a1feb5a38dc3023609661e6300a5747be2e942454c7e4a96ac16"
+    },
+    "legacy/legacy-1d2a1e3271adf133/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "PEP의 NAME := expr와 통제된 review의 NAME <- expr를 별도 답과 원문 근거로 모두 복구했다.",
+      "claim_reviews": [
+        {
+          "text": "The notation that assigns a name within a Python expression under the assignment expressions proposal is ``NAME := expr``.",
+          "supported": true,
+          "reason": "PEP의 NAME := expr와 통제된 review의 NAME <- expr를 별도 답과 원문 근거로 모두 복구했다."
+        },
+        {
+          "text": "However, another source mentions that in a language review, assignment inside an expression uses NAME <- expr.",
+          "supported": true,
+          "reason": "PEP의 NAME := expr와 통제된 review의 NAME <- expr를 별도 답과 원문 근거로 모두 복구했다."
+        }
+      ],
+      "reviewed_output_sha256": "329641f1067035d90595f5deb9635aff35648051dfb9d9cae644b9ad7de1bfee"
+    },
+    "legacy/legacy-c000762632771ec9/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "실험 기록 LengthMismatchError와 PEP strict zip ValueError를 별도 출처로 모두 복구했다.",
+      "claim_reviews": [
+        {
+          "text": "The exception raised by strict zip when its iterables have different lengths is LengthMismatchError.",
+          "supported": true,
+          "reason": "실험 기록 LengthMismatchError와 PEP strict zip ValueError를 별도 출처로 모두 복구했다."
+        },
+        {
+          "text": "According to the PEP 618, when the strict parameter is enabled, a ValueError is raised if one of the arguments is exhausted before the others.",
+          "supported": true,
+          "reason": "실험 기록 LengthMismatchError와 PEP strict zip ValueError를 별도 출처로 모두 복구했다."
+        }
+      ],
+      "reviewed_output_sha256": "e4824be9d156fcb6e0f6b4282cc1109149e369f3356108ccc11034b56b0f65e7"
+    },
+    "legacy/legacy-34429cce545ccddd/qa-0/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "Huilan Chen의 EcoTrace competitive analysis report Confluence 링크와 기록 작성자에 연결된다.",
+      "claim_reviews": [
+        {
+          "text": "Huilan Chen uploaded the final report to Confluence.",
+          "supported": true,
+          "reason": "Huilan Chen의 EcoTrace competitive analysis report Confluence 링크와 기록 작성자에 연결된다."
+        }
+      ],
+      "reviewed_output_sha256": "f5a89644970bbb852079acd8525a9f7975b85bddfdb9bc0f2768e60553f95bf8"
+    },
+    "legacy/legacy-34429cce545ccddd/qa-1/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "data engineer rule development 및 initial manual verification 최소10 working days를 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The preliminary estimated number of workdays required for data cleansing and initial verification is at least 10 working days.",
+          "supported": true,
+          "reason": "data engineer rule development 및 initial manual verification 최소10 working days를 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "6906da7df5c67ad76c4a5554bedbc683767034f035954fa7553e344587b824ec"
+    },
+    "legacy/legacy-34429cce545ccddd/qa-2/demonstrated": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "record_author Lizhen Zhou를 유지하고 customizable report dimensions 제안을 인용한다. 추가 managers/finance/compliance 설명도 별도 원문으로 지지된다.",
+      "claim_reviews": [
+        {
+          "text": "Lizhen Zhou suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors.",
+          "supported": true,
+          "reason": "record_author Lizhen Zhou를 유지하고 customizable report dimensions 제안을 인용한다. 추가 managers/finance/compliance 설명도 별도 원문으로 지지된다."
+        },
+        {
+          "text": "The suggestion was made in the context of focusing on managers in finance or compliance departments who have auditing and reporting needs.",
+          "supported": true,
+          "reason": "record_author Lizhen Zhou를 유지하고 customizable report dimensions 제안을 인용한다. 추가 managers/finance/compliance 설명도 별도 원문으로 지지된다."
+        }
+      ],
+      "reviewed_output_sha256": "6de75320d1a06759fae7d7c631cbc290df6cd8b47f865ec35006f08b75d865b3"
+    },
+    "ever/F_SH_Top01_026/direct": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Confluence 정답 및 경보 규칙 검증 완료 원문(Source1)을 반환한다. 다만 좁은 구절은 task를 빼고 업로드 문장만 남기며 다른 테스트 보고서도 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The final test report was uploaded to Confluence.",
+          "supported": true,
+          "reason": "Confluence 정답 및 경보 규칙 검증 완료 원문(Source1)을 반환한다. 다만 좁은 구절은 task를 빼고 업로드 문장만 남기며 다른 테스트 보고서도 함께 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "e3cd89bc9f9b71a04c13b1653fea49571641333675b062ed76d35d6ba3af07f8"
+    },
+    "ever/F_SH_Top01_026/reader_only": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Confluence 정답 및 경보 규칙 검증 완료 원문(Source1)을 반환한다. 다만 좁은 구절은 task를 빼고 업로드 문장만 남기며 다른 테스트 보고서도 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The final test report was uploaded to Confluence.",
+          "supported": true,
+          "reason": "Confluence 정답 및 경보 규칙 검증 완료 원문(Source1)을 반환한다. 다만 좁은 구절은 task를 빼고 업로드 문장만 남기며 다른 테스트 보고서도 함께 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "c9f2b25810130dcac1db444ef0e25be0809f5dfeb59e3fc4b6d3bbbba6add305"
+    },
+    "ever/F_SH_Top01_026/combined": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "Confluence 정답 및 경보 규칙 검증 완료 원문(Source1)을 반환한다. 다만 좁은 구절은 task를 빼고 업로드 문장만 남기며 다른 테스트 보고서도 함께 인용한다.",
+      "claim_reviews": [
+        {
+          "text": "The final test report was uploaded to Confluence.",
+          "supported": true,
+          "reason": "Confluence 정답 및 경보 규칙 검증 완료 원문(Source1)을 반환한다. 다만 좁은 구절은 task를 빼고 업로드 문장만 남기며 다른 테스트 보고서도 함께 인용한다."
+        }
+      ],
+      "reviewed_output_sha256": "c9f2b25810130dcac1db444ef0e25be0809f5dfeb59e3fc4b6d3bbbba6add305"
+    },
+    "ever/F_MH_Top01_015/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "1일로 오답. 10월24일 standby와 10월22일 같은 분석 착수는 완료 후 다음 독립 과제의 간격을 지지하지 않는다. 12월8일 착수 부재.",
+      "claim_reviews": [
+        {
+          "text": "The colleague responsible for analyzing the performance bottlenecks of the dashboard data query interface in the Carbon Footprint System Group took 1 day to start the next independent task in this project group.",
+          "supported": false,
+          "reason": "1일로 오답. 10월24일 standby와 10월22일 같은 분석 착수는 완료 후 다음 독립 과제의 간격을 지지하지 않는다. 12월8일 착수 부재."
+        }
+      ],
+      "reviewed_output_sha256": "49816f5dd5021a7fe12720ca19a271bb9b3c6e4d7a1334447003bbd6c7a602b8"
+    },
+    "ever/F_MH_Top01_015/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "최종 답이 비었다. 같은 사람의 다음 독립 과제 착수 근거가 부족한데 missing_queries도 비어 추가 검색이 없었다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "1711401c73befc139d26237acb2c8c3cadfed2842e59b312512152b748ac7e91"
+    },
+    "ever/F_MH_Top01_015/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "최종 답이 비었다. 같은 사람의 다음 독립 과제 착수 근거가 부족한데 missing_queries도 비어 추가 검색이 없었다.",
+      "claim_reviews": [],
+      "reviewed_output_sha256": "1711401c73befc139d26237acb2c8c3cadfed2842e59b312512152b748ac7e91"
+    },
+    "ever/F_TP_Top01_002/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "3일로 오답. 4월7일 기록의 last Friday는4월4일이며 완료는4월10일이다. 원문 날짜 단서가 있는데도 inclusive7일을 계산하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "It took Lujian Gao 3 days to plan the AWS S3 storage solution and design the tenant isolation strategy for the supply chain system.",
+          "supported": false,
+          "reason": "3일로 오답. 4월7일 기록의 last Friday는4월4일이며 완료는4월10일이다. 원문 날짜 단서가 있는데도 inclusive7일을 계산하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "dbf741c6b7e17f12f136eee1095eadf2e025eb8c97de0330b8a811d956acf046"
+    },
+    "ever/F_TP_Top01_002/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "3일로 오답. 4월7일 기록의 last Friday는4월4일이며 완료는4월10일이다. 원문 날짜 단서가 있는데도 inclusive7일을 계산하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "It took Lujian Gao 3 days to plan the AWS S3 storage solution and design the tenant isolation strategy for the supply chain system.",
+          "supported": false,
+          "reason": "3일로 오답. 4월7일 기록의 last Friday는4월4일이며 완료는4월10일이다. 원문 날짜 단서가 있는데도 inclusive7일을 계산하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "7dc31581c3baec5d15d3a77381f08d813e76c465b3bde99444df82f7c2ea6bf6"
+    },
+    "ever/F_TP_Top01_002/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "3일로 오답. 4월7일 기록의 last Friday는4월4일이며 완료는4월10일이다. 원문 날짜 단서가 있는데도 inclusive7일을 계산하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "It took Lujian Gao 3 days to plan the AWS S3 storage solution and design the tenant isolation strategy for the supply chain system.",
+          "supported": false,
+          "reason": "3일로 오답. 4월7일 기록의 last Friday는4월4일이며 완료는4월10일이다. 원문 날짜 단서가 있는데도 inclusive7일을 계산하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "7dc31581c3baec5d15d3a77381f08d813e76c465b3bde99444df82f7c2ea6bf6"
+    },
+    "ever/MA_U_Top01_005/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 A. 이메일 존재 여부에 따른 일반 anti-enumeration 규칙을 모든 account status 예외 금지로 확대했다. ACCOUNT_STATUS_LOCKED 전용 정책 근거가 없고 검색도 하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "A",
+          "supported": false,
+          "reason": "D 대신 A. 이메일 존재 여부에 따른 일반 anti-enumeration 규칙을 모든 account status 예외 금지로 확대했다. ACCOUNT_STATUS_LOCKED 전용 정책 근거가 없고 검색도 하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "1f6a2f8a421f992045ca14ed7ea187137f9946776418d5afc6d2dbb6fa240e9a"
+    },
+    "ever/MA_U_Top01_005/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 A. 이메일 존재 여부에 따른 일반 anti-enumeration 규칙을 모든 account status 예외 금지로 확대했다. ACCOUNT_STATUS_LOCKED 전용 정책 근거가 없고 검색도 하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "The correct option is A. According to the records, the main security consideration for the \"forgot password\" process is to prevent user enumeration attacks by ensuring consistent feedback messages regardless of the account status. The system should not set exceptions for any account status and should uniformly return a vague prompt like \"If this account is registered, you will receive an email.\" This aligns with the principle of maintaining absolute consistency in anti-enumeration strategies.",
+          "supported": false,
+          "reason": "D 대신 A. 이메일 존재 여부에 따른 일반 anti-enumeration 규칙을 모든 account status 예외 금지로 확대했다. ACCOUNT_STATUS_LOCKED 전용 정책 근거가 없고 검색도 하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "4f6570d0944479073ba91e2b0be641ccb7997eed7bd7bfa95527c8849d313e54"
+    },
+    "ever/MA_U_Top01_005/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 A. 이메일 존재 여부에 따른 일반 anti-enumeration 규칙을 모든 account status 예외 금지로 확대했다. ACCOUNT_STATUS_LOCKED 전용 정책 근거가 없고 검색도 하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "The correct option is A. According to the records, the main security consideration for the \"forgot password\" process is to prevent user enumeration attacks by ensuring consistent feedback messages regardless of the account status. The system should not set exceptions for any account status and should uniformly return a vague prompt like \"If this account is registered, you will receive an email.\" This aligns with the principle of maintaining absolute consistency in anti-enumeration strategies.",
+          "supported": false,
+          "reason": "D 대신 A. 이메일 존재 여부에 따른 일반 anti-enumeration 규칙을 모든 account status 예외 금지로 확대했다. ACCOUNT_STATUS_LOCKED 전용 정책 근거가 없고 검색도 하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "4f6570d0944479073ba91e2b0be641ccb7997eed7bd7bfa95527c8849d313e54"
+    },
+    "ever/MA_P_Top01_014/direct": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "C를 선택하고 금융 회계과목/비용 배분 mapping이 compliance audit에 필수라는 구절을 인용한다. 자연어 설명 대신 선택지와 인용으로 근거를 반환했다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": true,
+          "reason": "C를 선택하고 금융 회계과목/비용 배분 mapping이 compliance audit에 필수라는 구절을 인용한다. 자연어 설명 대신 선택지와 인용으로 근거를 반환했다."
+        }
+      ],
+      "reviewed_output_sha256": "f5855edf78e51ad821954b1daa323a4193ed67ac7e12918559515c1bee0713f3"
+    },
+    "ever/MA_P_Top01_014/reader_only": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "C를 선택하고 금융 회계과목/비용 배분 mapping이 compliance audit에 필수라는 구절을 인용한다. 자연어 설명 대신 선택지와 인용으로 근거를 반환했다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": true,
+          "reason": "C를 선택하고 금융 회계과목/비용 배분 mapping이 compliance audit에 필수라는 구절을 인용한다. 자연어 설명 대신 선택지와 인용으로 근거를 반환했다."
+        }
+      ],
+      "reviewed_output_sha256": "a63f5b2d5de2f8be0dd1b36b9a13e6284aa092ed07d9b402dbbf41edef276531"
+    },
+    "ever/MA_P_Top01_014/combined": {
+      "answer_correct": true,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": true,
+      "narrow_quotes_support_all_claims": true,
+      "unsupported_extra": false,
+      "reason": "C를 선택하고 금융 회계과목/비용 배분 mapping이 compliance audit에 필수라는 구절을 인용한다. 자연어 설명 대신 선택지와 인용으로 근거를 반환했다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": true,
+          "reason": "C를 선택하고 금융 회계과목/비용 배분 mapping이 compliance audit에 필수라는 구절을 인용한다. 자연어 설명 대신 선택지와 인용으로 근거를 반환했다."
+        }
+      ],
+      "reviewed_output_sha256": "a63f5b2d5de2f8be0dd1b36b9a13e6284aa092ed07d9b402dbbf41edef276531"
+    },
+    "ever/F_SH_Top02_014/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "Hanqiang Liang 대신 수신자 Weijun Xue를 담당자로 답했다. 인용은 Hanqiang의 완료 보고이며 Mingzhi의 reminder라는 설명도 해당 출처에서 지지되지 않는다.",
+      "claim_reviews": [
+        {
+          "text": "According to Mingzhi Li's reminder, @Weijun Xue is responsible for the medication check-in module that needs to be delivered by September 18.",
+          "supported": false,
+          "reason": "Hanqiang Liang 대신 수신자 Weijun Xue를 담당자로 답했다. 인용은 Hanqiang의 완료 보고이며 Mingzhi의 reminder라는 설명도 해당 출처에서 지지되지 않는다."
+        }
+      ],
+      "reviewed_output_sha256": "e514fc4fed08983f08529106aa5d736c59aca0e705b3566ff3b017f266b13f7d"
+    },
+    "ever/F_SH_Top02_014/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "Hanqiang Liang 대신 수신자 Weijun Xue를 담당자로 답했다. 인용은 Hanqiang의 완료 보고이며 Mingzhi의 reminder라는 설명도 해당 출처에서 지지되지 않는다.",
+      "claim_reviews": [
+        {
+          "text": "According to Mingzhi Li's reminder, @Weijun Xue is responsible for the medication check-in module that needs to be delivered by September 18.",
+          "supported": false,
+          "reason": "Hanqiang Liang 대신 수신자 Weijun Xue를 담당자로 답했다. 인용은 Hanqiang의 완료 보고이며 Mingzhi의 reminder라는 설명도 해당 출처에서 지지되지 않는다."
+        }
+      ],
+      "reviewed_output_sha256": "fc52e842432d0aaed9e36294b1a0e8f370a37ff238a95ff93dcbf19b91f02c4b"
+    },
+    "ever/F_SH_Top02_014/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "Hanqiang Liang 대신 수신자 Weijun Xue를 담당자로 답했다. 인용은 Hanqiang의 완료 보고이며 Mingzhi의 reminder라는 설명도 해당 출처에서 지지되지 않는다.",
+      "claim_reviews": [
+        {
+          "text": "According to Mingzhi Li's reminder, @Weijun Xue is responsible for the medication check-in module that needs to be delivered by September 18.",
+          "supported": false,
+          "reason": "Hanqiang Liang 대신 수신자 Weijun Xue를 담당자로 답했다. 인용은 Hanqiang의 완료 보고이며 Mingzhi의 reminder라는 설명도 해당 출처에서 지지되지 않는다."
+        }
+      ],
+      "reviewed_output_sha256": "fc52e842432d0aaed9e36294b1a0e8f370a37ff238a95ff93dcbf19b91f02c4b"
+    },
+    "ever/F_MH_Top02_033/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "7개월22일로 오답. Guoxin의1월24일 분석 완료와 다른 비상처리 초안 기록을 묶었고 같은 사람의2월12일 착수를 찾지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The colleague responsible for the in-depth analysis of market competitors started their next independent task in other project groups 7 months and 22 days after completing the analysis.",
+          "supported": false,
+          "reason": "7개월22일로 오답. Guoxin의1월24일 분석 완료와 다른 비상처리 초안 기록을 묶었고 같은 사람의2월12일 착수를 찾지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "702d91068676ea164cb734f40d21bc23f17d34fd55d9551400bb6fb9338b390b"
+    },
+    "ever/F_MH_Top02_033/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "95일로 오답. Guoxin의1월24일 완료와 Junxin의6월2일 repository/CI 착수를 연결했다. 답에 쓴4월18일도 인용 날짜와 다르다. 정답19일 근거 부재.",
+      "claim_reviews": [
+        {
+          "text": "The colleague responsible for the online diagnosis and treatment project group completed the in-depth analysis of market competitors on 2025-01-24, and started their next independent task in other project groups on 2025-04-18, which is 95 days later.",
+          "supported": false,
+          "reason": "95일로 오답. Guoxin의1월24일 완료와 Junxin의6월2일 repository/CI 착수를 연결했다. 답에 쓴4월18일도 인용 날짜와 다르다. 정답19일 근거 부재."
+        }
+      ],
+      "reviewed_output_sha256": "9cf008d86333e24ccd140af35a1e54646ed9b4dff1bd82c8d02f232ad60a3259"
+    },
+    "ever/F_MH_Top02_033/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "95일로 오답. Guoxin의1월24일 완료와 Junxin의6월2일 repository/CI 착수를 연결했다. 답에 쓴4월18일도 인용 날짜와 다르다. 정답19일 근거 부재.",
+      "claim_reviews": [
+        {
+          "text": "The colleague responsible for the online diagnosis and treatment project group completed the in-depth analysis of market competitors on 2025-01-24, and started their next independent task in other project groups on 2025-04-18, which is 95 days later.",
+          "supported": false,
+          "reason": "95일로 오답. Guoxin의1월24일 완료와 Junxin의6월2일 repository/CI 착수를 연결했다. 답에 쓴4월18일도 인용 날짜와 다르다. 정답19일 근거 부재."
+        }
+      ],
+      "reviewed_output_sha256": "9cf008d86333e24ccd140af35a1e54646ed9b4dff1bd82c8d02f232ad60a3259"
+    },
+    "ever/F_TP_Top02_048/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": true,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": false,
+      "reason": "기간 정보를 찾을 수 없다고 답해10 working days를 못 맞혔다. 초기 문맥에 등록 과제 전체 기간이 없다는 한계 진술은 맞지만 기간의 필수 근거는 반환하지 못했다.",
+      "claim_reviews": [
+        {
+          "text": "The sources do not provide specific information about the number of working days needed for the two tasks mentioned.",
+          "supported": true,
+          "reason": "기간 정보를 찾을 수 없다고 답해10 working days를 못 맞혔다. 초기 문맥에 등록 과제 전체 기간이 없다는 한계 진술은 맞지만 기간의 필수 근거는 반환하지 못했다."
+        }
+      ],
+      "reviewed_output_sha256": "ba25912e900f57efceb5ef2526fb68ad9388777d2f55ddae116d2afa7cdc2642"
+    },
+    "ever/F_TP_Top02_048/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "10 working days 대신 과제 설명을 반환했다. vision 완료 주장에는 착수/다른 프로젝트 자료를 인용하고, registration 전체 개발과 남은 validation 작업 착수를 혼동한다. 추가 검색 없음.",
+      "claim_reviews": [
+        {
+          "text": "The task of defining the project vision, technical strategy, and business model during the initial phase of the health records system is completed.",
+          "supported": false,
+          "reason": "10 working days 대신 과제 설명을 반환했다. vision 완료 주장에는 착수/다른 프로젝트 자료를 인용하고, registration 전체 개발과 남은 validation 작업 착수를 혼동한다. 추가 검색 없음."
+        },
+        {
+          "text": "The development of the user registration page for the health monitoring system, including graphical CAPTCHA and form validation logic, is scheduled to start next Monday after the static page framework and routes are configured.",
+          "supported": false,
+          "reason": "10 working days 대신 과제 설명을 반환했다. vision 완료 주장에는 착수/다른 프로젝트 자료를 인용하고, registration 전체 개발과 남은 validation 작업 착수를 혼동한다. 추가 검색 없음."
+        }
+      ],
+      "reviewed_output_sha256": "5ba96a0e7b8de7a757934b35e10a4a5f5e3044411dff2e41d2038fe444a7ca36"
+    },
+    "ever/F_TP_Top02_048/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "10 working days 대신 과제 설명을 반환했다. vision 완료 주장에는 착수/다른 프로젝트 자료를 인용하고, registration 전체 개발과 남은 validation 작업 착수를 혼동한다. 추가 검색 없음.",
+      "claim_reviews": [
+        {
+          "text": "The task of defining the project vision, technical strategy, and business model during the initial phase of the health records system is completed.",
+          "supported": false,
+          "reason": "10 working days 대신 과제 설명을 반환했다. vision 완료 주장에는 착수/다른 프로젝트 자료를 인용하고, registration 전체 개발과 남은 validation 작업 착수를 혼동한다. 추가 검색 없음."
+        },
+        {
+          "text": "The development of the user registration page for the health monitoring system, including graphical CAPTCHA and form validation logic, is scheduled to start next Monday after the static page framework and routes are configured.",
+          "supported": false,
+          "reason": "10 working days 대신 과제 설명을 반환했다. vision 완료 주장에는 착수/다른 프로젝트 자료를 인용하고, registration 전체 개발과 남은 validation 작업 착수를 혼동한다. 추가 검색 없음."
+        }
+      ],
+      "reviewed_output_sha256": "5ba96a0e7b8de7a757934b35e10a4a5f5e3044411dff2e41d2038fe444a7ca36"
+    },
+    "ever/MA_U_Top02_034/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 A. 일반 회귀 테스트 수행 기록으로 P0_SECURITY에서 COMPREHENSIVE_QA_GATE 필수라는 예외 없는 정책을 지지할 수 없다. PLAN_CODE_RED 정의를 검색하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "A",
+          "supported": false,
+          "reason": "D 대신 A. 일반 회귀 테스트 수행 기록으로 P0_SECURITY에서 COMPREHENSIVE_QA_GATE 필수라는 예외 없는 정책을 지지할 수 없다. PLAN_CODE_RED 정의를 검색하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "d613d0adbfc313e5ac6d54cadd0cd9136d8115ecb46bf7a62a382539a33ea435"
+    },
+    "ever/MA_U_Top02_034/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 A. 일반 회귀 테스트 수행 기록으로 P0_SECURITY에서 COMPREHENSIVE_QA_GATE 필수라는 예외 없는 정책을 지지할 수 없다. PLAN_CODE_RED 정의를 검색하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "A",
+          "supported": false,
+          "reason": "D 대신 A. 일반 회귀 테스트 수행 기록으로 P0_SECURITY에서 COMPREHENSIVE_QA_GATE 필수라는 예외 없는 정책을 지지할 수 없다. PLAN_CODE_RED 정의를 검색하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "d957c731a6bd51c1adc96254696223b83cc1c57808d4dc980290d03379dc4a48"
+    },
+    "ever/MA_U_Top02_034/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 A. 일반 회귀 테스트 수행 기록으로 P0_SECURITY에서 COMPREHENSIVE_QA_GATE 필수라는 예외 없는 정책을 지지할 수 없다. PLAN_CODE_RED 정의를 검색하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "A",
+          "supported": false,
+          "reason": "D 대신 A. 일반 회귀 테스트 수행 기록으로 P0_SECURITY에서 COMPREHENSIVE_QA_GATE 필수라는 예외 없는 정책을 지지할 수 없다. PLAN_CODE_RED 정의를 검색하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "d957c731a6bd51c1adc96254696223b83cc1c57808d4dc980290d03379dc4a48"
+    },
+    "ever/MA_P_Top02_083/direct": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 C. 데이터 link 격리/성능 개선 기록은 WebSocket 즉시 전환 승인과 backend readiness를 입증하지 않는다. polling 유지 정책을 추가 검색하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": false,
+          "reason": "D 대신 C. 데이터 link 격리/성능 개선 기록은 WebSocket 즉시 전환 승인과 backend readiness를 입증하지 않는다. polling 유지 정책을 추가 검색하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "6768069a2a1767cc3e4a077505c00b1146685b2c37a77bddf7d32a8d2def276f"
+    },
+    "ever/MA_P_Top02_083/reader_only": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 C. 데이터 link 격리/성능 개선 기록은 WebSocket 즉시 전환 승인과 backend readiness를 입증하지 않는다. polling 유지 정책을 추가 검색하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": false,
+          "reason": "D 대신 C. 데이터 link 격리/성능 개선 기록은 WebSocket 즉시 전환 승인과 backend readiness를 입증하지 않는다. polling 유지 정책을 추가 검색하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "37653b54920bd8c1bee30d7cced914b568a34bbdac92c0d16ee2435f0a89a262"
+    },
+    "ever/MA_P_Top02_083/combined": {
+      "answer_correct": false,
+      "returned_evidence_supports_all_claims": false,
+      "required_evidence_complete": false,
+      "narrow_quotes_support_all_claims": false,
+      "unsupported_extra": true,
+      "reason": "D 대신 C. 데이터 link 격리/성능 개선 기록은 WebSocket 즉시 전환 승인과 backend readiness를 입증하지 않는다. polling 유지 정책을 추가 검색하지 않았다.",
+      "claim_reviews": [
+        {
+          "text": "C",
+          "supported": false,
+          "reason": "D 대신 C. 데이터 link 격리/성능 개선 기록은 WebSocket 즉시 전환 승인과 backend readiness를 입증하지 않는다. polling 유지 정책을 추가 검색하지 않았다."
+        }
+      ],
+      "reviewed_output_sha256": "37653b54920bd8c1bee30d7cced914b568a34bbdac92c0d16ee2435f0a89a262"
+    }
+  }
+}

@@ -1,31 +1,59 @@
 # 기여 안내
 
-팀 기록을 병합하는 규칙, 근거를 읽는 QA, 평가 재현은 각각 따로 변경하고 검토할 수 있다. 실패하는 예를 보고하려면 질문 또는 새 기록, 당시 시스템에 보였던 원문, 기대 판단, 실제 판단을 적어 이슈를 열어 주세요. 공개 이슈에는 공유 가능한 자료나 가상 사례를 사용해 주세요.
+질문/새 기록, 당시 보였던 원문, 기대 판단, 실제 판단을 함께 제시해 주세요. 원문 인용의 존재와 의미적 지지를 나눠 적습니다. 공개 가능한 자료나 가상 사례를 사용합니다. 현재 연결 경로는 [service 명세](docs/service-v2.md), 후보/과거 경로는 [연구 이력](docs/research-history.md)을 따릅니다.
 
-## 로컬 검증
+## 검사 환경
 
-저장소 루트에서 Python 3.12와 Git으로 실행한다. 두 명령은 모델 가중치나 API 키를 요구하지 않는다.
+표준 라이브러리 코어와 reference 라이브러리 검사를 분리합니다. 전체 discover가 의존성 없이 실행된다고 가정하지 않습니다. 아래 코어 검사는 Python3.12와 Git을 사용합니다.
 
 ```sh
-python3 -m unittest discover -s tests -v
+python3 - <<'PYCODE'
+from pathlib import Path
+import unittest
+paths = sorted(p for p in Path('tests').glob('test_*.py')
+               if not p.name.startswith(('test_reference_', 'test_contextual_'))
+               and p.name != 'test_service.py')
+suite = unittest.TestLoader().loadTestsFromNames(['tests.' + p.stem for p in paths])
+result = unittest.TextTestRunner(verbosity=2).run(suite)
+raise SystemExit(not result.wasSuccessful())
+PYCODE
 python3 -m team_memory demo
+python3 -m team_memory demo --followup
 ```
 
-CUPMem 원형 직렬화·프롬프트 연결 검사까지 실행하려면 아래 고정 버전을 준비한다. CI도 같은 버전을 사용한다. 이 검사는 모델 추론이나 유료 API를 호출하지 않는다.
+CUPMem 원형 어댑터 검사까지 하려면 아래 고정 소스를 준비합니다. 없으면 해당 검사는 skipped입니다. 과거 캠페인/캐시에 의존하는 검사의 skip도 성공으로 세지 않습니다.
 
 ```sh
 git clone https://github.com/icedreamc/STALE.git .cache/cupmem-upstream
 git -C .cache/cupmem-upstream checkout --detach ea7d391103a151927cd29d2f01d87597a782bdcb
 cp evaluation/cupmem/upstream-manifest.json .cache/cupmem-upstream/UPSTREAM_MANIFEST.json
-CUPMEM_UPSTREAM_ROOT="$PWD/.cache/cupmem-upstream" python3 -m unittest discover -s tests -v
+export CUPMEM_UPSTREAM_ROOT="$PWD/.cache/cupmem-upstream"
 ```
 
-원본이 없으면 해당 연결 검사는 명시적으로 건너뛴다. 별도 보관한 과거 캠페인 파일·데이터 캐시·대용량 원시 호출 로그가 필요한 검사도 `skipped`로 표시된다. 공개된 입력·출력·코드의 해시와 근거 경계 검사는 계속 실행한다. `results/`에는 개발 당시의 보고서도 포함되므로, 현재 구현과 확인 범위는 README의 **현재 개발 경로**를 기준으로 읽는다.
+[환경 준비](docs/evaluation-guide.md)를 따른 Python3.11 reference 환경에서는:
+
+```sh
+.venv/bin/python - <<'PYCODE'
+from pathlib import Path
+import unittest
+paths = sorted(p for p in Path('tests').glob('test_*.py')
+               if p.name.startswith(('test_reference_', 'test_contextual_'))
+               or p.name == 'test_service.py')
+suite = unittest.TestLoader().loadTestsFromNames(['tests.' + p.stem for p in paths])
+result = unittest.TextTestRunner(verbosity=2).run(suite)
+raise SystemExit(not result.wasSuccessful() or bool(result.skipped))
+PYCODE
+```
+
+reference 검사는 실제 라이브러리·캐시된 tokenizer와 stub 모델/로컬 HTTP 서버를 사용합니다. 모델 가중치·유료 API를 호출하지 않습니다. sandbox가 localhost bind를 막으면 전송 검사가 실패할 수 있으므로 실패를 숨기지 말고 허용된 환경에서 해당 검사를 확인합니다. CI의 reference job은 skip도 실패로 처리합니다. 실행 명령의 최신 원본은 [workflow](.github/workflows/tests.yml)입니다.
 
 ## 실험을 바꾸는 PR
 
-1. 바꾸려는 판단을 한 문장으로 적는다. 예를 들어 동일 조건의 상충 관측 두 개가 모두 답에 남아야 한다.
-2. 그 판단이 달라지는 최소 사례와, 계속 맞혀야 하는 기존 사례를 함께 확인한다.
-3. PR에 실행 명령과 관측값을 적는다. QA는 **답 내용**과 **인용의 출처·구절**을 따로 표시한다. 평가에 정답 위치를 제공했다면 그 조건도 밝힌다.
+1. 어떤 판단을 개선하려는지와 재사용하는 레퍼런스의 실제 책임을 적습니다. 논문 아이디어, 저자 코드 재사용, 전체 재현을 구분합니다.
+2. 입력·모델·평가 기준·중단 조건을 새 결과 전에 고정합니다. 이미 본 개발 사례와 새 사례를 구분합니다.
+3. 바뀐 최소 사례와 계속 맞혀야 하는 기존 QA/인용을 함께 확인합니다. 추가 단계는 비용과 실패 경로도 비교합니다.
+4. 재생 호출과 새 호출, 검색을 포함한 평가와 고정 근거 독해를 분리합니다. 정답 위치를 제공했다면 명시합니다.
+5. 원출력·실패·채점 이유·환경·실제 사용량을 보존합니다. 동결 결과나 과거 source archive를 덮어쓰지 않습니다.
+6. 문서에는 실제 적용 기본값과 실험 후보를 구분합니다. `ok`나 문자열 위치 일치를 의미 정답 인증으로 쓰지 않습니다.
 
-기존 실험을 비교할 때는 먼저 저장된 출력으로 이전 점수를 재현한다. 새로운 프롬프트나 채점 기준으로 얻은 결과는 별도 실험으로 기록한다. [CPython 평가 재현 안내](evaluation/cpython/README.md)
+팀 코드의 재사용 라이선스는 결정 전입니다. vendor 원본의 LICENSE/NOTICE는 유지하며 외부 자료의 출처·revision·변형 범위를 기록합니다.

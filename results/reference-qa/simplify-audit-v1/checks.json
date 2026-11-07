@@ -1,0 +1,240 @@
+{
+  "checked_at": "2026-11-06T04:19:54.472583+00:00",
+  "model_calls": 0,
+  "gpu_minutes": 0,
+  "source_and_evaluation_hashes_match": true,
+  "original_selected_cards_and_ratings_unchanged": true,
+  "complete_post_retrieval_replay": {
+    "cases": 20,
+    "exact_model_calls_replayed": 112,
+    "original_draft_calls_verified": 20,
+    "all132_historical_calls_accounted_for": true,
+    "scope": "All post-retrieval stages replayed; retrieval itself not re-executed and no fresh model inference"
+  },
+  "new_run": {
+    "cases": 44,
+    "calls": 83,
+    "paired_retrieval_equal_cases": 12,
+    "truncated_outputs": 0
+  },
+  "probes": {
+    "judge_timeout_stdout": {
+      "status": "partial",
+      "answer_preserved": true,
+      "stdout": "Error evaluating document support: offline injected timeout\n",
+      "stdout_is_empty": false,
+      "judge_labels": [
+        "ERROR"
+      ]
+    },
+    "quote_schema_failure": {
+      "status": "ok",
+      "warnings": [],
+      "attribution_status": "partial",
+      "quote_attribution_error": "ValidationError: 1 validation error for QuestionAnswer\n  Invalid JSON: expected ident at line 1 column 2 [type=json_invalid, input_value='not-json', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/json_invalid",
+      "stage_failures": null,
+      "answer_preserved": true
+    },
+    "partial_review_reset_by_aqa": {
+      "before_status": "partial",
+      "after_status": "ok",
+      "after_warnings": [],
+      "accepted": true,
+      "remaining_error_labels": [
+        {
+          "source_id": "audit-a",
+          "label": "ERROR"
+        }
+      ]
+    },
+    "within_source_guard": {
+      "raw": "Source 1: The default for `rerere.autoUpdate` is stated as false when the setting is unset [1]. \n\nSource 2: No specific information about `rerere.autoUpdate` is provided in this source. \n\nAnswer: The default for `rerere.autoUpdate` is stated as false when the setting is unset [1].",
+      "missing_opposing_sources": [],
+      "document_judgments": [
+        {
+          "source_id": "1df3d1c21cd88713084aacdc",
+          "citation_numbers": [
+            1
+          ],
+          "label": "CONTRADICTS",
+          "raw": "{\n  \"claim\": \"Source 1:\\nThe default for `rerere.autoUpdate` is stated as true when the setting is unset [1]. \\n\\nSource 2:\\nNo specific information about `rerere.autoUpdate` is provided in this source. \\n\\nAnswer: The default for `rerere.autoUpdate` is stated as true when the setting is unset [1].\",\n  \"document_snippet\": \"rerere.autoUpdate::\\n\\tWhen set to true, `git-rerere` updates the index with the\\n\\tresulting contents after it cleanly resolves conflicts using\\n\\tpreviously recorded resolutions.  Defaults to false.\",\n  \"reasoning\": \"The document states that the default for `rerere.autoUpdate` is false, which directly contradicts the claim that it is stated as true when unset.\",\n  \"answer\": \"CONTRADICTS\"\n}"
+        },
+        {
+          "source_id": "8eee32fa3ff7f52b4f464fa7",
+          "citation_numbers": [
+            2
+          ],
+          "label": "IRRELEVANT",
+          "raw": "{\n  \"claim\": \"Source 1:\\nThe default for `rerere.autoUpdate` is stated as true when the setting is unset [1]. \\n\\nSource 2:\\nNo specific information about `rerere.autoUpdate` is provided in this source. \\n\\nAnswer: The default for `rerere.autoUpdate` is stated as true when the setting is unset [1].\",\n  \"document_snippet\": \"pull.ff::\\n\\tBy default, Git does not create an extra merge commit when merging\\n\\a commit that is a descendant of the current commit. Instead, the\\n\\ttip of the current branch is fast-forwarded. When set to `false`,\\n\\tthis variable tells Git to create an extra merge commit in such\\n\\ta case (equivalent to giving the `--no-ff` option from the command\\n\\tline). When set to `only`, only such fast-forward merges are\\n\\tallowed (equivalent to giving the `--ff-only` option from the command\\n\\tline). This setting overrides `merge.ff` when pulling.\",\n  \"reasoning\": \"The document does not mention `rerere.autoUpdate` at all, so it does not attempt to answer the question about the default value of `rerere.autoUpdate` when the setting is unset. Therefore, the document is irrelevant to the claim.\",\n  \"answer\": \"IRRELEVANT\"\n}"
+        }
+      ]
+    }
+  },
+  "judge_token_override": {
+    "requested_in_code": 384,
+    "effective_adapter_max_tokens": 1024,
+    "observed_old_judge_requests": [
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024
+    ],
+    "observed_new_judge_requests": [
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024
+    ]
+  },
+  "observed_schema_errors": {
+    "old20": [
+      {
+        "id": "legacy-d474ab3d7822c8ac/qa-1",
+        "status": "ok",
+        "attribution_status": "partial",
+        "error": "ValueError: Fact list differs from requested unchanged sentences"
+      },
+      {
+        "id": "legacy-d30bb1f10fe4bfe8/qa-0",
+        "status": "ok",
+        "attribution_status": "partial",
+        "error": "ValueError: Fact list differs from requested unchanged sentences"
+      },
+      {
+        "id": "legacy-702e9009795b2802/qa-0",
+        "status": "ok",
+        "attribution_status": "partial",
+        "error": "ValueError: Fact list differs from requested unchanged sentences"
+      },
+      {
+        "id": "legacy-c000762632771ec9/qa-0",
+        "status": "ok",
+        "attribution_status": "partial",
+        "error": "ValueError: Fact list differs from requested unchanged sentences"
+      }
+    ],
+    "comparison44": [
+      {
+        "id": "transfer/new-rerere/attributed",
+        "status": "ok",
+        "attribution_status": "partial",
+        "error": "ValueError: Fact list differs from requested unchanged sentences"
+      }
+    ]
+  },
+  "inspected_code_sha256": {
+    "team_memory/reference_checked.py": "3aed55e68bef438298f55a5a69e46946852d52183f2ee52a2090d849390ba0a9",
+    "team_memory/reference_attributed.py": "89e19a44ddf8646b3516f4e9161398acf999e861306056fd302e4c6a843f10c3",
+    "team_memory/reference_quotes.py": "ae585a3e8ba80849d38dc09bfc6d7a5b776c4fcc904ee3923d315efd6faaa1af",
+    "team_memory/reference_fallback.py": "ae6b3082a35afefc6b33a6ca914c7d66c58edfc35fa3271de0c02e1e02325650",
+    "team_memory/reference_joint.py": "2632992d18bc4662487f7fee53b9fe6a02d00fa7490b59aaf06a7d64235e7054"
+  }
+}

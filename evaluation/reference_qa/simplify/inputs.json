@@ -1,0 +1,332 @@
+{
+  "scope": "4 new public-documentation questions plus8 controlled diagnostics, including an order pair; not an independent benchmark",
+  "cases": [
+    {
+      "id": "new-rebase",
+      "category": "public_documentation",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rebase.backend::\n\tDefault backend to use for rebasing.  Possible choices are\n\t'apply' or 'merge'.  In the future, if the merge backend gains\n\tall remaining capabilities of the apply backend, this setting\n\tmay become unused.\n\nrebase.stat::\n\tWhether to show a diffstat of what changed upstream since the last\n\trebase. False by default.\n\nrebase.autoSquash::\n\tIf set to true, enable the `--autosquash` option of\n\tlinkgit:git-rebase[1] by default for interactive mode.\n\tThis can be overridden with the `--no-autosquash` option.\n\nrebase.autoStash::\n\tWhen set to true, automatically create a temporary stash entry\n\tbefore the operation begins, and apply it after the operation\n\tends.  This means that you can run rebase on a dirty worktree.\n\tHowever, use with care: the final stash application after a\n\tsuccessful rebase might result in non-trivial conflicts.\n\tThis option can be overridden by the `--no-autostash` and\n\t`--autostash` options of linkgit:git-rebase[1].\n\tDefaults to false.\n\nrebase.updateRefs::\n\tIf set to true enable `--update-refs` option by default.\n\nrebase.missingCommitsCheck::\n\tIf set to \"warn\", git rebase -i will print a warning if some\n\tcommits are removed (e.g. a line was deleted), however the\n\trebase will still proceed. If set to \"error\", it will print\n\tthe previous warning and stop the rebase, 'git rebase\n\t--edit-todo' can then be used to correct the error. If set to\n\t\"ignore\", no checking is done.\n\tTo drop a commit without warning or error, use the `drop`\n\tcommand in the todo list.\n\tDefaults to \"ignore\".\n\nrebase.instructionFormat::\n\tA format string, as specified in linkgit:git-log[1], to be used for the\n\ttodo list during an interactive rebase.  The format will\n\tautomatically have the commit hash prepended to the format.\n\nrebase.abbreviateCommands::\n\tIf set to true, `git rebase` will use abbreviated command names in the\n\ttodo list resulting in something like this:\n+\n-------------------------------------------\n\tp deadbee The oneline of the commit\n\tp fa1afe1 The oneline of the next commit\n\t...\n-------------------------------------------\n+\ninstead of:\n+\n-------------------------------------------\n\tpick deadbee The oneline of the commit\n\tpick fa1afe1 The oneline of the next commit\n\t...\n-------------------------------------------\n+\nDefaults to false.\n\nrebase.rescheduleFailedExec::\n\tAutomatically reschedule `exec` commands that failed. This only makes\n\tsense in interactive mode (or when an `--exec` option was provided).\n\tThis is the same as specifying the `--reschedule-failed-exec` option.\n\nrebase.forkPoint::\n\tIf set to false set `--no-fork-point` option by default.\n\nrebase.rebaseMerges::\n\tWhether and how to set the `--rebase-merges` option by default. Can\n\tbe `rebase-cousins`, `no-rebase-cousins`, or a boolean. Setting to\n\ttrue or to `no-rebase-cousins` is equivalent to\n\t`--rebase-merges=no-rebase-cousins`, setting to `rebase-cousins` is\n\tequivalent to `--rebase-merges=rebase-cousins`, and setting to false is\n\tequivalent to `--no-rebase-merges`. Passing `--rebase-merges` on the\n\tcommand line, with or without an argument, overrides any\n\t`rebase.rebaseMerges` configuration.\n\nrebase.maxLabelLength::\n\tWhen generating label names from commit subjects, truncate the names to\n\tthis length. By default, the names are truncated to a little less than\n\t`NAME_MAX` (to allow e.g. `.lock` files to be written for the\n\tcorresponding loose refs).\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rebase.txt"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        }
+      ],
+      "question": "With rebase.missingCommitsCheck set to error, what happens when a commit is removed from the interactive todo list, and how can the todo list be corrected?"
+    },
+    {
+      "id": "new-pull",
+      "category": "public_documentation",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        }
+      ],
+      "question": "What does pull.ff=only allow, and which merge setting does pull.ff override when pulling?"
+    },
+    {
+      "id": "new-push",
+      "category": "public_documentation",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "push.autoSetupRemote::\n\tIf set to \"true\" assume `--set-upstream` on default push when no\n\tupstream tracking exists for the current branch; this option\n\ttakes effect with push.default options 'simple', 'upstream',\n\tand 'current'. It is useful if by default you want new branches\n\tto be pushed to the default remote (like the behavior of\n\t'push.default=current') and you also want the upstream tracking\n\tto be set. Workflows most likely to benefit from this option are\n\t'simple' central workflows where all branches are expected to\n\thave the same name on the remote.\n\npush.default::\n\tDefines the action `git push` should take if no refspec is\n\tgiven (whether from the command-line, config, or elsewhere).\n\tDifferent values are well-suited for\n\tspecific workflows; for instance, in a purely central workflow\n\t(i.e. the fetch source is equal to the push destination),\n\t`upstream` is probably what you want.  Possible values are:\n+\n--\n\n* `nothing` - do not push anything (error out) unless a refspec is\n  given. This is primarily meant for people who want to\n  avoid mistakes by always being explicit.\n\n* `current` - push the current branch to update a branch with the same\n  name on the receiving end.  Works in both central and non-central\n  workflows.\n\n* `upstream` - push the current branch back to the branch whose\n  changes are usually integrated into the current branch (which is\n  called `@{upstream}`).  This mode only makes sense if you are\n  pushing to the same repository you would normally pull from\n  (i.e. central workflow).\n\n* `tracking` - This is a deprecated synonym for `upstream`.\n\n* `simple` - push the current branch with the same name on the remote.\n+\nIf you are working on a centralized workflow (pushing to the same repository you\npull from, which is typically `origin`), then you need to configure an upstream\nbranch with the same name.\n+\nThis mode is the default since Git 2.0, and is the safest option suited for\nbeginners.\n\n* `matching` - push all branches having the same name on both ends.\n  This makes the repository you are pushing to remember the set of\n  branches that will be pushed out (e.g. if you always push 'maint'\n  and 'master' there and no other branches, the repository you push\n  to will have these two branches, and your local 'maint' and\n  'master' will be pushed there).\n+\nTo use this mode effectively, you have to make sure _all_ the\nbranches you would push out are ready to be pushed out before\nrunning 'git push', as the whole point of this mode is to allow you\nto push all of the branches in one go.  If you usually finish work\non only one branch and push out the result, while other branches are\nunfinished, this mode is not for you.  Also this mode is not\nsuitable for pushing into a shared central repository, as other\npeople may add new branches there, or update the tip of existing\nbranches outside your control.\n+\nThis used to be the default, but not since Git 2.0 (`simple` is the\nnew default).\n\n--\n\npush.followTags::\n\tIf set to true, enable `--follow-tags` option by default.  You\n\tmay override this configuration at time of push by specifying\n\t`--no-follow-tags`.\n\npush.gpgSign::\n\tMay be set to a boolean value, or the string 'if-asked'. A true\n\tvalue causes all pushes to be GPG signed, as if `--signed` is\n\tpassed to linkgit:git-push[1]. The string 'if-asked' causes\n\tpushes to be signed if the server supports it, as if\n\t`--signed=if-asked` is passed to 'git push'. A false value may\n\toverride a value from a lower-priority config file. An explicit\n\tcommand-line flag always overrides this config option.\n\npush.pushOption::\n\tWhen no `--push-option=<option>` argument is given from the\n\tcommand line, `git push` behaves as if each <value> of\n\tthis variable is given as `--push-option=<value>`.\n+\nThis is a multi-valued variable, and an empty value can be used in a\nhigher priority configuration file (e.g. `.git/config` in a\nrepository) to clear the values inherited from a lower priority\nconfiguration files (e.g. `$HOME/.gitconfig`).\n+\n----\n\nExample:\n\n/etc/gitconfig\n  push.pushoption = a\n  push.pushoption = b\n\n~/.gitconfig\n  push.pushoption = c\n\nrepo/.git/config\n  push.pushoption =\n  push.pushoption = b\n\nThis will result in only b (a and c are cleared).\n\n----\n\npush.recurseSubmodules::\n\tMay be \"check\", \"on-demand\", \"only\", or \"no\", with the same behavior\n\tas that of \"push --recurse-submodules\".\n\tIf not set, 'no' is used by default, unless 'submodule.recurse' is\n\tset (in which case a 'true' value means 'on-demand').\n\npush.useForceIfIncludes::\n\tIf set to \"true\", it is equivalent to specifying\n\t`--force-if-includes` as an option to linkgit:git-push[1]\n\tin the command line. Adding `--no-force-if-includes` at the\n\ttime of push overrides this configuration setting.\n\npush.negotiate::\n\tIf set to \"true\", attempt to reduce the size of the packfile\n\tsent by rounds of negotiation in which the client and the\n\tserver attempt to find commits in common. If \"false\", Git will\n\trely solely on the server's ref advertisement to find commits\n\tin common.\n\npush.useBitmaps::\n\tIf set to \"false\", disable use of bitmaps for \"git push\" even if\n\t`pack.useBitmaps` is \"true\", without preventing other git operations\n\tfrom using bitmaps. Default is true.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/push.txt"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        }
+      ],
+      "question": "When push.autoSetupRemote is true and the current branch has no upstream tracking, what does it assume on a default push and with which push.default modes does it take effect?"
+    },
+    {
+      "id": "new-rerere",
+      "category": "public_documentation",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        }
+      ],
+      "question": "What is the default of rerere.autoUpdate, and what does enabling it do after recorded resolutions cleanly resolve conflicts?"
+    },
+    {
+      "id": "new-conflict-separate",
+      "category": "controlled_conflict",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        },
+        {
+          "owner": "Synthetic team recorder",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Synthetic team recorder",
+            "text": "Synthetic test report for Git2.48.0: with rerere.autoUpdate unset, we recorded its default as true. This is an observation report, not an approved correction to the manual.",
+            "location": "synthetic:simplify/counter-rerere"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        }
+      ],
+      "question": "What defaults for rerere.autoUpdate are stated in the supplied records when the setting is unset? Preserve differing reports with their sources."
+    },
+    {
+      "id": "new-conflict-one-source",
+      "category": "controlled_conflict_within_source",
+      "records": [
+        {
+          "owner": "Synthetic team recorder",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Synthetic team recorder",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n\n\nSynthetic appended test report:\nSynthetic test report for Git2.48.0: with rerere.autoUpdate unset, we recorded its default as true. This is an observation report, not an approved correction to the manual.",
+            "location": "synthetic:simplify/combined"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        }
+      ],
+      "question": "What defaults for rerere.autoUpdate are stated in the supplied records when the setting is unset? Preserve differing reports with their sources."
+    },
+    {
+      "id": "new-conflict-one-source-reversed",
+      "category": "controlled_order_pair",
+      "records": [
+        {
+          "owner": "Synthetic team recorder",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Synthetic team recorder",
+            "text": "Synthetic test report for Git2.48.0: with rerere.autoUpdate unset, we recorded its default as true. This is an observation report, not an approved correction to the manual.\n\nVerbatim manual excerpt:\nrerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "synthetic:simplify/combined-reversed"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        }
+      ],
+      "question": "What defaults for rerere.autoUpdate are stated in the supplied records when the setting is unset? Preserve differing reports with their sources."
+    },
+    {
+      "id": "new-conflict-stat",
+      "category": "controlled_conflict",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rebase.backend::\n\tDefault backend to use for rebasing.  Possible choices are\n\t'apply' or 'merge'.  In the future, if the merge backend gains\n\tall remaining capabilities of the apply backend, this setting\n\tmay become unused.\n\nrebase.stat::\n\tWhether to show a diffstat of what changed upstream since the last\n\trebase. False by default.\n\nrebase.autoSquash::\n\tIf set to true, enable the `--autosquash` option of\n\tlinkgit:git-rebase[1] by default for interactive mode.\n\tThis can be overridden with the `--no-autosquash` option.\n\nrebase.autoStash::\n\tWhen set to true, automatically create a temporary stash entry\n\tbefore the operation begins, and apply it after the operation\n\tends.  This means that you can run rebase on a dirty worktree.\n\tHowever, use with care: the final stash application after a\n\tsuccessful rebase might result in non-trivial conflicts.\n\tThis option can be overridden by the `--no-autostash` and\n\t`--autostash` options of linkgit:git-rebase[1].\n\tDefaults to false.\n\nrebase.updateRefs::\n\tIf set to true enable `--update-refs` option by default.\n\nrebase.missingCommitsCheck::\n\tIf set to \"warn\", git rebase -i will print a warning if some\n\tcommits are removed (e.g. a line was deleted), however the\n\trebase will still proceed. If set to \"error\", it will print\n\tthe previous warning and stop the rebase, 'git rebase\n\t--edit-todo' can then be used to correct the error. If set to\n\t\"ignore\", no checking is done.\n\tTo drop a commit without warning or error, use the `drop`\n\tcommand in the todo list.\n\tDefaults to \"ignore\".\n\nrebase.instructionFormat::\n\tA format string, as specified in linkgit:git-log[1], to be used for the\n\ttodo list during an interactive rebase.  The format will\n\tautomatically have the commit hash prepended to the format.\n\nrebase.abbreviateCommands::\n\tIf set to true, `git rebase` will use abbreviated command names in the\n\ttodo list resulting in something like this:\n+\n-------------------------------------------\n\tp deadbee The oneline of the commit\n\tp fa1afe1 The oneline of the next commit\n\t...\n-------------------------------------------\n+\ninstead of:\n+\n-------------------------------------------\n\tpick deadbee The oneline of the commit\n\tpick fa1afe1 The oneline of the next commit\n\t...\n-------------------------------------------\n+\nDefaults to false.\n\nrebase.rescheduleFailedExec::\n\tAutomatically reschedule `exec` commands that failed. This only makes\n\tsense in interactive mode (or when an `--exec` option was provided).\n\tThis is the same as specifying the `--reschedule-failed-exec` option.\n\nrebase.forkPoint::\n\tIf set to false set `--no-fork-point` option by default.\n\nrebase.rebaseMerges::\n\tWhether and how to set the `--rebase-merges` option by default. Can\n\tbe `rebase-cousins`, `no-rebase-cousins`, or a boolean. Setting to\n\ttrue or to `no-rebase-cousins` is equivalent to\n\t`--rebase-merges=no-rebase-cousins`, setting to `rebase-cousins` is\n\tequivalent to `--rebase-merges=rebase-cousins`, and setting to false is\n\tequivalent to `--no-rebase-merges`. Passing `--rebase-merges` on the\n\tcommand line, with or without an argument, overrides any\n\t`rebase.rebaseMerges` configuration.\n\nrebase.maxLabelLength::\n\tWhen generating label names from commit subjects, truncate the names to\n\tthis length. By default, the names are truncated to a little less than\n\t`NAME_MAX` (to allow e.g. `.lock` files to be written for the\n\tcorresponding loose refs).\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rebase.txt"
+          }
+        },
+        {
+          "owner": "Synthetic team recorder",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Synthetic team recorder",
+            "text": "Synthetic Git2.48.0 lab report: without setting rebase.stat, the observed default was true and the upstream diffstat was shown. No correction has been approved.",
+            "location": "synthetic:simplify/counter-stat"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        }
+      ],
+      "question": "Which default values for rebase.stat are given by the manual and the lab report?"
+    },
+    {
+      "id": "new-conditions",
+      "category": "controlled_coexistence",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rebase.backend::\n\tDefault backend to use for rebasing.  Possible choices are\n\t'apply' or 'merge'.  In the future, if the merge backend gains\n\tall remaining capabilities of the apply backend, this setting\n\tmay become unused.\n\nrebase.stat::\n\tWhether to show a diffstat of what changed upstream since the last\n\trebase. False by default.\n\nrebase.autoSquash::\n\tIf set to true, enable the `--autosquash` option of\n\tlinkgit:git-rebase[1] by default for interactive mode.\n\tThis can be overridden with the `--no-autosquash` option.\n\nrebase.autoStash::\n\tWhen set to true, automatically create a temporary stash entry\n\tbefore the operation begins, and apply it after the operation\n\tends.  This means that you can run rebase on a dirty worktree.\n\tHowever, use with care: the final stash application after a\n\tsuccessful rebase might result in non-trivial conflicts.\n\tThis option can be overridden by the `--no-autostash` and\n\t`--autostash` options of linkgit:git-rebase[1].\n\tDefaults to false.\n\nrebase.updateRefs::\n\tIf set to true enable `--update-refs` option by default.\n\nrebase.missingCommitsCheck::\n\tIf set to \"warn\", git rebase -i will print a warning if some\n\tcommits are removed (e.g. a line was deleted), however the\n\trebase will still proceed. If set to \"error\", it will print\n\tthe previous warning and stop the rebase, 'git rebase\n\t--edit-todo' can then be used to correct the error. If set to\n\t\"ignore\", no checking is done.\n\tTo drop a commit without warning or error, use the `drop`\n\tcommand in the todo list.\n\tDefaults to \"ignore\".\n\nrebase.instructionFormat::\n\tA format string, as specified in linkgit:git-log[1], to be used for the\n\ttodo list during an interactive rebase.  The format will\n\tautomatically have the commit hash prepended to the format.\n\nrebase.abbreviateCommands::\n\tIf set to true, `git rebase` will use abbreviated command names in the\n\ttodo list resulting in something like this:\n+\n-------------------------------------------\n\tp deadbee The oneline of the commit\n\tp fa1afe1 The oneline of the next commit\n\t...\n-------------------------------------------\n+\ninstead of:\n+\n-------------------------------------------\n\tpick deadbee The oneline of the commit\n\tpick fa1afe1 The oneline of the next commit\n\t...\n-------------------------------------------\n+\nDefaults to false.\n\nrebase.rescheduleFailedExec::\n\tAutomatically reschedule `exec` commands that failed. This only makes\n\tsense in interactive mode (or when an `--exec` option was provided).\n\tThis is the same as specifying the `--reschedule-failed-exec` option.\n\nrebase.forkPoint::\n\tIf set to false set `--no-fork-point` option by default.\n\nrebase.rebaseMerges::\n\tWhether and how to set the `--rebase-merges` option by default. Can\n\tbe `rebase-cousins`, `no-rebase-cousins`, or a boolean. Setting to\n\ttrue or to `no-rebase-cousins` is equivalent to\n\t`--rebase-merges=no-rebase-cousins`, setting to `rebase-cousins` is\n\tequivalent to `--rebase-merges=rebase-cousins`, and setting to false is\n\tequivalent to `--no-rebase-merges`. Passing `--rebase-merges` on the\n\tcommand line, with or without an argument, overrides any\n\t`rebase.rebaseMerges` configuration.\n\nrebase.maxLabelLength::\n\tWhen generating label names from commit subjects, truncate the names to\n\tthis length. By default, the names are truncated to a little less than\n\t`NAME_MAX` (to allow e.g. `.lock` files to be written for the\n\tcorresponding loose refs).\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rebase.txt"
+          }
+        },
+        {
+          "owner": "Synthetic team recorder",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Synthetic team recorder",
+            "text": "Synthetic procedure: local reviews use rebase.missingCommitsCheck=warn; CI uses rebase.missingCommitsCheck=error. A removed todo entry is the event being checked in both environments.",
+            "location": "synthetic:simplify/procedure"
+          }
+        }
+      ],
+      "question": "For a removed todo entry, what happens in local reviews and in CI under the supplied procedure?"
+    },
+    {
+      "id": "new-unrelated",
+      "category": "controlled_irrelevant_report",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        },
+        {
+          "owner": "Synthetic team recorder",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Synthetic team recorder",
+            "text": "Synthetic observation: rerere.enabled was true because this repository already had an rr-cache directory. This observation does not change rerere.autoUpdate.",
+            "location": "synthetic:simplify/enabled"
+          }
+        }
+      ],
+      "question": "What is the documented default of rerere.autoUpdate?"
+    },
+    {
+      "id": "new-author",
+      "category": "controlled_authorship",
+      "records": [
+        {
+          "owner": "Mira",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Mira",
+            "text": "@Noah: I confirmed that enabling push.autoSetupRemote assumes --set-upstream on a default push without existing upstream tracking.",
+            "location": "synthetic:simplify/mira-report"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "push.autoSetupRemote::\n\tIf set to \"true\" assume `--set-upstream` on default push when no\n\tupstream tracking exists for the current branch; this option\n\ttakes effect with push.default options 'simple', 'upstream',\n\tand 'current'. It is useful if by default you want new branches\n\tto be pushed to the default remote (like the behavior of\n\t'push.default=current') and you also want the upstream tracking\n\tto be set. Workflows most likely to benefit from this option are\n\t'simple' central workflows where all branches are expected to\n\thave the same name on the remote.\n\npush.default::\n\tDefines the action `git push` should take if no refspec is\n\tgiven (whether from the command-line, config, or elsewhere).\n\tDifferent values are well-suited for\n\tspecific workflows; for instance, in a purely central workflow\n\t(i.e. the fetch source is equal to the push destination),\n\t`upstream` is probably what you want.  Possible values are:\n+\n--\n\n* `nothing` - do not push anything (error out) unless a refspec is\n  given. This is primarily meant for people who want to\n  avoid mistakes by always being explicit.\n\n* `current` - push the current branch to update a branch with the same\n  name on the receiving end.  Works in both central and non-central\n  workflows.\n\n* `upstream` - push the current branch back to the branch whose\n  changes are usually integrated into the current branch (which is\n  called `@{upstream}`).  This mode only makes sense if you are\n  pushing to the same repository you would normally pull from\n  (i.e. central workflow).\n\n* `tracking` - This is a deprecated synonym for `upstream`.\n\n* `simple` - push the current branch with the same name on the remote.\n+\nIf you are working on a centralized workflow (pushing to the same repository you\npull from, which is typically `origin`), then you need to configure an upstream\nbranch with the same name.\n+\nThis mode is the default since Git 2.0, and is the safest option suited for\nbeginners.\n\n* `matching` - push all branches having the same name on both ends.\n  This makes the repository you are pushing to remember the set of\n  branches that will be pushed out (e.g. if you always push 'maint'\n  and 'master' there and no other branches, the repository you push\n  to will have these two branches, and your local 'maint' and\n  'master' will be pushed there).\n+\nTo use this mode effectively, you have to make sure _all_ the\nbranches you would push out are ready to be pushed out before\nrunning 'git push', as the whole point of this mode is to allow you\nto push all of the branches in one go.  If you usually finish work\non only one branch and push out the result, while other branches are\nunfinished, this mode is not for you.  Also this mode is not\nsuitable for pushing into a shared central repository, as other\npeople may add new branches there, or update the tip of existing\nbranches outside your control.\n+\nThis used to be the default, but not since Git 2.0 (`simple` is the\nnew default).\n\n--\n\npush.followTags::\n\tIf set to true, enable `--follow-tags` option by default.  You\n\tmay override this configuration at time of push by specifying\n\t`--no-follow-tags`.\n\npush.gpgSign::\n\tMay be set to a boolean value, or the string 'if-asked'. A true\n\tvalue causes all pushes to be GPG signed, as if `--signed` is\n\tpassed to linkgit:git-push[1]. The string 'if-asked' causes\n\tpushes to be signed if the server supports it, as if\n\t`--signed=if-asked` is passed to 'git push'. A false value may\n\toverride a value from a lower-priority config file. An explicit\n\tcommand-line flag always overrides this config option.\n\npush.pushOption::\n\tWhen no `--push-option=<option>` argument is given from the\n\tcommand line, `git push` behaves as if each <value> of\n\tthis variable is given as `--push-option=<value>`.\n+\nThis is a multi-valued variable, and an empty value can be used in a\nhigher priority configuration file (e.g. `.git/config` in a\nrepository) to clear the values inherited from a lower priority\nconfiguration files (e.g. `$HOME/.gitconfig`).\n+\n----\n\nExample:\n\n/etc/gitconfig\n  push.pushoption = a\n  push.pushoption = b\n\n~/.gitconfig\n  push.pushoption = c\n\nrepo/.git/config\n  push.pushoption =\n  push.pushoption = b\n\nThis will result in only b (a and c are cleared).\n\n----\n\npush.recurseSubmodules::\n\tMay be \"check\", \"on-demand\", \"only\", or \"no\", with the same behavior\n\tas that of \"push --recurse-submodules\".\n\tIf not set, 'no' is used by default, unless 'submodule.recurse' is\n\tset (in which case a 'true' value means 'on-demand').\n\npush.useForceIfIncludes::\n\tIf set to \"true\", it is equivalent to specifying\n\t`--force-if-includes` as an option to linkgit:git-push[1]\n\tin the command line. Adding `--no-force-if-includes` at the\n\ttime of push overrides this configuration setting.\n\npush.negotiate::\n\tIf set to \"true\", attempt to reduce the size of the packfile\n\tsent by rounds of negotiation in which the client and the\n\tserver attempt to find commits in common. If \"false\", Git will\n\trely solely on the server's ref advertisement to find commits\n\tin common.\n\npush.useBitmaps::\n\tIf set to \"false\", disable use of bitmaps for \"git push\" even if\n\t`pack.useBitmaps` is \"true\", without preventing other git operations\n\tfrom using bitmaps. Default is true.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/push.txt"
+          }
+        },
+        {
+          "owner": "Eli",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Eli",
+            "text": "@Mira: I checked pull.ff=only yesterday.",
+            "location": "synthetic:simplify/eli-report"
+          }
+        }
+      ],
+      "question": "Who wrote the report confirming push.autoSetupRemote and --set-upstream?"
+    },
+    {
+      "id": "new-no-answer",
+      "category": "controlled_absence",
+      "records": [
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "rerere.autoUpdate::\n\tWhen set to true, `git-rerere` updates the index with the\n\tresulting contents after it cleanly resolves conflicts using\n\tpreviously recorded resolutions.  Defaults to false.\n\nrerere.enabled::\n\tActivate recording of resolved conflicts, so that identical\n\tconflict hunks can be resolved automatically, should they be\n\tencountered again.  By default, linkgit:git-rerere[1] is\n\tenabled if there is an `rr-cache` directory under the\n\t`$GIT_DIR`, e.g. if \"rerere\" was previously used in the\n\trepository.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/rerere.txt"
+          }
+        },
+        {
+          "owner": "Git documentation",
+          "observed_at": "2026-11-01T00:00:00Z",
+          "source": {
+            "speaker": "Git documentation",
+            "text": "pull.ff::\n\tBy default, Git does not create an extra merge commit when merging\n\ta commit that is a descendant of the current commit. Instead, the\n\ttip of the current branch is fast-forwarded. When set to `false`,\n\tthis variable tells Git to create an extra merge commit in such\n\ta case (equivalent to giving the `--no-ff` option from the command\n\tline). When set to `only`, only such fast-forward merges are\n\tallowed (equivalent to giving the `--ff-only` option from the\n\tcommand line). This setting overrides `merge.ff` when pulling.\n\npull.rebase::\n\tWhen true, rebase branches on top of the fetched branch, instead\n\tof merging the default branch from the default remote when \"git\n\tpull\" is run. See \"branch.<name>.rebase\" for setting this on a\n\tper-branch basis.\n+\nWhen `merges` (or just 'm'), pass the `--rebase-merges` option to 'git rebase'\nso that the local merge commits are included in the rebase (see\nlinkgit:git-rebase[1] for details).\n+\nWhen the value is `interactive` (or just 'i'), the rebase is run in interactive\nmode.\n+\n*NOTE*: this is a possibly dangerous operation; do *not* use\nit unless you understand the implications (see linkgit:git-rebase[1]\nfor details).\n\npull.octopus::\n\tThe default merge strategy to use when pulling multiple branches\n\tat once.\n\npull.twohead::\n\tThe default merge strategy to use when pulling a single branch.\n\n",
+            "location": "https://github.com/git/git/blob/v2.48.0/Documentation/config/pull.txt"
+          }
+        }
+      ],
+      "question": "According only to these records, what is the default of gc.auto?"
+    }
+  ]
+}

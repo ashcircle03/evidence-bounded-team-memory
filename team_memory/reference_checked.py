@@ -1,8 +1,9 @@
 """Reference R-RAG pattern: draft, upstream document judgment, bounded revision.
 
-The document judge is Microsoft's unmodified MIT implementation, pinned in
+The document judge is Microsoft's MIT implementation, pinned in
 _vendor/conflictscore. Whole-answer checking follows the upstream direct variant;
 this is not a reproduction of the full claim-decomposition metric or paper score.
+Only its error logging is patched to protect the JSONL response stream.
 """
 from concurrent.futures import ThreadPoolExecutor
 import json
@@ -17,6 +18,7 @@ from llama_index.core.query_engine.citation_query_engine import CITATION_QA_TEMP
 from ._vendor.conflictscore.eval_all_calibration import evaluate_document_support
 from .reference_qa import ReferenceQA, format_response
 from .reference_prompts import RECORD_QA_CONTRACT
+from .reference_fallback import preserve_answer, stage_failure
 
 
 def parse_judgment(raw):
@@ -111,13 +113,20 @@ def accumulate_omitted_records(question, result, llm, tokenizer):
 
 class _LocalJudgeClient:
     """Adapt the upstream OpenAI call to the existing traced, loopback-only LLM."""
-    def __init__(self, llm):
-        self.llm = llm
+    def __init__(self, llm, review_context=None):
+        # OpenAILike's instance max_tokens overrides per-chat kwargs. A shallow
+        # model copy keeps the existing traced client without mutating shared LLM.
+        self.llm = llm.model_copy(update={'max_tokens':384}) if hasattr(llm,'model_copy') and hasattr(llm,'max_tokens') else llm
+        self.review_context = review_context
         self.chat = self.completions = self
 
     def create(self, *, messages, **unused):
         # Bounded local-model substitution; no provider discovery or paid fallback.
-        response = self.llm.chat([ChatMessage(**m) for m in messages], max_tokens=384)
+        adapted = [ChatMessage(**m) for m in messages]
+        if self.review_context:
+            from .review_context import judgment_messages
+            adapted = judgment_messages(adapted, self.review_context)
+        response = self.llm.chat(adapted, max_tokens=384)
         return SimpleNamespace(choices=[SimpleNamespace(message=response.message)])
 
 
@@ -134,6 +143,10 @@ class ConflictCheckedQA(ReferenceQA):
     def ask(self, question):
         with self.lock:
             draft = super().ask(question)
+            return preserve_answer(draft,'document_review',lambda:self._review(question,draft))
+
+    def _review(self, question, draft):
+        with self.lock:
             witnesses = draft['citation_sources']
             if not witnesses:
                 return draft
@@ -141,8 +154,12 @@ class ConflictCheckedQA(ReferenceQA):
             for number,w in enumerate(witnesses,1):
                 group = grouped.setdefault(w['source_id'], dict(numbers=[],parts=[],speaker=w['speaker']))
                 group['numbers'].append(number)
-                group['parts'].append(f"Source {number}:\nrecord_author: {w['speaker']}\n{w['quote']}")
-            client = _LocalJudgeClient(self.llm)
+                visible_text = w['quote']
+                if getattr(self, 'active_review_context', None):
+                    from .review_context import current_judge_text
+                    visible_text = current_judge_text(w, self.active_review_context)
+                group['parts'].append(f"Source {number}:\nrecord_author: {w['speaker']}\n{visible_text}")
+            client = _LocalJudgeClient(self.llm, getattr(self,'active_review_context',None))
 
             def judge(item):
                 sid,g = item
@@ -161,14 +178,16 @@ class ConflictCheckedQA(ReferenceQA):
                 # R-RAG's evidence feedback pattern; its binary answer contract is
                 # replaced by the user's record-preservation QA contract.
                 messages = review_messages(question,draft['raw'],witnesses,judgments)
+                if getattr(self, 'active_review_context', None):
+                    from .review_context import contextual_messages
+                    messages = contextual_messages(messages, self.active_review_context)
                 response = self.llm.chat(messages)
                 result = format_response(question, response.message.content, witnesses, allow_source_labels=True)
             result['draft_raw'] = draft['raw']
             result['document_judgments'] = judgments
             result['revised'] = bool(contradicted)
             if any(j['label']=='ERROR' for j in judgments):
-                result['warnings'].append('Conflict review incomplete: document judge parse or transport failure')
-                result['status'] = 'partial'
+                result=stage_failure(result,'document_review','IncompleteJudgment')
             # The evaluated Accumulate alternative regressed ordinary QA. Keep
             # the measured19/20 path; preserve the alternative only for replay.
             return result

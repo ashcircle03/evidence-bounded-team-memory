@@ -1,0 +1,230 @@
+{
+  "scope": "Exposed development diagnostic; historical controls, not a new paired holdout",
+  "answer_correct": 20,
+  "answer_and_citation": 20,
+  "total": 20,
+  "simple_answer_and_citation": 7,
+  "cupmem_answer_and_citation": 7,
+  "lost_simple_successes": [],
+  "gained_over_simple": [
+    "q05-ordinary/simple",
+    "d01/premise",
+    "old-pep-615-clean/premise",
+    "old-pep-572-clean/premise",
+    "old-pep-597-clean/premise",
+    "old-pep-618-clean/premise",
+    "old-pep-669-clean/premise",
+    "old-pep-654-clean/premise",
+    "old-pep-553-clean/premise",
+    "pep-680/clean/candidate",
+    "old-pep-572-conflict/premise",
+    "old-pep-618-conflict/premise",
+    "F_SH_Top01_013/premise"
+  ],
+  "by_corpus": {
+    "public_git": {
+      "total": 5,
+      "simple": 4,
+      "cupmem": 4,
+      "reference": 5
+    },
+    "controlled_with_public_source": {
+      "total": 1,
+      "simple": 0,
+      "cupmem": 0,
+      "reference": 1
+    },
+    "controlled": {
+      "total": 1,
+      "simple": 1,
+      "cupmem": 1,
+      "reference": 1
+    },
+    "PEP public source": {
+      "total": 8,
+      "simple": 0,
+      "cupmem": 0,
+      "reference": 8
+    },
+    "PEP public source with controlled counterstatement": {
+      "total": 2,
+      "simple": 0,
+      "cupmem": 0,
+      "reference": 2
+    },
+    "natural EverMemBench-Dynamic QA": {
+      "total": 3,
+      "simple": 2,
+      "cupmem": 2,
+      "reference": 3
+    }
+  },
+  "verification": {
+    "program_complete": true,
+    "planned_qa": 20,
+    "observed_qa": 20,
+    "input_sha256": "823ad971b8e0e3162b16424371229319dd43ad3cac9e3d937d265361a0f9c80c",
+    "originals_preserved": true,
+    "all_returned_offsets_valid": true,
+    "raw_answers_match_physical_model_responses": false,
+    "answer_segments_match_physical_model_responses": true,
+    "composite_raw_matches_upstream_concatenation": true,
+    "selected_quotes_present_in_actual_inputs": true,
+    "calls": 118,
+    "upstream_accumulate_composites": 0,
+    "posthoc_changed_answers": 7,
+    "posthoc_additions": 10,
+    "posthoc_edits_are_exact_citation_insertions": true,
+    "quote_attribution_calls": 0,
+    "quote_attribution_errors": 0,
+    "nli_pairs": 136,
+    "nli_truncated_pairs": 32,
+    "nli_input_output_and_selection_verified": true,
+    "unattributed_sentences": 14,
+    "selected_quotes_present_in_answer_generating_inputs": true,
+    "document_judgments_match_actual_model_calls": true,
+    "max_rendered_prompt_tokens": 3976,
+    "max_output_reservation": 1024,
+    "statuses": {
+      "ok": 20
+    },
+    "unfinished_generations": 0,
+    "result_sha256": "97e1096e7cf173c3897479738c9e782385b88ec822584ae18346cb4170e8757f",
+    "calls_sha256": "ed0756645646e1aae5ccc2f426fcf97e6bdc494a70faba8378d875c1b7e251d6"
+  },
+  "limitations": [
+    "One developer AI rated meaning against original sources; no independent human adjudication.",
+    "Hybrid retrieval, visible provenance and generation/review changed together; no causal ablation.",
+    "ALCE-shaped export exists; AutoAIS was not run. Raw Source N labels need canonical citation normalization for ALCE.",
+    "Required-answer citation support is scored; full sentence-level citation completeness is separate.",
+    "This run does not test new Git reconsideration or owner approval semantics."
+  ],
+  "versus_reference_v2": {
+    "previous_correct": 15,
+    "preserved": 15,
+    "recovered": [
+      "legacy-ae24415845ae48a7/qa-0",
+      "legacy-1d2a1e3271adf133/qa-0",
+      "legacy-c000762632771ec9/qa-0",
+      "legacy-34429cce545ccddd/qa-0",
+      "legacy-34429cce545ccddd/qa-2"
+    ],
+    "regressed": [],
+    "still_failed": [],
+    "cases": {
+      "legacy-d474ab3d7822c8ac/qa-0": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-d474ab3d7822c8ac/qa-1": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-d474ab3d7822c8ac/qa-2": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-d474ab3d7822c8ac/qa-3": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-d474ab3d7822c8ac/qa-4": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-ae24415845ae48a7/qa-0": {
+        "previous": false,
+        "current": true
+      },
+      "legacy-d30bb1f10fe4bfe8/qa-0": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-0": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-1": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-2": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-3": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-4": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-5": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-6": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-702e9009795b2802/qa-7": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-1d2a1e3271adf133/qa-0": {
+        "previous": false,
+        "current": true
+      },
+      "legacy-c000762632771ec9/qa-0": {
+        "previous": false,
+        "current": true
+      },
+      "legacy-34429cce545ccddd/qa-0": {
+        "previous": false,
+        "current": true
+      },
+      "legacy-34429cce545ccddd/qa-1": {
+        "previous": true,
+        "current": true
+      },
+      "legacy-34429cce545ccddd/qa-2": {
+        "previous": false,
+        "current": true
+      }
+    }
+  },
+  "versus_checked": {
+    "previous_correct": 19,
+    "preserved": 19,
+    "regressed": [],
+    "recovered": [
+      "legacy-c000762632771ec9/qa-0"
+    ]
+  },
+  "claim_level_citation_gap_cases": [
+    "legacy-702e9009795b2802/qa-3",
+    "legacy-702e9009795b2802/qa-7"
+  ],
+  "new_citation_error_cases": [
+    "legacy-d474ab3d7822c8ac/qa-2"
+  ],
+  "replay": {
+    "from_job_id": "119945",
+    "reused_physical_calls": 118,
+    "new_physical_calls": 0,
+    "changed_answer_cases": [
+      "legacy-d474ab3d7822c8ac/qa-2",
+      "legacy-d474ab3d7822c8ac/qa-4",
+      "legacy-d30bb1f10fe4bfe8/qa-0",
+      "legacy-702e9009795b2802/qa-0",
+      "legacy-702e9009795b2802/qa-1",
+      "legacy-702e9009795b2802/qa-2",
+      "legacy-702e9009795b2802/qa-3",
+      "legacy-702e9009795b2802/qa-5",
+      "legacy-702e9009795b2802/qa-6",
+      "legacy-702e9009795b2802/qa-7",
+      "legacy-c000762632771ec9/qa-0"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-07",
+  "scope": "local working-tree audit; no new inference or remote scheduler checks",
+  "suite": {
+    "command": ".venv/bin/python -m unittest discover -s tests -v",
+    "tests": 278,
+    "passed": 277,
+    "errors": 1,
+    "skipped": 0,
+    "elapsed_seconds": 26.056,
+    "error": "PermissionError on localhost bind in sandbox",
+    "raw_log": "unittest-sandbox.log"
+  },
+  "targeted_rerun": {
+    "command": ".venv/bin/python -m unittest tests.test_contextual_transport -v",
+    "execution": "sandbox escalation for localhost test",
+    "tests": 1,
+    "passed": 1,
+    "exit_code": 0,
+    "elapsed_seconds": 0.574
+  },
+  "probes": "probes.json",
+  "production_code_changed": false,
+  "prior_scores_changed": false,
+  "gpu_jobs_submitted": 0,
+  "limitations": [
+    "No remote CI execution",
+    "No clean dependency reinstall",
+    "No live model generalization test",
+    "No independent human grading",
+    "Practical merged-store probe uses file union, not Git commands"
+  ]
+}

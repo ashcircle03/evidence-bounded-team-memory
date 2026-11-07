@@ -1,0 +1,83 @@
+{
+  "summary": {
+    "legacy/connected": {
+      "n": 20,
+      "answer_correct": 18,
+      "returned_evidence_supports_all_claims": 20,
+      "required_evidence_complete": 18,
+      "narrow_quotes_support_all_claims": 20,
+      "unsupported_extra": 0,
+      "success": 18
+    },
+    "ever/joint": {
+      "n": 10,
+      "answer_correct": 2,
+      "returned_evidence_supports_all_claims": 3,
+      "required_evidence_complete": 2,
+      "narrow_quotes_support_all_claims": 1,
+      "unsupported_extra": 7,
+      "success": 2
+    },
+    "ever/reader_only": {
+      "n": 10,
+      "answer_correct": 2,
+      "returned_evidence_supports_all_claims": 5,
+      "required_evidence_complete": 2,
+      "narrow_quotes_support_all_claims": 2,
+      "unsupported_extra": 5,
+      "success": 2
+    },
+    "ever/combined": {
+      "n": 10,
+      "answer_correct": 3,
+      "returned_evidence_supports_all_claims": 5,
+      "required_evidence_complete": 3,
+      "narrow_quotes_support_all_claims": 3,
+      "unsupported_extra": 5,
+      "success": 3
+    }
+  },
+  "criteria": {
+    "legacy20_preserved": false,
+    "ever_more_than_prior_best": true,
+    "ever_prior_successes_preserved": true,
+    "beats_fresh_joint": true,
+    "no_contract_errors": false
+  },
+  "adopt_connected": false,
+  "legacy_losses_against_selected_attributed": [
+    "legacy/legacy-1d2a1e3271adf133/qa-0/connected",
+    "legacy/legacy-c000762632771ec9/qa-0/connected"
+  ],
+  "ever_losses_against_prior_joint": [],
+  "contract_errors": [
+    "ever/F_TP_Top01_002/reader_only",
+    "ever/F_TP_Top01_002/combined"
+  ],
+  "reviewer": "implementing Codex assistant, source-based review",
+  "independent_human": false,
+  "verification": {
+    "job_id": "120294",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "fixed_hashes_verified": true,
+    "outputs_replayed": 50,
+    "requests_replayed": 80,
+    "spans_verified": 92,
+    "original_top8_preserved": 10,
+    "finish_reasons": {
+      "stop": 80
+    },
+    "prompt_tokens": 182169,
+    "completion_tokens": 15362,
+    "gpu_minutes": 14.95,
+    "external_model_calls": 0
+  },
+  "limitations": "Exposed development; legacy inputs fixed; implementing AI review; no full benchmark or merge evaluation.",
+  "evidence_hashes": {
+    "result.json": "15538a3650ae9515e38ef18cf07eeb19984961d14cc7a7bb7e9c3ee585b118f0",
+    "calls.jsonl": "98bd66b672d1e24657a4fd3e77c9e8dc3b0c93e258fc9ae209b3c052cc11948b",
+    "ratings.json": "65aa1c03b5e045bd69bfc9f3e3c005af5fdee20bd013f86cbb49a1942e06776a",
+    "cards.json": "6fdd1c54abf90169924494bfb1d52b8725e0a7f6ea9acf2e35810c6031117bee"
+  }
+}

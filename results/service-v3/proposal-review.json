@@ -1,0 +1,278 @@
+{
+  "rows": [
+    {
+      "id": "release-correction",
+      "verdict": "correct_kind_overbroad_scope",
+      "reason": "Correction kind and target correct, but old/new quotes include unchanged release ownerHana. Approving the whole quoted span marks unrelated owner assertion superseded; exact-byte validity does not ensure precise correction scope.",
+      "proposals": [
+        {
+          "history": [
+            "eb65c257995f86bfa60fab11"
+          ],
+          "incoming": {
+            "end": 121,
+            "location": "synthetic-state://release-correction/2/Jun",
+            "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner.",
+            "source_id": "23844b2e07c75d46794d9b50",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "correction",
+          "previous": {
+            "end": 71,
+            "location": "synthetic-state://release-correction/1/Mina",
+            "quote": "For release Cedar, the upload cap is 500 MB. The release owner is Hana.",
+            "source_id": "eb65c257995f86bfa60fab11",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The earlier source stated the upload cap for Cedar release is 500 MB, but the incoming source explicitly corrects it to 480 MB under the same conditions. The release owner remains unchanged, so only the upload cap is corrected.",
+          "reviewer": "Mina",
+          "id": "d8ba419d3d4edf4c30bd9952",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "rejected-calendar",
+      "verdict": "supported",
+      "reason": "Exact same-release Monday-toTuesday correction; literal old/new spans and original owner are appropriate. Rejection is recorded correctly; downstream QA fails to apply it.",
+      "proposals": [
+        {
+          "history": [
+            "6c43fdcd030e1db50e8a29ed"
+          ],
+          "incoming": {
+            "end": 85,
+            "location": "synthetic-state://rejected-calendar/2/Jun",
+            "quote": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.",
+            "source_id": "2fbd009ee03ef23ead84287f",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "correction",
+          "previous": {
+            "end": 55,
+            "location": "synthetic-state://rejected-calendar/1/Mina",
+            "quote": "For the Delta release, the review meeting is on Monday.",
+            "source_id": "6c43fdcd030e1db50e8a29ed",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The incoming source explicitly corrects the earlier claim about the meeting day for the Delta release, stating it is on Tuesday instead of Monday.",
+          "reviewer": "Mina",
+          "id": "210f0ad1f678364c5de82dfe",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "compression-conditions",
+      "verdict": "supported",
+      "reason": "JPEGquality80 versuslosslessPNG scopes preserved with both measurements.",
+      "proposals": [
+        {
+          "history": [
+            "e047c620c14d07a05112e6c4"
+          ],
+          "incoming": {
+            "end": 121,
+            "location": "synthetic-state://compression-conditions/2/Jun",
+            "quote": "On the same archive benchmark, lossless PNG produced files of 900 KB. This used a different encoding from JPEG quality80.",
+            "source_id": "0112f60f701d051337ff2fe5",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "coexist",
+          "previous": {
+            "end": 66,
+            "location": "synthetic-state://compression-conditions/1/Mina",
+            "quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+            "source_id": "e047c620c14d07a05112e6c4",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The earlier observation about JPEG quality80 and the new observation about lossless PNG describe different encoding methods and their respective file sizes on the same archive benchmark. The coexistence is justified because they refer to different conditions (encoding methods) and are not mutually exclusive.",
+          "reviewer": "Mina",
+          "id": "288c763f9c745a0a00ce75b8",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "queue-disagreement",
+      "verdict": "supported",
+      "reason": "Sameworkload/worker/build, incompatible23ms versus31ms, both exact evidence paragraphs retained.",
+      "proposals": [
+        {
+          "history": [
+            "a8627294f95b36507731268c"
+          ],
+          "incoming": {
+            "end": 85,
+            "location": "synthetic-state://queue-disagreement/2/Jun",
+            "quote": "For queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7.",
+            "source_id": "717b7fd4054e06c6ee5117a2",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "conflict",
+          "previous": {
+            "end": 85,
+            "location": "synthetic-state://queue-disagreement/1/Mina",
+            "quote": "For queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7.",
+            "source_id": "a8627294f95b36507731268c",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "Both reports describe the same conditions (queue Nimbus, workload W, one worker, build7) but provide conflicting P95 latency measurements (23 ms vs. 31 ms).",
+          "reviewer": "Mina",
+          "id": "9bb3dfa31f897d7cf1b1ca57",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "writer-reopen",
+      "verdict": "supported_reconsider",
+      "reason": "Old decision and actualsingle-writer rationale quoted; incomingversion5 permits4writers and actualconcurrentcommits. Specific changed premise supports review.",
+      "proposals": [
+        {
+          "history": [
+            "f685e68dfa3f82b10dea1a0b"
+          ],
+          "incoming": {
+            "end": 125,
+            "location": "synthetic-state://writer-reopen/2/Jun",
+            "quote": "Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently.",
+            "source_id": "f4f71c348613627ca61c5efb",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "reconsider",
+          "previous": {
+            "end": 124,
+            "location": "synthetic-state://writer-reopen/1/Mina",
+            "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan.",
+            "source_id": "f685e68dfa3f82b10dea1a0b",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The earlier decision to postpone parallel writes was based on the assumption that only version4 of the Ledger database allowed for a single writer. However, the incoming evidence indicates that version5 now permits four simultaneous writers, as confirmed by a migration test. This change in the Ledger's capabilities warrants reconsidering the earlier decision to stick with serial writes.",
+          "reviewer": "Mina",
+          "id": "43497ec8cf439f8ddf5e1450",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "writer-near-miss",
+      "verdict": "unnecessary_alert",
+      "reason": "Serialperformance improves butsingle-writer rationale explicitly unchanged. A coexist PR is unnecessary for the frozennegativecase; no false reconsider proposal, but needless owner review.",
+      "proposals": [
+        {
+          "history": [
+            "04ba00f69bae119e1ad1ff2e"
+          ],
+          "incoming": {
+            "end": 141,
+            "location": "synthetic-state://writer-near-miss/2/Jun",
+            "quote": "Ledger version4 now completes each serial write in 8 ms after index tuning. It still permits only one writer; no concurrency change was made.",
+            "source_id": "f2dd4125f12caf7c58ca5837",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "coexist",
+          "previous": {
+            "end": 124,
+            "location": "synthetic-state://writer-near-miss/1/Mina",
+            "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan.",
+            "source_id": "04ba00f69bae119e1ad1ff2e",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The earlier source states that parallel writes were postponed due to version4's single-writer constraint, while the incoming source confirms that version4 still permits only one writer but reports an improvement in serial write performance. Both observations coexist under the same condition (version4's single-writer constraint) with different observations (performance improvement vs. decision to postpone parallel writes).",
+          "reviewer": "Mina",
+          "id": "c6858dca4de65c12201675a5",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "cache-reopen",
+      "verdict": "supported_reconsider",
+      "reason": "Oldpost-request retention prohibition quoted; incomingpolicy30s andactualcache20s change that precise rationale.",
+      "proposals": [
+        {
+          "history": [
+            "2eb283b980d95fa29838cdaf"
+          ],
+          "incoming": {
+            "end": 170,
+            "location": "synthetic-state://cache-reopen/2/Jun",
+            "quote": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. The new cache deletes entries after 20 seconds.",
+            "source_id": "ce761dc9c124ce590147d4a7",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "reconsider",
+          "previous": {
+            "end": 124,
+            "location": "synthetic-state://cache-reopen/1/Mina",
+            "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+            "source_id": "2eb283b980d95fa29838cdaf",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The earlier decision to disable user-session caching was based on a policy that forbade keeping session identifiers in memory after a request completed. The new evidence shows that the revised session policy now permits session identifiers in memory for up to 30 seconds after request completion, and the new cache deletes entries after 20 seconds. This change in policy and cache behavior warrants reconsidering the earlier decision to disable user-session caching.",
+          "reviewer": "Mina",
+          "id": "31c70143a82eb440c828eaa8",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "cache-near-miss",
+      "verdict": "unnecessary_alert",
+      "reason": "Publicproduct-image cache performance does not change session-ID policy. Different topic does not warrant a coexist PR against oldsession decision.",
+      "proposals": [
+        {
+          "history": [
+            "841309d4479a04388fa555bf"
+          ],
+          "incoming": {
+            "end": 124,
+            "location": "synthetic-state://cache-near-miss/2/Jun",
+            "quote": "A cache of public product images improved page speed by 15 percent. The session-identifier retention policy has not changed.",
+            "source_id": "e0238509cb370a885ddb39bd",
+            "speaker": "Jun",
+            "start": 0
+          },
+          "kind": "coexist",
+          "previous": {
+            "end": 124,
+            "location": "synthetic-state://cache-near-miss/1/Mina",
+            "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+            "source_id": "841309d4479a04388fa555bf",
+            "speaker": "Mina",
+            "start": 0
+          },
+          "reason": "The earlier source discusses the disabling of user-session caching due to a policy, while the incoming source refers to a cache of public product images that improved page speed. The session-identifier retention policy remains unchanged, allowing for different caching strategies to coexist.",
+          "reviewer": "Mina",
+          "id": "ae3117b95337e9f45beb6251",
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "supported_reconsider": 2,
+  "reconsider_positives": 2,
+  "negative_cases": 2,
+  "unnecessary_negative_alerts": 2,
+  "false_reconsider_on_negatives": 0,
+  "expected_kind_and_target": 6,
+  "precise_scope_supported": 5,
+  "total_updates": 8,
+  "shared_between_arms": true,
+  "limitations": "Authored controlled cases; descriptive synthetic locations visible to comparison model. Diagnostic only, not natural Git generalization."
+}

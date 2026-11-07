@@ -1,0 +1,40 @@
+{
+  "source_version": "cup-ref-claims-v3",
+  "submission_status": "authorized_recovery_within_existing60GPUminutes",
+  "files_sha256": {
+    "run.sbatch": "b69a3b99a6dedaba537f2b1e1ceedfdfdd841f70841dbe2b64f1a299b2eb120a",
+    "config.json": "2b3bdfb1f06af894be3c1e4873a69e0df65d95947e0cc6f213e1330809eeffbe",
+    "serve.py": "fce6810b4aee5ace0b0aa875c95f45555ce2e68c6ef9c12ff442396810513ddf",
+    "service.py": "d6142d6d2f6cd02f984d75c2023d09ec59ba60c5b4072c4f6c7fb9343cbd5325",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+    "download.py": "4961389d869b4f7159c417060b61ea7a621ac7cebd9e76f12255c29d1de7b01b",
+    "manifest.json": "a5f8543bc227caf634c629af99a1291faba42e4a1cc1065ba38e64a4735e2685",
+    "PROTOCOL.md": "eaedf432796ef52fc4ad00fc9b59779bd8b43870ad3c55ee7298e5c942e1fefb",
+    "regressions.json": "4c0c90d1e4c3061cba52183d1f1c4b695f73384965479e46ce74074723ebc9d2",
+    "code.tar.gz": "4e9fe215e6bf3e1b13c3e6337dfe911d12d4a1e4a3ee5fd1a3f73a3dd63c9c8b",
+    "prior-result.json": "f29ec35a398daef1be4a4281660790c1075a32a5845afec19019211d2bbe42e0",
+    "prior-calls.jsonl": "ffbeaec26bbf08180d149014879359fba74040686e8cd25b9dcfe35989dba26b"
+  },
+  "evaluation_sha256": {
+    "evaluation/cupmem/practical/legacy-key.json": "3ea20cd9fe22eef8ed6f35b6875738bea313e01df340a2904cb5f5df992bc690",
+    "evaluation/reference_qa/simplify/key.json": "fccc9223d494a23fc7db9672bde7755e2c7e2565a3cb5ba14417d3c0279888bf",
+    "evaluation/reference_qa/expanded/PROTOCOL.md": "eaedf432796ef52fc4ad00fc9b59779bd8b43870ad3c55ee7298e5c942e1fefb"
+  },
+  "prior_sha256": {
+    "results/reference-qa/quote-normalized-v1/cards.json": "9afd0481577434bd43fe2126cf9162598d4a8846623da0de0286c2d5b21b2225",
+    "results/reference-qa/quote-normalized-v1/ratings.json": "ac0cbf8b2577ddd708ec17d2843ffc30fef3c55c48a74029747f44a659edf8e0",
+    "results/reference-qa/simplify-v2/cards.json": "71a537f0efc7c183a1ef3fe190cac4e4e14f09901650d6446350f4586cad9510",
+    "results/reference-qa/simplify-v2/ratings.json": "e68f7c430f0e3478df42b367f8c91762ef4ed12fd6615f1dbf1f7c3e2f06a141"
+  },
+  "requested_resources": {
+    "gpus": 1,
+    "wall_minutes": 45,
+    "additional_budget_gpu_minutes": 60,
+    "includes_failures": true
+  },
+  "submit_command": "python -m evaluation.cupmem.dispatch submit cup-ref-claims-v3 1 45 run.sbatch config.json serve.py service.py prepare_nltk.py download.py manifest.json PROTOCOL.md regressions.json code.tar.gz prior-result.json prior-calls.jsonl",
+  "parent": "claims-v2",
+  "reused_job_id": "120041",
+  "reused_outputs": 36,
+  "reused_calls": 65
+}

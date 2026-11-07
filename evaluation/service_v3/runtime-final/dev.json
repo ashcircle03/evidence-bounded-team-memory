@@ -1,0 +1,273 @@
+{
+  "sources": [
+    {
+      "owner": "Alice",
+      "observed_at": "2026-01-01T00:00:00Z",
+      "source": {
+        "speaker": "Alice",
+        "location": "smoke://Alice/1",
+        "text": "  Under configuration A, the timeout is 10 seconds. The archive name is Orion. We paused parallel trials because only one worker was permitted.\n"
+      }
+    },
+    {
+      "owner": "Bob",
+      "observed_at": "2026-01-02T00:00:00Z",
+      "source": {
+        "speaker": "Bob",
+        "location": "smoke://Bob/2",
+        "text": "Under configuration B, four workers are now permitted. A trial measured a timeout of 20 seconds. The earlier one-worker restriction no longer applies; parallel trials can be reconsidered."
+      }
+    },
+    {
+      "owner": "Bob",
+      "observed_at": "2026-01-03T00:00:00Z",
+      "source": {
+        "speaker": "Bob",
+        "location": "smoke://Bob/3",
+        "text": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds. The archive name remains Orion."
+      }
+    }
+  ],
+  "cases": [
+    {
+      "label": "pending_qa",
+      "question": "What timeout is current for configuration A?",
+      "raw": "Source 1:  \nUnder configuration A, the timeout was originally reported as 10 seconds [1]. This assertion is pending correction, as Bob explicitly states that the timeout is 12 seconds under the same settings for configuration A [2]. The correction is pending, and the original report remains in the record as an unresolved assertion.  \n\nSource 2:  \nThe correction to the timeout for configuration A is pending, with the proposed value of 12 seconds [2]. The original assertion of 10 seconds is still considered part of the historical record and has not been erased or rejected.  \n\nAnswer: The timeout for configuration A is currently pending correction, with the original reported value of 10 seconds [1] and a proposed correction of 12 seconds [2].",
+      "witnesses": [
+        {
+          "source_id": "ac07a3cf6b902d1cfb40f54c",
+          "quote": "Under configuration A, the timeout is 10 seconds. The archive name is Orion. We paused parallel trials because only one worker was permitted.",
+          "start": 2,
+          "end": 143,
+          "location": "smoke://Alice/1",
+          "speaker": "Alice",
+          "observed_at": "2026-01-01T00:00:00.000000+00:00",
+          "assertion_reviews": [
+            {
+              "end": 51,
+              "location": "smoke://Alice/1",
+              "quote": "Under configuration A, the timeout is 10 seconds.",
+              "source_id": "ac07a3cf6b902d1cfb40f54c",
+              "speaker": "Alice",
+              "start": 2,
+              "proposal_id": "a7711d9e4ceeb99a2ee9d868",
+              "side": "previous",
+              "status": "reported",
+              "review_status": "pending"
+            }
+          ]
+        },
+        {
+          "source_id": "c6f5491099e15bbab828cfc8",
+          "quote": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds. The archive name remains Orion.",
+          "start": 0,
+          "end": 167,
+          "location": "smoke://Bob/3",
+          "speaker": "Bob",
+          "observed_at": "2026-01-03T00:00:00.000000+00:00",
+          "assertion_reviews": [
+            {
+              "end": 135,
+              "location": "smoke://Bob/3",
+              "quote": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds.",
+              "source_id": "c6f5491099e15bbab828cfc8",
+              "speaker": "Bob",
+              "start": 0,
+              "proposal_id": "a7711d9e4ceeb99a2ee9d868",
+              "side": "incoming",
+              "status": "pending_correction",
+              "review_status": "pending"
+            }
+          ]
+        },
+        {
+          "source_id": "b129ed8c694eacd7b1959ece",
+          "quote": "Under configuration B, four workers are now permitted. A trial measured a timeout of 20 seconds. The earlier one-worker restriction no longer applies; parallel trials can be reconsidered.",
+          "start": 0,
+          "end": 187,
+          "location": "smoke://Bob/2",
+          "speaker": "Bob",
+          "observed_at": "2026-01-02T00:00:00.000000+00:00"
+        }
+      ],
+      "context": {
+        "temporal_scope": "current",
+        "relations": [
+          {
+            "history": [
+              "ac07a3cf6b902d1cfb40f54c",
+              "b129ed8c694eacd7b1959ece"
+            ],
+            "incoming": {
+              "end": 135,
+              "location": "smoke://Bob/3",
+              "quote": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds.",
+              "source_id": "c6f5491099e15bbab828cfc8",
+              "speaker": "Bob",
+              "start": 0
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 51,
+              "location": "smoke://Alice/1",
+              "quote": "Under configuration A, the timeout is 10 seconds.",
+              "source_id": "ac07a3cf6b902d1cfb40f54c",
+              "speaker": "Alice",
+              "start": 2
+            },
+            "reason": "The incoming source explicitly corrects the earlier assertion about the timeout for configuration A under the same settings, providing a more accurate value of 12 seconds instead of 10 seconds.",
+            "reviewer": "Alice",
+            "id": "a7711d9e4ceeb99a2ee9d868",
+            "status": "pending"
+          },
+          {
+            "history": [
+              "ac07a3cf6b902d1cfb40f54c"
+            ],
+            "incoming": {
+              "end": 187,
+              "location": "smoke://Bob/2",
+              "quote": "The earlier one-worker restriction no longer applies; parallel trials can be reconsidered.",
+              "source_id": "b129ed8c694eacd7b1959ece",
+              "speaker": "Bob",
+              "start": 97
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 143,
+              "location": "smoke://Alice/1",
+              "quote": "We paused parallel trials because only one worker was permitted.",
+              "source_id": "ac07a3cf6b902d1cfb40f54c",
+              "speaker": "Alice",
+              "start": 79
+            },
+            "reason": "The earlier decision to pause parallel trials was based on the restriction of only one worker being permitted. The new evidence states that this restriction no longer applies, which materially affects the earlier decision and warrants reconsideration of parallel trials.",
+            "reviewer": "Alice",
+            "id": "c9af63bc2ce6b104b3ac939a",
+            "status": "pending"
+          }
+        ]
+      }
+    },
+    {
+      "label": "current_qa",
+      "question": "What timeout is current for configuration A?",
+      "raw": "Source 1:  \nThe timeout for configuration A was initially reported as 10 seconds [1]. This assertion has been explicitly corrected by Bob, who states that the timeout is 12 seconds under the same settings [2]. The correction has been approved.  \n\nAnswer: The current timeout for configuration A is 12 seconds [2].",
+      "witnesses": [
+        {
+          "source_id": "ac07a3cf6b902d1cfb40f54c",
+          "quote": "Under configuration A, the timeout is 10 seconds. The archive name is Orion. We paused parallel trials because only one worker was permitted.",
+          "start": 2,
+          "end": 143,
+          "location": "smoke://Alice/1",
+          "speaker": "Alice",
+          "observed_at": "2026-01-01T00:00:00.000000+00:00",
+          "assertion_reviews": [
+            {
+              "end": 51,
+              "location": "smoke://Alice/1",
+              "quote": "Under configuration A, the timeout is 10 seconds.",
+              "source_id": "ac07a3cf6b902d1cfb40f54c",
+              "speaker": "Alice",
+              "start": 2,
+              "proposal_id": "a7711d9e4ceeb99a2ee9d868",
+              "side": "previous",
+              "status": "superseded_assertion",
+              "review_status": "approved"
+            }
+          ]
+        },
+        {
+          "source_id": "c6f5491099e15bbab828cfc8",
+          "quote": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds. The archive name remains Orion.",
+          "start": 0,
+          "end": 167,
+          "location": "smoke://Bob/3",
+          "speaker": "Bob",
+          "observed_at": "2026-01-03T00:00:00.000000+00:00",
+          "assertion_reviews": [
+            {
+              "end": 135,
+              "location": "smoke://Bob/3",
+              "quote": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds.",
+              "source_id": "c6f5491099e15bbab828cfc8",
+              "speaker": "Bob",
+              "start": 0,
+              "proposal_id": "a7711d9e4ceeb99a2ee9d868",
+              "side": "incoming",
+              "status": "approved_correction",
+              "review_status": "approved"
+            }
+          ]
+        },
+        {
+          "source_id": "b129ed8c694eacd7b1959ece",
+          "quote": "Under configuration B, four workers are now permitted. A trial measured a timeout of 20 seconds. The earlier one-worker restriction no longer applies; parallel trials can be reconsidered.",
+          "start": 0,
+          "end": 187,
+          "location": "smoke://Bob/2",
+          "speaker": "Bob",
+          "observed_at": "2026-01-02T00:00:00.000000+00:00"
+        }
+      ],
+      "context": {
+        "temporal_scope": "current",
+        "relations": [
+          {
+            "history": [
+              "ac07a3cf6b902d1cfb40f54c",
+              "b129ed8c694eacd7b1959ece"
+            ],
+            "incoming": {
+              "end": 135,
+              "location": "smoke://Bob/3",
+              "quote": "I explicitly correct the earlier timeout report for configuration A under the same settings: the timeout is 12 seconds, not 10 seconds.",
+              "source_id": "c6f5491099e15bbab828cfc8",
+              "speaker": "Bob",
+              "start": 0
+            },
+            "kind": "correction",
+            "previous": {
+              "end": 51,
+              "location": "smoke://Alice/1",
+              "quote": "Under configuration A, the timeout is 10 seconds.",
+              "source_id": "ac07a3cf6b902d1cfb40f54c",
+              "speaker": "Alice",
+              "start": 2
+            },
+            "reason": "The incoming source explicitly corrects the earlier assertion about the timeout for configuration A under the same settings, providing a more accurate value of 12 seconds instead of 10 seconds.",
+            "reviewer": "Alice",
+            "id": "a7711d9e4ceeb99a2ee9d868",
+            "status": "approved"
+          },
+          {
+            "history": [
+              "ac07a3cf6b902d1cfb40f54c"
+            ],
+            "incoming": {
+              "end": 187,
+              "location": "smoke://Bob/2",
+              "quote": "The earlier one-worker restriction no longer applies; parallel trials can be reconsidered.",
+              "source_id": "b129ed8c694eacd7b1959ece",
+              "speaker": "Bob",
+              "start": 97
+            },
+            "kind": "reconsider",
+            "previous": {
+              "end": 143,
+              "location": "smoke://Alice/1",
+              "quote": "We paused parallel trials because only one worker was permitted.",
+              "source_id": "ac07a3cf6b902d1cfb40f54c",
+              "speaker": "Alice",
+              "start": 79
+            },
+            "reason": "The earlier decision to pause parallel trials was based on the restriction of only one worker being permitted. The new evidence states that this restriction no longer applies, which materially affects the earlier decision and warrants reconsideration of parallel trials.",
+            "reviewer": "Alice",
+            "id": "c9af63bc2ce6b104b3ac939a",
+            "status": "pending"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+PRIVATE_NLTK_READY /local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk/119952
+MODEL_FILE_VERIFIED README.md
+MODEL_FILE_VERIFIED config.json
+MODEL_FILE_VERIFIED model.safetensors
+MODEL_FILE_VERIFIED special_tokens_map.json
+MODEL_FILE_VERIFIED spm.model
+MODEL_FILE_VERIFIED tokenizer.json
+MODEL_FILE_VERIFIED tokenizer_config.json
+Traceback (most recent call last):
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-attr-nli-v1/code/evaluation/reference_qa/nli_replay.py", line 77, in main
+    save();print('NLI_STEP',row['case_id'],step['label'],step['nli_pairs'],flush=True)
+    ^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-attr-nli-v1/code/evaluation/reference_qa/nli_replay.py", line 29, in save
+    tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(value,ensure_ascii=False,indent=2));tmp.replace(path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/cupmem-qwen3-v1/lib/python3.11/pathlib.py", line 1079, in write_text
+    return f.write(data)
+           ^^^^^^^^^^^^^
+UnicodeEncodeError: 'ascii' codec can't encode character '\xef' in position 166616: ordinal not in range(128)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-attr-nli-v1/code/evaluation/reference_qa/nli_replay.py", line 87, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-attr-nli-v1/code/evaluation/reference_qa/nli_replay.py", line 84, in main
+    save();nli_file.close()
+    ^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-attr-nli-v1/code/evaluation/reference_qa/nli_replay.py", line 29, in save
+    tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(value,ensure_ascii=False,indent=2));tmp.replace(path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ceph_data/pjw031003/capstone-shared-knowledge/runtime/cupmem-qwen3-v1/lib/python3.11/pathlib.py", line 1079, in write_text
+    return f.write(data)
+           ^^^^^^^^^^^^^
+UnicodeEncodeError: 'ascii' codec can't encode character '\xef' in position 166615: ordinal not in range(128)

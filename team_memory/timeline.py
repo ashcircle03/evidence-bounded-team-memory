@@ -151,7 +151,7 @@ def ingest(store, envelope, generate, mode='direct'):
     if any(r['mode']!=mode for r in local):raise ValueError('use a separate client state for a different mode')
     visible={r['source_id'] for r in local}
     prior = {sid:e for sid,e in store.load('sources').items() if sid in visible}
-    sid = capture(store, envelope)
+    sid = store.capture_source(envelope) if hasattr(store, 'capture_source') else capture(store, envelope)
     env = store.load('sources')[sid]
     done = [r for r in local if r['source_id']==sid and r['mode']==mode]
     if done:

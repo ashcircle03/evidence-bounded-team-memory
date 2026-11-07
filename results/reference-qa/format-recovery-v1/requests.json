@@ -1,0 +1,97 @@
+[
+  {
+    "id": "legacy/legacy-d474ab3d7822c8ac/qa-3/claims",
+    "key": "6103d74d47a03eca189a2d00d4ea78ad4a99d5568e47a8c98a5bb12d90bec401",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: {\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?\"}\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Git documentation contributors\", \"original_source_number\": 2, \"recorded_at\": \"2025-03-14T16:19:41.000000+00:00\", \"quote\": \"`notes.mergeStrategy`::\\n\\tWhich merge strategy to choose by default when resolving notes\\n\\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\\n\\t`cat_sort_uniq`.  Defaults to `manual`.  See the \\\"NOTES MERGE STRATEGIES\\\"\\n\\tsection of linkgit:git-notes[1] for more information on each strategy.\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+        }
+      ],
+      "model": "Qwen3-8B",
+      "max_tokens": 1024,
+      "stream": false,
+      "temperature": 0.0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  {
+    "id": "legacy/legacy-702e9009795b2802/qa-3/claims",
+    "key": "54e5dcf109b7c33c195e4702b111fe6349bc4bf742db11542ec7892151d27427",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: {\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"Which exception does strict zip raise when its iterables have different lengths?\"}\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 1, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When enabled, a ``ValueError`` is\\nraised if one of the arguments is exhausted before the others.\"}, {\"evidence_id\": 2, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 3, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When the built-in ``zip`` is called with the keyword-only argument\\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\\nthe arguments are exhausted at differing lengths.\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+        }
+      ],
+      "model": "Qwen3-8B",
+      "max_tokens": 1024,
+      "stream": false,
+      "temperature": 0.0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  {
+    "id": "legacy/legacy-c000762632771ec9/qa-0/claims",
+    "key": "f0a5863a57e9e14791a3d34d2df93f78eac55dae205b35acc4e8e1aab3c18245",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: {\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"Which exception does strict zip raise when its iterables have different lengths?\"}\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Fay\", \"original_source_number\": 1, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.\"}, {\"evidence_id\": 2, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 2, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When enabled, a ``ValueError`` is\\nraised if one of the arguments is exhausted before the others.\"}, {\"evidence_id\": 3, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 4, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When the built-in ``zip`` is called with the keyword-only argument\\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\\nthe arguments are exhausted at differing lengths.\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+        }
+      ],
+      "model": "Qwen3-8B",
+      "max_tokens": 1024,
+      "stream": false,
+      "temperature": 0.0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  {
+    "id": "wiki/wiki-12/single2/claims",
+    "key": "ef4ecb5d9e39b783a745d8b201265ff9e9b885bab1087a1b1d6a3171bf98a9cf",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: What date was Julian Lewis Jones born?\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Wikipedia\", \"original_source_number\": 1, \"recorded_at\": null, \"quote\": \"Julian Lewis Jones Born\\t27 August 1968\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+        }
+      ],
+      "model": "Qwen3-8B",
+      "max_tokens": 1024,
+      "stream": false,
+      "temperature": 0.0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  {
+    "id": "wiki/wiki-12/both/claims",
+    "key": "c8edb221c1ca583fec6a8ed08cb7f3e79035fb98df8136e39cf1dcdec4e89b17",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: What date was Julian Lewis Jones born?\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Wikipedia\", \"original_source_number\": 1, \"recorded_at\": null, \"quote\": \"Julian Lewis Jones (born 21 August 1968\"}, {\"evidence_id\": 2, \"record_author\": \"Wikipedia\", \"original_source_number\": 2, \"recorded_at\": null, \"quote\": \"Julian Lewis Jones Born\\t27 August 1968\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+        }
+      ],
+      "model": "Qwen3-8B",
+      "max_tokens": 1024,
+      "stream": false,
+      "temperature": 0.0,
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  }
+]

@@ -1,0 +1,298 @@
+{
+  "jobs": {
+    "cup-state-dev-v1": {
+      "source_version": "cup-state-dev-v1",
+      "source_sha256": {
+        "run.sbatch": "3d12853c870cbb0e850b94d65f0b8bec99cb584d12055e291b7c81b6acb4960b",
+        "config.json": "4daf62eaa192d67a10ab6a6a9b6036c95bd058c4595a620d68fb10979b276291",
+        "serve.py": "c635284bf751ae275cb8e2998dff9344040d2bea7ee8dd67d481a46c8064ffbb",
+        "service.py": "3147720f3d9c91f859a03d0c48d1dbd73e6d291fa7bb5bfa388ec19b6b7e78cb",
+        "prepare_nltk.py": "91170820f64d4bfd621cc170b753b374b6d7ef89668dc1a8bef4bc6876fe1033",
+        "nltk-data.tar.gz": "1cd117ebbba66fb0918927cd0d2f6615f07ffa8dd27b2a691aa110cf1c3bd2ab",
+        "code.tar.gz": "9d932796a0baaace84e50c2485384c797e8311c66158585f00cab1a7f1041527",
+        "PROTOCOL.md": "78a793162fcdfe533ae63fafc28c9f805ba4131f08d02076d470e8df63a01dc9",
+        "dev.json": "08a31592b63837248b6c56b575a2ae7ddb40867a6d234e73cbf67673aa32250d"
+      },
+      "submission_intent": "submitted",
+      "job_id": "120369",
+      "gpus": 1,
+      "cpus": 8,
+      "ram_gb": 48,
+      "wall_minutes": 720,
+      "partition": "batch_ugrad",
+      "account": "ugrad",
+      "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-state-dev-v1",
+      "state": "COMPLETED",
+      "qos": "qos_pjw031003_2026_2",
+      "time_policy": "fixed_walltime",
+      "submitted_at": "2026-11-07T15:03:58.848740+00:00",
+      "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-120369.json",
+      "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-120369.log",
+      "exit_code": "0:0",
+      "elapsed_seconds": 428,
+      "usage": [
+        {
+          "JobID": "120369",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:07:08",
+          "ElapsedRaw": "428",
+          "AllocCPUS": "8",
+          "ReqMem": "48G",
+          "MaxRSS": "",
+          "TotalCPU": "00:48.537",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g1"
+        },
+        {
+          "JobID": "120369.batch",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:07:08",
+          "ElapsedRaw": "428",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "2334392K",
+          "TotalCPU": "00:48.535",
+          "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g1"
+        },
+        {
+          "JobID": "120369.extern",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:07:08",
+          "ElapsedRaw": "428",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "0",
+          "TotalCPU": "00:00.002",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g1"
+        }
+      ],
+      "verified": true
+    },
+    "cup-state-final-v1": {
+      "source_version": "cup-state-final-v1",
+      "source_sha256": {
+        "run.sbatch": "46e1698a57a9f513680539606af2161cf240d364afb22976b7c35dcccf66c0cc",
+        "config.json": "d959146019263ceeef002e05ab957ccf4293311a3ed95f6252f38fea77b980e2",
+        "serve.py": "c635284bf751ae275cb8e2998dff9344040d2bea7ee8dd67d481a46c8064ffbb",
+        "service.py": "956f475a58013f03b23e7bf6783d975c92bd98a7a1418de6b73168b11d77ce65",
+        "prepare_nltk.py": "91170820f64d4bfd621cc170b753b374b6d7ef89668dc1a8bef4bc6876fe1033",
+        "nltk-data.tar.gz": "1cd117ebbba66fb0918927cd0d2f6615f07ffa8dd27b2a691aa110cf1c3bd2ab",
+        "code.tar.gz": "4887d5b831df2a0c86b6ccd2214901d866e36dceb0efb0b87ae838ab110008b5",
+        "PROTOCOL.md": "7913df62cd0afeb6f75950057978238c9fc1a456291d1387482e260a896104eb",
+        "dev.json": "08a31592b63837248b6c56b575a2ae7ddb40867a6d234e73cbf67673aa32250d",
+        "streams.json": "8837c843e53f35b86be8fe802f76b87eaed9f87e2039a9c1000305f4c10d4a87",
+        "stream-keys.json": "a88b496d029a35b47124378d0aeedcc39323e61e062661beb94b781856b5e382",
+        "legacy.json": "e6a7f23fee77694bcf49149cccd1cc289b45310344225904766327744b43fb93",
+        "exclusions.json": "e1cd3a6b78a6e501c22db7e37eaff755bf4d15c1a1f32277a642c16df6f7f65e",
+        "dataset-manifest.json": "a5f8543bc227caf634c629af99a1291faba42e4a1cc1065ba38e64a4735e2685"
+      },
+      "submission_intent": "submitted",
+      "job_id": "120370",
+      "gpus": 1,
+      "cpus": 8,
+      "ram_gb": 48,
+      "wall_minutes": 720,
+      "partition": "batch_ugrad",
+      "account": "ugrad",
+      "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-state-final-v1",
+      "state": "COMPLETED",
+      "qos": "qos_pjw031003_2026_2",
+      "time_policy": "fixed_walltime",
+      "submitted_at": "2026-11-07T15:13:54.002796+00:00",
+      "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-120370.json",
+      "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-120370.log",
+      "exit_code": "0:0",
+      "elapsed_seconds": 875,
+      "usage": [
+        {
+          "JobID": "120370",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:14:35",
+          "ElapsedRaw": "875",
+          "AllocCPUS": "8",
+          "ReqMem": "48G",
+          "MaxRSS": "",
+          "TotalCPU": "14:27.809",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g1"
+        },
+        {
+          "JobID": "120370.batch",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:14:35",
+          "ElapsedRaw": "875",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "2704280K",
+          "TotalCPU": "14:27.807",
+          "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g1"
+        },
+        {
+          "JobID": "120370.extern",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:14:35",
+          "ElapsedRaw": "875",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "0",
+          "TotalCPU": "00:00.001",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g1"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "gpu_seconds": 1303,
+  "comparison_calls": {
+    "direct": {
+      "calls": 71,
+      "prompt_tokens": 98084,
+      "completion_tokens": 8190
+    },
+    "attributed": {
+      "calls": 253,
+      "prompt_tokens": 309584,
+      "completion_tokens": 47001
+    },
+    "shared_review": {
+      "calls": 8,
+      "prompt_tokens": 4906,
+      "completion_tokens": 1154
+    }
+  },
+  "development_successful_calls": 2,
+  "development_failed_request_attempts": 2,
+  "snapshot_reconstructions": 9,
+  "length_outputs": [
+    {
+      "id": 32,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top03_023",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 31,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top03_023",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 33,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top03_023",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 38,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top03_023",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 65,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 67,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 66,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 68,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 69,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 72,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 70,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    },
+    {
+      "id": 71,
+      "context": {
+        "split": "ever",
+        "case_id": "F_TP_Top04_039",
+        "arm": "attributed"
+      },
+      "max_tokens": 384
+    }
+  ],
+  "error_judgments": [
+    {
+      "id": "F_TP_Top03_023",
+      "arm": "attributed",
+      "errors": 4
+    },
+    {
+      "id": "F_TP_Top04_039",
+      "arm": "attributed",
+      "errors": 8
+    }
+  ]
+}

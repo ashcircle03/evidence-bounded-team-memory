@@ -1,0 +1,70 @@
+{
+  "source_version": "cup-service-v2-v1",
+  "source_sha256": {
+    "run.sbatch": "22172e2980a62a008e6525be6b2202439c3de7157959be01c308a226b7e25cd0",
+    "config.json": "d43fd43aa2427ece6f65227a8c8b63fe8cba0ff60eaba3e553a32e8d839cfbf3",
+    "code.tar.gz": "5043e1d14bbe2a961f9898d5d297c45aa7bd3fd8862af71660cd3f92c3cf33ea",
+    "serve.py": "a1e0dd73da9d8974294b37f9ca5804f6b738ed85400b3d5fd167307738b21283",
+    "service.py": "80b64789cc90cc18cbe905d2145b263c58596d681599280a8b821f1eb936c572",
+    "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+    "PROTOCOL.md": "836fc16c06d2c4a4da21a2be17ef696b28154b52dd1bd5cbbcb755b7b7d3f705"
+  },
+  "submission_intent": "submitted",
+  "job_id": "120336",
+  "gpus": 1,
+  "cpus": 8,
+  "ram_gb": 48,
+  "wall_minutes": 720,
+  "partition": "batch_ugrad",
+  "account": "ugrad",
+  "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-service-v2-v1",
+  "state": "FAILED",
+  "qos": "qos_pjw031003_2026_2",
+  "time_policy": "fixed_walltime",
+  "submitted_at": "2026-11-07T13:14:07.029539+00:00",
+  "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-120336.json",
+  "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-120336.log",
+  "exit_code": "1:0",
+  "elapsed_seconds": 476,
+  "usage": [
+    {
+      "JobID": "120336",
+      "State": "FAILED",
+      "ExitCode": "1:0",
+      "Elapsed": "00:07:56",
+      "ElapsedRaw": "476",
+      "AllocCPUS": "8",
+      "ReqMem": "48G",
+      "MaxRSS": "",
+      "TotalCPU": "01:00.532",
+      "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "NodeList": "aurora-g3"
+    },
+    {
+      "JobID": "120336.batch",
+      "State": "FAILED",
+      "ExitCode": "1:0",
+      "Elapsed": "00:07:56",
+      "ElapsedRaw": "476",
+      "AllocCPUS": "8",
+      "ReqMem": "",
+      "MaxRSS": "1248308K",
+      "TotalCPU": "01:00.531",
+      "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+      "NodeList": "aurora-g3"
+    },
+    {
+      "JobID": "120336.extern",
+      "State": "COMPLETED",
+      "ExitCode": "0:0",
+      "Elapsed": "00:07:56",
+      "ElapsedRaw": "476",
+      "AllocCPUS": "8",
+      "ReqMem": "",
+      "MaxRSS": "0",
+      "TotalCPU": "00:00.001",
+      "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+      "NodeList": "aurora-g3"
+    }
+  ]
+}

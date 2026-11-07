@@ -1,0 +1,28 @@
+{
+  "langchain": {
+    "url": "https://github.com/langchain-ai/langchain/blob/langchain%3D%3D0.3.27/libs/langchain/langchain/chains/openai_functions/citation_fuzzy_match.py",
+    "version": "langchain==0.3.27",
+    "license": "MIT",
+    "copied": [
+      "FactWithEvidence",
+      "QuestionAnswer fact list",
+      "system and exact-quote prompting"
+    ],
+    "adaptations": [
+      "Existing answer facts supplied unchanged",
+      "Full answer included for antecedents",
+      "JSON output via Qwen without OpenAI tool binding",
+      "Exact literal substring matches instead of fuzzy regex",
+      "Citation additions only; no answer rewriting"
+    ],
+    "not_claimed": [
+      "Original LangChain chain execution or model/benchmark reproduction",
+      "Semantic correctness proven by literal quote matching"
+    ]
+  },
+  "files_sha256": {
+    "team_memory/_vendor/langchain_citation/citation_fuzzy_match_original.py": "f41461148297f420669c93eacae541611a0ad0b03a8b2984eb06c456af7b69ee",
+    "team_memory/_vendor/langchain_citation/LICENSE": "f8eb3fceacf11e506c177df85bfbf4397fd067e2919b87062803b6fc09bf5580",
+    "team_memory/_vendor/langchain_citation/__init__.py": "a654e1dad66b4e506cd1757a594ea4d3a8a001173c075203d9b17cb8b4014ee8"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "gpu_minutes": 77.61666666666667,
+  "cap": 90,
+  "this_request_gpu_minutes": 7.583333333333334,
+  "this_request_approved_additional_gpu_minutes": 0,
+  "includes_all_attempts_and_timeout": true,
+  "cup_gpu_minutes": 450.1833333333334,
+  "cup_cap": 460,
+  "campaign_gpu_minutes": 745.2333333333335,
+  "campaign_cap": 760,
+  "jobs": {
+    "cup-ref-simple-v1": {
+      "source_version": "cup-ref-simple-v1",
+      "source_sha256": {
+        "run.sbatch": "1d9428fb71a7622b13fabf27f96fd6b7cec4f556cb30e32f7b853a67bfaa115f",
+        "config.json": "3f93244f7f8c8143171f9eb334e971a5311f431517d7380d9670abd22fab9942",
+        "serve.py": "1a4b247799cb7cd2b1bb2c67b50738ea818ae6fcb924ae203f6ed5c2dac154d7",
+        "service.py": "c6c17cbdfd99b83e187a1b62afbe3c6c1d0cecc1d32673b0e21245c791aad71c",
+        "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+        "code.tar.gz": "79068e6fcc9a208dbb294834827c994605eeae668ef09d186d3d04f4318c6466",
+        "legacy-contexts.json": "282ca03b6a7321780ecc647a04fd18832419e1284c3d6fa182ae394883cb817a",
+        "transfer-inputs.json": "9145c6be34e29e280f05065344058c23f24d7ab900b6bd3ab9d824662d9f4859"
+      },
+      "submission_intent": "submitted",
+      "job_id": "119975",
+      "gpus": 1,
+      "cpus": 8,
+      "ram_gb": 48,
+      "wall_minutes": 17,
+      "partition": "batch_ugrad",
+      "account": "ugrad",
+      "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-simple-v1",
+      "state": "FAILED",
+      "submitted_at": "2026-11-06T03:33:07.092777+00:00",
+      "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119975.json",
+      "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-119975.log",
+      "exit_code": "1:0",
+      "elapsed_seconds": 161,
+      "usage": [
+        {
+          "JobID": "119975",
+          "State": "FAILED",
+          "ExitCode": "1:0",
+          "Elapsed": "00:02:41",
+          "ElapsedRaw": "161",
+          "AllocCPUS": "8",
+          "ReqMem": "48G",
+          "MaxRSS": "",
+          "TotalCPU": "00:55.025",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g8"
+        },
+        {
+          "JobID": "119975.batch",
+          "State": "FAILED",
+          "ExitCode": "1:0",
+          "Elapsed": "00:02:41",
+          "ElapsedRaw": "161",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "2335136K",
+          "TotalCPU": "00:55.023",
+          "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g8"
+        },
+        {
+          "JobID": "119975.extern",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:02:41",
+          "ElapsedRaw": "161",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "0",
+          "TotalCPU": "00:00.001",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g8"
+        }
+      ]
+    },
+    "cup-ref-simple-v2": {
+      "source_version": "cup-ref-simple-v2",
+      "source_sha256": {
+        "run.sbatch": "79caed53ae1a04a1bc26042ef2aa43bd2f6de808d2909fd9c701e433f9e8fd15",
+        "config.json": "df197f7c0e7699aabd82c0aaf86a12ebd6c98ec01147a278cc1dd7a29252a363",
+        "serve.py": "1a4b247799cb7cd2b1bb2c67b50738ea818ae6fcb924ae203f6ed5c2dac154d7",
+        "service.py": "c6c17cbdfd99b83e187a1b62afbe3c6c1d0cecc1d32673b0e21245c791aad71c",
+        "prepare_nltk.py": "6bee1ec570788fa2b6f072343e332c0aeb29730296e045d442d2f2dee351b245",
+        "code.tar.gz": "75522ad60950f5be6cfa1be084d2d1661144a6156a07e45815c454df33f6818e",
+        "legacy-contexts.json": "282ca03b6a7321780ecc647a04fd18832419e1284c3d6fa182ae394883cb817a",
+        "transfer-inputs.json": "9145c6be34e29e280f05065344058c23f24d7ab900b6bd3ab9d824662d9f4859"
+      },
+      "submission_intent": "submitted",
+      "job_id": "119979",
+      "gpus": 1,
+      "cpus": 8,
+      "ram_gb": 48,
+      "wall_minutes": 14,
+      "partition": "batch_ugrad",
+      "account": "ugrad",
+      "source_path": "/ceph_data/pjw031003/capstone-shared-knowledge/source/sm-cup-ref-simple-v2",
+      "state": "COMPLETED",
+      "submitted_at": "2026-11-06T03:38:59.293962+00:00",
+      "result_path": "/ceph_data/pjw031003/capstone-shared-knowledge/results/sm-119979.json",
+      "log_path": "/ceph_data/pjw031003/capstone-shared-knowledge/logs/sm-119979.log",
+      "exit_code": "0:0",
+      "elapsed_seconds": 294,
+      "usage": [
+        {
+          "JobID": "119979",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:04:54",
+          "ElapsedRaw": "294",
+          "AllocCPUS": "8",
+          "ReqMem": "48G",
+          "MaxRSS": "",
+          "TotalCPU": "05:07.348",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g8"
+        },
+        {
+          "JobID": "119979.batch",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:04:54",
+          "ElapsedRaw": "294",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "2551888K",
+          "TotalCPU": "05:07.347",
+          "AllocTRES": "cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g8"
+        },
+        {
+          "JobID": "119979.extern",
+          "State": "COMPLETED",
+          "ExitCode": "0:0",
+          "Elapsed": "00:04:54",
+          "ElapsedRaw": "294",
+          "AllocCPUS": "8",
+          "ReqMem": "",
+          "MaxRSS": "0",
+          "TotalCPU": "00:00.001",
+          "AllocTRES": "billing=8,cpu=8,gres/gpu=1,mem=48G,node=1",
+          "NodeList": "aurora-g8"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "all_campaign_jobs_terminal": true
+}

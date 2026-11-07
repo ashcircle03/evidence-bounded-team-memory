@@ -1,0 +1,296 @@
+{
+  "rater": "Developer AI source review; no independent human adjudication",
+  "criterion": "Frozen PROTOCOL.md and keys. Primary requires complete answer with supporting returned original passages and no unsupported extra answer; all-citation precision and narrowed-quote fidelity are separately disclosed, not conflated with required support.",
+  "ratings": {
+    "legacy/legacy-d474ab3d7822c8ac/qa-0/joint": {
+      "success": true,
+      "reason": "Source1의 fetch.output 원문이 기본값 full을 명시한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-1/joint": {
+      "success": true,
+      "reason": "Source1의 merge.conflictStyle 원문이 zdiff3와 양끝 일치 행 제거를 명시한다. 좁힌 인용문은 구두점 차이로 미복원되어 원래 입력 문단이 반환됐다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-2/joint": {
+      "success": true,
+      "reason": "Source1의 format.subjectPrefix 원문이 [PATCH]를 기본값으로 명시한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-3/joint": {
+      "success": true,
+      "reason": "Source2의 notes.mergeStrategy 원문이 manual을 기본값으로 명시한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-d474ab3d7822c8ac/qa-4/joint": {
+      "success": true,
+      "reason": "Source2의 grep.extendedRegexp 항목은 patternType이 default일 때 기본/확장 정규식을 선택함을 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-ae24415845ae48a7/qa-0/joint": {
+      "success": true,
+      "reason": "원문1의 upstream 주장과 원문2의 origin 주장을 서로 다른 답과 해당 근거로 보존했다. 어느 쪽도 승인된 정정으로 승격하지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-d30bb1f10fe4bfe8/qa-0/joint": {
+      "success": true,
+      "reason": "원문1의 freshwater/L-2와 원문2의 brackish/B-8을 조건별로 보존했다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-0/joint": {
+      "success": true,
+      "reason": "Source1의 PEP615 원문은 시스템 자료가 없으면 PyPI tzdata로 대체함을 명시한다. 짧은 구절 매칭 실패와 원문 문단의 의미 지지는 구분한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-1/joint": {
+      "success": true,
+      "reason": "PEP572의 원문1 Abstract와 원문4 named expression 설명이 NAME := expr를 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-2/joint": {
+      "success": true,
+      "reason": "PEP597 원문1과3이 encoding 생략 및 locale 기본값 사용 때의 EncodingWarning을 명시한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-3/joint": {
+      "success": true,
+      "reason": "깨끗한 PEP618 사례이며 원문1과3이 길이가 다르면 ValueError임을 지지한다. 별도 상충 사례와 구분한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located",
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-4/joint": {
+      "success": true,
+      "reason": "Source1의 PEP669가 관련 함수·상수의 sys.monitoring namespace를 명시한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-5/joint": {
+      "success": true,
+      "reason": "PEP654 원문1과2가 exception groups를 다루는 except* 구문을 명시한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-702e9009795b2802/qa-6/joint": {
+      "success": true,
+      "reason": "Source2의 PEP553이 PYTHONBREAKPOINT=0으로 디버깅을 끔을 명시한다. 반환한 전체 원문으로 지지되지만 좁힌 구절은 미복원됐다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-702e9009795b2802/qa-7/joint": {
+      "success": true,
+      "reason": "필수 답 tomllib는 Source1 Abstract가 지지한다. 다만 추가 Source3과 그 짧은 구절은 기반 라이브러리 tomli만 설명하므로 해당 추가 인용은 부적절하다. 필수 답·원문 근거 성공과 모든 인용의 정확성을 동일시하지 않는다.",
+      "citation_issues": [
+        "Source3: tomli 기반 설명은 tomllib라는 모듈 이름을 지지하지 않음"
+      ],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-1d2a1e3271adf133/qa-0/joint": {
+      "success": true,
+      "reason": "PEP572의 NAME := expr[1]와 팀 기록의 NAME <- expr[2]를 별도 답으로 모두 보존했다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-c000762632771ec9/qa-0/joint": {
+      "success": false,
+      "reason": "PEP618의 ValueError[2][4]만 답했다. 입력 Source1에 있는 Fay의 LengthMismatchError 주장을 누락했으므로 기존 상충 답 보존에 실패했다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located",
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-0/joint": {
+      "success": true,
+      "reason": "필수 답 Confluence는 반환 Source2의 보고서 업로드 문장이 지지한다. 그러나 모델이 좁혀 고른 quoted_span은 Freemium 전략의 뒤 문단이며 업로드 위치를 지지하지 않는다. 전체 원문 인용 성공과 구절 선택 오류를 분리한다.",
+      "citation_issues": [
+        "Source2 전체 문단은 맞지만 좁혀 고른 Freemium 전략 구절은 Confluence 업로드를 지지하지 않음"
+      ],
+      "quote_location_diagnostics": []
+    },
+    "legacy/legacy-34429cce545ccddd/qa-1/joint": {
+      "success": true,
+      "reason": "Source1은 최소 10 working days의 data engineer input을 명시하며 답이 하한과 단위를 보존한다. 좁힌 구절은 대소문자 차이로 미복원됐다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located"
+      ]
+    },
+    "legacy/legacy-34429cce545ccddd/qa-2/joint": {
+      "success": true,
+      "reason": "Source2 작성자 Lizhen Zhou가 managers/auditors를 위한 customizable dimensions 질문 추가를 제안한다. 본문의 @Luhao Zhao를 작성자로 오인하지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-pull/joint": {
+      "success": true,
+      "reason": "Source1이 pull.ff=only의 fast-forward만 허용하는 동작과 merge.ff보다 우선함을 함께 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-pull/attributed": {
+      "success": true,
+      "reason": "Source1이 pull.ff=only의 fast-forward만 허용하는 동작과 merge.ff보다 우선함을 함께 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-push/joint": {
+      "success": true,
+      "reason": "Source1이 upstream이 없는 default push 조건, --set-upstream, simple/upstream/current 세 모드를 모두 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-push/attributed": {
+      "success": true,
+      "reason": "Source1이 upstream이 없는 default push 조건, --set-upstream, simple/upstream/current 세 모드를 모두 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-rerere/joint": {
+      "success": true,
+      "reason": "Source1이 autoUpdate 기본 false와 기존 해법으로 clean resolution 후 index 갱신을 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-rerere/attributed": {
+      "success": true,
+      "reason": "Source1이 autoUpdate 기본 false와 기존 해법으로 clean resolution 후 index 갱신을 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-separate/joint": {
+      "success": true,
+      "reason": "테스트 기록 true[1]와 매뉴얼 false[2]를 원문별로 보존한다. 버전 차이나 승인된 정정을 만들어내지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": [
+        "quote_not_located"
+      ]
+    },
+    "transfer/new-conflict-separate/attributed": {
+      "success": true,
+      "reason": "테스트 기록 true[1]와 매뉴얼 false[2]를 원문별로 보존한다. 버전 차이나 승인된 정정을 만들어내지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-stat/joint": {
+      "success": true,
+      "reason": "실험 기록의 true와 매뉴얼의 false를 각각 해당 원문에 연결했다. autoStash 등 다른 설정과 혼동하지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-stat/attributed": {
+      "success": true,
+      "reason": "실험 기록의 true와 매뉴얼의 false를 각각 해당 원문에 연결했다. autoStash 등 다른 설정과 혼동하지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-unrelated/joint": {
+      "success": true,
+      "reason": "autoUpdate 기본 false를 실제 rerere 원문[2]으로 답하며 무관한 enabled=true를 대안으로 만들지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-unrelated/attributed": {
+      "success": true,
+      "reason": "autoUpdate 기본 false를 실제 rerere 원문[2]으로 답하며 무관한 enabled=true를 대안으로 만들지 않았다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-no-answer/joint": {
+      "success": true,
+      "reason": "제공 기록에 gc.auto가 없으므로 구체적 기본값을 만들지 않았다. joint의 빈 answers와 insufficient 상태, attributed의 명시적 답 없음은 부재 응답 계약에 맞는다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-no-answer/attributed": {
+      "success": true,
+      "reason": "제공 기록에 gc.auto가 없으므로 구체적 기본값을 만들지 않았다. joint의 빈 answers와 insufficient 상태, attributed의 명시적 답 없음은 부재 응답 계약에 맞는다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-rebase/joint": {
+      "success": true,
+      "reason": "Source2가 error일 때 warning과 rebase 중단, git rebase --edit-todo로 수정함을 지지한다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-rebase/attributed": {
+      "success": false,
+      "reason": "주답은 맞지만 뒤 Source2 재진술에서 error 조건에도 rebase will still proceed라고 잘못 덧붙였다. 원문은 warn만 진행하며 error는 중단한다. 초안부터 존재한 오답을 검토 단계가 제거하지 못했다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-one-source/joint": {
+      "success": false,
+      "reason": "Source1 안의 테스트 true만 답하고 같은 원문의 매뉴얼 false를 누락했다. Source1 인용 하나로 두 주장의 보존을 대신할 수 없다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-one-source/attributed": {
+      "success": false,
+      "reason": "Source1 안의 매뉴얼 false만 답하고 같은 원문의 테스트 true를 누락했다. Source2 무정보 설명은 누락 복구가 아니다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-one-source-reversed/joint": {
+      "success": true,
+      "reason": "Source1 내 순서를 뒤집자 테스트 true와 매뉴얼 false를 각각 다른 인용 구절로 모두 반환했다. 이 방향의 성공은 정방향 실패를 상쇄하지 않는다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conflict-one-source-reversed/attributed": {
+      "success": false,
+      "reason": "역순 입력에서도 매뉴얼 false만 반환하여 같은 원문의 테스트 true를 누락했다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conditions/joint": {
+      "success": false,
+      "reason": "답의 조건별 동작은 맞지만 Source1 절차 기록만 인용했다. 그 원문에는 local=warn/CI=error만 있고 warning/proceed/stop/edit-todo의 동작은 없다. 그 동작을 설명하는 Source3도 검색 입력에 있었으나 반환 답의 근거로 선택하지 않았다.",
+      "citation_issues": [
+        "Source1은 절차 조건만 지지; 결과 동작의 Source3 인용 누락"
+      ],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-conditions/attributed": {
+      "success": false,
+      "reason": "local/CI 답 내용은 맞지만 인용은 절차 기록 Source1뿐이다. warn/error 동작을 지지하는 검색 Source3 인용이 빠져 고정 기준의 두 출처 요건을 충족하지 않는다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-author/joint": {
+      "success": false,
+      "reason": "record_author는 Mira인데 본문의 수신자 @Noah를 저자로 답했다. 인용 문자열은 존재하지만 작성자 주장을 지지하지 않는다.",
+      "citation_issues": [
+        "@Noah 구절은 수신자를 나타냄; metadata의 저자는 Mira"
+      ],
+      "quote_location_diagnostics": []
+    },
+    "transfer/new-author/attributed": {
+      "success": false,
+      "reason": "초안의 Mira는 옳았다. document_judgments가 무관한 Git documentation과 Eli 기록을 CONTRADICTS로 오판하여 revision이 두 사람/출처를 추가 작성자로 만들었다. Eli는 pull.ff 보고의 작성자다.",
+      "citation_issues": [],
+      "quote_location_diagnostics": []
+    }
+  }
+}

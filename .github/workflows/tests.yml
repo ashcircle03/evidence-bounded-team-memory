@@ -31,7 +31,17 @@ jobs:
       - name: Run unit tests
         env:
           CUPMEM_UPSTREAM_ROOT: ${{ github.workspace }}/.cache/cupmem-upstream
-        run: python -m unittest discover -s tests -v
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import unittest
+          paths = sorted(p for p in Path('tests').glob('test_*.py')
+                         if not p.name.startswith(('test_reference_', 'test_contextual_'))
+                         and p.name != 'test_service.py')
+          suite = unittest.TestLoader().loadTestsFromNames(['tests.'+p.stem for p in paths])
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          raise SystemExit(not result.wasSuccessful())
+          PY
       - name: Replay the two-clone Git demo
         run: |
           python -m team_memory demo > demo.json
@@ -61,3 +71,50 @@ jobs:
           PYTHONPATH: .
         run: |
           python evaluation/revision/integration.py evaluation/revision/development .cache/notes-integration.json --recording results/revision/git-integration.json
+
+  reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      NLTK_DATA: ${{ github.workspace }}/.cache/reference-nltk
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.11'
+      - name: Install explicit reference dependencies (no model weights)
+        run: |
+          python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r requirements-reference.txt
+          python -m nltk.downloader -d "$NLTK_DATA" punkt_tab stopwords
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          snapshot_download('Qwen/Qwen3-8B', revision='b968826d9c46dd6066d109eabc6255188de91218',
+              local_dir='.cache/qwen-tokenizer', allow_patterns=['tokenizer*', 'config.json', 'vocab.json', 'merges.txt', 'special_tokens_map.json'])
+          PY
+      - name: Run reference and public service contracts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import unittest
+          paths = sorted(p for p in Path('tests').glob('test_*.py')
+                         if p.name.startswith(('test_reference_', 'test_contextual_'))
+                         or p.name == 'test_service.py')
+          suite = unittest.TestLoader().loadTestsFromNames(['tests.'+p.stem for p in paths])
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          raise SystemExit(not result.wasSuccessful() or bool(result.skipped))
+          PY
+      - name: Test the deployable package outside the checkout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import tarfile
+          with tarfile.open('.cache/service-package.tar.gz', 'w:gz') as archive:
+              for path in sorted(Path('team_memory').rglob('*')):
+                  if path.is_file() and (path.suffix in ('.py', '.json', '.md', '.txt') or path.name == 'LICENSE'):
+                      archive.add(path, arcname=str(path))
+          PY
+          python -m evaluation.service_v2_package_check .cache/service-package.tar.gz

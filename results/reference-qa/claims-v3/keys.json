@@ -1,0 +1,1008 @@
+{
+  "keys": {
+    "F_SH_Top01_026": {
+      "topic_id": "01",
+      "id": "F_SH_Top01_026",
+      "Q": "After the alarm rule verification task for the energy consumption monitoring system is completed, where was the final test report uploaded?",
+      "A": "Confluence",
+      "R": [
+        {
+          "date": "2025-10-21",
+          "group": "Group 2",
+          "message_index": "3-4"
+        },
+        {
+          "date": "2025-10-22",
+          "group": "Group 2",
+          "message_index": "2-4, 6"
+        },
+        {
+          "date": "2025-10-23",
+          "group": "Group 2",
+          "message_index": "1, 3, 5-6, 8-9"
+        }
+      ],
+      "options": null
+    },
+    "F_MH_Top01_015": {
+      "topic_id": "01",
+      "id": "F_MH_Top01_015",
+      "Q": "After the colleague responsible for analyzing the performance bottlenecks of the dashboard data query interface in the Carbon Footprint System Group completed this task, how long did it take them to start the next independent task in this project group?",
+      "A": "From October 24, 2025 to December 8, 2025, there is a 45-day interval.",
+      "R": [
+        {
+          "date": "2025-10-22",
+          "group": "Group 3",
+          "message_index": "3"
+        },
+        {
+          "date": "2025-10-23",
+          "group": "Group 3",
+          "message_index": "1-4"
+        },
+        {
+          "date": "2025-10-24",
+          "group": "Group 3",
+          "message_index": "2, 5, 8-10, 12"
+        },
+        {
+          "date": "2025-12-08",
+          "group": "Group 3",
+          "message_index": "1-9"
+        },
+        {
+          "date": "2025-12-09",
+          "group": "Group 3",
+          "message_index": "1-7"
+        },
+        {
+          "date": "2025-12-10",
+          "group": "Group 3",
+          "message_index": "1, 3, 5-8"
+        }
+      ],
+      "options": null
+    },
+    "F_TP_Top01_002": {
+      "topic_id": "01",
+      "id": "F_TP_Top01_002",
+      "Q": "How many days did it take for Lujian Gao to plan the AWS S3 storage solution and design the tenant isolation strategy for the supply chain system?",
+      "A": "The task started on April 4, 2025, and ended on April 10, 2025, lasting 7 days.",
+      "R": [
+        {
+          "date": "2025-04-04",
+          "group": "Group 3",
+          "message_index": "4"
+        },
+        {
+          "date": "2025-04-07",
+          "group": "Group 3",
+          "message_index": "3"
+        },
+        {
+          "date": "2025-04-08",
+          "group": "Group 3",
+          "message_index": "3"
+        },
+        {
+          "date": "2025-04-09",
+          "group": "Group 3",
+          "message_index": "2"
+        },
+        {
+          "date": "2025-04-10",
+          "group": "Group 1",
+          "message_index": "9"
+        },
+        {
+          "date": "2025-04-10",
+          "group": "Group 3",
+          "message_index": "1, 21-22"
+        }
+      ],
+      "options": null
+    },
+    "MA_U_Top01_005": {
+      "topic_id": "01",
+      "id": "MA_U_Top01_005",
+      "Q": "Junior security engineer Xiao Lin is implementing the \"Forgot Password\" function for the new Carbon Emission Asset Management Platform. He recalls that during security training, the person in charge, Guohua Yin, emphasized that to prevent user enumeration attacks, all external system messages must remain vague and consistent under all circumstances. Now, he needs to handle a boundary case: when an enterprise account is marked as a 'risky account' and temporarily frozen by the security system due to multiple failed password attempts, and that user tries to reset their password again through the 'Forgot Password' function. In this specific scenario, how should Xiao Lin design the front-end feedback logic?",
+      "A": "D",
+      "options": {
+        "A": "The baseline specifications for platform secure interaction should be followed. To ensure absolute consistency in anti-enumeration strategies, the system should not set exceptions for any account status. All requests should be processed through the `ERR_POLICY_UNIFIED_RESPONSE_V1` policy, uniformly returning the vague prompt \"If this account is registered, you will receive an email.\" This is the core defense mechanism to prevent attackers from probing account status through response differences.",
+        "B": "Based on the latest security architecture review conclusions, the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy should be applied. This policy aims to achieve a balance between 'risk awareness and user-friendliness': on one hand, it returns a clear account lockout prompt to the frontend; on the other hand, to ensure users' right to know and quick recovery, the system still asynchronously triggers an email sending a notification with unlock instructions. This ensures that alerts are issued without interrupting the user's self-service recovery path.",
+        "C": "Based on the tiered alert design under the Zero Trust architecture, the `WARN_POLICY_SUSPICIOUS_ACTIVITY_V2` policy should be invoked. This policy decouples front-end responses from back-end handling: the front end only returns a generic error code that contains no status information, while high-risk logs are recorded in the background and the Security Operations Center (SOC) is notified for manual investigation, preventing any internal status from being exposed to potential attackers.",
+        "D": "Based on the platform's core error policy dictionary, the system needs to check the account status. If the status is `ACCOUNT_STATUS_LOCKED`, the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy is applied, which aborts the email sending process and returns a clear \"account locked\" message to the frontend. For other statuses, the standard process is followed to return a vague message."
+      },
+      "R": [
+        {
+          "date": "2025-05-02",
+          "group": "Group 3",
+          "message_index": "2, 8-9"
+        },
+        {
+          "date": "2025-05-05",
+          "group": "Group 3",
+          "message_index": "6, 26"
+        },
+        {
+          "date": "2025-05-06",
+          "group": "Group 3",
+          "message_index": "1-2, 25"
+        },
+        {
+          "date": "2025-05-07",
+          "group": "Group 3",
+          "message_index": "1-2, 6"
+        },
+        {
+          "date": "2025-05-08",
+          "group": "Group 3",
+          "message_index": "1-2, 6, 9-12"
+        },
+        {
+          "date": "2025-06-09",
+          "group": "Group 3",
+          "message_index": "7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27"
+        },
+        {
+          "date": "2025-06-17",
+          "group": "Group 3",
+          "message_index": "5-13"
+        }
+      ]
+    },
+    "MA_P_Top01_014": {
+      "topic_id": "01",
+      "id": "MA_P_Top01_014",
+      "Q": "Assistant, quickly help me double-check something. The project schedule is a bit tight. I'm working on the 'carbon asset management' module and I've found the logic for interfacing with finance to be too convoluted. All these accounting subjects and cost allocations are giving me a headache. To speed things up, I plan to cut the financial mapping functionality for now and use an internal ID as a placeholder, then add it back later. This will definitely be much faster. Can you help me see if there are any pitfalls with this plan?",
+      "A": "C",
+      "options": {
+        "A": "A. It can be adjusted. For decoupling and flexibility, it is recommended to encapsulate the financial mapping logic into an independent microservice. The main module can first call a mock API for development, and then perform joint debugging after the financial mapping service is completed. This approach ensures progress and adheres to architectural principles.",
+        "B": "In principle, yes. To avoid blocking the main development process, you can first implement the core functionality using internal identifiers. However, before the technical solution review, you must hold a meeting with Accountant Li's team in the Finance Department to ensure they understand and agree to this temporary solution, and attach the meeting minutes to the requirements document.",
+        "C": "This plan is not feasible. According to Director Lizhen Zhou's previous explicit requirements, the \"Carbon Asset Management\" module must clearly map to the accounting subjects and cost allocation logic of the finance department. This is a critical prerequisite to ensure the project can pass compliance audits later on, and cannot be omitted for the sake of development progress.",
+        "D": "Yes, this proposal has been approved. At the project architecture review meeting on March 28, Luhao Zhao and Product Owner Wei Zhang reached an agreement: to address the new data isolation requirements raised by the auditing firm, V1 will adopt a \"dual-track financial data system.\" The core module will first use simplified identifiers, and separately, the Data Mid-end team will independently build a \"compliance data mapping layer\" specifically for auditing, planned to go live in Q3. Your proposal perfectly aligns with this new plan."
+      },
+      "R": [
+        {
+          "date": "2025-03-21",
+          "group": "Group 1",
+          "message_index": "4, 7, 9"
+        },
+        {
+          "date": "2025-03-24",
+          "group": "Group 1",
+          "message_index": "6-9"
+        },
+        {
+          "date": "2025-03-25",
+          "group": "Group 1",
+          "message_index": "6-9"
+        },
+        {
+          "date": "2025-03-26",
+          "group": "Group 1",
+          "message_index": "18-20"
+        },
+        {
+          "date": "2025-03-27",
+          "group": "Group 1",
+          "message_index": "15-17"
+        },
+        {
+          "date": "2025-03-28",
+          "group": "Group 1",
+          "message_index": "1-3"
+        }
+      ]
+    },
+    "F_SH_Top02_014": {
+      "topic_id": "02",
+      "id": "F_SH_Top02_014",
+      "Q": "In the development task for the health record management system, according to Mingzhi Li's reminder, which colleague is responsible for the medication check-in module that needs to be delivered by September 18?",
+      "A": "Hanqiang Liang",
+      "R": [
+        {
+          "date": "2025-09-17",
+          "group": "Group 2",
+          "message_index": "8, 18"
+        },
+        {
+          "date": "2025-09-18",
+          "group": "Group 2",
+          "message_index": "1, 8, 15"
+        },
+        {
+          "date": "2025-09-19",
+          "group": "Group 2",
+          "message_index": "1, 4, 9, 11, 13"
+        }
+      ],
+      "options": null
+    },
+    "F_MH_Top02_033": {
+      "topic_id": "02",
+      "id": "F_MH_Top02_033",
+      "Q": "In the online diagnosis and treatment project group, how long after completing the in-depth analysis of market competitors (especially regarding the follow-up guidance process and technology stack) did the colleague responsible for this research start their next independent task in other project groups?",
+      "A": "From January 24, 2025 to February 12, 2025, there is a 19-day interval.",
+      "R": [
+        {
+          "date": "2025-01-21",
+          "group": "Group 3",
+          "message_index": "1-5"
+        },
+        {
+          "date": "2025-01-22",
+          "group": "Group 3",
+          "message_index": "6-9"
+        },
+        {
+          "date": "2025-01-23",
+          "group": "Group 3",
+          "message_index": "1-2, 6"
+        },
+        {
+          "date": "2025-01-24",
+          "group": "Group 3",
+          "message_index": "1-2, 4"
+        },
+        {
+          "date": "2025-02-12",
+          "group": "Group 1",
+          "message_index": "2, 4, 7-8"
+        },
+        {
+          "date": "2025-02-13",
+          "group": "Group 1",
+          "message_index": "2-4, 22-23"
+        },
+        {
+          "date": "2025-02-14",
+          "group": "Group 1",
+          "message_index": "2, 4-5, 8, 10"
+        }
+      ],
+      "options": null
+    },
+    "F_TP_Top02_048": {
+      "topic_id": "02",
+      "id": "F_TP_Top02_048",
+      "Q": "Excuse me, how many working days are needed in total for these two tasks: developing a user registration page for the health monitoring system that includes graphical CAPTCHA and form validation logic, and defining the project vision, technical strategy, and business model during the initial phase of the health records system?",
+      "A": "These two tasks will take a total of 10 working days. Specifically, developing the user registration page will require 7 working days, and defining the early project vision and scope will require 3 working days.",
+      "R": [
+        {
+          "date": "2025-01-16",
+          "group": "Group 2",
+          "message_index": "1-12"
+        },
+        {
+          "date": "2025-01-17",
+          "group": "Group 2",
+          "message_index": "1-4, 20-23"
+        },
+        {
+          "date": "2025-01-20",
+          "group": "Group 2",
+          "message_index": "1-5, 21"
+        },
+        {
+          "date": "2025-07-24",
+          "group": "Group 1",
+          "message_index": "1-2, 5-6"
+        },
+        {
+          "date": "2025-07-25",
+          "group": "Group 1",
+          "message_index": "1, 4-5, 26"
+        },
+        {
+          "date": "2025-07-28",
+          "group": "Group 1",
+          "message_index": "1-3, 16"
+        },
+        {
+          "date": "2025-07-29",
+          "group": "Group 1",
+          "message_index": "1-3, 7"
+        },
+        {
+          "date": "2025-07-30",
+          "group": "Group 1",
+          "message_index": "1, 6-7"
+        },
+        {
+          "date": "2025-07-31",
+          "group": "Group 1",
+          "message_index": "1, 3-4, 6-7"
+        },
+        {
+          "date": "2025-08-01",
+          "group": "Group 1",
+          "message_index": "1, 3, 8-10"
+        }
+      ],
+      "options": null
+    },
+    "MA_U_Top02_034": {
+      "topic_id": "02",
+      "id": "MA_U_Top02_034",
+      "Q": "Xiao Wang, a newly hired test engineer, is participating in the \"Smart IoT Health Monitoring System\" project for the first time. One afternoon, a security vulnerability suddenly emerged in the online system, classified as `Incident_Level = 'P0_SECURITY'`, posing a risk of unauthorized real-time access to some patients' private medical records. The development team submitted a fix patch within half an hour. The Project Manager asked Xiao Wang to immediately coordinate the subsequent testing and release work. Xiao Wang recalled that during the onboarding training, the Quality Director repeatedly emphasized that \"any fix must undergo complete regression testing before going live; this is an inviolable red line.\" Given the current situation, what is the most appropriate action Xiao Wang should take?",
+      "A": "D",
+      "options": {
+        "A": "Adhere to the \"quality redline\" emphasized by the Quality Director and cite the PMO's \"Standard Defect Handling Process.\" He should point out to the Project Manager that security-related fixes are highly prone to introducing secondary vulnerabilities, and the `COMPREHENSIVE_QA_GATE` process must be initiated to perform comprehensive regression testing, especially multiple rounds of cross-validation for data security and permissions, to ensure the absolute reliability of the fix and prevent more serious incidents due to rushed deployment.",
+        "B": "Immediately confirm that the incident has triggered the `PLAN_CODE_RED` contingency plan. According to the plan's design, the system will automatically perform a \"canary release\": the patch will be deployed to 10% of production servers, and a real-time anomaly detection system will be activated for monitoring. If core security metrics show no fluctuations within 15 minutes, the release will automatically expand to all servers. This is to achieve the optimal balance between rapid damage control and risk management.",
+        "C": "According to the company's \"SRE Emergency Incident Handling Manual,\" a P0 security incident should trigger a `PLAN_CODE_YELLOW` response. This process requires an immediate halt to all release activities, and the fix code must undergo a cross-review (Peer Review) by two senior engineers who were not involved in the coding. After the review is approved, the patch will be deployed to a pre-production environment that is identical to the production environment for at least 1 hour of soak testing to ensure stability.",
+        "D": "If the incident level is identified as `Incident_Level = 'P0_SECURITY'`, the `PLAN_CODE_RED` contingency plan should be immediately activated. According to this plan's definition, the standard regression testing process will be bypassed. Instead, a designated architect or senior engineer will perform minimal core functionality verification, and then release it to the production environment through an emergency channel."
+      },
+      "R": [
+        {
+          "date": "2025-11-14",
+          "group": "Group 3",
+          "message_index": "4-5, 7-8, 11"
+        },
+        {
+          "date": "2025-11-17",
+          "group": "Group 3",
+          "message_index": "1-6"
+        },
+        {
+          "date": "2025-11-18",
+          "group": "Group 3",
+          "message_index": "2-5, 14, 16"
+        },
+        {
+          "date": "2025-11-19",
+          "group": "Group 3",
+          "message_index": "1, 3-6"
+        },
+        {
+          "date": "2025-11-20",
+          "group": "Group 3",
+          "message_index": "2-5, 8-9"
+        },
+        {
+          "date": "2025-12-15",
+          "group": "Group 3",
+          "message_index": "7-15"
+        },
+        {
+          "date": "2025-12-18",
+          "group": "Group 3",
+          "message_index": "9-18"
+        }
+      ]
+    },
+    "MA_P_Top02_083": {
+      "topic_id": "02",
+      "id": "MA_P_Top02_083",
+      "Q": "Xiao A, I have an urgent matter here. The real-time heart rate dashboard for health monitoring is scheduled for a client demo next week, but currently, it uses polling, and the data updates too slowly, leading to a poor user experience. I've decided not to wait for a unified upgrade and will directly refactor it to WebSocket. I'm familiar with this and can get it done today. This will significantly improve the demo's effectiveness. I'll go ahead and start working on it, okay?",
+      "A": "D",
+      "options": {
+        "A": "Feasible, but compatibility needs to be considered. Given that backend services are not yet fully standardized, it is recommended that the frontend use the `sockjs-client` library. This library can automatically degrade to polling when WebSocket is unavailable, ensuring a smooth transition and the stability of online features.",
+        "B": "WebSocket is not recommended. At a recent technical review meeting, architect Yu Wang pointed out that the WebSocket solution is too cumbersome for unidirectional data push scenarios. The meeting decided to recommend using the lighter Server-Sent Events (SSE) technology instead. You can research this solution.",
+        "C": "Yes, this plan has been updated. Mingzhi Li announced at last week's (around October 8) backend architecture meeting that the core module of the message push service has passed acceptance testing and its performance is stable. He has approved that new features can directly use WebSocket for development, and no longer need to wait for a unified upgrade. Please proceed with confidence and update the technical documentation upon completion.",
+        "D": "Not yet. According to Mingzhi Li, the project lead's previous plan, because the backend message push service is not yet fully ready, all tasks requiring dynamic refreshing should currently be implemented using polling. Please continue to use polling, and the team will organize a unified upgrade once the service is stable."
+      },
+      "R": [
+        {
+          "date": "2025-09-29",
+          "group": "Group 1",
+          "message_index": "1-9"
+        },
+        {
+          "date": "2025-09-30",
+          "group": "Group 1",
+          "message_index": "1-3, 13-14"
+        },
+        {
+          "date": "2025-10-01",
+          "group": "Group 1",
+          "message_index": "1-2, 13-17"
+        },
+        {
+          "date": "2025-10-02",
+          "group": "Group 1",
+          "message_index": "4-8, 26, 28"
+        },
+        {
+          "date": "2025-10-03",
+          "group": "Group 1",
+          "message_index": "1, 3-4, 7-8, 23-26, 38"
+        }
+      ]
+    },
+    "wiki-195": {
+      "question_ID": "195",
+      "question": "Does the Bōsōzoku have a significant percentage (<15%) of members over the age of 20?",
+      "context1": "In general, the Japanese government sees bōsōzoku as highly organized groups, affiliated under several national federations. They are known to be surprisingly well organized, despite generally only having a handful of members above the age of twenty.",
+      "context2": " It is estimated that around 25% of bōsōzoku are above the age of twenty.",
+      "answer1": "No",
+      "answer2": "Yes",
+      "contradictType": "Explicit",
+      "samepassage": "Different",
+      "merged_context": "In general, the Japanese government sees bōsōzoku as highly organized groups, affiliated under several national federations. They are known to be surprisingly well organized, despite generally only having a handful of members above the age of twenty.\n It is estimated that around 25% of bōsōzoku are above the age of twenty.",
+      "ref_answer": "No|Yes",
+      "WikipediaArticleTitle": "Bōsōzoku",
+      "url": "https://en.wikipedia.org/wiki/Bōsōzoku"
+    },
+    "wiki-243": {
+      "question_ID": "243",
+      "question": "How many prisoners and wounded did the Spanish Empire have in the Battle of Martín García?",
+      "context1": "In the first and bloodiest day (10th March 1814) of the Combate of Martín García, Jacinto de Romarate (frigate captain of Spanish royalist forces) successfully repelled the enemy's (forces of the United Provinces of the Río de la Plata) attack. They had 45 dead and 50 wounded. At 5:00 pm on 11th March 1814, Jacinto de Romarate sent a note to the commander of the Montevideo garrison Miguel de la Sierra (Spanish royalist), informing he had few casualties, four dead and seven wounded, he had disembarked on the island and judged that, given the losses suffered, as soon as the patriot fleet was in condition it would retreat to Buenos Aires. On 15th March 1814, the royalists had 10 dead, 7 wounded and 50 prisoners.",
+      "context2": "The Spanish Empire had 10 dead, 47 prisoners and 17 wounded in the Battle of Martín García.",
+      "answer1": "50 prisoners and 64 wounded",
+      "answer2": "47 prisoners and 17 wounded",
+      "contradictType": "Implicit (reasoning required)",
+      "samepassage": "Different",
+      "merged_context": "In the first and bloodiest day (10th March 1814) of the Combate of Martín García, Jacinto de Romarate (frigate captain of Spanish royalist forces) successfully repelled the enemy's (forces of the United Provinces of the Río de la Plata) attack. They had 45 dead and 50 wounded. At 5:00 pm on 11th March 1814, Jacinto de Romarate sent a note to the commander of the Montevideo garrison Miguel de la Sierra (Spanish royalist), informing he had few casualties, four dead and seven wounded, he had disembarked on the island and judged that, given the losses suffered, as soon as the patriot fleet was in condition it would retreat to Buenos Aires. On 15th March 1814, the royalists had 10 dead, 7 wounded and 50 prisoners.\nThe Spanish Empire had 10 dead, 47 prisoners and 17 wounded in the Battle of Martín García.",
+      "ref_answer": "50 prisoners and 64 wounded|47 prisoners and 17 wounded",
+      "WikipediaArticleTitle": "Battle of Martín García",
+      "url": "https://en.wikipedia.org/wiki/Battle_of_Martín_García"
+    },
+    "wiki-130": {
+      "question_ID": "130",
+      "question": "Was Jay Telfer an husband of Bonnie Bedelia?",
+      "context1": "Bonnie Bedelia married scriptwriter Ken Luber on April 24, 1969. The couple had two sons, Uri (b. 1970) and Jonah (b. 1976), before divorcing in 1980. She wed actor Michael MacRae in 1995.",
+      "context2": "Bonnie Bedelia spouses were Ken Luber ​ ​(married 1969; divorced 1980)​, Jay Telfer ​ ​(married 1975; divorced 1975)​ and Michael MacRae ​(married 1995)",
+      "answer1": "No",
+      "answer2": "Yes",
+      "contradictType": "Implicit (reasoning required)",
+      "samepassage": "Different",
+      "merged_context": "Bonnie Bedelia married scriptwriter Ken Luber on April 24, 1969. The couple had two sons, Uri (b. 1970) and Jonah (b. 1976), before divorcing in 1980. She wed actor Michael MacRae in 1995.\nBonnie Bedelia spouses were Ken Luber ​ ​(married 1969; divorced 1980)​, Jay Telfer ​ ​(married 1975; divorced 1975)​ and Michael MacRae ​(married 1995)",
+      "ref_answer": "No|Yes",
+      "WikipediaArticleTitle": "Bonnie Bedelia",
+      "url": "https://en.wikipedia.org/wiki/Bonnie_Bedelia"
+    },
+    "wiki-8": {
+      "question_ID": "8",
+      "question": "What are examples of defunct newspapers in the United States?",
+      "context1": "This is a list of defunct newspapers of the United States. Only notable names among the thousands of such newspapers are listed, primarily major metropolitan dailies which published for ten years or more.",
+      "context2": "The Hoover Gazette was a weekly newspaper that served the city of Hoover, Alabama. The Hoover Gazette was owned by Eagle Publishing Company LLC. The Hoover Gazette was first published on June 5, 2006. The last edition of Hoover Gazette was on August 15, 2007. The newspaper Hoover Gazette was published each Wednesday.",
+      "answer1": "The Daily Worker",
+      "answer2": "The Hoover Gazette",
+      "contradictType": "Implicit (reasoning required)",
+      "samepassage": "Different",
+      "merged_context": "This is a list of defunct newspapers of the United States. Only notable names among the thousands of such newspapers are listed, primarily major metropolitan dailies which published for ten years or more.\nThe Hoover Gazette was a weekly newspaper that served the city of Hoover, Alabama. The Hoover Gazette was owned by Eagle Publishing Company LLC. The Hoover Gazette was first published on June 5, 2006. The last edition of Hoover Gazette was on August 15, 2007. The newspaper Hoover Gazette was published each Wednesday.",
+      "ref_answer": "The Daily Worker|The Hoover Gazette",
+      "WikipediaArticleTitle": "List of defunct newspapers of the United States",
+      "url": "https://en.wikipedia.org/wiki/List_of_defunct_newspapers_of_the_United_States"
+    },
+    "wiki-12": {
+      "question_ID": "12",
+      "question": "What date was Julian Lewis Jones born?",
+      "context1": "Julian Lewis Jones (born 21 August 1968",
+      "context2": "Julian Lewis Jones Born\t27 August 1968",
+      "answer1": "August 21st 1968",
+      "answer2": " 27 August 1968",
+      "contradictType": "Explicit",
+      "samepassage": "Different",
+      "merged_context": "Julian Lewis Jones (born 21 August 1968\nJulian Lewis Jones Born\t27 August 1968",
+      "ref_answer": "August 21st 1968| 27 August 1968",
+      "WikipediaArticleTitle": "Julian Lewis Jones",
+      "url": "https://en.wikipedia.org/wiki/Julian_Lewis_Jones"
+    },
+    "wiki-204": {
+      "question_ID": "204",
+      "question": "Was the ringleader of a violent protest against football games prosecution in 1659-1660 fined 10 pounds?",
+      "context1": "A prosecution of football games between 1659-1660 triggered a violent protest and resulted in over 100 armed men breaking into the Mayor's house; the ringleader was later fined 10 pounds or 400 shillings, a very large sum of money at the time.",
+      "context2": "A prosecution of football games between 1659-1660 triggered a violent protest and resulted in over 100 armed men breaking into the Mayor's house; the ringleader was later fined 10 pounds or 400 shillings, a very large sum of money at the time.",
+      "answer1": "Yes",
+      "answer2": "No",
+      "contradictType": "Explicit",
+      "samepassage": "Same",
+      "merged_context": "A prosecution of football games between 1659-1660 triggered a violent protest and resulted in over 100 armed men breaking into the Mayor's house; the ringleader was later fined 10 pounds or 400 shillings, a very large sum of money at the time.",
+      "ref_answer": "Yes|No",
+      "WikipediaArticleTitle": "Attempts to ban football games",
+      "url": "https://en.wikipedia.org/wiki/Attempts_to_ban_football_games"
+    },
+    "wiki-50": {
+      "question_ID": "50",
+      "question": "During the election results for the Russian Constituent Assembly on the 12/25 November 1917 , what percentage of votes the Socialist Revolutionaries (SRs) got?",
+      "context1": "During the election results for the Russian Constituent Assembly on the 12/25 November 1917 , the Socialist Revolutionaries (SRs) got 17,943,000 corresponding to 40.4%.",
+      "context2": "During the election results for the Russian Constituent Assembly on the 12/25 November 1917, while losing the urban vote, the Socialist-Revolutionary Party received around 57–58% (62% with their social democratic allies), having won the massive support of the rural peasantry who constituted 80% of the Russian population.",
+      "answer1": "40.4%",
+      "answer2": "around 57-58 %",
+      "contradictType": "Explicit",
+      "samepassage": "Different",
+      "merged_context": "During the election results for the Russian Constituent Assembly on the 12/25 November 1917 , the Socialist Revolutionaries (SRs) got 17,943,000 corresponding to 40.4%.\nDuring the election results for the Russian Constituent Assembly on the 12/25 November 1917, while losing the urban vote, the Socialist-Revolutionary Party received around 57–58% (62% with their social democratic allies), having won the massive support of the rural peasantry who constituted 80% of the Russian population.",
+      "ref_answer": "40.4%|around 57-58 %",
+      "WikipediaArticleTitle": "Russian Constituent Assembly",
+      "url": "https://en.wikipedia.org/wiki/Russian_Constituent_Assembly"
+    },
+    "wiki-222": {
+      "question_ID": "222",
+      "question": "Was the site of the Carandiru massacre an actual penitentiary?",
+      "context1": "The Carandiru massacre (Portuguese: Massacre do Carandiru, Portuguese: [mɐˈsakɾi du kɐɾɐ̃dʒiˈɾu]) occurred on 2 October 1992, in Carandiru Penitentiary in São Paulo, Brazil, when military police stormed the penitentiary following a prison riot. ",
+      "context2": "The facility at which the Carandiru massacre took place was a detention center, not a penitentiary, meaning that the inmates had not yet been tried or convicted.",
+      "answer1": "Yes",
+      "answer2": "No",
+      "contradictType": "Explicit",
+      "samepassage": "Different",
+      "merged_context": "The Carandiru massacre (Portuguese: Massacre do Carandiru, Portuguese: [mɐˈsakɾi du kɐɾɐ̃dʒiˈɾu]) occurred on 2 October 1992, in Carandiru Penitentiary in São Paulo, Brazil, when military police stormed the penitentiary following a prison riot. \nThe facility at which the Carandiru massacre took place was a detention center, not a penitentiary, meaning that the inmates had not yet been tried or convicted.",
+      "ref_answer": "Yes|No",
+      "WikipediaArticleTitle": "Carandiru massacre",
+      "url": "https://en.wikipedia.org/wiki/Carandiru_massacre"
+    }
+  },
+  "selection": [
+    "F_SH_Top01_026",
+    "F_MH_Top01_015",
+    "F_TP_Top01_002",
+    "MA_U_Top01_005",
+    "MA_P_Top01_014",
+    "F_SH_Top02_014",
+    "F_MH_Top02_033",
+    "F_TP_Top02_048",
+    "MA_U_Top02_034",
+    "MA_P_Top02_083",
+    "wiki-195",
+    "wiki-243",
+    "wiki-130",
+    "wiki-8",
+    "wiki-12",
+    "wiki-204",
+    "wiki-50",
+    "wiki-222"
+  ],
+  "retrieval": [
+    {
+      "id": "F_SH_Top01_026",
+      "corpus_records": 10222,
+      "chunks": 10222,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-21/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-21/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/9"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-27/Group 2/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-18/Group 2/31",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-30/Group 2/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-15/Group 2/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-02-26/Group 2/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-11/Group 2/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-29/Group 2/7"
+      ]
+    },
+    {
+      "id": "F_MH_Top01_015",
+      "corpus_records": 10222,
+      "chunks": 10222,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/12",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/8"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-07/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-04/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-01-27/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-19/Group 2/16"
+      ]
+    },
+    {
+      "id": "F_TP_Top01_002",
+      "corpus_records": 10222,
+      "chunks": 10222,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-04/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-09/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 1/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/21",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/22"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/21",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-09/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-18/Group 2/18",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 2/3"
+      ]
+    },
+    {
+      "id": "MA_U_Top01_005",
+      "corpus_records": 10222,
+      "chunks": 10222,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-05/Group 3/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-05/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-06/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-06/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-06/Group 3/25",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-07/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-07/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-07/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/12",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/17",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/19",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/21",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/23",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/25",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/27",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/12",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/9"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-05/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-07-28/Group 2/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-13/Group 3/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-15/Group 2/4"
+      ]
+    },
+    {
+      "id": "MA_P_Top01_014",
+      "corpus_records": 10222,
+      "chunks": 10222,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 1/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/18",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/19",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/20",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-27/Group 1/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-27/Group 1/16",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-27/Group 1/17",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 1/3"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/18",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-08-15/Group 2/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-11-25/Group 1/22",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-12/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-02-11/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-18/Group 3/3"
+      ]
+    },
+    {
+      "id": "F_SH_Top02_014",
+      "corpus_records": 10106,
+      "chunks": 10106,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-17/Group 2/18",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-17/Group 2/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/9"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-08/Group 2/24",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-14/Group 2/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-04-07/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-17/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-18/Group 2/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-16/Group 2/27",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 2/9"
+      ]
+    },
+    {
+      "id": "F_MH_Top02_033",
+      "corpus_records": 10106,
+      "chunks": 10106,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-23/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-23/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-23/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/22",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/23",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/8"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-07/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-05-14/Group 2/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-29/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-04-18/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-04/Group 2/17",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-06-02/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 3/1"
+      ]
+    },
+    {
+      "id": "F_TP_Top02_048",
+      "corpus_records": 10106,
+      "chunks": 10106,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/12",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/20",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/21",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/22",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/23",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/21",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/16",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-30/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-30/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-30/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/9"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/21",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-04/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 2/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-31/Group 2/7"
+      ]
+    },
+    {
+      "id": "MA_U_Top02_034",
+      "corpus_records": 10106,
+      "chunks": 10106,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/16",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/12",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/11",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/12",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/16",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/17",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/18",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/9"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-11/Group 3/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-10/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-04/Group 2/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 2/10",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-11/Group 3/19",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-11/Group 3/18"
+      ]
+    },
+    {
+      "id": "MA_P_Top02_083",
+      "corpus_records": 10106,
+      "chunks": 10106,
+      "gold_reference_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/9",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/13",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/16",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/17",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/2",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/28",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/6",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/8",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/1",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/23",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/24",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/25",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/26",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/3",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/38",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/7",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/8"
+      ],
+      "retrieved_locations": [
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/25",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-17/Group 2/19",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 2/4",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-04-08/Group 1/5",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-28/Group 1/15",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-03-17/Group 3/19",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-13/Group 1/14",
+        "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-23/Group 1/2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "date_boundary": {
+    "input_date": "2025-01-02T00:00:00Z",
+    "witness": {
+      "source_id": "s",
+      "quote": "Fact",
+      "start": 0,
+      "end": 4,
+      "location": "audit://s",
+      "speaker": "Alice"
+    },
+    "downstream_date": null
+  },
+  "timezone_order": {
+    "expected": [
+      "earlier",
+      "later"
+    ],
+    "actual": [
+      "later",
+      "earlier"
+    ]
+  },
+  "original_normalization": {
+    "raw": "  Fact\n",
+    "stored": "Fact",
+    "raw_fact_offset": 2,
+    "stored_fact_offset": 0
+  },
+  "source_id_guard": {
+    "before": "The value is 10 [1].",
+    "after": "The value is 999 [1][2].",
+    "accepted": true,
+    "status": "ok"
+  },
+  "practical_git_merge_boundary": {
+    "trial": 1,
+    "initial_statuses": [
+      "ok",
+      "ok"
+    ],
+    "source_count": 2,
+    "arrivals": [
+      "67fa5ed358a07830532bbf0e",
+      "c4f9a31431ef15bea1cd345d"
+    ],
+    "batches": [
+      {
+        "kind": "arrival",
+        "ordinal": 0,
+        "source_ids": [
+          "c4f9a31431ef15bea1cd345d"
+        ]
+      },
+      {
+        "kind": "arrival",
+        "ordinal": 0,
+        "source_ids": [
+          "67fa5ed358a07830532bbf0e"
+        ]
+      }
+    ],
+    "rebuild": {
+      "schema_version": "team-memory-service/v1",
+      "operation": "rebuild",
+      "status": "error",
+      "answers": [],
+      "proposals": [],
+      "warnings": [],
+      "errors": [
+        {
+          "stage": "native_write",
+          "type": "ValueError"
+        }
+      ],
+      "completed_sources": 0
+    },
+    "classification": "documented unsupported workflow; not a supported-path regression"
+  }
+}

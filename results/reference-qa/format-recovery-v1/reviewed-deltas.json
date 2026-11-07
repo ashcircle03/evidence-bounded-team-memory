@@ -1,0 +1,127 @@
+{
+  "legacy/legacy-d474ab3d7822c8ac/qa-3/claims": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "실제 인용에 notes.mergeStrategy와 기본값 manual이 함께 있다.",
+    "claim_reviews": [
+      {
+        "text": "If nobody specifies a notes merge strategy, the default strategy resolves notes conflicts by choosing `manual`.",
+        "supported": true,
+        "reason": "실제 인용에 notes.mergeStrategy와 기본값 manual이 함께 있다."
+      }
+    ]
+  },
+  "legacy/legacy-702e9009795b2802/qa-3/claims": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "strict=True, 길이가 다른 인자, ValueError가 PEP 원문에 함께 있다. 두 번째 인용도 인자가 먼저 소진될 때의 ValueError를 명시한다.",
+    "claim_reviews": [
+      {
+        "text": "When the built-in zip is called with the keyword-only argument strict=True, the resulting iterator will raise a ValueError if the arguments are exhausted at differing lengths.",
+        "supported": true,
+        "reason": "strict=True, 길이가 다른 인자, ValueError가 PEP 원문에 함께 있다."
+      },
+      {
+        "text": "When enabled, a ValueError is raised if one of the arguments is exhausted before the others.",
+        "supported": true,
+        "reason": "두 번째 인용도 인자가 먼저 소진될 때의 ValueError를 명시한다."
+      }
+    ]
+  },
+  "legacy/legacy-c000762632771ec9/qa-0/claims": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "PEP에는 strict=True에서의 ValueError가 명시돼 있다. Fay의 실험 기록에는 다른 결과 LengthMismatchError가 명시돼 있고 답이 이를 별도로 인용한다.",
+    "claim_reviews": [
+      {
+        "text": "When strict zip is used and its iterables have different lengths, it raises a ValueError.",
+        "supported": true,
+        "reason": "PEP에는 strict=True에서의 ValueError가 명시돼 있다."
+      },
+      {
+        "text": "Running the strict zip unequal-lengths check, the raised exception is recorded as LengthMismatchError for iterables of different lengths.",
+        "supported": true,
+        "reason": "Fay의 실험 기록에는 다른 결과 LengthMismatchError가 명시돼 있고 답이 이를 별도로 인용한다."
+      }
+    ]
+  },
+  "wiki/wiki-12/single2/claims": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "둘째 문단에 생일이 27 August 1968로 명시되어 있다.",
+    "claim_reviews": [
+      {
+        "text": "Julian Lewis Jones was born on 27 August 1968.",
+        "supported": true,
+        "reason": "둘째 문단에 생일이 27 August 1968로 명시되어 있다."
+      }
+    ]
+  },
+  "wiki/wiki-12/single2/joint": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "둘째 문단에 생일이 27 August 1968로 명시되어 있다.",
+    "claim_reviews": [
+      {
+        "text": "Julian Lewis Jones was born on 27 August 1968.",
+        "supported": true,
+        "reason": "둘째 문단에 생일이 27 August 1968로 명시되어 있다."
+      }
+    ]
+  },
+  "wiki/wiki-12/both/claims": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "첫 문단의 Julian Lewis Jones, 21 August 1968을 그대로 인용한다. 둘째 문단의 같은 인물, 27 August 1968을 그대로 인용한다.",
+    "claim_reviews": [
+      {
+        "text": "Julian Lewis Jones was born on 21 August 1968.",
+        "supported": true,
+        "reason": "첫 문단의 Julian Lewis Jones, 21 August 1968을 그대로 인용한다."
+      },
+      {
+        "text": "Julian Lewis Jones was born on 27 August 1968.",
+        "supported": true,
+        "reason": "둘째 문단의 같은 인물, 27 August 1968을 그대로 인용한다."
+      }
+    ]
+  },
+  "wiki/wiki-12/both/joint": {
+    "answer_correct": true,
+    "returned_evidence_supports_all_claims": true,
+    "required_evidence_complete": true,
+    "narrow_quotes_support_all_claims": true,
+    "unsupported_extra": false,
+    "reason": "첫 문단의 Julian Lewis Jones, 21 August 1968을 그대로 인용한다. 둘째 문단의 같은 인물, 27 August 1968을 그대로 인용한다.",
+    "claim_reviews": [
+      {
+        "text": "Julian Lewis Jones was born on 21 August 1968.",
+        "supported": true,
+        "reason": "첫 문단의 Julian Lewis Jones, 21 August 1968을 그대로 인용한다."
+      },
+      {
+        "text": "Julian Lewis Jones was born on 27 August 1968.",
+        "supported": true,
+        "reason": "둘째 문단의 같은 인물, 27 August 1968을 그대로 인용한다."
+      }
+    ]
+  }
+}

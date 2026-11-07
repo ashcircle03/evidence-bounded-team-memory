@@ -1,0 +1,65 @@
+{
+  "rater": "Developer AI; independent human adjudication still required",
+  "cases": {
+    "new-rebase": {
+      "required": "A warning is printed and rebase stops; git rebase --edit-todo can correct it. Cite rebase documentation.",
+      "forbidden": "Do not answer that it continues; do not confuse dropping with checking disabled.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-pull": {
+      "required": "Only fast-forward merges; overrides merge.ff while pulling. Cite pull documentation.",
+      "forbidden": "Do not apply pull.ff=false behavior to only.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-push": {
+      "required": "--set-upstream, with simple/upstream/current; no existing upstream and default push conditions retained. Cite push documentation.",
+      "forbidden": "Do not include matching or nothing as supported modes.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-rerere": {
+      "required": "Default false; enabling updates index with resolved contents after clean resolution. Cite rerere documentation.",
+      "forbidden": "Do not confuse rerere.enabled with autoUpdate.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-conflict-separate": {
+      "required": "Manual says false, test report says true; both explicitly attributed and supported. No invented different setting or version.",
+      "forbidden": "Do not silently pick one; do not call the pending report an approved correction.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-conflict-one-source": {
+      "required": "Manual says false, test report says true; both explicitly attributed and supported. No invented different setting or version.",
+      "forbidden": "Both passages are in one source: citing the source once without both defaults is incomplete.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-conflict-one-source-reversed": {
+      "required": "Manual says false, test report says true; both explicitly attributed and supported. No invented different setting or version.",
+      "forbidden": "Same criterion as forward order; newest/first passage is not an automatic winner.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-conflict-stat": {
+      "required": "Manual false and lab report true, both attributed with evidence.",
+      "forbidden": "Do not conflate rebase.stat with rebase.autoStash or silently resolve the discrepancy.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-conditions": {
+      "required": "Local warn prints warning and proceeds; CI error warns and stops. Cite procedure plus rebase document. Conditions differ, not an unresolved contradiction.",
+      "forbidden": "Do not give one shared outcome; do not invent version difference.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-unrelated": {
+      "required": "false with rerere source; no ambiguity from enabled=true.",
+      "forbidden": "Do not give true as another autoUpdate default.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-author": {
+      "required": "Mira, supported by the source authored by Mira.",
+      "forbidden": "Noah is addressee, Eli wrote another report; do not select either.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    },
+    "new-no-answer": {
+      "required": "Explicit insufficient/no answer, with no asserted numeric default.",
+      "forbidden": "Do not use model prior knowledge to invent a default or cite unrelated records.",
+      "criterion": "Answer requirements and conditions must hold; every answer must have a supporting returned source; no unsupported extra claim."
+    }
+  }
+}

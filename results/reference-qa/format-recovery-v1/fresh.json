@@ -1,0 +1,1993 @@
+{
+  "status": "complete",
+  "job_id": "120074",
+  "calls": [
+    {
+      "id": "legacy/legacy-d474ab3d7822c8ac/qa-3/claims",
+      "key": "6103d74d47a03eca189a2d00d4ea78ad4a99d5568e47a8c98a5bb12d90bec401",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: {\"as_of\":\"2025-03-14T16:19:41.000000+00:00\",\"question\":\"If nobody specifies a notes merge strategy, which strategy resolves notes conflicts by default?\"}\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Git documentation contributors\", \"original_source_number\": 2, \"recorded_at\": \"2025-03-14T16:19:41.000000+00:00\", \"quote\": \"`notes.mergeStrategy`::\\n\\tWhich merge strategy to choose by default when resolving notes\\n\\tconflicts.  Must be one of `manual`, `ours`, `theirs`, `union`, or\\n\\t`cat_sort_uniq`.  Defaults to `manual`.  See the \\\"NOTES MERGE STRATEGIES\\\"\\n\\tsection of linkgit:git-notes[1] for more information on each strategy.\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "max_tokens": 1024,
+        "stream": false,
+        "temperature": 0.0,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "response": {
+        "id": "chatcmpl-268c2e09617d4f69864cbf72ae16b811",
+        "object": "chat.completion",
+        "created": 1793943685,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "{\n  \"claims\": [\n    {\n      \"text\": \"If nobody specifies a notes merge strategy, the default strategy resolves notes conflicts by choosing `manual`.\",\n      \"evidence\": [1]\n    }\n  ]\n}",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 597,
+          "total_tokens": 644,
+          "completion_tokens": 47,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "http_status": 200
+    },
+    {
+      "id": "legacy/legacy-702e9009795b2802/qa-3/claims",
+      "key": "54e5dcf109b7c33c195e4702b111fe6349bc4bf742db11542ec7892151d27427",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: {\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"Which exception does strict zip raise when its iterables have different lengths?\"}\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 1, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When enabled, a ``ValueError`` is\\nraised if one of the arguments is exhausted before the others.\"}, {\"evidence_id\": 2, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 3, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When the built-in ``zip`` is called with the keyword-only argument\\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\\nthe arguments are exhausted at differing lengths.\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "max_tokens": 1024,
+        "stream": false,
+        "temperature": 0.0,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "response": {
+        "id": "chatcmpl-f70d8c408d6f4df9bdd912b6688fe878",
+        "object": "chat.completion",
+        "created": 1793943686,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "{\n  \"claims\": [\n    {\n      \"text\": \"When the built-in zip is called with the keyword-only argument strict=True, the resulting iterator will raise a ValueError if the arguments are exhausted at differing lengths.\",\n      \"evidence\": [2]\n    },\n    {\n      \"text\": \"When enabled, a ValueError is raised if one of the arguments is exhausted before the others.\",\n      \"evidence\": [1]\n    }\n  ]\n}",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 634,
+          "total_tokens": 727,
+          "completion_tokens": 93,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "http_status": 200
+    },
+    {
+      "id": "legacy/legacy-c000762632771ec9/qa-0/claims",
+      "key": "f0a5863a57e9e14791a3d34d2df93f78eac55dae205b35acc4e8e1aab3c18245",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: {\"as_of\":\"2026-11-03T12:00:00Z\",\"question\":\"Which exception does strict zip raise when its iterables have different lengths?\"}\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Fay\", \"original_source_number\": 1, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"Running the strict zip unequal-lengths check, we recorded the raised exception as LengthMismatchError for iterables of different lengths.\"}, {\"evidence_id\": 2, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 2, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When enabled, a ``ValueError`` is\\nraised if one of the arguments is exhausted before the others.\"}, {\"evidence_id\": 3, \"record_author\": \"PEP 618 contributors\", \"original_source_number\": 4, \"recorded_at\": \"2026-11-03T12:00:00.000000+00:00\", \"quote\": \"When the built-in ``zip`` is called with the keyword-only argument\\n``strict=True``, the resulting iterator will raise a ``ValueError`` if\\nthe arguments are exhausted at differing lengths.\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "max_tokens": 1024,
+        "stream": false,
+        "temperature": 0.0,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "response": {
+        "id": "chatcmpl-3276946618d641dda38801f664bcfa53",
+        "object": "chat.completion",
+        "created": 1793943689,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "{\n  \"claims\": [\n    {\n      \"text\": \"When strict zip is used and its iterables have different lengths, it raises a ValueError.\",\n      \"evidence\": [2, 3]\n    },\n    {\n      \"text\": \"Running the strict zip unequal-lengths check, the raised exception is recorded as LengthMismatchError for iterables of different lengths.\",\n      \"evidence\": [1]\n    }\n  ]\n}",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 727,
+          "total_tokens": 817,
+          "completion_tokens": 90,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "http_status": 200
+    },
+    {
+      "id": "wiki/wiki-12/single2/claims",
+      "key": "ef4ecb5d9e39b783a745d8b201265ff9e9b885bab1087a1b1d6a3171bf98a9cf",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: What date was Julian Lewis Jones born?\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Wikipedia\", \"original_source_number\": 1, \"recorded_at\": null, \"quote\": \"Julian Lewis Jones Born\\t27 August 1968\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "max_tokens": 1024,
+        "stream": false,
+        "temperature": 0.0,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "response": {
+        "id": "chatcmpl-14c39b5f8fbf4a1bb48bec4395dc1389",
+        "object": "chat.completion",
+        "created": 1793943691,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "{\n  \"claims\": [\n    {\n      \"text\": \"Julian Lewis Jones was born on 27 August 1968.\",\n      \"evidence\": [1]\n    }\n  ]\n}",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 444,
+          "total_tokens": 488,
+          "completion_tokens": 44,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "http_status": 200
+    },
+    {
+      "id": "wiki/wiki-12/both/claims",
+      "key": "c8edb221c1ca583fec6a8ed08cb7f3e79035fb98df8136e39cf1dcdec4e89b17",
+      "request": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Answer the question from the selected evidence and its source metadata.\nFollowing Attribute First's fusion-in-context step, cover all and only the\nselected evidence. Group evidence that jointly supports ONE claim and produce\nthat claim with its Evidence IDs. Each output item is one factual assertion or\none condition-outcome pair. Retain the subject and conditions. Keep incompatible\nsource answers separately attributed; do not resolve them with prior knowledge.\nDifferent conditions can coexist. Do not make unrelated records alternatives.\nRespect explicit corrections and scope exceptions when the question asks for\nthe applicable current rule. Recording time alone is not a correction event.\nFor authorship use record_author, never an @mention. Several Evidence IDs may\nbelong to one original source: preserve their distinct claims. Cite every span\nneeded to support the whole claim. Do not invent evidence IDs or extra facts.\nReturn only the typed JSON answer; empty claims means insufficient evidence.\n\nQUESTION: What date was Julian Lewis Jones born?\nEVIDENCE: [{\"evidence_id\": 1, \"record_author\": \"Wikipedia\", \"original_source_number\": 1, \"recorded_at\": null, \"quote\": \"Julian Lewis Jones (born 21 August 1968\"}, {\"evidence_id\": 2, \"record_author\": \"Wikipedia\", \"original_source_number\": 2, \"recorded_at\": null, \"quote\": \"Julian Lewis Jones Born\\t27 August 1968\"}]\nSCHEMA: {\"$defs\": {\"Claim\": {\"properties\": {\"text\": {\"description\": \"One factual assertion or one condition-outcome pair, answering the question.\", \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"evidence\": {\"description\": \"Displayed Evidence IDs that jointly support this entire claim, including conditions and attribution.\", \"items\": {\"type\": \"integer\"}, \"minItems\": 1, \"title\": \"Evidence\", \"type\": \"array\"}}, \"required\": [\"text\", \"evidence\"], \"title\": \"Claim\", \"type\": \"object\"}}, \"properties\": {\"claims\": {\"items\": {\"$ref\": \"#/$defs/Claim\"}, \"title\": \"Claims\", \"type\": \"array\"}}, \"required\": [\"claims\"], \"title\": \"ClaimAnswer\", \"type\": \"object\"}"
+          }
+        ],
+        "model": "Qwen3-8B",
+        "max_tokens": 1024,
+        "stream": false,
+        "temperature": 0.0,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "response": {
+        "id": "chatcmpl-0a2e1fbe8c39438cb7a2ec6d9c8e66c0",
+        "object": "chat.completion",
+        "created": 1793943692,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "{\n  \"claims\": [\n    {\n      \"text\": \"Julian Lewis Jones was born on 21 August 1968.\",\n      \"evidence\": [1]\n    },\n    {\n      \"text\": \"Julian Lewis Jones was born on 27 August 1968.\",\n      \"evidence\": [2]\n    }\n  ]\n}",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 495,
+          "total_tokens": 573,
+          "completion_tokens": 78,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "http_status": 200
+    }
+  ],
+  "source_version": "cup-ref-format-v1",
+  "input_hashes": {
+    "requests.json": "78fdc368449347d0e5f0bff31b8b53f77fb649dff5e826a1972f6177d725b12e",
+    "reference-locations.json": "318fbe8633ad9718bdb9b05f1da628c996c6652fbdebe7e5c4b126f7fee691b7",
+    "manifest.json": "a5f8543bc227caf634c629af99a1291faba42e4a1cc1065ba38e64a4735e2685",
+    "service.py": "93189fbe6e08ea249e424648003751eef35c6c2e7b20b3277a789af2aef5aadb",
+    "PROTOCOL.md": "4594fae82978deff944121a085cf9fbb23787105ca1a4ce653d6bbaafe8edb7f"
+  },
+  "model": "b968826d9c46dd6066d109eabc6255188de91218",
+  "external_model_api_calls": 0,
+  "native_references": {
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 1/4": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-21 10:05:20",
+      "dialogue": "Good morning everyone, today I'm starting to design the high-level information architecture for the system. I'll be basing it on the user personas and the initial PRD draft completed in the previous project. @Yu Su @Peng Hou Regarding the information architecture, I'd like to confirm first: should we prioritize organizing information from the perspective of user roles (executives, finance, sustainability department), or from the perspective of business processes (data entry, accounting, reporting)? Or a combination of both?",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 1/7": {
+      "speaker": "Yu Su",
+      "time": "2025-03-21 10:25:50",
+      "dialogue": "@Luhao Zhao Good question. Personally, I suggest combining both approaches in the initial stage. First, use the core business process (data collection -> accounting analysis -> asset management -> report output) as the main thread. Then, within each stage, organize the presentation of information based on the concerns of different user roles. For example, in the executive view, highlight strategic KPIs and charts.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-21/Group 1/9": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-21 10:35:15",
+      "dialogue": "@Yu Su Understood, this idea is very clear. Then I will first draw the first draft of the information architecture based on the principle of \"process-centric, role-assisted\".",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/6": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-24 11:20:00",
+      "dialogue": "Everyone, I'd like to sync up on the progress of the information architecture design. Based on the \"process-centric, role-supplementary\" principle discussed with Yu Su last week, I have already drafted a high-level information architecture. It mainly revolves around four major modules: \"Data Ingestion - Accounting Management - Asset Management - Reporting and Analysis,\" and I've planned corresponding view entry points for different roles. The Figma link has been sent to the group. Product and design colleagues, please take a look and provide your feedback. @Yu Su @Peng Hou @Jingwei Sun",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/7": {
+      "speaker": "Yu Su",
+      "time": "2025-03-24 11:35:15",
+      "dialogue": "@Luhao Zhao Received. This structure is very clear, and the main process is clear at a glance. This afternoon, I will carefully check whether the sub-function division under each module is reasonable, especially the related parts of asset management and accounting rules.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/8": {
+      "speaker": "Lizhen Zhou",
+      "time": "2025-03-24 14:30:00",
+      "dialogue": "@Luhao Zhao Just looked at the information architecture draft, it's very good. Please make sure that the \"Carbon Asset Management\" module can clearly map the accounting subjects and cost allocation logic that the finance department cares about, which is crucial for subsequent compliance audits.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-24/Group 1/9": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-24 14:33:20",
+      "dialogue": "@Lizhen Zhou Received, Boss Zhou. I will focus on refining the structure of this part in the next iteration and confirm with you again.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/6": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-25 15:40:00",
+      "dialogue": "@Lizhen Zhou @Yu Su Good afternoon, regarding the system's high-level information architecture, I have deepened the relevant modules based on Boss Zhou's suggestion yesterday that \"carbon asset management needs to be mapped to accounting subjects.\" I have re-sort out (re-organized/re-evaluated) the entire information flow of \"carbon assets\" from recognition, measurement to reporting, and tried to reflect the connection with the financial cost center and accounting subjects in the architecture. The new draft has been updated, please help me check again if it is closer to the needs of financial auditing.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/7": {
+      "speaker": "Lizhen Zhou",
+      "time": "2025-03-25 15:50:30",
+      "dialogue": "@Luhao Zhao, thank you for your hard work. I've seen it, and this direction is correct. It's very important to bring financial logic forward into information architecture design. I suggest we have a 15-minute quick meeting with @Yu Su, and I'll give you a specific cost allocation example so you can have a better feel for the design.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/8": {
+      "speaker": "Yu Su",
+      "time": "2025-03-25 15:55:00",
+      "dialogue": "Good suggestion! @Luhao Zhao, Boss Zhou and I are available anytime. Once we fully grasp this core logic, our subsequent product feature definitions will be very clear. This is one of our core competitive advantages.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-25/Group 1/9": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-25 16:00:00",
+      "dialogue": "Great! Thanks, Boss Zhou and Yu Su! Then I'll send a meeting invitation right away, how about now?",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/18": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-26 15:30:55",
+      "dialogue": "@Lizhen Zhou @Yu Su Good afternoon, thank you very much for yesterday afternoon's meeting. Boss Zhou's sharing of cost allocation cases gave me a deeper understanding of the financial logic of carbon asset management. I have integrated these logics into the high-level information architecture diagram, especially in the \"Carbon Asset Management\" module, detailing the information flow path from asset recognition, measurement, amortization to retirement. The new draft has been updated to Figma, please help review it again to see if it accurately reflects the financial needs.",
+      "message_index": 18
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/19": {
+      "speaker": "Lizhen Zhou",
+      "time": "2025-03-26 15:40:00",
+      "dialogue": "@Luhao Zhao So efficient! I just saw the new architecture diagram, and it's much clearer this time! It shows the mapping of accounting subjects and the association of cost centers, which ensures that subsequent product functions will not deviate from financial compliance from an information architecture perspective. Very good, I have no more questions.",
+      "message_index": 19
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-26/Group 1/20": {
+      "speaker": "Yu Su",
+      "time": "2025-03-26 15:45:10",
+      "dialogue": "@Luhao Zhao This architecture really captures the essence. From a product perspective, this information architecture provides a solid foundation for us to define specific functions like carbon asset accounting and impairment testing later on. Great work!",
+      "message_index": 20
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-27/Group 1/15": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-27 11:00:00",
+      "dialogue": "@all Here's an update. Yesterday afternoon, the high-level information architecture diagram received positive feedback from Boss Lizhen Zhou and Yu Su. The logic regarding the association between carbon assets, financial cost centers, and accounting subjects in the diagram was recognized by both business and finance. I have uploaded the updated draft to Confluence as the basis for our subsequent discussions. It is expected to be finalized and archived tomorrow.",
+      "message_index": 15
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-27/Group 1/16": {
+      "speaker": "Lizhen Zhou",
+      "time": "2025-03-27 11:05:25",
+      "dialogue": "@Luhao Zhao Thank you for your hard work. This architectural design is very solid and lays a firm foundation for subsequent financial compliance functions.",
+      "message_index": 16
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-27/Group 1/17": {
+      "speaker": "Yu Su",
+      "time": "2025-03-27 11:08:10",
+      "dialogue": "Well done! @Luhao Zhao With this clear information architecture, our product team can more confidently break down and design subsequent user stories and features.",
+      "message_index": 17
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 1/1": {
+      "speaker": "Luhao Zhao",
+      "time": "2025-03-28 09:05:30",
+      "dialogue": "Good morning everyone! Here's some good news: The final version of the task [Design System High-Level Information Architecture] has been completed, incorporating the valuable feedback from Boss Lizhen Zhou and Yu Su. The diagram clearly reflects the logical connection between carbon assets and financial cost centers. I have archived the final version in Confluence, and this task is officially complete! Thank you all for your support!",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 1/2": {
+      "speaker": "Lizhen Zhou",
+      "time": "2025-03-28 09:10:00",
+      "dialogue": "@Luhao Zhao, great work! This information architecture provides a clear blueprint for our subsequent financial compliance function design, which is very valuable. Congratulations on the successful completion of the task!",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-03-28/Group 1/3": {
+      "speaker": "Yu Su",
+      "time": "2025-03-28 09:12:45",
+      "dialogue": "@Luhao Zhao, excellent work! With this solid architecture, we'll have much more confidence in breaking down our subsequent product features. Congratulations!",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-04/Group 3/4": {
+      "speaker": "Lujian Gao",
+      "time": "2025-04-04 09:45:00",
+      "dialogue": "Hello everyone, today I'm starting a new design task: [Designing a File Storage Solution]. Considering that our system will need to store a large number of supporting documents, reports, etc. in the future, I will focus on comparing Azure Blob and AWS S3. The evaluation dimensions will include cost, API ease of use, access permission management, and the difficulty of integration with our existing technology stack. A preliminary selection recommendation report will be provided early next week.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-07/Group 3/3": {
+      "speaker": "Lujian Gao",
+      "time": "2025-04-07 09:20:50",
+      "dialogue": "Good morning everyone. Regarding the design of our file storage solution, I conducted a preliminary evaluation of Azure Blob and AWS S3 last Friday. From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage, and our other projects are also on AWS. Today, I will start designing the Bucket Policy and directory structure based on S3, for example, isolating by tenant and file type.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-08/Group 3/3": {
+      "speaker": "Lujian Gao",
+      "time": "2025-04-08 10:33:45",
+      "dialogue": "I'm updating you on the progress of the file storage solution. The technical selection has been finalized as AWS S3. Today, I am designing the Bucket Policy to ensure that sensitive files (such as audit reports, certification documents) uploaded by different enterprise tenants are physically isolated and invisible to each other. I am also planning the lifecycle policy to automatically transfer archived files older than one year to a lower-cost storage tier.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-09/Group 3/2": {
+      "speaker": "Lujian Gao",
+      "time": "2025-04-09 09:40:10",
+      "dialogue": "Morning. I've completed the draft design for our file storage solution (AWS S3), specifically regarding bucket permission policies and lifecycle rules, ensuring data isolation between different tenants. Today, I'm mainly working on writing the accompanying documentation, explaining our recommended directory structure, such as how to organize voucher files from different vendors and years. I expect to have the complete solution ready by tomorrow.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 1/9": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-04-10 17:50:00",
+      "dialogue": "Today, several key design tasks were completed on time, which is great. Hao Zhao's user journey map pointed us in the right direction, and the architecture designs by Hao Zhao (another project) and Lujian Gao also paved the way for subsequent development. Everyone, let's keep up this pace.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/1": {
+      "speaker": "Lujian Gao",
+      "time": "2025-04-10 09:05:55",
+      "dialogue": "Good morning everyone, regarding the file storage solution, the complete technical design document (based on AWS S3) has been uploaded to Confluence. It includes three main parts: bucket permission policies, lifecycle rules, and recommended directory structure. @Mingzhi Li Boss Li, please review it.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/21": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-04-10 15:30:00",
+      "dialogue": "@Lujian Gao I've finished reviewing the document on the file storage solution. The design is very comprehensive, especially the considerations for tenant data isolation and cost optimization. The proposal is approved and can be finalized.",
+      "message_index": 21
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-04-10/Group 3/22": {
+      "speaker": "Lujian Gao",
+      "time": "2025-04-10 15:40:10",
+      "dialogue": "Received, Boss Li. I will formally close the task for [Design File Storage Solution]. The final version of the document has been marked as final in Confluence.",
+      "message_index": 22
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/2": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-02 09:20:15",
+      "dialogue": "No problem, Boss Chen. I'll check immediately. Also, I'm officially starting today to create high-fidelity UI design mockups for the login, registration, and forgot password pages. I will design based on the existing wireframes and PRD. @Guohua Yin, regarding the \"forgot password\" process, are there any particular security or usability details I need to pay attention to?",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/8": {
+      "speaker": "Guohua Yin",
+      "time": "2025-05-02 10:15:00",
+      "dialogue": "@Yang Zhao Good question. Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\" Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\" Please ensure the UI copy adheres to this principle.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-02/Group 3/9": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-02 10:20:45",
+      "dialogue": "Received, thanks for the reminder. I will clarify this in the design draft and interaction specifications. @Huilan Chen Boss Chen, I just did a final check on the optimized design draft. All components and styles are highly consistent with the design system, and the overall visual effect is great! Especially the changes to the supplier submission process, the experience is much smoother. No problem!",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-05/Group 3/6": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-05 10:00:15",
+      "dialogue": "Morning~ I have two tasks today. One is to continue advancing the high-fidelity design of the login/registration page. I will implement the interactive copy for the \"forgot password\" flow to prevent user enumeration attacks, as mentioned by Guohua Yin last week. The other is to start the high-fidelity design of the new supplier admission process page. I will first study the relevant PRD and flowcharts before starting the design.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-05/Group 3/26": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-05 17:15:00",
+      "dialogue": "Here's an update on today's design progress: The high-fidelity UI mockups for the login/registration page have been completed according to the security prompts, and the Figma link has been updated. @Huilan Chen Boss Chen @Guohua Yin, please take a look when you have a moment. The draft for the supplier access process is also almost done, and I'll continue to refine it tomorrow.",
+      "message_index": 26
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-06/Group 3/1": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-05-06 09:35:00",
+      "dialogue": "Good morning everyone, today we have a few new tasks starting and a few ongoing ones. Let's all synchronize our plans.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-06/Group 3/2": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-06 09:42:15",
+      "dialogue": "Morning! My tasks are quite concentrated today. First, I'll continue to advance the high-fidelity mockups for the login/registration and supplier access processes, especially the 'forgot password' flow. I'll strictly follow the security principles mentioned by Guohua Yin last week to ensure that the prompt text doesn't expose user information. Second, today I'll start the high-fidelity design for the data entry form page. This page has complex interactions, so I'll first lay out a framework.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-06/Group 3/25": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-06 17:45:00",
+      "dialogue": "Here's a quick update on today's work: The high-fidelity design for the login/registration/forgot password pages is mostly complete, and the Figma link has been updated. About 70% of the UI for the supplier access process is also done. The page framework and core interactive prototype for the data entry form have also been set up, and I'll continue to refine the visual design tomorrow. @Huilan Chen, Boss Chen, you can take a look at the prototype when you have a moment.",
+      "message_index": 25
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-07/Group 3/1": {
+      "speaker": "Huilan Chen",
+      "time": "2025-05-07 09:30:00",
+      "dialogue": "Good morning everyone, a new day has begun. @Yang Zhao, Boss Li also mentioned yesterday that you have a heavy workload, so please prioritize carefully. What are the progress plans for the landing page, supplier access, and data entry today? Specifically, can the interactive prototype for data entry be ready today? @Xinjie Li @Yutong Song @Zixuan Qin, please also share your respective plans.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-07/Group 3/2": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-07 09:40:15",
+      "dialogue": "Good morning, Boss Chen! Received. I will prioritize finishing the login/registration page today, ensuring all interaction details comply with security standards. For the high-fidelity draft of the supplier access process, I expect to advance it by about 30% today. As for the interactive prototype of the data entry form, I already built the framework yesterday, and today I will connect the core logic for field grouping, real-time validation, and draft saving. I'll send it to you for review this afternoon.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-07/Group 3/6": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-05-07 10:10:05",
+      "dialogue": "@Yang Zhao The priority arrangement is good, proceed as planned. @Xinjie Li Excellent, containerization is the foundation of deployment automation, get on it. @Yutong Song For Zustand practices, you can document more to facilitate team sharing. @Zixuan Qin The Dashboard is the facade, the information architecture needs to be clear and highlight key points.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/1": {
+      "speaker": "Huilan Chen",
+      "time": "2025-05-08 09:15:10",
+      "dialogue": "Good morning, everyone. Our project team has a full schedule today, so let's quickly sync up. @Yang Zhao, today is the delivery day for the login/registration page. Please ensure both quality and timeliness. You also have several other design tasks running in parallel, so please manage your energy well. @Xinjie Li @Yutong Song @Zixuan Qin, please also share your plans for today.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/2": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-08 09:25:30",
+      "dialogue": "Good morning, Boss Chen! Received. The design draft for the login/registration page will definitely be delivered today; I'm currently doing the final detail walkthrough. The supplier access process page will continue to be pushed forward today, striving to complete most of the remaining work. The data entry form will also undergo visual optimization based on your feedback from yesterday. Additionally, today I will start the design for the supplier performance evaluation details page. I will carefully read the PRD and wireframes before starting to conceptualize. With multiple tasks running in parallel, I will prioritize them effectively, please rest assured. 💪",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/6": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-05-08 09:40:00",
+      "dialogue": "Everyone's progress is very clear. @Yang Zhao, please finalize the login page today. This is the first visible outcome of our project to the outside world. @Xinjie Li, the containerization work is nearing completion, which is great. This is the foundation for our subsequent efficient deployment. @Yutong Song, documenting is a good habit, I support it.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/9": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-08 17:05:00",
+      "dialogue": "Everyone, the high-fidelity UI design for the login/registration/forgot password pages has been officially completed! 🎉 I have uploaded the final version to Figma and meticulously annotated all components and interaction states. @Huilan Chen @Guohua Yin, please conduct the final review. In particular, the forgot password process fully adheres to the security principles previously proposed by Manager Yin, standardizing the prompt copy and avoiding user enumeration risks. https://sd.figma.com/file/20250508/supply-chain-carbon-footprint-login-ui-v1.0",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/10": {
+      "speaker": "Huilan Chen",
+      "time": "2025-05-08 17:15:30",
+      "dialogue": "@Yang Zhao Thank you for your hard work! I just reviewed it, and the overall effect is excellent, with visual consistency and smooth interaction. The forgotten password process is also handled very well. I have no more issues, and it can be handed over to the front-end development team. Great job!",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/11": {
+      "speaker": "Guohua Yin",
+      "time": "2025-05-08 17:18:00",
+      "dialogue": "Confirmed, the interaction design for \"forgot password\" meets security requirements. The overall quality of the design draft is very high, great work @Yang Zhao.",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-05-08/Group 3/12": {
+      "speaker": "Yang Zhao",
+      "time": "2025-05-08 17:20:10",
+      "dialogue": "Received! Thanks for the confirmation, Boss Chen and Manager Yin! I'll close the task on Jira then. Also, here's an update on the progress of other tasks: 90% of the supplier access process UI page is complete and can be finalized tomorrow; the visual design for the data entry form page is also in progress.",
+      "message_index": 12
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/7": {
+      "speaker": "Guohua Yin",
+      "time": "2025-06-09 10:45:50",
+      "dialogue": "@All members Dear technical leads, I'm sharing an important security policy update. I just sent an email regarding the interaction handling specifications for locked accounts.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/9": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-06-09 11:09:35",
+      "dialogue": "Email received. The core requirement is that all accounts marked as `ACCOUNT_STATUS_LOCKED` must be forcibly routed to the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy for frontend interaction. @Xinjie Li @Xuexin Yin, please assess the scope of impact on the backend.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/11": {
+      "speaker": "Xinjie Li",
+      "time": "2025-06-09 11:40:04",
+      "dialogue": "Received. This change affects all authentication-related requests. To confirm, does this mean that entry points like login, password reset, and two-factor authentication will all need to add a check for the `ACCOUNT_STATUS_LOCKED` status, and interrupt the process to return this specific error?",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/13": {
+      "speaker": "Guohua Yin",
+      "time": "2025-06-09 12:04:12",
+      "dialogue": "Yes, @Xinjie Li. The goal is to unify the feedback output of risk accounts to prevent attackers from probing account status through differences in returns from different interfaces.",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/15": {
+      "speaker": "Huilan Chen",
+      "time": "2025-06-09 12:33:58",
+      "dialogue": "From a product experience perspective, how will `ERR_POLICY_LOCKED_ACCOUNT_V1` be displayed to the user? We need to provide clear guidance to the user. @Luhao Zhao",
+      "message_index": 15
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/17": {
+      "speaker": "Guohua Yin",
+      "time": "2025-06-09 12:59:02",
+      "dialogue": "@Huilan Chen This strategy will return a specific error code and message template to the frontend. The frontend will then display a unified prompt, informing the user that \"The account has been locked, please contact customer service,\" guiding them to use a manual channel.",
+      "message_index": 17
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/19": {
+      "speaker": "Qing Wei",
+      "time": "2025-06-09 13:25:35",
+      "dialogue": "Understood. Then our frontend will need to agree on this new error code, and then globally capture and display the corresponding UI component. This workload is not significant.",
+      "message_index": 19
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/21": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-06-09 13:48:20",
+      "dialogue": "Testing here needs support. For a complete regression, we need a method that can manually set the test account to `ACCOUNT_STATUS_LOCKED` status.",
+      "message_index": 21
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/23": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-06-09 14:14:41",
+      "dialogue": "Good question. @Lujian Gao, could you check if you can provide a backend management function or script to modify account status, making it easier for testing colleagues to set up scenarios?",
+      "message_index": 23
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/25": {
+      "speaker": "Lujian Gao",
+      "time": "2025-06-09 14:45:50",
+      "dialogue": "Received. I'll compile a set of operating commands for the testing team.",
+      "message_index": 25
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-09/Group 3/27": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-06-09 15:12:35",
+      "dialogue": "Great, then everyone should proceed with this plan and ensure that the adaptation is completed in the Current Version iteration. Relevant colleagues remember to create task orders for follow-up. Meeting adjourned.",
+      "message_index": 27
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/5": {
+      "speaker": "Guohua Yin",
+      "time": "2025-06-17 10:37:29",
+      "dialogue": "Good afternoon, everyone. I just updated the \"Platform Core Error Strategy Dictionary (v3)\" in the knowledge base, adding an important new strategy, which I'd like to share with you all.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/6": {
+      "speaker": "Guohua Yin",
+      "time": "2025-06-17 11:02:12",
+      "dialogue": "The newly added policy code is `ERR_POLICY_LOCKED_ACCOUNT_V1`, defined as 'Explicit Status Alert Policy'. It is mainly used for scenarios where an account is locked, requiring explicit interruption of user operations and guidance to manual channels.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/7": {
+      "speaker": "Xinjie Li",
+      "time": "2025-06-17 11:30:15",
+      "dialogue": "Received. I've reviewed the document. This strategy will be handled by `ExplicitStateAlertModule`, and the parameter `halt_downstream_triggers` is set to `true`. This means that after the backend triggers this strategy, all downstream automated notifications (emails, SMS) will be halted, right?",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/8": {
+      "speaker": "Guohua Yin",
+      "time": "2025-06-17 11:57:53",
+      "dialogue": "@Xinjie Li Yes, your understanding is completely correct. This is to avoid sending users redundant or potentially confusing automated messages.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/9": {
+      "speaker": "Qing Wei",
+      "time": "2025-06-17 12:27:32",
+      "dialogue": "For the frontend, this strategy requires returning a 'predefined, clear, unambiguous prompt message'. Have the specific wording and interaction style of this prompt message been determined? We need to make specialized UI adaptations based on this error code.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/10": {
+      "speaker": "Huilan Chen",
+      "time": "2025-06-17 12:52:54",
+      "dialogue": "@Qing Wei This issue is very important. The core of this strategy is to guide users to solve problems through manual channels. Therefore, the prompt copy must be clear and direct, and should not confuse users. I will work with @Yang Zhao and @Luhao Zhao as soon as possible to produce standard copy and design drafts.",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/11": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-06-17 13:24:43",
+      "dialogue": "Great, suspending automated notifications and providing clear front-end guidance can effectively reduce customer service communication costs. @Zixuan Qin, please pay attention to this on your operations side. You can focus on user feedback data for related scenarios in the future to see the effect of this strategy.",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/12": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-06-17 13:51:38",
+      "dialogue": "Okay Boss Huang, we will follow up on the data performance. 👍",
+      "message_index": 12
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-06-17/Group 3/13": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-06-17 14:19:34",
+      "dialogue": "OK, the strategy definition is clear, and the responsibilities of all parties are well-defined. @All members of the R&D Department, please ensure that this strategy is correctly used in relevant business logic. Frontend, backend, and testing all need to have a clear understanding of this strategy's behavior.",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-21/Group 2/3": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-10-21 09:22:45",
+      "dialogue": "Morning all. Today, I'm starting two new testing tasks: verifying the creation and triggering logic of alert rules, and verifying the accuracy of large screen charts and KPI data. This morning, I'll first delve into the documentation and implementation logic related to alert rules, set up the test environment, and then start designing specific test cases this afternoon. For the large screen data verification work, I will first confirm the data caliber and source with @Jiahui Zhao.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-21/Group 2/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-21 09:40:00",
+      "dialogue": "Good morning, everyone. The plans are very clear. @Minghua Wei, today is the deadline. Please make sure to meticulously complete the final work to ensure the stability of the sensor management function. @Zhiyu Peng, access control is the cornerstone of security. Pay special attention to edge cases during testing. @Xinmeng Tian, the new task has started. Please arrange your time and priorities reasonably, and communicate any issues promptly. Everyone, keep up the pace.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/2": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-10-22 09:18:30",
+      "dialogue": "Morning all. I'm continuing to follow up on the alarm rule verification. Yesterday, I found that a rule with a combined condition (e.g., 'power > 100KW' AND 'duration > 5 minutes') did not trigger as expected. I will focus on investigating this today. Additionally, regarding the verification of big screen data accuracy, I've scheduled a meeting with @Jiahui Zhao at 10 AM to confirm the data caliber and source to ensure we have a consistent understanding.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-22 09:35:10",
+      "dialogue": "Received. @Zhiyu Peng, permission testing must be completed today. Be sure to be thorough, especially covering more edge cases like yesterday's. @Xinmeng Tian, alarms and data are the core of the system. Both of your tasks are critical. If you encounter any problems, raise them immediately; don't let them pile up.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/4": {
+      "speaker": "Xinhao Yao",
+      "time": "2025-10-22 09:40:05",
+      "dialogue": "@Zhiyu Peng You're welcome. The backend interface's permission verification has also been added synchronously, so it should be double-insured now. @Xinmeng Tian Regarding the issue with the combined condition rules, I'll check the logs to see if there's any oversight in the event handling logic and get back to you shortly.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 2/6": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-10-22 11:45:50",
+      "dialogue": "@Xinhao Yao I've also found a clue here. It seems to be a unit issue with the time window calculation. After I converted 'minutes' to 'seconds', the rule could be triggered. The units we defined and the units the backend actually processes might be inconsistent. This needs to be unified.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-22/Group 3/3": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-10-22 09:30:15",
+      "dialogue": "Morning~ Starting today, I'll be performing a performance analysis on the Kanban data query API. I'll begin by using browser developer tools and Postman to identify all APIs called when the main Kanban board loads. Then, I'll analyze each API's response time and data packet size to pinpoint potential bottlenecks.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/1": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-10-23 09:10:15",
+      "dialogue": "Good morning everyone. My main task today is to complete the verification of the alert rule trigger logic. This is today's deadline and must be done. The issues with combined conditions and time units discovered yesterday will be the focus of my efforts today. In addition, I have a meeting with @Jiahui Zhao at 10 AM to continue aligning on the data accuracy of the large screen KPIs.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-23 09:25:00",
+      "dialogue": "Received, the plan is very clear. @Xinmeng Tian, the alarm rule verification is a hard task that must be completed today, so be sure to ensure quality. This is a core capability of the system and there can be no omissions. @Zhiyu Peng, the alarm notification test is also very important, pay attention to the comprehensiveness of the test.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/5": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-10-23 11:18:00",
+      "dialogue": "Okay, thank you so much, @Jiahui Zhao! I'll wait for the raw data from your side, and we'll have another round of review this afternoon. I'll continue to work on the alert rule issue. I just confirmed with @Xinhao Yao that the inconsistent time unit issue discovered yesterday has been unified to seconds by the backend, and I'm currently verifying it.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/6": {
+      "speaker": "Xinhao Yao",
+      "time": "2025-10-23 11:20:10",
+      "dialogue": "You're welcome, @Xinmeng Tian. The unit issue has been fixed and deployed to the test environment. I'm also checking the logs for the issue where combination rules are not triggered. It seems like there might be a logical error in the event aggregation stream processing, and I'm currently pinpointing it.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/8": {
+      "speaker": "Xinmeng Tian",
+      "time": "2025-10-23 16:45:30",
+      "dialogue": "@all [Task Completed] Hello everyone, the task \"Verify the accuracy of alarm rule creation and trigger logic\" for the Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System has been completed. All test cases have passed, including various single conditions, combined conditions, and boundary value scenarios. The few issues discovered yesterday have also all been regression verified and passed. The final test report has been uploaded to Confluence. 🎉",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 2/9": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-10-23 16:50:18",
+      "dialogue": "Great job, @Xinmeng Tian! You completed it on time and with high quality, which is excellent! Alarms are one of the core functions of our product, and the completion of this task has laid a solid foundation for our next phase of stability testing.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/1": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-10-23 09:20:45",
+      "dialogue": "Good morning everyone, I have some preliminary results from the performance analysis of the dashboard data query API. Currently, I've identified three APIs during dashboard loading that have significantly longer response times, especially with large data volumes, where they can take over 2 seconds. These mainly involve queries for the \"Supplier Performance Trend\" and \"Material Carbon Footprint Traceability\" modules.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/2": {
+      "speaker": "Hongxin Ding",
+      "time": "2025-10-23 09:28:10",
+      "dialogue": "Received @Zixuan Qin, the analysis is very insightful, great job! These APIs are indeed my next optimization targets. The optimization of the data submission interface yesterday yielded good results, so today I'll continue this momentum and focus on analyzing the queries you mentioned. I'll start with the \"Supplier Performance Trend\" API, as it has the highest call frequency.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/3": {
+      "speaker": "Huilan Chen",
+      "time": "2025-10-23 09:40:00",
+      "dialogue": "Excellent! Zixuan Qin quickly identified the performance bottleneck, and Hongxin Ding immediately followed up with optimizations. This kind of efficient closed-loop collaboration should be maintained. The performance of the dashboard directly affects user experience, and I look forward to seeing your optimization results.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-23/Group 3/4": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-10-23 10:30:25",
+      "dialogue": "@Hongxin Ding I've updated the detailed call chains, SQL execution plans, and slow query logs for these three APIs to Jira, linking them to your optimization task. Hope this helps.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/2": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-10-24 09:10:05",
+      "dialogue": "Morning. I'm on standby. After Hongxin Ding's optimization and deployment, I will immediately perform the final performance verification on all data query APIs for the dashboard. This is the final step of my analysis task.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/5": {
+      "speaker": "Huilan Chen",
+      "time": "2025-10-24 09:30:00",
+      "dialogue": "It's great to see everyone's plans are so clear. @Hongxin Ding @Zixuan Qin Kanban performance is key to user experience, and your closed-loop collaboration is a guarantee of success. Looking forward to today's results. @Jiahui Zhao @Guohua Yin The launch of security testing is very timely, which is crucial for the reliability of our products. Keep up the good work, everyone!",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/8": {
+      "speaker": "Hongxin Ding",
+      "time": "2025-10-24 13:50:00",
+      "dialogue": "@Zixuan Qin The optimized version has been deployed, and the materialized view has started working. You can begin re-testing the performance of the dashboard API.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/9": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-10-24 13:51:15",
+      "dialogue": "Received! I'll start immediately and run through the exact same scenario as before.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/10": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-10-24 15:00:00",
+      "dialogue": "🎉🎉【Good news!】@all The performance test results are out, and the effect is very significant! The average response time of the \"Supplier Performance Trend\" API has dropped directly from over 2 seconds to about 300 milliseconds, and the dashboard loads as smooth as silk. @Hongxin Ding Your optimization is awesome! My dashboard API performance analysis task is hereby successfully completed, and the final report has been uploaded.",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-10-24/Group 3/12": {
+      "speaker": "Huilan Chen",
+      "time": "2025-10-24 15:10:00",
+      "dialogue": "This is definitely the best news of the week! Thumbs up for your efficient collaboration and excellent results! @Zixuan Qin @Hongxin Ding This optimization has greatly improved the user experience. You've all worked hard, enjoy your weekend!",
+      "message_index": 12
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/1": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-08 10:00:15",
+      "dialogue": "Hi everyone, I'm starting to organize the system operation training for internal users today. First, I need to determine the training outline, duration, and scope of participants.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/2": {
+      "speaker": "Huilan Chen",
+      "time": "2025-12-08 10:05:45",
+      "dialogue": "@Zixuan Qin The participants are mainly colleagues from the core business departments in the first batch of pilot programs. I'll have Peng Hou send you the list shortly. For the training content, I suggest focusing on the core modules of data submission, review process, and the supply chain dashboard.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/3": {
+      "speaker": "Peng Hou",
+      "time": "2025-12-08 10:08:00",
+      "dialogue": "Received, Boss Chen. @Zixuan Qin I'll go compile the list, I'll give it to you in about half an hour.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/4": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-08 10:10:30",
+      "dialogue": "Great, thank you Boss Chen and Peng Hou! I'll start by designing the PPT framework and presentation flow for the training based on these core modules. The user manual we completed last week can serve as excellent foundational material.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/5": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-08 14:45:00",
+      "dialogue": "The first draft of the training outline is ready, divided into three parts: 1. System Overview and Value Introduction; 2. Hands-on Core Function Practice (role-based); 3. Q&A Session. I plan to keep the training duration within 1.5 hours. What do you all think?",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/6": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-12-08 14:50:18",
+      "dialogue": "1.5 hours is more suitable, so everyone can stay focused. More time can be spent on the practical exercise part, and it's best to let everyone follow along and operate.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/7": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-08 14:55:25",
+      "dialogue": "Good suggestion! Then I will design some interactive tasks in the drill session. Regarding the training time, I initially considered arranging it for Wednesday afternoon. Does everyone think that's suitable?",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/8": {
+      "speaker": "Huilan Chen",
+      "time": "2025-12-08 15:00:50",
+      "dialogue": "Wednesday afternoon works. I'll coordinate with my business colleagues for their availability. Please send me the draft meeting invitation first so I can review it.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-08/Group 3/9": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-08 17:30:00",
+      "dialogue": "Today's work progress: I have aligned the training outline and preliminary schedule with Boss Chen and Boss Huang. Tomorrow I will send out meeting invitations and start making detailed training PPTs. @Huilan Chen",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/1": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-09 10:05:10",
+      "dialogue": "Good morning, everyone. Regarding the internal user system operation training meeting, I have drafted the meeting invitation based on the conclusions of yesterday's meeting. @Huilan Chen Boss Chen, please review it. At the same time, I will start preparing the training PPT, prioritizing the core sections you mentioned: data submission, review process, and supply chain dashboard.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/2": {
+      "speaker": "Peng Hou",
+      "time": "2025-12-09 10:08:22",
+      "dialogue": "@Zixuan Qin The final list of trainees was confirmed yesterday, and the email group has also been set up. You can use it anytime.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/3": {
+      "speaker": "Huilan Chen",
+      "time": "2025-12-09 10:15:00",
+      "dialogue": "@Zixuan Qin I've reviewed the draft invitation, and it's very well written and clear. You can add a sentence in the email body saying, \"Attendees are advised to review the user manual in advance to better participate in the practical session.\" Once that's done, you can send it out. Great job on the PPT!",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/4": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-09 10:18:30",
+      "dialogue": "Okay, thank you Boss Chen for the suggestion! I'll revise it immediately and send out the meeting invitation. Thanks @Peng Hou!",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/5": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-09 16:45:55",
+      "dialogue": "Here's an update on the preparation progress for today's training session: Invitations for the system operation training session for the first batch of internal users (scheduled for Wednesday afternoon) have been sent. The training PPT has completed the detailed content and animation for the \"System Overview\" and \"Data Submission Process\" chapters. Tomorrow, we will continue to complete the \"Review Process\" and \"Kanban Interpretation\" sections.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/6": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-12-09 16:50:00",
+      "dialogue": "Good progress. @Zixuan Qin, remember what we talked about yesterday: make sure to allocate enough time for the practical exercise session and design good guiding tasks to ensure everyone can keep up.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-09/Group 3/7": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-09 16:52:10",
+      "dialogue": "Don't worry, Boss Huang, I've already set aside 40 minutes for interactive practice and Q&A in the 1.5-hour agenda, as per your suggestion, and prepared 3 small exercises for different roles.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/1": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-10 09:30:15",
+      "dialogue": "Good morning everyone, just a friendly reminder that the system operation training session we've prepared for internal users will start promptly at 2 PM today. The training materials and hands-on practice sessions are all ready. We look forward to your participation!",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/3": {
+      "speaker": "Huilan Chen",
+      "time": "2025-12-10 09:50:25",
+      "dialogue": "Great job, @Zixuan Qin and @Yaying Han. @Yaying Han, after sending out supplier invitations, you need to proactively follow up, answer any questions they might have, and ensure they can get started smoothly. @Zixuan Qin, good luck with the training session; make sure everyone fully understands the value of our system.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/5": {
+      "speaker": "Zixuan Qin",
+      "time": "2025-12-10 16:30:00",
+      "dialogue": "@All members The internal user system operation training session this afternoon has successfully concluded! Thank you to all colleagues for your active participation. Everyone was very concerned about the data submission and review process and raised many good questions. The practical exercise session suggested by Boss Huang was very effective, and most colleagues kept up with the pace and completed the guided tasks. This training task has been completed.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/6": {
+      "speaker": "Peng Hou",
+      "time": "2025-12-10 16:35:10",
+      "dialogue": "Thank you for your hard work, @Zixuan Qin! As a participant, I feel this training was very successful. The explanations were clear, and the practical sessions greatly deepened my understanding of the entire process.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/7": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-12-10 16:40:00",
+      "dialogue": "Well done, @Zixuan Qin! Training is the first step in promotion and application, and today got off to a good start. It's much more effective for everyone to get hands-on experience than just listening. Afterwards, we can compile the Q&A collected today and add it to the FAQ.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/01/2025-12-10/Group 3/8": {
+      "speaker": "Huilan Chen",
+      "time": "2025-12-10 16:45:50",
+      "dialogue": "Thanks to Zixuan Qin for the meticulous preparation and organization. This training gave our business colleagues an intuitive understanding of and confidence in the system, laying a solid foundation for its subsequent full-scale promotion. Yaying Han, the vendor-side work must also keep up; we need to tackle both aspects, and both must be strong.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/1": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-01-16 10:00:00",
+      "dialogue": "@all Hello everyone. Today we are officially launching a new project – the \"Personal Health Record and Chronic Disease Management System.\" This project aims to provide users with a comprehensive and continuous health management tool. Our primary task today is to jointly discuss and define the overall vision and scope of the project. Please feel free to speak your mind, especially @Mingzhi Li, @Huilan Chen, and @Jianguo Huang. We hope you can provide initial ideas from the strategic perspectives of technology, product, and operations.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/2": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-16 10:15:22",
+      "dialogue": "Received, Boss Zhang. I'm very happy to launch this project, which has great social value. From a product perspective, I believe the core vision of the system should be 'empowering individuals, connecting care'. We should not only help users record health data but also help them better manage their health through data analysis and smart reminders. At the same time, we should make it convenient for them to share information with family and doctors to receive timely guidance and care. I'll first arrange for @Weijun Xue to do a market competitor analysis, and @Qingni Jiang to prepare a research plan for potential users (such as middle-aged and elderly patients with chronic diseases and their children).",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/3": {
+      "speaker": "Weijun Xue",
+      "time": "2025-01-16 10:18:45",
+      "dialogue": "Okay Boss Chen, I'll start working on it right away, focusing on analyzing the functions, user experience, and business models of existing health record apps.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/4": {
+      "speaker": "Qingni Jiang",
+      "time": "2025-01-16 10:20:11",
+      "dialogue": "Received, Boss Chen. I will first draft a user interview outline and questionnaire to clarify our target user profile and core pain points. 👍",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/5": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-16 10:40:36",
+      "dialogue": "This is a very challenging project. Technically, the first two things that come to mind are: First, data security and privacy are the lifeline, and the highest standards of design must be adopted. All storage, transmission, and access of Protected Health Information (PHI) require strict encryption and access control. Second, we should consider the synergy between this system and the 'Smart IoT Health Monitoring System' to achieve data interoperability between the two systems. Data generated by users in the monitoring system can directly flow into health records, forming a complete health profile. This scalability needs to be reserved during the initial architectural design phase.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/6": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-01-16 11:05:14",
+      "dialogue": "I agree with Boss Li's point about synergy; it will be a huge advantage for us. From an operational and business perspective, we need to clearly define the project scope: Who exactly are our customers? Will we charge individual users directly, or will we provide services by partnering with B-side institutions like physical examination centers, insurance companies, and community hospitals? Personally, I lean towards starting with a B2B2C model, partnering with institutions to acquire our first batch of core users. This approach makes it easier to build trust and brand recognition.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/7": {
+      "speaker": "Huihong Tian",
+      "time": "2025-01-16 15:00:50",
+      "dialogue": "@Mingzhi Li Boss Li, you just mentioned that data security is the top priority, and I strongly agree. Given the high sensitivity of PHI, should our backend start some technical pre-research and solution comparisons now regarding database selection, encryption algorithms, and data desensitization?",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/8": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-16 15:08:23",
+      "dialogue": "Good question. @Huihong Tian, you and a few core backend colleagues can immediately start this preliminary research work. Focus on researching mature medical information system architectures in the industry, especially those that comply with HIPAA or the domestic electronic medical record system functional application level classification evaluation standards. Next week, we will organize a technical review meeting to specifically discuss this.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/9": {
+      "speaker": "Fanxin Liang",
+      "time": "2025-01-16 15:30:00",
+      "dialogue": "@Jianguo Huang Boss Huang, regarding the content, I think we can plan some popular science articles and short videos about chronic disease management in advance. When the product is launched, these can serve as content reserves to help users better understand and use our product, and enhance user stickiness.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/10": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-01-16 15:35:15",
+      "dialogue": "Good suggestion! @Fanxin Liang, you can first draft an initial direction for content operations, which can also serve as part of our project scope definition.",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/11": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-01-16 16:30:00",
+      "dialogue": "Today's discussion was very productive. Everyone provided valuable insights from different perspectives regarding the project's vision and scope. The product side's 'empowerment and connection,' the technical side's 'security and collaboration,' and the operations side's 'B2B2C model' will be central to defining our project scope. According to the task plan, this work will be completed by January 20th. Please, all responsible parties, based on today's discussion, start preparing the specific documentation. @Huilan Chen, please lead the product side to output a draft of the core user journey and functional framework by this Friday (tomorrow), so we can have a more in-depth discussion next Monday.",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-16/Group 2/12": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-16 16:35:18",
+      "dialogue": "Understood, Boss Zhang. Our product team will act immediately and ensure the draft is submitted before the end of work tomorrow.",
+      "message_index": 12
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/1": {
+      "speaker": "Weijun Xue",
+      "time": "2025-01-17 14:30:15",
+      "dialogue": "@Huilan Chen Boss Chen, I have finished the first draft of the competitive analysis report. It focuses on the functional layout, user experience, and business models of several mainstream health record apps on the market. I have sent it to your email, hoping it can provide input for our user journey design.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/2": {
+      "speaker": "Qingni Jiang",
+      "time": "2025-01-17 14:35:40",
+      "dialogue": "@Huilan Chen Boss Chen, my potential user research plan is also ready. It includes preliminary user personas, interview outlines, and questionnaire drafts, which I have also shared with you. Please review them. 😊",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/3": {
+      "speaker": "Huihong Tian",
+      "time": "2025-01-17 15:00:20",
+      "dialogue": "@Mingzhi Li Boss Li, as per your instructions, I and several backend colleagues have started preliminary research on data security technology. We are currently reviewing relevant materials on HIPAA and domestic electronic medical record system security standards. At next week's technical review meeting, we will prepare a comparative analysis of encryption schemes and access control architectures.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-17 15:05:10",
+      "dialogue": "@Huihong Tian Very good, you've been very proactive. This work is crucial, so please research it thoroughly first, and communicate any issues at any time.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/20": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-17 16:45:00",
+      "dialogue": "@all Good afternoon, everyone. With the strong support of Weijun Xue and Qingni Jiang, and based on the discussions from yesterday's meeting, I have led the drafting of the \"Personal Health Record and Chronic Disease Management System - Core User Journey and Function Framework Draft,\" which is now complete. Document link: [Core User Journey and Function Framework Draft_V1.0.docx]. This draft primarily outlines the core user flow and functional modules under the vision of \"Empowering Individuals, Connecting Care.\" Directors Weihua Zhang, Mingzhi Li, and Jianguo Huang, and all core colleagues, please review it. We will have an in-depth discussion based on this document at our meeting next Monday.",
+      "message_index": 20
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/21": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-01-17 16:55:30",
+      "dialogue": "@Huilan Chen Received, very efficient, thanks to the product team for their hard work. This is a critical step in defining our project scope. I will read it carefully and prepare for Monday's discussion.",
+      "message_index": 21
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/22": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-01-17 17:00:15",
+      "dialogue": "@Huilan Chen Received, thank you! I will focus on the interactive process of institutional users (such as community hospitals) under the B2B2C model, which is crucial for the implementation of our operating model.",
+      "message_index": 22
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-17/Group 2/23": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-17 17:05:00",
+      "dialogue": "@Huilan Chen Document received. I will evaluate this draft over the weekend from the perspectives of technical feasibility, data flow, and data collaboration with our 'Smart IoT Health Monitoring System'. We'll discuss it next Monday.",
+      "message_index": 23
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/1": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-01-20 09:15:00",
+      "dialogue": "@all Good morning everyone. Today is the deadline for the project vision and scope definition. Last Friday, Huilan Chen already shared the \"Draft Core User Journey and Feature Framework,\" which I believe everyone has reviewed. Today, we need to have an in-depth discussion based on this document and finalize our project's overall vision and scope. Directors and core members, Mingzhi Li, Jianguo Huang, and Huilan Chen, please prepare your feedback.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/2": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-20 10:00:30",
+      "dialogue": "@Weihua Zhang Boss Zhang, I reviewed the draft in detail over the weekend. I strongly agree with the product side's vision of 'empowering individuals and connecting care'. From a technical perspective, the data interoperability and smart reminder functions mentioned in the draft do not present major implementation barriers. However, I must reiterate that data security must be the highest priority. For the data sharing function mentioned in the draft, we need to clearly define the granularity of permission control in the scope definition. In addition, for data collaboration with the 'Smart IoT Health Monitoring System', we need to clearly define the data interface standards and synchronization mechanisms. @Huihong Tian Their technical pre-research from last week can provide support for us to formulate specific security standards.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/3": {
+      "speaker": "Huihong Tian",
+      "time": "2025-01-20 10:10:00",
+      "dialogue": "@Mingzhi Li Understood, Boss Li. We have prepared the materials regarding HIPAA and domestic security standards and can share them at any time.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/4": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-01-20 10:30:15",
+      "dialogue": "@Weihua Zhang I also read the draft, and the user journey is very complete. Regarding the project scope, I strongly recommend clarifying the B2B2C model in the first phase. The individual user experience described in the draft is excellent, but we need to define the core functions and interaction processes for institutional clients (such as community hospitals, physical examination centers) just as clearly. This directly relates to our market entry strategy and early user acquisition. Operationally, we can start by deeply cooperating with one or two institutions to refine our products and service model.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/5": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-20 11:00:45",
+      "dialogue": "Thanks for the feedback from @Mingzhi Li and @Jianguo Huang. The data security and permission granularity mentioned by Boss Li can be emphasized as core principles in the scope definition. The needs of the institutional side in the B2B2C model proposed by Boss Huang are very important. We can first include the most core management functions for the institutional side in the V1 scope, such as bulk user management and data overview, and more complex functions can be put into subsequent iterations. I will fine-tune the document later based on everyone's opinions to clarify these consensuses.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-20/Group 2/21": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-01-20 17:15:30",
+      "dialogue": "@all After a day of discussion and rapid revisions by Huilan Chen, we have reached a clear consensus on the project's vision and scope. It is now officially confirmed: the project vision is \"Empowering individuals, connecting care, and building a new digital health ecosystem.\" The first phase of the project will focus on core personal health record management and initially establish basic institutional functions under the B2B2C model. Data security will be the highest principle throughout. The final version of \"Project Vision and Scope Definition V1.0\" has been archived. At this point, the task of defining the overall project vision and scope has been successfully completed! Thank you all for your efforts; this is the cornerstone of our project's success. Next, the product and technical teams can begin detailed requirements and architecture design based on this document.",
+      "message_index": 21
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/1": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-01-21 09:35:10",
+      "dialogue": "Good morning, everyone! Today, I'm officially starting the competitive product feature analysis for our online diagnosis and treatment project. The preliminary plan is to focus on a few leading platforms, such as Ping An Good Doctor, WeDoctor, and DXY (Ding Xiang Yuan), primarily breaking them down from the dimensions of core diagnosis and treatment processes, membership systems, pharmaceutical services, and special features (e.g., family doctors, specialist services). I will compile a detailed comparison table, and the first draft is expected by Thursday. @Huilan Chen, Boss Chen, do you see anything that needs to be added to this analysis framework?",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/2": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-21 09:48:25",
+      "dialogue": "@Guoxin Pan Good morning, the plan is very clear. Besides the ones you mentioned, I suggest adding \"Hao Daifu Online\". They are very distinctive in doctor resources and reputation management, which is worth learning from. In addition, when analyzing, you can pay special attention to their user guidance and follow-up visit process design to see how they improve user stickiness.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-21 10:15:05",
+      "dialogue": "@Guoxin Pan When you analyze, if convenient, please also pay attention to whether these platforms have public information on audio and video communication technology, and medical record data encryption and transmission standards. Although it may not be a product feature, it has reference value for our technology selection and architecture design.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/4": {
+      "speaker": "Xiaofang Tang",
+      "time": "2025-01-21 10:22:40",
+      "dialogue": "Wow, competitive analysis has begun! This is great! @Guoxin Pan Manager Pan, from an operations perspective, I'm particularly curious about their user acquisition and engagement strategies, such as any promotional activities, loyalty programs, or community engagement tactics. This information will be very helpful for us in formulating our future operational strategies! 🥳",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-21/Group 3/5": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-01-21 11:05:18",
+      "dialogue": "Received! Thanks for all the suggestions! @Huilan Chen Okay, I've added \"Hao Daifu Online\" to the analysis list and will focus on user retention design. @Mingzhi Li Understood, I'll pay attention to technical information and collect as much as possible. @Xiaofang Tang No problem, operational strategies and gameplay are also a key focus for me, and I'll create a separate module for analysis. So I'll get started in this improved direction! 💪",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/6": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-01-22 14:15:20",
+      "dialogue": "Hi all, here's an update on the competitor analysis. The suggestions everyone gave yesterday were very helpful, and I've adjusted the analysis framework. Today, I focused on experiencing and analyzing \"Hao Dafu Online\" which Boss Huilan Chen mentioned. Their doctor reputation management and follow-up guidance processes are indeed very thorough. For example, they build doctors' personal brands through patient thank-you letters and service star ratings, and their follow-up reminders are also integrated with changes in the patient's condition, which is very much worth learning from. I'm currently compiling these interactive and operational details into a document.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/7": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-01-22 14:16:10",
+      "dialogue": "Additionally, regarding the technical information that Boss Mingzhi Li is concerned about, I found some clues in the recruitment information and technical team blogs of several competitors. For example, they generally use WebRTC technology for real-time audio and video communication, and they mentioned end-to-end encryption standards for data encryption. Although the information is incomplete, it can serve as a reference for our subsequent technology selection. I will also include this information in the report.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/8": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-22 14:25:45",
+      "dialogue": "@Guoxin Pan You did a great job. It's very valuable to be able to dig out technical information from these channels. WebRTC and end-to-end encryption are indeed the mainstream directions, and this information is very helpful to us. Thank you for your hard work!",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-22/Group 3/9": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-22 14:30:00",
+      "dialogue": "@Guoxin Pan Good progress. The re-consultation guidance process is key. Summarize their interaction and copywriting details more, and see how they trigger users at different nodes. Looking forward to your analysis report.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-23/Group 3/1": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-01-23 09:45:12",
+      "dialogue": "Morning all~ Yesterday, Boss Huilan Chen asked me to focus on the competitor's follow-up guidance process. I thoroughly experienced and analyzed it, and summarized a few key findings: 1. **Haodf.com**: Their follow-up guidance is the most robust. After doctor-patient communication, based on the doctor's advice (e.g., \"re-examination in one week\"), it automatically generates to-do items and push reminders. The copy is very friendly, like a personal doctor's assistant. 2. **WeDoctor**: Mainly uses cards on the order details page and personal center for reminders, with relatively weaker guidance. 3. **Ping An Good Doctor**: More reliant on family doctor signing services, maintaining long-term relationships through service packages. I've organized detailed screenshots and interaction flows in Confluence, everyone can take a look.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-23/Group 3/2": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-23 10:05:45",
+      "dialogue": "@Guoxin Pan Excellent analysis, great work! The \"automation + human touch\" guidance approach of \"Hao Dafu Online\" is indeed a key area for us to learn from. I've read the document you compiled, it's very detailed. In the future, we can further consider which scenarios and user types these guidance methods are suitable for, to provide more specific ammunition for our own product design.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-23/Group 3/6": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-23 14:30:00",
+      "dialogue": "@Li Mo, the configuration work is progressing very quickly, thank you for your hard work. Regarding the GitLab integration, yes, you need to contact @Dong He, he has the relevant permissions. The two of you should connect and get the integration running. The goal is to automatically link commits and merge requests to Jira tasks. @Guoxin Pan's competitor analysis is also very valuable, especially the technical implementation part, which we will refer to in our subsequent architecture design.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/1": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-01-24 09:40:10",
+      "dialogue": "Good morning everyone! Regarding the competitive product analysis of the online medical consultation market, I have completed the final report. The report specifically analyzes the applicable scenarios and user types for different follow-up guidance methods (such as Haodf.com's automated reminders vs. WeDoctor's card-style guidance), as per Boss Huilan Chen's instructions. At the same time, it also summarizes the technical stack information of various platforms (such as WebRTC, data encryption standards) that Boss Mingzhi Li was concerned about. The final version of the report has been uploaded to Confluence. The competitive product analysis task is now complete, and everyone is welcome to review it.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/2": {
+      "speaker": "Huilan Chen",
+      "time": "2025-01-24 09:55:30",
+      "dialogue": "Received, @Guoxin Pan is very efficient! Thank you for your hard work. I'll go check it out now, especially the scenario-based analysis part of the follow-up visit guidance, which is very valuable for our subsequent design. Mission accomplished! 👍",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-01-24/Group 3/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-01-24 10:15:50",
+      "dialogue": "@Guoxin Pan Report received. I will focus on the technical part later, which will be very helpful for our architecture selection. @Li Mo Great, completing the integration work is a crucial step. Please find a R&D colleague to actually operate it, from creating a branch to submitting an MR, to see if the entire workflow is smooth.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/2": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-12 09:48:22",
+      "dialogue": "Morning all. I'm starting to sort out the initial hardware equipment list today. Based on last week's competitive product analysis report, I will prioritize devices with high market share and good user reputation. At the same time, technical feasibility is key. @Zihao Wan, your protocol research is crucial for our equipment selection. I hope you can share which brands have relatively open device data interfaces?",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-02-12 10:12:30",
+      "dialogue": "@Zihao Wan Good progress. Encryption is a tough nut to crack, but the value is immense once we do. Continue to focus on authentication and authorization processes, as we discussed yesterday; this is key to stable data acquisition. If you need to purchase new equipment for reverse engineering, just submit a request. @Guoxin Pan Based on Zihao's preliminary conclusions, the list can initially focus on equipment from major manufacturers.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/7": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-12 16:20:00",
+      "dialogue": "Everyone, I've put the draft list of initially screened hardware devices on Confluence. The current list includes the Apple Watch series, mainstream Garmin models, and the Fitbit Charge/Sense series. This was mainly based on market share, API support, and Zihao Wan's research progress. @Mingzhi Li @Zihao Wan, please help evaluate this list from a technical perspective. Are there any omissions or particularly high-risk items?",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-12/Group 1/8": {
+      "speaker": "Zihao Wan",
+      "time": "2025-02-12 16:35:10",
+      "dialogue": "@Guoxin Pan, I've received the list. I've looked it over, and these devices are indeed mainstream and are currently the focus of my research. Data integration for Apple and Garmin is relatively reliable. After Fitbit was acquired by Google, its API strategy saw some changes, introducing some uncertainty, but it's still worth investing in. This list is reasonable as a V1 version, and we can proceed with in-depth technical solution design based on these devices.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/2": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-13 09:52:30",
+      "dialogue": "@Zihao Wan Received, thank you for your hard work! This information is very crucial. If Garmin's deep sleep data is temporarily unavailable, a major highlight of our product will be affected. Boss Mingzhi Li, should we consider adjusting the hardware list, or setting a longer pre-research period for this technical difficulty? I can prepare a Plan B first, temporarily lowering the priority of Garmin's advanced features.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-02-13 10:05:00",
+      "dialogue": "@Zihao Wan Don't be discouraged, only by tackling tough challenges can we build barriers. You should continue your research as planned and clearly organize the data types and formats that can be stably obtained at present. @Guoxin Pan Plan B is a good idea, it's always good to have a backup plan. We can't let one technical point hold up the entire project. Zihao, can you assess and provide a clear conclusion by tomorrow noon? We need this input to make a decision about how much effort will be required to solve it.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/4": {
+      "speaker": "Zihao Wan",
+      "time": "2025-02-13 10:10:25",
+      "dialogue": "Understood! @Mingzhi Li, I will focus my efforts today on trying a few more reverse engineering approaches, and I will definitely provide an evaluation conclusion before noon tomorrow. @Guoxin Pan, I will first organize and send you the stable data interface documentation for Apple Watch and Fitbit. Plan B can be initially based on these two.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/22": {
+      "speaker": "Huilan Chen",
+      "time": "2025-02-13 14:45:00",
+      "dialogue": "@Hao Lv Great idea! Cross-product linecoordinate experience, this is precisely the advantage of our group army operations. I'll first mark this opportunity point on the map as \"High Value.\" @Guoxin Pan @Zihao Wan This also once again illustrates the importance of obtaining high-quality data (such as accurate judgment of abnormal heart rate). The demands on our product side and the implementation on the technical side are closely linked.",
+      "message_index": 22
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-13/Group 1/23": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-13 14:50:18",
+      "dialogue": "Completely agree! Seeing the user journey in such detail gives us a clearer direction for equipment selection and feature planning. We must ensure that the selected equipment can stably provide data to support these core scenarios. I will make this an important criterion for hardware screening.",
+      "message_index": 23
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/2": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-14 09:40:25",
+      "dialogue": "Good morning, Sister Huilan! The journey map is crucial. The final version of my hardware list is pending its conclusion and Zihao's. Yesterday, I saw the pain points of \"passive family caregivers\" on the map. Indeed, the equipment we choose must be able to stably provide data that they \"can understand.\" 👍",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-02-14 11:05:15",
+      "dialogue": "@Zihao Wan Thanks for your hard work. The conclusion is very clear. This assessment is crucial for our decision-making. Since the cost and risk are so high, we cannot stake everything on this. @Guoxin Pan It seems we need to activate Plan B and make this clear in the hardware list.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/5": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-14 11:12:30",
+      "dialogue": "Received! @Zihao Wan, thank you for your in-depth research! @Mingzhi Li, understood. I will immediately adjust the hardware list, limiting the capabilities of Garmin devices to basic data, and increasing the priority of Apple Watch and Fitbit, as their data interfaces are relatively more complete. This way, the functions of our initial version will be more focused and stable. I will release the final hardware device list this afternoon.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/8": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-02-14 16:45:00",
+      "dialogue": "Everyone, the initial hardware device list for V1.0 has also been finalized and published to Confluence. The list integrates Zihau Wan's technical evaluation conclusions and Huilan Chen's user journey map insights, currently focusing on Apple Watch, Fitbit, and Garmin (basic data). The list describes the data types and stability obtainable from each device. This task is complete. 🎉",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-02-14/Group 1/10": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-02-14 17:15:30",
+      "dialogue": "@Guoxin Pan @Zihao Wan @Huilan Chen Great, today we completed three key planning tasks, clearing up the initial uncertainties for the project. Good job everyone, have a good rest this weekend!",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/1": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-07-24 09:30:00",
+      "dialogue": "Good morning everyone. @Si Jia @Huihong Fu, the deadline for the main layout and personal profile interfaces you are responsible for is tomorrow. You need to finalize everything today to ensure they can be submitted for testing on time tomorrow. @Hanqiang Liang, you're starting the development of the registration and login pages today. How are your plans coming along?",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/2": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-24 09:35:15",
+      "dialogue": "Hello Boss Li, received. I'm starting to develop the registration and login pages today. This morning, I will first carefully study the PRD provided by Guoxin Pan and the UI design by Mengqing Ma, especially the form validation rules and interaction details. Then, I will set up the basic project structure and routing. I plan to get the static page framework set up today.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/5": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-24 11:15:20",
+      "dialogue": "@Guoxin Pan I looked at the registration process. Regarding the step of sending SMS verification codes, the design draft mentions the need for a graphic verification code to prevent malicious attacks. Does this logic require backend API support, or do we generate it ourselves on the frontend?",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-24/Group 1/6": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-07-24 11:20:00",
+      "dialogue": "@Hanqiang Liang Good question, we've discussed this before. The backend will provide interfaces for generating and verifying graphic CAPTCHAs; you just need to call them. I'll have the backend colleague responsible for this send you the API documentation.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/1": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-07-25 09:05:20",
+      "dialogue": "Good morning everyone. Just a reminder, today is the final delivery day for the main layout and personal profile interfaces for @Si Jia and @Huihong Fu. Please finalize your work. @Hanqiang Liang, please start the development of the registration and login pages today as planned, and communicate any issues promptly.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/4": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-25 09:20:45",
+      "dialogue": "@Mingzhi Li Received! I've already started on the development tasks for the registration and login pages. This morning, I thoroughly reviewed the PRD and UI mockups. Today, I plan to first build out the static layouts for both pages using React components and configure the routing. Regarding the graphical verification code, @Guoxin Pan, please send me the backend API documentation so I can reserve a spot for it.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/5": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-07-25 09:25:00",
+      "dialogue": "@Hanqiang Liang No problem, I'll immediately have the backend colleague in charge of this send you the API documentation link for the graphical verification code. Feel free to communicate if anything is unclear about the registration and login logic.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-25/Group 1/26": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-25 17:30:50",
+      "dialogue": "@Mingzhi Li Here's an end-of-day progress update: The static page framework for the registration and login pages has been built, and the routes have been configured. The interface location for the graphical CAPTCHA has also been reserved. Starting next Monday, we will implement the form validation logic and interface docking.",
+      "message_index": 26
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/1": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-07-28 09:05:55",
+      "dialogue": "Good morning everyone. For the new week, Hanqiang Liang will continue to advance the development of user registration and login pages. Meanwhile, Peng Sun will start testing the main layout and personal profile interfaces completed by Si Jia and Huihong Fu last week. Please coordinate well.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/2": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-28 09:12:30",
+      "dialogue": "Good morning, Boss Li. Received. The static pages and routing configuration were completed last Friday. Today, I plan to start implementing dynamic logic, starting with the registration page. I'll implement all input field validation rules, such as password strength, email format, and whether the two password entries match.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/3": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-28 09:15:10",
+      "dialogue": "Additionally, I will start integrating with the graphical CAPTCHA interface. @Guoxin Pan, thank you for coordinating the interface documentation last Friday, I have received it. If I encounter any problems during integration today, I might need to trouble the backend colleagues again.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-28/Group 1/16": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-28 17:50:25",
+      "dialogue": "Before knocking off, here's a progress update: The form validation logic for the registration page has been fully completed, and the backend interface has been successfully called to retrieve and display the graphical verification code. Tomorrow, I plan to implement the \"send SMS verification code\" interaction and anti-spam logic, and complete the final registration submission function. The development of the login page will follow closely. Progress is smooth so far.",
+      "message_index": 16
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/1": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-29 09:18:55",
+      "dialogue": "Good morning everyone, here's an update on my progress. Yesterday, I finished integrating the graphical verification code for the registration page. Today's plan is: in the morning, I will implement the interactive logic for \"sending SMS verification code,\" including the 60-second countdown anti-spam feature for the button. In the afternoon, I will start developing the form submission and API integration for the login page.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/2": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-07-29 09:45:30",
+      "dialogue": "@Hanqiang Liang Good progress. Registration and login are the entry points for the user journey, so it's crucial to ensure a smooth experience. If you encounter any issues when integrating with the SMS service, please provide feedback promptly.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/3": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-29 09:46:10",
+      "dialogue": "Received, Boss Li. The SMS API documentation seems quite clear at the moment, so there shouldn't be much of a problem.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-29/Group 1/7": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-29 17:40:10",
+      "dialogue": "Pre-closing sync: The SMS verification code sending logic for the registration page, including the countdown function, has been debugged and is working in the dev environment. The basic API requests for the login page have also been encapsulated. Tomorrow, I will continue to complete the token handling and page redirection after successful login. Overall progress is smooth.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-30/Group 1/1": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-30 09:35:10",
+      "dialogue": "Good morning, everyone! Here's a progress update: Yesterday, I successfully debugged the logic for sending SMS verification codes on the registration page. This morning, I'll continue developing the login functionality, mainly focusing on handling the token returned by the backend after a successful login, including local storage and carrying it in subsequent requests. This afternoon, I plan to complete the final step of the registration page, which is the submission logic for the entire form.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-30/Group 1/6": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-07-30 15:00:00",
+      "dialogue": "@Hanqiang Liang The progress on registration and login looks good. This afternoon, when you're working on registration submission, if you encounter an error message returned by the backend, such as \"phone number already registered,\" the frontend prompt must be user-friendly and clear. You can refer to the specifications I updated in the PRD for the specific wording.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-30/Group 1/7": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-30 17:50:00",
+      "dialogue": "Pre-knock-off sync: The token handling and 401 interception and redirection logic for the login page have been developed and debugged. The form submission function for the registration page has also been integrated, allowing successful registration of new users. Additionally, following Manager Guoxin Pan's suggestion, friendly front-end prompts have been implemented for various backend errors. Tomorrow, I plan to conduct end-to-end testing for these two pages and optimize some interaction details.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/1": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-31 09:15:20",
+      "dialogue": "Good morning everyone! Here's an update on today's plan: Yesterday, the core functionalities of the registration and login pages were completed. Since these two tasks are due tomorrow, my main focus today will be to connect the registration and login processes for complete end-to-end testing. This is to ensure that the entire flow, from new user registration to successful login, and then to token injection and 401 interception, is smooth and error-free. I will pay special attention to optimizing interaction details and error prompts.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-07-31 09:40:50",
+      "dialogue": "@Hanqiang Liang Very good, be sure to polish the entire user entry process today to ensure the quality of tomorrow's delivery. @Huihong Fu Thanks for starting the new task, pay attention to communication in multi-project collaboration to ensure that interface definitions can meet the needs of all parties.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/4": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-31 11:30:00",
+      "dialogue": "I just found a small issue during joint debugging and testing: after a user successfully registers, they are automatically redirected to the login page. However, if they immediately try to log in with the newly registered account, it occasionally prompts 'user does not exist'. I suspect this is caused by the master-slave database synchronization delay. @Huihong Fu, does your backend login interface read from the slave database?",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/6": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-31 11:50:00",
+      "dialogue": "@Huihong Fu It's done! After a few more tests, the issue has been resolved, and you can log in immediately after registering. Thanks! I'll continue testing other scenarios.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-07-31/Group 1/7": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-07-31 17:35:00",
+      "dialogue": "Pre-wrap-up sync: The registration and login page functionalities have been fully integrated and tested. The process is smooth, and interaction details and error prompts have been optimized. We can submit for testing on time tomorrow. @Mingzhi Li",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/1": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-08-01 09:10:15",
+      "dialogue": "Good morning everyone. Today is the delivery day for the user registration and login pages. I plan to spend the morning doing a final round of complete regression testing on the entire user entry flow, especially after Huihong Fu helped resolve the database master-slave synchronization delay issue yesterday, to ensure that newly registered users can log in immediately. The goal is to package and submit for testing on time this afternoon. @Mingzhi Li @Guoxin Pan",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-08-01 09:20:00",
+      "dialogue": "@Hanqiang Liang Very good, today we must ensure the quality of delivery. The smooth experience of the user registration and login process is crucial. I look forward to your good news. @Huihong Fu The start was good. Remember that this interface will be called across projects later, so the design needs to maintain good versatility and clear documentation.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/8": {
+      "speaker": "Hanqiang Liang",
+      "time": "2025-08-01 16:30:00",
+      "dialogue": "Everyone, a formal update: The two development tasks, [User Registration Page and Form Logic] and [User Login Page and Form Logic], have both been completed today. I have finished multiple rounds of self-testing, including functionality, interaction, and compatibility. The code has been merged into the develop branch and successfully deployed in the dev environment. @Peng Sun @Yuni Qin You can now start formal testing. The relevant API documentation and feature overview have been updated on Confluence. @Mingzhi Li @Guoxin Pan",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/9": {
+      "speaker": "Peng Sun",
+      "time": "2025-08-01 16:33:45",
+      "dialogue": "@Hanqiang Liang Received! Thank you for your hard work! Our testing team will start executing test cases immediately, and any issues will be reported via Jira as soon as possible. On-time delivery is fantastic!",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-08-01/Group 1/10": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-08-01 16:40:00",
+      "dialogue": "Well done, @Hanqiang Liang! You delivered high-quality work on the deadline, giving the project a great start. Thank you for your hard work.",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-17/Group 2/8": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-17 09:33:25",
+      "dialogue": "Good morning everyone, I'm starting to write test cases for the family member authorization feature today. I will focus on the closed-loop process of invitation, acceptance/rejection, and removal. I need to wait for the API development progress from @Huihong Tian and @Hailong Qian. I will first write the core use cases based on the documentation.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-17/Group 2/18": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-17 17:40:00",
+      "dialogue": "The test cases for the family member authorization function have completed the main flow and drafts for most abnormal scenarios. Tomorrow, I will refine them further based on the final interface definition.",
+      "message_index": 18
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/1": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-09-18 09:05:30",
+      "dialogue": "Good morning everyone. Today is Thursday. Just a reminder to @Hanqiang Liang and @Huihong Tian, your medication check-in module and family member invitation interface are due today. Please make sure to complete the delivery today. Other colleagues, please also share your plans and progress for today.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/8": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-18 09:20:15",
+      "dialogue": "Morning all. I'm waiting for the final API confirmation from Huihong Tian and Hailong Qian for the test cases of the family member authorization function. I will first set up the test case framework for the main process and abnormal scenarios based on the existing documentation, and then refine it once their APIs are stable.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-18/Group 2/15": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-18 16:30:10",
+      "dialogue": "Received! @Huihong Tian I'll update my test cases now. @Hailong Qian Is the interface for removing members ready? I need it to test the whole process.",
+      "message_index": 15
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/1": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-09-19 09:05:00",
+      "dialogue": "Good morning everyone, today is Friday, and also the deadline for several tasks. @Qianghan Mao @Hailong Qian @Yuni Qin, please focus on the tasks due today and ensure a smooth completion. Other classmates, please also synchronize your plans for today.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/4": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-19 09:14:00",
+      "dialogue": "Morning all. My task of writing test cases for the family member authorization function mainly depends on the completion of the removal interface to form a complete test closed loop. @Hailong Qian, let me know when your interface is ready. My test case framework is basically complete; I'm just waiting for joint debugging and filling in details.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/9": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-19 11:31:15",
+      "dialogue": "Awesome, got it! @Hailong Qian I'll start connecting and testing right away, then refine my test case details.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/11": {
+      "speaker": "Yuni Qin",
+      "time": "2025-09-19 16:40:00",
+      "dialogue": "Reporting in, the test cases for the family member authorization feature have also been completed. The test cases have been uploaded to Confluence, covering normal and abnormal scenarios for the entire process, including invitation, acceptance, rejection, removal, and list query. Task completed!",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-19/Group 2/13": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-09-19 17:00:00",
+      "dialogue": "Excellent! @Qianghan Mao @Yuni Qin @Hailong Qian, all three of you completed your tasks on time and with high quality today. Great job! Happy weekend, everyone!",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/1": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-29 09:30:00",
+      "dialogue": "Hi all, today I'm starting the task of docking and dynamically refreshing the dashboard data interface. @Junxin Yuan, could you please provide the documentation and the dev environment address for the real-time health data aggregation interface you completed last Friday?",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/2": {
+      "speaker": "Junxin Yuan",
+      "time": "2025-09-29 09:35:15",
+      "dialogue": "@Yunqi Qian No problem, I just sent the document and API address to your private chat. The API currently returns real-time aggregated data for heart rate, blood pressure, and blood oxygen. Check if the format is correct.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/3": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-29 09:45:00",
+      "dialogue": "Received, thanks a lot! The data structure looks very clear. I plan to complete the static data integration this morning to ensure the charts render correctly. In the afternoon, I'll start researching dynamic refresh solutions, initially considering WebSocket if the backend supports it. @Mingzhi Li",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-09-29 09:50:20",
+      "dialogue": "@Yunqi Qian Great plan. WebSocket is the best solution, but our message push service isn't fully ready yet. This task can be implemented using polling for now, for example, by requesting the interface every 10 seconds. Once the WebSocket service is stable later, we can upgrade it uniformly. This way, we can avoid blocking your current task.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/5": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-29 09:55:10",
+      "dialogue": "Okay, Boss Li, understood. Then I'll use the polling solution for now, and I'll adjust the plan.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/6": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-29 15:00:00",
+      "dialogue": "Just an update on the progress. The dashboard page has successfully integrated with the data aggregation interface. The real-time values for heart rate, blood pressure, and blood oxygen are now correctly displayed on the page. 🥳",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/7": {
+      "speaker": "Huilan Chen",
+      "time": "2025-09-29 15:05:30",
+      "dialogue": "Very efficient! @Yunqi Qian Looking forward to the final result. 👍",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/8": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-29 17:15:00",
+      "dialogue": "Dynamic refresh has also been added. Currently, the interface is polled every 10 seconds to refresh data. I added a simple loading effect to avoid flickering during refresh. I'll test the code myself first and submit a PR tomorrow. Today's tasks went smoothly.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-29/Group 1/9": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-09-29 17:20:10",
+      "dialogue": "@Yunqi Qian Excellent, great output on the first day. I'll check the CR tomorrow.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/1": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-30 09:35:00",
+      "dialogue": "Morning Team, I have submitted a PR with the code for connecting the Kanban page to the data interface and implementing polling refresh. @Mingzhi Li, please review it when you have a moment.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/2": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-09-30 10:30:25",
+      "dialogue": "@Yunqi Qian I've reviewed your PR, and overall it's well-implemented and very efficient. I have a few small suggestions: 1. It's best to clear the polling timer when the component unmounts to avoid memory leaks. 2. API requests can be encapsulated in a separate service file for easier maintenance. 3. As I mentioned in yesterday's instructions, you can add an error handling logic to provide a user-friendly prompt when an API request fails. Please optimize it in this direction first.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/3": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-30 10:45:50",
+      "dialogue": "Received, Boss Li! Your suggestions are very pertinent, and I will revise them immediately. Especially the error handling and timer clearing, those were indeed my oversights. I'll perfect these points today and resubmit tomorrow. There are still a few days left for this task, so there's plenty of time.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/13": {
+      "speaker": "Huilan Chen",
+      "time": "2025-09-30 15:00:10",
+      "dialogue": "@Yunqi Qian I checked the page you deployed in the dev environment. Although it's polling, the data fluctuation feels very intuitive, and the visual effect is good! Looking forward to the version with error handling.",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-09-30/Group 1/14": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-09-30 15:05:33",
+      "dialogue": "Thanks, Boss Chen! I'm optimizing the code to make the experience even better. 💪",
+      "message_index": 14
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/1": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-01 09:32:00",
+      "dialogue": "Good morning everyone. Today, I will optimize based on the PR suggestions Boss Li made yesterday, mainly including: 1. Adding timer clear logic when components are unmounted to prevent memory leaks; 2. Encapsulating API requests into a separate service layer for easier maintenance; 3. Implementing a unified error prompt for failed interface requests.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/2": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-01 09:35:10",
+      "dialogue": "@Yunqi Qian The plan is clear. Please communicate any issues at any time, especially regarding error handling logic, which needs to be thoroughly considered.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/13": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-01 14:15:45",
+      "dialogue": "Progress update: The service layer encapsulation for API requests and the timer clearing logic have been completed. Error handling is currently in progress. @Boss Huilan Chen, regarding the prompt message when an interface request fails, should we display a unified \"Network error, please try again later\" or different messages based on different error codes?",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/14": {
+      "speaker": "Huilan Chen",
+      "time": "2025-10-01 14:20:05",
+      "dialogue": "@Yunqi Qian, that's very thoughtful. At this stage, we don't need overly complex error differentiation. A unified, friendly prompt will suffice, such as \"Data loading failed, please check your network and try again~\". This avoids confusing users. This experience is very important.",
+      "message_index": 14
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/15": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-01 14:21:30",
+      "dialogue": "Okay, Boss Chen, understood. We'll use a unified and friendly prompt. Thanks for the guidance!",
+      "message_index": 15
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/16": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-01 17:30:50",
+      "dialogue": "Today's work is done. I've optimized the code as suggested and pushed the updates to the dev branch. Tomorrow, I'll self-test it again to ensure everything is fine before asking Boss Mingzhi Li to re-review it. This task is still on schedule.",
+      "message_index": 16
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-01/Group 1/17": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-01 17:35:00",
+      "dialogue": "@Yunqi Qian Very good, this makes the code much more robust. Looking forward to tomorrow's final version.",
+      "message_index": 17
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/4": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-02 09:40:10",
+      "dialogue": "Good morning, let's sync up on the progress of the Kanban dynamic refresh. After optimizing the suggestions Boss Li made yesterday, I ran through a full self-test this morning, including various edge cases and exception handling, and it's currently running stably. The timer clear logic has also been verified, with no signs of memory leaks.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/5": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-02 09:42:30",
+      "dialogue": "@Yunqi Qian Not bad, the work is very solid. Tomorrow is the deadline, so let's double-check it today to make sure everything is perfect.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/6": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-02 09:45:00",
+      "dialogue": "Okay, Boss Li. @Yuni Qin, if it's convenient, could you please help do a quick check on the dev environment? Especially when an interface request fails, please see if the prompt \"Data loading failed, please check your network and try again~\" pops up normally. Many thanks!",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/7": {
+      "speaker": "Yuni Qin",
+      "time": "2025-10-02 10:30:55",
+      "dialogue": "@Yunqi Qian No problem, I just took a look. The functionality is very smooth, and the polling refresh effect is good. I tried disconnecting the network, and indeed, the friendly prompt text that Boss Chen mentioned popped up. The experience is great. 👍",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/8": {
+      "speaker": "Huilan Chen",
+      "time": "2025-10-02 10:35:20",
+      "dialogue": "@Yunqi Qian @Yuni Qin, great job! The implementation of this small detail in the prompt copy will greatly improve the user experience. Yunqi Qian did an excellent job, and it can be delivered smoothly tomorrow. 😊",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/26": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-02 17:50:30",
+      "dialogue": "The dynamic refresh task for the Kanban board has completed all self-testing and verification today, and the code has also been optimized. It is currently running stably in the dev environment. Tomorrow morning, I will submit the official test application, preparing to complete this task.",
+      "message_index": 26
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-02/Group 1/28": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-10-02 18:00:00",
+      "dialogue": "Everyone worked hard today, and everything went very smoothly. @Yunqi Qian, please finish on time tomorrow. @Huihong Fu, a good start, keep it up!",
+      "message_index": 28
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/1": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-03 09:33:15",
+      "dialogue": "Good morning, everyone. Today is the deadline for the Kanban dynamic refresh task. I plan to do a final round of regression self-testing this morning to ensure all functions are stable, and then officially submit for testing. @Yuni Qin, please support the final verification testing today.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/3": {
+      "speaker": "Yuni Qin",
+      "time": "2025-10-03 09:36:25",
+      "dialogue": "Received @Yunqi Qian, no problem, I'm ready anytime. Just let me know when you're done with your self-test.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-10-03 09:40:00",
+      "dialogue": "@Yunqi Qian Very good, be sure to guarantee the quality. This task must be successfully closed today. @Huihong Fu Good progress. Regarding the model API calls, how do you plan to handle scenarios where calls time out or return errors? Robustness needs to be thoroughly considered.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/7": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-03 11:15:00",
+      "dialogue": "@Yuni Qin I have self-tested everything and the code has been deployed to the dev environment. Formal verification can now begin. Thank you for your trouble!",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/8": {
+      "speaker": "Yuni Qin",
+      "time": "2025-10-03 11:16:05",
+      "dialogue": "Received, starting testing immediately.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/23": {
+      "speaker": "Yuni Qin",
+      "time": "2025-10-03 14:20:55",
+      "dialogue": "@Mingzhi Li @Huilan Chen @Yunqi Qian The verification test for the dashboard dynamic refresh function has been completed. The test scope includes: data polling refresh (10s interval), loading state display, error prompt after network disconnection (the text is \"Data loading failed, please check your network and try again~\"), and timer clearance when components are unmounted (verified via React DevTools). All test cases have passed, and no new issues were found. The function meets expectations and can be launched. 👍",
+      "message_index": 23
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/24": {
+      "speaker": "Yunqi Qian",
+      "time": "2025-10-03 14:25:10",
+      "dialogue": "Great, thanks to @Yuni Qin for the detailed verification! @Mingzhi Li @Huilan Chen @Jianguo Huang The task \"Docking Kanban data interface and realizing dynamic refresh\" has completed development and testing, and all functional points meet the online requirements. I am now officially marking this task as complete. The code has been merged into the main branch.",
+      "message_index": 24
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/25": {
+      "speaker": "Huilan Chen",
+      "time": "2025-10-03 14:30:00",
+      "dialogue": "Awesome! @Yunqi Qian, you've worked hard, and the final effect is very smooth, especially the friendly prompts under weak network conditions. The user experience will definitely be great. Thanks to @Yuni Qin for the careful verification! Once this feature goes live, our health dashboard will truly \"come alive\"! 🎉",
+      "message_index": 25
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/26": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-10-03 14:32:45",
+      "dialogue": "Well done, @Yunqi Qian. Delivered on time, and the results are solid, which is commendable. Team, keep up this pace.",
+      "message_index": 26
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-10-03/Group 1/38": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-10-03 17:58:00",
+      "dialogue": "Good job, everyone. @Yunqi Qian, you completed the task very well. @Huihong Fu, please continue to follow up. I'll check on the progress early next week. Everyone, have a great weekend.",
+      "message_index": 38
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-11-14 09:30:00",
+      "dialogue": "Great, everyone is already in the zone this morning. @Dong He, continuous monitoring after deployment is very important. If there are any abnormal fluctuations in indicators, you must alert the group immediately. @Jun Chen @Peng Sun, once the defects are fixed, @Jianqiao Xiang and @Peng Sun must immediately start comprehensive regression testing, making sure to cover all high-priority scenarios without any omissions. Boss Zhang specifically emphasized this.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/5": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-14 09:32:10",
+      "dialogue": "Received, Boss Li. I've already prepared the test case set for regression testing. We're just waiting for Peng Sun and Jun Chen's fixed version to be deployed to the test environment, and we can start immediately.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/7": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-14 11:46:15",
+      "dialogue": "Yes, all fixed. @Jianqiao Xiang The test environment is ready, and regression testing can begin. I will fully cooperate on my end as well.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/8": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-14 11:50:30",
+      "dialogue": "Awesome! We're officially starting regression testing for high-priority defects. The automated test scripts have begun execution, and I'll be leading the team to closely follow up on several core manual test cases, especially those related to previous permission bypasses and payment processes.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-14/Group 3/11": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-14 17:55:00",
+      "dialogue": "Before clocking out, here's a sync-up on the regression test progress: Automated tests are 80% complete, and one P3 UI display issue has been found and logged. All core manual test flows have passed, and no P0/P1 blocking issues have been found yet. We will continue to complete the remaining tests next Monday.",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/1": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-17 09:33:15",
+      "dialogue": "Good morning, everyone, a new week has begun! Peng Sun and I will continue with the high-priority bug regression testing that we didn't finish last Friday. This morning's focus is on completing the remaining automated test case coverage and manually verifying a few edge cases involving payments and refunds. The P3-level UI issue discovered last week has already been reported in Jira, please relevant colleagues pay attention to it.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/2": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-17 09:40:05",
+      "dialogue": "Received @Jianqiao Xiang. I'm ready to cooperate at any time. If any backend-related issues are found during testing, such as abnormal interface responses or errors in the logs, feel free to @me, and I will investigate immediately. Let's try to go through all P1 use cases today.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-11-17 10:10:20",
+      "dialogue": "Thanks for your hard work, @Jianqiao Xiang @Peng Sun. This regression test is crucial and relates to the quality of the patched version. You must cover all high-priority scenarios as I emphasized last week, especially the permission and data security parts that had issues before. Verify them repeatedly, and don't miss anything.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/4": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-17 14:25:45",
+      "dialogue": "Here's an update on this afternoon's progress: The automated regression tests have all finished running, and no new blocker issues have been found. I manually verified the permission models for both doctors and patients, and the previously discovered privilege escalation vulnerability has been confirmed as fixed. I'm currently cross-testing the payment process with another colleague, and everything is normal so far.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/5": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-17 14:31:00",
+      "dialogue": "Great. I've also been monitoring the backend logs. The service has been stable during regression testing, with no abnormal errors. API response times are also within the normal range. Please continue, and keep me updated if anything comes up.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-17/Group 3/6": {
+      "speaker": "Jun Chen",
+      "time": "2025-11-17 17:48:30",
+      "dialogue": "Thanks to Jianqiao Xiang and Peng Sun for their meticulous testing work. Seeing the smooth progress so far, I feel relieved. This version fixes many critical issues, and high-quality regression testing is the last guarantee before going live. Keep up the good work tomorrow!",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/2": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-18 09:48:20",
+      "dialogue": "Morning all. Peng Sun and I will continue regression testing for high-priority defects today. As per Boss Li's previous instructions, today's focus is on data security and permission-related scenarios. We will repeatedly verify to ensure everything is foolproof. 💪",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/3": {
+      "speaker": "Jun Chen",
+      "time": "2025-11-18 09:52:00",
+      "dialogue": "@Hongfang Xiong Yes, I just sent you the domain information in a private chat. If you need assistance with the certificate application process, just let me know. @Jianqiao Xiang @Peng Sun Thank you for your hard work on the regression testing. This is the last line of defense before going live, so please do your best!",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/4": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-18 10:15:30",
+      "dialogue": "@Jianqiao Xiang Received. I've already shifted the focus of the automation script to the permission module. This morning, I'll first assist the \"Personal Health Records\" project team in finalizing some database optimization work. After that, I'll fully dedicate myself to the regression testing here. Feel free to call me anytime if there are any backend issues.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/5": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-11-18 10:30:00",
+      "dialogue": "@Peng Sun Okay, it's tough working on multiple projects. Regression testing for the diagnosis and treatment system is crucial, please make sure to focus on it once the other side is wrapped up. @Jianqiao Xiang Thank you for your thoroughness, we need this kind of inquisitive spirit to dig out all potential risks.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/14": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-18 15:20:15",
+      "dialogue": "Here's an update on the regression test progress: We cross-tested data isolation between different roles (doctor and patient) and did not reproduce the previous privilege escalation issue. However, when viewing medical records shared by others, we found a UI display issue where some data was incomplete. This does not involve security and has been logged as a P3 defect. The core process is temporarily secure.",
+      "message_index": 14
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-18/Group 3/16": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-18 16:15:00",
+      "dialogue": "@Jianqiao Xiang Regarding that UI issue, I checked the backend API return data and it's complete. It should be a frontend parsing or styling problem. I've sent the logs to the frontend colleague. I also performed several rounds of abnormal call tests on the API, and the service is very stable with no exceptions.",
+      "message_index": 16
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/1": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-19 09:32:15",
+      "dialogue": "Good morning everyone! Today, Peng Sun and I will continue to push forward with regression testing for high-priority defects. Following Boss Li's previous instructions, today's focus is on the medical record and prescription permission modules that previously had issues. We will simulate multiple doctor accounts to cross-verify data isolation.",
+      "message_index": 1
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/3": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-11-19 09:55:00",
+      "dialogue": "@Hongfang Xiong, thank you for your hard work. After the configuration is complete, remember to send the health check report for the SSL certificate chain. @Jianqiao Xiang @Peng Sun, you've accurately identified the key areas for regression testing. Data isolation is our lifeline, so please test it with the most stringent scenarios to ensure everything is foolproof. The P3 UI issue discovered yesterday, if it's not a blocker, can be noted for now. We'll prioritize ensuring core functionalities.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/4": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-19 11:10:25",
+      "dialogue": "Received, Boss Li. I will focus on monitoring the backend logs, especially the SQL queries and permission verification parts. I will respond immediately if there are any anomalies. I also have integration testing tasks at IoT Health this morning, so I will balance both, but the regression of the diagnosis and treatment system has the highest priority.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/5": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-19 15:45:50",
+      "dialogue": "Here's an update on this afternoon's testing progress: We repeatedly tested the creation, editing, and viewing permissions of medical records using 3 different doctor accounts. We did not reproduce the previous data interference issue; data isolation appears to be effective. The payment process was also run several times, and the refund logic was verified. Currently, no new blockers have been found. Tomorrow, we will go through the remaining use cases.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-19/Group 3/6": {
+      "speaker": "Jun Chen",
+      "time": "2025-11-19 16:30:00",
+      "dialogue": "That's great news, very exciting! Thanks to the testing team for their rigorous and meticulous work, which provides a solid guarantee for us to launch on time. @Hongfang Xiong, if CDN configuration needs business-side cooperation for testing, just let me know anytime.",
+      "message_index": 6
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/2": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-20 09:35:45",
+      "dialogue": "Morning all. @Peng Sun Today is the deadline for regression testing, let's clear the remaining use cases. I will focus on re-testing the data isolation scenario emphasized by Boss Li, repeatedly operating with a few boundary accounts to ensure everything is foolproof.",
+      "message_index": 2
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/3": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-20 09:38:20",
+      "dialogue": "Received, @Jianqiao Xiang. I'll cooperate at any time and keep an eye on the backend logs and performance metrics. I also need to complete the API integration testing for the IoT Health project today. Both will be pushed forward simultaneously, but the diagnosis and treatment system has the highest priority.",
+      "message_index": 3
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/4": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-11-20 11:00:00",
+      "dialogue": "Everyone is making good progress. @Hongfang Xiong, please complete as planned, and remember to submit the health check report for the SSL certificate chain after completion, as I mentioned yesterday. @Jianqiao Xiang @Peng Sun, please wrap up the testing work properly and ensure we get a clean regression test report today.",
+      "message_index": 4
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/5": {
+      "speaker": "Jianqiao Xiang",
+      "time": "2025-11-20 14:30:50",
+      "dialogue": "Regression test progress update: Just now, another QA colleague and I simulated three doctor accounts online simultaneously, performing cross read/write operations on the same batch of patient medical records. We didn't find any data crosstalk or permission bypass issues. The previous data isolation fix was effective. The remaining P2-level scenarios are expected to be completed within an hour.",
+      "message_index": 5
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/8": {
+      "speaker": "Peng Sun",
+      "time": "2025-11-20 17:30:00",
+      "dialogue": "@all Regression testing for high-priority defects in the real-time online diagnosis and treatment service system has been fully completed. All test cases have passed, and no new P0/P1 level defects have been found. The P3 UI issue discovered on Tuesday has been recorded in Jira. I officially declare this task complete. A detailed test report will be published to the project space later.",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-11-20/Group 3/9": {
+      "speaker": "Jun Chen",
+      "time": "2025-11-20 17:35:30",
+      "dialogue": "Awesome! This news is very exciting! Many thanks to Jianqiao Xiang and Peng Sun's team for their rigorous work, which provides a solid guarantee for the stability of our products!",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/7": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-15 11:30:38",
+      "dialogue": "@all @Technical Committee Members Synchronizing an important resolution: The SOP for P0-level security incidents has been finalized. All incidents identified as `Incident_Level = 'P0_SECURITY'` will automatically and compulsorily trigger the `PLAN_CODE_RED` contingency plan.",
+      "message_index": 7
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/8": {
+      "speaker": "Dong He",
+      "time": "2025-12-15 11:47:16",
+      "dialogue": "Received, Boss Mingzhi. The email mentions that this rule needs to be solidified into the automated O&M platform. What preparations do we need to make on our O&M side?",
+      "message_index": 8
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/9": {
+      "speaker": "Peng Sun",
+      "time": "2025-12-15 12:07:10",
+      "dialogue": "Understood. Just to confirm, after `PLAN_CODE_RED` is triggered, does that mean all standard release processes will be suspended? What kind of drills or tests do we need to cooperate with for this automated trigger logic?",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/10": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-15 12:25:15",
+      "dialogue": "Reply to Dong He: Yes, Guoqiang Gao will lead the implementation, but your operations and maintenance team needs to cooperate to ensure reliable linkage between the monitoring system and the contingency plan execution platform. He will pull a meeting with you later to align on the details.",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/11": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-15 12:45:44",
+      "dialogue": "Reply to Peng Sun: Absolutely correct. All standard procedures are suspended. The core principle this time is 'loss mitigation first,' solve the problem first, then follow the procedures. Regarding the drill, we will arrange a dedicated red team-blue team exercise later to test the effectiveness of this SOP.",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/12": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-12-15 13:05:08",
+      "dialogue": "Received. This resolution is very necessary. @Dong He, your team must fully cooperate and solidify this rule as soon as possible. Safety is no small matter.",
+      "message_index": 12
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/13": {
+      "speaker": "Junxin Yuan",
+      "time": "2025-12-15 13:26:05",
+      "dialogue": "Understood. Is this trigger fully automated? For example, after the monitoring system alerts, does it directly execute `PLAN_CODE_RED` without any manual intervention?",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/14": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-15 13:43:52",
+      "dialogue": "Yes, @Junxin Yuan. After discussion, the final decision is to trigger unconditionally and fully automatically, without a manual confirmation step, to minimize response time.",
+      "message_index": 14
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-15/Group 3/15": {
+      "speaker": "Weihua Zhang",
+      "time": "2025-12-15 14:03:00",
+      "dialogue": "Resolution received. Ensure full implementation.",
+      "message_index": 15
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/9": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-18 14:17:33",
+      "dialogue": "Everyone, I'm synchronizing an important release process update. For urgent incidents in the production environment, we have defined a new fast-track plan `PLAN_CODE_RED`, and the configuration file has been updated.",
+      "message_index": 9
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/10": {
+      "speaker": "Dong He",
+      "time": "2025-12-18 14:34:04",
+      "dialogue": "Received. Is it the `emergency_plans.yml` file? I've checked, and the release of this plan will go through our emergency channel.",
+      "message_index": 10
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/11": {
+      "speaker": "Qianghan Mao",
+      "time": "2025-12-18 14:47:49",
+      "dialogue": "Hold on, I see the first step in the process is `BYPASS_REGRESSION_SUITE`. Does that mean we completely skip regression testing and release directly? That's a bit risky. 😱",
+      "message_index": 11
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/12": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-18 15:01:35",
+      "dialogue": "@Qianghan Mao Yes, the core of this plan is to handle online P0-level failures as quickly as possible and prioritize service restoration. Therefore, standard regression testing procedures will be bypassed.",
+      "message_index": 12
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/13": {
+      "speaker": "Huihong Fu",
+      "time": "2025-12-18 15:17:58",
+      "dialogue": "What about the verification step in the middle? Someone has to take a look, right? I saw `EXECUTE_MINIMUM_VIABLE_VERIFICATION` written in the configuration, and it requires an architect or a senior security engineer to execute it?",
+      "message_index": 13
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/14": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-18 15:32:22",
+      "dialogue": "That's right. This \"minimum viable verification\" is a crucial step and must be performed by an authorized architect or senior engineer to ensure the core functions are sound. This is the final safety valve.",
+      "message_index": 14
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/15": {
+      "speaker": "Qianghan Mao",
+      "time": "2025-12-18 15:48:23",
+      "dialogue": "Understood, sacrificing coverage for time. Then the fourth step, `CREATE_POST_RELEASE_QA_TICKET`, is up to our QA team. After the release, we will immediately create a high-priority Jira task to arrange comprehensive follow-up testing and cover all the skipped parts.",
+      "message_index": 15
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/16": {
+      "speaker": "Jianguo Huang",
+      "time": "2025-12-18 16:03:06",
+      "dialogue": "@Mingzhi Li What are the trigger conditions for this plan? We need to define them clearly to prevent this fast track from being abused.",
+      "message_index": 16
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/17": {
+      "speaker": "Mingzhi Li",
+      "time": "2025-12-18 16:16:41",
+      "dialogue": "The trigger conditions will be very strict. It must be a P0-level failure that causes widespread unavailability of core functions and has no rollback or degradation plan. Before activation, it needs to be jointly confirmed by the technical committee and relevant business leaders.",
+      "message_index": 17
+    },
+    "EverMemBench-Dynamic@a6b210a32248e841967b7b64a64281d2ff3f669d/02/2025-12-18/Group 3/18": {
+      "speaker": "Guoxin Pan",
+      "time": "2025-12-18 16:32:25",
+      "dialogue": "Understood. It's a last resort. As long as the follow-up can keep up, from a product perspective, the risk is within a controllable range. 👍",
+      "message_index": 18
+    }
+  }
+}
