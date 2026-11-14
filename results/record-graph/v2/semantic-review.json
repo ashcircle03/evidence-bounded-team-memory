@@ -1,0 +1,2412 @@
+{
+  "reviewer": "implementation agent; source-based review, not independent human gold",
+  "scope": "All v2 accepted claims inspected; source-level findings are not semantic precision",
+  "rows": [
+    {
+      "source_id": "2532b1977fc260894d4d3a7e",
+      "assessment": "defect",
+      "reason": "완료·업로드 보고를 decision으로 분류. 보고서 claim의 subject가 자기 문장뿐이라 작업명 문장0과 연결되지 않음. yesterday time도 역할에 없음.",
+      "reviewed_claim_ids": [
+        "c:d1c19549fd336e3fa0bd8ee8",
+        "c:6310953dfb4d5dae135c1dfd",
+        "c:03dda15be287796b4fa55a3a",
+        "c:021d079d14dad43374314125"
+      ],
+      "units": [
+        {
+          "id": "u:0a40157572c6cfe1e1e8d5ed",
+          "index": 0,
+          "start": 0,
+          "end": 213,
+          "quote": "@all [Task Completed] Hello everyone, the task \"Verify the accuracy of alarm rule creation and trigger logic\" for the Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System has been completed.",
+          "window_start": 0,
+          "window_end": 471
+        },
+        {
+          "id": "u:f89ae2f5ca75d83497b86246",
+          "index": 1,
+          "start": 214,
+          "end": 329,
+          "quote": "All test cases have passed, including various single conditions, combined conditions, and boundary value scenarios.",
+          "window_start": 0,
+          "window_end": 473
+        },
+        {
+          "id": "u:90d844f187d0d6537b39a723",
+          "index": 2,
+          "start": 330,
+          "end": 416,
+          "quote": "The few issues discovered yesterday have also all been regression verified and passed.",
+          "window_start": 0,
+          "window_end": 473
+        },
+        {
+          "id": "u:bb26e0fa29ae590278224ac4",
+          "index": 3,
+          "start": 417,
+          "end": 471,
+          "quote": "The final test report has been uploaded to Confluence.",
+          "window_start": 0,
+          "window_end": 473
+        },
+        {
+          "id": "u:040ca119960bc2fd16045395",
+          "index": 4,
+          "start": 472,
+          "end": 473,
+          "quote": "🎉",
+          "window_start": 214,
+          "window_end": 473
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:0a40157572c6cfe1e1e8d5ed"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:0a40157572c6cfe1e1e8d5ed"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:d1c19549fd336e3fa0bd8ee8",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:f89ae2f5ca75d83497b86246"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:f89ae2f5ca75d83497b86246"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:6310953dfb4d5dae135c1dfd",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:90d844f187d0d6537b39a723"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:90d844f187d0d6537b39a723"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:03dda15be287796b4fa55a3a",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:bb26e0fa29ae590278224ac4"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:bb26e0fa29ae590278224ac4"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:021d079d14dad43374314125",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "assessment": "limited",
+      "reason": "마감 claim에 목요일과 두 수신자가 보존됨. 원문은 두 사람과 두 업무를 나란히 열거하므로 개인별 담당 확정은 이 record만으로 독립 검증 불가. delivery 문장의 subject는 자기 문장뿐.",
+      "reviewed_claim_ids": [
+        "c:d56cc26ac75f4ee00f270bf3",
+        "c:07a5e317f4f5ff2bb96f7c84",
+        "c:22bdcf60bad881e99283e96d"
+      ],
+      "units": [
+        {
+          "id": "u:2d54a2f80fb9f438875b9052",
+          "index": 0,
+          "start": 0,
+          "end": 22,
+          "quote": "Good morning everyone.",
+          "window_start": 0,
+          "window_end": 230
+        },
+        {
+          "id": "u:c7949952a41c23254fecc5f8",
+          "index": 1,
+          "start": 23,
+          "end": 41,
+          "quote": "Today is Thursday.",
+          "window_start": 0,
+          "window_end": 301
+        },
+        {
+          "id": "u:580ff910724bb31f2e4b3aa4",
+          "index": 2,
+          "start": 42,
+          "end": 181,
+          "quote": "Just a reminder to @Hanqiang Liang and @Huihong Tian, your medication check-in module and family member invitation interface are due today.",
+          "window_start": 0,
+          "window_end": 301
+        },
+        {
+          "id": "u:c6257e816f4b15029681dc8d",
+          "index": 3,
+          "start": 182,
+          "end": 230,
+          "quote": "Please make sure to complete the delivery today.",
+          "window_start": 0,
+          "window_end": 301
+        },
+        {
+          "id": "u:fc2fe98f1aec0f5afa8242a6",
+          "index": 4,
+          "start": 231,
+          "end": 301,
+          "quote": "Other colleagues, please also share your plans and progress for today.",
+          "window_start": 23,
+          "window_end": 301
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:580ff910724bb31f2e4b3aa4"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [
+            "u:c7949952a41c23254fecc5f8"
+          ],
+          "subject": [
+            "u:580ff910724bb31f2e4b3aa4"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:d56cc26ac75f4ee00f270bf3",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [
+              1
+            ],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:c6257e816f4b15029681dc8d"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [
+            "u:c7949952a41c23254fecc5f8"
+          ],
+          "subject": [
+            "u:c6257e816f4b15029681dc8d"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:07a5e317f4f5ff2bb96f7c84",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [
+              1
+            ],
+            "subject": [
+              3
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:fc2fe98f1aec0f5afa8242a6"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [
+            "u:c7949952a41c23254fecc5f8"
+          ],
+          "subject": [
+            "u:fc2fe98f1aec0f5afa8242a6"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:22bdcf60bad881e99283e96d",
+          "role_indices": {
+            "claim": [
+              4
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [
+              1
+            ],
+            "subject": [
+              4
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "assessment": "defect",
+      "reason": "Punkt가 etc.에서 문장을 끊어 Considering 절을 별도 observation으로 만듦. 미래 비교·평가 계획도 observation으로 분류하고 today/early next week time 연결을 누락.",
+      "reviewed_claim_ids": [
+        "c:5d444b3113a92b5f02e385b1",
+        "c:1543dc57663b23a45336a60a",
+        "c:54877acc888e8d16473c620e",
+        "c:463d668e664b038bc93341d8",
+        "c:f1e17ea7508683955d5786f9"
+      ],
+      "units": [
+        {
+          "id": "u:ad651491f187c8efcb513ae3",
+          "index": 0,
+          "start": 0,
+          "end": 90,
+          "quote": "Hello everyone, today I'm starting a new design task: [Designing a File Storage Solution].",
+          "window_start": 0,
+          "window_end": 417
+        },
+        {
+          "id": "u:354bfa88ed63420298cbf779",
+          "index": 1,
+          "start": 91,
+          "end": 191,
+          "quote": "Considering that our system will need to store a large number of supporting documents, reports, etc.",
+          "window_start": 0,
+          "window_end": 497
+        },
+        {
+          "id": "u:123d009aa4bf8c38377220dd",
+          "index": 2,
+          "start": 192,
+          "end": 255,
+          "quote": "in the future, I will focus on comparing Azure Blob and AWS S3.",
+          "window_start": 0,
+          "window_end": 497
+        },
+        {
+          "id": "u:36f2dbb85df84bc84d3e0df9",
+          "index": 3,
+          "start": 256,
+          "end": 417,
+          "quote": "The evaluation dimensions will include cost, API ease of use, access permission management, and the difficulty of integration with our existing technology stack.",
+          "window_start": 0,
+          "window_end": 497
+        },
+        {
+          "id": "u:950c6b6e79f0cf211b04b7bb",
+          "index": 4,
+          "start": 418,
+          "end": 497,
+          "quote": "A preliminary selection recommendation report will be provided early next week.",
+          "window_start": 91,
+          "window_end": 497
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:ad651491f187c8efcb513ae3"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:ad651491f187c8efcb513ae3"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:5d444b3113a92b5f02e385b1",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:354bfa88ed63420298cbf779"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:354bfa88ed63420298cbf779"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:1543dc57663b23a45336a60a",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:123d009aa4bf8c38377220dd"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:123d009aa4bf8c38377220dd"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:54877acc888e8d16473c620e",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:36f2dbb85df84bc84d3e0df9"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:36f2dbb85df84bc84d3e0df9"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:463d668e664b038bc93341d8",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              3
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:950c6b6e79f0cf211b04b7bb"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:950c6b6e79f0cf211b04b7bb"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:f1e17ea7508683955d5786f9",
+          "role_indices": {
+            "claim": [
+              4
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              4
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "assessment": "coarse",
+      "reason": "last Friday와 Today를 각각 자기 원문 구절에 연결. 시간 정규화나 비용 우위→선택 이유 관계까지 확정한 것은 아님.",
+      "reviewed_claim_ids": [
+        "c:cfc8179a8af61b21b4216c44",
+        "c:7ee1230d35a6ec76dc43be1d",
+        "c:ac8647c16f556d1281562a9d"
+      ],
+      "units": [
+        {
+          "id": "u:a9eb9d0b7857ff8601dae036",
+          "index": 0,
+          "start": 0,
+          "end": 22,
+          "quote": "Good morning everyone.",
+          "window_start": 0,
+          "window_end": 408
+        },
+        {
+          "id": "u:993a443e6dd0b7ede54ad40e",
+          "index": 1,
+          "start": 23,
+          "end": 148,
+          "quote": "Regarding the design of our file storage solution, I conducted a preliminary evaluation of Azure Blob and AWS S3 last Friday.",
+          "window_start": 0,
+          "window_end": 408
+        },
+        {
+          "id": "u:a30455e5f96889bdda89c935",
+          "index": 2,
+          "start": 149,
+          "end": 275,
+          "quote": "From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage, and our other projects are also on AWS.",
+          "window_start": 0,
+          "window_end": 408
+        },
+        {
+          "id": "u:9da0ae36c6eb1bc4b25bf9e5",
+          "index": 3,
+          "start": 276,
+          "end": 408,
+          "quote": "Today, I will start designing the Bucket Policy and directory structure based on S3, for example, isolating by tenant and file type.",
+          "window_start": 0,
+          "window_end": 408
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:993a443e6dd0b7ede54ad40e"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [
+            "u:993a443e6dd0b7ede54ad40e"
+          ],
+          "subject": [
+            "u:993a443e6dd0b7ede54ad40e"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:cfc8179a8af61b21b4216c44",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [
+              1
+            ],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:a30455e5f96889bdda89c935"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:a30455e5f96889bdda89c935"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:7ee1230d35a6ec76dc43be1d",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:9da0ae36c6eb1bc4b25bf9e5"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [
+            "u:9da0ae36c6eb1bc4b25bf9e5"
+          ],
+          "subject": [
+            "u:9da0ae36c6eb1bc4b25bf9e5"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:ac8647c16f556d1281562a9d",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [
+              3
+            ],
+            "subject": [
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "assessment": "limited",
+      "reason": "It includes / review it의 subject가 자기 문장으로만 연결돼 문서 대상이 해소되지 않음. 전체 원문을 함께 읽으면 복구 가능.",
+      "reviewed_claim_ids": [
+        "c:577b3a2f5f301449e2131d64",
+        "c:7abe2a9fa00dee1483fba4c4",
+        "c:14d1e15dc6b201ae496a84f9"
+      ],
+      "units": [
+        {
+          "id": "u:dd6a726d65482cc9ebc0425e",
+          "index": 0,
+          "start": 0,
+          "end": 149,
+          "quote": "Good morning everyone, regarding the file storage solution, the complete technical design document (based on AWS S3) has been uploaded to Confluence.",
+          "window_start": 0,
+          "window_end": 300
+        },
+        {
+          "id": "u:35f23ccb24ff4cc319fc91f4",
+          "index": 1,
+          "start": 150,
+          "end": 261,
+          "quote": "It includes three main parts: bucket permission policies, lifecycle rules, and recommended directory structure.",
+          "window_start": 0,
+          "window_end": 300
+        },
+        {
+          "id": "u:8e173b941f3fae5d8e856e38",
+          "index": 2,
+          "start": 262,
+          "end": 300,
+          "quote": "@Mingzhi Li Boss Li, please review it.",
+          "window_start": 0,
+          "window_end": 300
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:dd6a726d65482cc9ebc0425e"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:dd6a726d65482cc9ebc0425e"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:577b3a2f5f301449e2131d64",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:35f23ccb24ff4cc319fc91f4"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:35f23ccb24ff4cc319fc91f4"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:7abe2a9fa00dee1483fba4c4",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:8e173b941f3fae5d8e856e38"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:8e173b941f3fae5d8e856e38"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:14d1e15dc6b201ae496a84f9",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "assessment": "limited",
+      "reason": "승인을 보고한 문장을 decision 후보로 남김. 인증 review 이벤트를 만들지는 않음. proposal의 정확한 대상은 문장 자체에 해소돼 있지 않음.",
+      "reviewed_claim_ids": [
+        "c:d26476b4c1d158707b88c2a4",
+        "c:ba52c2a587b117e1dfff36da",
+        "c:d04820ffeeb51783e4e2662a"
+      ],
+      "units": [
+        {
+          "id": "u:a9abce15d05dd1d489567993",
+          "index": 0,
+          "start": 0,
+          "end": 78,
+          "quote": "@Lujian Gao I've finished reviewing the document on the file storage solution.",
+          "window_start": 0,
+          "window_end": 238
+        },
+        {
+          "id": "u:9a69850680954b83a5c8de3e",
+          "index": 1,
+          "start": 79,
+          "end": 191,
+          "quote": "The design is very comprehensive, especially the considerations for tenant data isolation and cost optimization.",
+          "window_start": 0,
+          "window_end": 238
+        },
+        {
+          "id": "u:a092d125f74b776b3514b83f",
+          "index": 2,
+          "start": 192,
+          "end": 238,
+          "quote": "The proposal is approved and can be finalized.",
+          "window_start": 0,
+          "window_end": 238
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:a9abce15d05dd1d489567993"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:a9abce15d05dd1d489567993"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:d26476b4c1d158707b88c2a4",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:9a69850680954b83a5c8de3e"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:9a69850680954b83a5c8de3e"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:ba52c2a587b117e1dfff36da",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:a092d125f74b776b3514b83f"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:a092d125f74b776b3514b83f"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:d04820ffeeb51783e4e2662a",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "e736ba69ded95cdd2331a4e8",
+      "assessment": "defect",
+      "reason": "user enumeration 방지라는 이유를 condition으로 배정하고 basis는 비움. 실제 적용 범위인 이메일 존재 여부와 역할을 구분하지 못함.",
+      "reviewed_claim_ids": [
+        "c:6448bb638842b6f3be914db2",
+        "c:e05d73064c3880e23ba8e3d4"
+      ],
+      "units": [
+        {
+          "id": "u:11a73cd1d781bf0bcce4b6e1",
+          "index": 0,
+          "start": 0,
+          "end": 25,
+          "quote": "@Yang Zhao Good question.",
+          "window_start": 0,
+          "window_end": 474
+        },
+        {
+          "id": "u:a8b8a3cce477cd6c4b91b921",
+          "index": 1,
+          "start": 26,
+          "end": 140,
+          "quote": "Regarding the \"forgot password\" process, our main security consideration is to prevent \"user enumeration attacks.\"",
+          "window_start": 0,
+          "window_end": 474
+        },
+        {
+          "id": "u:8a75cf6e30e7c2710843994a",
+          "index": 2,
+          "start": 141,
+          "end": 421,
+          "quote": "Therefore, regardless of whether the email entered by the user exists or not, the feedback message should be consistent, such as \"If this email address is registered, you will receive an email containing a password reset link,\" instead of directly prompting \"user does not exist.\"",
+          "window_start": 0,
+          "window_end": 474
+        },
+        {
+          "id": "u:d622888ed0e683fd3d1cbd15",
+          "index": 3,
+          "start": 422,
+          "end": 474,
+          "quote": "Please ensure the UI copy adheres to this principle.",
+          "window_start": 0,
+          "window_end": 474
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:8a75cf6e30e7c2710843994a"
+          ],
+          "condition": [
+            "u:a8b8a3cce477cd6c4b91b921"
+          ],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:8a75cf6e30e7c2710843994a"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:6448bb638842b6f3be914db2",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [
+              1
+            ],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:d622888ed0e683fd3d1cbd15"
+          ],
+          "condition": [],
+          "basis": [
+            "u:8a75cf6e30e7c2710843994a"
+          ],
+          "time": [],
+          "subject": [
+            "u:d622888ed0e683fd3d1cbd15"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:e05d73064c3880e23ba8e3d4",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [
+              2
+            ],
+            "time": [],
+            "subject": [
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "assessment": "defect",
+      "reason": "LOCKED 계정의 강제 라우팅 문장은 남지만 condition edge가 비어 있음. 필수 정책을 observation으로만 표현.",
+      "reviewed_claim_ids": [
+        "c:f4286f427b292a14c0f6aea6",
+        "c:a5716aaadedfc56229a4612c"
+      ],
+      "units": [
+        {
+          "id": "u:900f6629eab28d72413fa402",
+          "index": 0,
+          "start": 0,
+          "end": 15,
+          "quote": "Email received.",
+          "window_start": 0,
+          "window_end": 260
+        },
+        {
+          "id": "u:a81efc0605036374710b04b5",
+          "index": 1,
+          "start": 16,
+          "end": 186,
+          "quote": "The core requirement is that all accounts marked as `ACCOUNT_STATUS_LOCKED` must be forcibly routed to the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy for frontend interaction.",
+          "window_start": 0,
+          "window_end": 260
+        },
+        {
+          "id": "u:5d8d7734d7b327010df1b41e",
+          "index": 2,
+          "start": 187,
+          "end": 260,
+          "quote": "@Xinjie Li @Xuexin Yin, please assess the scope of impact on the backend.",
+          "window_start": 0,
+          "window_end": 260
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:a81efc0605036374710b04b5"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:a81efc0605036374710b04b5"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:f4286f427b292a14c0f6aea6",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:5d8d7734d7b327010df1b41e"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:5d8d7734d7b327010df1b41e"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:a5716aaadedfc56229a4612c",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "82db5705bd31ef3b677608e5",
+      "assessment": "defect",
+      "reason": "잠긴 계정이라는 적용 조건은 문장 안에 있으나 condition 연결 없음. It의 정책 대상도 자기 문장으로만 연결.",
+      "reviewed_claim_ids": [
+        "c:4fe2378a89a3b76007e502ee",
+        "c:9f470d84bfdee54bc555b0d5"
+      ],
+      "units": [
+        {
+          "id": "u:a738ada02407a94d7bd44546",
+          "index": 0,
+          "start": 0,
+          "end": 105,
+          "quote": "The newly added policy code is `ERR_POLICY_LOCKED_ACCOUNT_V1`, defined as 'Explicit Status Alert Policy'.",
+          "window_start": 0,
+          "window_end": 249
+        },
+        {
+          "id": "u:96202632ecb3736e558f0bca",
+          "index": 1,
+          "start": 106,
+          "end": 249,
+          "quote": "It is mainly used for scenarios where an account is locked, requiring explicit interruption of user operations and guidance to manual channels.",
+          "window_start": 0,
+          "window_end": 249
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:a738ada02407a94d7bd44546"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:a738ada02407a94d7bd44546"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:4fe2378a89a3b76007e502ee",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:96202632ecb3736e558f0bca"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:96202632ecb3736e558f0bca"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:9f470d84bfdee54bc555b0d5",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "f3e4d9a3e84884e5abe2e967",
+      "assessment": "limited",
+      "reason": "halt=true 문장과 질문을 basis로 연결하고 question 자격을 구분함. reviewed document 진술은 별도 claim에서 빠짐. 이 질문의 확정 답은 다른 source에 있어 단일 원문 graph로 해결되지 않음.",
+      "reviewed_claim_ids": [
+        "c:a3239be66f6f6669606b33fd",
+        "c:50e5c32602e2af490cfa4237"
+      ],
+      "units": [
+        {
+          "id": "u:b25668e7c9bf57d34b6dfd3c",
+          "index": 0,
+          "start": 0,
+          "end": 9,
+          "quote": "Received.",
+          "window_start": 0,
+          "window_end": 295
+        },
+        {
+          "id": "u:29224bd7f41ba11c71d25c77",
+          "index": 1,
+          "start": 10,
+          "end": 37,
+          "quote": "I've reviewed the document.",
+          "window_start": 0,
+          "window_end": 295
+        },
+        {
+          "id": "u:2e3c77788dd11d03cce14abe",
+          "index": 2,
+          "start": 38,
+          "end": 161,
+          "quote": "This strategy will be handled by `ExplicitStateAlertModule`, and the parameter `halt_downstream_triggers` is set to `true`.",
+          "window_start": 0,
+          "window_end": 295
+        },
+        {
+          "id": "u:131d3afb1eb6272d54a4d3b2",
+          "index": 3,
+          "start": 162,
+          "end": 295,
+          "quote": "This means that after the backend triggers this strategy, all downstream automated notifications (emails, SMS) will be halted, right?",
+          "window_start": 0,
+          "window_end": 295
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:2e3c77788dd11d03cce14abe"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:2e3c77788dd11d03cce14abe"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:a3239be66f6f6669606b33fd",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:131d3afb1eb6272d54a4d3b2"
+          ],
+          "condition": [],
+          "basis": [
+            "u:2e3c77788dd11d03cce14abe"
+          ],
+          "time": [],
+          "subject": [
+            "u:131d3afb1eb6272d54a4d3b2"
+          ],
+          "stance": "question",
+          "qualification": "model_extracted_unverified",
+          "id": "c:50e5c32602e2af490cfa4237",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [
+              2
+            ],
+            "time": [],
+            "subject": [
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "2f036a676a1e734b9821a11d",
+      "assessment": "defect",
+      "reason": "Yes, your understanding의 선행 질문을 표현할 연결 또는 미해결 참조 표시가 없음. 다음 문장의 이유도 확인 claim의 basis로 연결하지 않음.",
+      "reviewed_claim_ids": [
+        "c:7616ddc1e13a5f9330b18f43",
+        "c:b5c71762a6694659c58ff46d"
+      ],
+      "units": [
+        {
+          "id": "u:1d2fc7190f4b16c62c580946",
+          "index": 0,
+          "start": 0,
+          "end": 57,
+          "quote": "@Xinjie Li Yes, your understanding is completely correct.",
+          "window_start": 0,
+          "window_end": 143
+        },
+        {
+          "id": "u:cf18f18985d764979916fff0",
+          "index": 1,
+          "start": 58,
+          "end": 143,
+          "quote": "This is to avoid sending users redundant or potentially confusing automated messages.",
+          "window_start": 0,
+          "window_end": 143
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:1d2fc7190f4b16c62c580946"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:1d2fc7190f4b16c62c580946"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:7616ddc1e13a5f9330b18f43",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:cf18f18985d764979916fff0"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:cf18f18985d764979916fff0"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:b5c71762a6694659c58ff46d",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "assessment": "coarse",
+      "reason": "미래 WebSocket 검토에 같은 문장의 조건·시간을 연결. static integration plan의 decision 라벨은 개인 계획/팀 결정 구분이 불충분하지만 승인 이벤트를 생성하지는 않음.",
+      "reviewed_claim_ids": [
+        "c:5842d36f06beb5c8489c9712",
+        "c:138129ecb030524a9953d04d",
+        "c:e3c7717ca34f9cac0993be30"
+      ],
+      "units": [
+        {
+          "id": "u:0f24e95554b898b9f2891bcd",
+          "index": 0,
+          "start": 0,
+          "end": 23,
+          "quote": "Received, thanks a lot!",
+          "window_start": 0,
+          "window_end": 287
+        },
+        {
+          "id": "u:eb535a91d211f082d382a3ca",
+          "index": 1,
+          "start": 24,
+          "end": 60,
+          "quote": "The data structure looks very clear.",
+          "window_start": 0,
+          "window_end": 299
+        },
+        {
+          "id": "u:4da86580f01edd5012cf217e",
+          "index": 2,
+          "start": 61,
+          "end": 159,
+          "quote": "I plan to complete the static data integration this morning to ensure the charts render correctly.",
+          "window_start": 0,
+          "window_end": 299
+        },
+        {
+          "id": "u:5beb33ffe8566f2443be702d",
+          "index": 3,
+          "start": 160,
+          "end": 287,
+          "quote": "In the afternoon, I'll start researching dynamic refresh solutions, initially considering WebSocket if the backend supports it.",
+          "window_start": 0,
+          "window_end": 299
+        },
+        {
+          "id": "u:063031ad8df024b0fccb21f0",
+          "index": 4,
+          "start": 288,
+          "end": 299,
+          "quote": "@Mingzhi Li",
+          "window_start": 24,
+          "window_end": 299
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:4da86580f01edd5012cf217e"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [
+            "u:4da86580f01edd5012cf217e"
+          ],
+          "subject": [
+            "u:4da86580f01edd5012cf217e"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:5842d36f06beb5c8489c9712",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [
+              2
+            ],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:5beb33ffe8566f2443be702d"
+          ],
+          "condition": [
+            "u:5beb33ffe8566f2443be702d"
+          ],
+          "basis": [],
+          "time": [
+            "u:5beb33ffe8566f2443be702d"
+          ],
+          "subject": [
+            "u:5beb33ffe8566f2443be702d"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:138129ecb030524a9953d04d",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [
+              3
+            ],
+            "basis": [],
+            "time": [
+              3
+            ],
+            "subject": [
+              3
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:eb535a91d211f082d382a3ca"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:eb535a91d211f082d382a3ca"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:e3c7717ca34f9cac0993be30",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "9279497ab46d95f158eeb6de",
+      "assessment": "defect",
+      "reason": "polling claim의 condition/basis가 비어 있고 미래 upgrade의 조건도 연결되지 않음. avoid blocking이라는 이유를 별도 decision으로 잘못 분류.",
+      "reviewed_claim_ids": [
+        "c:f9d8f5e7a1a5e747908e8a5f",
+        "c:5e6f1e66d63a699334041412",
+        "c:27c4cfa1b8a8d58bffecce08",
+        "c:ead1f3c860a2476c33a3ec0b"
+      ],
+      "units": [
+        {
+          "id": "u:da800c2d29906175729e0c3d",
+          "index": 0,
+          "start": 0,
+          "end": 23,
+          "quote": "@Yunqi Qian Great plan.",
+          "window_start": 0,
+          "window_end": 291
+        },
+        {
+          "id": "u:3ef47eaa7938cb459f538835",
+          "index": 1,
+          "start": 24,
+          "end": 107,
+          "quote": "WebSocket is the best solution, but our message push service isn't fully ready yet.",
+          "window_start": 0,
+          "window_end": 342
+        },
+        {
+          "id": "u:04a2daa939296c40049f192f",
+          "index": 2,
+          "start": 108,
+          "end": 218,
+          "quote": "This task can be implemented using polling for now, for example, by requesting the interface every 10 seconds.",
+          "window_start": 0,
+          "window_end": 342
+        },
+        {
+          "id": "u:10ddb37db6dc7857590ef9b7",
+          "index": 3,
+          "start": 219,
+          "end": 291,
+          "quote": "Once the WebSocket service is stable later, we can upgrade it uniformly.",
+          "window_start": 0,
+          "window_end": 342
+        },
+        {
+          "id": "u:b7faff175ac3a5d9c7afd403",
+          "index": 4,
+          "start": 292,
+          "end": 342,
+          "quote": "This way, we can avoid blocking your current task.",
+          "window_start": 24,
+          "window_end": 342
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:3ef47eaa7938cb459f538835"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:3ef47eaa7938cb459f538835"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:f9d8f5e7a1a5e747908e8a5f",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:04a2daa939296c40049f192f"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:04a2daa939296c40049f192f"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:5e6f1e66d63a699334041412",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:10ddb37db6dc7857590ef9b7"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:10ddb37db6dc7857590ef9b7"
+          ],
+          "stance": "proposal",
+          "qualification": "model_extracted_unverified",
+          "id": "c:27c4cfa1b8a8d58bffecce08",
+          "role_indices": {
+            "claim": [
+              3
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              3
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:b7faff175ac3a5d9c7afd403"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:b7faff175ac3a5d9c7afd403"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:ead1f3c860a2476c33a3ec0b",
+          "role_indices": {
+            "claim": [
+              4
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              4
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "assessment": "coarse",
+      "reason": "polling을 쓰겠다는 결정 문장은 보존. 원인·업무 대상은 앞선 source를 필요로 하므로 이 graph만으로 완결되지 않음.",
+      "reviewed_claim_ids": [
+        "c:70efd054a1cb92fbfec8d3b4"
+      ],
+      "units": [
+        {
+          "id": "u:53a9a7035827be710bcd73cf",
+          "index": 0,
+          "start": 0,
+          "end": 26,
+          "quote": "Okay, Boss Li, understood.",
+          "window_start": 0,
+          "window_end": 96
+        },
+        {
+          "id": "u:f61fb525bea93810f890256c",
+          "index": 1,
+          "start": 27,
+          "end": 96,
+          "quote": "Then I'll use the polling solution for now, and I'll adjust the plan.",
+          "window_start": 0,
+          "window_end": 96
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:f61fb525bea93810f890256c"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:f61fb525bea93810f890256c"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:70efd054a1cb92fbfec8d3b4",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "d70dd6562091af5bc67b569e",
+      "assessment": "defect",
+      "reason": "보류 decision은 있지만 version4 조건과 one-writer 이유의 edge가 없음.",
+      "reviewed_claim_ids": [
+        "c:69eb0c6af435fc06fbd231af",
+        "c:86ab4925ab22290a866c57ed",
+        "c:10e4a99a6aa558c383584e7a"
+      ],
+      "units": [
+        {
+          "id": "u:f7c537db3440f0a13ec80063",
+          "index": 0,
+          "start": 0,
+          "end": 34,
+          "quote": "Version 4 permits one writer only.",
+          "window_start": 0,
+          "window_end": 102
+        },
+        {
+          "id": "u:a264ae7e36fe30f37026b131",
+          "index": 1,
+          "start": 35,
+          "end": 84,
+          "quote": "We defer the throughput experiment for version 4.",
+          "window_start": 0,
+          "window_end": 102
+        },
+        {
+          "id": "u:d943514cf0d44dfb7894bd59",
+          "index": 2,
+          "start": 85,
+          "end": 102,
+          "quote": "Archive is Orion.",
+          "window_start": 0,
+          "window_end": 102
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:f7c537db3440f0a13ec80063"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:f7c537db3440f0a13ec80063"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:69eb0c6af435fc06fbd231af",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:a264ae7e36fe30f37026b131"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:a264ae7e36fe30f37026b131"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:86ab4925ab22290a866c57ed",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:d943514cf0d44dfb7894bd59"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:d943514cf0d44dfb7894bd59"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:10e4a99a6aa558c383584e7a",
+          "role_indices": {
+            "claim": [
+              2
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "70052b5dd1e070597977a5a3",
+      "assessment": "coarse",
+      "reason": "version5 네 writer와 version4 비대체 문장을 각각 보존. 전역 entity resolution/조건 정규화는 수행하지 않음.",
+      "reviewed_claim_ids": [
+        "c:0371d11bcabd184db062dd6e",
+        "c:b6616bbcd1ac76d97b434e12"
+      ],
+      "units": [
+        {
+          "id": "u:64f4d77a7fdf65316d1298a5",
+          "index": 0,
+          "start": 0,
+          "end": 31,
+          "quote": "Version 5 permits four writers.",
+          "window_start": 0,
+          "window_end": 87
+        },
+        {
+          "id": "u:e19b4b86f49f3c064a62c8ea",
+          "index": 1,
+          "start": 32,
+          "end": 87,
+          "quote": "This report does not replace the version 4 observation.",
+          "window_start": 0,
+          "window_end": 87
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:64f4d77a7fdf65316d1298a5"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:64f4d77a7fdf65316d1298a5"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:0371d11bcabd184db062dd6e",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:e19b4b86f49f3c064a62c8ea"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:e19b4b86f49f3c064a62c8ea"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:b6616bbcd1ac76d97b434e12",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "9b3beb4415717cd7e733267b",
+      "assessment": "defect",
+      "reason": "120ms claim에 profile A condition edge가 없음. 원문은 수치를 보고할 뿐 측정 절차를 입증하지 않으므로 measured라는 QA 표현의 평가에는 주의가 필요.",
+      "reviewed_claim_ids": [
+        "c:89c1114016092b7f008b2d41",
+        "c:220c206569f9f2967b5d6d0c"
+      ],
+      "units": [
+        {
+          "id": "u:7991713453d554b027e3b12b",
+          "index": 0,
+          "start": 0,
+          "end": 34,
+          "quote": "Under profile A, latency is 120ms.",
+          "window_start": 0,
+          "window_end": 49
+        },
+        {
+          "id": "u:e26fee4a4413da42563c4e5e",
+          "index": 1,
+          "start": 35,
+          "end": 49,
+          "quote": "Owner is Hana.",
+          "window_start": 0,
+          "window_end": 49
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:7991713453d554b027e3b12b"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:7991713453d554b027e3b12b"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:89c1114016092b7f008b2d41",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:e26fee4a4413da42563c4e5e"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:e26fee4a4413da42563c4e5e"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:220c206569f9f2967b5d6d0c",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "179a1f3807834e7e65309f43",
+      "assessment": "defect",
+      "reason": "uncertainty는 보존했으나 미측정 제약을 condition에 넣고 profile B 적용 조건과 basis 연결을 놓침.",
+      "reviewed_claim_ids": [
+        "c:4f6741759d15eb3f2a8d520a"
+      ],
+      "units": [
+        {
+          "id": "u:6563d8673d9e3fbd8bfd6392",
+          "index": 0,
+          "start": 0,
+          "end": 35,
+          "quote": "I suspect profile B may reach 90ms.",
+          "window_start": 0,
+          "window_end": 94
+        },
+        {
+          "id": "u:9a6889f9fb32b6feca88c9ad",
+          "index": 1,
+          "start": 36,
+          "end": 94,
+          "quote": "This is an untested proposal; no measurement is available.",
+          "window_start": 0,
+          "window_end": 94
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:6563d8673d9e3fbd8bfd6392"
+          ],
+          "condition": [
+            "u:9a6889f9fb32b6feca88c9ad"
+          ],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:6563d8673d9e3fbd8bfd6392"
+          ],
+          "stance": "uncertainty",
+          "qualification": "model_extracted_unverified",
+          "id": "c:4f6741759d15eb3f2a8d520a",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [
+              1
+            ],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "assessment": "coarse",
+      "reason": "retry3과 maintainer Hana를 원문 그대로 보존. 서로의 역할을 병합하지 않았음.",
+      "reviewed_claim_ids": [
+        "c:d30a2f6d28e03c771296c485",
+        "c:f0677c5bfcf2151bf65a7a50"
+      ],
+      "units": [
+        {
+          "id": "u:efabb61218555ebc62a36c36",
+          "index": 0,
+          "start": 0,
+          "end": 21,
+          "quote": "The retry limit is 3.",
+          "window_start": 0,
+          "window_end": 45
+        },
+        {
+          "id": "u:8550b15b048949b11b6c14cb",
+          "index": 1,
+          "start": 22,
+          "end": 45,
+          "quote": "The maintainer is Hana.",
+          "window_start": 0,
+          "window_end": 45
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:efabb61218555ebc62a36c36"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:efabb61218555ebc62a36c36"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:d30a2f6d28e03c771296c485",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:8550b15b048949b11b6c14cb"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:8550b15b048949b11b6c14cb"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:f0677c5bfcf2151bf65a7a50",
+          "role_indices": {
+            "claim": [
+              1
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "d369e9ea51b1a073ce9e4c3d",
+      "assessment": "defect",
+      "reason": "인증 이벤트 없음 문장을 claim이나 basis로 연결하지 않음. raw unit과 미배정 unit에는 남지만 주장만 읽으면 핵심 자격 제한이 사라짐.",
+      "reviewed_claim_ids": [
+        "c:f0d321098c1fdd3c8e54d434"
+      ],
+      "units": [
+        {
+          "id": "u:2a384e69c2bae171dc08de3f",
+          "index": 0,
+          "start": 0,
+          "end": 56,
+          "quote": "Jun says: \"Hana approved changing the retry limit to 4.\"",
+          "window_start": 0,
+          "window_end": 104
+        },
+        {
+          "id": "u:81346a423a8e2cb4889b4731",
+          "index": 1,
+          "start": 57,
+          "end": 104,
+          "quote": "No authenticated review event is supplied here.",
+          "window_start": 0,
+          "window_end": 104
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:2a384e69c2bae171dc08de3f"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:2a384e69c2bae171dc08de3f"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:f0d321098c1fdd3c8e54d434",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "d433c146841359d87b93fe53",
+      "assessment": "defect",
+      "reason": "원거리 version4/CPU 조건을 보류 claim에 연결하지 않음. 가까운 window만으로도 복구 불가. 불필요한 archive 반복은 하나의 claim으로 묶임.",
+      "reviewed_claim_ids": [
+        "c:91f2f73ac673fc4e3bd51e16",
+        "c:2fbf63e8e943dbca0fb4f0dd",
+        "c:5b6ea320408b5612fd7b6435"
+      ],
+      "units": [
+        {
+          "id": "u:3d21eca79c3d93279635cc3f",
+          "index": 0,
+          "start": 0,
+          "end": 47,
+          "quote": "This experiment concerns version 4 on CPU only.",
+          "window_start": 0,
+          "window_end": 170
+        },
+        {
+          "id": "u:f758ac0081c5f6c2fa6502a2",
+          "index": 1,
+          "start": 48,
+          "end": 88,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 0,
+          "window_end": 211
+        },
+        {
+          "id": "u:902edcf2c2826d8d3737e1b5",
+          "index": 2,
+          "start": 89,
+          "end": 129,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 0,
+          "window_end": 252
+        },
+        {
+          "id": "u:cdec30dab536e4a6dda26e3b",
+          "index": 3,
+          "start": 130,
+          "end": 170,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 0,
+          "window_end": 293
+        },
+        {
+          "id": "u:b4053be2a5ce81b297083fb4",
+          "index": 4,
+          "start": 171,
+          "end": 211,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 48,
+          "window_end": 334
+        },
+        {
+          "id": "u:1b2b8aca28b86fc7bbba6b68",
+          "index": 5,
+          "start": 212,
+          "end": 252,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 89,
+          "window_end": 375
+        },
+        {
+          "id": "u:54dde3f50da0b88738398be6",
+          "index": 6,
+          "start": 253,
+          "end": 293,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 130,
+          "window_end": 448
+        },
+        {
+          "id": "u:2626e389a82ca8de9b4fece7",
+          "index": 7,
+          "start": 294,
+          "end": 334,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 171,
+          "window_end": 448
+        },
+        {
+          "id": "u:70cc82687de934398c0715ef",
+          "index": 8,
+          "start": 335,
+          "end": 375,
+          "quote": "The archive reference remains unchanged.",
+          "window_start": 212,
+          "window_end": 448
+        },
+        {
+          "id": "u:19720893a3dc035e1eb74488",
+          "index": 9,
+          "start": 376,
+          "end": 448,
+          "quote": "We defer the throughput experiment because only one writer is available.",
+          "window_start": 253,
+          "window_end": 448
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:3d21eca79c3d93279635cc3f"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:3d21eca79c3d93279635cc3f"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:91f2f73ac673fc4e3bd51e16",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:f758ac0081c5f6c2fa6502a2",
+            "u:902edcf2c2826d8d3737e1b5",
+            "u:cdec30dab536e4a6dda26e3b",
+            "u:b4053be2a5ce81b297083fb4",
+            "u:1b2b8aca28b86fc7bbba6b68",
+            "u:54dde3f50da0b88738398be6",
+            "u:2626e389a82ca8de9b4fece7",
+            "u:70cc82687de934398c0715ef"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:f758ac0081c5f6c2fa6502a2",
+            "u:902edcf2c2826d8d3737e1b5",
+            "u:cdec30dab536e4a6dda26e3b",
+            "u:b4053be2a5ce81b297083fb4",
+            "u:1b2b8aca28b86fc7bbba6b68",
+            "u:54dde3f50da0b88738398be6",
+            "u:2626e389a82ca8de9b4fece7",
+            "u:70cc82687de934398c0715ef"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:2fbf63e8e943dbca0fb4f0dd",
+          "role_indices": {
+            "claim": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          }
+        },
+        {
+          "claim": [
+            "u:19720893a3dc035e1eb74488"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:19720893a3dc035e1eb74488"
+          ],
+          "stance": "decision",
+          "qualification": "model_extracted_unverified",
+          "id": "c:5b6ea320408b5612fd7b6435",
+          "role_indices": {
+            "claim": [
+              9
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              9
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "609abafedb0753176911d1c4",
+      "assessment": "defect",
+      "reason": "version5/GPU 및 version4 미검증을 원문에는 보존하지만 condition edge는 비어 있음.",
+      "reviewed_claim_ids": [
+        "c:aa3ecf56220cc5396a8b3e03"
+      ],
+      "units": [
+        {
+          "id": "u:301890e793c62c899fba3013",
+          "index": 0,
+          "start": 0,
+          "end": 76,
+          "quote": "Version 5 on GPU allows four writers; this has not been tested on version 4.",
+          "window_start": 0,
+          "window_end": 76
+        }
+      ],
+      "claims": [
+        {
+          "claim": [
+            "u:301890e793c62c899fba3013"
+          ],
+          "condition": [],
+          "basis": [],
+          "time": [],
+          "subject": [
+            "u:301890e793c62c899fba3013"
+          ],
+          "stance": "observation",
+          "qualification": "model_extracted_unverified",
+          "id": "c:aa3ecf56220cc5396a8b3e03",
+          "role_indices": {
+            "claim": [
+              0
+            ],
+            "condition": [],
+            "basis": [],
+            "time": [],
+            "subject": [
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

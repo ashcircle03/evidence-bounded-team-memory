@@ -21,7 +21,7 @@ def main(folder):
     from llama_index.core.embeddings import MockEmbedding
     from team_memory.readers.retrieval import guard_request
     from team_memory.readers.attribution import AttributedQA
-    from team_memory.records.graph import construct
+    from team_memory.records.graph import construct,vllm_writer_kwargs
     from team_memory.adapters.records import RecordsAdapter
     from team_memory.adapters.answering import AnsweringAdapter
     from team_memory.adapters.reader_bridge import evidence_from,witnesses_from
@@ -50,12 +50,13 @@ def main(folder):
         try:
             tokenizer=AutoTokenizer.from_pretrained(cfg['model_path'],local_files_only=True)
             with httpx.Client(trust_env=False,event_hooks={'request':[guard_request(tokenizer),on_request],'response':[on_response]}) as client:
-                def model(max_tokens):
+                def model(max_tokens,*,guided=False):
+                    extra={'chat_template_kwargs':{'enable_thinking':False},'seed':42}
                     return OpenAILike(model='Qwen3-8B',api_base=os.environ['PRACTICAL_MODEL_URL'],api_key='local-no-secret',
                         is_chat_model=True,is_function_calling_model=False,context_window=32768,max_tokens=max_tokens,
                         tokenizer=tokenizer,temperature=0,timeout=180,max_retries=0,http_client=client,
-                        additional_kwargs={'extra_body':{'chat_template_kwargs':{'enable_thinking':False},'seed':42}})
-                writer=model(2048);reader_llm=model(1024)
+                        additional_kwargs=vllm_writer_kwargs(extra) if guided else {'extra_body':extra})
+                writer=model(2048,guided=cfg.get('guided_writer',False));reader_llm=model(1024)
                 def generate(system,content):return writer.chat([ChatMessage(role='system',content=system),ChatMessage(role='user',content=content)]).message.content
                 inputs=json.loads((folder/'inputs.json').read_text())
                 # Construct ALL records without passing questions to the writer.

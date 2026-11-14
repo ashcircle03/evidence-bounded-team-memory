@@ -20,6 +20,27 @@ class RecordGraphFlowTests(unittest.TestCase):
     call=flow.ModuleFlowTests.call
     source=flow.ModuleFlowTests.source
     ask=flow.ModuleFlowTests.ask
+    def test_generation_schema_reaches_actual_vllm_request(self):
+        import httpx
+        from llama_index.llms.openai_like import OpenAILike
+        from llama_index.core.llms import ChatMessage
+        from team_memory.records.graph import Extraction,vllm_writer_kwargs
+        sent=[]
+        def transport(req):
+            sent.append(json.loads(req.content))
+            return httpx.Response(200,json={'id':'test','object':'chat.completion','created':0,'model':'Qwen3-8B',
+                'choices':[{'index':0,'finish_reason':'stop','message':{'role':'assistant','content':'{"claims":[]}'}}]})
+        extra={'chat_template_kwargs':{'enable_thinking':False},'seed':42}
+        with httpx.Client(transport=httpx.MockTransport(transport)) as client:
+            llm=OpenAILike(model='Qwen3-8B',api_base='http://local.invalid/v1',api_key='test',
+                          is_chat_model=True,http_client=client,max_retries=0,
+                          additional_kwargs=vllm_writer_kwargs(extra))
+            llm.chat([ChatMessage(role='user',content='test')])
+        self.assertEqual(sent[0]['guided_json'],Extraction.model_json_schema())
+        self.assertEqual(sent[0]['chat_template_kwargs'],extra['chat_template_kwargs'])
+        self.assertEqual(sent[0]['seed'],42)
+        self.assertNotIn('guided_json',extra)
+
     def test_graph_survives_save_restart_compare_retrieve_answer(self):
         from team_memory.adapters.runtime import connect_v2
         from team_memory.readers.attribution import AttributedQA

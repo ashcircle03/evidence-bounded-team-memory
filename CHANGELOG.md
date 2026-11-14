@@ -5,6 +5,7 @@
 - 원문 구절과 주장 후보·조건·이유·시간·대상을 연결하는 선택적 record_graph를 추가했다. LlamaIndex sentence window를 실제 재사용하며 별도 graph DB는 없다.
 - 기록 구성부터 저장·재시작·비교 입력·검색 문맥·QA 입력까지 연결했다. 미검증 추출을 승인 이벤트로 승격하지 않는다.
 - 실제 실패에서 정한22개 source·9개 질문을 고정했다. [설계](docs/modules/records-graph.md)와 [실행/결과](results/record-graph/README.md)에서 의미 평가와 전달 검사를 구분한다.
+- Qwen 두 실행과 실패 원출력을 공개했다. vLLM guided_json으로 형식 실패를 고쳤지만 의미 연결 누락·QA 퇴행이 남아 기본 채택은 보류했다. 기존 raw 경로와20문항 재생은 유지한다.
 
 ## 2026-11-15 — records 품질·실험 기반
 

@@ -1,12 +1,14 @@
 # records — 근거 있는 팀 지식의 구성과 상태 관리
 
-[공통 계약](README.md) · 구현 소유: `storage/*`, `review/state.py` · [실제 adapter](../../team_memory/adapters/records.py) · [전환 범위](runtime.md)
+[공통 계약](README.md) · 구현 소유: `records/*`, `storage/*`, `review/state.py` · [실제 adapter](../../team_memory/adapters/records.py) · [전환 범위](runtime.md)
 
 **records의 연구 책임은 DB에 쌓이는 지식의 품질이다.** 원문 저장뿐 아니라, 이후 비교·검색·답변이 사용할 주장·조건·출처·상태를 충실하게 구성하고 보존하는 것까지 포함한다. LLM이 추출한 내용은 출처가 연결된 추출/추론 기록으로 남기며, 그 자체를 사람의 승인이나 확정 사실로 승격하지 않는다.
 
 **v1.2에 원문에서 주장 후보·조건·이유·시간·대상 구절을 연결하는 opt-in 구성 경로를 추가했다.** [record graph 설계와 코드](records-graph.md)를 참조한다. 기본값은 기존 원문 경로이며, 773개 보존·46개 상태 검사 통과는 지식 구성의 의미 성능이 아니다. 독립된 사람의 정답셋과 대규모 일반화 검증은 아직 없다.
 
 [DB 품질에 대한 범위 교정](records-quality-scope.md). 아래 operation은 유지하고 source에 선택적인 record_graph를 추가했다. 엄격한 schema를 쓰는 팀원은 v1.2로 함께 갱신해야 한다.
+
+실제 Qwen 진단에서는 형식 오류를 수정했지만 조건/이유 연결 누락과 QA 퇴행이 남아 **자동 그래프를 기본으로 채택하지 않았다**. [원문·문항별 결과와 결정](../../results/record-graph/README.md)을 참고한다.
 
 | operation | payload | 정상 data |
 |---|---|---|
