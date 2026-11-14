@@ -1,0 +1,575 @@
+[
+  {
+    "case_id": "release-correction",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": true,
+    "reason": "Matches required relation and grounded original spans.",
+    "proposals": [
+      {
+        "history": [
+          "eb65c257995f86bfa60fab11"
+        ],
+        "incoming": {
+          "end": 89,
+          "location": "synthetic-state://release-correction/2/Jun",
+          "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB.",
+          "source_id": "23844b2e07c75d46794d9b50",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 89,
+          "location": "synthetic-state://release-correction/2/Jun",
+          "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB.",
+          "source_id": "23844b2e07c75d46794d9b50",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 44,
+          "location": "synthetic-state://release-correction/1/Mina",
+          "quote": "For release Cedar, the upload cap is 500 MB.",
+          "source_id": "eb65c257995f86bfa60fab11",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 44,
+          "location": "synthetic-state://release-correction/1/Mina",
+          "quote": "For release Cedar, the upload cap is 500 MB.",
+          "source_id": "eb65c257995f86bfa60fab11",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The incoming report explicitly corrects the upload cap for the Cedar release from 500 MB to 480 MB, which is a factual change about the same attribute under the same conditions.",
+        "reviewer": "Mina",
+        "id": "690410db23ae1a45ff5ae02a",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "rejected-calendar",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": true,
+    "reason": "Matches required relation and grounded original spans.",
+    "proposals": [
+      {
+        "history": [
+          "6c43fdcd030e1db50e8a29ed"
+        ],
+        "incoming": {
+          "end": 85,
+          "location": "synthetic-state://rejected-calendar/2/Jun",
+          "quote": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.",
+          "source_id": "2fbd009ee03ef23ead84287f",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 85,
+          "location": "synthetic-state://rejected-calendar/2/Jun",
+          "quote": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.",
+          "source_id": "2fbd009ee03ef23ead84287f",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 55,
+          "location": "synthetic-state://rejected-calendar/1/Mina",
+          "quote": "For the Delta release, the review meeting is on Monday.",
+          "source_id": "6c43fdcd030e1db50e8a29ed",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 55,
+          "location": "synthetic-state://rejected-calendar/1/Mina",
+          "quote": "For the Delta release, the review meeting is on Monday.",
+          "source_id": "6c43fdcd030e1db50e8a29ed",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The incoming report explicitly corrects the meeting day for the Delta release from Monday to Tuesday, indicating a factual change in the schedule.",
+        "reviewer": "Mina",
+        "id": "148c73f5024bae59f78b861f",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "compression-conditions",
+    "expected": [
+      "coexist"
+    ],
+    "actual": [],
+    "informational": [
+      {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "e047c620c14d07a05112e6c4",
+          "location": "synthetic-state://compression-conditions/1/Mina",
+          "speaker": "Mina",
+          "start": 0,
+          "end": 66,
+          "quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB."
+        },
+        "incoming": {
+          "source_id": "0112f60f701d051337ff2fe5",
+          "location": "synthetic-state://compression-conditions/2/Jun",
+          "speaker": "Jun",
+          "start": 0,
+          "end": 69,
+          "quote": "On the same archive benchmark, lossless PNG produced files of 900 KB."
+        },
+        "reason": "Different compression formats (JPEG quality80 vs. lossless PNG) produce different file sizes under the same benchmark conditions, indicating coexistence of different results for different methods.",
+        "requires_review": false
+      }
+    ],
+    "grounded_relation_correct": true,
+    "reason": "Different JPEG/PNG settings are preserved as informational coexistence; no approval request. This is a service contract distinction, not proof of improved relation classification.",
+    "proposals": []
+  },
+  {
+    "case_id": "queue-disagreement",
+    "expected": [
+      "conflict"
+    ],
+    "actual": [
+      "conflict"
+    ],
+    "informational": [],
+    "grounded_relation_correct": true,
+    "reason": "Matches required relation and grounded original spans.",
+    "proposals": [
+      {
+        "history": [
+          "a8627294f95b36507731268c"
+        ],
+        "incoming": {
+          "end": 85,
+          "location": "synthetic-state://queue-disagreement/2/Jun",
+          "quote": "For queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7.",
+          "source_id": "717b7fd4054e06c6ee5117a2",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "conflict",
+        "previous": {
+          "end": 85,
+          "location": "synthetic-state://queue-disagreement/1/Mina",
+          "quote": "For queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7.",
+          "source_id": "a8627294f95b36507731268c",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "Both reports claim the P95 latency for queue Nimbus on workload W with one worker and build7, but they provide conflicting values: 23 ms vs. 31 ms. This indicates a discrepancy in the measured latency under the same conditions.",
+        "reviewer": "Mina",
+        "id": "005b421173aacab95e9112a8",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "writer-reopen",
+    "expected": [
+      "reconsider"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": false,
+    "reason": "Changed version/policy should trigger reconsideration while preserving the earlier conditional report. Actual correction misclassifies the relation.",
+    "proposals": [
+      {
+        "history": [
+          "f685e68dfa3f82b10dea1a0b"
+        ],
+        "incoming": {
+          "end": 54,
+          "location": "synthetic-state://writer-reopen/2/Jun",
+          "quote": "Ledger version5 now permits four simultaneous writers.",
+          "source_id": "f4f71c348613627ca61c5efb",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 54,
+          "location": "synthetic-state://writer-reopen/2/Jun",
+          "quote": "Ledger version5 now permits four simultaneous writers.",
+          "source_id": "f4f71c348613627ca61c5efb",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 93,
+          "location": "synthetic-state://writer-reopen/1/Mina",
+          "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "source_id": "f685e68dfa3f82b10dea1a0b",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 93,
+          "location": "synthetic-state://writer-reopen/1/Mina",
+          "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "source_id": "f685e68dfa3f82b10dea1a0b",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The incoming report states that Ledger version5 now permits four simultaneous writers, which directly contradicts the earlier claim that version4 permits only one writer. This correction is necessary because the new information changes the factual basis of the earlier report.",
+        "reviewer": "Mina",
+        "id": "03586405253c5d2fbe193816",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "writer-near-miss",
+    "expected": [],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": false,
+    "reason": "Earlier blocking premise is unchanged; correction proposal is unnecessary.",
+    "proposals": [
+      {
+        "history": [
+          "04ba00f69bae119e1ad1ff2e"
+        ],
+        "incoming": {
+          "end": 75,
+          "location": "synthetic-state://writer-near-miss/2/Jun",
+          "quote": "Ledger version4 now completes each serial write in 8 ms after index tuning.",
+          "source_id": "f2dd4125f12caf7c58ca5837",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 75,
+          "location": "synthetic-state://writer-near-miss/2/Jun",
+          "quote": "Ledger version4 now completes each serial write in 8 ms after index tuning.",
+          "source_id": "f2dd4125f12caf7c58ca5837",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 93,
+          "location": "synthetic-state://writer-near-miss/1/Mina",
+          "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "source_id": "04ba00f69bae119e1ad1ff2e",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 93,
+          "location": "synthetic-state://writer-near-miss/1/Mina",
+          "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "source_id": "04ba00f69bae119e1ad1ff2e",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The incoming report clarifies that Ledger version4 still permits only one writer, confirming the earlier statement about concurrency. However, the incoming report adds new evidence about the performance improvement (8 ms per serial write) which was not mentioned in the earlier report. This new evidence does not contradict the earlier statement but adds context about the performance of the serial writes.",
+        "reviewer": "Mina",
+        "id": "dc45efffa01dc9913ee3e68d",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "cache-reopen",
+    "expected": [
+      "reconsider"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": false,
+    "reason": "Changed version/policy should trigger reconsideration while preserving the earlier conditional report. Actual correction misclassifies the relation.",
+    "proposals": [
+      {
+        "history": [
+          "2eb283b980d95fa29838cdaf"
+        ],
+        "incoming": {
+          "end": 122,
+          "location": "synthetic-state://cache-reopen/2/Jun",
+          "quote": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion.",
+          "source_id": "ce761dc9c124ce590147d4a7",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 122,
+          "location": "synthetic-state://cache-reopen/2/Jun",
+          "quote": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion.",
+          "source_id": "ce761dc9c124ce590147d4a7",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 124,
+          "location": "synthetic-state://cache-reopen/1/Mina",
+          "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "source_id": "2eb283b980d95fa29838cdaf",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 124,
+          "location": "synthetic-state://cache-reopen/1/Mina",
+          "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "source_id": "2eb283b980d95fa29838cdaf",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The earlier report stated that user-session caching was disabled due to a policy forbidding session identifiers in memory after a request completed. The incoming report clarifies that the revised session policy now permits session identifiers in memory for up to 30 seconds after request completion, which directly contradicts the earlier assertion.",
+        "reviewer": "Mina",
+        "id": "44973194e1ebc8a510280dc5",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "cache-near-miss",
+    "expected": [],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": false,
+    "reason": "Earlier blocking premise is unchanged; correction proposal is unnecessary.",
+    "proposals": [
+      {
+        "history": [
+          "841309d4479a04388fa555bf"
+        ],
+        "incoming": {
+          "end": 124,
+          "location": "synthetic-state://cache-near-miss/2/Jun",
+          "quote": "The session-identifier retention policy has not changed.",
+          "source_id": "e0238509cb370a885ddb39bd",
+          "speaker": "Jun",
+          "start": 68
+        },
+        "incoming_assertion": {
+          "end": 124,
+          "location": "synthetic-state://cache-near-miss/2/Jun",
+          "quote": "The session-identifier retention policy has not changed.",
+          "source_id": "e0238509cb370a885ddb39bd",
+          "speaker": "Jun",
+          "start": 68
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 124,
+          "location": "synthetic-state://cache-near-miss/1/Mina",
+          "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "source_id": "841309d4479a04388fa555bf",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 124,
+          "location": "synthetic-state://cache-near-miss/1/Mina",
+          "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "source_id": "841309d4479a04388fa555bf",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The session-identifier retention policy has not changed, which contradicts the earlier claim that it was disabled due to policy. The new evidence indicates the policy remains in effect, so the earlier assertion about disabling caching is incorrect.",
+        "reviewer": "Mina",
+        "id": "45f749f3a750bd65812f2c12",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "new-temperature",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": true,
+    "reason": "Matches required relation and grounded original spans.",
+    "proposals": [
+      {
+        "history": [
+          "b596dc2bf6776986bf84d7e6"
+        ],
+        "incoming": {
+          "end": 109,
+          "location": "synthetic://completion/Ben/2",
+          "quote": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.",
+          "source_id": "65c73db907509841d81c6856",
+          "speaker": "Ben",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 109,
+          "location": "synthetic://completion/Ben/2",
+          "quote": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.",
+          "source_id": "65c73db907509841d81c6856",
+          "speaker": "Ben",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 76,
+          "location": "synthetic://completion/Ada/1",
+          "quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "source_id": "b596dc2bf6776986bf84d7e6",
+          "speaker": "Ada",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 76,
+          "location": "synthetic://completion/Ada/1",
+          "quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "source_id": "b596dc2bf6776986bf84d7e6",
+          "speaker": "Ada",
+          "start": 0
+        },
+        "reason": "The incoming report explicitly corrects the operating temperature of the Iris chamber from 40 C to 45 C, while maintaining the supervisor as Nuri. This is a direct factual correction to the earlier report.",
+        "reviewer": "Ada",
+        "id": "ca857ff66d1bad63067c02dd",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "new-retention",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": true,
+    "reason": "Matches required relation and grounded original spans.",
+    "proposals": [
+      {
+        "history": [
+          "1fea622c3384dc5b477d3fbc"
+        ],
+        "incoming": {
+          "end": 90,
+          "location": "synthetic://completion/Dan/2",
+          "quote": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days.",
+          "source_id": "b7c75e13ab1d01dd0967486a",
+          "speaker": "Dan",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 90,
+          "location": "synthetic://completion/Dan/2",
+          "quote": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days.",
+          "source_id": "b7c75e13ab1d01dd0967486a",
+          "speaker": "Dan",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 52,
+          "location": "synthetic://completion/Cora/1",
+          "quote": "For the Mira audit, the retention period is 90 days.",
+          "source_id": "1fea622c3384dc5b477d3fbc",
+          "speaker": "Cora",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 52,
+          "location": "synthetic://completion/Cora/1",
+          "quote": "For the Mira audit, the retention period is 90 days.",
+          "source_id": "1fea622c3384dc5b477d3fbc",
+          "speaker": "Cora",
+          "start": 0
+        },
+        "reason": "The incoming report explicitly corrects the retention period for the Mira audit from 90 days to 30 days, indicating a change in the previously reported fact.",
+        "reviewer": "Cora",
+        "id": "98d12fdf87c9e2693961426d",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "new-vote-conflict",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "informational": [],
+    "grounded_relation_correct": true,
+    "reason": "Matches required relation and grounded original spans.",
+    "proposals": [
+      {
+        "history": [
+          "5d298335633c1323b12c5cba"
+        ],
+        "incoming": {
+          "end": 70,
+          "location": "synthetic://completion/Finn/2",
+          "quote": "I explicitly correct the interval for the same Sol relay to 9 seconds.",
+          "source_id": "b12b16f0086cb5ba5e9cecc5",
+          "speaker": "Finn",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 70,
+          "location": "synthetic://completion/Finn/2",
+          "quote": "I explicitly correct the interval for the same Sol relay to 9 seconds.",
+          "source_id": "b12b16f0086cb5ba5e9cecc5",
+          "speaker": "Finn",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 41,
+          "location": "synthetic://completion/Eda/1",
+          "quote": "For relay Sol, the interval is 6 seconds.",
+          "source_id": "5d298335633c1323b12c5cba",
+          "speaker": "Eda",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 41,
+          "location": "synthetic://completion/Eda/1",
+          "quote": "For relay Sol, the interval is 6 seconds.",
+          "source_id": "5d298335633c1323b12c5cba",
+          "speaker": "Eda",
+          "start": 0
+        },
+        "reason": "The incoming report explicitly corrects the interval for relay Sol from 6 seconds to 9 seconds, indicating a change in the previously reported value.",
+        "reviewer": "Eda",
+        "id": "2f1c7e78fec78cbb5e1e1f4b",
+        "status": "pending"
+      }
+    ]
+  }
+]

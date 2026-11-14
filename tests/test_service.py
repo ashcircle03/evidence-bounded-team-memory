@@ -28,11 +28,14 @@ class ServiceTests(unittest.TestCase):
 
     def compare(self, system, content):
         data = json.loads(content)
-        if not data['incoming']['source']['text'].startswith('I correct'):
+        if 'incoming' not in data:
+            return json.dumps(dict(sources=[dict(target=e['id'],decisions=[]) for e in data['earlier']]))
+        incoming = data['incoming']['source']['sentences']
+        if not incoming[0]['text'].startswith('I correct'):
             return '{"relations":[]}'
-        old = next(e for e in data['earlier'] if '10 seconds' in e['source']['text'])
+        old = next(e for e in data['earlier'] if any('10 seconds' in s['text'] for s in e['source']['sentences']))
         return json.dumps(dict(relations=[dict(kind='correction', target=old['id'],
-            old_quote='The timeout is 10 seconds.', new_quote=data['incoming']['source']['text'],
+            old_sentence_ids=[0], new_sentence_ids=[0], old_assertion_id=0, new_assertion_id=0,
             reason='Explicit correction of the timeout under the same settings.')]))
 
     def respond(self, body):
@@ -79,6 +82,47 @@ class ServiceTests(unittest.TestCase):
         self.assertTrue(any('"status": "approved"' in str(c['messages']) for c in self.calls))
         self.assertEqual(service.handle(dict(operation='ingest', source=incoming))['receipt']['replayed'], True)
 
+    def test_failed_comparison_keeps_qa_available_and_failure_visible_after_restart(self):
+        self.responder=self.respond
+        path=Path(self.temp.name)/'failed-review';calls=[]
+        def fail(*_):calls.append(1);raise TimeoutError('test comparator unavailable')
+        self.compare=fail
+        service=self.make_service(path)
+        service.import_history([self.source('The archive is Orion.')])
+        incoming=self.source('An unrelated new report.', 'test:next')
+        self.assertEqual(service.ingest(incoming)['status'],'partial')
+        answer=self.make_service(path).ask('What is the archive?')
+        self.assertIn('Orion',answer['raw'])
+        self.assertEqual(answer['review_status'],'partial')
+        self.assertEqual(answer['review_errors'][0]['stage'],'comparison_call')
+        self.assertEqual(calls,[1])
+
+    def test_reconsideration_effect_reaches_qa_without_changing_facts(self):
+        from team_memory import timeline
+        self.responder=self.respond
+        def compare(_,content):
+            data=json.loads(content)
+            return json.dumps(dict(relations=[dict(kind='reconsider',target=data['earlier'][0]['id'],
+                old_sentence_ids=[0,1],new_sentence_ids=[0],reason='The blocking constraint changed.')]))
+        self.compare=compare
+        path=Path(self.temp.name)/'reconsider'
+        service=self.make_service(path)
+        original=self.source('The archive is Orion. We postponed parallel writes because version 4 permits one writer.')
+        service.import_history([original])
+        p=service.ingest(self.source('Version 5 permits four writers.', 'test:next'))['proposals'][0]
+        pending=service.ask('What is the archive?')
+        self.assertEqual(pending['reconsideration_effects'][0]['review_effect'],'review_requested')
+        service.review(p['id'],'author','approve')
+        result=self.make_service(path).ask('What is the archive?')
+        self.assertIn('Orion',result['raw'])
+        self.assertEqual(result['reconsideration_effects'][0]['review_effect'],'review_authorized')
+        self.assertFalse(result['reconsideration_effects'][0]['changes_established_facts'])
+        self.assertEqual(result['correction_effects'],[])
+        state=[w for w in result['citation_sources'] if w.get('evidence_type')=='review_state']
+        self.assertTrue(state);self.assertIn('Approval authorizes that review only',state[0]['quote'])
+        self.assertEqual(timeline.assertion_status(p['previous'],'Orion',timeline.proposals(service.store)),'reported')
+        self.assertTrue(any('review_authorized' in str(c['messages']) for c in self.calls))
+
     def test_direct_reader_keeps_same_initial_prompt_without_judge(self):
         from team_memory.reference_attributed import CitedSourceQA
         from team_memory.service import TeamMemoryService
@@ -96,6 +140,30 @@ class ServiceTests(unittest.TestCase):
         self.assertEqual(direct_calls[0], self.calls[0])
         self.assertEqual(len(direct_calls), 1)
         self.assertEqual(len(self.calls), 2)
+
+    def test_review_snapshot_is_citable_in_initial_generation_and_judge(self):
+        def respond(body):
+            text = '\n'.join(m['content'] for m in body['messages'])
+            if 'SUPPORTS' in text and 'IRRELEVANT' in text:
+                return '{"answer":"SUPPORTS"}'
+            blocks = re.findall(r'Source (\d+):\n(.*?)(?=\nSource \d+:|$)', text, re.S)
+            number = next(n for n,b in blocks if b.startswith('record_author: timeline state reducer\n'))
+            return f'The correction has been approved [{number}].'
+        self.responder = respond
+        service = self.make_service(Path(self.temp.name)/'state-source')
+        service.import_history([self.source('The timeout is 10 seconds.')])
+        incoming = self.source('I correct the earlier timeout: it is 20 seconds under the same settings.', 'test:bob')
+        p = service.ingest(incoming)['proposals'][0]
+        service.review(p['id'], 'author', 'approve')
+        result = service.ask('Was the timeout correction approved?')
+        self.assertEqual(result['status'], 'ok')
+        evidence = result['answers'][0]['evidence']
+        self.assertEqual(len(evidence),1)
+        self.assertEqual(evidence[0]['evidence_type'],'review_state')
+        self.assertEqual(evidence[0]['record_snapshot']['proposal']['status'],'approved')
+        self.assertIn('author recorded approve',evidence[0]['quote'])
+        self.assertIn('review_state',str(self.calls[0]['messages']))
+        self.assertEqual(sum(w.get('evidence_type')=='review_state' for w in result['citation_sources']),1)
 
     def test_two_git_clones_merge_and_sync_without_ordinal_rebuild(self):
         base = Path(self.temp.name)/'git'
@@ -137,7 +205,9 @@ class ServiceTests(unittest.TestCase):
         service.review(p['id'], 'author', 'reject')
         result = service.ask('What is the archive?', temporal_scope='historical')
         self.assertEqual(result['temporal_scope'], 'historical')
-        self.assertIsNone(result['review_context'])
+        self.assertEqual(result['review_context']['relations'][0]['status'], 'rejected')
+        self.assertFalse(result['correction_effects'][0]['change_applied'])
+        self.assertEqual(result['correction_effects'][0]['other_role'], 'rejected_change_not_applied')
         self.assertIn('Orion', result['raw'])
 
     def test_public_jsonl_cli_has_one_response_per_request(self):

@@ -1,0 +1,52 @@
+[
+  {
+    "case_id": "release-correction",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "quotation is not an exact source substring",
+        "raw": "{\n  \"relations\": [\n    {\n      \"kind\": \"correction\",\n      \"target\": \"eb65c257995f86bfa60fab11\",\n      \"old_quote\": \"For release Cedar, the upload cap is 500 MB. The release owner is Hana.\",\n      \"new_quote\": \"I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner.\",\n      \"reason\": \"The earlier source claimed the upload cap for release Cedar is 500 MB, but the incoming source explicitly corrects it to 480 MB under the same conditions. The release owner remains unchanged, so only the upload cap value is corrected.\",\n      \"old_assertion\": \"The upload cap is 500 MB.\",\n      \"new_assertion\": \"I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB.\"\n    }\n  ]\n}"
+      }
+    ]
+  },
+  {
+    "case_id": "rejected-calendar",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "'reason'",
+        "raw": "{\"relations\":[{\"kind\":\"correction\",\"target\":\"6c43fdcd030e1db50e8a29ed\",\"old_quote\":\"For the Delta release, the review meeting is on Monday.\",\"new_quote\":\"I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.\",\"old_assertion\":\"For the Delta release, the review meeting is on Monday.\",\"new_assertion\":\"I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.\"}]}"
+      }
+    ]
+  },
+  {
+    "case_id": "new-temperature",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "'reason'",
+        "raw": "{\"relations\":[{\"kind\":\"correction\",\"target\":\"b596dc2bf6776986bf84d7e6\",\"old_quote\":\"For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.\",\"new_quote\":\"I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.\",\"old_assertion\":\"For chamber Iris, the operating temperature is 40 C.\",\"new_assertion\":\"I explicitly correct the operating temperature of the same Iris chamber to 45 C.\"}]}"
+      }
+    ]
+  },
+  {
+    "case_id": "new-retention",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "quotation is not an exact source substring",
+        "raw": "{\n  \"relations\": [\n    {\n      \"kind\": \"correction\",\n      \"target\": \"1fea622c3384dc5b477d3fbc\",\n      \"old_quote\": \"For the Mira audit, the retention period is 90 days.\",\n      \"new_quote\": \"I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days.\",\n      \"reason\": \"The earlier source stated the retention period for the Mira audit is 90 days. The incoming source explicitly corrects this to 30 days, providing a direct retraction of the earlier claim under the same conditions (Mira audit).\",\n      \"old_assertion\": \"The retention period is 90 days.\",\n      \"new_assertion\": \"I correct the retention period to 30 days.\"\n    }\n  ]\n}"
+      }
+    ]
+  },
+  {
+    "case_id": "new-vote-conflict",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "'reason'",
+        "raw": "{\"relations\":[{\"kind\":\"correction\",\"target\":\"5d298335633c1323b12c5cba\",\"old_quote\":\"For relay Sol, the interval is 6 seconds.\",\"new_quote\":\"I explicitly correct the interval for the same Sol relay to 9 seconds.\",\"old_assertion\":\"For relay Sol, the interval is 6 seconds.\",\"new_assertion\":\"I explicitly correct the interval for the same Sol relay to 9 seconds.\"}]}"
+      }
+    ]
+  }
+]

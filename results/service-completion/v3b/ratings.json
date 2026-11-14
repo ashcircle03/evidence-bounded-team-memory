@@ -1,0 +1,264 @@
+{
+  "release-correction/pending": {
+    "answer_correct": true,
+    "source_evidence_complete": false,
+    "state_citation_complete": true,
+    "reason": "500MB established and480MB pending are correct. The original new report is not directly cited (only earlier source and review snapshot); strict originals-plus-snapshot requirement is not fully met. The snapshot contains a traceable incoming assertion."
+  },
+  "release-correction/approved": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "480MB current; both original assertions and approved owner-vote snapshot are cited."
+  },
+  "release-correction/historical": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Mina original500MB is preserved with the original record."
+  },
+  "release-correction/unrelated": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Hana remains answerable from unchanged original fact."
+  },
+  "rejected-calendar/rejected": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Monday retained; Tuesday labelled rejected with owner-vote snapshot."
+  },
+  "compression-conditions/both": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "JPEG quality80=600KB and losslessPNG=900KB retained with their sources and conditions."
+  },
+  "queue-disagreement/both": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Both23ms/31ms under identical conditions retained; explicitly unresolved conflict cites pending snapshot."
+  },
+  "writer-reopen/plan": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Mentions the valid version4-to5 reason to revisit, but invents data-consistency rationale and treats a new-version observation as a pending correction of the older-version fact. Relation-kind failure is also counted separately."
+  },
+  "writer-near-miss/plan": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Correctly says serial speed does not remove single-writer reason. Cites originals and actual pending snapshot, but the stored correction proposal itself is unnecessary; not a successful negative proposal decision."
+  },
+  "cache-reopen/plan": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Mentions revised30s policy but omits the new20s cache behavior and frames policy evolution as a correction contradicting the original observation. Not the required grounded changed-condition explanation."
+  },
+  "cache-near-miss/plan": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Correct No and unchanged session policy with both sources and actual snapshot. The unnecessary correction proposal is a separate failure; answer is repetitive and status attribution is not clean sentence by sentence."
+  },
+  "new-temperature/pending": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "40C established;45C pending. Earlier source and review snapshot identify both proposal value and state; snapshot includes original incoming witness."
+  },
+  "new-temperature/approved": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "45C and unchanged Nuri; approved Ada vote is cited. A later approval sentence wrongly attaches source2 alone; core approval also cites source3. This is not perfect per-sentence attribution."
+  },
+  "new-temperature/historical": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Ada original40C remains accessible and cited."
+  },
+  "new-retention/current": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "90days retained; rejected30day change supported by actual rejection snapshot."
+  },
+  "new-retention/proposal": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Dan30day proposal and rejection correctly separated and cited."
+  },
+  "new-vote-conflict/current": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Not approved;6s remains;9s proposed; conflicting owner votes explicitly cited. Also uses loose pending terminology, so this is core correctness, not perfectly consistent status wording."
+  },
+  "legacy-d474ab3d7822c8ac/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "fetch.output explicitly defaults to full.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-d474ab3d7822c8ac/qa-1": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "merge.conflictStyle source explains zdiff3 removes matching edge lines.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-d474ab3d7822c8ac/qa-2": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "format.subjectPrefix source gives PATCH.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-d474ab3d7822c8ac/qa-3": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "notes.mergeStrategy explicitly defaults to manual.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-d474ab3d7822c8ac/qa-4": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": false,
+    "reason": "Correct grep.extendedRegexp with adjacent source grep.adoc L14-L18: true enables extended-regexp and the setting is ignored outside patternType=default. This supports the option identity and its condition, although the frozen key points to L7-L13; keep the mismatch diagnostic.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-ae24415845ae48a7/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Both origin and upstream retained with their own original reports; no authoritative winner.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-d30bb1f10fe4bfe8/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Freshwater L-2 and brackish B-8 both matched to condition-specific original reports.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP615 fallback tzdata is stated in cited abstract.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-1": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP572 NAME := expr is stated in cited abstract.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-2": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP597 EncodingWarning and omitted-encoding trigger are stated together.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-3": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP618 source says strict=True raises ValueError when exhausted at differing lengths.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-4": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP669 explicitly adds sys.monitoring for relevant functions/constants.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-5": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP654 cited abstract/rationale names except* and ExceptionGroup.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-6": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP553 cited environment-variable section says PYTHONBREAKPOINT=0 disables debugging.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-702e9009795b2802/qa-7": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP680 title and abstract identify tomllib for standard TOML parsing.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-1d2a1e3271adf133/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP NAME := expr and Dee NAME <- expr both preserved with their original sources.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-c000762632771ec9/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "PEP ValueError and Fay LengthMismatchError both preserved with their sources; no winner invented.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-34429cce545ccddd/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Huilan Chen source explicitly says the completed competitive report was uploaded to Confluence.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-34429cce545ccddd/qa-1": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Xuexin Yin source explicitly estimates at least10 working days for rule development and initial manual verification.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  },
+  "legacy-34429cce545ccddd/qa-2": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Lizhen Zhou author metadata and original suggestion identify who requested customizable reporting dimensions; Luhao follow-up corroborates incorporation.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+  }
+}

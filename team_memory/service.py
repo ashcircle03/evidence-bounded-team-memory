@@ -10,10 +10,10 @@ from pathlib import Path
 import subprocess
 from threading import RLock
 
-from .store import Store, digest
-from .source_store import SourceStore, source_envelope
-from . import timeline
-from .timeline_cli import process_sources
+from team_memory.storage.objects import Store, digest
+from team_memory.storage.sources import SourceStore, source_envelope
+from team_memory.review import state as timeline
+from team_memory.review.cli import process_sources
 
 
 VERSION = 'team-memory/v2'
@@ -36,7 +36,11 @@ class TeamMemoryService:
         reader.store = self.store
         # Derived indexes are private to each checkout, just like processing receipts.
         reader.index_dir = self.store.timeline_client_root / 'reference-index'
-        self.reader, self.generate = reader, generate
+        self.reader = reader
+        def compare(system, content):
+            from team_memory.review.comparison import compare_sources
+            return compare_sources(generate, content)
+        self.generate = compare
         self.lock = RLock()
 
     def _response(self, operation, **fields):
@@ -87,7 +91,10 @@ class TeamMemoryService:
             result.update(temporal_scope=temporal_scope, review_context=context,
                           review_status=synced['status'], review_errors=synced['review_errors'])
             if context:
-                from .review_context import assertion_reviews
+                from team_memory.readers.context import assertion_reviews, resolution_view, reconsideration_view
+                result['correction_effects'] = resolution_view(context)
+                effects=reconsideration_view(context)
+                if effects:result['reconsideration_effects']=effects
                 for answer in result.get('answers', []):
                     for evidence in answer.get('evidence', []):
                         evidence['assertion_reviews'] = assertion_reviews(evidence, context)
@@ -129,8 +136,8 @@ def main():
     from contextlib import redirect_stdout
     import sys
     from llama_index.core.llms import ChatMessage
-    from .reference_attributed import AttributedQA, CitedSourceQA
-    from .reference_qa import local_components
+    from team_memory.readers.attribution import AttributedQA, CitedSourceQA
+    from team_memory.readers.retrieval import local_components
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader', choices=['attributed', 'direct'], default='attributed')
     parser.add_argument('--store', required=True)

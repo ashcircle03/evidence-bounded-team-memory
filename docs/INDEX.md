@@ -1,6 +1,10 @@
 # 문서 지도
 
-처음 온 독자: [현재 상태](../README.md) → [문제·연구 이력](research-history.md) → [현재 설계](current-design.md) → [최신 문항별 비교](../results/service-v3/cases.md).
+개발 시작: [모듈·의존성 지도](architecture.md) · [기여 안내](../CONTRIBUTING.md) · [경로 대응표](module-paths.json).
+
+최신 감사: [레퍼런스 원형과 현재 연결](reference-composition-audit.md). 상세 과거 점수: [2026-11-08 상태 기록](status-2026-11-08.md).
+
+처음 온 독자: [현재 상태](../README.md) → [문제·연구 이력](research-history.md) → [현재 설계](current-design.md) → [최신 입출력 검증](../results/module-boundary/README.md).
 
 팀원 연동: [단일 서비스 계약](service-v2.md) · [상태 인용 자료형](review-state-citations.md).
 
@@ -13,6 +17,10 @@
 - [Practical service: responsibilities and operating contract](cupmem-practical-v2.md)
 - [CUPMem team service v1: implementation contract](cupmem-service-v1.md)
 - [현재 설계: 연결부의 책임과 근거](current-design.md)
+- [모듈 입출력: 원문 위치·부분 실패·재검토 효과](module-boundary-design.md)
+- [서비스 구현 경계 수정과 오픈소스 비교](service-completion-design.md)
+- [결정 근거 패치: 실제 구현 참고와 두 후보의 기각 이유](source-patch-design.md)
+- [결정·근거 추출 공개 구현 감사와 CoMRAT 원본 실행](rationale-reuse-audit.md)
 - [개발·실험 프로세스 추가 감사](development-process-audit-2026-11-07.md)
 - [기존 평가 약속과 이번 확대 평가의 연결](evaluation-coverage.md)
 - [평가를 읽고 재현하는 방법](evaluation-guide.md)
@@ -33,3 +41,9 @@
 - [Review-state citations](review-state-citations.md)
 - [팀원 연결용 단일 호출 경로](service-v2.md)
 - [구현·개발·평가 전체 흐름 감사](system-audit-2026-11-07.md)
+
+## 저장소 유지보수
+
+- [모듈 구조와 의존성](architecture.md)
+- [구조 변경 검증](module-layout-verification.json)
+- [변경 기록](../CHANGELOG.md)

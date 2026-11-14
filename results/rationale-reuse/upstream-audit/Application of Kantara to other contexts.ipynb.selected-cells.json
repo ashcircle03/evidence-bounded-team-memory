@@ -1,0 +1,32 @@
+{
+  "artifact": "Replication_package/Methodology/Application of Kantara to other contexts.ipynb",
+  "license": "CC-BY-4.0",
+  "source": "https://zenodo.org/records/13742395",
+  "cells": [
+    {
+      "index": 46,
+      "source": [
+        "# Code to test 1 pair only, not batches\n",
+        "from transformers import pipeline\n",
+        "\n",
+        "\n",
+        "def detect_contradiction_nli_one_pair(sentence1, sentence2):\n",
+        "    pipe = pipeline( model=\"roberta-large-mnli\", device='cuda:0')\n",
+        "\n",
+        "    # Concatenate the sentences and get predictions\n",
+        "    sentence_pairs = str(sentence1 + sentence2)\n",
+        "    predictions = pipe(sentence_pairs)\n",
+        "    print(predictions)\n",
+        "\n",
+        "    # Extract prediction +  score\n",
+        "    label = predictions[0]['label']\n",
+        "    score = predictions[0]['score']\n",
+        "\n",
+        "    if label == 'CONTRADICTION' and score > 0.5:\n",
+        "      return True, score\n",
+        "    else:\n",
+        "      return False, 0.0"
+      ]
+    }
+  ]
+}

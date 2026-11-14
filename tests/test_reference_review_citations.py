@@ -55,6 +55,19 @@ class ReviewCitationTests(unittest.TestCase):
         context=self.context();timeline.review(self.store,self.pid,'A','approve')
         with self.assertRaises(ValueError):review_sources(self.store,context)
 
+    def test_new_reconsider_render_cannot_change_old_snapshot_offsets(self):
+        from team_memory.review_citations import review_sources,render_snapshot
+        p=self.store.load('timeline_proposals')[self.pid]
+        p=dict(p,kind='reconsider')
+        pid=self.store.put('timeline_proposals',p)
+        ctx=dict(temporal_scope='current',relations=[x for x in timeline.proposals(self.store) if x['id']==pid])
+        new=review_sources(self.store,ctx)[0]
+        self.assertEqual(new['record_snapshot']['schema'],'review-snapshot/v2')
+        old=dict(new['record_snapshot'],schema='review-snapshot/v1')
+        self.assertNotEqual(digest(old),new['snapshot_id'])
+        self.assertNotIn('Approval authorizes that review only',render_snapshot(old))
+        self.assertEqual(render_snapshot(new['record_snapshot']),new['quote'])
+
     def test_exact_quote_adapter_keeps_answer_and_original_citation(self):
         import nltk
         nltk.data.path.insert(0,str(Path(__file__).resolve().parents[1]/'.cache/reference-nltk'))
@@ -71,6 +84,11 @@ class ReviewCitationTests(unittest.TestCase):
         self.assertEqual(out['raw'],'The deadline was Thursday [1]. [2] The correction is pending.')
         self.assertEqual(out['answers'][0]['evidence'][0],original)
         self.assertEqual(out['answers'][0]['evidence'][1]['evidence_type'],'review_state')
+        # Initial generation may already have numbered the same snapshot.
+        initial=format_response('What is the status?',raw,[original]+review_sources(self.store,self.context()))
+        existing=add_quote_citations('What is the status?',initial,llm)
+        self.assertEqual(existing['raw'],out['raw'])
+        self.assertEqual(existing['answers'],out['answers'])
         # A fake approved sentence is not a substring of a pending snapshot.
         llm.chat=lambda *_:SimpleNamespace(message=SimpleNamespace(content=json.dumps(dict(question="What is the status?",answer=[
             dict(fact='The correction is pending.',substring_quote=['The correction has been approved.'])]))))

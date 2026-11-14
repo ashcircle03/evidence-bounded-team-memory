@@ -1,0 +1,182 @@
+{
+  "new-edge-negative": {
+    "expected": "none",
+    "correct": false,
+    "reason": "No approval request, but unchanged constraints/unrelated changes are still mislabeled coexistence rather than no relation.",
+    "review_proposals": 0,
+    "informational_relations": 1,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-checksum-conflict": {
+    "expected": "conflict",
+    "correct": false,
+    "reason": "Unresolved same-condition disagreement is converted to correction without explicit correction/retraction. The new report cannot silently become authoritative.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-pressure-correction": {
+    "expected": "correction",
+    "correct": true,
+    "reason": "Relation kind and exact original assertions support the explicit correction or condition-specific coexistence. Placeholder explanation quality is recorded separately when present.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": true
+  },
+  "new-capacity-correction": {
+    "expected": "correction",
+    "correct": true,
+    "reason": "Relation kind and exact original assertions support the explicit correction or condition-specific coexistence. Placeholder explanation quality is recorded separately when present.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": true
+  },
+  "new-consent-negative": {
+    "expected": "none",
+    "correct": false,
+    "reason": "No approval request, but unchanged constraints/unrelated changes are still mislabeled coexistence rather than no relation.",
+    "review_proposals": 0,
+    "informational_relations": 1,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-altitude-coexist": {
+    "expected": "coexist",
+    "correct": true,
+    "reason": "Relation kind and exact original assertions support the explicit correction or condition-specific coexistence. Placeholder explanation quality is recorded separately when present.",
+    "review_proposals": 0,
+    "informational_relations": 1,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-checksum-count-conflict": {
+    "expected": "conflict",
+    "correct": false,
+    "reason": "Unresolved same-condition disagreement is converted to correction without explicit correction/retraction. The new report cannot silently become authoritative.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-lighting-coexist": {
+    "expected": "coexist",
+    "correct": false,
+    "reason": "Returns no relation and loses the requested condition-specific coexistence relation. No review false positive, but expected informational relation is absent.",
+    "review_proposals": 0,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-cooldown-correction": {
+    "expected": "correction",
+    "correct": true,
+    "reason": "Relation kind and exact original assertions support the explicit correction or condition-specific coexistence. Placeholder explanation quality is recorded separately when present.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": true
+  },
+  "new-measurement-conflict": {
+    "expected": "conflict",
+    "correct": false,
+    "reason": "Unresolved same-condition disagreement is converted to correction without explicit correction/retraction. The new report cannot silently become authoritative.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-resume-negative": {
+    "expected": "none",
+    "correct": false,
+    "reason": "Unnecessary correction even though the quoted report explicitly repeats the unchanged no-resumption constraint.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-permit-negative": {
+    "expected": "none",
+    "correct": true,
+    "reason": "No relation and no failed receipt; unchanged access restriction leaves the night-observation blocker intact.",
+    "review_proposals": 0,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-resume-reconsider": {
+    "expected": "reconsider",
+    "correct": true,
+    "reason": "Source review confirms a reconsideration of the stated decision with the original blocking premise and changed condition quoted. Explanation preserves the scope and does not erase the earlier observation.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-permit-reconsider": {
+    "expected": "reconsider",
+    "correct": true,
+    "reason": "Source review confirms a reconsideration of the stated decision with the original blocking premise and changed condition quoted. Explanation preserves the scope and does not erase the earlier observation.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-consent-reconsider": {
+    "expected": "reconsider",
+    "correct": false,
+    "reason": "Correctly describes partial24-record consent and unchanged36, but emits informational coexistence instead of reopening the scoped release decision.",
+    "review_proposals": 0,
+    "informational_relations": 1,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-deadline-correction": {
+    "expected": "correction",
+    "correct": true,
+    "reason": "Relation kind and exact original assertions support the explicit correction or condition-specific coexistence. Placeholder explanation quality is recorded separately when present.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": true
+  },
+  "new-partition-coexist": {
+    "expected": "coexist",
+    "correct": true,
+    "reason": "Relation kind and exact original assertions support the explicit correction or condition-specific coexistence. Placeholder explanation quality is recorded separately when present.",
+    "review_proposals": 0,
+    "informational_relations": 1,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-threads-coexist": {
+    "expected": "coexist",
+    "correct": false,
+    "reason": "One-worker and four-worker rates are different conditions, but the model creates a correction.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-port-conflict": {
+    "expected": "conflict",
+    "correct": false,
+    "reason": "Unresolved same-condition disagreement is converted to correction without explicit correction/retraction. The new report cannot silently become authoritative.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  },
+  "new-edge-reconsider": {
+    "expected": "reconsider",
+    "correct": true,
+    "reason": "Source review confirms a reconsideration of the stated decision with the original blocking premise and changed condition quoted. Explanation preserves the scope and does not erase the earlier observation.",
+    "review_proposals": 1,
+    "informational_relations": 0,
+    "failed": false,
+    "placeholder_explanation": false
+  }
+}

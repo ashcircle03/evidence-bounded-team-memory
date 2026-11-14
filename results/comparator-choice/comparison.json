@@ -1,0 +1,72 @@
+{
+  "exact_paired_comparison_inputs": 31,
+  "known8b_proposals_and_receipts_equal_prior": {
+    "release-correction": true,
+    "rejected-calendar": true,
+    "compression-conditions": true,
+    "queue-disagreement": true,
+    "writer-reopen": true,
+    "writer-near-miss": true,
+    "cache-reopen": true,
+    "cache-near-miss": true,
+    "new-temperature": true,
+    "new-retention": true,
+    "new-vote-conflict": true
+  },
+  "prior_qa_reference": "results/module-boundary/v1/result.json; actual8B job120445",
+  "checkpoints": "Qwen3-8B vs Qwen2.5-14B-Instruct; not parameter-count-only effect",
+  "models": {
+    "8b": {
+      "reconsider": {
+        "correct": 0,
+        "total": 4
+      },
+      "none": {
+        "correct": 0,
+        "total": 4
+      },
+      "correction": {
+        "correct": 4,
+        "total": 4
+      },
+      "conflict": {
+        "correct": 4,
+        "total": 4
+      },
+      "coexist": {
+        "correct": 3,
+        "total": 4
+      },
+      "negative_unnecessary_review": 1,
+      "failed_cases": 1,
+      "rater": "implementation agent, not independent"
+    },
+    "14b": {
+      "reconsider": {
+        "correct": 3,
+        "total": 4
+      },
+      "none": {
+        "correct": 1,
+        "total": 4
+      },
+      "correction": {
+        "correct": 4,
+        "total": 4
+      },
+      "conflict": {
+        "correct": 0,
+        "total": 4
+      },
+      "coexist": {
+        "correct": 2,
+        "total": 4
+      },
+      "negative_unnecessary_review": 1,
+      "failed_cases": 0,
+      "rater": "implementation agent, not independent"
+    }
+  },
+  "comparator_gate": false,
+  "end_to_end_adoption_not_established_by_this_gate": true
+}

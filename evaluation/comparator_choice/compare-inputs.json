@@ -1,0 +1,748 @@
+{
+  "cases": [
+    {
+      "id": "new-edge-negative",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://092a3faaf29a97bd/1",
+            "text": "We rejected deployment of the Atlas classifier to the 8 GB field device because its original model requires 32 GB of memory. Deployment also requires at least 90 percent accuracy."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://092a3faaf29a97bd/2",
+          "text": "The original Atlas classifier now processes images 25 percent faster on a 64 GB workstation. It still requires 32 GB of memory, and no model fitting the 8 GB field device was tested."
+        }
+      }
+    },
+    {
+      "id": "new-checksum-conflict",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://1bf5edcaac0ef4db/1",
+            "text": "For artifact Rho build9, I recorded the published checksum as aa731."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://1bf5edcaac0ef4db/2",
+          "text": "For the same artifact Rho build9, I recorded the published checksum as bb842. I have not withdrawn either report."
+        }
+      }
+    },
+    {
+      "id": "new-pressure-correction",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://27195de7e0e9480a/1",
+            "text": "For pump Delta at test setting R, the recorded pressure is 70 kPa. The operator is Hana."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://27195de7e0e9480a/2",
+          "text": "I correct the earlier Delta test-setting-R pressure entry: the correct value is 75 kPa, not 70 kPa. The operator is still Hana."
+        }
+      }
+    },
+    {
+      "id": "new-capacity-correction",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://36d543acbadd51c9/1",
+            "text": "The configured capacity of tank Vega is 120 liters. Its inspection owner is Min."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://36d543acbadd51c9/2",
+          "text": "I retract the 120-liter entry for tank Vega and correct its configured capacity to 150 liters. Min remains the inspection owner."
+        }
+      }
+    },
+    {
+      "id": "new-consent-negative",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://470aff7341397f53/1",
+            "text": "We withheld release of the 60-record interview dataset because the consent forms did not authorize sharing records with external researchers. The records remain stored internally."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://470aff7341397f53/2",
+          "text": "We renamed fields in all 60 interview records to make internal analysis easier. No participant has changed their consent, and external research sharing is still unauthorized."
+        }
+      }
+    },
+    {
+      "id": "new-altitude-coexist",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://49cbf01387717d1e/1",
+            "text": "The measured boiling point of water at the sea-level site was 100 degrees Celsius."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://49cbf01387717d1e/2",
+          "text": "The measured boiling point of water at the 3000-meter site was 90 degrees Celsius."
+        }
+      }
+    },
+    {
+      "id": "new-checksum-count-conflict",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://5385dfab202e09fc/1",
+            "text": "For archive Sigma revision5, my report counts 420 records in the published archive."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://5385dfab202e09fc/2",
+          "text": "For that same archive Sigma revision5, my report counts 427 records in the published archive. The discrepancy has not been resolved."
+        }
+      }
+    },
+    {
+      "id": "new-lighting-coexist",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://59f4093e1927a1fd/1",
+            "text": "The camera detector measured 0.91 recall on the daylight-image set."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://59f4093e1927a1fd/2",
+          "text": "The camera detector measured 0.68 recall on the low-light-image set."
+        }
+      }
+    },
+    {
+      "id": "new-cooldown-correction",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://6c02c103fec4d5e0/1",
+            "text": "The configured cooldown for instrument Lyra is 12 minutes. The operating mode is standard."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://6c02c103fec4d5e0/2",
+          "text": "I correct our previous Lyra standard-mode cooldown record: its configured cooldown is 15 minutes. The operating mode is unchanged."
+        }
+      }
+    },
+    {
+      "id": "new-measurement-conflict",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://75d50234b0135cc7/1",
+            "text": "For sensor Tau in calibration run C8 at 20 degrees Celsius, I measured an offset of 0.4 volts."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://75d50234b0135cc7/2",
+          "text": "For the same sensor Tau in calibration run C8 at 20 degrees Celsius, I measured an offset of 0.7 volts. Neither measurement has been retracted."
+        }
+      }
+    },
+    {
+      "id": "new-resume-negative",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://7cdb7647b7a1ea2c/1",
+            "text": "We postponed unattended ingestion from the Harbor API because version2 cannot resume a download after a disconnected connection. Manual ingestion remains the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://7cdb7647b7a1ea2c/2",
+          "text": "Our revised HTTP client reduces Harbor API version2 request latency by 18 percent. Version2 still cannot resume a download after a disconnected connection."
+        }
+      }
+    },
+    {
+      "id": "new-permit-negative",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://8f0cae810138792c/1",
+            "text": "We suspended night-sky observations from the rooftop because the access permit allowed entry only between 08:00 and 18:00. The camera itself was operational."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://8f0cae810138792c/2",
+          "text": "The camera now records sharper daylight images after a lens upgrade. Rooftop access is still restricted to 08:00 through 18:00."
+        }
+      }
+    },
+    {
+      "id": "new-resume-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://999aef28827c3db5/1",
+            "text": "We postponed unattended ingestion from the Harbor API because version2 cannot resume a download after a disconnected connection. Manual ingestion remains the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://999aef28827c3db5/2",
+          "text": "Harbor API version3 now provides continuation tokens for interrupted downloads. In a fault-injection test, the client resumed from the token after the connection was cut and completed the download."
+        }
+      }
+    },
+    {
+      "id": "new-permit-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://ac3a9213b23d9c6c/1",
+            "text": "We suspended night-sky observations from the rooftop because the access permit allowed entry only between 08:00 and 18:00. The camera itself was operational."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://ac3a9213b23d9c6c/2",
+          "text": "The amended rooftop permit allows entry between 22:00 and 02:00 for the next two weeks. No night-sky observation has been conducted under this amended permit yet."
+        }
+      }
+    },
+    {
+      "id": "new-consent-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://bdf6c19d62b4c44f/1",
+            "text": "We withheld release of the 60-record interview dataset because the consent forms did not authorize sharing records with external researchers. The records remain stored internally."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://bdf6c19d62b4c44f/2",
+          "text": "Participants for 24 of the 60 records have signed new consent permitting external noncommercial research use of those 24 records. Consent for the remaining 36 records has not changed."
+        }
+      }
+    },
+    {
+      "id": "new-deadline-correction",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://c1f67919f1dcf0e6/1",
+            "text": "The deadline for submitting the Cedar report is 15 August 2026. Its reviewer is Rina."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://c1f67919f1dcf0e6/2",
+          "text": "I explicitly correct our earlier Cedar report deadline entry to 18 August 2026. Rina is still its reviewer."
+        }
+      }
+    },
+    {
+      "id": "new-partition-coexist",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://d011d921f711c528/1",
+            "text": "On the validation split, classifier Nova achieved 94 percent accuracy."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://d011d921f711c528/2",
+          "text": "On the geographically separate test split, classifier Nova achieved 86 percent accuracy."
+        }
+      }
+    },
+    {
+      "id": "new-threads-coexist",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://d206b77060cca8a9/1",
+            "text": "For dataset D and build12, the parser processes 100 files per minute with one worker."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://d206b77060cca8a9/2",
+          "text": "For dataset D and build12, the parser processes 260 files per minute with four workers."
+        }
+      }
+    },
+    {
+      "id": "new-port-conflict",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://dfccdbbf02fca76d/1",
+            "text": "For service Kappa deployment D2, my configuration report lists the listening port as 8081."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://dfccdbbf02fca76d/2",
+          "text": "For the same service Kappa deployment D2, my configuration report lists the listening port as 8082. This is my independent report, not a retraction of the earlier report."
+        }
+      }
+    },
+    {
+      "id": "new-edge-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://e26afee74d7a64a8/1",
+            "text": "We rejected deployment of the Atlas classifier to the 8 GB field device because its original model requires 32 GB of memory. Deployment also requires at least 90 percent accuracy."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://e26afee74d7a64a8/2",
+          "text": "The quantized Atlas model uses 6.2 GB on the same 8 GB field device. The held-out accuracy of that quantized model is 92 percent."
+        }
+      }
+    },
+    {
+      "id": "release-correction",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://release-correction/1/Mina",
+            "text": "For release Cedar, the upload cap is 500 MB. The release owner is Hana."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://release-correction/2/Jun",
+          "text": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner."
+        }
+      }
+    },
+    {
+      "id": "rejected-calendar",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://rejected-calendar/1/Mina",
+            "text": "For the Delta release, the review meeting is on Monday."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://rejected-calendar/2/Jun",
+          "text": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday."
+        }
+      }
+    },
+    {
+      "id": "compression-conditions",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://compression-conditions/1/Mina",
+            "text": "On the archive benchmark, JPEG quality80 produced files of 600 KB."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://compression-conditions/2/Jun",
+          "text": "On the same archive benchmark, lossless PNG produced files of 900 KB. This used a different encoding from JPEG quality80."
+        }
+      }
+    },
+    {
+      "id": "queue-disagreement",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://queue-disagreement/1/Mina",
+            "text": "For queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://queue-disagreement/2/Jun",
+          "text": "For queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7. I am reporting an independent measurement, not correcting the earlier report."
+        }
+      }
+    },
+    {
+      "id": "writer-reopen",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://writer-reopen/1/Mina",
+            "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://writer-reopen/2/Jun",
+          "text": "Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently."
+        }
+      }
+    },
+    {
+      "id": "writer-near-miss",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://writer-near-miss/1/Mina",
+            "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://writer-near-miss/2/Jun",
+          "text": "Ledger version4 now completes each serial write in 8 ms after index tuning. It still permits only one writer; no concurrency change was made."
+        }
+      }
+    },
+    {
+      "id": "cache-reopen",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://cache-reopen/1/Mina",
+            "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://cache-reopen/2/Jun",
+          "text": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. The new cache deletes entries after 20 seconds."
+        }
+      }
+    },
+    {
+      "id": "cache-near-miss",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://cache-near-miss/1/Mina",
+            "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://cache-near-miss/2/Jun",
+          "text": "A cache of public product images improved page speed by 15 percent. The session-identifier retention policy has not changed."
+        }
+      }
+    },
+    {
+      "id": "new-temperature",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Ada",
+          "observed_at": "2026-06-01T10:00:00Z",
+          "source": {
+            "speaker": "Ada",
+            "location": "synthetic://completion/Ada/1",
+            "text": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Ben",
+        "observed_at": "2026-06-02T10:00:00Z",
+        "source": {
+          "speaker": "Ben",
+          "location": "synthetic://completion/Ben/2",
+          "text": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor."
+        }
+      }
+    },
+    {
+      "id": "new-retention",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Cora",
+          "observed_at": "2026-06-01T10:00:00Z",
+          "source": {
+            "speaker": "Cora",
+            "location": "synthetic://completion/Cora/1",
+            "text": "For the Mira audit, the retention period is 90 days."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Dan",
+        "observed_at": "2026-06-02T10:00:00Z",
+        "source": {
+          "speaker": "Dan",
+          "location": "synthetic://completion/Dan/2",
+          "text": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days."
+        }
+      }
+    },
+    {
+      "id": "new-vote-conflict",
+      "split": "known_regression",
+      "initial": [
+        {
+          "owner": "Eda",
+          "observed_at": "2026-06-01T10:00:00Z",
+          "source": {
+            "speaker": "Eda",
+            "location": "synthetic://completion/Eda/1",
+            "text": "For relay Sol, the interval is 6 seconds."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Finn",
+        "observed_at": "2026-06-02T10:00:00Z",
+        "source": {
+          "speaker": "Finn",
+          "location": "synthetic://completion/Finn/2",
+          "text": "I explicitly correct the interval for the same Sol relay to 9 seconds."
+        }
+      }
+    }
+  ]
+}

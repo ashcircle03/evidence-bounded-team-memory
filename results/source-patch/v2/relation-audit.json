@@ -1,0 +1,1785 @@
+[
+  {
+    "case_id": "release-correction",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "correction"
+    ],
+    "grounded_relation_correct": true,
+    "reason": "Unchanged grounded correction.",
+    "comparison_errors": [],
+    "comparison_audit": [],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "eb65c257995f86bfa60fab11",
+          "decisions": []
+        }
+      ],
+      "suppressed_decision_candidates": []
+    },
+    "proposals": [
+      {
+        "history": [
+          "eb65c257995f86bfa60fab11"
+        ],
+        "incoming": {
+          "end": 89,
+          "location": "synthetic-state://release-correction/2/Jun",
+          "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB.",
+          "source_id": "23844b2e07c75d46794d9b50",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "incoming_assertion": {
+          "end": 89,
+          "location": "synthetic-state://release-correction/2/Jun",
+          "quote": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB.",
+          "source_id": "23844b2e07c75d46794d9b50",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "correction",
+        "previous": {
+          "end": 44,
+          "location": "synthetic-state://release-correction/1/Mina",
+          "quote": "For release Cedar, the upload cap is 500 MB.",
+          "source_id": "eb65c257995f86bfa60fab11",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "previous_assertion": {
+          "end": 44,
+          "location": "synthetic-state://release-correction/1/Mina",
+          "quote": "For release Cedar, the upload cap is 500 MB.",
+          "source_id": "eb65c257995f86bfa60fab11",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "The incoming report explicitly corrects the upload cap for the Cedar release from 500 MB to 480 MB, which is a factual change about the same attribute under the same conditions.",
+        "reviewer": "Mina",
+        "id": "690410db23ae1a45ff5ae02a",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "rejected-calendar",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": false,
+    "reason": "A meeting schedule without a rationale was extracted as a reasoned decision; correction became reconsideration.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "6c43fdcd030e1db50e8a29ed",
+          "decision": {
+            "source_id": "6c43fdcd030e1db50e8a29ed",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "6c43fdcd030e1db50e8a29ed",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "For the Delta release, the review meeting is on Monday.",
+          "basis_quote": "For the Delta release, the review meeting is on Monday.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "2fbd009ee03ef23ead84287f",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "6c43fdcd030e1db50e8a29ed",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "6c43fdcd030e1db50e8a29ed",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "6c43fdcd030e1db50e8a29ed",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "2fbd009ee03ef23ead84287f",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "2fbd009ee03ef23ead84287f"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "6c43fdcd030e1db50e8a29ed",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "6c43fdcd030e1db50e8a29ed",
+          "old_quote": "For the Delta release, the review meeting is on Monday.",
+          "new_quote": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.",
+          "reason": "The incoming report explicitly corrects the meeting day for the Delta release from Monday to Tuesday, indicating a factual change in the schedule.",
+          "old_assertion": "For the Delta release, the review meeting is on Monday.",
+          "new_assertion": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "6c43fdcd030e1db50e8a29ed"
+        ],
+        "incoming": {
+          "end": 85,
+          "location": "synthetic-state://rejected-calendar/2/Jun",
+          "quote": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday.",
+          "source_id": "2fbd009ee03ef23ead84287f",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 55,
+          "location": "synthetic-state://rejected-calendar/1/Mina",
+          "quote": "For the Delta release, the review meeting is on Monday.",
+          "source_id": "6c43fdcd030e1db50e8a29ed",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: For the Delta release, the review meeting is on Monday. New evidence for reviewing that basis: I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Mina",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "2fbd009ee03ef23ead84287f"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "6c43fdcd030e1db50e8a29ed"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "6c43fdcd030e1db50e8a29ed"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "6c43fdcd030e1db50e8a29ed"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "6c43fdcd030e1db50e8a29ed"
+            },
+            "basis_quote": "For the Delta release, the review meeting is on Monday.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "6c43fdcd030e1db50e8a29ed"
+            },
+            "decision_id": "D0",
+            "decision_quote": "For the Delta release, the review meeting is on Monday.",
+            "target": "6c43fdcd030e1db50e8a29ed"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "2fbd009ee03ef23ead84287f"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "2fbd009ee03ef23ead84287f"
+                }
+              }
+            ]
+          }
+        },
+        "id": "cb1a70b90a13a509246bb1a3",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "compression-conditions",
+    "expected": [
+      "coexist"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": false,
+    "reason": "A measurement was extracted as a reasoned decision; informational coexistence became an unnecessary reconsideration.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "e047c620c14d07a05112e6c4",
+          "decision": {
+            "source_id": "e047c620c14d07a05112e6c4",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "e047c620c14d07a05112e6c4",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+          "basis_quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "0112f60f701d051337ff2fe5",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "e047c620c14d07a05112e6c4",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "e047c620c14d07a05112e6c4",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "e047c620c14d07a05112e6c4",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "0112f60f701d051337ff2fe5",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "0112f60f701d051337ff2fe5"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "e047c620c14d07a05112e6c4",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "coexist",
+          "target": "e047c620c14d07a05112e6c4",
+          "old_quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+          "new_quote": "On the same archive benchmark, lossless PNG produced files of 900 KB.",
+          "reason": "Different compression formats (JPEG quality80 vs. lossless PNG) produce different file sizes under the same benchmark conditions, indicating coexistence of different results for different methods."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "e047c620c14d07a05112e6c4"
+        ],
+        "incoming": {
+          "end": 69,
+          "location": "synthetic-state://compression-conditions/2/Jun",
+          "quote": "On the same archive benchmark, lossless PNG produced files of 900 KB.",
+          "source_id": "0112f60f701d051337ff2fe5",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 66,
+          "location": "synthetic-state://compression-conditions/1/Mina",
+          "quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+          "source_id": "e047c620c14d07a05112e6c4",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: On the archive benchmark, JPEG quality80 produced files of 600 KB. New evidence for reviewing that basis: On the same archive benchmark, lossless PNG produced files of 900 KB. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Mina",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "0112f60f701d051337ff2fe5"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "e047c620c14d07a05112e6c4"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "e047c620c14d07a05112e6c4"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "e047c620c14d07a05112e6c4"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "e047c620c14d07a05112e6c4"
+            },
+            "basis_quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "e047c620c14d07a05112e6c4"
+            },
+            "decision_id": "D0",
+            "decision_quote": "On the archive benchmark, JPEG quality80 produced files of 600 KB.",
+            "target": "e047c620c14d07a05112e6c4"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "0112f60f701d051337ff2fe5"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "0112f60f701d051337ff2fe5"
+                }
+              }
+            ]
+          }
+        },
+        "id": "49d5ab9775dcb5f5b154cf57",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "queue-disagreement",
+    "expected": [
+      "conflict"
+    ],
+    "actual": [
+      "conflict"
+    ],
+    "grounded_relation_correct": true,
+    "reason": "Same-condition independent measurements remain a conflict.",
+    "comparison_errors": [],
+    "comparison_audit": [],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "a8627294f95b36507731268c",
+          "decisions": []
+        }
+      ],
+      "suppressed_decision_candidates": []
+    },
+    "proposals": [
+      {
+        "history": [
+          "a8627294f95b36507731268c"
+        ],
+        "incoming": {
+          "end": 85,
+          "location": "synthetic-state://queue-disagreement/2/Jun",
+          "quote": "For queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7.",
+          "source_id": "717b7fd4054e06c6ee5117a2",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "conflict",
+        "previous": {
+          "end": 85,
+          "location": "synthetic-state://queue-disagreement/1/Mina",
+          "quote": "For queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7.",
+          "source_id": "a8627294f95b36507731268c",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "Both reports claim the P95 latency for queue Nimbus on workload W with one worker and build7, but they provide conflicting values: 23 ms vs. 31 ms. This indicates a discrepancy in the measured latency under the same conditions.",
+        "reviewer": "Mina",
+        "id": "005b421173aacab95e9112a8",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "writer-reopen",
+    "expected": [
+      "reconsider"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": true,
+    "reason": "The stored original version4 one-writer reason and version5 four-writer evidence support another review. No claim that version4 changed or that a new plan was approved. QA also recovers migration test.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "f685e68dfa3f82b10dea1a0b",
+          "decision": {
+            "source_id": "f685e68dfa3f82b10dea1a0b",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "f685e68dfa3f82b10dea1a0b",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "basis_quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "f4f71c348613627ca61c5efb",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "f685e68dfa3f82b10dea1a0b",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "f685e68dfa3f82b10dea1a0b",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "f685e68dfa3f82b10dea1a0b",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "f4f71c348613627ca61c5efb",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "f4f71c348613627ca61c5efb"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "f685e68dfa3f82b10dea1a0b",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "f685e68dfa3f82b10dea1a0b",
+          "old_quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "new_quote": "Ledger version5 now permits four simultaneous writers.",
+          "reason": "The incoming report states that Ledger version5 now permits four simultaneous writers, which directly contradicts the earlier claim that version4 permits only one writer. This correction is necessary because the new information changes the factual basis of the earlier report.",
+          "old_assertion": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "new_assertion": "Ledger version5 now permits four simultaneous writers."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "f685e68dfa3f82b10dea1a0b"
+        ],
+        "incoming": {
+          "end": 54,
+          "location": "synthetic-state://writer-reopen/2/Jun",
+          "quote": "Ledger version5 now permits four simultaneous writers.",
+          "source_id": "f4f71c348613627ca61c5efb",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 93,
+          "location": "synthetic-state://writer-reopen/1/Mina",
+          "quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+          "source_id": "f685e68dfa3f82b10dea1a0b",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: We postponed parallel writes to the Ledger database because version4 permits only one writer. New evidence for reviewing that basis: Ledger version5 now permits four simultaneous writers. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Mina",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "f4f71c348613627ca61c5efb"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "f685e68dfa3f82b10dea1a0b"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "f685e68dfa3f82b10dea1a0b"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "f685e68dfa3f82b10dea1a0b"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "f685e68dfa3f82b10dea1a0b"
+            },
+            "basis_quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "f685e68dfa3f82b10dea1a0b"
+            },
+            "decision_id": "D0",
+            "decision_quote": "We postponed parallel writes to the Ledger database because version4 permits only one writer.",
+            "target": "f685e68dfa3f82b10dea1a0b"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "f4f71c348613627ca61c5efb"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "f4f71c348613627ca61c5efb"
+                }
+              }
+            ]
+          }
+        },
+        "id": "0674ecc3adb335f3fa449502",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "writer-near-miss",
+    "expected": [],
+    "actual": [],
+    "grounded_relation_correct": false,
+    "reason": "Placeholder target source ID caused a failed receipt. Empty proposals are an error, not a successful no-op.",
+    "comparison_errors": [
+      {
+        "stage": "comparison",
+        "error": "ValueError: Every earlier source must be typed exactly once",
+        "raw": "{\"relations\": null, \"selection_error\": \"ValueError: Every earlier source must be typed exactly once\", \"model_outputs\": [\"{\\n  \\\"sources\\\": [\\n    {\\n      \\\"target\\\": \\\"source ID\\\",\\n      \\\"decisions\\\": [\\n        {\\n          \\\"decision_sentence_ids\\\": [0],\\n          \\\"basis_sentence_ids\\\": [0]\\n        }\\n      ]\\n    }\\n  ]\\n}\"], \"comparison_audit\": []}"
+      }
+    ],
+    "comparison_audit": [],
+    "metadata": {},
+    "proposals": []
+  },
+  {
+    "case_id": "cache-reopen",
+    "expected": [
+      "reconsider"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": true,
+    "reason": "Original prohibition and revised30second policy support reconsideration while preserving original report. QA separately omits20second cache behavior.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "2eb283b980d95fa29838cdaf",
+          "decision": {
+            "source_id": "2eb283b980d95fa29838cdaf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "2eb283b980d95fa29838cdaf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "basis_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "ce761dc9c124ce590147d4a7",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "2eb283b980d95fa29838cdaf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "2eb283b980d95fa29838cdaf",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "2eb283b980d95fa29838cdaf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "ce761dc9c124ce590147d4a7",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "ce761dc9c124ce590147d4a7"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "2eb283b980d95fa29838cdaf",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "2eb283b980d95fa29838cdaf",
+          "old_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "new_quote": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion.",
+          "reason": "The earlier report stated that user-session caching was disabled due to a policy forbidding session identifiers in memory after a request completed. The incoming report clarifies that the revised session policy now permits session identifiers in memory for up to 30 seconds after request completion, which directly contradicts the earlier assertion.",
+          "old_assertion": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "new_assertion": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "2eb283b980d95fa29838cdaf"
+        ],
+        "incoming": {
+          "end": 122,
+          "location": "synthetic-state://cache-reopen/2/Jun",
+          "quote": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion.",
+          "source_id": "ce761dc9c124ce590147d4a7",
+          "speaker": "Jun",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 124,
+          "location": "synthetic-state://cache-reopen/1/Mina",
+          "quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "source_id": "2eb283b980d95fa29838cdaf",
+          "speaker": "Mina",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed. New evidence for reviewing that basis: The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Mina",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "ce761dc9c124ce590147d4a7"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "2eb283b980d95fa29838cdaf"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "2eb283b980d95fa29838cdaf"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "2eb283b980d95fa29838cdaf"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "2eb283b980d95fa29838cdaf"
+            },
+            "basis_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "2eb283b980d95fa29838cdaf"
+            },
+            "decision_id": "D0",
+            "decision_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+            "target": "2eb283b980d95fa29838cdaf"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "ce761dc9c124ce590147d4a7"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "ce761dc9c124ce590147d4a7"
+                }
+              }
+            ]
+          }
+        },
+        "id": "c3d7754534c2e27d422f60a5",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "cache-near-miss",
+    "expected": [],
+    "actual": [],
+    "grounded_relation_correct": true,
+    "reason": "Explicit unchanged assessment, empty patch, old basis retained; unrelated product-image result does not generate a proposal.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "841309d4479a04388fa555bf",
+          "decision": {
+            "source_id": "841309d4479a04388fa555bf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "841309d4479a04388fa555bf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "basis_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "unchanged",
+          "patches": []
+        },
+        "before": {
+          "decision": {
+            "source_id": "841309d4479a04388fa555bf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "841309d4479a04388fa555bf",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "841309d4479a04388fa555bf",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "841309d4479a04388fa555bf",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [],
+        "kind": null,
+        "outcome": "unchanged"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "841309d4479a04388fa555bf",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "841309d4479a04388fa555bf",
+          "old_quote": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "new_quote": "The session-identifier retention policy has not changed.",
+          "reason": "The session-identifier retention policy has not changed, which contradicts the earlier claim that it was disabled due to policy. The new evidence indicates the policy remains in effect, so the earlier assertion about disabling caching is incorrect.",
+          "old_assertion": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed.",
+          "new_assertion": "The session-identifier retention policy has not changed."
+        }
+      ]
+    },
+    "proposals": []
+  },
+  {
+    "case_id": "new-temperature",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": false,
+    "reason": "Temperature observation without a reasoned action was mis-extracted as a decision; correction became reconsideration.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "b596dc2bf6776986bf84d7e6",
+          "decision": {
+            "source_id": "b596dc2bf6776986bf84d7e6",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "b596dc2bf6776986bf84d7e6",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "basis_quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "65c73db907509841d81c6856",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "b596dc2bf6776986bf84d7e6",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "b596dc2bf6776986bf84d7e6",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "b596dc2bf6776986bf84d7e6",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "65c73db907509841d81c6856",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "65c73db907509841d81c6856"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "b596dc2bf6776986bf84d7e6",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "b596dc2bf6776986bf84d7e6",
+          "old_quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "new_quote": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.",
+          "reason": "The incoming report explicitly corrects the operating temperature of the Iris chamber from 40 C to 45 C, while maintaining the supervisor as Nuri. This is a direct factual correction to the earlier report.",
+          "old_assertion": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "new_assertion": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "b596dc2bf6776986bf84d7e6"
+        ],
+        "incoming": {
+          "end": 109,
+          "location": "synthetic://completion/Ben/2",
+          "quote": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.",
+          "source_id": "65c73db907509841d81c6856",
+          "speaker": "Ben",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 76,
+          "location": "synthetic://completion/Ada/1",
+          "quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+          "source_id": "b596dc2bf6776986bf84d7e6",
+          "speaker": "Ada",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri. New evidence for reviewing that basis: I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Ada",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "65c73db907509841d81c6856"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b596dc2bf6776986bf84d7e6"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b596dc2bf6776986bf84d7e6"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b596dc2bf6776986bf84d7e6"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b596dc2bf6776986bf84d7e6"
+            },
+            "basis_quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b596dc2bf6776986bf84d7e6"
+            },
+            "decision_id": "D0",
+            "decision_quote": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri.",
+            "target": "b596dc2bf6776986bf84d7e6"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "65c73db907509841d81c6856"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "65c73db907509841d81c6856"
+                }
+              }
+            ]
+          }
+        },
+        "id": "3671f5ea7bff8add8a38a69b",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "new-retention",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": false,
+    "reason": "Retention fact without reason was mis-extracted as a decision; correction became reconsideration.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "1fea622c3384dc5b477d3fbc",
+          "decision": {
+            "source_id": "1fea622c3384dc5b477d3fbc",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "1fea622c3384dc5b477d3fbc",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "For the Mira audit, the retention period is 90 days.",
+          "basis_quote": "For the Mira audit, the retention period is 90 days.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "b7c75e13ab1d01dd0967486a",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "1fea622c3384dc5b477d3fbc",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "1fea622c3384dc5b477d3fbc",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "1fea622c3384dc5b477d3fbc",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "b7c75e13ab1d01dd0967486a",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "b7c75e13ab1d01dd0967486a"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "1fea622c3384dc5b477d3fbc",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "1fea622c3384dc5b477d3fbc",
+          "old_quote": "For the Mira audit, the retention period is 90 days.",
+          "new_quote": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days.",
+          "reason": "The incoming report explicitly corrects the retention period for the Mira audit from 90 days to 30 days, indicating a change in the previously reported fact.",
+          "old_assertion": "For the Mira audit, the retention period is 90 days.",
+          "new_assertion": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "1fea622c3384dc5b477d3fbc"
+        ],
+        "incoming": {
+          "end": 90,
+          "location": "synthetic://completion/Dan/2",
+          "quote": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days.",
+          "source_id": "b7c75e13ab1d01dd0967486a",
+          "speaker": "Dan",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 52,
+          "location": "synthetic://completion/Cora/1",
+          "quote": "For the Mira audit, the retention period is 90 days.",
+          "source_id": "1fea622c3384dc5b477d3fbc",
+          "speaker": "Cora",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: For the Mira audit, the retention period is 90 days. New evidence for reviewing that basis: I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Cora",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b7c75e13ab1d01dd0967486a"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "1fea622c3384dc5b477d3fbc"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "1fea622c3384dc5b477d3fbc"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "1fea622c3384dc5b477d3fbc"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "1fea622c3384dc5b477d3fbc"
+            },
+            "basis_quote": "For the Mira audit, the retention period is 90 days.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "1fea622c3384dc5b477d3fbc"
+            },
+            "decision_id": "D0",
+            "decision_quote": "For the Mira audit, the retention period is 90 days.",
+            "target": "1fea622c3384dc5b477d3fbc"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "b7c75e13ab1d01dd0967486a"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "b7c75e13ab1d01dd0967486a"
+                }
+              }
+            ]
+          }
+        },
+        "id": "69484e254e39427c58b0f3c9",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "case_id": "new-vote-conflict",
+    "expected": [
+      "correction"
+    ],
+    "actual": [
+      "reconsider"
+    ],
+    "grounded_relation_correct": false,
+    "reason": "Interval fact without reason was mis-extracted as a decision; correction became reconsideration.",
+    "comparison_errors": [],
+    "comparison_audit": [
+      {
+        "decision": {
+          "decision_id": "D0",
+          "target": "5d298335633c1323b12c5cba",
+          "decision": {
+            "source_id": "5d298335633c1323b12c5cba",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "5d298335633c1323b12c5cba",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "decision_quote": "For relay Sol, the interval is 6 seconds.",
+          "basis_quote": "For relay Sol, the interval is 6 seconds.",
+          "context_ids": [
+            0
+          ]
+        },
+        "update": {
+          "decision_id": "D0",
+          "assessment": "changed",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis",
+              "value": {
+                "source_id": "b12b16f0086cb5ba5e9cecc5",
+                "sentence_ids": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "before": {
+          "decision": {
+            "source_id": "5d298335633c1323b12c5cba",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "5d298335633c1323b12c5cba",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "after": {
+          "decision": {
+            "source_id": "5d298335633c1323b12c5cba",
+            "sentence_ids": [
+              0
+            ]
+          },
+          "basis": {
+            "source_id": "b12b16f0086cb5ba5e9cecc5",
+            "sentence_ids": [
+              0
+            ]
+          }
+        },
+        "patches": [
+          {
+            "op": "replace",
+            "path": "/basis/source_id",
+            "value": "b12b16f0086cb5ba5e9cecc5"
+          }
+        ],
+        "kind": "reconsider",
+        "outcome": "proposal"
+      }
+    ],
+    "metadata": {
+      "decision_extraction": [
+        {
+          "target": "5d298335633c1323b12c5cba",
+          "decisions": [
+            {
+              "decision_sentence_ids": [
+                0
+              ],
+              "basis_sentence_ids": [
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "suppressed_decision_candidates": [
+        {
+          "kind": "correction",
+          "target": "5d298335633c1323b12c5cba",
+          "old_quote": "For relay Sol, the interval is 6 seconds.",
+          "new_quote": "I explicitly correct the interval for the same Sol relay to 9 seconds.",
+          "reason": "The incoming report explicitly corrects the interval for relay Sol from 6 seconds to 9 seconds, indicating a change in the previously reported value.",
+          "old_assertion": "For relay Sol, the interval is 6 seconds.",
+          "new_assertion": "I explicitly correct the interval for the same Sol relay to 9 seconds."
+        }
+      ]
+    },
+    "proposals": [
+      {
+        "history": [
+          "5d298335633c1323b12c5cba"
+        ],
+        "incoming": {
+          "end": 70,
+          "location": "synthetic://completion/Finn/2",
+          "quote": "I explicitly correct the interval for the same Sol relay to 9 seconds.",
+          "source_id": "b12b16f0086cb5ba5e9cecc5",
+          "speaker": "Finn",
+          "start": 0
+        },
+        "kind": "reconsider",
+        "previous": {
+          "end": 41,
+          "location": "synthetic://completion/Eda/1",
+          "quote": "For relay Sol, the interval is 6 seconds.",
+          "source_id": "5d298335633c1323b12c5cba",
+          "speaker": "Eda",
+          "start": 0
+        },
+        "reason": "Earlier decision and its basis: For relay Sol, the interval is 6 seconds. New evidence for reviewing that basis: I explicitly correct the interval for the same Sol relay to 9 seconds. This proposes reconsideration; the earlier scoped report remains stored and no changed plan is approved.",
+        "reviewer": "Eda",
+        "state_delta": {
+          "after": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "b12b16f0086cb5ba5e9cecc5"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "5d298335633c1323b12c5cba"
+            }
+          },
+          "before": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "5d298335633c1323b12c5cba"
+            },
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "5d298335633c1323b12c5cba"
+            }
+          },
+          "decision": {
+            "basis": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "5d298335633c1323b12c5cba"
+            },
+            "basis_quote": "For relay Sol, the interval is 6 seconds.",
+            "context_ids": [
+              0
+            ],
+            "decision": {
+              "sentence_ids": [
+                0
+              ],
+              "source_id": "5d298335633c1323b12c5cba"
+            },
+            "decision_id": "D0",
+            "decision_quote": "For relay Sol, the interval is 6 seconds.",
+            "target": "5d298335633c1323b12c5cba"
+          },
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/basis/source_id",
+              "value": "b12b16f0086cb5ba5e9cecc5"
+            }
+          ],
+          "update": {
+            "assessment": "changed",
+            "decision_id": "D0",
+            "patches": [
+              {
+                "op": "replace",
+                "path": "/basis",
+                "value": {
+                  "sentence_ids": [
+                    0
+                  ],
+                  "source_id": "b12b16f0086cb5ba5e9cecc5"
+                }
+              }
+            ]
+          }
+        },
+        "id": "a14a5dea265a7e52fd908ec0",
+        "status": "pending"
+      }
+    ]
+  }
+]

@@ -1,0 +1,137 @@
+{
+  "cases": [
+    {
+      "id": "writer-reopen",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://writer-reopen/1/Mina",
+            "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://writer-reopen/2/Jun",
+          "text": "Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending-reason",
+          "operation": "ask",
+          "question": "Why were parallel writes postponed, and what new evidence warrants revisiting that decision?"
+        },
+        {
+          "label": "pending-status",
+          "operation": "ask",
+          "question": "What is the review status of this proposal, and what remains established?"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "restart",
+          "operation": "restart"
+        },
+        {
+          "label": "approved-reason",
+          "operation": "ask",
+          "question": "Why were parallel writes postponed, and what new evidence warrants revisiting that decision?"
+        },
+        {
+          "label": "approved-status",
+          "operation": "ask",
+          "question": "What did Mina approve, and what does that approval establish about the earlier decision and any further experiment?"
+        }
+      ],
+      "split": "supplied_correct_relation",
+      "selector": {
+        "kind": "reconsider",
+        "old_sentence_ids": [
+          0,
+          1
+        ],
+        "new_sentence_ids": [
+          0,
+          1
+        ],
+        "reason": "The new report changes the stated constraint that justified the earlier decision; the earlier report remains true under its original conditions."
+      }
+    },
+    {
+      "id": "cache-reopen",
+      "initial": [
+        {
+          "owner": "Mina",
+          "observed_at": "2026-03-01T09:00:00Z",
+          "source": {
+            "speaker": "Mina",
+            "location": "synthetic-state://cache-reopen/1/Mina",
+            "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Jun",
+        "observed_at": "2026-03-02T09:00:00Z",
+        "source": {
+          "speaker": "Jun",
+          "location": "synthetic-state://cache-reopen/2/Jun",
+          "text": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. The new cache deletes entries after 20 seconds."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending-reason",
+          "operation": "ask",
+          "question": "What changed that makes reviewing the earlier session-cache decision warranted?"
+        },
+        {
+          "label": "pending-status",
+          "operation": "ask",
+          "question": "What is the review status of this proposal, and what remains established?"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "restart",
+          "operation": "restart"
+        },
+        {
+          "label": "approved-reason",
+          "operation": "ask",
+          "question": "What changed that makes reviewing the earlier session-cache decision warranted?"
+        },
+        {
+          "label": "approved-status",
+          "operation": "ask",
+          "question": "What did Mina approve, and what does that approval establish about the earlier decision and any further experiment?"
+        }
+      ],
+      "split": "supplied_correct_relation",
+      "selector": {
+        "kind": "reconsider",
+        "old_sentence_ids": [
+          0
+        ],
+        "new_sentence_ids": [
+          0,
+          1
+        ],
+        "reason": "The new report changes the stated constraint that justified the earlier decision; the earlier report remains true under its original conditions."
+      }
+    }
+  ]
+}

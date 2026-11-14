@@ -28,20 +28,12 @@ jobs:
           persist-credentials: false
       - name: Install the frozen upstream file manifest
         run: cp evaluation/cupmem/upstream-manifest.json .cache/cupmem-upstream/UPSTREAM_MANIFEST.json
-      - name: Run unit tests
+      - name: Install core package and test tools
+        run: python -m pip install -e '.[dev]'
+      - name: Run core contracts
         env:
           CUPMEM_UPSTREAM_ROOT: ${{ github.workspace }}/.cache/cupmem-upstream
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import unittest
-          paths = sorted(p for p in Path('tests').glob('test_*.py')
-                         if not p.name.startswith(('test_reference_', 'test_contextual_'))
-                         and p.name != 'test_service.py')
-          suite = unittest.TestLoader().loadTestsFromNames(['tests.'+p.stem for p in paths])
-          result = unittest.TextTestRunner(verbosity=2).run(suite)
-          raise SystemExit(not result.wasSuccessful())
-          PY
+        run: python scripts/check.py core
       - name: Replay the two-clone Git demo
         run: |
           python -m team_memory demo > demo.json
@@ -88,7 +80,7 @@ jobs:
       - name: Install explicit reference dependencies (no model weights)
         run: |
           python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
-          python -m pip install -r requirements-reference.txt
+          python -m pip install -e '.[reference,dev]'
           python -m nltk.downloader -d "$NLTK_DATA" punkt_tab stopwords
           python - <<'PY'
           from huggingface_hub import snapshot_download
@@ -96,25 +88,10 @@ jobs:
               local_dir='.cache/qwen-tokenizer', allow_patterns=['tokenizer*', 'config.json', 'vocab.json', 'merges.txt', 'special_tokens_map.json'])
           PY
       - name: Run reference and public service contracts
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import unittest
-          paths = sorted(p for p in Path('tests').glob('test_*.py')
-                         if p.name.startswith(('test_reference_', 'test_contextual_'))
-                         or p.name == 'test_service.py')
-          suite = unittest.TestLoader().loadTestsFromNames(['tests.'+p.stem for p in paths])
-          result = unittest.TextTestRunner(verbosity=2).run(suite)
-          raise SystemExit(not result.wasSuccessful() or bool(result.skipped))
-          PY
+        run: python scripts/check.py reference --fail-on-skip
       - name: Test the deployable package outside the checkout
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import tarfile
-          with tarfile.open('.cache/service-package.tar.gz', 'w:gz') as archive:
-              for path in sorted(Path('team_memory').rglob('*')):
-                  if path.is_file() and (path.suffix in ('.py', '.json', '.md', '.txt') or path.name == 'LICENSE'):
-                      archive.add(path, arcname=str(path))
-          PY
+          python -m team_memory.packaging .cache/service-package.tar.gz > .cache/service-package-manifest.json
           python -m evaluation.service_v2_package_check .cache/service-package.tar.gz
+      - name: Build an installable wheel without model weights
+        run: python -m pip wheel --no-deps --no-build-isolation . -w .cache/wheels

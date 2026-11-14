@@ -1,0 +1,338 @@
+{
+  "old_extraction_received_no_incoming": true,
+  "cases": 11,
+  "failed_cases": [
+    "release-correction",
+    "compression-conditions",
+    "new-temperature"
+  ],
+  "empty_extractions": [
+    "release-correction",
+    "new-temperature"
+  ],
+  "semantic_correctness_verified": false,
+  "cases_detail": [
+    {
+      "case_id": "release-correction",
+      "model_calls": 1,
+      "extracted_records": 0,
+      "receipt_errors": [
+        {
+          "stage": "comparison",
+          "error": "JSONDecodeError: Extra data: line 1 column 445 (char 444)",
+          "raw": "{\"relations\": null, \"selection_error\": \"JSONDecodeError: Extra data: line 1 column 445 (char 444)\", \"model_outputs\": [\"{\\\"records\\\":[{\\\"target\\\":\\\"eb65c257995f86bfa60fab11\\\",\\\"record_type\\\":\\\"fact\\\",\\\"subject\\\":\\\"release Cedar\\\",\\\"attribute\\\":\\\"upload cap\\\",\\\"value\\\":\\\"500 MB\\\",\\\"conditions\\\":\\\"release Cedar\\\",\\\"sentence_ids\\\":[0],\\\"assertion_id\\\":0,\\\"decision_sentence_ids\\\":[]},{\\\"target\\\":\\\"eb65c257995f86bfa60fab11\\\",\\\"record_type\\\":\\\"fact\\\",\\\"subject\\\":\\\"release Cedar\\\",\\\"attribute\\\":\\\"owner\\\",\\\"value\\\":\\\"Hana\\\",\\\"conditions\\\":\\\"release Cedar\\\",\\\"sentence_ids\\\":[1],\\\"assertion_id\\\":1,\\\"decision_sentence_ids\\\":[]}]}}\"], \"comparison_audit\": []}"
+        }
+      ],
+      "audit_records": 0,
+      "proposal_count": 0,
+      "updates": [],
+      "eligible_negative": false
+    },
+    {
+      "case_id": "rejected-calendar",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 1,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "fact",
+          "subject": "review meeting",
+          "attribute": "scheduled date",
+          "before": {
+            "value": "Monday",
+            "conditions": "Delta release"
+          },
+          "after": {
+            "value": "Tuesday",
+            "conditions": "Delta release"
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/value",
+              "value": "Tuesday"
+            }
+          ],
+          "kind": "correction",
+          "outcome": "proposal",
+          "reason": "The incoming text explicitly corrects the previously stated meeting day for the Delta release from Monday to Tuesday."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "compression-conditions",
+      "model_calls": 1,
+      "extracted_records": 1,
+      "receipt_errors": [
+        {
+          "stage": "comparison",
+          "error": "KeyError: 'decision_sentence_ids'",
+          "raw": "{\"relations\": null, \"selection_error\": \"KeyError: 'decision_sentence_ids'\", \"model_outputs\": [\"{\\\"records\\\":[{\\\"target\\\":\\\"e047c620c14d07a05112e6c4\\\",\\\"record_type\\\":\\\"fact\\\",\\\"subject\\\":\\\"JPEG quality80\\\",\\\"attribute\\\":\\\"file size\\\",\\\"value\\\":\\\"600 KB\\\",\\\"conditions\\\":\\\"archive benchmark\\\",\\\"sentence_ids\\\":[0],\\\"assertion_id\\\":0}]}\"], \"comparison_audit\": []}"
+        }
+      ],
+      "audit_records": 0,
+      "proposal_count": 0,
+      "updates": [],
+      "eligible_negative": false
+    },
+    {
+      "case_id": "queue-disagreement",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 1,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "fact",
+          "subject": "queue Nimbus",
+          "attribute": "P95 latency",
+          "before": {
+            "value": "23 ms",
+            "conditions": "workload W, one worker, build7"
+          },
+          "after": {
+            "value": "31 ms",
+            "conditions": "workload W, one worker, build7"
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/value",
+              "value": "31 ms"
+            }
+          ],
+          "kind": "conflict",
+          "outcome": "proposal",
+          "reason": "The incoming text provides an independent measurement of P95 latency for queue Nimbus under the same conditions, which updates the value from 23 ms to 31 ms."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "writer-reopen",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 1,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "decision",
+          "subject": "parallel writes",
+          "attribute": "permitted by version4",
+          "before": {
+            "value": "false",
+            "conditions": "version4"
+          },
+          "after": {
+            "value": "true",
+            "conditions": "version4"
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/value",
+              "value": "true"
+            }
+          ],
+          "kind": "reconsider",
+          "outcome": "proposal",
+          "reason": "The incoming text explicitly states that Ledger version5 now permits four simultaneous writers, which directly contradicts the earlier claim that version4 permits only one writer. This indicates that the attribute 'permitted by version4' should be corrected to 'true' as the incoming text refers to version5, not version4."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "writer-near-miss",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 0,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "decision",
+          "subject": "Mina",
+          "attribute": "action taken",
+          "before": {
+            "value": "postponed parallel writes to the Ledger database",
+            "conditions": "version4"
+          },
+          "after": {
+            "value": "postponed parallel writes to the Ledger database",
+            "conditions": "version4"
+          },
+          "patches": [],
+          "kind": null,
+          "outcome": "no_change",
+          "reason": "The incoming text confirms that the action taken was to postpone parallel writes to the Ledger database, as previously stated, and does not contradict or change this claim."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "cache-reopen",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 0,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "decision",
+          "subject": "user-session caching",
+          "attribute": "action taken",
+          "before": {
+            "value": "disabled",
+            "conditions": "policy forbade keeping session identifiers in memory after a request completed"
+          },
+          "after": {
+            "value": "disabled",
+            "conditions": "revised session policy permits session identifiers in memory for up to 30 seconds after request completion"
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/conditions",
+              "value": "revised session policy permits session identifiers in memory for up to 30 seconds after request completion"
+            }
+          ],
+          "kind": null,
+          "outcome": "no_change",
+          "reason": "The incoming text explicitly corrects the earlier claim about the session policy, indicating that session identifiers are now permitted in memory for up to 30 seconds after request completion."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "cache-near-miss",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 0,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "decision",
+          "subject": "user-session caching",
+          "attribute": "action taken",
+          "before": {
+            "value": "disabled",
+            "conditions": "policy forbade keeping session identifiers in memory after a request completed"
+          },
+          "after": {
+            "value": "disabled",
+            "conditions": "The session-identifier retention policy has not changed."
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/conditions",
+              "value": "The session-identifier retention policy has not changed."
+            }
+          ],
+          "kind": null,
+          "outcome": "no_change",
+          "reason": "The new text explicitly states that the session-identifier retention policy has not changed, which directly contradicts the earlier claim that the policy forbade keeping session identifiers in memory after a request completed."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "new-temperature",
+      "model_calls": 1,
+      "extracted_records": 0,
+      "receipt_errors": [
+        {
+          "stage": "comparison",
+          "error": "JSONDecodeError: Extra data: line 1 column 478 (char 477)",
+          "raw": "{\"relations\": null, \"selection_error\": \"JSONDecodeError: Extra data: line 1 column 478 (char 477)\", \"model_outputs\": [\"{\\\"records\\\":[{\\\"target\\\":\\\"b596dc2bf6776986bf84d7e6\\\",\\\"record_type\\\":\\\"fact\\\",\\\"subject\\\":\\\"Iris\\\",\\\"attribute\\\":\\\"operating temperature\\\",\\\"value\\\":\\\"40 C\\\",\\\"conditions\\\":\\\"2026-06-01T10:00:00.000000+00:00\\\",\\\"sentence_ids\\\":[0],\\\"assertion_id\\\":0,\\\"decision_sentence_ids\\\":[]},{\\\"target\\\":\\\"b596dc2bf6776986bf84d7e6\\\",\\\"record_type\\\":\\\"fact\\\",\\\"subject\\\":\\\"Nuri\\\",\\\"attribute\\\":\\\"supervisor\\\",\\\"value\\\":\\\"yes\\\",\\\"conditions\\\":\\\"2026-06-01T10:00:00.000000+00:00\\\",\\\"sentence_ids\\\":[0],\\\"assertion_id\\\":0,\\\"decision_sentence_ids\\\":[]}]}}\"], \"comparison_audit\": []}"
+        }
+      ],
+      "audit_records": 0,
+      "proposal_count": 0,
+      "updates": [],
+      "eligible_negative": false
+    },
+    {
+      "case_id": "new-retention",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 1,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "fact",
+          "subject": "Mira audit",
+          "attribute": "retention period",
+          "before": {
+            "value": "90 days",
+            "conditions": "2026-06-01T10:00:00.000000+00:00"
+          },
+          "after": {
+            "value": "30 days",
+            "conditions": "2026-06-01T10:00:00.000000+00:00"
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/value",
+              "value": "30 days"
+            }
+          ],
+          "kind": "correction",
+          "outcome": "proposal",
+          "reason": "The incoming text explicitly corrects the retention period for the Mira audit from 90 days to 30 days."
+        }
+      ],
+      "eligible_negative": true
+    },
+    {
+      "case_id": "new-vote-conflict",
+      "model_calls": 2,
+      "extracted_records": 1,
+      "receipt_errors": [],
+      "audit_records": 1,
+      "proposal_count": 1,
+      "updates": [
+        {
+          "record_id": "R0",
+          "record_type": "fact",
+          "subject": "relay Sol",
+          "attribute": "interval",
+          "before": {
+            "value": "6 seconds",
+            "conditions": "2026-06-01T10:00:00.000000+00:00"
+          },
+          "after": {
+            "value": "9 seconds",
+            "conditions": "2026-06-01T10:00:00.000000+00:00"
+          },
+          "patches": [
+            {
+              "op": "replace",
+              "path": "/value",
+              "value": "9 seconds"
+            }
+          ],
+          "kind": "correction",
+          "outcome": "proposal",
+          "reason": "The incoming text explicitly corrects the earlier claim about the interval for relay Sol from 6 seconds to 9 seconds."
+        }
+      ],
+      "eligible_negative": true
+    }
+  ]
+}

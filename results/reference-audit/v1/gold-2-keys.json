@@ -1,0 +1,49 @@
+{
+  "legacy_key": "evaluation/qa20/evaluator/key.json",
+  "existing_stream_key": "evaluation/service_v3/stream-keys.json",
+  "transfer": {
+    "new-temperature/pending": {
+      "required": [
+        "40 C established",
+        "45 C proposed, pending approval"
+      ],
+      "forbidden": [
+        "45 C current established"
+      ]
+    },
+    "new-temperature/approved": {
+      "required": [
+        "45 C established",
+        "Nuri supervisor",
+        "owner approval citation"
+      ]
+    },
+    "new-temperature/historical": {
+      "required": [
+        "40 C originally reported by Ada"
+      ]
+    },
+    "new-retention/current": {
+      "required": [
+        "90 days established",
+        "30-day change rejected"
+      ],
+      "forbidden": [
+        "30 days current established"
+      ]
+    },
+    "new-retention/proposal": {
+      "required": [
+        "Dan proposed30 days",
+        "owner rejected the change"
+      ]
+    },
+    "new-vote-conflict/current": {
+      "required": [
+        "6 seconds remains established",
+        "9 seconds proposed",
+        "owner votes conflict; not approved"
+      ]
+    }
+  }
+}

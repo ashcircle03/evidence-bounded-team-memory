@@ -1,0 +1,343 @@
+{
+  "new-resume-reconsider/pending-reason": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Preserves version2 inability and version3 continuation-token recovery evidence; cites both originals and the pending reconsideration snapshot.",
+    "desired_reconsideration_flow_met": true
+  },
+  "new-resume-reconsider/approved-state": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Correctly states review-only approval and preserved old facts, but explicitly calls the incoming version3 report a proposed correction approved for reconsideration. Relation-kind confusion remains despite correct structured input.",
+    "desired_reconsideration_flow_met": false
+  },
+  "new-permit-reconsider/pending-reason": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Correct old08-18 and new22-02 two-week window; explicitly says no night observation yet. Both originals cited. This question does not require stating the pending status.",
+    "desired_reconsideration_flow_met": true
+  },
+  "new-permit-reconsider/approved-state": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Correct owner approval authorizes review only; original facts retained, new22-02 for two weeks and no observation yet preserved. Both originals and vote snapshot cited.",
+    "desired_reconsideration_flow_met": true
+  },
+  "new-consent-reconsider/pending-reason": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Preserves24 newly consented noncommercial records and36 still restricted with both originals. However comparator only made informational coexistence, so no required reconsideration proposal exists.",
+    "desired_reconsideration_flow_met": false
+  },
+  "new-consent-reconsider/approved-state": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": false,
+    "reason": "No review proposal or owner vote exists, yet answer asserts Alex approved release of24 records. Participant consent is not Alex owner approval. Original-source citations do not support this claim.",
+    "desired_reconsideration_flow_met": false
+  },
+  "new-edge-reconsider/pending-reason": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Core32GB/8GB,90percent,6.2GB/92percent conditions and pending review are correct, but assigns proposal authorship to Alex. Snapshot only names Alex as reviewer; proposal authorship is not established.",
+    "desired_reconsideration_flow_met": false,
+    "core_conditions_correct": true,
+    "unsupported_actor_claim": true
+  },
+  "new-edge-reconsider/approved-state": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Review-only approval, original32GB and90percent condition, new6.2GB and92percent all retained with both originals and vote snapshot. Further verification wording is vague but does not falsely state that92 is below90 or assert automatic deployment.",
+    "desired_reconsideration_flow_met": true
+  },
+  "release-correction/pending": {
+    "answer_correct": true,
+    "source_evidence_complete": false,
+    "state_citation_complete": true,
+    "reason": "500MB established,480MB pending and unapproved. Only earlier original and review snapshot cited; incoming original not directly cited. Same strict-coverage limitation as reference."
+  },
+  "release-correction/approved": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Starts correctly with approved480MB and superseded500MB, but ends with the unqualified present-tense assertion For release Cedar, the upload cap is500MB. Contradictory current-value answer is a new regression; old answer did not append this sentence."
+  },
+  "release-correction/historical": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Mina original500MB correctly separated from approved480MB; originals and vote snapshot cited."
+  },
+  "release-correction/unrelated": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Hana remains owner, supported by original record."
+  },
+  "rejected-calendar/rejected": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Monday retained and Tuesday rejected; originals and rejection snapshot cited. A rejection sentence cites source2 alone; core rejection also cites snapshot3, so not perfect sentence attribution."
+  },
+  "queue-disagreement/both": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Both23ms and31ms kept with the identical workload, worker and build conditions; pending-conflict snapshot cited."
+  },
+  "writer-reopen/plan": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Newversion5 ability is incorrectly described as contradicting version4 and a pending correction. Correct reconsideration was not created; QA repeats the wrong relation."
+  },
+  "writer-near-miss/plan": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Correctly says faster serial writes do not remove the unchanged one-writer restriction; cites both originals, no false owner approval."
+  },
+  "cache-reopen/plan": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Correctly mentions new30s policy but omits newcache20s deletion. Comparator returned invalid source ID and created no proposal; this is not successful abstention."
+  },
+  "cache-near-miss/plan": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Correctly says unchanged session policy leaves the disabling reason intact. Describes actual pending reconsideration without claiming approval. Upstream proposal is unnecessary and scored separately."
+  },
+  "new-temperature/pending": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "40C established and45C pending, with earlier original plus traceable review snapshot. Same existing key convention as reference."
+  },
+  "new-temperature/approved": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "45C and Nuri preserved; incoming original and Ada approval snapshot cited. Historical40C available in snapshot; empty Source headings are formatting noise."
+  },
+  "new-temperature/historical": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Original Ada40C preserved with original evidence."
+  },
+  "new-retention/current": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "90days retained, Dan30days rejected; originals and actual vote snapshot support answer."
+  },
+  "new-retention/proposal": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Dan30day proposal and rejection separately stated and supported by original and vote snapshot."
+  },
+  "new-vote-conflict/current": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": true,
+    "reason": "Correct no approval,6s established,9s proposed; conflicting owner votes cited."
+  },
+  "compression-conditions/both": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. JPEG quality80=600KB and losslessPNG=900KB retained with their sources and conditions.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-d474ab3d7822c8ac/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. fetch.output explicitly defaults to full.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-d474ab3d7822c8ac/qa-1": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. merge.conflictStyle source explains zdiff3 removes matching edge lines.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-d474ab3d7822c8ac/qa-2": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. format.subjectPrefix source gives PATCH.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-d474ab3d7822c8ac/qa-3": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. notes.mergeStrategy explicitly defaults to manual.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-d474ab3d7822c8ac/qa-4": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": false,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. Correct grep.extendedRegexp with adjacent source grep.adoc L14-L18: true enables extended-regexp and the setting is ignored outside patternType=default. This supports the option identity and its condition, although the frozen key points to L7-L13; keep the mismatch diagnostic.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-ae24415845ae48a7/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. Both origin and upstream retained with their own original reports; no authoritative winner.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-d30bb1f10fe4bfe8/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. Freshwater L-2 and brackish B-8 both matched to condition-specific original reports.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-702e9009795b2802/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer identifies tzdata; cited PEP615 abstract explicitly states system-data fallback to PyPI tzdata.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-702e9009795b2802/qa-1": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer gives NAME := expr with PEP572 abstract and syntax section; both citations support the core notation.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-702e9009795b2802/qa-2": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. PEP597 EncodingWarning and omitted-encoding trigger are stated together.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-702e9009795b2802/qa-3": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer gives ValueError with strict=True and differing lengths; cited PEP618 specification supports it.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-702e9009795b2802/qa-4": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. PEP669 explicitly adds sys.monitoring for relevant functions/constants.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-702e9009795b2802/qa-5": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer gives except* for ExceptionGroup; cited PEP654 rationale and abstract both support it.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-702e9009795b2802/qa-6": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer gives PYTHONBREAKPOINT=0; cited environment-variable section explicitly states disables debugging.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-702e9009795b2802/qa-7": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer identifies tomllib and packaging motivation; cited PEP680 abstract and motivation support requested answer. This does not certify every extra claim about maintenance.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-1d2a1e3271adf133/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh answer preserves both PEP NAME := expr and review-record NAME <- expr, each with its own original source.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": false
+  },
+  "legacy-c000762632771ec9/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. PEP ValueError and Fay LengthMismatchError both preserved with their sources; no winner invented.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-34429cce545ccddd/qa-0": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. Huilan Chen source explicitly says the completed competitive report was uploaded to Confluence.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-34429cce545ccddd/qa-1": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. Xuexin Yin source explicitly estimates at least10 working days for rule development and initial manual verification.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  },
+  "legacy-34429cce545ccddd/qa-2": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "state_citation_complete": null,
+    "fixed_key_location_coverage": true,
+    "reason": "Fresh job120453 raw and complete answer/evidence objects match job120445 exactly. Lizhen Zhou author metadata and original suggestion identify who requested customizable reporting dimensions; Luhao follow-up corroborates incorporation.",
+    "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect.",
+    "exact_raw_and_evidence_equal_reference": true
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "adopt_14b": false,
+  "selected_comparator": "Qwen3-8B (existing default)",
+  "production_changed": false,
+  "gates": {
+    "oracle_reader": false,
+    "comparator": false,
+    "legacy_preserved": true,
+    "state_preserved": false,
+    "new_flow_all_conditions_preserved": false
+  },
+  "comparison": {
+    "8b": {
+      "reconsider": {
+        "correct": 0,
+        "total": 4
+      },
+      "none": {
+        "correct": 0,
+        "total": 4
+      },
+      "correction": {
+        "correct": 4,
+        "total": 4
+      },
+      "conflict": {
+        "correct": 4,
+        "total": 4
+      },
+      "coexist": {
+        "correct": 3,
+        "total": 4
+      },
+      "negative_unnecessary_review": 1,
+      "failed_cases": 1,
+      "rater": "implementation agent, not independent"
+    },
+    "14b": {
+      "reconsider": {
+        "correct": 3,
+        "total": 4
+      },
+      "none": {
+        "correct": 1,
+        "total": 4
+      },
+      "correction": {
+        "correct": 4,
+        "total": 4
+      },
+      "conflict": {
+        "correct": 0,
+        "total": 4
+      },
+      "coexist": {
+        "correct": 2,
+        "total": 4
+      },
+      "negative_unnecessary_review": 1,
+      "failed_cases": 0,
+      "rater": "implementation agent, not independent"
+    }
+  },
+  "regression": {
+    "8b-reference": {
+      "legacy_answer_and_evidence": 20,
+      "state_answer_and_state_evidence": 8,
+      "state_strict_all_evidence": 7
+    },
+    "14b-comparator": {
+      "legacy_answer_and_evidence": 20,
+      "state_answer_and_state_evidence": 7,
+      "state_strict_all_evidence": 6
+    }
+  },
+  "exact_known_raw_and_answer_evidence_matches": {
+    "release-correction/pending": false,
+    "release-correction/approved": false,
+    "release-correction/historical": false,
+    "release-correction/unrelated": false,
+    "rejected-calendar/rejected": false,
+    "compression-conditions/both": true,
+    "queue-disagreement/both": false,
+    "writer-reopen/plan": false,
+    "writer-near-miss/plan": false,
+    "cache-reopen/plan": false,
+    "cache-near-miss/plan": false,
+    "new-temperature/pending": false,
+    "new-temperature/approved": false,
+    "new-temperature/historical": false,
+    "new-retention/current": false,
+    "new-retention/proposal": false,
+    "new-vote-conflict/current": false,
+    "legacy-d474ab3d7822c8ac/qa-0": true,
+    "legacy-d474ab3d7822c8ac/qa-1": true,
+    "legacy-d474ab3d7822c8ac/qa-2": true,
+    "legacy-d474ab3d7822c8ac/qa-3": true,
+    "legacy-d474ab3d7822c8ac/qa-4": true,
+    "legacy-ae24415845ae48a7/qa-0": true,
+    "legacy-d30bb1f10fe4bfe8/qa-0": true,
+    "legacy-702e9009795b2802/qa-0": false,
+    "legacy-702e9009795b2802/qa-1": false,
+    "legacy-702e9009795b2802/qa-2": true,
+    "legacy-702e9009795b2802/qa-3": false,
+    "legacy-702e9009795b2802/qa-4": true,
+    "legacy-702e9009795b2802/qa-5": false,
+    "legacy-702e9009795b2802/qa-6": false,
+    "legacy-702e9009795b2802/qa-7": false,
+    "legacy-1d2a1e3271adf133/qa-0": false,
+    "legacy-c000762632771ec9/qa-0": true,
+    "legacy-34429cce545ccddd/qa-0": true,
+    "legacy-34429cce545ccddd/qa-1": true,
+    "legacy-34429cce545ccddd/qa-2": true
+  },
+  "new_flow": {
+    "8b": {
+      "answer_correct": 2,
+      "desired_flow_checkpoints": 0,
+      "both_checkpoints_correct": 0,
+      "qa_count": 8,
+      "families": 4
+    },
+    "14b": {
+      "answer_correct": 5,
+      "desired_flow_checkpoints": 4,
+      "both_checkpoints_correct": 1,
+      "qa_count": 8,
+      "families": 4
+    }
+  },
+  "jobs": [
+    {
+      "phase": "oracle",
+      "job_id": "120449",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "gpus": 1,
+      "elapsed_seconds": 423,
+      "gpu_minutes": 7.05,
+      "calls": 39,
+      "prompt_tokens": 59098,
+      "completion_tokens": 8964
+    },
+    {
+      "phase": "compare-8b",
+      "job_id": "120450",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "gpus": 1,
+      "elapsed_seconds": 175,
+      "gpu_minutes": 2.9166666666666665,
+      "calls": 31,
+      "prompt_tokens": 20723,
+      "completion_tokens": 4488
+    },
+    {
+      "phase": "compare-14b",
+      "job_id": "120451",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "gpus": 2,
+      "elapsed_seconds": 701,
+      "gpu_minutes": 23.366666666666667,
+      "calls": 31,
+      "prompt_tokens": 20599,
+      "completion_tokens": 2203
+    },
+    {
+      "phase": "flow-8b",
+      "job_id": "120452",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "gpus": 1,
+      "elapsed_seconds": 195,
+      "gpu_minutes": 3.25,
+      "calls": 36,
+      "prompt_tokens": 60701,
+      "completion_tokens": 9087
+    },
+    {
+      "phase": "flow-14b",
+      "job_id": "120453",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "gpus": 1,
+      "elapsed_seconds": 747,
+      "gpu_minutes": 12.45,
+      "calls": 241,
+      "prompt_tokens": 361417,
+      "completion_tokens": 44233
+    }
+  ],
+  "total_gpu_minutes": 49.03333333333333,
+  "total_calls": 378,
+  "total_prompt_tokens": 522538,
+  "total_completion_tokens": 68975,
+  "limits": [
+    "Authored diagnostic cases, four matched decision families, not independent public benchmark.",
+    "Same implementation agent rated meanings; no independent adjudicator.",
+    "Different checkpoint generations and GPU counts; not size-only or equal-hardware speed experiment.",
+    "Single fixed run per arm; no claim of statistically stable gains.",
+    "Existing QA20 contains only three natural EverMem items; no full EverMem or Wiki score."
+  ]
+}

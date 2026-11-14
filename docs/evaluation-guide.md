@@ -1,6 +1,6 @@
 # 평가를 읽고 재현하는 방법
 
-2026-11-08. 이 안내는 **저장된 실행을 검증하는 것**과 **새 모델 출력을 얻는 것**을 분리한다. 최신 결과는 [service-v3](../results/service-v3/README.md), 이전 모든 단계는 [연구 이력](research-history.md)에 있다.
+2026-11-08. 이 안내는 **저장된 실행을 검증하는 것**과 **새 모델 출력을 얻는 것**을 분리한다. 최근 구현 검증은 [service-completion](../results/service-completion/README.md), 앞선 reader 비교는 [service-v3](../results/service-v3/README.md), 이전 모든 단계는 [연구 이력](research-history.md)에 있다.
 
 ## 어떤 질문을 평가했는가
 
@@ -98,3 +98,20 @@ Aurora 규칙: 계산 노드에 GPU 최소1개를 할당하고 conda를 활성�
 ## 공개 범위
 
 코드, 설정, 평가 입력/키, 실제 요청·응답, 실패 자료, 채점 이유, 자원 기록을 공개한다. 모델 가중치, 로컬 캐시, 인증정보와 비밀키는 제외한다. 과거 일부 대용량 raw trace는 원래 공개 범위대로 제외돼 있으며 해당 단계의 보고서와 manifest가 그 경계를 설명한다. upstream 자료의 권리는 원출처에 남고 팀 코드의 라이선스는 아직 결정 전이다.
+
+## 오픈소스 서비스 경계 수정 검증
+
+`results/service-completion/`에는 v1, v2, v3b, v4의 입력·코드 archive·원출력·
+Slurm 기록을 별도로 보존한다. 미제출 v3는 preflight 기록만 있다. 현재 소스는
+v3b다. v4 결과를 현재 구현의 성과로 합치지 않는다. 모두 같은37문항을 반복한
+개발/회귀 검사이며, legacy20도 고정 passage 재생이 아닌 전체 원문에서 새로 검색했다.
+새17 합성 QA와 자연 QA를 합쳐 벤치마크 성능으로 제시하지 않는다.
+
+복사본에서 `python -m evaluation.service_completion.verify COPY`로 제출 packet,
+Slurm 종료, 프로그램 완료, 원문 및 검토 snapshot의 해시·offset을 검증한다.
+`python -m evaluation.service_completion.summarize COPY`는 v3b의 저장된37개
+ratings를 집계한다. 후자는 원문 의미를 다시 평가하거나 모델을 호출하지 않는다.
+정답 키 위치 일치와 대체 원문이 실제로 답을 지지하는지는 구분해 보고했다.
+# 후속 결정 근거 패치 검사
+
+`results/source-patch/README.md`는 같은37 출력에 대한 두 후속 후보와 기각 이유를 기록한다. `verify`는 패킷·원문 offset·실제 검토 스냅샷을 검사하고, `verify_patch`/`verify_decision_patch`는 두 후보의 실제 추출/패치 입력을 검사한다. 형식 검증 통과는 의미 정답이 아니다. 기본 경로 복구의 `replay_restored`는 이전 모델 출력을 이용한 재생이며 새 모델 QA 결과로 세지 않는다.

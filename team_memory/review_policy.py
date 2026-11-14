@@ -1,3 +1,9 @@
-"""Shared approval semantics, moved verbatim from cupmem_service. No runtime dependencies."""
+"""Compatibility import; implementation: team_memory.review.policy.
 
-TEMPORAL_POLICY = 'Use temporal_scope explicitly. For historical questions retain what was reported\nunder its original conditions and identify later corrections as corrections, not erased history.\nFor current questions use an approved correction for ONLY its exact old assertion. Unapproved or\ndisputed corrections remain unresolved and their approval status must be stated if relevant.\nApproval of reconsideration authorizes reconsideration, not rejection of the earlier measurement.\nUnrelated review links do not affect an answer. Original-search hits are candidates, not verified support.\nGive one answer item per distinct conditional measurement; use kind conditional for multiple settings.\nDo not label two independently reported conditions single. A concise combined answer is allowed when\nit explains one decision and its changed premise. Do not treat native STALE annotations as whole-record deletion.'
+New code should import the implementation path directly.
+"""
+from importlib import import_module as _import_module
+import sys as _sys
+
+_implementation = _import_module("team_memory.review.policy")
+_sys.modules[__name__] = _implementation

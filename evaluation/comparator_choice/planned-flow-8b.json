@@ -1,0 +1,184 @@
+{
+  "cases": [
+    {
+      "id": "new-resume-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://999aef28827c3db5/1",
+            "text": "We postponed unattended ingestion from the Harbor API because version2 cannot resume a download after a disconnected connection. Manual ingestion remains the plan."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://999aef28827c3db5/2",
+          "text": "Harbor API version3 now provides continuation tokens for interrupted downloads. In a fault-injection test, the client resumed from the token after the connection was cut and completed the download."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending-reason",
+          "operation": "ask",
+          "question": "Why was unattended Harbor ingestion postponed, and what does the new report change about that decision?"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "restart",
+          "operation": "restart"
+        },
+        {
+          "label": "approved-state",
+          "operation": "ask",
+          "question": "What has Alex approved, what remains established from the earlier report, and what would still need to be tested or decided?"
+        }
+      ]
+    },
+    {
+      "id": "new-permit-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://ac3a9213b23d9c6c/1",
+            "text": "We suspended night-sky observations from the rooftop because the access permit allowed entry only between 08:00 and 18:00. The camera itself was operational."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://ac3a9213b23d9c6c/2",
+          "text": "The amended rooftop permit allows entry between 22:00 and 02:00 for the next two weeks. No night-sky observation has been conducted under this amended permit yet."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending-reason",
+          "operation": "ask",
+          "question": "Why were night-sky observations suspended, what is the scope of the new access permission, and have observations under it happened?"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "restart",
+          "operation": "restart"
+        },
+        {
+          "label": "approved-state",
+          "operation": "ask",
+          "question": "What has Alex approved, what remains established from the earlier report, and what would still need to be tested or decided?"
+        }
+      ]
+    },
+    {
+      "id": "new-consent-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://bdf6c19d62b4c44f/1",
+            "text": "We withheld release of the 60-record interview dataset because the consent forms did not authorize sharing records with external researchers. The records remain stored internally."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://bdf6c19d62b4c44f/2",
+          "text": "Participants for 24 of the 60 records have signed new consent permitting external noncommercial research use of those 24 records. Consent for the remaining 36 records has not changed."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending-reason",
+          "operation": "ask",
+          "question": "What part of the interview dataset could now be considered for external release, under what conditions, and what remains restricted?"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "restart",
+          "operation": "restart"
+        },
+        {
+          "label": "approved-state",
+          "operation": "ask",
+          "question": "What has Alex approved, what remains established from the earlier report, and what would still need to be tested or decided?"
+        }
+      ]
+    },
+    {
+      "id": "new-edge-reconsider",
+      "split": "new_authored",
+      "initial": [
+        {
+          "owner": "Alex",
+          "observed_at": "2026-07-01T09:00:00Z",
+          "source": {
+            "speaker": "Alex",
+            "location": "authored-choice://e26afee74d7a64a8/1",
+            "text": "We rejected deployment of the Atlas classifier to the 8 GB field device because its original model requires 32 GB of memory. Deployment also requires at least 90 percent accuracy."
+          }
+        }
+      ],
+      "incoming": {
+        "owner": "Blair",
+        "observed_at": "2026-07-02T09:00:00Z",
+        "source": {
+          "speaker": "Blair",
+          "location": "authored-choice://e26afee74d7a64a8/2",
+          "text": "The quantized Atlas model uses 6.2 GB on the same 8 GB field device. The held-out accuracy of that quantized model is 92 percent."
+        }
+      },
+      "steps": [
+        {
+          "label": "pending-reason",
+          "operation": "ask",
+          "question": "What blocked Atlas deployment to the field device, and what new evidence warrants reconsidering that deployment under its requirements?"
+        },
+        {
+          "label": "approve",
+          "operation": "review_fixture",
+          "choice": "approve"
+        },
+        {
+          "label": "restart",
+          "operation": "restart"
+        },
+        {
+          "label": "approved-state",
+          "operation": "ask",
+          "question": "What has Alex approved, what remains established from the earlier report, and what would still need to be tested or decided?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "scope": "Module reorganization; no new model inference",
+  "tests": {
+    "full_passed": 331,
+    "subtests_passed": 87,
+    "skipped": 0,
+    "source_package_contracts": 17,
+    "wheel_import_cli_and_demos_passed": true
+  },
+  "method": "Compared AST after removing imports and normalizing only relocated vendor-resource roots; all25 implementation bodies match the pre-reorganization local source. store.py remains byte-identical.",
+  "production_service": "Only imports changed during this reorganization; earlier unpublished feature changes also included in release.",
+  "pending_experiment_archive": "reference-audit-v1 packet hashes verified unchanged",
+  "modules": [
+    {
+      "old": "team_memory/store.py",
+      "canonical": "team_memory/storage/objects.py",
+      "before_sha256": "7a1ecc38dfeacc4a508ff6714d2ce8fd25341e052dba4bab789f1dc490e762ff",
+      "after_sha256": "ebb751e74a03e0dfb9fd86243bfb749cee86c50ca1b13446fae327da57ef35d2",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": true
+    },
+    {
+      "old": "team_memory/source_store.py",
+      "canonical": "team_memory/storage/sources.py",
+      "before_sha256": "121a537dfd0d7f19d67116600b8a6428be5c568244837cf2e290535a7f09e79c",
+      "after_sha256": "6cf289588174b4598c842e3cc7be741a4757c4816d33e315cf0b1073240d16b1",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/timeline.py",
+      "canonical": "team_memory/review/state.py",
+      "before_sha256": "aab085dd645e47aa43f4de53674055c01180c9a8da595e8b3a7db93ac8d037b9",
+      "after_sha256": "bb0b1a7f32118cfb7884dff953fe4f6382cf028272e10cef7cec47f2001e2876",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/source_comparison.py",
+      "canonical": "team_memory/review/comparison.py",
+      "before_sha256": "e626ddf08caa248c369731cf32f1714efc5f41fefa4c6f4a8c366a59618e2adf",
+      "after_sha256": "689a0f676b84e360fa973089386cf06b99cecfe92cdaa2e3573693cfde7cba98",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/review_policy.py",
+      "canonical": "team_memory/review/policy.py",
+      "before_sha256": "41598a96a095599943dc15f53f4dd0c8392aaa543f25cefa770e41c7323f6ea8",
+      "after_sha256": "41598a96a095599943dc15f53f4dd0c8392aaa543f25cefa770e41c7323f6ea8",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/timeline_cli.py",
+      "canonical": "team_memory/review/cli.py",
+      "before_sha256": "f2f76bb4264f256306d69f1104dd48a3b1c8d7769ed4b9d07073261a5620c209",
+      "after_sha256": "27adb750b6f03bb66405c3cd736ea0dd424183348456ffdb17f7516b44c0e14c",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_qa.py",
+      "canonical": "team_memory/readers/retrieval.py",
+      "before_sha256": "4ac630a76aef99cf835f08dcb652f52ec33d96909ea83be154d5a6fe45a02f74",
+      "after_sha256": "f50d0d29d3f6e7a39d9d0ecab111a70358a854efe00bfdff295799f2d5f03acd",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_checked.py",
+      "canonical": "team_memory/readers/checking.py",
+      "before_sha256": "66a95e1e6baeff0eb079deeb95b40f3a262effc56cc8fd716de884cf3fb2fa9c",
+      "after_sha256": "e0dbf4ce84b6c18753820a89d1b041b7410f971bca828e1574fc7edf642fae58",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_attributed.py",
+      "canonical": "team_memory/readers/attribution.py",
+      "before_sha256": "4ebd72a074a6b7ce6d051a1efa9023a5eb4d96d74da2ce27c58d384c50af0e07",
+      "after_sha256": "d60b2f398f31c8b2acbfb39fd00692097ea6cded0d55c89a19de1434526ccc2f",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_quotes.py",
+      "canonical": "team_memory/readers/citations.py",
+      "before_sha256": "ad44387bab72d4befd169b6753065a1e604bd8c393f67c5fe2a6225e219432b2",
+      "after_sha256": "0f9eb4c8f2b1b4f2bf7dad5b01a02390279c4ea872d9e98d96d360f7fbe06337",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_fallback.py",
+      "canonical": "team_memory/readers/fallback.py",
+      "before_sha256": "089f26ed86a052de453e166fc789ed98944f5ee7d9fa5fa7e91c566a256fceda",
+      "after_sha256": "089f26ed86a052de453e166fc789ed98944f5ee7d9fa5fa7e91c566a256fceda",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_prompts.py",
+      "canonical": "team_memory/readers/prompts.py",
+      "before_sha256": "d269f5082faae1aaab738b11e1b2d54c01100b3d375fef89ce384b212cf03a57",
+      "after_sha256": "d269f5082faae1aaab738b11e1b2d54c01100b3d375fef89ce384b212cf03a57",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/review_context.py",
+      "canonical": "team_memory/readers/context.py",
+      "before_sha256": "75abdd094bf8c1bc0087ed182b6ca28fea0f934f8f8ae4077c93dcf5972bf590",
+      "after_sha256": "cb67b0fb48f1d7af8fcecb0b2d23eb6d4caf252791ec3b99a3028806a0b31944",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/review_citations.py",
+      "canonical": "team_memory/readers/state_citations.py",
+      "before_sha256": "3885028aa85aedddfa76185f0db410a7cd72501c5a6ff033897a296d72ceaad7",
+      "after_sha256": "f7102a3f9daca0d14315397fc7d4d23309113aa5d9bb61499ea453182ab969e2",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_claims.py",
+      "canonical": "team_memory/experiments/readers/claims.py",
+      "before_sha256": "7bc41c117702abd7e1950f762e68b73ea0bef3fde93fbe1716ee716667157c3e",
+      "after_sha256": "eb1191cbdc8e6f5b7287df82b91ab42c3b5aa7a3c05880290c9ba7978023b6ab",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_connected.py",
+      "canonical": "team_memory/experiments/readers/connected.py",
+      "before_sha256": "f105dbd9b1adf2a80e67c2d1f5dd104487c66044188c15447a4bac9106eb07d5",
+      "after_sha256": "ee220b521cfa6dc23b5fda5adc4f0d7c7ca79db3cae43c66fbe50e8c9661cb25",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_contextual.py",
+      "canonical": "team_memory/experiments/readers/contextual.py",
+      "before_sha256": "0da23eb772ed08462639cae674c873a3f37fe070c0793254302f9b701fed4103",
+      "after_sha256": "58e1c4198197462f9f9ef01ecbd764c8dfee5e63a64c20fd670261322866996f",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_demonstrated.py",
+      "canonical": "team_memory/experiments/readers/demonstrated.py",
+      "before_sha256": "4d85ca679f060e841ae30d50b1bd20c83e7c290e730e27774d3902cbf32a1bc5",
+      "after_sha256": "d488267c23976123692fbc60623924b57070398f65702e4d90ae441857f3e178",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_documents.py",
+      "canonical": "team_memory/experiments/readers/documents.py",
+      "before_sha256": "e38af3a30227fbef7f39d51f1e6607043a78a87073719eb54f4c07dcb2854263",
+      "after_sha256": "18b5b4d7adae4f800ed73edcac7cb60abcdec507dbc0c22f0736398dde847f7a",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_format.py",
+      "canonical": "team_memory/experiments/readers/format.py",
+      "before_sha256": "76f7161e54c8f9770e055d672fa6385cdc0357bd223ef9e024fbb8a726e8a440",
+      "after_sha256": "ebf2fda319a5b47b0d83d1f2e49f1975dd69901301ac0c68050cb4d2f091cb80",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_joint.py",
+      "canonical": "team_memory/experiments/readers/joint.py",
+      "before_sha256": "9bbe6f8401fdf2d42bcfae7f7172d35fe868325c3bba32b4b3c90a5bcf328e18",
+      "after_sha256": "67a1bdc91a63cc6ce5ea103f4c15f7081047d0ffe7785997d6bb6125fb5e4a54",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_nli.py",
+      "canonical": "team_memory/experiments/readers/nli.py",
+      "before_sha256": "9e94c57d172df8c03351b610c6aaf5644acfa3cac88c534d396d5a05167652f4",
+      "after_sha256": "9e94c57d172df8c03351b610c6aaf5644acfa3cac88c534d396d5a05167652f4",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/reference_retrieval.py",
+      "canonical": "team_memory/experiments/readers/retrieval.py",
+      "before_sha256": "03455d11b5239216debc37d2f87fc47f955f358d0bab740a118dad15aae84098",
+      "after_sha256": "03455d11b5239216debc37d2f87fc47f955f358d0bab740a118dad15aae84098",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/source_patch.py",
+      "canonical": "team_memory/experiments/review/source_patch.py",
+      "before_sha256": "7f2939bf857c59a133dad2bda4e21222b549c0b279f869c9ea3ef8d6f0d6327d",
+      "after_sha256": "9c2f9d16b41f4e0a46534861f54a88763277685edd8481ba6cf151cc543ccca3",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    },
+    {
+      "old": "team_memory/decision_patch.py",
+      "canonical": "team_memory/experiments/review/decision_patch.py",
+      "before_sha256": "60daee07737b1cc11fa11eb84b5fe41af245f6dc0e5e3ce547aabbda0432dccf",
+      "after_sha256": "d468707c897c8ad70098a7d7c48027e2502f190e8e257c6cf214e7ae93952701",
+      "logic_ast_preserved": true,
+      "frozen_original_preserved": false
+    }
+  ]
+}

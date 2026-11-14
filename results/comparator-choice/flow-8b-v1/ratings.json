@@ -1,0 +1,50 @@
+{
+  "new-resume-reconsider/pending-reason": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "Oldversion2/newversion3 are quoted, but the system made a correction instead of reconsideration and omits the reported recovery-test evidence."
+  },
+  "new-resume-reconsider/approved-state": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "Synthetic vote approved the wrong correction. QA then falsely says the earlier version2 claim is incorrect because version3 supports continuation; original conditional fact not preserved."
+  },
+  "new-permit-reconsider/pending-reason": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "QA preserves old08-18, new22-02 for two weeks, and no night observations yet. Comparator still failed to produce reconsideration."
+  },
+  "new-permit-reconsider/approved-state": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "QA describes the actual stored correction vote, not a warranted reconsideration authorization; the required end-to-end review state was never created."
+  },
+  "new-consent-reconsider/pending-reason": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "24 noncommercial/36 restricted scopes retained, but new consent is represented as an unapproved correction rather than scoped reconsideration. Also calls the proposal by Alex although Blair supplied incoming evidence."
+  },
+  "new-consent-reconsider/approved-state": {
+    "answer_correct": false,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "Wrong correction was approved; retains24/36 scope but treats earlier withholding as corrected and adds vague testing of remaining consent status."
+  },
+  "new-edge-reconsider/pending-reason": {
+    "answer_correct": true,
+    "source_evidence_complete": true,
+    "desired_reconsideration_flow_met": false,
+    "reason": "Direct-source QA correctly explains32GB vs8GB, quantized6.2GB and92>=90. Comparator duplicate failure prevented a reconsideration proposal."
+  },
+  "new-edge-reconsider/approved-state": {
+    "answer_correct": false,
+    "source_evidence_complete": false,
+    "desired_reconsideration_flow_met": false,
+    "reason": "No proposal or vote exists, yet QA invents Alex approval, asks whether92 meets90, and emits unrelated sky/water statements. This is a reader error in addition to upstream duplicate failure."
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "oracle_initial_requests": {
+    "writer-reopen/pending-reason": {
+      "call_id": 1,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "writer-reopen/pending-status": {
+      "call_id": 5,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "writer-reopen/approved-reason": {
+      "call_id": 10,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "writer-reopen/approved-status": {
+      "call_id": 15,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "cache-reopen/pending-reason": {
+      "call_id": 20,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "cache-reopen/pending-status": {
+      "call_id": 25,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "cache-reopen/approved-reason": {
+      "call_id": 30,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    },
+    "cache-reopen/approved-status": {
+      "call_id": 35,
+      "typed_effect_in_input": true,
+      "correct_effect_in_input": true
+    }
+  },
+  "all_oracle_inputs_have_correct_effect": true,
+  "failed_comparison_reader_case": {
+    "case": "new-edge-reconsider/approved-state",
+    "job_id": "120452",
+    "initial_call_id": 34,
+    "original_proposal_count": 0,
+    "original_vote_count": 0,
+    "first_draft_invents_approval": true,
+    "template_example_in_input": true,
+    "template_example_in_output": true,
+    "origin": "Installed LlamaIndex citation_query_engine.py CITATION_QA_TEMPLATE; examples are not team records.",
+    "connection_observation": "With no validated relation, active_review_context is absent. service.ask attaches review_errors after generation; failed-comparison status is not explicitly supplied to the reader.",
+    "causal_limit": "Observed source of leaked example and absence of review context. No ablation performed; not a proof that one prompt edit or larger model fixes it."
+  },
+  "scope": "Diagnostic only; frozen production and evaluator criteria were not edited in response to outputs.",
+  "approved_fact_regression": {
+    "job_id": "120453",
+    "case": "release-correction/approved",
+    "correct_stored_relation": true,
+    "correct_owner_vote": true,
+    "initially_states_approved_value": "480 MB",
+    "final_answer_appends_unqualified_old_value": "500 MB",
+    "reference_answer_has_no_such_append": true,
+    "causal_limit": "Observed single-run regression; does not establish statistically stable model-specific causation."
+  }
+}

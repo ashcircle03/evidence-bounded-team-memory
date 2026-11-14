@@ -1,0 +1,47 @@
+{
+  "decision": "adopt_boundary_fixes_only",
+  "model_or_training_changed": false,
+  "basis": "77 targeted tests; fresh same37 answer/evidence equality; input/code hash and source/snapshot validation",
+  "legacy_answers_and_required_evidence": {
+    "passed": 20,
+    "total": 20
+  },
+  "correction_value_and_review_state": {
+    "passed": 8,
+    "total": 8,
+    "cases": [
+      "release-correction/pending",
+      "release-correction/approved",
+      "rejected-calendar/rejected",
+      "new-temperature/pending",
+      "new-temperature/approved",
+      "new-retention/current",
+      "new-retention/proposal",
+      "new-vote-conflict/current"
+    ]
+  },
+  "correction_strict_original_and_state_citations": {
+    "passed": 7,
+    "total": 8
+  },
+  "grounded_reconsideration": {
+    "passed": 0,
+    "total": 2
+  },
+  "unnecessary_proposals_on_negatives": {
+    "count": 2,
+    "total": 2
+  },
+  "actual_model_reconsideration_effect_coverage": 0,
+  "limitation": "Correct reconsideration routing was exercised by controlled contract fixtures; Qwen misclassified both positives as correction, so natural generated reconsideration-to-QA success is not established.",
+  "qa_identical": 37,
+  "proposals_identical": 11,
+  "requests_identical": 220,
+  "requests_total": 222,
+  "model_calls": 222,
+  "slurm_job_id": "120445",
+  "slurm_state": "COMPLETED",
+  "exit_code": "0:0",
+  "gpu_allocation_seconds": 1058,
+  "complete_system_requirements_met": false
+}

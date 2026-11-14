@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evidence-bounded-team-memory"
+version = "0.1.0"
+description = "Source-grounded team records, review proposals and attributed QA"
+readme = "README.md"
+requires-python = ">=3.11"
+dynamic = ["optional-dependencies"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Repository = "https://github.com/ashcircle03/evidence-bounded-team-memory"
+Issues = "https://github.com/ashcircle03/evidence-bounded-team-memory/issues"
+
+[project.scripts]
+team-memory = "team_memory.service:main"
+
+[tool.setuptools.packages.find]
+include = ["team_memory*"]
+
+[tool.setuptools.package-data]
+team_memory = ["workbench.html", "_vendor/**/*.json", "_vendor/**/*.md", "_vendor/**/*.txt", "_vendor/**/LICENSE", "_vendor/**/NOTICE"]
+
+[tool.setuptools.dynamic.optional-dependencies]
+reference = {file = ["requirements-reference.txt"]}
+dev = {file = ["requirements-dev.txt"]}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"

@@ -1,0 +1,42 @@
+{
+  "slurm_complete": true,
+  "program_complete": true,
+  "packet_hashes_valid": true,
+  "qa_outputs": 45,
+  "calls": 241,
+  "proposal_bindings": 11,
+  "source_bindings": 71,
+  "review_bindings": 17,
+  "failures": [],
+  "comparison_errors": [
+    {
+      "case_id": "cache-reopen",
+      "errors": [
+        {
+          "stage": "selection",
+          "error": {
+            "stage": "selection",
+            "index": 0,
+            "error": "Unknown earlier source ID",
+            "row": {
+              "kind": "reconsider",
+              "target": "2eb2b980d95fa29838cdaf",
+              "old_sentence_ids": [
+                0
+              ],
+              "new_sentence_ids": [
+                0
+              ],
+              "reason": "The earlier report is based on a policy that has been revised to permit session identifiers in memory for up to 30 seconds after request completion.",
+              "old_assertion_id": 0,
+              "new_assertion_id": 0
+            }
+          },
+          "raw": "{\"relations\":[{\"kind\":\"reconsider\",\"target\":\"2eb2b980d95fa29838cdaf\",\"old_sentence_ids\":[0],\"new_sentence_ids\":[0],\"reason\":\"The earlier report is based on a policy that has been revised to permit session identifiers in memory for up to 30 seconds after request completion.\",\"old_assertion_id\":0,\"new_assertion_id\":0}]}"
+        }
+      ]
+    }
+  ],
+  "finish_issues": [],
+  "semantic_correctness_checked": false
+}

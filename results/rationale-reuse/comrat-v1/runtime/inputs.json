@@ -1,0 +1,172 @@
+[
+  {
+    "id": "published-01",
+    "group": "published_prediction_replay",
+    "text": "mm/slab_common: remove CONFIG_NUMA ifdefs for common kmalloc functions"
+  },
+  {
+    "id": "published-02",
+    "group": "published_prediction_replay",
+    "text": "Now that slab_alloc_node() is available for SLAB when CONFIG_NUMA=n, remove CONFIG_NUMA ifdefs for common kmalloc functions."
+  },
+  {
+    "id": "published-03",
+    "group": "published_prediction_replay",
+    "text": "mm: Convert __ksize() to struct slab"
+  },
+  {
+    "id": "published-04",
+    "group": "published_prediction_replay",
+    "text": "In SLUB, use folios, and struct slab to access slab_cache field"
+  },
+  {
+    "id": "published-05",
+    "group": "published_prediction_replay",
+    "text": "In SLOB, use folios to properly resolve pointers beyond PAGE_SIZE offset of the object"
+  },
+  {
+    "id": "published-06",
+    "group": "published_prediction_replay",
+    "text": "[ vbabka@suse.cz: use folios, and only convert folio_test_slab() == true folios to struct slab ]"
+  },
+  {
+    "id": "published-07",
+    "group": "published_prediction_replay",
+    "text": "ACPI: button: move HIDs to acpi/button.h"
+  },
+  {
+    "id": "published-08",
+    "group": "published_prediction_replay",
+    "text": "This makes it possible to use ACPI_BUTTON_HID_POWER in another driver."
+  },
+  {
+    "id": "published-09",
+    "group": "published_prediction_replay",
+    "text": "ACPI: Delete unused proc filename macros"
+  },
+  {
+    "id": "published-10",
+    "group": "published_prediction_replay",
+    "text": "Those were used to create files in /proc/acpi long ago and were missed when that code was deleted."
+  },
+  {
+    "id": "published-11",
+    "group": "published_prediction_replay",
+    "text": "Add reference to OpenPGP key"
+  },
+  {
+    "id": "published-12",
+    "group": "published_prediction_replay",
+    "text": "Pin github/codeql-action action to 662472"
+  },
+  {
+    "id": "release-correction/old/0",
+    "group": "known_team_transfer",
+    "text": "For release Cedar, the upload cap is 500 MB. The release owner is Hana."
+  },
+  {
+    "id": "release-correction/new/0",
+    "group": "known_team_transfer",
+    "text": "I explicitly correct the upload cap for the same Cedar release: it is 480 MB, not 500 MB. Hana remains the release owner."
+  },
+  {
+    "id": "rejected-calendar/old/0",
+    "group": "known_team_transfer",
+    "text": "For the Delta release, the review meeting is on Monday."
+  },
+  {
+    "id": "rejected-calendar/new/0",
+    "group": "known_team_transfer",
+    "text": "I explicitly correct the meeting day for the same Delta release: Tuesday, not Monday."
+  },
+  {
+    "id": "compression-conditions/old/0",
+    "group": "known_team_transfer",
+    "text": "On the archive benchmark, JPEG quality80 produced files of 600 KB."
+  },
+  {
+    "id": "compression-conditions/new/0",
+    "group": "known_team_transfer",
+    "text": "On the same archive benchmark, lossless PNG produced files of 900 KB. This used a different encoding from JPEG quality80."
+  },
+  {
+    "id": "queue-disagreement/old/0",
+    "group": "known_team_transfer",
+    "text": "For queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7."
+  },
+  {
+    "id": "queue-disagreement/new/0",
+    "group": "known_team_transfer",
+    "text": "For queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7. I am reporting an independent measurement, not correcting the earlier report."
+  },
+  {
+    "id": "writer-reopen/old/0",
+    "group": "known_team_transfer",
+    "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+  },
+  {
+    "id": "writer-reopen/new/0",
+    "group": "known_team_transfer",
+    "text": "Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently."
+  },
+  {
+    "id": "writer-near-miss/old/0",
+    "group": "known_team_transfer",
+    "text": "We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan."
+  },
+  {
+    "id": "writer-near-miss/new/0",
+    "group": "known_team_transfer",
+    "text": "Ledger version4 now completes each serial write in 8 ms after index tuning. It still permits only one writer; no concurrency change was made."
+  },
+  {
+    "id": "cache-reopen/old/0",
+    "group": "known_team_transfer",
+    "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+  },
+  {
+    "id": "cache-reopen/new/0",
+    "group": "known_team_transfer",
+    "text": "The revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. The new cache deletes entries after 20 seconds."
+  },
+  {
+    "id": "cache-near-miss/old/0",
+    "group": "known_team_transfer",
+    "text": "We disabled user-session caching because the policy forbade keeping session identifiers in memory after a request completed."
+  },
+  {
+    "id": "cache-near-miss/new/0",
+    "group": "known_team_transfer",
+    "text": "A cache of public product images improved page speed by 15 percent. The session-identifier retention policy has not changed."
+  },
+  {
+    "id": "new-temperature/old/0",
+    "group": "known_team_transfer",
+    "text": "For chamber Iris, the operating temperature is 40 C. The supervisor is Nuri."
+  },
+  {
+    "id": "new-temperature/new/0",
+    "group": "known_team_transfer",
+    "text": "I explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor."
+  },
+  {
+    "id": "new-retention/old/0",
+    "group": "known_team_transfer",
+    "text": "For the Mira audit, the retention period is 90 days."
+  },
+  {
+    "id": "new-retention/new/0",
+    "group": "known_team_transfer",
+    "text": "I explicitly correct the retention period for the same Mira audit to 30 days, not 90 days."
+  },
+  {
+    "id": "new-vote-conflict/old/0",
+    "group": "known_team_transfer",
+    "text": "For relay Sol, the interval is 6 seconds."
+  },
+  {
+    "id": "new-vote-conflict/new/0",
+    "group": "known_team_transfer",
+    "text": "I explicitly correct the interval for the same Sol relay to 9 seconds."
+  }
+]

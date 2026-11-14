@@ -58,12 +58,13 @@ class TimelineTests(unittest.TestCase):
         def forbidden(*a):raise AssertionError('unexpected model call')
         self.assertTrue(t.ingest(self.store,self.old,forbidden)['replayed'])
 
-    def test_invalid_comparison_is_atomic_and_raw_source_survives(self):
+    def test_invalid_sibling_is_isolated_and_raw_source_survives(self):
         new=env('New measurement.',day=2)
         good=dict(kind='conflict',target=digest(self.old),old_quote='10 seconds',new_quote='New measurement.',reason='different')
         bad=dict(good,target='future-source')
         r=t.ingest(self.store,new,lambda *a:json.dumps(dict(relations=[good,bad])))
-        self.assertTrue(r['errors']);self.assertFalse(t.proposals(self.store))
+        self.assertTrue(r['errors']);self.assertEqual(len(t.proposals(self.store)),1)
+        self.assertEqual(r['errors'][0]['index'],1)
         self.assertIn(digest(new),self.store.load('sources'))
 
     def test_index_must_quote_source_and_cannot_set_approval(self):

@@ -63,7 +63,7 @@ class ReferenceContracts(unittest.TestCase):
             llm=OpenAILike(model='test',api_base='http://localhost:1/v1',api_key='fake',is_chat_model=True,
                           max_tokens=1024,http_client=client,max_retries=0)
             _LocalJudgeClient(llm).create(messages=[dict(role='user',content='test')])
-            self.assertEqual(seen[0]['max_tokens'],384);self.assertEqual(llm.max_tokens,1024)
+            self.assertEqual(seen[0]['max_tokens'],4096);self.assertEqual(llm.max_tokens,1024)
 
     def test_cli_reserves_stdout_for_one_json_per_request(self):
         from team_memory.reference_qa import main

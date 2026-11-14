@@ -1,0 +1,1480 @@
+{
+  "kind": "Verified historical request/output analysis; zero new model calls",
+  "counts": {
+    "observed": {
+      "cases": 37,
+      "judgment_calls": 139,
+      "cases_with_contradiction": 7,
+      "rewritten": 7,
+      "changed_text": 6,
+      "aqa_calls": 4,
+      "aqa_accepted": 2,
+      "failed_existing_answer_rating": 2
+    },
+    "oracle": {
+      "cases": 8,
+      "judgment_calls": 24,
+      "cases_with_contradiction": 0,
+      "rewritten": 0,
+      "changed_text": 0,
+      "aqa_calls": 0,
+      "aqa_accepted": 0,
+      "failed_existing_answer_rating": 6
+    }
+  },
+  "rows": [
+    {
+      "id": "observed/release-correction/pending",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2,
+        "IRRELEVANT": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": false,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: 500MB established and480MB pending are correct. The original new report is not directly cited (only earlier source and review snapshot); strict originals-plus-snapshot requirement is not fully met. The snapshot contains a traceable incoming assertion."
+      },
+      "trace_ids": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The current upload cap for release Cedar is 500 MB, as reported by Mina [1]. The correction proposing a change to 480 MB by Jun is pending and has not been approved [3]. The original assertion remains stored as historical evidence and has not been erased or superseded.",
+      "before_citation": "The current upload cap for release Cedar is 500 MB, as reported by Mina [1]. The correction proposing a change to 480 MB by Jun is pending and has not been approved [3]. The original assertion remains stored as historical evidence and has not been erased or superseded.",
+      "final_raw": "The current upload cap for release Cedar is 500 MB, as reported by Mina [1]. The correction proposing a change to 480 MB by Jun is pending and has not been approved [3]. The original assertion remains stored as historical evidence and has not been erased or superseded."
+    },
+    {
+      "id": "observed/release-correction/approved",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: 480MB current; both original assertions and approved owner-vote snapshot are cited."
+      },
+      "trace_ids": [
+        7,
+        8,
+        10,
+        9,
+        11
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The current upload cap for release Cedar is 480 MB, as the correction proposed by Jun has been approved. The original assertion of 500 MB by Mina is now superseded. \n\nSource 2:  \nSource 3:",
+      "before_citation": "The current upload cap for release Cedar is 480 MB, as the correction proposed by Jun has been approved. The original assertion of 500 MB by Mina is now superseded. \n\nSource 2:  \nSource 3:",
+      "final_raw": "[2] [3] The current upload cap for release Cedar is 480 MB, as the correction proposed by Jun has been approved. [1] [3] The original assertion of 500 MB by Mina is now superseded. \n\nSource 2:  \nSource 3:"
+    },
+    {
+      "id": "observed/release-correction/historical",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Mina original500MB is preserved with the original record."
+      },
+      "trace_ids": [
+        12,
+        14,
+        13,
+        15
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Mina originally reported that the upload cap for release Cedar is 500 MB [1].",
+      "before_citation": "Mina originally reported that the upload cap for release Cedar is 500 MB [1].",
+      "final_raw": "Mina originally reported that the upload cap for release Cedar is 500 MB [1]."
+    },
+    {
+      "id": "observed/release-correction/unrelated",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2,
+        "IRRELEVANT": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Hana remains answerable from unchanged original fact."
+      },
+      "trace_ids": [
+        16,
+        17,
+        19,
+        18
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Hana is the release owner [1].",
+      "before_citation": "Hana is the release owner [1].",
+      "final_raw": "Hana is the release owner [1]."
+    },
+    {
+      "id": "observed/rejected-calendar/rejected",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Monday retained; Tuesday labelled rejected with owner-vote snapshot."
+      },
+      "trace_ids": [
+        21,
+        22,
+        24,
+        23
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "For the Delta release, the meeting day remains established as Monday [1]. The correction proposed by Jun to change the meeting day to Tuesday has been rejected and has not replaced the original assertion [3].",
+      "before_citation": "For the Delta release, the meeting day remains established as Monday [1]. The correction proposed by Jun to change the meeting day to Tuesday has been rejected and has not replaced the original assertion [3].",
+      "final_raw": "For the Delta release, the meeting day remains established as Monday [1]. The correction proposed by Jun to change the meeting day to Tuesday has been rejected and has not replaced the original assertion [3]."
+    },
+    {
+      "id": "observed/compression-conditions/both",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: JPEG quality80=600KB and losslessPNG=900KB retained with their sources and conditions."
+      },
+      "trace_ids": [
+        26,
+        28,
+        27
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 1: JPEG quality80 produced files of 600 KB [1].  \nSource 2: Lossless PNG produced files of 900 KB [2].",
+      "before_citation": "Source 1: JPEG quality80 produced files of 600 KB [1].  \nSource 2: Lossless PNG produced files of 900 KB [2].",
+      "final_raw": "Source 1: JPEG quality80 produced files of 600 KB [1].  \nSource 2: Lossless PNG produced files of 900 KB [2]."
+    },
+    {
+      "id": "observed/queue-disagreement/both",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Both23ms/31ms under identical conditions retained; explicitly unresolved conflict cites pending snapshot."
+      },
+      "trace_ids": [
+        30,
+        31,
+        33,
+        32,
+        34
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 1:  \nFor queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7 [1].  \n\nSource 2:  \nFor queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7 [2].  \n\nThe two measurements, 31 ms and 23 ms, were reported independently under the same conditions for queue Nimbus on workload W with one worker and build7. The discrepancy between the two values indicates a conflict in the reported P95 latency measurements. The conflict proposal (ID: 005b421173aacab95e9112a8) is pending, and no approval or rejection has been recorded in the current snapshot [3].",
+      "before_citation": "Source 1:  \nFor queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7 [1].  \n\nSource 2:  \nFor queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7 [2].  \n\nThe two measurements, 31 ms and 23 ms, were reported independently under the same conditions for queue Nimbus on workload W with one worker and build7. The discrepancy between the two values indicates a conflict in the reported P95 latency measurements. The conflict proposal (ID: 005b421173aacab95e9112a8) is pending, and no approval or rejection has been recorded in the current snapshot [3].",
+      "final_raw": "Source 1:  \nFor queue Nimbus, the P95 latency was 31 ms on workload W with one worker and build7 [1].  \n\nSource 2:  \nFor queue Nimbus, the P95 latency was 23 ms on workload W with one worker and build7 [2].  \n\nThe two measurements, 31 ms and 23 ms, were reported independently under the same conditions for queue Nimbus on workload W with one worker and build7. The discrepancy between the two values indicates a conflict in the reported P95 latency measurements. The conflict proposal (ID: 005b421173aacab95e9112a8) is pending, and no approval or rejection has been recorded in the current snapshot [3]."
+    },
+    {
+      "id": "observed/writer-reopen/plan",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Mentions the valid version4-to5 reason to revisit, but invents data-consistency rationale and treats a new-version observation as a pending correction of the older-version fact. Relation-kind failure is also counted separately."
+      },
+      "trace_ids": [
+        36,
+        37,
+        39,
+        38,
+        40
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 1:  \nThe postponement of parallel writes to the Ledger database was based on the assertion that version4 permits only one writer [1]. This decision was made to ensure data consistency and avoid conflicts during writes.  \n\nSource 2:  \nNew evidence from Ledger version5 indicates that it now permits four simultaneous writers [2]. This information suggests that the earlier restriction in version4 may no longer apply, potentially warranting a reevaluation of the decision to postpone parallel writes.  \n\nSource 3:  \nThe correction proposing that Ledger version5 permits four simultaneous writers is pending and has not yet been approved or rejected [3]. As such, the original assertion about version4 remains unresolved and is still considered valid under the current temporal scope.  \n\nAnswer: Parallel writes were postponed because version4 permits only one writer [1]. The new evidence from Ledger version5, which permits four simultaneous writers [2], warrants revisiting the decision. However, the correction proposing this change is pending and has not yet been approved or rejected [3]. The original assertion about version4 remains valid until the pending correction is resolved.",
+      "before_citation": "Source 1:  \nThe postponement of parallel writes to the Ledger database was based on the assertion that version4 permits only one writer [1]. This decision was made to ensure data consistency and avoid conflicts during writes.  \n\nSource 2:  \nNew evidence from Ledger version5 indicates that it now permits four simultaneous writers [2]. This information suggests that the earlier restriction in version4 may no longer apply, potentially warranting a reevaluation of the decision to postpone parallel writes.  \n\nSource 3:  \nThe correction proposing that Ledger version5 permits four simultaneous writers is pending and has not yet been approved or rejected [3]. As such, the original assertion about version4 remains unresolved and is still considered valid under the current temporal scope.  \n\nAnswer: Parallel writes were postponed because version4 permits only one writer [1]. The new evidence from Ledger version5, which permits four simultaneous writers [2], warrants revisiting the decision. However, the correction proposing this change is pending and has not yet been approved or rejected [3]. The original assertion about version4 remains valid until the pending correction is resolved.",
+      "final_raw": "Source 1:  \nThe postponement of parallel writes to the Ledger database was based on the assertion that version4 permits only one writer [1]. This decision was made to ensure data consistency and avoid conflicts during writes.  \n\nSource 2:  \nNew evidence from Ledger version5 indicates that it now permits four simultaneous writers [2]. This information suggests that the earlier restriction in version4 may no longer apply, potentially warranting a reevaluation of the decision to postpone parallel writes.  \n\nSource 3:  \nThe correction proposing that Ledger version5 permits four simultaneous writers is pending and has not yet been approved or rejected [3]. As such, the original assertion about version4 remains unresolved and is still considered valid under the current temporal scope.  \n\nAnswer: Parallel writes were postponed because version4 permits only one writer [1]. The new evidence from Ledger version5, which permits four simultaneous writers [2], warrants revisiting the decision. However, the correction proposing this change is pending and has not yet been approved or rejected [3]. The original assertion about version4 remains valid until the pending correction is resolved."
+    },
+    {
+      "id": "observed/writer-near-miss/plan",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Correctly says serial speed does not remove single-writer reason. Cites originals and actual pending snapshot, but the stored correction proposal itself is unnecessary; not a successful negative proposal decision."
+      },
+      "trace_ids": [
+        42,
+        45,
+        43,
+        44,
+        46
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 1:  \nThe new report does not remove the reason parallel writes were postponed. The original assertion by Mina, \"We postponed parallel writes to the Ledger database because version4 permits only one writer,\" remains reported and unresolved. The incoming assertion by Jun, \"Ledger version4 now completes each serial write in 8 ms after index tuning,\" adds performance information but does not contradict or remove the earlier reason for postponing parallel writes. The correction proposal is pending and has not replaced the original assertion.  \n\nSource 3:  \nThe correction proposal is pending and has not replaced the original assertion. The original report remains stored as historical evidence and has not been erased. The proposed change remains unresolved.",
+      "before_citation": "Source 1:  \nThe new report does not remove the reason parallel writes were postponed. The original assertion by Mina, \"We postponed parallel writes to the Ledger database because version4 permits only one writer,\" remains reported and unresolved. The incoming assertion by Jun, \"Ledger version4 now completes each serial write in 8 ms after index tuning,\" adds performance information but does not contradict or remove the earlier reason for postponing parallel writes. The correction proposal is pending and has not replaced the original assertion.  \n\nSource 3:  \nThe correction proposal is pending and has not replaced the original assertion. The original report remains stored as historical evidence and has not been erased. The proposed change remains unresolved.",
+      "final_raw": "Source 1:  \nThe new report does not remove the reason parallel writes were postponed. [1] [3] The original assertion by Mina, \"We postponed parallel writes to the Ledger database because version4 permits only one writer,\" remains reported and unresolved. [2] [3] The incoming assertion by Jun, \"Ledger version4 now completes each serial write in 8 ms after index tuning,\" adds performance information but does not contradict or remove the earlier reason for postponing parallel writes. [3] The correction proposal is pending and has not replaced the original assertion.  \n\nSource 3:  \nThe correction proposal is pending and has not replaced the original assertion. [3] The original report remains stored as historical evidence and has not been erased. [3] The proposed change remains unresolved."
+    },
+    {
+      "id": "observed/cache-reopen/plan",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Mentions revised30s policy but omits the new20s cache behavior and frames policy evolution as a correction contradicting the original observation. Not the required grounded changed-condition explanation."
+      },
+      "trace_ids": [
+        48,
+        51,
+        49,
+        50,
+        52
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The earlier session-cache decision is being reviewed due to a proposed correction that contradicts the original assertion. The original assertion by Mina stated that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed [2]. The incoming assertion by Jun proposes that the revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion [1]. This correction is pending and has not been approved or rejected, meaning the original assertion remains valid and unresolved [3]. The discrepancy between the two assertions warrants a review to determine the current policy and its implications for session caching.",
+      "before_citation": "The earlier session-cache decision is being reviewed due to a proposed correction that contradicts the original assertion. The original assertion by Mina stated that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed [2]. The incoming assertion by Jun proposes that the revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion [1]. This correction is pending and has not been approved or rejected, meaning the original assertion remains valid and unresolved [3]. The discrepancy between the two assertions warrants a review to determine the current policy and its implications for session caching.",
+      "final_raw": "[3] The earlier session-cache decision is being reviewed due to a proposed correction that contradicts the original assertion. The original assertion by Mina stated that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed [2]. The incoming assertion by Jun proposes that the revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion [1]. This correction is pending and has not been approved or rejected, meaning the original assertion remains valid and unresolved [3]. [3] The discrepancy between the two assertions warrants a review to determine the current policy and its implications for session caching."
+    },
+    {
+      "id": "observed/cache-near-miss/plan",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "IRRELEVANT": 1,
+        "SUPPORTS": 2
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Correct No and unchanged session policy with both sources and actual snapshot. The unnecessary correction proposal is a separate failure; answer is repetitive and status attribution is not clean sentence by sentence."
+      },
+      "trace_ids": [
+        54,
+        57,
+        55,
+        56,
+        58
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 1:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.  \n\nSource 2:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.  \n\nSource 3:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.",
+      "before_citation": "Source 1:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.  \n\nSource 2:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.  \n\nSource 3:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.",
+      "final_raw": "Source 1:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.  \n\nSource 2:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected.  \n\nSource 3:  \nThe product-image cache result does not remove the reason user-session caching was disabled. The original assertion by Mina, which states that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains reported and unresolved. The incoming assertion by Jun, which claims that the session-identifier retention policy has not changed, is a pending correction and has not replaced the original assertion. Therefore, the reason for disabling user-session caching is still based on the original policy, as the correction is pending and has not been approved or rejected."
+    },
+    {
+      "id": "observed/new-temperature/pending",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: 40C established;45C pending. Earlier source and review snapshot identify both proposal value and state; snapshot includes original incoming witness."
+      },
+      "trace_ids": [
+        60,
+        61,
+        63,
+        62
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The currently established operating temperature for chamber Iris is 40 C [1]. A proposed correction to 45 C has been submitted by Ben, but it remains pending and has not been approved or rejected [3].",
+      "before_citation": "The currently established operating temperature for chamber Iris is 40 C [1]. A proposed correction to 45 C has been submitted by Ben, but it remains pending and has not been approved or rejected [3].",
+      "final_raw": "The currently established operating temperature for chamber Iris is 40 C [1]. A proposed correction to 45 C has been submitted by Ben, but it remains pending and has not been approved or rejected [3]."
+    },
+    {
+      "id": "observed/new-temperature/approved",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "IRRELEVANT": 1,
+        "SUPPORTS": 2
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: 45C and unchanged Nuri; approved Ada vote is cited. A later approval sentence wrongly attaches source2 alone; core approval also cites source3. This is not perfect per-sentence attribution."
+      },
+      "trace_ids": [
+        64,
+        67,
+        65,
+        66,
+        68
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The established operating temperature for chamber Iris is 45 C, and the supervisor remains Nuri. This correction was approved by Ada and applies to the earlier assertion that stated the operating temperature was 40 C [2]. \n\nSource 2:  \nI explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.  \n\nSource 3:  \nThe correction has been approved. The original report remains stored as historical evidence; it has not been erased.",
+      "before_citation": "The established operating temperature for chamber Iris is 45 C, and the supervisor remains Nuri. This correction was approved by Ada and applies to the earlier assertion that stated the operating temperature was 40 C [2]. \n\nSource 2:  \nI explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.  \n\nSource 3:  \nThe correction has been approved. The original report remains stored as historical evidence; it has not been erased.",
+      "final_raw": "[2] [3] The established operating temperature for chamber Iris is 45 C, and the supervisor remains Nuri. This correction was approved by Ada and applies to the earlier assertion that stated the operating temperature was 40 C [2]. \n\nSource 2:  \nI explicitly correct the operating temperature of the same Iris chamber to 45 C. Nuri remains the supervisor.  \n\nSource 3:  \nThe correction has been approved. [3] The original report remains stored as historical evidence; it has not been erased."
+    },
+    {
+      "id": "observed/new-temperature/historical",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Ada original40C remains accessible and cited."
+      },
+      "trace_ids": [
+        69,
+        70,
+        71,
+        72
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Ada originally reported that the operating temperature for chamber Iris was 40 C [1].",
+      "before_citation": "Ada originally reported that the operating temperature for chamber Iris was 40 C [1].",
+      "final_raw": "Ada originally reported that the operating temperature for chamber Iris was 40 C [1]."
+    },
+    {
+      "id": "observed/new-retention/current",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: 90days retained; rejected30day change supported by actual rejection snapshot."
+      },
+      "trace_ids": [
+        74,
+        75,
+        76,
+        77,
+        78
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The retention period established for the Mira audit remains 90 days [1]. The correction proposed by Dan to change the retention period to 30 days was rejected [3]. Therefore, the original assertion by Cora is still considered the established value.",
+      "before_citation": "The retention period established for the Mira audit remains 90 days [1]. The correction proposed by Dan to change the retention period to 30 days was rejected [3]. Therefore, the original assertion by Cora is still considered the established value.",
+      "final_raw": "The retention period established for the Mira audit remains 90 days [1]. The correction proposed by Dan to change the retention period to 30 days was rejected [3]. [3] Therefore, the original assertion by Cora is still considered the established value."
+    },
+    {
+      "id": "observed/new-retention/proposal",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2,
+        "CONTRADICTS": 1
+      },
+      "revised": true,
+      "text_changed_before_citation": true,
+      "aqa_called": true,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Dan30day proposal and rejection correctly separated and cited."
+      },
+      "trace_ids": [
+        79,
+        82,
+        80,
+        81,
+        83,
+        84
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Dan proposed a correction to the retention period for the Mira audit, changing it from 90 days to 30 days [1]. However, this change was rejected [3]. The original assertion by Cora that the retention period is 90 days remains the established value, and the proposed correction by Dan has not been applied.",
+      "before_citation": "Dan proposed a change to the retention period for the Mira audit, changing it from 90 days to 30 days [1]. This change was rejected [3]. The original assertion by Cora that the retention period is 90 days remains the established value, and the proposed correction by Dan has not been applied [3].",
+      "final_raw": "Dan proposed a change to the retention period for the Mira audit, changing it from 90 days to 30 days [1]. This change was rejected [3]. The original assertion by Cora that the retention period is 90 days remains the established value, and the proposed correction by Dan has not been applied [3]."
+    },
+    {
+      "id": "observed/new-vote-conflict/current",
+      "group": "observed",
+      "legacy": false,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2,
+        "CONTRADICTS": 1
+      },
+      "revised": true,
+      "text_changed_before_citation": true,
+      "aqa_called": true,
+      "aqa_accepted": true,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Not approved;6s remains;9s proposed; conflicting owner votes explicitly cited. Also uses loose pending terminology, so this is core correctness, not perfectly consistent status wording."
+      },
+      "trace_ids": [
+        86,
+        89,
+        87,
+        88,
+        90,
+        91,
+        92
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The interval change for relay Sol has not been approved. The original assertion that \"For relay Sol, the interval is 6 seconds\" remains established [1]. There is a pending correction proposal to change the interval to 9 seconds, but it has not been applied due to conflicting votes and unresolved approval status [3]. \n\nSource 1:  \nSource 3:",
+      "before_citation": "The interval change for relay Sol is not approved. The established interval remains 6 seconds as reported by Source 1. The proposed correction to 9 seconds from Source 2 is pending and has not been applied. \n\nSource 1: The interval for relay Sol is 6 seconds [1].  \nSource 2: The interval for relay Sol is corrected to 9 seconds [2].  \nSource 3: The correction proposal is unresolved due to conflicting votes [3].",
+      "final_raw": "[3] The interval change for relay Sol is not approved. The established interval remains 6 seconds as reported by Source 1. The proposed correction to 9 seconds from Source 2 is pending and has not been applied. \n\nSource 1: The interval for relay Sol is 6 seconds [1].  \nSource 2: The interval for relay Sol is corrected to 9 seconds [2].  \nSource 3: The correction proposal is unresolved due to conflicting votes [3]."
+    },
+    {
+      "id": "observed/legacy-d474ab3d7822c8ac/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 6
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: fetch.output explicitly defaults to full.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        100,
+        99,
+        101
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Git uses the `full` style by default for printing fetch ref update status. This is specified in the `fetch.output` configuration, where the default value is set to `full` [1]. \n\nSource 1:\nThe default for `fetch.output` is `full`, which controls how ref update status is printed.",
+      "before_citation": "Git uses the `full` style by default for printing fetch ref update status. This is specified in the `fetch.output` configuration, where the default value is set to `full` [1]. \n\nSource 1:\nThe default for `fetch.output` is `full`, which controls how ref update status is printed.",
+      "final_raw": "Git uses the `full` style by default for printing fetch ref update status. This is specified in the `fetch.output` configuration, where the default value is set to `full` [1]. \n\nSource 1:\nThe default for `fetch.output` is `full`, which controls how ref update status is printed."
+    },
+    {
+      "id": "observed/legacy-d474ab3d7822c8ac/qa-1",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 5
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: merge.conflictStyle source explains zdiff3 removes matching edge lines.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        102,
+        104,
+        105,
+        106,
+        103,
+        108,
+        107,
+        109
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 1:\nThe alternate merge conflict style that removes matching lines near either edge of the conflict region is \"zdiff3\". This style is similar to \"diff3\" but includes the removal of matching lines on the two sides from the conflict region when those matching lines appear near either the beginning or end of a conflict region.",
+      "before_citation": "Source 1:\nThe alternate merge conflict style that removes matching lines near either edge of the conflict region is \"zdiff3\". This style is similar to \"diff3\" but includes the removal of matching lines on the two sides from the conflict region when those matching lines appear near either the beginning or end of a conflict region.",
+      "final_raw": "Source 1:\nThe alternate merge conflict style that removes matching lines near either edge of the conflict region is \"zdiff3\". This style is similar to \"diff3\" but includes the removal of matching lines on the two sides from the conflict region when those matching lines appear near either the beginning or end of a conflict region."
+    },
+    {
+      "id": "observed/legacy-d474ab3d7822c8ac/qa-2",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 4
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: format.subjectPrefix source gives PATCH.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The default subject prefix for format-patch is \"[PATCH]\". This is specified in the documentation under the `format.subjectPrefix` setting, which indicates that the default is to output files with the \"[PATCH]\" subject prefix [1]. \n\nSource 1:\nThe default for format-patch is to output files with the '[PATCH]' subject prefix. Use this variable to change that prefix.",
+      "before_citation": "The default subject prefix for format-patch is \"[PATCH]\". This is specified in the documentation under the `format.subjectPrefix` setting, which indicates that the default is to output files with the \"[PATCH]\" subject prefix [1]. \n\nSource 1:\nThe default for format-patch is to output files with the '[PATCH]' subject prefix. Use this variable to change that prefix.",
+      "final_raw": "[1] The default subject prefix for format-patch is \"[PATCH]\". This is specified in the documentation under the `format.subjectPrefix` setting, which indicates that the default is to output files with the \"[PATCH]\" subject prefix [1]. \n\nSource 1:\nThe default for format-patch is to output files with the '[PATCH]' subject prefix. [1] Use this variable to change that prefix."
+    },
+    {
+      "id": "observed/legacy-d474ab3d7822c8ac/qa-3",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "IRRELEVANT": 3,
+        "SUPPORTS": 1,
+        "CONTRADICTS": 2
+      },
+      "revised": true,
+      "text_changed_before_citation": false,
+      "aqa_called": true,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: notes.mergeStrategy explicitly defaults to manual.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        117,
+        119,
+        118,
+        121,
+        120,
+        122,
+        123,
+        124,
+        125
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "If nobody specifies a notes merge strategy, the default strategy that resolves notes conflicts is `manual` [2].",
+      "before_citation": "If nobody specifies a notes merge strategy, the default strategy that resolves notes conflicts is `manual` [2].",
+      "final_raw": "If nobody specifies a notes merge strategy, the default strategy that resolves notes conflicts is `manual` [2]."
+    },
+    {
+      "id": "observed/legacy-d474ab3d7822c8ac/qa-4",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2,
+        "IRRELEVANT": 4
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": false,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Correct grep.extendedRegexp with adjacent source grep.adoc L14-L18: true enables extended-regexp and the setting is ignored outside patternType=default. This supports the option identity and its condition, although the frozen key points to L7-L13; keep the mismatch diagnostic.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        126,
+        130,
+        128,
+        127,
+        129,
+        132,
+        131,
+        133
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The Git configuration option that chooses between basic and extended matching when `grep.patternType` is set to `default` is `grep.extendedRegexp`. This option, when set to `true`, enables the `--extended-regexp` option by default. \n\nAnswer: The `grep.extendedRegexp` configuration option chooses between basic and extended matching when `grep.patternType` is set to `default` [2].",
+      "before_citation": "The Git configuration option that chooses between basic and extended matching when `grep.patternType` is set to `default` is `grep.extendedRegexp`. This option, when set to `true`, enables the `--extended-regexp` option by default. \n\nAnswer: The `grep.extendedRegexp` configuration option chooses between basic and extended matching when `grep.patternType` is set to `default` [2].",
+      "final_raw": "[2] The Git configuration option that chooses between basic and extended matching when `grep.patternType` is set to `default` is `grep.extendedRegexp`. [2] This option, when set to `true`, enables the `--extended-regexp` option by default. \n\nAnswer: The `grep.extendedRegexp` configuration option chooses between basic and extended matching when `grep.patternType` is set to `default` [2]."
+    },
+    {
+      "id": "observed/legacy-ae24415845ae48a7/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "CONTRADICTS": 1,
+        "SUPPORTS": 2,
+        "IRRELEVANT": 2
+      },
+      "revised": true,
+      "text_changed_before_citation": true,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Both origin and upstream retained with their own original reports; no authoritative winner.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The default remote name for a newly cloned repository is `origin` [1].",
+      "before_citation": "The default remote name for a newly cloned repository is `origin` [2]. The default remote name for a newly cloned repository is upstream [1].",
+      "final_raw": "The default remote name for a newly cloned repository is `origin` [2]. The default remote name for a newly cloned repository is upstream [1]."
+    },
+    {
+      "id": "observed/legacy-d30bb1f10fe4bfe8/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 2,
+        "IRRELEVANT": 4
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Freshwater L-2 and brackish B-8 both matched to condition-specific original reports.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        141,
+        145,
+        142,
+        143,
+        144,
+        146,
+        147,
+        148
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "For collecting field water, the choice of cartridge depends on the type of site. For freshwater sites, the field water sampler should use the L-2 cartridge [1]. For brackish sites, the field water sampler should use the B-8 cartridge [2]. \n\nSource 1:\nFor freshwater sites the field water sampler uses the L-2 cartridge.\n\nSource 2:\nAt brackish sites the field water sampler uses the B-8 cartridge.",
+      "before_citation": "For collecting field water, the choice of cartridge depends on the type of site. For freshwater sites, the field water sampler should use the L-2 cartridge [1]. For brackish sites, the field water sampler should use the B-8 cartridge [2]. \n\nSource 1:\nFor freshwater sites the field water sampler uses the L-2 cartridge.\n\nSource 2:\nAt brackish sites the field water sampler uses the B-8 cartridge.",
+      "final_raw": "For collecting field water, the choice of cartridge depends on the type of site. For freshwater sites, the field water sampler should use the L-2 cartridge [1]. For brackish sites, the field water sampler should use the B-8 cartridge [2]. \n\nSource 1:\nFor freshwater sites the field water sampler uses the L-2 cartridge.\n\nSource 2:\nAt brackish sites the field water sampler uses the B-8 cartridge."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP615 fallback tzdata is stated in cited abstract.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        149,
+        151,
+        150,
+        152
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "If system time zone data is unavailable, the fallback for `zoneinfo` is the first-party package `tzdata`, which is deployed on PyPI [1]. \n\nSource 1:\nThe `zoneinfo` module will use the system's time zone data if available; if no system time zone data is available, the library will fall back to using the first-party package `tzdata`, deployed on PyPI. [d]_",
+      "before_citation": "If system time zone data is unavailable, the fallback for `zoneinfo` is the first-party package `tzdata`, which is deployed on PyPI [1]. \n\nSource 1:\nThe `zoneinfo` module will use the system's time zone data if available; if no system time zone data is available, the library will fall back to using the first-party package `tzdata`, deployed on PyPI. [d]_",
+      "final_raw": "If system time zone data is unavailable, the fallback for `zoneinfo` is the first-party package `tzdata`, which is deployed on PyPI [1]. \n\nSource 1:\nThe `zoneinfo` module will use the system's time zone data if available; if no system time zone data is available, the library will fall back to using the first-party package `tzdata`, deployed on PyPI. [d]_"
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-1",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP572 NAME := expr is stated in cited abstract.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        153,
+        154,
+        156,
+        155,
+        157
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The notation that assigns a name within a Python expression under the assignment expressions proposal is ``NAME := expr``. This notation allows for assigning a variable within an expression, which is part of the \"Assignment Expressions\" feature introduced in PEP 572 [1].\n\nSource 1:\nThe notation ``NAME := expr`` is used to assign a name within a Python expression as part of the \"Assignment Expressions\" proposal [1].",
+      "before_citation": "The notation that assigns a name within a Python expression under the assignment expressions proposal is ``NAME := expr``. This notation allows for assigning a variable within an expression, which is part of the \"Assignment Expressions\" feature introduced in PEP 572 [1].\n\nSource 1:\nThe notation ``NAME := expr`` is used to assign a name within a Python expression as part of the \"Assignment Expressions\" proposal [1].",
+      "final_raw": "The notation that assigns a name within a Python expression under the assignment expressions proposal is ``NAME := expr``. This notation allows for assigning a variable within an expression, which is part of the \"Assignment Expressions\" feature introduced in PEP 572 [1].\n\nSource 1:\nThe notation ``NAME := expr`` is used to assign a name within a Python expression as part of the \"Assignment Expressions\" proposal [1]."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-2",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 2
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP597 EncodingWarning and omitted-encoding trigger are stated together.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        158,
+        161,
+        160,
+        159,
+        162
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The warning category that signals omitted encoding when `open` uses the locale default is ``EncodingWarning``. This warning is emitted when the ``encoding`` argument is omitted and the default locale-specific encoding is used [1].\n\nSource 1:  \nThe warning is emitted when the ``encoding`` argument to ``open()`` is omitted and the default locale-specific encoding is used [1].",
+      "before_citation": "The warning category that signals omitted encoding when `open` uses the locale default is ``EncodingWarning``. This warning is emitted when the ``encoding`` argument is omitted and the default locale-specific encoding is used [1].\n\nSource 1:  \nThe warning is emitted when the ``encoding`` argument to ``open()`` is omitted and the default locale-specific encoding is used [1].",
+      "final_raw": "[1] The warning category that signals omitted encoding when `open` uses the locale default is ``EncodingWarning``. This warning is emitted when the ``encoding`` argument is omitted and the default locale-specific encoding is used [1].\n\nSource 1:  \nThe warning is emitted when the ``encoding`` argument to ``open()`` is omitted and the default locale-specific encoding is used [1]."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-3",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 2
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP618 source says strict=True raises ValueError when exhausted at differing lengths.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        163,
+        164,
+        166,
+        165,
+        167
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "When the `zip` function in Python is called with the `strict=True` parameter and the iterables have different lengths, it raises a `ValueError` [1]. This behavior is specified in PEP 618, which introduces the optional `strict` parameter to the built-in `zip` function. The `ValueError` is raised at the point when iteration would normally stop, indicating that the iterables are of unequal length and the `strict` mode is enabled.\n\nSource 1:\nThe `zip` function, when called with `strict=True`, raises a `ValueError` if the arguments are exhausted at differing lengths [1].",
+      "before_citation": "When the `zip` function in Python is called with the `strict=True` parameter and the iterables have different lengths, it raises a `ValueError` [1]. This behavior is specified in PEP 618, which introduces the optional `strict` parameter to the built-in `zip` function. The `ValueError` is raised at the point when iteration would normally stop, indicating that the iterables are of unequal length and the `strict` mode is enabled.\n\nSource 1:\nThe `zip` function, when called with `strict=True`, raises a `ValueError` if the arguments are exhausted at differing lengths [1].",
+      "final_raw": "When the `zip` function in Python is called with the `strict=True` parameter and the iterables have different lengths, it raises a `ValueError` [1]. [1] This behavior is specified in PEP 618, which introduces the optional `strict` parameter to the built-in `zip` function. [3] The `ValueError` is raised at the point when iteration would normally stop, indicating that the iterables are of unequal length and the `strict` mode is enabled.\n\nSource 1:\nThe `zip` function, when called with `strict=True`, raises a `ValueError` if the arguments are exhausted at differing lengths [1]."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-4",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP669 explicitly adds sys.monitoring for relevant functions/constants.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        168,
+        171,
+        170,
+        169,
+        172,
+        173
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The namespace that exports the low-impact interpreter monitoring functions and constants is ``sys.monitoring``. This namespace is introduced as part of PEP 669, which proposes an API for monitoring Python programs running on CPython with minimal performance impact.\n\nSource 1:\nThe ``sys.monitoring`` namespace will be added, which will contain the relevant functions and constants [1].",
+      "before_citation": "The namespace that exports the low-impact interpreter monitoring functions and constants is ``sys.monitoring``. This namespace is introduced as part of PEP 669, which proposes an API for monitoring Python programs running on CPython with minimal performance impact.\n\nSource 1:\nThe ``sys.monitoring`` namespace will be added, which will contain the relevant functions and constants [1].",
+      "final_raw": "The namespace that exports the low-impact interpreter monitoring functions and constants is ``sys.monitoring``. [1] This namespace is introduced as part of PEP 669, which proposes an API for monitoring Python programs running on CPython with minimal performance impact.\n\nSource 1:\nThe ``sys.monitoring`` namespace will be added, which will contain the relevant functions and constants [1]."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-5",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP654 cited abstract/rationale names except* and ExceptionGroup.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        174,
+        175,
+        176,
+        177
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The syntax that handles exception groups in the proposal for multiple unrelated exceptions is ``except*``. This syntax is introduced as part of the PEP 654 proposal to handle ``ExceptionGroup`` objects, which represent a group of unrelated exceptions being propagated together.\n\nAnswer: The syntax used to handle exception groups in the proposal is ``except*`` [2].",
+      "before_citation": "The syntax that handles exception groups in the proposal for multiple unrelated exceptions is ``except*``. This syntax is introduced as part of the PEP 654 proposal to handle ``ExceptionGroup`` objects, which represent a group of unrelated exceptions being propagated together.\n\nAnswer: The syntax used to handle exception groups in the proposal is ``except*`` [2].",
+      "final_raw": "[1] The syntax that handles exception groups in the proposal for multiple unrelated exceptions is ``except*``. [2] This syntax is introduced as part of the PEP 654 proposal to handle ``ExceptionGroup`` objects, which represent a group of unrelated exceptions being propagated together.\n\nAnswer: The syntax used to handle exception groups in the proposal is ``except*`` [2]."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-6",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP553 cited environment-variable section says PYTHONBREAKPOINT=0 disables debugging.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        178,
+        179,
+        180,
+        181
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The value of `PYTHONBREAKPOINT` that makes the default breakpoint hook disable debugging is `PYTHONBREAKPOINT=0`. This setting causes `sys.breakpointhook()` to return `None` immediately, effectively disabling debugging.\n\nSource 2:  \nThe default implementation of `sys.breakpointhook()` consults a new environment variable called `PYTHONBREAKPOINT`. This environment variable can have various values: `PYTHONBREAKPOINT=0` disables debugging. Specifically, with this value `sys.breakpointhook()` returns `None` immediately.",
+      "before_citation": "The value of `PYTHONBREAKPOINT` that makes the default breakpoint hook disable debugging is `PYTHONBREAKPOINT=0`. This setting causes `sys.breakpointhook()` to return `None` immediately, effectively disabling debugging.\n\nSource 2:  \nThe default implementation of `sys.breakpointhook()` consults a new environment variable called `PYTHONBREAKPOINT`. This environment variable can have various values: `PYTHONBREAKPOINT=0` disables debugging. Specifically, with this value `sys.breakpointhook()` returns `None` immediately.",
+      "final_raw": "The value of `PYTHONBREAKPOINT` that makes the default breakpoint hook disable debugging is `PYTHONBREAKPOINT=0`. This setting causes `sys.breakpointhook()` to return `None` immediately, effectively disabling debugging.\n\nSource 2:  \nThe default implementation of `sys.breakpointhook()` consults a new environment variable called `PYTHONBREAKPOINT`. This environment variable can have various values: `PYTHONBREAKPOINT=0` disables debugging. Specifically, with this value `sys.breakpointhook()` returns `None` immediately."
+    },
+    {
+      "id": "observed/legacy-702e9009795b2802/qa-7",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP680 title and abstract identify tomllib for standard TOML parsing.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        182,
+        184,
+        183,
+        186,
+        185,
+        187
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The standard library module that provides the TOML parser for Python packaging tools is `tomllib`. This module was introduced as part of PEP 680, which aims to add TOML parsing support to the standard library. The rationale for this addition includes solving bootstrapping problems for Python build tools and providing a standard way to configure various Python tools that use TOML. \n\nAnswer: The `tomllib` module provides the TOML parser for Python packaging tools [1].",
+      "before_citation": "The standard library module that provides the TOML parser for Python packaging tools is `tomllib`. This module was introduced as part of PEP 680, which aims to add TOML parsing support to the standard library. The rationale for this addition includes solving bootstrapping problems for Python build tools and providing a standard way to configure various Python tools that use TOML. \n\nAnswer: The `tomllib` module provides the TOML parser for Python packaging tools [1].",
+      "final_raw": "[1] The standard library module that provides the TOML parser for Python packaging tools is `tomllib`. [1] This module was introduced as part of PEP 680, which aims to add TOML parsing support to the standard library. [2] The rationale for this addition includes solving bootstrapping problems for Python build tools and providing a standard way to configure various Python tools that use TOML. \n\nAnswer: The `tomllib` module provides the TOML parser for Python packaging tools [1]."
+    },
+    {
+      "id": "observed/legacy-1d2a1e3271adf133/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 3,
+        "CONTRADICTS": 1
+      },
+      "revised": true,
+      "text_changed_before_citation": true,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP NAME := expr and Dee NAME <- expr both preserved with their original sources.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        188,
+        189,
+        190,
+        192,
+        191,
+        193
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The notation that assigns a name within a Python expression under the assignment expressions proposal is `NAME := expr`. This notation allows for assigning a value to a variable within an expression, which is part of the \"Assignment Expressions\" feature introduced in PEP 572 [1].\n\nSource 1:\nThe notation `NAME := expr` is used to assign a name within a Python expression as part of the assignment expressions proposal [1].",
+      "before_citation": "The notation that assigns a name within a Python expression under the assignment expressions proposal is `NAME := expr` [1]. Another source states that assignment inside an expression uses `NAME <- expr` [2].",
+      "final_raw": "The notation that assigns a name within a Python expression under the assignment expressions proposal is `NAME := expr` [1]. Another source states that assignment inside an expression uses `NAME <- expr` [2]."
+    },
+    {
+      "id": "observed/legacy-c000762632771ec9/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "CONTRADICTS": 1,
+        "SUPPORTS": 1,
+        "IRRELEVANT": 1
+      },
+      "revised": true,
+      "text_changed_before_citation": true,
+      "aqa_called": true,
+      "aqa_accepted": true,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: PEP ValueError and Fay LengthMismatchError both preserved with their sources; no winner invented.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        194,
+        197,
+        195,
+        196,
+        198,
+        199,
+        200
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "When the `strict` parameter is set to `True` in the `zip` function and the iterables have different lengths, a `ValueError` is raised. This is specified in the PEP 618, which introduces the optional `strict` boolean keyword parameter to the built-in `zip` function. \n\nSource 2:\nThe PEP 618 describes that when `strict=True`, the iterator will raise a `ValueError` if the arguments are exhausted at differing lengths. \n\nAnswer: The strict zip raises a `ValueError` when its iterables have different lengths [2].",
+      "before_citation": "The question asks which exception is raised by strict zip when its iterables have different lengths. \n\nSource 1 states that \"the raised exception as LengthMismatchError for iterables of different lengths.\" [1]\n\nSource 4, which provides the specification for the strict zip feature, states that \"the resulting iterator will raise a ValueError if the arguments are exhausted at differing lengths.\" [4]\n\nThese two sources provide conflicting information: one says LengthMismatchError, and the other says ValueError.\n\nExample answer: Source 1 identifies LengthMismatchError; Source 4 identifies ValueError.",
+      "final_raw": "The question asks which exception is raised by strict zip when its iterables have different lengths. \n\nSource 1 states that \"the raised exception as LengthMismatchError for iterables of different lengths.\" [1]\n\nSource 4, which provides the specification for the strict zip feature, states that \"the resulting iterator will raise a ValueError if the arguments are exhausted at differing lengths.\" [4]\n\nThese two sources provide conflicting information: one says LengthMismatchError, and the other says ValueError.\n\nExample answer: Source 1 identifies LengthMismatchError; Source 4 identifies ValueError."
+    },
+    {
+      "id": "observed/legacy-34429cce545ccddd/qa-0",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "IRRELEVANT": 7,
+        "SUPPORTS": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Huilan Chen source explicitly says the completed competitive report was uploaded to Confluence.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        201,
+        204,
+        202,
+        203,
+        205,
+        208,
+        207,
+        206,
+        209
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 2:\nHuilan Chen uploaded the final report to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report.",
+      "before_citation": "Source 2:\nHuilan Chen uploaded the final report to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report.",
+      "final_raw": "Source 2:\nHuilan Chen uploaded the final report to Confluence: https://sd.confluence.net/wiki/spaces/SCT/pages/20250131/EcoTrace+Competitive+Analysis+Report."
+    },
+    {
+      "id": "observed/legacy-34429cce545ccddd/qa-1",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "SUPPORTS": 1,
+        "IRRELEVANT": 4
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Xuexin Yin source explicitly estimates at least10 working days for rule development and initial manual verification.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        210,
+        214,
+        211,
+        212,
+        213,
+        215
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "The preliminary estimated number of workdays required for data cleansing and initial verification, as mentioned in the report, is at least 10 working days of data engineer input for rule development and initial manual verification [1].",
+      "before_citation": "The preliminary estimated number of workdays required for data cleansing and initial verification, as mentioned in the report, is at least 10 working days of data engineer input for rule development and initial manual verification [1].",
+      "final_raw": "The preliminary estimated number of workdays required for data cleansing and initial verification, as mentioned in the report, is at least 10 working days of data engineer input for rule development and initial manual verification [1]."
+    },
+    {
+      "id": "observed/legacy-34429cce545ccddd/qa-2",
+      "group": "observed",
+      "legacy": true,
+      "source_job": "120445",
+      "judgments": {
+        "IRRELEVANT": 3,
+        "SUPPORTS": 1,
+        "CONTRADICTS": 1
+      },
+      "revised": true,
+      "text_changed_before_citation": true,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": true,
+        "state_citation_complete": null,
+        "fixed_key_location_coverage": true,
+        "reason": "Fresh Qwen answer text and complete answer/evidence objects equal v3b. Prior source-based judgment: Lizhen Zhou author metadata and original suggestion identify who requested customizable reporting dimensions; Luhao follow-up corroborates incorporation.",
+        "scope": "Core requested answer and required supporting evidence; not every auxiliary sentence or label is perfect."
+      },
+      "trace_ids": [
+        216,
+        220,
+        219,
+        218,
+        217,
+        221,
+        222
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": null,
+      "draft_raw": "Source 2:\nLizhen Zhou suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors.",
+      "before_citation": "Source 2: Lizhen Zhou suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors. [2]  \nSource 3: Boss Zhou's suggestion regarding customizable report dimensions was incorporated. [3]",
+      "final_raw": "Source 2: Lizhen Zhou suggested adding questions about customizable reporting dimensions to address the needs of managers and auditors. [2]  \nSource 3: Boss Zhou's suggestion regarding customizable report dimensions was incorporated. [3]"
+    },
+    {
+      "id": "oracle/writer-reopen/pending-reason",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": false,
+        "reason": "Correct version4/version5 facts and citations, but calls the incoming report a proposed correction despite kind=reconsider."
+      },
+      "trace_ids": [
+        1,
+        3,
+        2,
+        4
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "Source 1:  \nParallel writes were postponed because version 4 of the Ledger database permits only one writer at a time, as stated by Mina [1].  \n\nSource 2 and Source 3:  \nThe decision to revisit this plan is based on new evidence from Jun, who reported that Ledger version 5 now permits four simultaneous writers, and that migration tests confirmed four transactions could be committed concurrently [2]. This new information challenges the earlier constraint that justified the postponement of parallel writes, prompting a reconsideration of the decision [3].  \n\nThe original assertion by Mina remains valid under its original conditions, and the new assertion by Jun is a proposed correction that is currently pending review [3].",
+      "before_citation": "Source 1:  \nParallel writes were postponed because version 4 of the Ledger database permits only one writer at a time, as stated by Mina [1].  \n\nSource 2 and Source 3:  \nThe decision to revisit this plan is based on new evidence from Jun, who reported that Ledger version 5 now permits four simultaneous writers, and that migration tests confirmed four transactions could be committed concurrently [2]. This new information challenges the earlier constraint that justified the postponement of parallel writes, prompting a reconsideration of the decision [3].  \n\nThe original assertion by Mina remains valid under its original conditions, and the new assertion by Jun is a proposed correction that is currently pending review [3].",
+      "final_raw": "Source 1:  \nParallel writes were postponed because version 4 of the Ledger database permits only one writer at a time, as stated by Mina [1].  \n\nSource 2 and Source 3:  \nThe decision to revisit this plan is based on new evidence from Jun, who reported that Ledger version 5 now permits four simultaneous writers, and that migration tests confirmed four transactions could be committed concurrently [2]. This new information challenges the earlier constraint that justified the postponement of parallel writes, prompting a reconsideration of the decision [3].  \n\nThe original assertion by Mina remains valid under its original conditions, and the new assertion by Jun is a proposed correction that is currently pending review [3]."
+    },
+    {
+      "id": "oracle/writer-reopen/pending-status",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": false,
+        "reason": "Pending state and old facts preserved; invents a proposed-correction status for the incoming observation."
+      },
+      "trace_ids": [
+        5,
+        8,
+        6,
+        7,
+        9
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "The review status of the proposal is pending. The earlier assertion by Mina, \"We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan,\" remains established as historical evidence. The incoming assertion by Jun, \"Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently,\" is a proposed correction that has not been approved or rejected. The original report has not been erased, and the proposed correction is pending reconsideration [3].",
+      "before_citation": "The review status of the proposal is pending. The earlier assertion by Mina, \"We postponed parallel writes to the Ledger database because version4 permits only one writer. Serial writes remain the plan,\" remains established as historical evidence. The incoming assertion by Jun, \"Ledger version5 now permits four simultaneous writers. Our migration test confirmed four transactions committed concurrently,\" is a proposed correction that has not been approved or rejected. The original report has not been erased, and the proposed correction is pending reconsideration [3].",
+      "final_raw": "[3] The review status of the proposal is pending. [2] [3] The earlier assertion by Mina, \"We postponed parallel writes to the Ledger database because version4 permits only one writer. [2] [3] Serial writes remain the plan,\" remains established as historical evidence. [1] [3] The incoming assertion by Jun, \"Ledger version5 now permits four simultaneous writers. [1] [3] Our migration test confirmed four transactions committed concurrently,\" is a proposed correction that has not been approved or rejected. The original report has not been erased, and the proposed correction is pending reconsideration [3]."
+    },
+    {
+      "id": "oracle/writer-reopen/approved-reason",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": false,
+        "reason": "Keeps old/new version conditions but describes a separate unapproved correction after a reconsideration was approved."
+      },
+      "trace_ids": [
+        10,
+        13,
+        11,
+        12,
+        14
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "Source 1:  \nParallel writes were postponed because version 4 of the Ledger database permits only one writer at a time, as stated by Mina [1].  \n\nSource 3:  \nThe decision to postpone parallel writes was revisited due to new evidence from Jun, who reported that Ledger version 5 now permits four simultaneous writers, and that migration tests confirmed four transactions could be committed concurrently [3]. This new information prompted a reconsideration of the earlier decision, as the constraint that justified the original postponement (version 4's single-writer limitation) no longer applies under the current conditions. The original report remains valid under its original conditions, and the new assertion is treated as a separate, unapproved correction.",
+      "before_citation": "Source 1:  \nParallel writes were postponed because version 4 of the Ledger database permits only one writer at a time, as stated by Mina [1].  \n\nSource 3:  \nThe decision to postpone parallel writes was revisited due to new evidence from Jun, who reported that Ledger version 5 now permits four simultaneous writers, and that migration tests confirmed four transactions could be committed concurrently [3]. This new information prompted a reconsideration of the earlier decision, as the constraint that justified the original postponement (version 4's single-writer limitation) no longer applies under the current conditions. The original report remains valid under its original conditions, and the new assertion is treated as a separate, unapproved correction.",
+      "final_raw": "Source 1:  \nParallel writes were postponed because version 4 of the Ledger database permits only one writer at a time, as stated by Mina [1].  \n\nSource 3:  \nThe decision to postpone parallel writes was revisited due to new evidence from Jun, who reported that Ledger version 5 now permits four simultaneous writers, and that migration tests confirmed four transactions could be committed concurrently [3]. [2] [3] This new information prompted a reconsideration of the earlier decision, as the constraint that justified the original postponement (version 4's single-writer limitation) no longer applies under the current conditions. [3] The original report remains valid under its original conditions, and the new assertion is treated as a separate, unapproved correction."
+    },
+    {
+      "id": "oracle/writer-reopen/approved-status",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 2,
+        "IRRELEVANT": 1
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": false,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": true,
+        "reason": "Correctly limits approval to review and denies fact replacement/automatic decision reversal/new experimental success. Only review snapshot cited; the narrated migration facts lack direct original-source citations."
+      },
+      "trace_ids": [
+        15,
+        16,
+        18,
+        17,
+        19
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "Mina approved a reconsideration proposal that requests re-examination of the earlier decision to postpone parallel writes to the Ledger database due to the constraint that version4 permits only one writer. This approval authorizes a review of the earlier decision in light of the new information that Ledger version5 now permits four simultaneous writers, as confirmed by a migration test. However, the approval does not replace any factual assertion, overturn the earlier decision, or establish that a new experiment succeeded. The original report remains stored as historical evidence and has not been erased [3].",
+      "before_citation": "Mina approved a reconsideration proposal that requests re-examination of the earlier decision to postpone parallel writes to the Ledger database due to the constraint that version4 permits only one writer. This approval authorizes a review of the earlier decision in light of the new information that Ledger version5 now permits four simultaneous writers, as confirmed by a migration test. However, the approval does not replace any factual assertion, overturn the earlier decision, or establish that a new experiment succeeded. The original report remains stored as historical evidence and has not been erased [3].",
+      "final_raw": "[3] Mina approved a reconsideration proposal that requests re-examination of the earlier decision to postpone parallel writes to the Ledger database due to the constraint that version4 permits only one writer. [3] This approval authorizes a review of the earlier decision in light of the new information that Ledger version5 now permits four simultaneous writers, as confirmed by a migration test. [3] However, the approval does not replace any factual assertion, overturn the earlier decision, or establish that a new experiment succeeded. The original report remains stored as historical evidence and has not been erased [3]."
+    },
+    {
+      "id": "oracle/cache-reopen/pending-reason",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": true,
+        "reason": "Correct old prohibition and new30-second allowance, but omits the supplied20-second cache deletion condition required by the frozen reason criteria."
+      },
+      "trace_ids": [
+        20,
+        23,
+        21,
+        22,
+        24
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "The change that makes reviewing the earlier session-cache decision warranted is the revised session policy, which explicitly permits session identifiers in memory for up to 30 seconds after request completion [1]. This revision alters the constraint that previously justified the decision to disable user-session caching [2]. The earlier decision was based on a policy that forbade keeping session identifiers in memory after a request completed [2]. The reconsideration proposal is pending, and no approval or rejection has been recorded in this snapshot [3]. The original report remains stored as historical evidence and has not been erased.",
+      "before_citation": "The change that makes reviewing the earlier session-cache decision warranted is the revised session policy, which explicitly permits session identifiers in memory for up to 30 seconds after request completion [1]. This revision alters the constraint that previously justified the decision to disable user-session caching [2]. The earlier decision was based on a policy that forbade keeping session identifiers in memory after a request completed [2]. The reconsideration proposal is pending, and no approval or rejection has been recorded in this snapshot [3]. The original report remains stored as historical evidence and has not been erased.",
+      "final_raw": "The change that makes reviewing the earlier session-cache decision warranted is the revised session policy, which explicitly permits session identifiers in memory for up to 30 seconds after request completion [1]. This revision alters the constraint that previously justified the decision to disable user-session caching [2]. The earlier decision was based on a policy that forbade keeping session identifiers in memory after a request completed [2]. The reconsideration proposal is pending, and no approval or rejection has been recorded in this snapshot [3]. The original report remains stored as historical evidence and has not been erased."
+    },
+    {
+      "id": "oracle/cache-reopen/pending-status",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": false,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": false,
+        "reason": "Pending review is correctly named but incoming report is mislabeled a proposed correction. Only review snapshot cited for factual report claims."
+      },
+      "trace_ids": [
+        25,
+        28,
+        26,
+        27,
+        29
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "The review status of the proposal is pending. The earlier assertion by Mina, which stated that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains established as historical evidence. The incoming assertion by Jun, which describes the revised session policy permitting session identifiers in memory for up to 30 seconds after request completion, is a proposed correction that has not been approved or rejected. [3]",
+      "before_citation": "The review status of the proposal is pending. The earlier assertion by Mina, which stated that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains established as historical evidence. The incoming assertion by Jun, which describes the revised session policy permitting session identifiers in memory for up to 30 seconds after request completion, is a proposed correction that has not been approved or rejected. [3]",
+      "final_raw": "[3] The review status of the proposal is pending. [3] The earlier assertion by Mina, which stated that user-session caching was disabled because the policy forbade keeping session identifiers in memory after a request completed, remains established as historical evidence. [3] The incoming assertion by Jun, which describes the revised session policy permitting session identifiers in memory for up to 30 seconds after request completion, is a proposed correction that has not been approved or rejected. [3]"
+    },
+    {
+      "id": "oracle/cache-reopen/approved-reason",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": false,
+        "source_evidence_complete": true,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": true,
+        "reason": "Correct policy-change rationale, but again omits20-second deletion. No false automatic adoption, but required condition completeness fails."
+      },
+      "trace_ids": [
+        30,
+        31,
+        33,
+        32,
+        34
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "The change that makes reviewing the earlier session-cache decision warranted is the revised session policy, which explicitly permits session identifiers in memory for up to 30 seconds after request completion. This revision alters the constraint that previously justified the decision to disable user-session caching. The earlier decision was based on a policy that forbade keeping session identifiers in memory after a request completed, as stated in Source 2. The new policy, as reported in Source 1, changes this constraint, thereby warranting a reconsideration of the earlier decision. \n\nSource 1:  \nSource 2:  \nSource 3:",
+      "before_citation": "The change that makes reviewing the earlier session-cache decision warranted is the revised session policy, which explicitly permits session identifiers in memory for up to 30 seconds after request completion. This revision alters the constraint that previously justified the decision to disable user-session caching. The earlier decision was based on a policy that forbade keeping session identifiers in memory after a request completed, as stated in Source 2. The new policy, as reported in Source 1, changes this constraint, thereby warranting a reconsideration of the earlier decision. \n\nSource 1:  \nSource 2:  \nSource 3:",
+      "final_raw": "[1] [3] The change that makes reviewing the earlier session-cache decision warranted is the revised session policy, which explicitly permits session identifiers in memory for up to 30 seconds after request completion. [2] [3] This revision alters the constraint that previously justified the decision to disable user-session caching. The earlier decision was based on a policy that forbade keeping session identifiers in memory after a request completed, as stated in Source 2. The new policy, as reported in Source 1, changes this constraint, thereby warranting a reconsideration of the earlier decision. \n\nSource 1:  \nSource 2:  \nSource 3:"
+    },
+    {
+      "id": "oracle/cache-reopen/approved-status",
+      "group": "oracle",
+      "legacy": false,
+      "source_job": "120449",
+      "judgments": {
+        "SUPPORTS": 3
+      },
+      "revised": false,
+      "text_changed_before_citation": false,
+      "aqa_called": false,
+      "aqa_accepted": false,
+      "original_rating": {
+        "answer_correct": true,
+        "source_evidence_complete": false,
+        "state_citation_complete": true,
+        "relation_kind_semantics_correct": true,
+        "reason": "Correct approval-as-review semantics, no automatic fact/decision change. Narrated old/new policy facts cite only review snapshot, not original reports."
+      },
+      "trace_ids": [
+        35,
+        36,
+        38,
+        37,
+        39
+      ],
+      "initial_prompt_contains_correct_reconsideration_effect": true,
+      "draft_raw": "Mina approved a reconsideration proposal that requests re-examination of the earlier decision to disable user-session caching, based on the incoming assertion by Jun that the revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. This approval authorizes a review of the earlier decision in light of the new information, but it does not replace any factual assertion, overturn the earlier decision, or establish that a new experiment succeeded [3]. The original report remains stored as historical evidence and has not been erased.",
+      "before_citation": "Mina approved a reconsideration proposal that requests re-examination of the earlier decision to disable user-session caching, based on the incoming assertion by Jun that the revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. This approval authorizes a review of the earlier decision in light of the new information, but it does not replace any factual assertion, overturn the earlier decision, or establish that a new experiment succeeded [3]. The original report remains stored as historical evidence and has not been erased.",
+      "final_raw": "[3] Mina approved a reconsideration proposal that requests re-examination of the earlier decision to disable user-session caching, based on the incoming assertion by Jun that the revised session policy explicitly permits session identifiers in memory for up to 30 seconds after request completion. This approval authorizes a review of the earlier decision in light of the new information, but it does not replace any factual assertion, overturn the earlier decision, or establish that a new experiment succeeded [3]. [3] The original report remains stored as historical evidence and has not been erased."
+    }
+  ]
+}

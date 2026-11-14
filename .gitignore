@@ -1,6 +1,11 @@
 __pycache__/
 *.py[cod]
 .venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
 .DS_Store
 .env
 .env.*
@@ -18,3 +23,6 @@ results/cupmem/pilot-v5/*.cupmem.json
 results/cupmem/pilot-v5/*.cupmem.partial.json
 results/cupmem/local-pilot-v1/live/http.jsonl
 results/preview/index.html
+
+# Incomplete local packaging attempts are preserved locally, not release artifacts.
+results/reference-audit/*-prepare-incomplete*/

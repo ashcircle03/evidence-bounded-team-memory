@@ -1,0 +1,42 @@
+[
+  {
+    "case_id": "release-correction",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "KeyError: 'old_assertion_id'",
+        "raw": "{\"relations\": null, \"selection_error\": \"KeyError: 'old_assertion_id'\", \"model_output\": \"{\\n  \\\"relations\\\": [\\n    {\\n      \\\"kind\\\": \\\"correction\\\",\\n      \\\"target\\\": \\\"eb65c257995f86bfa60fab11\\\",\\n      \\\"old_sentence_ids\\\": [0],\\n      \\\"new_sentence_ids\\\": [0],\\n      \\\"reason\\\": \\\"The earlier claim that the upload cap for release Cedar is 500 MB is explicitly corrected by the incoming source, which states the upload cap is 480 MB. The correction applies to the same fact and conditions (Cedar release).\\\"\\n    }\\n  ]\\n}\"}"
+      }
+    ]
+  },
+  {
+    "case_id": "writer-reopen",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "KeyError: 'old_assertion_id'",
+        "raw": "{\"relations\": null, \"selection_error\": \"KeyError: 'old_assertion_id'\", \"model_output\": \"{\\n  \\\"relations\\\": [\\n    {\\n      \\\"kind\\\": \\\"correction\\\",\\n      \\\"target\\\": \\\"f685e68dfa3f82b10dea1a0b\\\",\\n      \\\"old_sentence_ids\\\": [0],\\n      \\\"new_sentence_ids\\\": [0],\\n      \\\"reason\\\": \\\"The earlier claim that version4 permits only one writer is corrected by the incoming evidence that version5 now permits four simultaneous writers. This change in the database version directly affects the decision to postpone parallel writes.\\\"\\n    },\\n    {\\n      \\\"kind\\\": \\\"correction\\\",\\n      \\\"target\\\": \\\"f685e68dfa3f82b10dea1a0b\\\",\\n      \\\"old_sentence_ids\\\": [1],\\n      \\\"new_sentence_ids\\\": [1],\\n      \\\"reason\\\": \\\"The earlier statement that serial writes remain the plan is no longer valid due to the new capability of version5 to support four simultaneous writers. This change in the database version justifies reconsidering the write strategy.\\\"\\n    }\\n  ]\\n}\"}"
+      }
+    ]
+  },
+  {
+    "case_id": "new-temperature",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "KeyError: 'old_assertion_id'",
+        "raw": "{\"relations\": null, \"selection_error\": \"KeyError: 'old_assertion_id'\", \"model_output\": \"{\\n  \\\"relations\\\": [\\n    {\\n      \\\"kind\\\": \\\"correction\\\",\\n      \\\"target\\\": \\\"b596dc2bf6776986bf84d7e6\\\",\\n      \\\"old_sentence_ids\\\": [0],\\n      \\\"new_sentence_ids\\\": [0],\\n      \\\"reason\\\": \\\"The incoming source explicitly corrects the operating temperature of the Iris chamber from 40 C to 45 C, while preserving the supervisor as Nuri. This directly contradicts the earlier observation and requires a correction to the temperature value.\\\"\\n    }\\n  ]\\n}\"}"
+      }
+    ]
+  },
+  {
+    "case_id": "new-vote-conflict",
+    "errors": [
+      {
+        "stage": "comparison",
+        "error": "KeyError: 'old_assertion_id'",
+        "raw": "{\"relations\": null, \"selection_error\": \"KeyError: 'old_assertion_id'\", \"model_output\": \"{\\n  \\\"relations\\\": [\\n    {\\n      \\\"kind\\\": \\\"correction\\\",\\n      \\\"target\\\": \\\"5d298335633c1323b12c5cba\\\",\\n      \\\"old_sentence_ids\\\": [0],\\n      \\\"new_sentence_ids\\\": [0],\\n      \\\"reason\\\": \\\"The earlier claim that 'For relay Sol, the interval is 6 seconds.' is explicitly corrected by the incoming report stating 'I explicitly correct the interval for the same Sol relay to 9 seconds.' This correction refers to the same fact and conditions, updating the interval from 6 seconds to 9 seconds for relay Sol.\\\"\\n    }\\n  ]\\n}\"}"
+      }
+    ]
+  }
+]
