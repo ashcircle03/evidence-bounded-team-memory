@@ -1,0 +1,4691 @@
+[
+  {
+    "name": "records-read",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-read",
+      "workspace_id": "demo",
+      "operation": "snapshot.get",
+      "payload": {
+        "snapshot_id": null
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-read",
+      "workspace_id": "demo",
+      "module": "records",
+      "operation": "snapshot.get",
+      "status": "ok",
+      "data": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data",
+        "equals": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        }
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "records-append-idempotent",
+    "setup": {
+      "snapshot": {
+        "id": "snap-1",
+        "revision": 1,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          }
+        ],
+        "proposals": []
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "jun",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-append-idempotent",
+      "workspace_id": "demo",
+      "operation": "record.append",
+      "payload": {
+        "source": {
+          "id": "s-new",
+          "owner": "jun",
+          "speaker": "Jun",
+          "observed_at": "2026-11-02T09:00:00Z",
+          "location": "correction.md#L1",
+          "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+        },
+        "idempotency_key": "append-new",
+        "expected_revision": 1
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-append-idempotent",
+      "workspace_id": "demo",
+      "module": "records",
+      "operation": "record.append",
+      "status": "ok",
+      "data": {
+        "snapshot": {
+          "id": "snap-2",
+          "revision": 2,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": []
+        },
+        "object_id": "s-new",
+        "replayed": false
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/snapshot/sources",
+        "equals": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ]
+      }
+    ],
+    "state_unchanged": false,
+    "retry_identically": true
+  },
+  {
+    "name": "records-proposal-pending",
+    "setup": {
+      "snapshot": {
+        "id": "snap-2",
+        "revision": 2,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": []
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-proposal-pending",
+      "workspace_id": "demo",
+      "operation": "proposal.submit",
+      "payload": {
+        "candidate": {
+          "kind": "correction",
+          "previous": {
+            "source_id": "s-old",
+            "start": 0,
+            "end": 36,
+            "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          "incoming": {
+            "source_id": "s-new",
+            "start": 0,
+            "end": 71,
+            "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          },
+          "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+          "previous_assertion": {
+            "source_id": "s-old",
+            "start": 18,
+            "end": 23,
+            "quote": "120ms"
+          },
+          "incoming_assertion": {
+            "source_id": "s-new",
+            "start": 18,
+            "end": 22,
+            "quote": "90ms"
+          }
+        },
+        "idempotency_key": "propose-correction",
+        "expected_revision": 2
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-proposal-pending",
+      "workspace_id": "demo",
+      "module": "records",
+      "operation": "proposal.submit",
+      "status": "ok",
+      "data": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "object_id": "p-correction",
+        "replayed": false
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/snapshot/proposals/0/status",
+        "equals": "pending"
+      },
+      {
+        "path": "/data/snapshot/proposals/0/effect",
+        "equals": "none"
+      }
+    ],
+    "state_unchanged": false,
+    "retry_identically": false
+  },
+  {
+    "name": "records-owner-approval",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-owner-approval",
+      "workspace_id": "demo",
+      "operation": "review.apply",
+      "payload": {
+        "proposal_id": "p-correction",
+        "choice": "approve",
+        "idempotency_key": "vote-1",
+        "expected_revision": 3
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "records-owner-approval",
+      "workspace_id": "demo",
+      "module": "records",
+      "operation": "review.apply",
+      "status": "ok",
+      "data": {
+        "snapshot": {
+          "id": "snap-4",
+          "revision": 4,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "approved",
+              "effect": "replace_assertion",
+              "decided_at": "2026-11-02T10:00:00Z"
+            }
+          ]
+        },
+        "object_id": "p-correction",
+        "replayed": false
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/snapshot/sources",
+        "equals": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ]
+      },
+      {
+        "path": "/data/snapshot/proposals/0/effect",
+        "equals": "replace_assertion"
+      },
+      {
+        "path": "/data/snapshot/proposals/0/candidate/previous_assertion",
+        "equals": {
+          "source_id": "s-old",
+          "start": 18,
+          "end": 23,
+          "quote": "120ms"
+        }
+      }
+    ],
+    "state_unchanged": false,
+    "retry_identically": true
+  },
+  {
+    "name": "unauthorized-review",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "jun",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "unauthorized-review",
+      "workspace_id": "demo",
+      "operation": "review.apply",
+      "payload": {
+        "proposal_id": "p-correction",
+        "choice": "approve",
+        "idempotency_key": "unauthorized-review",
+        "expected_revision": 3
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "unauthorized-review",
+      "workspace_id": "demo",
+      "module": "records",
+      "operation": "review.apply",
+      "status": "invalid",
+      "data": null,
+      "errors": [
+        {
+          "code": "FORBIDDEN",
+          "message": "Synthetic fixture: FORBIDDEN",
+          "retryable": false,
+          "item_id": null
+        }
+      ]
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "invalid"
+      },
+      {
+        "path": "/errors/0/code",
+        "equals": "FORBIDDEN"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "stale-review",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "stale-review",
+      "workspace_id": "demo",
+      "operation": "review.apply",
+      "payload": {
+        "proposal_id": "p-correction",
+        "choice": "approve",
+        "idempotency_key": "stale-review",
+        "expected_revision": 2
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "stale-review",
+      "workspace_id": "demo",
+      "module": "records",
+      "operation": "review.apply",
+      "status": "invalid",
+      "data": null,
+      "errors": [
+        {
+          "code": "STALE_SNAPSHOT",
+          "message": "Synthetic fixture: STALE_SNAPSHOT",
+          "retryable": false,
+          "item_id": null
+        }
+      ]
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "invalid"
+      },
+      {
+        "path": "/errors/0/code",
+        "equals": "STALE_SNAPSHOT"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "relations-exact-correction",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "relations-exact-correction",
+      "workspace_id": "demo",
+      "operation": "relations.compare",
+      "payload": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "incoming_source_id": "s-new",
+        "history_source_ids": [
+          "s-old"
+        ]
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "relations-exact-correction",
+      "workspace_id": "demo",
+      "module": "relations",
+      "operation": "relations.compare",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-3",
+        "candidates": [
+          {
+            "kind": "correction",
+            "previous": {
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            "incoming": {
+              "source_id": "s-new",
+              "start": 0,
+              "end": 71,
+              "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            },
+            "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+            "previous_assertion": {
+              "source_id": "s-old",
+              "start": 18,
+              "end": 23,
+              "quote": "120ms"
+            },
+            "incoming_assertion": {
+              "source_id": "s-new",
+              "start": 18,
+              "end": 22,
+              "quote": "90ms"
+            }
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/candidates",
+        "equals": [
+          {
+            "kind": "correction",
+            "previous": {
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            "incoming": {
+              "source_id": "s-new",
+              "start": 0,
+              "end": 71,
+              "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            },
+            "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+            "previous_assertion": {
+              "source_id": "s-old",
+              "start": 18,
+              "end": 23,
+              "quote": "120ms"
+            },
+            "incoming_assertion": {
+              "source_id": "s-new",
+              "start": 18,
+              "end": 22,
+              "quote": "90ms"
+            }
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "relations-different-conditions",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v2 / GPU: latency 90ms."
+          }
+        ],
+        "proposals": []
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "relations-different-conditions",
+      "workspace_id": "demo",
+      "operation": "relations.compare",
+      "payload": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v2 / GPU: latency 90ms."
+            }
+          ],
+          "proposals": []
+        },
+        "incoming_source_id": "s-new",
+        "history_source_ids": [
+          "s-old"
+        ]
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "relations-different-conditions",
+      "workspace_id": "demo",
+      "module": "relations",
+      "operation": "relations.compare",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-3",
+        "candidates": [
+          {
+            "kind": "coexist",
+            "previous": {
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            "incoming": {
+              "source_id": "s-new",
+              "start": 0,
+              "end": 23,
+              "quote": "v2 / GPU: latency 90ms."
+            },
+            "reason": "Different version and hardware; these measurements can coexist.",
+            "previous_assertion": null,
+            "incoming_assertion": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/candidates/0/kind",
+        "equals": "coexist"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "relations-model-timeout",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "relations-model-timeout",
+      "workspace_id": "demo",
+      "operation": "relations.compare",
+      "payload": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "incoming_source_id": "s-new",
+        "history_source_ids": [
+          "s-old"
+        ]
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "relations-model-timeout",
+      "workspace_id": "demo",
+      "module": "relations",
+      "operation": "relations.compare",
+      "status": "error",
+      "data": null,
+      "errors": [
+        {
+          "code": "MODEL_TIMEOUT",
+          "message": "Synthetic fixture: MODEL_TIMEOUT",
+          "retryable": false,
+          "item_id": null
+        }
+      ]
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "error"
+      },
+      {
+        "path": "/errors/0/code",
+        "equals": "MODEL_TIMEOUT"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "retrieval-keeps-metadata-and-state",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "retrieval-keeps-metadata-and-state",
+      "workspace_id": "demo",
+      "operation": "evidence.retrieve",
+      "payload": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "query": {
+          "text": "What is the currently accepted latency for v1 / CPU?",
+          "time_scope": "current",
+          "as_of": null,
+          "conditions": [
+            "v1",
+            "CPU"
+          ]
+        },
+        "max_evidence": 4
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "retrieval-keeps-metadata-and-state",
+      "workspace_id": "demo",
+      "module": "retrieval",
+      "operation": "evidence.retrieve",
+      "status": "ok",
+      "data": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "query": {
+          "text": "What is the currently accepted latency for v1 / CPU?",
+          "time_scope": "current",
+          "as_of": null,
+          "conditions": [
+            "v1",
+            "CPU"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "e-s-old",
+            "kind": "source",
+            "state_record": null,
+            "source_id": "s-old",
+            "start": 0,
+            "end": 36,
+            "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          {
+            "id": "e-s-new",
+            "kind": "source",
+            "state_record": null,
+            "source_id": "s-new",
+            "start": 0,
+            "end": 71,
+            "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency.",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          {
+            "id": "e-state",
+            "kind": "review_state",
+            "source_id": null,
+            "state_record": {
+              "proposal_id": "p-correction",
+              "snapshot_id": "snap-3",
+              "text": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown"
+            },
+            "start": 0,
+            "end": 119,
+            "quote": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown",
+            "owner": null,
+            "speaker": null,
+            "observed_at": null,
+            "location": null,
+            "conditions": []
+          }
+        ],
+        "coverage": "hits",
+        "unresolved_proposal_ids": [
+          "p-correction"
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/coverage",
+        "equals": "hits"
+      },
+      {
+        "path": "/data/unresolved_proposal_ids",
+        "equals": [
+          "p-correction"
+        ]
+      },
+      {
+        "path": "/data/evidence",
+        "equals": [
+          {
+            "id": "e-s-old",
+            "kind": "source",
+            "state_record": null,
+            "source_id": "s-old",
+            "start": 0,
+            "end": 36,
+            "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          {
+            "id": "e-s-new",
+            "kind": "source",
+            "state_record": null,
+            "source_id": "s-new",
+            "start": 0,
+            "end": 71,
+            "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency.",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          {
+            "id": "e-state",
+            "kind": "review_state",
+            "source_id": null,
+            "state_record": {
+              "proposal_id": "p-correction",
+              "snapshot_id": "snap-3",
+              "text": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown"
+            },
+            "start": 0,
+            "end": 119,
+            "quote": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown",
+            "owner": null,
+            "speaker": null,
+            "observed_at": null,
+            "location": null,
+            "conditions": []
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "retrieval-no-hits-is-not-db-absence",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "retrieval-no-hits-is-not-db-absence",
+      "workspace_id": "demo",
+      "operation": "evidence.retrieve",
+      "payload": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "query": {
+          "text": "What is the currently accepted latency for v1 / CPU?",
+          "time_scope": "current",
+          "as_of": null,
+          "conditions": [
+            "v1",
+            "CPU"
+          ]
+        },
+        "max_evidence": 4
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "retrieval-no-hits-is-not-db-absence",
+      "workspace_id": "demo",
+      "module": "retrieval",
+      "operation": "evidence.retrieve",
+      "status": "ok",
+      "data": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "query": {
+          "text": "What is the currently accepted latency for v1 / CPU?",
+          "time_scope": "current",
+          "as_of": null,
+          "conditions": [
+            "v1",
+            "CPU"
+          ]
+        },
+        "evidence": [],
+        "coverage": "no_hits",
+        "unresolved_proposal_ids": []
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/coverage",
+        "equals": "no_hits"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "retrieval-failed-is-not-no-hits",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "retrieval-failed-is-not-no-hits",
+      "workspace_id": "demo",
+      "operation": "evidence.retrieve",
+      "payload": {
+        "snapshot": {
+          "id": "snap-3",
+          "revision": 3,
+          "as_of": "2026-11-02T10:00:00Z",
+          "sources": [
+            {
+              "id": "s-old",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+            },
+            {
+              "id": "s-new",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+            }
+          ],
+          "proposals": [
+            {
+              "id": "p-correction",
+              "candidate": {
+                "kind": "correction",
+                "previous": {
+                  "source_id": "s-old",
+                  "start": 0,
+                  "end": 36,
+                  "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                },
+                "incoming": {
+                  "source_id": "s-new",
+                  "start": 0,
+                  "end": 71,
+                  "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                },
+                "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                "previous_assertion": {
+                  "source_id": "s-old",
+                  "start": 18,
+                  "end": 23,
+                  "quote": "120ms"
+                },
+                "incoming_assertion": {
+                  "source_id": "s-new",
+                  "start": 18,
+                  "end": 22,
+                  "quote": "90ms"
+                }
+              },
+              "reviewer": "hana",
+              "status": "pending",
+              "effect": "none",
+              "decided_at": null
+            }
+          ]
+        },
+        "query": {
+          "text": "What is the currently accepted latency for v1 / CPU?",
+          "time_scope": "current",
+          "as_of": null,
+          "conditions": [
+            "v1",
+            "CPU"
+          ]
+        },
+        "max_evidence": 4
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "retrieval-failed-is-not-no-hits",
+      "workspace_id": "demo",
+      "module": "retrieval",
+      "operation": "evidence.retrieve",
+      "status": "error",
+      "data": null,
+      "errors": [
+        {
+          "code": "RETRIEVAL_FAILED",
+          "message": "Synthetic fixture: RETRIEVAL_FAILED",
+          "retryable": false,
+          "item_id": null
+        }
+      ]
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "error"
+      },
+      {
+        "path": "/errors/0/code",
+        "equals": "RETRIEVAL_FAILED"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-pending-keeps-current",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-pending-keeps-current",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-3",
+            "revision": 3,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "correction",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 71,
+                    "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                  },
+                  "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                  "previous_assertion": {
+                    "source_id": "s-old",
+                    "start": 18,
+                    "end": 23,
+                    "quote": "120ms"
+                  },
+                  "incoming_assertion": {
+                    "source_id": "s-new",
+                    "start": 18,
+                    "end": 22,
+                    "quote": "90ms"
+                  }
+                },
+                "reviewer": "hana",
+                "status": "pending",
+                "effect": "none",
+                "decided_at": null
+              }
+            ]
+          },
+          "query": {
+            "text": "What is the currently accepted latency for v1 / CPU?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 71,
+              "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-3",
+                "text": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown"
+              },
+              "start": 0,
+              "end": 119,
+              "quote": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": [
+            "p-correction"
+          ]
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-pending-keeps-current",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-3",
+        "outcome": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "The recorded latency is 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The 90ms correction is pending, so it has not replaced 120ms.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-old",
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "The recorded latency is 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The 90ms correction is pending, so it has not replaced 120ms.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-old",
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-approved-changes-only-latency",
+    "setup": {
+      "snapshot": {
+        "id": "snap-4",
+        "revision": 4,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "approved",
+            "effect": "replace_assertion",
+            "decided_at": "2026-11-02T10:00:00Z"
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-approved-changes-only-latency",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-4",
+            "revision": 4,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "correction",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 71,
+                    "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                  },
+                  "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                  "previous_assertion": {
+                    "source_id": "s-old",
+                    "start": 18,
+                    "end": 23,
+                    "quote": "120ms"
+                  },
+                  "incoming_assertion": {
+                    "source_id": "s-new",
+                    "start": 18,
+                    "end": 22,
+                    "quote": "90ms"
+                  }
+                },
+                "reviewer": "hana",
+                "status": "approved",
+                "effect": "replace_assertion",
+                "decided_at": "2026-11-02T10:00:00Z"
+              }
+            ]
+          },
+          "query": {
+            "text": "What is the currently accepted latency for v1 / CPU?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 71,
+              "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-4",
+                "text": "snapshot=snap-4; proposal=p-correction; kind=correction; status=approved; effect=replace_assertion; reviewer=hana; decided_at=2026-11-02T10:00:00Z"
+              },
+              "start": 0,
+              "end": 146,
+              "quote": "snapshot=snap-4; proposal=p-correction; kind=correction; status=approved; effect=replace_assertion; reviewer=hana; decided_at=2026-11-02T10:00:00Z",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": []
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-approved-changes-only-latency",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-4",
+        "outcome": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "The approved latency is 90ms.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "Hana remains the owner.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "The approved latency is 90ms.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "Hana remains the owner.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-no-evidence-abstains",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-no-evidence-abstains",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-3",
+            "revision": 3,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "correction",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 71,
+                    "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                  },
+                  "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                  "previous_assertion": {
+                    "source_id": "s-old",
+                    "start": 18,
+                    "end": 23,
+                    "quote": "120ms"
+                  },
+                  "incoming_assertion": {
+                    "source_id": "s-new",
+                    "start": 18,
+                    "end": 22,
+                    "quote": "90ms"
+                  }
+                },
+                "reviewer": "hana",
+                "status": "pending",
+                "effect": "none",
+                "decided_at": null
+              }
+            ]
+          },
+          "query": {
+            "text": "What is the currently accepted latency for v1 / CPU?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [],
+          "coverage": "no_hits",
+          "unresolved_proposal_ids": []
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-no-evidence-abstains",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-3",
+        "outcome": "abstained",
+        "claims": [],
+        "reason": "No retrieved evidence supports an answer."
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/outcome",
+        "equals": "abstained"
+      },
+      {
+        "path": "/data/claims",
+        "equals": []
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-conflict-both-alternatives",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Repeated measurement."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "conflict",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 45,
+                "quote": "v1 / CPU: latency 90ms. Repeated measurement."
+              },
+              "reason": "Incompatible measurements under the stated same conditions.",
+              "previous_assertion": null,
+              "incoming_assertion": null
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-conflict-both-alternatives",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-3",
+            "revision": 3,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Repeated measurement."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "conflict",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 45,
+                    "quote": "v1 / CPU: latency 90ms. Repeated measurement."
+                  },
+                  "reason": "Incompatible measurements under the stated same conditions.",
+                  "previous_assertion": null,
+                  "incoming_assertion": null
+                },
+                "reviewer": "hana",
+                "status": "pending",
+                "effect": "none",
+                "decided_at": null
+              }
+            ]
+          },
+          "query": {
+            "text": "What is the currently accepted latency for v1 / CPU?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 45,
+              "quote": "v1 / CPU: latency 90ms. Repeated measurement.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-3",
+                "text": "snapshot=snap-3; proposal=p-correction; kind=conflict; status=pending; effect=none; reviewer=hana; decided_at=unknown"
+              },
+              "start": 0,
+              "end": 117,
+              "quote": "snapshot=snap-3; proposal=p-correction; kind=conflict; status=pending; effect=none; reviewer=hana; decided_at=unknown",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": [
+            "p-correction"
+          ]
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-conflict-both-alternatives",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-3",
+        "outcome": "conflict",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Hana reports 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": "latency"
+          },
+          {
+            "id": "c2",
+            "text": "Jun reports 90ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-new"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": "latency"
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/outcome",
+        "equals": "conflict"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "Hana reports 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": "latency"
+          },
+          {
+            "id": "c2",
+            "text": "Jun reports 90ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-new"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": "latency"
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-unrelated-conflict-does-not-block",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Repeated measurement."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "conflict",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 45,
+                "quote": "v1 / CPU: latency 90ms. Repeated measurement."
+              },
+              "reason": "Incompatible measurements under the stated same conditions.",
+              "previous_assertion": null,
+              "incoming_assertion": null
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-unrelated-conflict-does-not-block",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-3",
+            "revision": 3,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Repeated measurement."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "conflict",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 45,
+                    "quote": "v1 / CPU: latency 90ms. Repeated measurement."
+                  },
+                  "reason": "Incompatible measurements under the stated same conditions.",
+                  "previous_assertion": null,
+                  "incoming_assertion": null
+                },
+                "reviewer": "hana",
+                "status": "pending",
+                "effect": "none",
+                "decided_at": null
+              }
+            ]
+          },
+          "query": {
+            "text": "Who owns the report?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 45,
+              "quote": "v1 / CPU: latency 90ms. Repeated measurement.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-3",
+                "text": "snapshot=snap-3; proposal=p-correction; kind=conflict; status=pending; effect=none; reviewer=hana; decided_at=unknown"
+              },
+              "start": 0,
+              "end": 117,
+              "quote": "snapshot=snap-3; proposal=p-correction; kind=conflict; status=pending; effect=none; reviewer=hana; decided_at=unknown",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": [
+            "p-correction"
+          ]
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-unrelated-conflict-does-not-block",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-3",
+        "outcome": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Hana owns the report.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/outcome",
+        "equals": "answered"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-reconsider-is-not-correction",
+    "setup": {
+      "snapshot": {
+        "id": "snap-4",
+        "revision": 4,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 crashes with parallel hooks; keep single-threaded execution."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "reconsider",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 63,
+                "quote": "v1 crashes with parallel hooks; keep single-threaded execution."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 82,
+                "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+              },
+              "reason": "Changed version may remove the premise behind the earlier decision.",
+              "previous_assertion": null,
+              "incoming_assertion": null
+            },
+            "reviewer": "hana",
+            "status": "approved",
+            "effect": "authorize_reconsideration",
+            "decided_at": "2026-11-02T10:00:00Z"
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-reconsider-is-not-correction",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-4",
+            "revision": 4,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 crashes with parallel hooks; keep single-threaded execution."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "reconsider",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 63,
+                    "quote": "v1 crashes with parallel hooks; keep single-threaded execution."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 82,
+                    "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+                  },
+                  "reason": "Changed version may remove the premise behind the earlier decision.",
+                  "previous_assertion": null,
+                  "incoming_assertion": null
+                },
+                "reviewer": "hana",
+                "status": "approved",
+                "effect": "authorize_reconsideration",
+                "decided_at": "2026-11-02T10:00:00Z"
+              }
+            ]
+          },
+          "query": {
+            "text": "Does approval mean parallel execution is now the adopted decision?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "hook invocation"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 63,
+              "quote": "v1 crashes with parallel hooks; keep single-threaded execution.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "parallel hook invocation"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 82,
+              "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v2",
+                "parallel hook invocation"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-4",
+                "text": "snapshot=snap-4; proposal=p-correction; kind=reconsider; status=approved; effect=authorize_reconsideration; reviewer=hana; decided_at=2026-11-02T10:00:00Z"
+              },
+              "start": 0,
+              "end": 154,
+              "quote": "snapshot=snap-4; proposal=p-correction; kind=reconsider; status=approved; effect=authorize_reconsideration; reviewer=hana; decided_at=2026-11-02T10:00:00Z",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": []
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-reconsider-is-not-correction",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-4",
+        "outcome": "conditional",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Review is authorized; no changed execution decision or successful experiment is recorded.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-old",
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "hook invocation"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/outcome",
+        "equals": "conditional"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "Review is authorized; no changed execution decision or successful experiment is recorded.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-old",
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "hook invocation"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "gateway-read-only-ask",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "gateway-read-only-ask",
+      "workspace_id": "demo",
+      "operation": "gateway.ask",
+      "payload": {
+        "query": {
+          "text": "What is the currently accepted latency for v1 / CPU?",
+          "time_scope": "current",
+          "as_of": null,
+          "conditions": [
+            "v1",
+            "CPU"
+          ]
+        },
+        "snapshot_id": "snap-3"
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "gateway-read-only-ask",
+      "workspace_id": "demo",
+      "module": "gateway",
+      "operation": "gateway.ask",
+      "status": "ok",
+      "data": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-3",
+            "revision": 3,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "correction",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 71,
+                    "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                  },
+                  "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                  "previous_assertion": {
+                    "source_id": "s-old",
+                    "start": 18,
+                    "end": 23,
+                    "quote": "120ms"
+                  },
+                  "incoming_assertion": {
+                    "source_id": "s-new",
+                    "start": 18,
+                    "end": 22,
+                    "quote": "90ms"
+                  }
+                },
+                "reviewer": "hana",
+                "status": "pending",
+                "effect": "none",
+                "decided_at": null
+              }
+            ]
+          },
+          "query": {
+            "text": "What is the currently accepted latency for v1 / CPU?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 71,
+              "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-3",
+                "text": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown"
+              },
+              "start": 0,
+              "end": 119,
+              "quote": "snapshot=snap-3; proposal=p-correction; kind=correction; status=pending; effect=none; reviewer=hana; decided_at=unknown",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": [
+            "p-correction"
+          ]
+        },
+        "answer": {
+          "snapshot_id": "snap-3",
+          "outcome": "answered",
+          "reason": null,
+          "claims": [
+            {
+              "id": "c1",
+              "text": "The recorded latency is 120ms.",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e-s-old"
+              ],
+              "conditions": [
+                "v1",
+                "CPU"
+              ],
+              "alternative_group": null
+            },
+            {
+              "id": "c2",
+              "text": "The 90ms correction is pending, so it has not replaced 120ms.",
+              "kind": "state",
+              "evidence_ids": [
+                "e-s-old",
+                "e-s-new",
+                "e-state"
+              ],
+              "conditions": [
+                "v1",
+                "CPU"
+              ],
+              "alternative_group": null
+            }
+          ]
+        }
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/answer/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "The recorded latency is 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The 90ms correction is pending, so it has not replaced 120ms.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-old",
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "gateway-rejects-unauthorized-review",
+    "setup": {
+      "snapshot": {
+        "id": "snap-3",
+        "revision": 3,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "pending",
+            "effect": "none",
+            "decided_at": null
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "jun",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "gateway-rejects-unauthorized-review",
+      "workspace_id": "demo",
+      "operation": "gateway.review",
+      "payload": {
+        "proposal_id": "p-correction",
+        "choice": "approve",
+        "idempotency_key": "bad-vote",
+        "expected_revision": 3
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "gateway-rejects-unauthorized-review",
+      "workspace_id": "demo",
+      "module": "gateway",
+      "operation": "gateway.review",
+      "status": "invalid",
+      "data": null,
+      "errors": [
+        {
+          "code": "FORBIDDEN",
+          "message": "Synthetic fixture: FORBIDDEN",
+          "retryable": false,
+          "item_id": null
+        }
+      ]
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "invalid"
+      },
+      {
+        "path": "/errors/0/code",
+        "equals": "FORBIDDEN"
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "gateway-ingest-keeps-source-on-comparison-failure",
+    "setup": {
+      "snapshot": {
+        "id": "snap-1",
+        "revision": 1,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          }
+        ],
+        "proposals": []
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "jun",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "gateway-ingest-keeps-source-on-comparison-failure",
+      "workspace_id": "demo",
+      "operation": "gateway.ingest",
+      "payload": {
+        "source": {
+          "id": "s-new",
+          "owner": "jun",
+          "speaker": "Jun",
+          "observed_at": "2026-11-02T09:00:00Z",
+          "location": "correction.md#L1",
+          "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+        },
+        "idempotency_key": "append-new",
+        "expected_revision": 1
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "gateway-ingest-keeps-source-on-comparison-failure",
+      "workspace_id": "demo",
+      "module": "gateway",
+      "operation": "gateway.ingest",
+      "status": "partial",
+      "data": {
+        "receipt": {
+          "snapshot": {
+            "id": "snap-2",
+            "revision": 2,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              }
+            ],
+            "proposals": []
+          },
+          "object_id": "s-new",
+          "replayed": false
+        },
+        "proposal_ids": []
+      },
+      "errors": [
+        {
+          "code": "MODEL_TIMEOUT",
+          "message": "Synthetic fixture: MODEL_TIMEOUT",
+          "retryable": false,
+          "item_id": null
+        }
+      ]
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "partial"
+      },
+      {
+        "path": "/data/receipt/snapshot/sources",
+        "equals": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ]
+      },
+      {
+        "path": "/errors/0/code",
+        "equals": "MODEL_TIMEOUT"
+      }
+    ],
+    "state_unchanged": false,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-rejected-does-not-promote-new-value",
+    "setup": {
+      "snapshot": {
+        "id": "snap-rejected",
+        "revision": 4,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "correction",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 36,
+                "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 71,
+                "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              },
+              "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+              "previous_assertion": {
+                "source_id": "s-old",
+                "start": 18,
+                "end": 23,
+                "quote": "120ms"
+              },
+              "incoming_assertion": {
+                "source_id": "s-new",
+                "start": 18,
+                "end": 22,
+                "quote": "90ms"
+              }
+            },
+            "reviewer": "hana",
+            "status": "rejected",
+            "effect": "none",
+            "decided_at": "2026-11-02T10:00:00Z"
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-rejected-does-not-promote-new-value",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-rejected",
+            "revision": 4,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "correction",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 36,
+                    "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 71,
+                    "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency."
+                  },
+                  "reason": "The report explicitly corrects latency under the same v1 / CPU condition.",
+                  "previous_assertion": {
+                    "source_id": "s-old",
+                    "start": 18,
+                    "end": 23,
+                    "quote": "120ms"
+                  },
+                  "incoming_assertion": {
+                    "source_id": "s-new",
+                    "start": 18,
+                    "end": 22,
+                    "quote": "90ms"
+                  }
+                },
+                "reviewer": "hana",
+                "status": "rejected",
+                "effect": "none",
+                "decided_at": "2026-11-02T10:00:00Z"
+              }
+            ]
+          },
+          "query": {
+            "text": "What is the currently accepted latency for v1 / CPU?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "v1",
+              "CPU"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 36,
+              "quote": "v1 / CPU: latency 120ms. 담당자는 Hana다.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 71,
+              "quote": "v1 / CPU: latency 90ms. Earlier 120ms was a typo; correct only latency.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v1",
+                "CPU"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-rejected",
+                "text": "snapshot=snap-rejected; proposal=p-correction; kind=correction; status=rejected; effect=none; reviewer=hana; decided_at=2026-11-02T10:00:00Z"
+              },
+              "start": 0,
+              "end": 140,
+              "quote": "snapshot=snap-rejected; proposal=p-correction; kind=correction; status=rejected; effect=none; reviewer=hana; decided_at=2026-11-02T10:00:00Z",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": []
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1",
+      "request_id": "answer-rejected-does-not-promote-new-value",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-rejected",
+        "outcome": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "The recorded latency remains 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The proposed 90ms correction was rejected.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "The recorded latency remains 120ms.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The proposed 90ms correction was rejected.",
+            "kind": "state",
+            "evidence_ids": [
+              "e-s-new",
+              "e-state"
+            ],
+            "conditions": [
+              "v1",
+              "CPU"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  }
+]

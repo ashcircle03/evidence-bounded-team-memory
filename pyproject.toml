@@ -26,9 +26,10 @@ team-memory = "team_memory.service:main"
 include = ["team_memory*"]
 
 [tool.setuptools.package-data]
-team_memory = ["workbench.html", "_vendor/**/*.json", "_vendor/**/*.md", "_vendor/**/*.txt", "_vendor/**/LICENSE", "_vendor/**/NOTICE"]
+team_memory = ["workbench.html", "contracts/*.json", "_vendor/**/*.json", "_vendor/**/*.md", "_vendor/**/*.txt", "_vendor/**/LICENSE", "_vendor/**/NOTICE"]
 
 [tool.setuptools.dynamic.optional-dependencies]
+contracts = {file = ["requirements-contracts.txt"]}
 reference = {file = ["requirements-reference.txt"]}
 dev = {file = ["requirements-dev.txt"]}
 

@@ -1,5 +1,16 @@
 # 변경 기록
 
+## 2026-11-14 — 팀 개발 계약 v1
+
+- 협업 책임을 records / relations / retrieval / answering / gateway로 정의했다.
+- JSON Schema, Python ports, 참조 무결성 검사, 교체 가능한 conformance runner를 추가했다.
+- 합성 시나리오22개와 계약·오류 주입 검사56개를 제공한다. fixture double과 실제 adapter 검증을 구분한다.
+- 각 모듈의 입출력·권한·원자성·부분 실패·재시도·담당 파일·전환 작업을 문서화했다.
+- claim별 근거, 승인 효과 제한, read-only QA와 trusted caller 경계를 명세했다.
+- 기존 v2 모델·프롬프트·런타임 경로는 유지했다. 새 adapter는 아직 구현 완료가 아니다.
+
+검증: [387개 테스트·87개 하위 사례 및 패키지 확인](docs/modules/verification.json). 새 모델 추론·벤치마크 성능 측정은 포함하지 않는다.
+
 ## 2026-11-14 — 모듈 구조와 개발 환경
 
 - 현재 구현을 storage/review/readers와 service 진입점으로 구분했다.

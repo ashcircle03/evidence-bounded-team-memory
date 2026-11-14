@@ -9,6 +9,21 @@ permissions:
   contents: read
 
 jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e '.[dev]'
+      - name: Validate shared module examples and adversarial contracts (no models)
+        run: |
+          python -m pytest -q tests/test_module_contracts.py
+          python -m team_memory.contracts.conformance examples/contracts/cases.json
   test:
     runs-on: ubuntu-24.04
     timeout-minutes: 5

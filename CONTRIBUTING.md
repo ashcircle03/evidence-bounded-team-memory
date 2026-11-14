@@ -1,5 +1,7 @@
 # 기여 안내
 
+팀별 독립 개발은 [다섯 모듈 협업 계약](docs/modules/README.md)을 기준으로 한다. 자기 모듈의 입출력·권한·실패 계약과 [공통 예제](examples/contracts/README.md)를 먼저 확인한다. `python -m pytest -q tests/test_module_contracts.py`는 모델 없이 실행된다. `--factory`로 실제 adapter를 연결하기 전의 fixture-only 통과를 구현 완료로 표시하지 않는다.
+
 먼저 [모듈 지도](docs/architecture.md)에서 변경할 책임을 찾는다. 운영 경로는 `service → storage/review/readers`이며, 새 실험 후보는 `team_memory/experiments`, 평가 코드는 `evaluation`, 측정 결과는 `results`에 둔다. 호환 파일과 `_vendor`에 새 프로젝트 로직을 넣지 않는다.
 
 ## 개발 환경

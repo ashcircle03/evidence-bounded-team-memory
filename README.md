@@ -4,7 +4,7 @@
 
 **팀이 Git으로 공유하는 기록에서 조건·출처·승인 상태를 보존하며 답하고, 과거 결정의 재검토를 제안하는 연구 프로토타입.**
 
-[모듈 지도](docs/architecture.md) · [시작하기](#시작하기) · [JSONL API](docs/service-v2.md) · [개발 안내](CONTRIBUTING.md) · [평가 결과](results/README.md) · [전체 문서](docs/INDEX.md)
+[팀 개발 계약](docs/modules/README.md) · [모듈 지도](docs/architecture.md) · [시작하기](#시작하기) · [JSONL API](docs/service-v2.md) · [개발 안내](CONTRIBUTING.md) · [평가 결과](results/README.md) · [전체 문서](docs/INDEX.md)
 
 ## 할 수 있는 일
 
@@ -17,9 +17,12 @@
 
 ## 모듈 구조
 
+팀 협업은 **records / relations / retrieval / answering / gateway** 다섯 책임으로 나눈다. [입출력·권한·실패 계약 v1](docs/modules/README.md), [공통 예제와 독립 테스트](examples/contracts/README.md)를 먼저 읽는다. 이는 기존 v2를 앞으로 분리할 계약이며 모든 런타임 adapter가 구현됐다는 뜻은 아니다. 아래는 현재 코드 배치다.
+
 ```text
 team_memory/
 ├── service.py            # 공개 JSONL API와 전체 흐름 조정
+├── contracts/            # 협업용 schema·ports·검증·conformance (v2와 구분)
 ├── storage/              # 불변 객체·원문 저장
 ├── review/               # 관계 비교·근거 결합·제안·작성자 검토 상태
 ├── readers/              # 검색·QA·상태 문맥·인용
