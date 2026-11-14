@@ -49,6 +49,8 @@ jobs:
         env:
           CUPMEM_UPSTREAM_ROOT: ${{ github.workspace }}/.cache/cupmem-upstream
         run: python scripts/check.py core
+      - name: Evaluate deterministic record-state fixtures
+        run: python -m evaluation.records.evaluate --synthetic-only --output .cache/records-quality.json
       - name: Replay the two-clone Git demo
         run: |
           python -m team_memory demo > demo.json

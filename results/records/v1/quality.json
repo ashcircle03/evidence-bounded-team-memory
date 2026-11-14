@@ -1,0 +1,1245 @@
+{
+  "measured_at": "2026-11-14T15:54:40.526618+00:00",
+  "fresh_inference": false,
+  "scope": "record module; oracle relationship labels; preservation and state, not extraction or QA accuracy",
+  "input_sha256": {
+    "evaluation/records/cases.json": "8196518f6bfc85fdf75f969fb5986e318733a91c833e7c43e1745dbf13a36db9",
+    "results/module-boundary/v1/result.json": "a1a1736f1a9bc6f70bc3ea0798a25f88b17dc29a5997ac4bff0ae6446cf5fd7e"
+  },
+  "synthetic": {
+    "passed": 46,
+    "total": 46,
+    "independent_story_templates": 4,
+    "rows": [
+      {
+        "id": "correction-plain-pending",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-plain-approve",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-plain-reject",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-plain-approve-reject",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-plain-reject-approve",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-unicode_multiline-pending",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-unicode_multiline-approve",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-unicode_multiline-reject",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-unicode_multiline-approve-reject",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "replace_assertion",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-unicode_multiline-reject-approve",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true,
+          "unrelated_field_unchanged": true,
+          "target_effect_exact": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-plain-pending",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-plain-approve",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-plain-reject",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-plain-approve-reject",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-plain-reject-approve",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-unicode_multiline-pending",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-unicode_multiline-approve",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-unicode_multiline-reject",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-unicode_multiline-approve-reject",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "authorize_reconsideration",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-unicode_multiline-reject-approve",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-plain-pending",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-plain-approve",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-plain-reject",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-plain-approve-reject",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-plain-reject-approve",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-unicode_multiline-pending",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-unicode_multiline-approve",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-unicode_multiline-reject",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-unicode_multiline-approve-reject",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "coexist-unicode_multiline-reject-approve",
+        "scenario_group": "coexist",
+        "expected": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "informational",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-plain-pending",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-plain-approve",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-plain-reject",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-plain-approve-reject",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-plain-reject-approve",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-unicode_multiline-pending",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "pending",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-unicode_multiline-approve",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-unicode_multiline-reject",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-unicode_multiline-approve-reject",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "approved",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-unicode_multiline-reject-approve",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 1
+        },
+        "observed": {
+          "status": "rejected",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "source_metadata_exact": true,
+          "candidate_spans_exact": true,
+          "state_exact": true,
+          "vote_authority": true,
+          "pending_snapshot_unchanged": true,
+          "cached_uncached_equal": true,
+          "writes_succeeded": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-plain-approve-reject-legacy-import",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "state_exact": true,
+          "originals_preserved": true,
+          "cached_uncached_equal": true
+        },
+        "passed": true
+      },
+      {
+        "id": "correction-unicode_multiline-approve-reject-legacy-import",
+        "scenario_group": "correction",
+        "expected": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "state_exact": true,
+          "originals_preserved": true,
+          "cached_uncached_equal": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-plain-approve-reject-legacy-import",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "state_exact": true,
+          "originals_preserved": true,
+          "cached_uncached_equal": true
+        },
+        "passed": true
+      },
+      {
+        "id": "reconsider-unicode_multiline-approve-reject-legacy-import",
+        "scenario_group": "reconsider",
+        "expected": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "state_exact": true,
+          "originals_preserved": true,
+          "cached_uncached_equal": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-plain-approve-reject-legacy-import",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "state_exact": true,
+          "originals_preserved": true,
+          "cached_uncached_equal": true
+        },
+        "passed": true
+      },
+      {
+        "id": "conflict-unicode_multiline-approve-reject-legacy-import",
+        "scenario_group": "conflict",
+        "expected": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana",
+          "accepted_votes": 0
+        },
+        "observed": {
+          "status": "review_conflict",
+          "effect": "none",
+          "reviewer": "hana"
+        },
+        "checks": {
+          "unauthorized_review_rejected": true,
+          "state_exact": true,
+          "originals_preserved": true,
+          "cached_uncached_equal": true
+        },
+        "passed": true
+      }
+    ]
+  },
+  "natural": {
+    "selection": "All unique EverMem/Git/PEP sources in the existing development archive; not an unseen split",
+    "dataset_counts": {
+      "EverMemBench-Dynamic": 528,
+      "Git-PEP": 245
+    },
+    "field_scores": {
+      "id": {
+        "correct": 773,
+        "total": 773
+      },
+      "text": {
+        "correct": 773,
+        "total": 773
+      },
+      "owner": {
+        "correct": 773,
+        "total": 773
+      },
+      "speaker": {
+        "correct": 773,
+        "total": 773
+      },
+      "observed_at": {
+        "correct": 773,
+        "total": 773
+      },
+      "location": {
+        "correct": 773,
+        "total": 773
+      }
+    },
+    "source_count": 773,
+    "fabricated_proposals": 0,
+    "historical_prefix_exact": true,
+    "passed": true
+  }
+}

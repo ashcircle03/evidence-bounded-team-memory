@@ -117,3 +117,81 @@ def test_mixed_v2_writer_is_detected_instead_of_silently_ignored(tmp_path):
     SourceStore(tmp_path).capture_source(dict(owner='a',observed_at='2026-11-14T00:00:00Z',
         source=dict(speaker='a',location='x',text='external legacy append')))
     with pytest.raises(Exception,match='Legacy v2 files changed'):port.snapshot()
+
+
+def test_cached_snapshot_is_detached_and_not_stale_across_writers(tmp_path):
+    port=RecordsAdapter(tmp_path,'demo')
+    append(port,source('original'),'a')
+    before=port.snapshot()
+    altered=port.snapshot();altered['sources'][0]['text']='caller mutation'
+    assert port.snapshot()==before
+    other=RecordsAdapter(tmp_path,'demo');append(other,source('second'),'b')
+    assert len(port.snapshot()['sources'])==2
+    assert port.snapshot(before['id'])==before
+    assert port.snapshot()==RecordsAdapter(tmp_path,'demo',cache=False).snapshot()
+
+
+@pytest.mark.parametrize('damage',['edit','delete','replace_json'])
+def test_storage_corruption_is_not_reported_as_bad_user_input(tmp_path,damage):
+    port=RecordsAdapter(tmp_path,'demo');append(port,source('original'),'a')
+    snap=port.snapshot()
+    target=tmp_path/'module_commits'/(snap['id']+'.json')
+    if damage=='edit':target.write_text(target.read_text().replace('original','modified'))
+    elif damage=='replace_json':target.write_text('{bad json')
+    else:
+        # Remove the referenced parent, not the head (head removal is rollback).
+        target=tmp_path/'module_commits'/(port.chain()[-1][1]['parent']+'.json')
+        target.unlink()
+    response=call(port,'snapshot.get',{'snapshot_id':None})
+    assert response['status']=='error'
+    assert response['errors'][0]['code']=='IO_FAILURE'
+
+
+def test_valid_hash_does_not_make_invalid_vote_authoritative(tmp_path):
+    from team_memory.storage.objects import digest
+    port=RecordsAdapter(tmp_path,'demo');pid=proposal(port)
+    head=port.chain()[-1][1]
+    vote=dict(proposal=pid,actor='not-owner',choice='approve')
+    forged=deepcopy(head)
+    forged.update(parent=port.snapshot()['id'],revision=4)
+    forged['objects']={'timeline_votes':{digest(vote):vote}}
+    port.store.put('module_commits',forged)
+    response=call(port,'snapshot.get',{'snapshot_id':None})
+    assert response['errors'][0]['code']=='IO_FAILURE'
+
+
+@pytest.mark.parametrize('kind',['unknown_collection','bad_revision','bad_timestamp'])
+def test_malformed_commits_fail_closed(tmp_path,kind):
+    port=RecordsAdapter(tmp_path,'demo');append(port,source('A'),'a')
+    head=deepcopy(port.chain()[-1][1])
+    head.update(parent=port.snapshot()['id'],revision=2)
+    if kind=='unknown_collection':head['objects']={'authoritative_answers':{}}
+    elif kind=='bad_revision':head['revision']=True
+    else:head['at']='yesterday'
+    port.store.put('module_commits',head)
+    assert call(port,'snapshot.get',{'snapshot_id':None})['errors'][0]['code']=='IO_FAILURE'
+
+
+def test_visible_commit_sync_failure_can_be_confirmed_without_duplicate(tmp_path):
+    port=RecordsAdapter(tmp_path,'demo')
+    payload=dict(source=source('A'),expected_revision=0,idempotency_key='a')
+    from team_memory.adapters.base import Failure
+    with patch.object(port,'_sync_directories',side_effect=Failure('IO_FAILURE','sync failed',retryable=True)):
+        first=call(port,'record.append',payload)
+    assert first['status']=='error' and first['errors'][0]['retryable']
+    assert port.snapshot()['revision']==1
+    retry=call(port,'record.append',payload)
+    assert retry['status']=='ok' and retry['data']['replayed']
+    assert port.snapshot()['revision']==1
+
+
+def test_post_link_error_reconciles_existing_commit(tmp_path):
+    port=RecordsAdapter(tmp_path,'demo')
+    original=port.store.put
+    def write_then_fail(kind,obj):
+        original(kind,obj)
+        raise OSError('failed after visible commit')
+    with patch.object(port.store,'put',side_effect=write_then_fail):
+        response=append(port,source('A'),'a')
+    assert response['status']=='ok'
+    assert port.snapshot()['revision']==1

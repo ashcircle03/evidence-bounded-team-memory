@@ -1,0 +1,2108 @@
+{
+  "version": "records-diagnostic-v1",
+  "synthetic": true,
+  "relation_labels_are_inputs": true,
+  "independent_story_templates": 4,
+  "cases": [
+    {
+      "id": "correction-plain-pending",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-plain-pending/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-plain-pending/new",
+          "text": "Correction under config A: latency is 90ms. Owner is still Hana."
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 0,
+          "end": 33,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 0,
+          "end": 43,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [],
+      "expected": {
+        "status": "pending",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "correction-plain-approve",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-plain-approve/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-plain-approve/new",
+          "text": "Correction under config A: latency is 90ms. Owner is still Hana."
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 0,
+          "end": 33,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 0,
+          "end": 43,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "approved",
+        "effect": "replace_assertion",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "correction-plain-reject",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-plain-reject/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-plain-reject/new",
+          "text": "Correction under config A: latency is 90ms. Owner is still Hana."
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 0,
+          "end": 33,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 0,
+          "end": 43,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "rejected",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "correction-plain-approve-reject",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-plain-approve-reject/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-plain-approve-reject/new",
+          "text": "Correction under config A: latency is 90ms. Owner is still Hana."
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 0,
+          "end": 33,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 0,
+          "end": 43,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "correction-plain-reject-approve",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-plain-reject-approve/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-plain-reject-approve/new",
+          "text": "Correction under config A: latency is 90ms. Owner is still Hana."
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 0,
+          "end": 33,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 0,
+          "end": 43,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "correction-unicode_multiline-pending",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-unicode_multiline-pending/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-unicode_multiline-pending/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nCorrection under config A: latency is 90ms. Owner is still Hana.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 27,
+          "end": 60,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 27,
+          "end": 70,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [],
+      "expected": {
+        "status": "pending",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "correction-unicode_multiline-approve",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-unicode_multiline-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-unicode_multiline-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nCorrection under config A: latency is 90ms. Owner is still Hana.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 27,
+          "end": 60,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 27,
+          "end": 70,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "approved",
+        "effect": "replace_assertion",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "correction-unicode_multiline-reject",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-unicode_multiline-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-unicode_multiline-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nCorrection under config A: latency is 90ms. Owner is still Hana.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 27,
+          "end": 60,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 27,
+          "end": 70,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "rejected",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "correction-unicode_multiline-approve-reject",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-unicode_multiline-approve-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-unicode_multiline-approve-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nCorrection under config A: latency is 90ms. Owner is still Hana.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 27,
+          "end": 60,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 27,
+          "end": 70,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "correction-unicode_multiline-reject-approve",
+      "scenario_group": "correction",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://correction-unicode_multiline-reject-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://correction-unicode_multiline-reject-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nCorrection under config A: latency is 90ms. Owner is still Hana.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "correction",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Correction under config A: latency is 90ms. Owner is still Hana."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": {
+          "source_id": "old",
+          "start": 27,
+          "end": 60,
+          "quote": "Under config A, latency is 120ms."
+        },
+        "incoming_assertion": {
+          "source_id": "new",
+          "start": 27,
+          "end": 70,
+          "quote": "Correction under config A: latency is 90ms."
+        }
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "reconsider-plain-pending",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-plain-pending/old",
+          "text": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-plain-pending/new",
+          "text": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 73,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 81,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [],
+      "expected": {
+        "status": "pending",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "reconsider-plain-approve",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-plain-approve/old",
+          "text": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-plain-approve/new",
+          "text": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 73,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 81,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "approved",
+        "effect": "authorize_reconsideration",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "reconsider-plain-reject",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-plain-reject/old",
+          "text": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-plain-reject/new",
+          "text": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 73,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 81,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "rejected",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "reconsider-plain-approve-reject",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-plain-approve-reject/old",
+          "text": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-plain-approve-reject/new",
+          "text": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 73,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 81,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "reconsider-plain-reject-approve",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-plain-reject-approve/old",
+          "text": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-plain-reject-approve/new",
+          "text": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 73,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 81,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "reconsider-unicode_multiline-pending",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-unicode_multiline-pending/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nKeep one writer because version 4 permits only one writer. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-unicode_multiline-pending/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nVersion 5 now permits four concurrent writers. This is not a completed migration.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 100,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 108,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [],
+      "expected": {
+        "status": "pending",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "reconsider-unicode_multiline-approve",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-unicode_multiline-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nKeep one writer because version 4 permits only one writer. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-unicode_multiline-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nVersion 5 now permits four concurrent writers. This is not a completed migration.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 100,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 108,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "approved",
+        "effect": "authorize_reconsideration",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "reconsider-unicode_multiline-reject",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-unicode_multiline-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nKeep one writer because version 4 permits only one writer. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-unicode_multiline-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nVersion 5 now permits four concurrent writers. This is not a completed migration.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 100,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 108,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "rejected",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "reconsider-unicode_multiline-approve-reject",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-unicode_multiline-approve-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nKeep one writer because version 4 permits only one writer. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-unicode_multiline-approve-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nVersion 5 now permits four concurrent writers. This is not a completed migration.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 100,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 108,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "reconsider-unicode_multiline-reject-approve",
+      "scenario_group": "reconsider",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://reconsider-unicode_multiline-reject-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nKeep one writer because version 4 permits only one writer. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://reconsider-unicode_multiline-reject-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nVersion 5 now permits four concurrent writers. This is not a completed migration.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "reconsider",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 100,
+          "quote": "Keep one writer because version 4 permits only one writer. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 108,
+          "quote": "Version 5 now permits four concurrent writers. This is not a completed migration."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "coexist-plain-pending",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-plain-pending/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-plain-pending/new",
+          "text": "Under config B, latency is 90ms. Config A has not been retested."
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-plain-approve",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-plain-approve/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-plain-approve/new",
+          "text": "Under config B, latency is 90ms. Config A has not been retested."
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-plain-reject",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-plain-reject/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-plain-reject/new",
+          "text": "Under config B, latency is 90ms. Config A has not been retested."
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-plain-approve-reject",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-plain-approve-reject/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-plain-approve-reject/new",
+          "text": "Under config B, latency is 90ms. Config A has not been retested."
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-plain-reject-approve",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-plain-reject-approve/old",
+          "text": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-plain-reject-approve/new",
+          "text": "Under config B, latency is 90ms. Config A has not been retested."
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 48,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 64,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-unicode_multiline-pending",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-unicode_multiline-pending/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-unicode_multiline-pending/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config B, latency is 90ms. Config A has not been retested.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-unicode_multiline-approve",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-unicode_multiline-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-unicode_multiline-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config B, latency is 90ms. Config A has not been retested.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-unicode_multiline-reject",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-unicode_multiline-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-unicode_multiline-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config B, latency is 90ms. Config A has not been retested.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-unicode_multiline-approve-reject",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-unicode_multiline-approve-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-unicode_multiline-approve-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config B, latency is 90ms. Config A has not been retested.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "coexist-unicode_multiline-reject-approve",
+      "scenario_group": "coexist",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://coexist-unicode_multiline-reject-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://coexist-unicode_multiline-reject-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nUnder config B, latency is 90ms. Config A has not been retested.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "coexist",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 75,
+          "quote": "Under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 91,
+          "quote": "Under config B, latency is 90ms. Config A has not been retested."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "informational",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "conflict-plain-pending",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-plain-pending/old",
+          "text": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-plain-pending/new",
+          "text": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 59,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 78,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [],
+      "expected": {
+        "status": "pending",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "conflict-plain-approve",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-plain-approve/old",
+          "text": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-plain-approve/new",
+          "text": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 59,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 78,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "approved",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "conflict-plain-reject",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-plain-reject/old",
+          "text": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-plain-reject/new",
+          "text": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 59,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 78,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "rejected",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "conflict-plain-approve-reject",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-plain-approve-reject/old",
+          "text": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-plain-approve-reject/new",
+          "text": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 59,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 78,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "conflict-plain-reject-approve",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-plain-reject-approve/old",
+          "text": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-plain-reject-approve/new",
+          "text": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 0,
+          "end": 59,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 0,
+          "end": 78,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "conflict-unicode_multiline-pending",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-unicode_multiline-pending/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-unicode_multiline-pending/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 90ms. Neither report has been corrected.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 86,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 105,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [],
+      "expected": {
+        "status": "pending",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 0
+      }
+    },
+    {
+      "id": "conflict-unicode_multiline-approve",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-unicode_multiline-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-unicode_multiline-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 90ms. Neither report has been corrected.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 86,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 105,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve"
+      ],
+      "expected": {
+        "status": "approved",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "conflict-unicode_multiline-reject",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-unicode_multiline-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-unicode_multiline-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 90ms. Neither report has been corrected.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 86,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 105,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject"
+      ],
+      "expected": {
+        "status": "rejected",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 1
+      }
+    },
+    {
+      "id": "conflict-unicode_multiline-approve-reject",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-unicode_multiline-approve-reject/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-unicode_multiline-approve-reject/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 90ms. Neither report has been corrected.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 86,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 105,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "approve",
+        "reject"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    },
+    {
+      "id": "conflict-unicode_multiline-reject-approve",
+      "scenario_group": "conflict",
+      "split": "diagnostic",
+      "sources": [
+        {
+          "id": "old",
+          "owner": "hana",
+          "speaker": "hana",
+          "observed_at": "2026-10-01T09:00:00+09:00",
+          "location": "synthetic-records://conflict-unicode_multiline-reject-approve/old",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 120ms. Owner is Hana.\n\t"
+        },
+        {
+          "id": "new",
+          "owner": "jun",
+          "speaker": "jun",
+          "observed_at": "2026-10-02T00:00:00Z",
+          "location": "synthetic-records://conflict-unicode_multiline-reject-approve/new",
+          "text": "  실험 기록 🧪\n조건을 임의로 넓히지 않는다.\nOn build 7 under config A, latency is 90ms. Neither report has been corrected.\n\t"
+        }
+      ],
+      "candidate": {
+        "kind": "conflict",
+        "previous": {
+          "source_id": "old",
+          "start": 27,
+          "end": 86,
+          "quote": "On build 7 under config A, latency is 120ms. Owner is Hana."
+        },
+        "incoming": {
+          "source_id": "new",
+          "start": 27,
+          "end": 105,
+          "quote": "On build 7 under config A, latency is 90ms. Neither report has been corrected."
+        },
+        "reason": "Oracle relation supplied to isolate record state handling.",
+        "previous_assertion": null,
+        "incoming_assertion": null
+      },
+      "votes": [
+        "reject",
+        "approve"
+      ],
+      "expected": {
+        "status": "review_conflict",
+        "effect": "none",
+        "reviewer": "hana",
+        "accepted_votes": 2
+      }
+    }
+  ]
+}

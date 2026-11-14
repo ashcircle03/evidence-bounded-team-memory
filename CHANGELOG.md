@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-11-15 — records 품질·실험 기반
+
+- v1.1 입출력을 유지하면서 파일 손상 검사, 재생성 가능한 읽기 캐시, 디렉터리 동기화와 같은 key 재시도를 보완했다.
+- 실제 개발 envelope 773개 보존, 46개 합성 상태 흐름, 지연시간과 기존 QA 보존을 분리해 측정했다.
+- 닫힌 review의 순차 반전 거절과 기존 v2 상충 투표 import를 구분했다. 초기 정답표 오류도 공개한다.
+- [record 실험 기준](docs/modules/records-experiments.md) · [결과와 한계](results/records/README.md).
+
 ## 2026-11-15 — 실제 v2 어댑터 연결 / 계약 v1.1
 
 - records·relations·retrieval·answering·gateway를 `connect_v2`로 연결했다. 기존 v2 API도 유지한다.

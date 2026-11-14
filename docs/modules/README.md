@@ -123,3 +123,5 @@ factory는 **case 하나를 받아** 테스트용 저장소에 `case['setup']['s
 3. 조립 시 ingest → pending QA → owner approval → QA를 같은 snapshot/ID로 연결해 검증한다. 변경 범위 밖 필드·상충 양쪽 근거도 확인한다.
 4. 새 포트가 모두 준비되기 전까지 v2 기본 진입점을 교체하지 않는다. 미완료 adapter에 성공처럼 보이는 fallback을 넣지 않는다.
 5. 필드 의미·권한·오류 의미를 바꾸면 새 계약 버전을 낸다. 내부 모델·프롬프트·검색기 교체는 포트 의미를 유지하면 가능하다.
+
+records 담당자의 데이터셋·상태 전이·성능 실험은 [records 실험 기준](records-experiments.md)에서 관리한다.

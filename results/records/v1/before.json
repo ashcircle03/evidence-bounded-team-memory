@@ -1,0 +1,57 @@
+{
+  "measured_at": "2026-11-14T15:48:06.089826+00:00",
+  "host": "macOS-27.0.1-arm64-arm-64bit",
+  "python": "3.11.13",
+  "workload": "synthetic append-only records; complete validated snapshot responses; no proposals or model calls",
+  "source_sha256": {
+    "team_memory/adapters/records.py": "0360bdfa290b4f21dc8c621b65eb98db06ccb56827ede0f8f09b2032952e2801",
+    "team_memory/contracts/validation.py": "8b8ef55610d9d07df2d850910fa26cbf5412c4c4652a3a6288c94ba1ed39fabe"
+  },
+  "rows": [
+    {
+      "records": 10,
+      "append_last_10": {
+        "n": 10,
+        "median_ms": 2.4026460014283657,
+        "p95_ms": 2.9752091504633427
+      },
+      "read": {
+        "n": 10,
+        "median_ms": 2.391687361523509,
+        "p95_ms": 2.5829998776316643
+      },
+      "reopen_and_read_ms": 3.4418748691678047,
+      "stored_bytes": 10205
+    },
+    {
+      "records": 100,
+      "append_last_10": {
+        "n": 10,
+        "median_ms": 15.551500022411346,
+        "p95_ms": 16.56954176723957
+      },
+      "read": {
+        "n": 10,
+        "median_ms": 13.675166992470622,
+        "p95_ms": 15.711124986410141
+      },
+      "reopen_and_read_ms": 23.268000222742558,
+      "stored_bytes": 100757
+    },
+    {
+      "records": 300,
+      "append_last_10": {
+        "n": 10,
+        "median_ms": 45.629812637344,
+        "p95_ms": 48.25679212808609
+      },
+      "read": {
+        "n": 10,
+        "median_ms": 37.72670845501125,
+        "p95_ms": 39.93229102343321
+      },
+      "reopen_and_read_ms": 64.7720000706613,
+      "stored_bytes": 304557
+    }
+  ]
+}
