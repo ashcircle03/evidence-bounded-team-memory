@@ -1,6 +1,6 @@
 # relations — 관계의 의미 판단과 근거 선택
 
-[공통 계약](README.md) · 구현 소유: `review/comparison.py`, `review/policy.py` · 예정 adapter: `adapters/relations.py`
+[공통 계약](README.md) · 구현 소유: `review/comparison.py`, `review/policy.py` · [실제 adapter](../../team_memory/adapters/relations.py)
 
 입력 `relations.compare`: snapshot, incoming_source_id, history_source_ids. 출력은 같은 snapshot_id와 candidates다. 후보 하나는 kind, previous/incoming 문맥 span, reason, 정정일 때 두 assertion span이다. 새 문서 전체를 한 종류로 분류하지 않고 새 기록과 과거 기록의 개별 관계를 반환한다. 서로 다른 과거 대상에 복수 후보를 반환할 수 있다.
 

@@ -1,5 +1,16 @@
 # 변경 기록
 
+## 2026-11-15 — 실제 v2 어댑터 연결 / 계약 v1.1
+
+- records·relations·retrieval·answering·gateway를 `connect_v2`로 연결했다. 기존 v2 API도 유지한다.
+- 기존 Store와 검토 reducer를 재사용해 원자적 명령 commit, owner 권한, revision, idempotency를 구현했다.
+- 기존 검색과 생성 사이를 나누고 QA 중 sync/비교/상태 쓰기를 제거했다.
+- 비교 당시 snapshot/history를 보존하고, 조작된 snapshot이나 빠진 상태 근거를 거절한다.
+- 기존20의130개 정확한 모델 요청을 재생해 답·근거를 보존했다.8문항의11개 무인용 구절도 원문 그대로 유지하도록 v1.1의 original_text/unattributed/answer_span을 추가했다.
+- 실제 저장·재시작·재검토·정정·상충·QA 연결을 검사했다. decoder는 stub이며 새 GPU 추론으로 보고하지 않는다.
+
+[검증 결과와 운영 제한](results/module-adapters/README.md) · [실제 연결 방법](docs/modules/runtime.md). 분기 Git 자동 병합·인증 transport·과거 시점 조회는 아직 범위 밖이다.
+
 ## 2026-11-14 — 팀 개발 계약 v1
 
 - 협업 책임을 records / relations / retrieval / answering / gateway로 정의했다.

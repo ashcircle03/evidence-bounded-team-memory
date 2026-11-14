@@ -6,7 +6,7 @@
 
 처음 온 독자: [현재 상태](../README.md) → [문제·연구 이력](research-history.md) → [현재 설계](current-design.md) → [최신 입출력 검증](../results/module-boundary/README.md).
 
-팀원 연동: [다섯 모듈 협업 계약 v1](modules/README.md) · [공통 예제·테스트](../examples/contracts/README.md) · [기존 v2 서비스 계약](service-v2.md) · [상태 인용 자료형](review-state-citations.md).
+팀원 연동: [다섯 모듈 협업 계약 v1.1](modules/README.md) · [실제 v2 어댑터 사용법](modules/runtime.md) · [공통 예제·테스트](../examples/contracts/README.md) · [기존 v2 서비스 계약](service-v2.md) · [상태 인용 자료형](review-state-citations.md).
 
 검증: [평가·재현](evaluation-guide.md) · [기여/검사](../CONTRIBUTING.md) · [모든 결과](../results/README.md).
 

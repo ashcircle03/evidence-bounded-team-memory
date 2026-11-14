@@ -17,12 +17,13 @@
 
 ## 모듈 구조
 
-팀 협업은 **records / relations / retrieval / answering / gateway** 다섯 책임으로 나눈다. [입출력·권한·실패 계약 v1](docs/modules/README.md), [공통 예제와 독립 테스트](examples/contracts/README.md)를 먼저 읽는다. 이는 기존 v2를 앞으로 분리할 계약이며 모든 런타임 adapter가 구현됐다는 뜻은 아니다. 아래는 현재 코드 배치다.
+팀 협업은 **records / relations / retrieval / answering / gateway** 다섯 책임으로 나눈다. [입출력·권한·실패 계약 v1.1](docs/modules/README.md), [실제 v2 연결·사용법](docs/modules/runtime.md), [공통 예제와 독립 테스트](examples/contracts/README.md)를 먼저 읽는다. 어댑터는 opt-in으로 연결됐으며 기존 v2 API도 유지한다. 새 경로의 분기 Git 자동 병합은 아직 지원하지 않는다.
 
 ```text
 team_memory/
 ├── service.py            # 공개 JSONL API와 전체 흐름 조정
 ├── contracts/            # 협업용 schema·ports·검증·conformance (v2와 구분)
+├── adapters/             # 기존 v2를 다섯 포트로 연결하는 실제 구현
 ├── storage/              # 불변 객체·원문 저장
 ├── review/               # 관계 비교·근거 결합·제안·작성자 검토 상태
 ├── readers/              # 검색·QA·상태 문맥·인용

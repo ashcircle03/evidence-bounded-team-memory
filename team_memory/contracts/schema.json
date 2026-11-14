@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "team-memory.modules/v1",
+  "title": "team-memory.modules/v1.1",
   "$defs": {
     "span": {
       "type": "object",
@@ -108,6 +108,17 @@
               "type": "null"
             }
           ]
+        },
+        "comparison_snapshot_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "required": [
@@ -160,6 +171,13 @@
               "type": "null"
             }
           ]
+        },
+        "history_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "required": [
@@ -495,6 +513,24 @@
               "type": "null"
             }
           ]
+        },
+        "answer_span": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "end": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "start",
+            "end"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -539,6 +575,63 @@
               "type": "null"
             }
           ]
+        },
+        "original_text": {
+          "type": "string"
+        },
+        "unattributed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "unverified_revision": {
+          "type": "object",
+          "properties": {
+            "original_text": {
+              "type": "string"
+            },
+            "candidate_text": {
+              "type": "string"
+            },
+            "original_evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "acceptance_basis": {
+              "const": "source_id_coverage_only"
+            }
+          },
+          "required": [
+            "original_text",
+            "candidate_text",
+            "original_evidence_ids",
+            "acceptance_basis"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -623,7 +716,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -672,7 +765,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -721,7 +814,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -778,7 +871,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -825,7 +918,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -877,7 +970,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -925,7 +1018,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -964,7 +1057,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -1015,7 +1108,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -1064,7 +1157,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1"
+          "const": "team-memory.modules/v1.1"
         },
         "request_id": {
           "type": "string",
@@ -1157,7 +1250,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1203,7 +1296,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1249,7 +1342,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1295,7 +1388,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1341,7 +1434,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1387,7 +1480,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1433,7 +1526,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1479,7 +1572,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1525,7 +1618,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1571,7 +1664,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1617,7 +1710,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1663,7 +1756,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1709,7 +1802,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1772,7 +1865,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1835,7 +1928,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1881,7 +1974,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1927,7 +2020,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -1973,7 +2066,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2019,7 +2112,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2065,7 +2158,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2111,7 +2204,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2157,7 +2250,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2203,7 +2296,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2249,7 +2342,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2295,7 +2388,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2354,7 +2447,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2413,7 +2506,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2459,7 +2552,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2505,7 +2598,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2568,7 +2661,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2631,7 +2724,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2677,7 +2770,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2723,7 +2816,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2769,7 +2862,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2815,7 +2908,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",
@@ -2861,7 +2954,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1"
+              "const": "team-memory.modules/v1.1"
             },
             "request_id": {
               "type": "string",

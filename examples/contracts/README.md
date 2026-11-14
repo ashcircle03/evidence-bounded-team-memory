@@ -2,6 +2,8 @@
 
 이 디렉터리는 **합성 입력과 사람이 정한 기대 응답**이다. 실측 모델 출력이나 성능 벤치마크가 아니다. [전체 계약](../../docs/modules/README.md).
 
+현재 예제 버전은 v1.1이다. 실제 저장소·검색·생성 연결은 [구현 사용법](../../docs/modules/runtime.md)과 [실제 어댑터 통합 검사](../../tests/test_reference_module_adapters.py)를 따른다. 기존22개 fixture는 계약 예제로 유지하며 live backend의 hash/time 값까지 고정하는 실험은 아니다.
+
 `cases.json`의 사례 하나는 setup(snapshot), context(신뢰된 테스트 주체), request, response(고정 double), expect(JSON Pointer 단언), state_unchanged, retry_identically로 구성된다. 각 사례는 독립된 저장소를 사용한다. setup은 fixture를 seed하기 위한 개발 전용 기능이며 운영 API로 노출하지 않는다.
 
 | 사례 묶음 | 확인할 연결 |

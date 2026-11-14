@@ -1,5 +1,7 @@
 # 결과 자료 안내
 
+최신 협업 구현 연결: [다섯 실제 어댑터와 기존20문항의 정확한 요청 재생](module-adapters/README.md). 새 모델 추론 성능과 구분한다.
+
 최신 비교기 선택은 [comparator-choice](comparator-choice/README.md), 현재 운영 코드의 입출력 검증은 [module-boundary](module-boundary/README.md), 이전 reader 비교는 [service-v3](service-v3/README.md)를 먼저 읽는다. 전체 판단 흐름은 [연구 이력](../docs/research-history.md)에 있다. 아래 폴더는 서로 다른 실험이며 수치를 합산하지 않는다.
 
 | 보고서 | 위치 |

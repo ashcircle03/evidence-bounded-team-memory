@@ -175,3 +175,14 @@ def test_structural_validation_is_not_semantic_entailment():
     # Exact offsets/IDs are still valid. A separate semantic test must catch this.
     validate_exchange(c['request'],c['response'])
     with pytest.raises(ContractError): run_case(c,fixture_factory(c))
+
+
+def test_lossless_answer_keeps_unattributed_text_without_borrowed_citations():
+    c=case('answer-pending-keeps-current');answer=c['response']['data']
+    text=answer['claims'][0]['text'];tail=' Uncited extra statement.'
+    answer['claims']=answer['claims'][:1]
+    answer['claims'][0]['answer_span']=dict(start=0,end=len(text))
+    answer.update(original_text=text+tail,unattributed=[dict(start=len(text),end=len(text+tail),text=tail)])
+    check_answer(answer,c['request']['payload']['bundle'])
+    answer['unattributed']=[]
+    with pytest.raises(ContractError,match='lost'):check_answer(answer,c['request']['payload']['bundle'])

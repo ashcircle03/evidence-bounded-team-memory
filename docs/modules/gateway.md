@@ -1,6 +1,6 @@
 # gateway — 인증된 호출과 흐름 연결
 
-[공통 계약](README.md) · 구현 소유: `service.py`의 조정 부분 / 팀원 MCP transport · 예정 adapter: `adapters/gateway.py`
+[공통 계약](README.md) · 구현 소유: `service.py`의 조정 부분 / 팀원 MCP transport · [실제 adapter](../../team_memory/adapters/gateway.py)
 
 MCP·JSONL·HTTP는 이 포트 바깥의 transport다. gateway는 모델 판단을 다시 구현하지 않고 신원·요청·snapshot·오류를 전달한다. 현재 service v2는 인증 모듈이 아니다.
 
@@ -18,4 +18,4 @@ ingest는 여러 records 명령의 조정이며 하나의 대형 원자 transact
 
 신원은 transport에서 검증해 CallContext로 주입한다. 외부 JSON의 actor/owner 주장만으로 승인 권한을 부여하지 않는다. records도 다시 소유자 권한을 검사하므로 gateway를 우회해도 승인되지 않아야 한다. 리뷰 로그에 인증 주체와 명령 ID를 남긴다.
 
-공통 검사: read-only ask와 무단 review 거절. 통합 담당자 추가 검사: 실제 인증 실패, workspace 격리, append 성공/비교 실패의 partial, ingest 재시도·중간 저장, 호출 예산 초과, 다른 snapshot 혼합, endpoint별 request_id 보존. 기존 v2 ask의 sync 제거와 claim별 응답 어댑터가 완료되기 전에는 새 계약 API를 서비스 완료로 표시하지 않는다.
+실제 연결 검사: read-only ask, 무단 review 거절, workspace 격리, append 성공/비교 실패의 partial, 명시적 ingest 재시도, 조작된 snapshot 거절. 새 gateway ask는 sync를 호출하지 않는다. 실제 인증 transport와 분기 Git 병합은 별도 범위이며 [runtime 제한](runtime.md)을 따른다.

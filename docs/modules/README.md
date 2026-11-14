@@ -1,10 +1,10 @@
-# 팀 개발 계약 v1
+# 팀 개발 계약 v1.1
 
-2026-11-14 · `team-memory.modules/v1`
+2026-11-15 · `team-memory.modules/v1.1`
 
 **협업 단위는 records / relations / retrieval / answering / gateway 다섯 개다.** 책임, 입출력, 상태 변경 권한, 실패의 영향 범위, 독립 검증 가능성을 기준으로 나눈다. 논문의 개별 기법이나 파일 수가 모듈 수를 결정하지 않는다. ConflictScore·수정·AQA는 answering 내부에서 교체할 수 있는 전략이다.
 
-이 문서는 **앞으로 맞출 협업 계약**이다. 현재 `service.py`의 `team-memory/v2` API와 다르다. 이번 변경은 계약·검증 도구·합성 예제를 제공하며, 기존 모델·프롬프트·상태 전이를 바꾸지 않는다. 아래 전환표의 미완료 부분을 현재 기능으로 설명하면 안 된다.
+실제 어댑터가 [`connect_v2`](runtime.md)로 연결됐다. 기존 `service.py`의 `team-memory/v2` API와 구분되는 opt-in 경로다. v1.1은 기존 무인용 답변 구절을 잃지 않는 original_text/unattributed와 answer_span, 이전 비교 history IDs를 추가한다. 아래 구현 범위와 [검증 결과](../../results/module-adapters/README.md)를 함께 읽는다.
 
 ## 다섯 개발 단위
 
@@ -102,19 +102,19 @@ factory는 **case 하나를 받아** 테스트용 저장소에 `case['setup']['s
 
 ## 현재 구현과 전환 책임
 
-| 협업 모듈 | 재사용할 현재 구현 | 필요한 전환 / 아직 보장하지 않는 것 |
+| 협업 모듈 | 재사용할 현재 구현 | 연결된 어댑터 / 남은 범위 |
 |---|---|---|
-| records | `storage.sources`, `storage.objects`, `review.state` | 다섯 모듈 공통 snapshot/revision/receipt 어댑터, 인증된 주체, optimistic concurrency·동일 key 원자성 |
-| relations | `review.comparison`, `review.policy` | 기존 분류 출력을 후보만 반환하는 포트로 감싸기; 실제 분류 정확도는 별도 검증 |
-| retrieval | `readers.retrieval`, `readers.context`, `state_citations` | 현재 retrieval과 generation이 한 reader에 결합됨. evidence bundle 반환으로 분리 필요 |
-| answering | `readers.checking`, `attribution`, `citations`, `state_citations` | claim별 인용 어댑터; global citation을 임의로 모든 claim에 복제하면 안 됨 |
-| gateway | `service.py` | v2 ask는 sync를 호출함. 새 ask는 read-only로 분리; actor 문자열을 실제 인증으로 취급하지 않음 |
+| records | `storage.sources`, `storage.objects`, `review.state` | 실제 파일 commit/revision/receipt·owner 검사 구현. 분기 Git 자동 병합은 미지원 |
+| relations | `review.comparison`, `review.policy` | 후보만 반환하는 실제 포트 연결. 기존 의미 분류 오류를 해결했다고 주장하지 않음 |
+| retrieval | `readers.retrieval`, `readers.context`, `state_citations` | 생성 전 반환하는 경계 구현. 검색 정확도 재측정은 별도 |
+| answering | `readers.checking`, `attribution`, `citations`, `state_citations` | 고정 근거 생성·주장별 명시 인용·무인용 구절 보존. 의미 entailment는 별도 |
+| gateway | v2 서비스의 ingest/review/ask 흐름 | 새 ask는 read-only. 실제 인증 transport는 호출자 책임 |
 
 기존 `state_citations`의 derived snapshot cache 쓰기는 팀 지식 변경과 구분한다. 기존 검토 이벤트에 시각이 없으면 이행 과정에서 만들지 않는다. `store.py`와 동결 평가 archive는 그대로 유지한다. 이 문서와 기존 v2 API를 혼용하지 않는다.
 
 ## 팀원의 편집 경계와 변경 절차
 
-각 기능 담당자는 [자기 모듈 문서](#다섯-개발-단위)의 현재 파일과 새 adapter 진입점만 수정한다. 계약용 새 adapter는 `team_memory/adapters/{records,relations,retrieval,answering,gateway}.py`를 예약 경로로 사용한다. **아직 존재하지 않는 구현**이며 담당자가 생성한다. 공통 DTO/schema의 복사본을 만들지 않는다.
+각 기능 담당자는 [자기 모듈 문서](#다섯-개발-단위)와 실제 `team_memory/adapters/{records,relations,retrieval,answering,gateway}.py`를 수정한다. 공통 DTO/schema의 복사본을 만들지 않는다. [연결 방법과 전환 제한](runtime.md)을 먼저 확인한다.
 
 현재 `readers/retrieval.py`에는 검색과 생성이 함께 있으므로 두 담당자가 동시에 직접 수정하지 않는다. 우선 각 adapter 파일에서 경계를 구현하고, 기존 파일에서 코드를 추출하는 변경은 통합 PR 하나로 처리한다. `state_citations` 같은 공유 렌더링도 공통 계약을 바꾸는 PR에서 조정한다.
 

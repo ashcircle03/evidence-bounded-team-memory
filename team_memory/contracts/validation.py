@@ -62,6 +62,11 @@ def check_candidate(candidate, snapshot):
         check_span(candidate[key], source_map)
     require(candidate["previous"]["source_id"] != candidate["incoming"]["source_id"],
             "candidate must link different records")
+    if 'comparison_snapshot_id' in candidate or 'history_source_ids' in candidate:
+        require('comparison_snapshot_id' in candidate and 'history_source_ids' in candidate,'Comparison provenance must be paired')
+        history=candidate['history_source_ids']
+        require(len(history)==len(set(history)) and all(sid in source_map for sid in history),'Invalid comparison history')
+        require(candidate['previous']['source_id'] in history and candidate['incoming']['source_id'] not in history,'Invalid comparison boundary')
     for key in ("previous", "incoming"):
         child, parent = candidate[key + "_assertion"], candidate[key]
         if candidate["kind"] == "correction":
@@ -82,6 +87,11 @@ def check_snapshot(snapshot):
     for proposal in snapshot["proposals"]:
         candidate = proposal["candidate"]
         check_candidate(candidate, snapshot)
+        if 'history_source_ids' in proposal:
+            history=proposal['history_source_ids']
+            require(len(history)==len(set(history)) and all(sid in sources(snapshot) for sid in history), 'Invalid proposal history')
+            require(candidate['previous']['source_id'] in history and candidate['incoming']['source_id'] not in history,
+                    'Proposal history changed the comparison boundary')
         require(proposal["reviewer"] == sources(snapshot)[candidate["previous"]["source_id"]]["owner"],
                 "reviewer must be derived from original record owner")
         kind, status = candidate["kind"], proposal["status"]
@@ -142,6 +152,10 @@ def check_answer(answer, bundle):
     check_bundle(bundle)
     require(answer["snapshot_id"] == bundle["snapshot"]["id"], "answer uses a different snapshot")
     evidence = {e["id"]: e for e in bundle["evidence"]}
+    if 'unverified_revision' in answer:
+        revision=answer['unverified_revision']
+        require(revision['candidate_text']==answer.get('original_text'),'Revision differs from returned answer')
+        require(all(eid in evidence for eid in revision['original_evidence_ids']),'Prior answer cites absent evidence')
     claims = answer["claims"]
     require(len({c['id'] for c in claims}) == len(claims), "duplicate claim ID")
     if answer["outcome"] in ("abstained", "needs_clarification"):
@@ -164,6 +178,20 @@ def check_answer(answer, bundle):
     if answer["outcome"] == "conflict":
         require(any(len(group) >= 2 and len({tuple(c['evidence_ids']) for c in group}) >= 2
                     for group in groups.values()), "conflict requires separately cited alternatives")
+    if 'original_text' in answer or 'unattributed' in answer:
+        require('original_text' in answer and 'unattributed' in answer,'Lossless answer fields must be paired')
+        raw=answer['original_text'];segments=[]
+        for claim in claims:
+            require('answer_span' in claim,'Lossless claims need answer offsets')
+            segments.append(dict(claim['answer_span'],text=claim['text']))
+        segments+=answer['unattributed']
+        cursor=0
+        for segment in sorted(segments,key=lambda s:s['start']):
+            a,b=segment['start'],segment['end']
+            require(type(a) is int and type(b) is int and a==cursor and a<b<=len(raw),'Answer spans overlap or omit text')
+            require(raw[a:b]==segment['text'],'Claim changed original answer text')
+            cursor=b
+        require(cursor==len(raw),'Original answer text was lost')
 
 
 def validate_exchange(request, response):
@@ -212,6 +240,9 @@ def validate_exchange(request, response):
             require(bool(data['candidates']), 'partial comparison must preserve a usable candidate')
         for candidate in data["candidates"]:
             check_candidate(candidate, snapshot)
+            if 'comparison_snapshot_id' in candidate:
+                require(candidate['comparison_snapshot_id']==snapshot['id'] and candidate['history_source_ids']==payload['history_source_ids'],
+                        'Comparison provenance differs from the requested context')
             require(candidate['previous']['source_id'] in payload['history_source_ids'] and
                     candidate['incoming']['source_id'] == payload['incoming_source_id'],
                     "candidate outside requested comparison pairs")

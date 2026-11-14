@@ -1,8 +1,10 @@
 # answering — 근거별 답변과 제한된 추가 검사
 
-[공통 계약](README.md) · 구현 소유: `readers/checking.py`, `attribution.py`, `citations.py`와 생성 부분 · 예정 adapter: `adapters/answering.py`
+[공통 계약](README.md) · 구현 소유: `readers/checking.py`, `attribution.py`, `citations.py`와 생성 부분 · [실제 adapter](../../team_memory/adapters/answering.py)
 
 입력 `answer.generate`: bundle 하나. 출력 answer: snapshot_id, outcome, claims, reason. claim은 id·text·kind·evidence_ids·conditions·alternative_group을 가진다. 모델·ConflictScore·답변 수정·AQA 선택은 내부 구현이다. 다른 담당자가 이 내부 호출 순서를 알아야 포트를 사용할 수 있는 구조는 피한다.
+
+v1.1 실제 어댑터는 original_text, unattributed, claim별 answer_span도 반환한다. 기존 답의 무인용 문장을 삭제하거나 근거를 임의로 복제하지 않고 공개 응답에 남기기 위해서다. [무손실 변환 명세](runtime.md#v11-답을-버리지-않는-주장별-변환).
 
 | claim kind | 의미 | 필수 근거 |
 |---|---|---|

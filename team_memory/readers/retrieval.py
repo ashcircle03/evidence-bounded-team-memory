@@ -120,13 +120,14 @@ class ReferenceQA:
                     location=src['location'], speaker=src['speaker'],
                     observed_at=sources[sid]['observed_at'])
 
-    def ask(self, question):
+    def ask(self, question, *, retrieve_only=False):
         if not isinstance(question, str) or not question.strip():
             raise ValueError('Nonempty question required')
         with self.lock:
             self.active_review_context = None
             sources = self.store.load('sources')
             if not sources:
+                if retrieve_only:return dict(witnesses=[],context=None)
                 return dict(status='insufficient', answers=[], citation_sources=[], raw='')
             index = self._index(sources)
             # Use the upstream packing algorithm with the REAL model tokenizer.
@@ -179,6 +180,12 @@ class ReferenceQA:
                 response_mode='compact')
             engine = CitationQueryEngine(retriever, llm=self.llm,
                 response_synthesizer=synthesizer, text_splitter=citation_splitter, metadata_mode=metadata_mode)
+            if retrieve_only:
+                from llama_index.core.schema import QueryBundle
+                nodes=engine._create_citation_nodes(
+                    engine.retrieve(QueryBundle(question)) if selected_nodes is None else selected_nodes)
+                return dict(witnesses=[self._witness(n.node,sources,i) for i,n in enumerate(nodes,1)],
+                            context=self.active_review_context)
             if selected_nodes is None:
                 result = engine.query(question)
             else:
@@ -187,6 +194,46 @@ class ReferenceQA:
             raw = str(result)
             witnesses = [self._witness(n.node, sources, i) for i, n in enumerate(result.source_nodes, 1)]
             return self._format_response(question, raw, witnesses)
+
+    def generate_evidence(self, question, witnesses, context=None):
+        """Synthesize over fixed citation spans without retrieval or state writes.
+
+        Rebuild the upstream citation node representation, including the same
+        provenance headers. This is the split counterpart of ask, not a new QA
+        prompt. Callers run their existing review/attribution stages afterwards.
+        """
+        from llama_index.core.schema import TextNode,NodeWithScore,QueryBundle
+        self.active_review_context=context
+        if not witnesses:return dict(status='insufficient',answers=[],citation_sources=[],raw='')
+        nodes=[]
+        for number,w in enumerate(witnesses,1):
+            metadata={};hidden=[]
+            if self.profile=='team':
+                metadata['record_author']=w['speaker']
+                if w.get('evidence_type')=='review_state':metadata['evidence_type']='review_state'
+                else:
+                    metadata['recorded_at']=w['observed_at']
+                    if context:
+                        from team_memory.readers.context import assertion_reviews
+                        reviews=assertion_reviews(w,context)
+                        if reviews:metadata['reviewed_assertions']=json.dumps([
+                            dict(quote=r['quote'],status=r['status'],review_status=r['review_status'])
+                            for r in reviews],ensure_ascii=False)
+            node=TextNode(text=w['quote'],metadata=metadata,
+                          excluded_embed_metadata_keys=list(metadata),excluded_llm_metadata_keys=hidden)
+            body=node.get_content(metadata_mode=MetadataMode.LLM if self.profile=='team' else MetadataMode.NONE)
+            node.set_content(f'Source {number}:\n{body}\n')
+            nodes.append(NodeWithScore(node=node))
+        templates=self._team_templates() if self.profile=='team' else (CITATION_QA_TEMPLATE,CITATION_REFINE_TEMPLATE)
+        if context:
+            from team_memory.readers.context import contextual_templates
+            templates=contextual_templates(templates,context)
+        helper=PromptHelper(context_window=self.context_window-256,num_output=self.num_output,
+                            tokenizer=lambda t:self.tokenizer.encode(t,add_special_tokens=False))
+        synth=get_response_synthesizer(llm=self.llm,prompt_helper=helper,text_qa_template=templates[0],
+                                      refine_template=templates[1],response_mode='compact')
+        result=synth.synthesize(query=QueryBundle(question),nodes=nodes)
+        return self._format_response(question,str(result),witnesses)
 
     def _format_response(self,question,raw,witnesses):
         return format_response(question,raw,witnesses,allow_source_labels=self.profile=='team')

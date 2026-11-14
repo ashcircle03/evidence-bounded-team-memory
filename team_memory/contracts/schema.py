@@ -54,11 +54,13 @@ def build_schema():
         previous=ref("span"), incoming=ref("span"), reason=S,
         previous_assertion=nullable(ref("span")),
         incoming_assertion=nullable(ref("span")))
+    d['candidate']['properties'].update(comparison_snapshot_id=S,history_source_ids=arr(S))
     d["proposal"] = obj(
         id=S, candidate=ref("candidate"), reviewer=S,
         status=enum("informational", "pending", "approved", "rejected", "review_conflict"),
         effect=enum("none", "replace_assertion", "authorize_reconsideration"),
         decided_at=nullable(TIME))
+    d['proposal']['properties']['history_source_ids']=arr(S)
     d["snapshot"] = obj(id=S, revision=N, as_of=TIME,
                         sources=arr(ref("source")), proposals=arr(ref("proposal")))
     d["query"] = obj(text=S, time_scope=enum("current", "historical", "unspecified"),
@@ -82,9 +84,14 @@ def build_schema():
     d["claim"] = obj(
         id=S, text=S, kind=enum("reported_fact", "state", "inference", "uncertainty"),
         evidence_ids=arr(S), conditions=arr(S), alternative_group=nullable(S))
+    d['claim']['properties']['answer_span']=obj(start=N,end=N)
     d["answer"] = obj(
         snapshot_id=S, outcome=enum("answered", "conditional", "conflict", "abstained", "needs_clarification"),
         claims=arr(ref("claim")), reason=nullable(S))
+    d['answer']['properties'].update(original_text=TEXT,
+        unattributed=arr(obj(start=N,end=N,text=S)))
+    d['answer']['properties']['unverified_revision']=obj(original_text=TEXT,candidate_text=TEXT,
+        original_evidence_ids=arr(S),acceptance_basis={'const':'source_id_coverage_only'})
     d["issue"] = obj(
         code=enum("INVALID_INPUT", "FORBIDDEN", "NOT_FOUND", "STALE_SNAPSHOT",
                   "IDEMPOTENCY_CONFLICT", "IO_FAILURE", "MODEL_TIMEOUT",

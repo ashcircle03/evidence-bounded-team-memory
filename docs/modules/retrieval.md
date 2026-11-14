@@ -1,6 +1,6 @@
 # retrieval — 질문에 맞는 근거와 상태 전달
 
-[공통 계약](README.md) · 구현 소유: `readers/retrieval.py`, `readers/context.py`의 검색·문맥 구성 부분 · 예정 adapter: `adapters/retrieval.py`
+[공통 계약](README.md) · 구현 소유: `readers/retrieval.py`, `readers/context.py`의 검색·문맥 구성 부분 · [실제 adapter](../../team_memory/adapters/retrieval.py)
 
 입력 `evidence.retrieve`: snapshot, query(text,time_scope,as_of,conditions), max_evidence. 출력 bundle: 같은 snapshot·query, evidence, coverage, unresolved_proposal_ids. query는 원 요청을 보존하며 내부 query rewriting은 진단 로그에 별도 기록한다.
 
@@ -12,4 +12,4 @@ coverage는 hits / no_hits / incomplete다. 필요한 근거가 budget 밖에 �
 
 DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않는다. 검색 실패(error), 검색 결과 없음(ok/no_hits), 일부 조회(partial/incomplete), 충분한 근거인데 생성 실패를 별도 집계한다.
 
-공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. 실제 generation 분리는 현재 reader에서 아직 필요한 전환이다.
+공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).

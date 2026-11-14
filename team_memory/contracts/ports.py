@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from typing import Any, Protocol
 
-VERSION = "team-memory.modules/v1"
+VERSION = "team-memory.modules/v1.1"
 MODULES = ("records", "relations", "retrieval", "answering", "gateway")
 
 

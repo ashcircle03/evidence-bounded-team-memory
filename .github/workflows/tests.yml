@@ -104,6 +104,8 @@ jobs:
           PY
       - name: Run reference and public service contracts
         run: python scripts/check.py reference --fail-on-skip
+      - name: Replay measured Qwen requests through the split answer adapter
+        run: python -m evaluation.module_adapters.replay --output .cache/module-adapter-replay
       - name: Test the deployable package outside the checkout
         run: |
           python -m team_memory.packaging .cache/service-package.tar.gz > .cache/service-package-manifest.json

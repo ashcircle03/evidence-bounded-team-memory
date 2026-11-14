@@ -12,6 +12,18 @@ from team_memory.review.state import proposals, relation_span
 def review_sources(store, context):
     if not context:
         return []
+    # The module adapter reads one immutable contract snapshot. Reuse its typed
+    # state evidence in every stage instead of creating a second authority.
+    snapshot=getattr(store,'contract_snapshot',None)
+    if snapshot is not None:
+        from team_memory.adapters.legacy import state_witness
+        current={p['id']:p for p in proposals(store)}
+        exported={p['id']:p for p in snapshot['proposals']}
+        result=[]
+        for linked in context['relations']:
+            if current.get(linked['id'])!=linked:raise ValueError('Frozen review context mismatch')
+            result.append(state_witness(snapshot,exported[linked['id']]))
+        return result
     current = {p['id']: p for p in proposals(store)}
     votes = store.load('timeline_votes')
     sources = store.load('sources')

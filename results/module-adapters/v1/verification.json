@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-15",
+  "base_commit": "7d91559a455403652342a1c88a6fd83c92827c4b",
+  "contract_version": "team-memory.modules/v1.1",
+  "checks": {
+    "all_tests": {
+      "passed": 407,
+      "subtests_passed": 87,
+      "skipped": 0
+    },
+    "contract_tests": 57,
+    "records_tests": 7,
+    "adapter_integration_tests": 12,
+    "external_source_package_tests": 17,
+    "wheel_import_and_storage": "passed",
+    "exact_request_replay": {
+      "questions": 20,
+      "passed": 20,
+      "matched_requests": 130,
+      "fresh_inference": false,
+      "retrieval_fixed": true
+    }
+  },
+  "artifact_sha256": {
+    "source_archive": "76ce30e3a7db3f7ef9bf92ac8e9c351baa26c2913a857fa470ab897718cb4b8b",
+    "wheel": "f279c78d432906cfa2570b7e107a85405b84f87b95b18e593b28061f464c594b"
+  },
+  "source_sha256": {
+    "evaluation/module_adapters/__init__.py": "3cdac9f9bfd89a8966398acabb31c08601e81349c5a7ce6c5efefd7111977c7e",
+    "evaluation/module_adapters/replay.py": "d1875b05a21e8adfa61b71981f72048e25700609442dd2848ea8fea6220cfc16",
+    "team_memory/adapters/__init__.py": "1cf7f40e8d40362d15ed07744b0522f5d7ec04784d8f79fc9ae40abb86f0b7bb",
+    "team_memory/adapters/answering.py": "a9c9000e54f140697ec9d20a8c712248d4008f7bab2dfb19a29a49c13acb7ba7",
+    "team_memory/adapters/base.py": "c4f7744bb41089f105e59fe0486e657d4934e40f748b6af86e9741a6bdfe22ee",
+    "team_memory/adapters/gateway.py": "be737bd677e2b9a70ab30b34b2ec5b6307ddfed5377128c0f5af0022ffe8cfb2",
+    "team_memory/adapters/legacy.py": "647c650e95e405c3311d15dbd0ef87a758e30a8e5276781930a23e22e32c44d9",
+    "team_memory/adapters/reader_bridge.py": "1ef7650c839064b290986c9f98d9a2d68562d08bdaca98cc2b45c93a45c0baa9",
+    "team_memory/adapters/records.py": "0360bdfa290b4f21dc8c621b65eb98db06ccb56827ede0f8f09b2032952e2801",
+    "team_memory/adapters/relations.py": "54338ae5326da503ca3c8967558ee1d2f817260d66f19b7a3e6c219a9d02063e",
+    "team_memory/adapters/retrieval.py": "c114f889ed4bf50fdb5a589c9f183cd3e138624cec40cbd98eb5e148299d1116",
+    "team_memory/adapters/runtime.py": "10e7d5247814f4b1b21ee9c5cbcffde14edca3e67991465adfe16d42ba5b6fa6",
+    "team_memory/contracts/__init__.py": "694db86b5a4b9d265bc832f12d8b124f37cd56ebeef4c95d667e1d248c48ce19",
+    "team_memory/contracts/conformance.py": "63a12b92da0e06252e639b75b99c8a415ea27bb051452e836c164d4fab2656a5",
+    "team_memory/contracts/ports.py": "629624065790f6ffd79fc04438c71a78454eadc177f4ed6cf8c3dd034c786a50",
+    "team_memory/contracts/schema.py": "af685e041ee37a8c8948ec3444c88e550d0d945ac352a1d3842919498dd81b7e",
+    "team_memory/contracts/validation.py": "8b8ef55610d9d07df2d850910fa26cbf5412c4c4652a3a6288c94ba1ed39fabe",
+    "team_memory/readers/retrieval.py": "d54ef9294e13359969091d6c8c7f67685742794909d836efa7178f2a0482bf06",
+    "team_memory/readers/state_citations.py": "0b3efd6e2c0c7dd5c0a6b5cc718480a90dcd962a716380d583991f55ea75f2a1"
+  },
+  "limitations": [
+    "State-flow decoder is stubbed; canonical state prompts need fresh Qwen evaluation",
+    "Historical approval queries and divergent Git branch merging are unsupported",
+    "Authentication is supplied by the caller; mixed v2 and module writers are rejected",
+    "Eight legacy answers contain eleven explicitly unattributed spans; these are preserved"
+  ]
+}

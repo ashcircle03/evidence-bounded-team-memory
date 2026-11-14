@@ -1,6 +1,6 @@
 # records — 불변 원문과 상태의 유일한 쓰기 주체
 
-[공통 계약](README.md) · 구현 소유: `storage/*`, `review/state.py` · 예정 adapter: `adapters/records.py`
+[공통 계약](README.md) · 구현 소유: `storage/*`, `review/state.py` · [실제 adapter](../../team_memory/adapters/records.py) · [전환 범위](runtime.md)
 
 LLM이 문서 관계를 해석해도 저장된 승인 상태는 모델 문장으로 바뀌지 않아야 한다. 원문과 이벤트를 보존하고 유효 상태를 계산하는 책임이다. 구조 검증은 의미의 진실 판정이 아니다.
 
