@@ -58,7 +58,10 @@ def _compare_sources(generate, content):
         if not bounds and text.strip():bounds=[(0,len(text))]
         spans[sid]=bounds;sources[sid]=text
         env['source']['sentences']=[dict(id=i,text=text[a:b]) for i,(a,b) in enumerate(bounds)]
-    raw=generate(PROMPT,json.dumps(data,ensure_ascii=False))
+    prompt=PROMPT
+    if any('record_graph' in env for env in data['earlier']+[data['incoming']]):
+        prompt+='\nrecord_graph is an unverified reading aid linking original sentences to conditions and reasons. It is not independent evidence or an approval. Use original text and explicit earlier_relations for authority.\n'
+    raw=generate(prompt,json.dumps(data,ensure_ascii=False))
     parsed=timeline.decode(raw)
     if not isinstance(parsed,dict):raise ValueError('Comparison must be an object')
     rows=parsed['relations']

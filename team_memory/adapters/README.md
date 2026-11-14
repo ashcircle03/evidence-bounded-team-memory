@@ -18,3 +18,5 @@ an `AttributedQA` or `CitedSourceQA` factory, and a trusted caller context.
 The `legacy`/`reader_bridge` files contain shared representation conversion, not
 another model. `base` owns envelope/error handling. Do not copy a second schema
 or state reducer into an adapter. The old service v2 remains a separate entrypoint.
+
+Optional query-blind record construction: [records graph](../../docs/modules/records-graph.md). The default remains raw records; graph semantics require separate evaluation.

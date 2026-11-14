@@ -17,7 +17,7 @@
 
 ## 모듈 구조
 
-팀 협업은 **records / relations / retrieval / answering / gateway** 다섯 책임으로 나눈다. [입출력·권한·실패 계약 v1.1](docs/modules/README.md), [실제 v2 연결·사용법](docs/modules/runtime.md), [공통 예제와 독립 테스트](examples/contracts/README.md)를 먼저 읽는다. 어댑터는 opt-in으로 연결됐으며 기존 v2 API도 유지한다. 새 경로의 분기 Git 자동 병합은 아직 지원하지 않는다.
+팀 협업은 **records / relations / retrieval / answering / gateway** 다섯 책임으로 나눈다. [입출력·권한·실패 계약 v1.2](docs/modules/README.md), [실제 v2 연결·사용법](docs/modules/runtime.md), [공통 예제와 독립 테스트](examples/contracts/README.md)를 먼저 읽는다. 어댑터는 opt-in으로 연결됐으며 기존 v2 API도 유지한다. 새 경로의 분기 Git 자동 병합은 아직 지원하지 않는다.
 
 ```text
 team_memory/

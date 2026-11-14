@@ -81,6 +81,10 @@ def check_candidate(candidate, snapshot):
 
 def check_snapshot(snapshot):
     validate("snapshot", snapshot)
+    for source in snapshot['sources']:
+        if 'record_graph' in source:
+            from team_memory.records.graph import validate_graph
+            validate_graph(source,source['record_graph'])
     require(len(sources(snapshot)) == len(snapshot["sources"]), "duplicate source ID")
     require(len({p['id'] for p in snapshot['proposals']}) == len(snapshot['proposals']),
             "duplicate proposal ID")

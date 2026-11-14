@@ -1,16 +1,16 @@
-# 팀 개발 계약 v1.1
+# 팀 개발 계약 v1.2
 
-2026-11-15 · `team-memory.modules/v1.1`
+2026-11-15 · `team-memory.modules/v1.2`
 
 **협업 단위는 records / relations / retrieval / answering / gateway 다섯 개다.** 책임, 입출력, 상태 변경 권한, 실패의 영향 범위, 독립 검증 가능성을 기준으로 나눈다. 논문의 개별 기법이나 파일 수가 모듈 수를 결정하지 않는다. ConflictScore·수정·AQA는 answering 내부에서 교체할 수 있는 전략이다.
 
-실제 어댑터가 [`connect_v2`](runtime.md)로 연결됐다. 기존 `service.py`의 `team-memory/v2` API와 구분되는 opt-in 경로다. v1.1은 기존 무인용 답변 구절을 잃지 않는 original_text/unattributed와 answer_span, 이전 비교 history IDs를 추가한다. 아래 구현 범위와 [검증 결과](../../results/module-adapters/README.md)를 함께 읽는다.
+실제 어댑터가 [`connect_v2`](runtime.md)로 연결됐다. 기존 `service.py`의 `team-memory/v2` API와 구분되는 opt-in 경로다. v1.1은 기존 무인용 답변 구절을 잃지 않는 original_text/unattributed와 answer_span, 이전 비교 history IDs를 추가한다. v1.2는 선택적인 [record graph 구성 경로](records-graph.md)를 추가하며 기본값은 원문 경로다. 아래 구현 범위와 [검증 결과](../../results/module-adapters/README.md)를 함께 읽는다.
 
 ## 다섯 개발 단위
 
 | 모듈 / 담당 범위 | 입력 → 출력 | 쓸 수 있는 상태 | 독립 개발의 완료 기준 |
 |---|---|---|---|
-| [records](records.md) / 저장·상태 | 원문·제안·검토 명령 → receipt / immutable snapshot | 원문, 제안, 승인 이벤트, 버전만 이 모듈이 기록 | 원자성·권한·재시도·변경 범위 검사 |
+| [records](records.md) / 지식 구성·상태 | 원문 → 출처와 연결된 지식 후보; 제안·검토 → snapshot | 원문, 미검증 추출, 제안, 승인 이벤트, 버전 | 주장·조건·귀속·근거 보존과 의미 평가 + 저장 검사 |
 | [relations](relations.md) / 의미 비교 | 고정 snapshot·새 기록·과거 후보 IDs → 근거 있는 관계 후보 | 없음 | 공존/상충/정정/재검토 구분, 잘못된 구절·실패 분리 |
 | [retrieval](retrieval.md) / 검색·근거 구성 | 질문·시점·조건·snapshot·예산 → evidence bundle | 검색 인덱스/캐시만; 팀 지식 변경 금지 | 원문·메타데이터·상태 전달, 검색 실패 분리 |
 | [answering](answering.md) / 답변·검사·인용 | 고정 evidence bundle → claims + 각 claim의 evidence IDs | 진단 로그만; 팀 지식 변경 금지 | 현재값·대안·보류·주장별 근거 연결 |

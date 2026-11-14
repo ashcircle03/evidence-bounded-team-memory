@@ -9,11 +9,17 @@ def envelope(source):
     result=dict(owner=source['owner'],observed_at=source['observed_at'],
                 source={k:source[k] for k in ('speaker','location','text')})
     source_envelope(result)  # Reuse v2 validation without normalizing input metadata.
+    if 'record_graph' in source:
+        from team_memory.records.graph import validate_graph
+        validate_graph(source,source['record_graph'])
+        result['record_graph']=deepcopy(source['record_graph'])
     return result
 
 
 def public_source(env, sid=None):
-    return dict(id=sid or digest(env),owner=env['owner'],observed_at=env['observed_at'],**env['source'])
+    result=dict(id=sid or digest(env),owner=env['owner'],observed_at=env['observed_at'],**env['source'])
+    if 'record_graph' in env:result['record_graph']=deepcopy(env['record_graph'])
+    return result
 
 
 def span(witness):

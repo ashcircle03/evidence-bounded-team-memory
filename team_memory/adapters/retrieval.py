@@ -26,6 +26,13 @@ class RetrievalAdapter(Adapter):
                 fcntl.flock(lock,fcntl.LOCK_EX)
                 prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True)
         except Exception:raise Failure('RETRIEVAL_FAILED','Retrieval or citation preparation failed')
+        from team_memory.records.graph import linked_span
+        sources={s['id']:s for s in snapshot['sources']}
+        for w in prepared['witnesses']:
+            if w.get('evidence_type')!='review_state':
+                source=sources[w['source_id']]
+                a,b=linked_span(source,w['start'],w['end'])
+                w.update(start=a,end=b,quote=source['text'][a:b])
         evidence=[evidence_from(w,snapshot,i) for i,w in enumerate(prepared['witnesses'],1)]
         truncated=len(evidence)>payload['max_evidence']
         evidence=evidence[:payload['max_evidence']]

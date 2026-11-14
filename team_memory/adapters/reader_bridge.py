@@ -29,9 +29,12 @@ def evidence_from(w,snapshot,number):
                     start=0,end=len(w['quote']),quote=w['quote'],owner=None,speaker=None,
                     observed_at=None,location=None,conditions=[])
     source=next(s for s in snapshot['sources'] if s['id']==w['source_id'])
+    from team_memory.records.graph import describe
+    description=describe(source,w['start'],w['end'])
+    conditions=list(dict.fromkeys(u['quote'] for c in description['claims'] for u in c['condition'])) if description else []
     return dict(id=f'e{number}',kind='source',source_id=w['source_id'],state_record=None,
                 start=w['start'],end=w['end'],quote=w['quote'],
-                **{k:source[k] for k in ('owner','speaker','observed_at','location')},conditions=[])
+                **{k:source[k] for k in ('owner','speaker','observed_at','location')},conditions=conditions)
 
 
 def witnesses_from(bundle):
@@ -43,6 +46,11 @@ def witnesses_from(bundle):
             w=state_witness(bundle['snapshot'],props[e['state_record']['proposal_id']])
             w.update(start=e['start'],end=e['end'],quote=e['quote'])
         else:w={k:e[k] for k in ('source_id','start','end','quote','location','speaker','observed_at')}
+        if e['kind']=='source':
+            from team_memory.records.graph import describe
+            source=next(s for s in bundle['snapshot']['sources'] if s['id']==e['source_id'])
+            description=describe(source,e['start'],e['end'])
+            if description is not None:w['record_context']=description
         output.append(w)
     return output
 

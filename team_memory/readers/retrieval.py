@@ -219,6 +219,8 @@ class ReferenceQA:
                         if reviews:metadata['reviewed_assertions']=json.dumps([
                             dict(quote=r['quote'],status=r['status'],review_status=r['review_status'])
                             for r in reviews],ensure_ascii=False)
+            if w.get('record_context') is not None:
+                metadata['record_context']=json.dumps(w['record_context'],ensure_ascii=False)
             node=TextNode(text=w['quote'],metadata=metadata,
                           excluded_embed_metadata_keys=list(metadata),excluded_llm_metadata_keys=hidden)
             body=node.get_content(metadata_mode=MetadataMode.LLM if self.profile=='team' else MetadataMode.NONE)

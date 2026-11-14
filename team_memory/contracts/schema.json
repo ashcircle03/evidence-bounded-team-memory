@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "team-memory.modules/v1.1",
+  "title": "team-memory.modules/v1.2",
   "$defs": {
     "span": {
       "type": "object",
@@ -56,6 +56,9 @@
         "text": {
           "type": "string",
           "minLength": 1
+        },
+        "record_graph": {
+          "$ref": "#/$defs/record_graph"
         }
       },
       "required": [
@@ -65,6 +68,217 @@
         "observed_at",
         "location",
         "text"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_unit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "window_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "window_end": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "index",
+        "start",
+        "end",
+        "quote",
+        "window_start",
+        "window_end"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_claim": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "condition": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "basis": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "time": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "subject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "stance": {
+          "enum": [
+            "observation",
+            "decision",
+            "proposal",
+            "uncertainty",
+            "question",
+            "unknown"
+          ]
+        },
+        "qualification": {
+          "const": "model_extracted_unverified"
+        }
+      },
+      "required": [
+        "id",
+        "claim",
+        "condition",
+        "basis",
+        "time",
+        "subject",
+        "stance",
+        "qualification"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_edge": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "contains",
+            "next",
+            "derived_from",
+            "claim",
+            "condition",
+            "basis",
+            "time",
+            "subject"
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "target",
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "records.graph/v1"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_fingerprint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "builder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "not_run",
+            "annotated",
+            "failed"
+          ]
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_unit"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_claim"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_edge"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "source_id",
+        "source_fingerprint",
+        "builder",
+        "model",
+        "status",
+        "units",
+        "claims",
+        "errors",
+        "edges"
       ],
       "additionalProperties": false
     },
@@ -716,7 +930,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -765,7 +979,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -814,7 +1028,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -871,7 +1085,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -918,7 +1132,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -970,7 +1184,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -1018,7 +1232,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -1057,7 +1271,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -1108,7 +1322,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -1157,7 +1371,7 @@
       "type": "object",
       "properties": {
         "contract_version": {
-          "const": "team-memory.modules/v1.1"
+          "const": "team-memory.modules/v1.2"
         },
         "request_id": {
           "type": "string",
@@ -1250,7 +1464,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1296,7 +1510,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1342,7 +1556,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1388,7 +1602,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1434,7 +1648,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1480,7 +1694,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1526,7 +1740,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1572,7 +1786,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1618,7 +1832,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1664,7 +1878,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1710,7 +1924,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1756,7 +1970,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1802,7 +2016,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1865,7 +2079,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1928,7 +2142,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -1974,7 +2188,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2020,7 +2234,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2066,7 +2280,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2112,7 +2326,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2158,7 +2372,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2204,7 +2418,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2250,7 +2464,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2296,7 +2510,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2342,7 +2556,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2388,7 +2602,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2447,7 +2661,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2506,7 +2720,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2552,7 +2766,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2598,7 +2812,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2661,7 +2875,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2724,7 +2938,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2770,7 +2984,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2816,7 +3030,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2862,7 +3076,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2908,7 +3122,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",
@@ -2954,7 +3168,7 @@
           "type": "object",
           "properties": {
             "contract_version": {
-              "const": "team-memory.modules/v1.1"
+              "const": "team-memory.modules/v1.2"
             },
             "request_id": {
               "type": "string",

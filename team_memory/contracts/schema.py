@@ -49,6 +49,15 @@ def build_schema():
     d["span"] = obj(source_id=S, start=N, end=N, quote=S)
     d["source"] = obj(id=S, owner=S, speaker=S, observed_at=TIME,
                       location=S, text=S)
+    d['record_graph_unit']=obj(id=S,index=N,start=N,end=N,quote=S,window_start=N,window_end=N)
+    d['record_graph_claim']=obj(id=S,claim=arr(S),condition=arr(S),basis=arr(S),time=arr(S),subject=arr(S),
+        stance=enum('observation','decision','proposal','uncertainty','question','unknown'),
+        qualification={'const':'model_extracted_unverified'})
+    d['record_graph_edge']=obj(source=S,target=S,kind=enum('contains','next','derived_from','claim','condition','basis','time','subject'))
+    d['record_graph']=obj(version={'const':'records.graph/v1'},source_id=S,source_fingerprint=S,builder=S,model=S,
+        status=enum('not_run','annotated','failed'),units=arr(ref('record_graph_unit')),claims=arr(ref('record_graph_claim')),
+        errors=arr(S),edges=arr(ref('record_graph_edge')))
+    d["source"]["properties"]["record_graph"] = ref('record_graph')
     d["candidate"] = obj(
         kind=enum("coexist", "conflict", "correction", "reconsider"),
         previous=ref("span"), incoming=ref("span"), reason=S,

@@ -12,7 +12,7 @@
 | answering | 기존 synthesize → ConflictScore → 필요시 수정/AQA → 인용 보완 | 고정 bundle만 사용, 문장별 명시 인용 연결, 무인용 구절도 원문 그대로 보존 |
 | gateway | v2의 명시적 ingest/review/ask 흐름 | ask에서 sync 제거, 명령 전송 전 intent 저장, ingest 부분 실패·재시도 연결 |
 
-새 분류 모델·판단 프롬프트·추가 검사 모델은 없다. 상태 근거는 새 계약의 canonical rendering을 사용하므로 기존 v2의 상태 문맥과 바이트가 같다고 주장하지 않는다. source-only QA는 고정 근거에서 실제 모델 요청130개가 기존 기록과 정확히 일치했다.
+기본 경로에는 새 분류 모델·판단 프롬프트·추가 검사 모델이 없다. v1.2의 선택적 record_builder는 [record graph writer](records-graph.md)를 호출한다. 상태 근거는 새 계약의 canonical rendering을 사용하므로 기존 v2의 상태 문맥과 바이트가 같다고 주장하지 않는다. source-only QA는 고정 근거에서 실제 모델 요청130개가 기존 기록과 정확히 일치했다.
 
 ## 연결 방법
 

@@ -52,3 +52,5 @@
 ## records 모듈 단독 개발
 
 [records 데이터·기능·성능 검증](records/README.md): 실제 개발 envelope 773개 보존, 합성 상태 흐름 46개(네 이야기의 변형), 로컬 속도와 기존 QA 재생을 구분해서 보고한다.
+
+[records 구성·전달 진단](record-graph/README.md): 질문 없이 만든 주장/조건 연결과 raw QA를 비교하는 후속 실험. 저장 검사와 구분한다.
