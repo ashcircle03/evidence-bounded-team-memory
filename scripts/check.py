@@ -4,7 +4,8 @@ from pathlib import Path
 import sys
 
 ROOT=Path(__file__).resolve().parents[1]
-REFERENCE_FILES={"test_service.py", "test_comparison_contract.py", "test_source_patch.py", "test_decision_patch.py"}
+REFERENCE_FILES={"test_service.py", "test_comparator_choice.py", "test_comparison_contract.py",
+                 "test_source_patch.py", "test_decision_patch.py"}
 
 
 def selected(suite):
