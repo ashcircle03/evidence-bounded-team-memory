@@ -1397,6 +1397,45 @@
       ],
       "additionalProperties": false
     },
+    "request:evidence.prepare": {
+      "type": "object",
+      "properties": {
+        "contract_version": {
+          "const": "team-memory.modules/v1.2"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workspace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "const": "evidence.prepare"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "snapshot": {
+              "$ref": "#/$defs/snapshot"
+            }
+          },
+          "required": [
+            "snapshot"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "contract_version",
+        "request_id",
+        "workspace_id",
+        "operation",
+        "payload"
+      ],
+      "additionalProperties": false
+    },
     "request:answer.generate": {
       "type": "object",
       "properties": {
@@ -1612,6 +1651,9 @@
         },
         {
           "$ref": "#/$defs/request:evidence.retrieve"
+        },
+        {
+          "$ref": "#/$defs/request:evidence.prepare"
         },
         {
           "$ref": "#/$defs/request:answer.generate"
@@ -2556,6 +2598,250 @@
             },
             "operation": {
               "const": "evidence.retrieve"
+            },
+            "status": {
+              "const": "error"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/issue"
+              },
+              "minItems": 1
+            },
+            "data": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "contract_version",
+            "request_id",
+            "workspace_id",
+            "module",
+            "operation",
+            "status",
+            "errors",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "team-memory.modules/v1.2"
+            },
+            "request_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "workspace_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "module": {
+              "const": "retrieval"
+            },
+            "operation": {
+              "const": "evidence.prepare"
+            },
+            "status": {
+              "const": "ok"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/issue"
+              },
+              "maxItems": 0
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "snapshot_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "index_key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "prepared_documents": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reused_documents": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "snapshot_id",
+                "index_key",
+                "source_count",
+                "prepared_documents",
+                "reused_documents"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "contract_version",
+            "request_id",
+            "workspace_id",
+            "module",
+            "operation",
+            "status",
+            "errors",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "team-memory.modules/v1.2"
+            },
+            "request_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "workspace_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "module": {
+              "const": "retrieval"
+            },
+            "operation": {
+              "const": "evidence.prepare"
+            },
+            "status": {
+              "const": "partial"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/issue"
+              },
+              "minItems": 1
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "snapshot_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "index_key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "prepared_documents": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reused_documents": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "snapshot_id",
+                "index_key",
+                "source_count",
+                "prepared_documents",
+                "reused_documents"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "contract_version",
+            "request_id",
+            "workspace_id",
+            "module",
+            "operation",
+            "status",
+            "errors",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "team-memory.modules/v1.2"
+            },
+            "request_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "workspace_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "module": {
+              "const": "retrieval"
+            },
+            "operation": {
+              "const": "evidence.prepare"
+            },
+            "status": {
+              "const": "invalid"
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/issue"
+              },
+              "minItems": 1
+            },
+            "data": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "contract_version",
+            "request_id",
+            "workspace_id",
+            "module",
+            "operation",
+            "status",
+            "errors",
+            "data"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "contract_version": {
+              "const": "team-memory.modules/v1.2"
+            },
+            "request_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "workspace_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "module": {
+              "const": "retrieval"
+            },
+            "operation": {
+              "const": "evidence.prepare"
             },
             "status": {
               "const": "error"

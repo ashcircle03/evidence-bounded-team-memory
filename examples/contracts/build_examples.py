@@ -205,6 +205,12 @@ def build():
         claim('The proposed 90ms correction was rejected.',['e-s-new','e-state'],'state','c2')])
     case('answer-rejected-does-not-promote-new-value','answer.generate',{'bundle':rejected_bundle},rejected_answer,
          seed=rejected,expect=[equals('/data/claims',rejected_answer['claims'])])
+    case('retrieval-prepare-without-question','evidence.prepare',{'snapshot':snapshot},
+         dict(snapshot_id=snapshot['id'],index_key='example-index',source_count=2,prepared_documents=1,reused_documents=1),
+         expect=[equals('/data/prepared_documents',1),equals('/data/reused_documents',1)])
+    case('retrieval-unprepared-does-not-rebuild','evidence.retrieve',
+         dict(snapshot=snapshot,query=query,max_evidence=8),None,status='invalid',code='INDEX_STALE',
+         expect=[equals('/errors/0/code','INDEX_STALE')])
     return cases
 
 

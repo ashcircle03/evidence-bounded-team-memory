@@ -250,6 +250,10 @@ def validate_exchange(request, response):
             require(candidate['previous']['source_id'] in payload['history_source_ids'] and
                     candidate['incoming']['source_id'] == payload['incoming_source_id'],
                     "candidate outside requested comparison pairs")
+    elif operation == "evidence.prepare":
+        require(data["snapshot_id"] == payload["snapshot"]["id"], "preparation uses wrong snapshot")
+        require(data["source_count"] == len(payload["snapshot"]["sources"]), "preparation lost sources")
+        require(data["prepared_documents"] + data["reused_documents"] == data["source_count"], "incomplete prepared index")
     elif operation == "evidence.retrieve":
         check_bundle(data)
         require(data["snapshot"] == payload["snapshot"], "retrieval altered snapshot")

@@ -36,7 +36,7 @@ class RelationsPort(Port, Protocol):
 
 
 class RetrievalPort(Port, Protocol):
-    """evidence.retrieve: read-only retrieval with provenance and state."""
+    """evidence.prepare: derived-index write; evidence.retrieve: prepared read."""
 
 
 class AnsweringPort(Port, Protocol):

@@ -1,6 +1,6 @@
 # v2를 재사용하는 실제 다섯 모듈 연결
 
-현재 진입점은 [`connect_v2`](../../team_memory/adapters/runtime.py)다. 기존 JSONL `service.py`를 교체하지 않는 명시적 opt-in 경로다. 모델·임베딩·인증된 호출 주체를 주입하면 원문 저장 → 비교 → 제안 → 작성자 검토 → QA를 연결한다. UI나 MCP 서버는 추가하지 않았다.
+현재 진입점은 [`connect_v2`](../../team_memory/adapters/runtime.py)다. 기존 JSONL `service.py`를 교체하지 않는 명시적 opt-in 경로다. 모델·임베딩·인증된 호출 주체를 주입하면 원문 저장 → 비교 → 제안 → 작성자 검토 → QA를 연결한다. UI나 MCP 서버는 추가하지 않았다. [질문 독립 색인 수명주기](index-lifecycle.md): ingest가 준비를 완료하고 ask는 준비된 세대만 읽는다.
 
 ## 무엇을 재사용했는가
 
@@ -62,7 +62,7 @@ answer = gateway.handle(request('gateway.ask', {
 }, workspace_id='my-team', request_id='ask-1'), context=context)
 ```
 
-기존 기록을 가져오는 초기 쓰기는 `record.append`, 새로운 보고를 비교까지 하는 쓰기는 `gateway.ingest`다. 타인 원문을 import할 권한은 `records:write`와 별도 `records:import`를 함께 갖춰야 한다. 승인 요청은 `gateway.review`에 proposal_id·choice·expected_revision·idempotency_key를 전달한다. 실제 principal은 이전 원문 owner와 일치해야 한다. endpoint 인증 자체는 팀원의 MCP/API 계층 책임이다.
+기존 기록을 가져오는 초기 쓰기는 `record.append` 후 `evidence.prepare(snapshot)`이며, 새로운 보고를 비교까지 하는 쓰기는 `gateway.ingest`다. 타인 원문을 import할 권한은 `records:write`와 별도 `records:import`를 함께 갖춰야 한다. 승인 요청은 `gateway.review`에 proposal_id·choice·expected_revision·idempotency_key를 전달한다. 실제 principal은 이전 원문 owner와 일치해야 한다. endpoint 인증 자체는 팀원의 MCP/API 계층 책임이다.
 
 `source.id`는 기존 native source hash를 그대로 사용할 수 있다. `public_source`가 이를 계산한다. 이미 외부에서 부여한 opaque source ID도 충돌 없이 보존한다. 검토 관계의 이전 history IDs도 DTO에 보존해 이후 기록을 과거 비교 문맥에 끼워 넣지 않는다.
 

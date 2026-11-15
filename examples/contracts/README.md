@@ -12,6 +12,7 @@
 | unauthorized-review / stale-review | 작성자 권한·revision 거절, 실패 후 상태 불변 |
 | relations-exact-correction / different-conditions / model-timeout | 좁은 정정·조건별 공존·실행 실패 분리 |
 | retrieval-keeps-metadata-and-state / no-hits / failed | 원문·작성자·날짜·상태 전달, 검색 누락과 장애 분리 |
+| retrieval-prepare-without-question / unprepared-does-not-rebuild | 쓰기 권한의 준비, 조회 시 INDEX_STALE·원장 불변 |
 | answer-pending / approved / rejected | 현재값·제안값·담당자 유지 |
 | answer-conflict / unrelated-conflict / reconsider | 양쪽 근거·무관한 상충·재검토 권한 제한 |
 | answer-no-evidence | 근거 없는 답변의 보류 |

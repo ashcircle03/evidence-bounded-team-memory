@@ -41,12 +41,19 @@ class ModuleFlowTests(unittest.TestCase):
     def make(self,path):
         from team_memory.adapters.runtime import connect_v2
         from team_memory.readers.attribution import AttributedQA
-        return connect_v2(path,workspace_id='demo',reader_factory=lambda store:AttributedQA(store,**self.options),generate=self.compare)
+        gateway=connect_v2(path,workspace_id='demo',reader_factory=lambda store:AttributedQA(store,**self.options),generate=self.compare)
+        if not hasattr(self,'preparers'):self.preparers={}
+        self.preparers[gateway.records]=gateway.retrieval
+        return gateway
 
     def call(self,port,op,payload,context=None):
         req=request(op,payload,workspace_id='demo',request_id='test-'+op)
         response=port.handle(req,context=context or self.context)
         validate_exchange(req,response)
+        # Low-level record import fixtures explicitly prepare before any query.
+        if op=='record.append' and response['status']=='ok':
+            ready=self.call(self.preparers[port],'evidence.prepare',dict(snapshot=response['data']['snapshot']),context)
+            self.assertEqual(ready['status'],'ok',ready)
         return response
 
     def source(self,text,owner='hana',location='test:old'):
@@ -111,7 +118,9 @@ class ModuleFlowTests(unittest.TestCase):
         v2=TeamMemoryService(root,reader=AttributedQA(root,**self.options),generate=self.compare)
         v2.import_history([dict(owner='hana',observed_at='2026-11-14T00:00:00Z',source=dict(speaker='hana',location='test',text='Archive is Orion.'))])
         original=v2.ask('What is the archive?');calls=deepcopy(self.calls);self.calls.clear()
-        g=self.make(root);actual=self.ask(g,'What is the archive?')
+        g=self.make(root)
+        self.call(g.retrieval,'evidence.prepare',dict(snapshot=g.records.snapshot()))
+        actual=self.ask(g,'What is the archive?')
         self.assertEqual(actual['status'],'ok',actual)
         self.assertEqual(''.join(c['text'] for c in actual['data']['answer']['claims']),original['raw'])
         self.assertEqual(self.calls,calls)

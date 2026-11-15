@@ -118,11 +118,13 @@ class ReferenceQAIntegration(unittest.TestCase):
 
     def test_failed_derived_index_does_not_poison_originals(self):
         from unittest.mock import patch
-        self.service.import_history([self.source('A preserved original.')])
-        with patch('team_memory.reference_qa.VectorStoreIndex', side_effect=RuntimeError('failed index')):
+        from team_memory.readers.indexing import IndexNotReady
+        with patch('team_memory.readers.indexing.VectorStoreIndex', side_effect=RuntimeError('failed index')):
             with self.assertRaises(RuntimeError):
-                self.service.ask('What is preserved?')
+                self.service.import_history([self.source('A preserved original.')])
         self.assertEqual(len(self.service.store.load('sources')), 1)
+        with self.assertRaises(IndexNotReady):self.service.ask('What is preserved?')
+        self.service.prepare_index()  # explicit retry; queries never repair indexes
         self.assertEqual(self.service.ask('What is preserved?')['status'], 'ok')
 
     def test_oversized_question_is_rejected_before_transport(self):

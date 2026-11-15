@@ -10,7 +10,6 @@ from pathlib import Path
 import re
 from threading import RLock
 
-from llama_index.core import Document, StorageContext, VectorStoreIndex, load_index_from_storage
 from llama_index.core.indices.prompt_helper import PromptHelper
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.query_engine import CitationQueryEngine
@@ -40,56 +39,36 @@ class ReferenceQA:
         self.index_dir = Path(index_dir) if index_dir else self.store.root / 'reference-index'
         self.lock = RLock()
         self.splitter = SentenceSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap,
+            id_func=lambda i,doc: "node:"+digest([doc.id_,i]),
             tokenizer=lambda text: tokenizer.encode(text, add_special_tokens=False), include_metadata=False)
-        self.index_config = dict(backend='llama-index-core/0.14.25', chunk_size=chunk_size,
+        self.index_config = dict(backend='llama-index-core/0.14.25', node_ids='source-chunk/v1', chunk_size=chunk_size,
             chunk_overlap=chunk_overlap, embedding=embed_model.to_dict(),
             tokenizer_sha256=sha256(tokenizer.backend_tokenizer.to_str().encode()).hexdigest())
         if profile == 'team':
             self.index_config['metadata_profile'] = 'author-recorded-at-v1'
         self.index = None
         self.index_key = None
+        self.sparse = None
 
-    def import_history(self, records):
+    def import_history(self, records, *, prepare=True):
         # Validate the complete input before capturing anything. This operation
         # does not invoke either an LLM or CUPMem. Indexing can be retried later.
         validate = getattr(self.store, 'source_envelope', source_envelope)
         envs = [validate(e) for e in records]
         with self.lock:
             ids = [self.store.put('sources', e) for e in envs]
-        return dict(status='ok', source_ids=ids, llm_calls=0)
+        prepared=self.prepare_index() if prepare else None
+        return dict(status='ok', source_ids=ids, llm_calls=0, index_preparation=prepared)
+
+    def prepare_index(self):
+        """Explicit write-side preparation, never called by ask()."""
+        from .indexing import prepare
+        with self.lock:return prepare(self,self.store.load('sources'))
 
     def _index(self, sources):
-        key = digest(dict(config=self.index_config, sources=sorted(sources)))
-        if self.index_key == key:
-            return self.index
-        directory = self.index_dir / key
-        if (directory / 'complete.json').exists():
-            index = load_index_from_storage(StorageContext.from_defaults(persist_dir=str(directory)),
-                                             embed_model=self.embed_model)
-        else:
-            docs = [Document(id_=sid, text=e['source']['text'], metadata={'source_id': sid},
-                excluded_embed_metadata_keys=['source_id'], excluded_llm_metadata_keys=['source_id'])
-                for sid, e in sorted(sources.items())]
-            nodes = self.splitter.get_nodes_from_documents(docs)
-            for node in nodes:
-                # CitationQueryEngine deliberately clears offsets when it splits
-                # nodes again. Retain the parent bounds outside model-visible text.
-                node.metadata.update(source_id=node.ref_doc_id,
-                                     parent_start=node.start_char_idx, parent_end=node.end_char_idx)
-                node.excluded_embed_metadata_keys = list(node.metadata)
-                node.excluded_llm_metadata_keys = list(node.metadata)
-                if self.profile == 'team':
-                    envelope = sources[node.ref_doc_id]
-                    node.metadata.update(record_author=envelope['source']['speaker'],
-                                         recorded_at=envelope['observed_at'])
-                    # Preserve the original dense retrieval representation. Author
-                    # attribution belongs to the reader, not an inferred @mention.
-                    node.excluded_embed_metadata_keys = list(node.metadata)
-            index = VectorStoreIndex(nodes, embed_model=self.embed_model)
-            index.storage_context.persist(persist_dir=str(directory))
-            (directory / 'complete.json').write_text(json.dumps(dict(key=key, config=self.index_config)))
-        self.index, self.index_key = index, key
-        return index
+        """Load only. A missing/stale generation must not trigger ingestion."""
+        from .indexing import load
+        return load(self,sources)
 
     @staticmethod
     def _witness(node, sources, number):
@@ -140,8 +119,7 @@ class ReferenceQA:
             citation_splitter, metadata_mode = self.splitter, MetadataMode.NONE
             if self.profile == 'team':
                 from llama_index.core.retrievers import QueryFusionRetriever
-                from llama_index.retrievers.bm25 import BM25Retriever
-                sparse = BM25Retriever.from_defaults(docstore=index.docstore, similarity_top_k=self.top_k)
+                sparse = self.sparse
                 # Retain the union: top4 dense + top4 sparse => at most8. Upstream
                 # RRF ranks the union; no extra query generation or answer-key terms.
                 retriever = QueryFusionRetriever([retriever, sparse], llm=self.llm,

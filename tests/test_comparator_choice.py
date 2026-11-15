@@ -16,7 +16,8 @@ class ComparatorChoiceTests(unittest.TestCase):
     def test_oracle_uses_exact_source_selector_and_does_not_change_facts(self):
         class Reader:
             def __init__(self,p):self.store=SourceStore(p)
-            def import_history(self,rows):return dict(status='ok',source_ids=[self.store.capture_source(x) for x in rows])
+            def import_history(self,rows,*,prepare=True):return dict(status='ok',source_ids=[self.store.capture_source(x) for x in rows])
+            def prepare_index(self):return dict(source_count=len(self.store.load('sources')))
         for case in oracle_inputs()['cases']:
             with self.subTest(case=case['id']),tempfile.TemporaryDirectory() as root:
                 def generate(_,content):

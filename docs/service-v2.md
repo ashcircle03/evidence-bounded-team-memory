@@ -33,14 +33,14 @@ python -m team_memory.service \
 {"operation":"view"}
 ```
 
-- `import_history`: 빈 저장소 최초 적재. 모델 호출/소급 승인 없이 저장한다.
+- `import_history`: 빈 저장소 최초 적재. LLM 호출/소급 승인 없이 저장하고 문서 임베딩·색인을 준비한다.
 - `ingest`: 아직 처리하지 않은 공유 원문을 읽고 새 보고를 기존 timeline으로 비교.
   모델은 원문 문장 ID를 선택하고 코드는 원래 구절과 offset을 함께 전달한다.
   일부 후보 형식 오류는 다른 정상 후보를 소거하지 않고 receipt.errors에 남는다.
   조건이 다른 관측의 공존은 `receipt.informational_relations`에 남긴다.
   사실을 변경하지 않는 공존 자체는 승인 요청을 만들지 않는다.
-- `sync`: Git 병합 후 새 원문 처리. 처리 영수증 재사용, 실패는 노출하며 무조건 재시도하지 않는다.
-- `ask`: 동기화 후 기존 attributed QA. 검색 출처에 연결된 검토 관계가 있으면 양쪽 원문과
+- `sync`: Git 병합 후 새 원문 처리와 검색 색인 준비. 처리 영수증·변경 없는 문서 벡터를 재사용한다. 관계 오류는 노출하며 무조건 재시도하지 않는다.
+- `ask`: 준비된 색인으로 기존 attributed QA. sync/문서 임베딩을 호출하지 않는다. 새 기록의 색인이 없으면 `not_ready` / `INDEX_STALE`을 반환하므로 명시적 sync가 필요하다. 검색 출처에 연결된 검토 관계가 있으면 양쪽 원문과
   상태를 독해/수정에 전달한다. 무관한 관계의 존재만으로 답을 막지 않는다.
   비교 호출 실패도 원문 QA를 막지 않고 review_status/review_errors로 노출한다.
   관련 재검토가 있으면 reconsideration_effects를 반환하며 changes_established_facts는 false다.

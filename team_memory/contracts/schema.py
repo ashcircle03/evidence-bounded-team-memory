@@ -38,7 +38,7 @@ B = {"type": "boolean"}
 OPERATIONS = {
     "record.append": "records", "proposal.submit": "records",
     "review.apply": "records", "snapshot.get": "records",
-    "relations.compare": "relations", "evidence.retrieve": "retrieval",
+    "relations.compare": "relations", "evidence.retrieve": "retrieval", "evidence.prepare": "retrieval",
     "answer.generate": "answering", "gateway.ask": "gateway",
     "gateway.ingest": "gateway", "gateway.review": "gateway",
 }
@@ -123,6 +123,7 @@ def build_schema():
         "snapshot.get": obj(snapshot_id=nullable(S)),
         "relations.compare": obj(snapshot=ref("snapshot"), incoming_source_id=S,
                                  history_source_ids=arr(S)),
+        "evidence.prepare": obj(snapshot=ref("snapshot")),
         "evidence.retrieve": obj(snapshot=ref("snapshot"), query=ref("query"),
                                  max_evidence={"type": "integer", "minimum": 1}),
         "answer.generate": obj(bundle=ref("bundle")),
@@ -134,6 +135,7 @@ def build_schema():
         "record.append": ref("receipt"), "proposal.submit": ref("receipt"),
         "review.apply": ref("receipt"), "snapshot.get": ref("snapshot"),
         "relations.compare": obj(snapshot_id=S, candidates=arr(ref("candidate"))),
+        "evidence.prepare": obj(snapshot_id=S,index_key=S,source_count=N,prepared_documents=N,reused_documents=N),
         "evidence.retrieve": ref("bundle"), "answer.generate": ref("answer"),
         "gateway.ask": obj(bundle=ref("bundle"), answer=ref("answer")),
         "gateway.ingest": obj(receipt=ref("receipt"), proposal_ids=arr(S)),

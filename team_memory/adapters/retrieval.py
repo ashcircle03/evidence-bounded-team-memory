@@ -1,6 +1,4 @@
 """Existing dense/BM25 RRF and review expansion, stopped before generation."""
-import fcntl
-from pathlib import Path
 from team_memory.contracts.validation import check_snapshot
 from team_memory.readers.retrieval import ReferenceQA
 from .base import Adapter,Failure,issue
@@ -9,22 +7,28 @@ from .reader_bridge import reader_for,evidence_from,query_text
 
 class RetrievalAdapter(Adapter):
     module='retrieval'
-    capabilities={'evidence.retrieve':'evidence:read'}
+    capabilities={'evidence.retrieve':'evidence:read','evidence.prepare':'records:write'}
 
     def __init__(self,workspace_id,reader_factory,cache_root,*,snapshot_loader):
         super().__init__(workspace_id);self.factory=reader_factory;self.cache_root=cache_root;self.snapshot_loader=snapshot_loader
 
     def execute(self,operation,payload,context):
         snapshot=payload['snapshot'];check_snapshot(snapshot);self.verify_snapshot(snapshot)
+        if operation=='evidence.prepare':
+            reader=reader_for(self.factory,self.cache_root,snapshot)
+            try:prepared=reader.prepare_index()
+            except Exception as exc:
+                raise Failure('RETRIEVAL_FAILED','Index preparation failed; original records remain saved',retryable=True) from exc
+            return dict(snapshot_id=snapshot['id'],**prepared),[]
         query=payload['query']
         if query['time_scope']=='historical':
             raise Failure('TIME_SCOPE_UNAVAILABLE','Legacy vote timestamps cannot prove historical approval state')
         reader=reader_for(self.factory,self.cache_root,snapshot)
+        from team_memory.readers.indexing import IndexNotReady
         try:
-            cache=Path(self.cache_root);cache.mkdir(parents=True,exist_ok=True)
-            with (cache/'index.lock').open('a') as lock,reader.lock:
-                fcntl.flock(lock,fcntl.LOCK_EX)
-                prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True)
+            prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True)
+        except IndexNotReady as exc:
+            raise Failure('INDEX_STALE',str(exc),retryable=True) from exc
         except Exception:raise Failure('RETRIEVAL_FAILED','Retrieval or citation preparation failed')
         from team_memory.records.graph import linked_span
         sources={s['id']:s for s in snapshot['sources']}

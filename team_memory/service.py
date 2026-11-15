@@ -14,6 +14,7 @@ from team_memory.storage.objects import Store, digest
 from team_memory.storage.sources import SourceStore, source_envelope
 from team_memory.review import state as timeline
 from team_memory.review.cli import process_sources
+from team_memory.readers.indexing import IndexNotReady
 
 
 VERSION = 'team-memory/v2'
@@ -55,33 +56,37 @@ class TeamMemoryService:
         with self.lock:
             if self.store.load('sources'):
                 raise ValueError('import_history is only for an empty store; use ingest or sync')
-            result = self.reader.import_history(envs)
+            result = self.reader.import_history(envs,prepare=False)
             for sid in result['source_ids']:
                 timeline.client_store(self.store).put('receipts', dict(source_id=sid, mode='direct',
                     history=[], proposals=[], errors=[], initial_history=True))
+            result['index_preparation']=self.reader.prepare_index()
             return self._response('import_history', **result)
 
     def sync(self):
         with self.lock:
             rows = process_sources(self.store, self.generate, 'direct')
+            prepared=self.reader.prepare_index()
             errors = [dict(source_id=r['source_id'], **e) for r in timeline.receipts(self.store)
                       for e in r.get('errors', [])]
             return self._response('sync', status='partial' if errors else 'ok',
-                processed=len(rows), review_errors=errors, proposals=timeline.proposals(self.store))
+                processed=len(rows), review_errors=errors, proposals=timeline.proposals(self.store), index_preparation=prepared)
 
     def ingest(self, source):
         env = source_envelope(source)
         with self.lock:
             self.sync()
             row = timeline.ingest(self.store, env, self.generate, 'direct')
+            prepared=self.reader.prepare_index()
             return self._response('ingest', status='partial' if row['errors'] else 'ok',
-                receipt=row, proposals=[p for p in timeline.proposals(self.store) if p['id'] in row['proposals']])
+                receipt=row, index_preparation=prepared, proposals=[p for p in timeline.proposals(self.store) if p['id'] in row['proposals']])
 
     def ask(self, question, temporal_scope='current'):
         if temporal_scope not in ('current', 'historical'):
             raise ValueError('temporal_scope must be current or historical')
         with self.lock:
-            synced = self.sync()
+            errors=[dict(source_id=r['source_id'],**e) for r in timeline.receipts(self.store) for e in r.get('errors',[])]
+            synced=dict(status='partial' if errors else 'ok',review_errors=errors)
             relations = timeline.proposals(self.store)
             with self.reader.lock:
                 self.reader.review_relations = relations
@@ -125,6 +130,8 @@ class TeamMemoryService:
             if operation == 'view':
                 return self._response('view', status='ok', **timeline.view(self.store))
             raise ValueError('Unknown operation')
+        except IndexNotReady as exc:
+            return self._response(operation,status='not_ready',error_code='INDEX_STALE',error=str(exc))
         except (ValueError, TypeError, KeyError) as exc:
             return self._response(operation, status='invalid', error_type=type(exc).__name__, error=str(exc))
         except Exception as exc:

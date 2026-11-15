@@ -62,6 +62,8 @@ class GatewayAdapter(Adapter):
                     expected_revision=payload['expected_revision'])
         receipt,_=self.call(self.records,'record.append',append,context)
         out=dict(receipt=receipt,proposal_ids=deepcopy(progress['done']))
+        try:self.call(self.retrieval,'evidence.prepare',dict(snapshot=receipt['snapshot']),context)
+        except Failure as exc:return out,[exc.issue]
         if progress['plan'] is None:
             snapshot=receipt['snapshot'];sid=payload['source']['id']
             try:

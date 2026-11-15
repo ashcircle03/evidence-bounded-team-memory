@@ -10,6 +10,8 @@
 
 검증: [평가·재현](evaluation-guide.md) · [기여/검사](../CONTRIBUTING.md) · [모든 결과](../results/README.md).
 
+[질문 독립 색인·Git 동기화 계약](modules/index-lifecycle.md) · [색인 수명주기 검증](../results/service-storage/v1/README.md).
+
 ## 설계·실험 문서 전체
 
 과거 문서는 해당 후보를 만들 당시의 설명이다. 명칭에 reference/service가 있어도 현재 기본 경로라는 뜻은 아니다.

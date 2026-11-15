@@ -1,0 +1,33 @@
+{
+  "full_suite": {
+    "command": "NLTK_DATA=.cache/reference-nltk .venv/bin/python -m pytest -q --tb=short",
+    "passed": 445,
+    "subtests_passed": 87,
+    "failed": 0
+  },
+  "additional_lifecycle_suite": {
+    "command": "NLTK_DATA=.cache/reference-nltk .venv/bin/python -m pytest -q tests/test_reference_index_lifecycle.py --tb=short",
+    "passed": 9,
+    "includes_seven_previously_counted": true,
+    "new_cases": [
+      "Git pull requires explicit sync",
+      "initial import recovery does not compare history"
+    ]
+  },
+  "qa_replay": {
+    "command": "NLTK_DATA=.cache/reference-nltk .venv/bin/python -m evaluation.module_adapters.replay --output results/service-storage/v1/qa-preservation",
+    "passed": 20,
+    "matched_requests": 130,
+    "fresh_inference": false
+  },
+  "source_package": {
+    "command": "NLTK_DATA=.cache/reference-nltk .venv/bin/python -m evaluation.service_v2_package_check ../campaigns/speakermem-dev/source/storage-index-v1/code.tar.gz",
+    "passed": 17,
+    "skipped": 0
+  },
+  "contract_examples": {
+    "mode": "fixture-only",
+    "passed": 24,
+    "total": 24
+  }
+}
