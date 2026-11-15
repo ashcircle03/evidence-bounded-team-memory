@@ -25,6 +25,7 @@ team_memory/
 ├── contracts/            # 협업용 schema·ports·검증·conformance (v2와 구분)
 ├── adapters/             # 기존 v2를 다섯 포트로 연결하는 실제 구현
 ├── storage/              # 불변 객체·원문 저장
+├── records/              # 질문 없는 주장·조건·이유 구성과 원문 구절 연결
 ├── review/               # 관계 비교·근거 결합·제안·작성자 검토 상태
 ├── readers/              # 검색·QA·상태 문맥·인용
 ├── experiments/          # 별도 평가한 reader와 패치 후보
@@ -37,6 +38,7 @@ docs/                     # 설계 의도·입출력·개발·연구 이력
 
 | 수정할 대상 | 구현 진입점 | 책임과 계약 |
 |---|---|---|
+| 주장·조건·이유 구성 | [records/](team_memory/records/) | [레퍼런스 기반 그룹 연결](docs/modules/records-grouped.md) |
 | 원문·저장 형식 | [storage/](team_memory/storage/) | [저장소 계약](team_memory/storage/README.md) |
 | 정정·재검토·작성자 검토 | [review/](team_memory/review/) | [관계와 상태 계약](team_memory/review/README.md) |
 | 검색·답변·인용 | [readers/](team_memory/readers/) | [reader 단계별 입출력](team_memory/readers/README.md) |

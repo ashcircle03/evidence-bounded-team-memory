@@ -1,0 +1,194 @@
+{
+  "annotation": "Partial implementation-authored diagnostic probes; not independent semantic gold. Existing probes are development data. New contrasts are also authored by implementer.",
+  "probes": [
+    {
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "anchor": "must be forcibly routed",
+      "condition": [
+        "ACCOUNT_STATUS_LOCKED"
+      ],
+      "basis": [],
+      "absent": [],
+      "forbidden": []
+    },
+    {
+      "source_id": "9279497ab46d95f158eeb6de",
+      "anchor": "implemented using polling",
+      "condition": [],
+      "basis": [
+        "our message push service isn't fully ready yet"
+      ],
+      "absent": [],
+      "forbidden": []
+    },
+    {
+      "source_id": "9279497ab46d95f158eeb6de",
+      "anchor": "we can upgrade it uniformly",
+      "condition": [
+        "Once the WebSocket service is stable later"
+      ],
+      "basis": [],
+      "absent": [],
+      "forbidden": []
+    },
+    {
+      "source_id": "d70dd6562091af5bc67b569e",
+      "anchor": "We defer the throughput experiment",
+      "condition": [
+        "version 4"
+      ],
+      "basis": [
+        "one writer only"
+      ],
+      "absent": [],
+      "forbidden": []
+    },
+    {
+      "source_id": "d433c146841359d87b93fe53",
+      "anchor": "We defer the throughput experiment",
+      "condition": [
+        "version 4 on CPU only"
+      ],
+      "basis": [
+        "only one writer is available"
+      ],
+      "absent": [],
+      "forbidden": []
+    },
+    {
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "anchor": "suspend acquisition",
+      "condition": [
+        "until it cools"
+      ],
+      "basis": [
+        "the sensor is overheating"
+      ],
+      "absent": [],
+      "forbidden": [
+        "backup log"
+      ]
+    },
+    {
+      "source_id": "28a51957eb949709dc372152",
+      "anchor": "use tray R",
+      "condition": [
+        "sample is saline"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [
+        "sample is dry"
+      ]
+    },
+    {
+      "source_id": "28a51957eb949709dc372152",
+      "anchor": "use tray S",
+      "condition": [
+        "sample is dry"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [
+        "sample is saline"
+      ]
+    },
+    {
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "anchor": "retain the budget unchanged",
+      "condition": [],
+      "basis": [],
+      "absent": [
+        "condition",
+        "basis"
+      ],
+      "forbidden": [
+        "printer",
+        "roof"
+      ]
+    },
+    {
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "anchor": "do not release the lot",
+      "condition": [
+        "contaminated batches"
+      ],
+      "basis": [
+        "the assay failed"
+      ],
+      "absent": [],
+      "forbidden": [
+        "Clean batches"
+      ]
+    },
+    {
+      "source_id": "5f206a25739987cca8005d1e",
+      "anchor": "stop pump X",
+      "condition": [
+        "pressures above 8 bar"
+      ],
+      "basis": [
+        "its casing is cracked"
+      ],
+      "absent": [],
+      "forbidden": [
+        "pressures below 2 bar",
+        "reservoir needs refill"
+      ]
+    },
+    {
+      "source_id": "5f206a25739987cca8005d1e",
+      "anchor": "start pump Y",
+      "condition": [
+        "pressures below 2 bar"
+      ],
+      "basis": [
+        "reservoir needs refill"
+      ],
+      "absent": [],
+      "forbidden": [
+        "pressures above 8 bar",
+        "casing is cracked"
+      ]
+    },
+    {
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "anchor": "might trial coating N",
+      "condition": [
+        "coastal sites"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": []
+    },
+    {
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "anchor": "Cancel the vibration trial",
+      "condition": [
+        "turbine T9 in winter"
+      ],
+      "basis": [
+        "the mount is broken"
+      ],
+      "absent": [],
+      "forbidden": []
+    },
+    {
+      "source_id": "2d361eea7c9853729f31dac7",
+      "anchor": "valve closed",
+      "condition": [],
+      "basis": [],
+      "absent": [
+        "condition",
+        "basis"
+      ],
+      "forbidden": []
+    }
+  ]
+}

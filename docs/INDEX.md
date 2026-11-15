@@ -47,3 +47,5 @@
 - [모듈 구조와 의존성](architecture.md)
 - [구조 변경 검증](module-layout-verification.json)
 - [변경 기록](../CHANGELOG.md)
+
+- [records 조건·이유 연결: 실제 구현 재대조](modules/records-grouped.md)
