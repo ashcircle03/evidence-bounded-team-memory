@@ -116,3 +116,5 @@ NLTK_DATA=.cache/reference-nltk python -m evaluation.record_groups.replay_alignm
 유지한다. 실제 대화의 핵심 실패가 그대로이므로 “records 지식 품질을 해결했다”거나
 “QA도 좋아졌다”고 보고하지 않는다. 남은 문제는 graph DB의 부재가 아니라, 모델이
 어떤 구절을 어느 명제의 조건·이유로 묶는지와 원문 내 반복/대화 간 참조의 해소다.
+
+후속: [기존5개 요구의 원출력·레퍼런스 적용 감사](five-failure-audit.md). 역할 표기 실패, 그룹 연결 누락, 평가 키의 모호성을 분리했다. 런타임·점수 변경 없음.
