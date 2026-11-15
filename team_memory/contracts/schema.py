@@ -57,7 +57,13 @@ def build_schema():
     d['record_graph']=obj(version={'const':'records.graph/v1'},source_id=S,source_fingerprint=S,builder=S,model=S,
         status=enum('not_run','annotated','failed'),units=arr(ref('record_graph_unit')),claims=arr(ref('record_graph_claim')),
         errors=arr(S),edges=arr(ref('record_graph_edge')))
-    d["source"]["properties"]["record_graph"] = ref('record_graph')
+    from copy import deepcopy
+    d['record_graph_claim_v2']=deepcopy(d['record_graph_claim'])
+    d['record_graph_claim_v2']['properties']['basis_annotations']=arr(obj(unit_id=S,kind=enum('stated','inferred','unspecified')))
+    d['record_graph_claim_v2']['required'].append('basis_annotations')
+    d['record_graph_v2']=deepcopy(d['record_graph'])
+    d['record_graph_v2']['properties'].update(version={'const':'records.graph/v2'},claims=arr(ref('record_graph_claim_v2')))
+    d["source"]["properties"]["record_graph"] = {'oneOf':[ref('record_graph'),ref('record_graph_v2')]}
     d["candidate"] = obj(
         kind=enum("coexist", "conflict", "correction", "reconsider"),
         previous=ref("span"), incoming=ref("span"), reason=S,

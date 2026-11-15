@@ -126,7 +126,7 @@ def build(source,generate=None,*,model='none'):
 def validate_graph(source,graph):
     if set(graph)!={'version','source_id','source_fingerprint','builder','model','status','units','claims','errors','edges'}:
         raise ValueError('Invalid graph fields')
-    if graph['version']!=VERSION or graph['source_id']!=source['id'] or graph['source_fingerprint']!=source_fingerprint(source):
+    if graph['version'] not in (VERSION,'records.graph/v2') or graph['source_id']!=source['id'] or graph['source_fingerprint']!=source_fingerprint(source):
         raise ValueError('Graph belongs to different source content')
     if graph['status'] not in ('not_run','annotated','failed'):raise ValueError('Invalid extraction status')
     if not all(isinstance(graph[k],str) and graph[k] for k in ('builder','model')):raise ValueError('Missing producer')
@@ -144,7 +144,13 @@ def validate_graph(source,graph):
     if not units or text[prior:].strip():raise ValueError('Incomplete original units')
     seen=set()
     for c in graph['claims']:
-        if set(c)!=set(ROLES)|{'id','stance','qualification'}:raise ValueError('Invalid claim fields')
+        expected_fields=set(ROLES)|{'id','stance','qualification'}
+        if graph['version']=='records.graph/v2':expected_fields.add('basis_annotations')
+        if set(c)!=expected_fields:raise ValueError('Invalid claim fields')
+        if graph['version']=='records.graph/v2':
+            annotations=c['basis_annotations']
+            if any(set(a)!={'unit_id','kind'} or a['kind'] not in ('stated','inferred','unspecified') for a in annotations):raise ValueError('Invalid basis qualification')
+            if [a['unit_id'] for a in annotations]!=c['basis']:raise ValueError('Every basis span needs exactly one qualification')
         if c['qualification']!='model_extracted_unverified':raise ValueError('Annotation promoted to fact')
         index_data={role:[units[uid]['index'] for uid in c[role]] for role in ROLES}
         Extraction.model_validate({'claims':[dict(index_data,stance=c['stance'])]})
@@ -191,7 +197,8 @@ def describe(source,start,end):
     for c in graph['claims']:
         if all(start<=by_id[uid]['start'] and by_id[uid]['end']<=end for role in ROLES for uid in c[role]):
             claims.append({**{k:c[k] for k in ('id','stance','qualification')},
-                **{role:[{k:by_id[uid][k] for k in ('id','start','end','quote')} for uid in c[role]] for role in ROLES}})
+                **{role:[{k:by_id[uid][k] for k in ('id','start','end','quote')} for uid in c[role]] for role in ROLES},
+                **({'basis_annotations':deepcopy(c['basis_annotations'])} if 'basis_annotations' in c else {})})
     return dict(source_id=source['id'],record_author=source['speaker'],location=source['location'],
                 observed_at=source['observed_at'],extraction_status=graph['status'],
                 annotation_completeness='not_proven',

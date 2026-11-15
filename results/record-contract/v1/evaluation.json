@@ -1,0 +1,3939 @@
+{
+  "scope": "Development partial link probes and typed reasons; not full semantic recall or QA accuracy",
+  "job_id": "122915",
+  "actual_requests_verified": 60,
+  "same_sources_verified": 30,
+  "identical_nonmessage_request_parameters": true,
+  "arms": {
+    "control": {
+      "sources": 30,
+      "statuses": {
+        "failed": 4,
+        "annotated": 26
+      },
+      "claims": 69,
+      "passed_probes": 7,
+      "total_probes": 15,
+      "protected_passed": 7,
+      "protected_total": 7,
+      "hard_five_passed": 0,
+      "negative_role_violations": 0,
+      "missing_claim_anchor": 2,
+      "qualified_reason_recovery": 0,
+      "false_stated_probes": 0,
+      "protected_regressions": []
+    },
+    "revised": {
+      "sources": 30,
+      "statuses": {
+        "annotated": 24,
+        "failed": 6
+      },
+      "claims": 52,
+      "passed_probes": 10,
+      "total_probes": 15,
+      "protected_passed": 6,
+      "protected_total": 7,
+      "hard_five_passed": 2,
+      "negative_role_violations": 1,
+      "missing_claim_anchor": 2,
+      "qualified_reason_recovery": 6,
+      "false_stated_probes": 0,
+      "protected_regressions": [
+        12
+      ]
+    }
+  },
+  "cost": {
+    "control": {
+      "prompt_tokens": 34177,
+      "total_tokens": 40157,
+      "completion_tokens": 5980,
+      "calls": 30
+    },
+    "revised": {
+      "prompt_tokens": 47617,
+      "total_tokens": 54356,
+      "completion_tokens": 6739,
+      "calls": 30
+    }
+  },
+  "finish_reason": {
+    "control": {
+      "stop": 30
+    },
+    "revised": {
+      "stop": 30
+    }
+  },
+  "cases": [
+    {
+      "arm": "revised",
+      "probe_index": 0,
+      "case_id": "MA_U_Top01_005",
+      "protected": false,
+      "reason": {
+        "probe_index": 0,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:72ef0ebd773e3fe7dc802ff2",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "anchor": "must be forcibly routed",
+      "condition": [
+        "ACCOUNT_STATUS_LOCKED"
+      ],
+      "basis": [],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:72ef0ebd773e3fe7dc802ff2",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 0,
+      "case_id": "MA_U_Top01_005",
+      "protected": false,
+      "reason": {
+        "probe_index": 0,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:398702693eb08fe5751b4479",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "anchor": "must be forcibly routed",
+      "condition": [
+        "ACCOUNT_STATUS_LOCKED"
+      ],
+      "basis": [],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:398702693eb08fe5751b4479",
+          "checks": {
+            "condition": false,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 1,
+      "case_id": "MA_P_Top02_083",
+      "protected": false,
+      "reason": {
+        "probe_index": 1,
+        "expected": "inferred",
+        "matched": [
+          {
+            "claim_id": "c:84a9fbcaf8f8e0c729f7bc4f",
+            "premises": [
+              {
+                "premise": "our message push service isn't fully ready yet",
+                "present": false,
+                "kinds": [],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "9279497ab46d95f158eeb6de",
+      "anchor": "implemented using polling",
+      "condition": [],
+      "basis": [
+        "our message push service isn't fully ready yet"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:84a9fbcaf8f8e0c729f7bc4f",
+          "checks": {
+            "condition": true,
+            "basis": false,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 2,
+      "case_id": "MA_P_Top02_083",
+      "protected": false,
+      "reason": {
+        "probe_index": 2,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:c392cf1c7d339d0faaf4846f",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "9279497ab46d95f158eeb6de",
+      "anchor": "we can upgrade it uniformly",
+      "condition": [
+        "Once the WebSocket service is stable later"
+      ],
+      "basis": [],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:c392cf1c7d339d0faaf4846f",
+          "checks": {
+            "condition": false,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 1,
+      "case_id": "MA_P_Top02_083",
+      "protected": false,
+      "reason": {
+        "probe_index": 1,
+        "expected": "inferred",
+        "matched": [],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "9279497ab46d95f158eeb6de",
+      "anchor": "implemented using polling",
+      "condition": [],
+      "basis": [
+        "our message push service isn't fully ready yet"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "failed",
+      "matched": [],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 2,
+      "case_id": "MA_P_Top02_083",
+      "protected": false,
+      "reason": {
+        "probe_index": 2,
+        "expected": null,
+        "matched": [],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "9279497ab46d95f158eeb6de",
+      "anchor": "we can upgrade it uniformly",
+      "condition": [
+        "Once the WebSocket service is stable later"
+      ],
+      "basis": [],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "failed",
+      "matched": [],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 3,
+      "case_id": "version-defer",
+      "protected": false,
+      "reason": {
+        "probe_index": 3,
+        "expected": "inferred",
+        "matched": [
+          {
+            "claim_id": "c:eef462a04a6523cea2d794c4",
+            "premises": [
+              {
+                "premise": "one writer only",
+                "present": false,
+                "kinds": [],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "d70dd6562091af5bc67b569e",
+      "anchor": "We defer the throughput experiment",
+      "condition": [
+        "version 4"
+      ],
+      "basis": [
+        "one writer only"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:eef462a04a6523cea2d794c4",
+          "checks": {
+            "condition": false,
+            "basis": false,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 3,
+      "case_id": "version-defer",
+      "protected": false,
+      "reason": {
+        "probe_index": 3,
+        "expected": "inferred",
+        "matched": [
+          {
+            "claim_id": "c:0c765271e9d3bc5384582c25",
+            "premises": [
+              {
+                "premise": "one writer only",
+                "present": false,
+                "kinds": [],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "d70dd6562091af5bc67b569e",
+      "anchor": "We defer the throughput experiment",
+      "condition": [
+        "version 4"
+      ],
+      "basis": [
+        "one writer only"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:0c765271e9d3bc5384582c25",
+          "checks": {
+            "condition": false,
+            "basis": false,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 4,
+      "case_id": "far-condition",
+      "protected": false,
+      "reason": {
+        "probe_index": 4,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:6b552fac5c7fc6a4a3da7af7",
+            "premises": [
+              {
+                "premise": "only one writer is available",
+                "present": false,
+                "kinds": [],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "d433c146841359d87b93fe53",
+      "anchor": "We defer the throughput experiment",
+      "condition": [
+        "version 4 on CPU only"
+      ],
+      "basis": [
+        "only one writer is available"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:6b552fac5c7fc6a4a3da7af7",
+          "checks": {
+            "condition": false,
+            "basis": false,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 4,
+      "case_id": "far-condition",
+      "protected": false,
+      "reason": {
+        "probe_index": 4,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:276dd6f3e0d1ca81d406bc0e",
+            "premises": [
+              {
+                "premise": "only one writer is available",
+                "present": true,
+                "kinds": [
+                  "stated"
+                ],
+                "correct_kind": true,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": true,
+        "false_stated": false
+      },
+      "source_id": "d433c146841359d87b93fe53",
+      "anchor": "We defer the throughput experiment",
+      "condition": [
+        "version 4 on CPU only"
+      ],
+      "basis": [
+        "only one writer is available"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:276dd6f3e0d1ca81d406bc0e",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 5,
+      "case_id": "causal",
+      "protected": false,
+      "reason": {
+        "probe_index": 5,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:39b5fa7e16722ecd30356c55",
+            "premises": [
+              {
+                "premise": "the sensor is overheating",
+                "present": false,
+                "kinds": [],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "anchor": "suspend acquisition",
+      "condition": [
+        "until it cools"
+      ],
+      "basis": [
+        "the sensor is overheating"
+      ],
+      "absent": [],
+      "forbidden": [
+        "backup log"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:39b5fa7e16722ecd30356c55",
+          "checks": {
+            "condition": false,
+            "basis": false,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 5,
+      "case_id": "causal",
+      "protected": false,
+      "reason": {
+        "probe_index": 5,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:68931c1b67a6d76a3bef0404",
+            "premises": [
+              {
+                "premise": "the sensor is overheating",
+                "present": true,
+                "kinds": [
+                  "stated"
+                ],
+                "correct_kind": true,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": true,
+        "false_stated": false
+      },
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "anchor": "suspend acquisition",
+      "condition": [
+        "until it cools"
+      ],
+      "basis": [
+        "the sensor is overheating"
+      ],
+      "absent": [],
+      "forbidden": [
+        "backup log"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:68931c1b67a6d76a3bef0404",
+          "checks": {
+            "condition": false,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 6,
+      "case_id": "conditional",
+      "protected": true,
+      "reason": {
+        "probe_index": 6,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:e69989edbd53783cd2fe34bc",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "28a51957eb949709dc372152",
+      "anchor": "use tray R",
+      "condition": [
+        "sample is saline"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [
+        "sample is dry"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:e69989edbd53783cd2fe34bc",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 7,
+      "case_id": "conditional",
+      "protected": true,
+      "reason": {
+        "probe_index": 7,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:03bdfa2086aad6306cd30beb",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "28a51957eb949709dc372152",
+      "anchor": "use tray S",
+      "condition": [
+        "sample is dry"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [
+        "sample is saline"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:03bdfa2086aad6306cd30beb",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 6,
+      "case_id": "conditional",
+      "protected": true,
+      "reason": {
+        "probe_index": 6,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:c138ecaa64a77934028d1c01",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "28a51957eb949709dc372152",
+      "anchor": "use tray R",
+      "condition": [
+        "sample is saline"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [
+        "sample is dry"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:c138ecaa64a77934028d1c01",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 7,
+      "case_id": "conditional",
+      "protected": true,
+      "reason": {
+        "probe_index": 7,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:4a179d2d84fc5994740c7f4c",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "28a51957eb949709dc372152",
+      "anchor": "use tray S",
+      "condition": [
+        "sample is dry"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [
+        "sample is saline"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:4a179d2d84fc5994740c7f4c",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 8,
+      "case_id": "adjacent",
+      "protected": true,
+      "reason": {
+        "probe_index": 8,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:2e92f62e6a233216d53faa81",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "anchor": "retain the budget unchanged",
+      "condition": [],
+      "basis": [],
+      "absent": [
+        "condition",
+        "basis"
+      ],
+      "forbidden": [
+        "printer",
+        "roof"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:2e92f62e6a233216d53faa81",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 8,
+      "case_id": "adjacent",
+      "protected": true,
+      "reason": {
+        "probe_index": 8,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:2e92f62e6a233216d53faa81",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "anchor": "retain the budget unchanged",
+      "condition": [],
+      "basis": [],
+      "absent": [
+        "condition",
+        "basis"
+      ],
+      "forbidden": [
+        "printer",
+        "roof"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:2e92f62e6a233216d53faa81",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 9,
+      "case_id": "negation",
+      "protected": true,
+      "reason": {
+        "probe_index": 9,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:bf222b70ec7a960b71963101",
+            "premises": [
+              {
+                "premise": "the assay failed",
+                "present": true,
+                "kinds": [
+                  "stated"
+                ],
+                "correct_kind": true,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": true,
+        "false_stated": false
+      },
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "anchor": "do not release the lot",
+      "condition": [
+        "contaminated batches"
+      ],
+      "basis": [
+        "the assay failed"
+      ],
+      "absent": [],
+      "forbidden": [
+        "Clean batches"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:bf222b70ec7a960b71963101",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 9,
+      "case_id": "negation",
+      "protected": true,
+      "reason": {
+        "probe_index": 9,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:eaecd3c558f90bc2d6754b83",
+            "premises": [
+              {
+                "premise": "the assay failed",
+                "present": true,
+                "kinds": [
+                  "unspecified"
+                ],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "anchor": "do not release the lot",
+      "condition": [
+        "contaminated batches"
+      ],
+      "basis": [
+        "the assay failed"
+      ],
+      "absent": [],
+      "forbidden": [
+        "Clean batches"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:eaecd3c558f90bc2d6754b83",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 10,
+      "case_id": "interleaved",
+      "protected": true,
+      "reason": {
+        "probe_index": 10,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:d5cd8e9a8c9c96cc7d358b29",
+            "premises": [
+              {
+                "premise": "its casing is cracked",
+                "present": true,
+                "kinds": [
+                  "unspecified"
+                ],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "5f206a25739987cca8005d1e",
+      "anchor": "stop pump X",
+      "condition": [
+        "pressures above 8 bar"
+      ],
+      "basis": [
+        "its casing is cracked"
+      ],
+      "absent": [],
+      "forbidden": [
+        "pressures below 2 bar",
+        "reservoir needs refill"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:d5cd8e9a8c9c96cc7d358b29",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 11,
+      "case_id": "interleaved",
+      "protected": true,
+      "reason": {
+        "probe_index": 11,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:7e3349257b271cba28d7ebc5",
+            "premises": [
+              {
+                "premise": "reservoir needs refill",
+                "present": true,
+                "kinds": [
+                  "unspecified"
+                ],
+                "correct_kind": false,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "5f206a25739987cca8005d1e",
+      "anchor": "start pump Y",
+      "condition": [
+        "pressures below 2 bar"
+      ],
+      "basis": [
+        "reservoir needs refill"
+      ],
+      "absent": [],
+      "forbidden": [
+        "pressures above 8 bar",
+        "casing is cracked"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:7e3349257b271cba28d7ebc5",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 10,
+      "case_id": "interleaved",
+      "protected": true,
+      "reason": {
+        "probe_index": 10,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:21dc602bcaff420512eba60f",
+            "premises": [
+              {
+                "premise": "its casing is cracked",
+                "present": true,
+                "kinds": [
+                  "stated"
+                ],
+                "correct_kind": true,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": true,
+        "false_stated": false
+      },
+      "source_id": "5f206a25739987cca8005d1e",
+      "anchor": "stop pump X",
+      "condition": [
+        "pressures above 8 bar"
+      ],
+      "basis": [
+        "its casing is cracked"
+      ],
+      "absent": [],
+      "forbidden": [
+        "pressures below 2 bar",
+        "reservoir needs refill"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:21dc602bcaff420512eba60f",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 11,
+      "case_id": "interleaved",
+      "protected": true,
+      "reason": {
+        "probe_index": 11,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:d0fdd8d2b0772b84c63dad3c",
+            "premises": [
+              {
+                "premise": "reservoir needs refill",
+                "present": true,
+                "kinds": [
+                  "stated"
+                ],
+                "correct_kind": true,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": true,
+        "false_stated": false
+      },
+      "source_id": "5f206a25739987cca8005d1e",
+      "anchor": "start pump Y",
+      "condition": [
+        "pressures below 2 bar"
+      ],
+      "basis": [
+        "reservoir needs refill"
+      ],
+      "absent": [],
+      "forbidden": [
+        "pressures above 8 bar",
+        "casing is cracked"
+      ],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:d0fdd8d2b0772b84c63dad3c",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 12,
+      "case_id": "proposal",
+      "protected": true,
+      "reason": {
+        "probe_index": 12,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:7abf530f9a917b33d38931e3",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "anchor": "might trial coating N",
+      "condition": [
+        "coastal sites"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:7abf530f9a917b33d38931e3",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": false,
+            "no_forbidden": true
+          },
+          "passed": false
+        }
+      ],
+      "passed": false,
+      "negative_role_violation": true
+    },
+    {
+      "arm": "control",
+      "probe_index": 12,
+      "case_id": "proposal",
+      "protected": true,
+      "reason": {
+        "probe_index": 12,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:b3a80e3a1edb62bce49becc4",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "anchor": "might trial coating N",
+      "condition": [
+        "coastal sites"
+      ],
+      "basis": [],
+      "absent": [
+        "basis"
+      ],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:b3a80e3a1edb62bce49becc4",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 13,
+      "case_id": "far",
+      "protected": false,
+      "reason": {
+        "probe_index": 13,
+        "expected": "stated",
+        "matched": [],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "anchor": "Cancel the vibration trial",
+      "condition": [
+        "turbine T9 in winter"
+      ],
+      "basis": [
+        "the mount is broken"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "failed",
+      "matched": [],
+      "passed": false,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 13,
+      "case_id": "far",
+      "protected": false,
+      "reason": {
+        "probe_index": 13,
+        "expected": "stated",
+        "matched": [
+          {
+            "claim_id": "c:cd3b374437ff826baa5b7efd",
+            "premises": [
+              {
+                "premise": "the mount is broken",
+                "present": true,
+                "kinds": [
+                  "stated"
+                ],
+                "correct_kind": true,
+                "falsely_stated": false
+              }
+            ]
+          }
+        ],
+        "recovered_with_expected_kind": true,
+        "false_stated": false
+      },
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "anchor": "Cancel the vibration trial",
+      "condition": [
+        "turbine T9 in winter"
+      ],
+      "basis": [
+        "the mount is broken"
+      ],
+      "absent": [],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:cd3b374437ff826baa5b7efd",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "revised",
+      "probe_index": 14,
+      "case_id": "coincidence",
+      "protected": false,
+      "reason": {
+        "probe_index": 14,
+        "expected": null,
+        "matched": [
+          {
+            "claim_id": "c:9a128e2a229da4f19649d881",
+            "premises": []
+          }
+        ],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "2d361eea7c9853729f31dac7",
+      "anchor": "valve closed",
+      "condition": [],
+      "basis": [],
+      "absent": [
+        "condition",
+        "basis"
+      ],
+      "forbidden": [],
+      "source_status": "annotated",
+      "matched": [
+        {
+          "claim_id": "c:9a128e2a229da4f19649d881",
+          "checks": {
+            "condition": true,
+            "basis": true,
+            "absent": true,
+            "no_forbidden": true
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "negative_role_violation": false
+    },
+    {
+      "arm": "control",
+      "probe_index": 14,
+      "case_id": "coincidence",
+      "protected": false,
+      "reason": {
+        "probe_index": 14,
+        "expected": null,
+        "matched": [],
+        "recovered_with_expected_kind": false,
+        "false_stated": false
+      },
+      "source_id": "2d361eea7c9853729f31dac7",
+      "anchor": "valve closed",
+      "condition": [],
+      "basis": [],
+      "absent": [
+        "condition",
+        "basis"
+      ],
+      "forbidden": [],
+      "source_status": "failed",
+      "matched": [],
+      "passed": false,
+      "negative_role_violation": false
+    }
+  ],
+  "all_claims": [
+    {
+      "arm": "revised",
+      "case_id": "F_SH_Top01_026",
+      "source_id": "2532b1977fc260894d4d3a7e",
+      "claim_id": "c:ec2596728aeefe5f6cf6415e",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "All test cases have passed, including various single conditions, combined conditions, and boundary value scenarios",
+          "unit_id": "u:efccbaed48d4bdab5c2d6c77",
+          "kind": "stated"
+        },
+        {
+          "quote": "The few issues discovered yesterday have also all been regression verified and passed",
+          "unit_id": "u:ef74bfa39bb636e7a7d4a303",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "Verify the accuracy of alarm rule creation and trigger logic"
+      ],
+      "condition": [],
+      "basis": [
+        "All test cases have passed, including various single conditions, combined conditions, and boundary value scenarios",
+        "The few issues discovered yesterday have also all been regression verified and passed"
+      ],
+      "time": [],
+      "subject": [
+        "Enterprise Energy Consumption Monitoring and Energy Saving Diagnosis System"
+      ]
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_SH_Top01_026",
+      "source_id": "2532b1977fc260894d4d3a7e",
+      "claim_id": "c:bff87bd59dd3aabd2a73e834",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The final test report has been uploaded to Confluence"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:d42618994a2ae682131b6495",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "your medication check-in module and family member invitation interface are due today"
+      ],
+      "condition": [
+        "your medication check-in module and family member invitation interface"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "your medication check-in module and family member invitation interface"
+      ]
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:0e1f911c8f6e24222eec1163",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "Please make sure to complete the delivery today"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:5c005c1dc541aebb47cd1179",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "Other colleagues, please also share your plans and progress for today"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:13c80f0b99e923a57752cf07",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Good morning everyone",
+        "Today is Thursday"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:fb65da8eb5621b8379a8c4fa",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "your medication check-in module and family member invitation interface are due today"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "your medication check-in module and family member invitation interface"
+      ]
+    },
+    {
+      "arm": "control",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:a750f5171624098b3ea7230a",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "Please make sure to complete the delivery today"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_SH_Top02_014",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "claim_id": "c:5cc52e0a982750b9a65a8628",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "Other colleagues, please also share your plans and progress for today"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:73eb87356c92033e2d6be77e",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "today I'm starting a new design task",
+        "[Designing a File Storage Solution]"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:44674593dfb328c9ce7497ac",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "I will focus on comparing Azure Blob and AWS S3"
+      ],
+      "condition": [
+        "Considering that our system will need to store a large number of supporting documents, reports, etc. in the future"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:82df13edc6536d0a57061536",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "The evaluation dimensions will include cost, API ease of use, access permission management, and the difficulty of integration with our existing technology stack"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:53b5aa6c6cbfb4a56580bc32",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "A preliminary selection recommendation report will be provided early next week"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:64a9b8c999cc12a4f976c295",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "our system will need to store a large number of supporting documents, reports, etc.",
+          "unit_id": "u:3d54d34d117353090649ea6f",
+          "kind": "inferred"
+        },
+        {
+          "quote": "in the future",
+          "unit_id": "u:b7ecef55b0b956a3b9674c18",
+          "kind": "inferred"
+        }
+      ],
+      "claim": [
+        "I will focus on comparing Azure Blob and AWS S3"
+      ],
+      "condition": [
+        "Designing a File Storage Solution"
+      ],
+      "basis": [
+        "our system will need to store a large number of supporting documents, reports, etc. in the future"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:166b6a7019abccd4ae265a57",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "The evaluation dimensions will include cost, API ease of use, access permission management, and the difficulty of integration with our existing technology stack"
+      ],
+      "condition": [
+        "Designing a File Storage Solution"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "claim_id": "c:3f9698389372f6d50b9d36ae",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "A preliminary selection recommendation report will be provided early next week"
+      ],
+      "condition": [
+        "Designing a File Storage Solution"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "claim_id": "c:6398904a2accafa8434942c8",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Good morning everyone"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "claim_id": "c:025e420989b8a20d1e8ef890",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "I conducted a preliminary evaluation of Azure Blob and AWS S3 last Friday"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [
+        "last Friday"
+      ],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "claim_id": "c:d58ace63a6a1fdcf3803eaa0",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage",
+        "our other projects are also on AWS"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "claim_id": "c:e667fa164ed2379903472bed",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "Today, I will start designing the Bucket Policy and directory structure based on S3",
+        "for example, isolating by tenant and file type"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [
+        "Today"
+      ],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "claim_id": "c:01637bab5f90dbb1dfe98f38",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "Good morning everyone",
+        "regarding the file storage solution"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "claim_id": "c:44064ceb1a5c63be3eab5fed",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "the complete technical design document (based on AWS S3) has been uploaded to Confluence"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "claim_id": "c:8cd36823a6f0bfd6f8c60617",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "It includes three main parts",
+        "bucket permission policies",
+        "lifecycle rules",
+        "recommended directory structure"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "claim_id": "c:2a833175d9e628edf2f608eb",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "@Mingzhi Li Boss Li, please review it"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "claim_id": "c:12fde54c6da9722882a69f45",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "the complete technical design document (based on AWS S3) has been uploaded to Confluence"
+      ],
+      "condition": [
+        "regarding the file storage solution",
+        "@Mingzhi Li Boss Li, please review it"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "claim_id": "c:45175ede6cf37bb884312598",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "It includes three main parts: bucket permission policies, lifecycle rules, and recommended directory structure"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "claim_id": "c:34d6982a003f1adef693d6e9",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The design is very comprehensive"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "document on the file storage solution"
+      ]
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "claim_id": "c:638e0b620c1f41cdcf908c5f",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "especially the considerations for tenant data isolation and cost optimization"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "claim_id": "c:e96506b72bdeb2122f62c001",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "The proposal is approved and can be finalized"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "claim_id": "c:121f233bd929dc700c533bf6",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "@Lujian Gao I've finished reviewing the document on the file storage solution"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "claim_id": "c:fb04cfede21ce0f078d9ab2f",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The design is very comprehensive",
+        "especially the considerations for tenant data isolation and cost optimization"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "F_TP_Top01_002",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "claim_id": "c:b788d29f1f65096e0e3b43cb",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "The proposal is approved and can be finalized"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "claim_id": "c:72ef0ebd773e3fe7dc802ff2",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "must be forcibly routed to the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy for frontend interaction"
+      ],
+      "condition": [
+        "all accounts marked as `ACCOUNT_STATUS_LOCKED`"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "all accounts marked as `ACCOUNT_STATUS_LOCKED`"
+      ]
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "claim_id": "c:254ae492c4854c815f8065c1",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "please assess the scope of impact on the backend"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "@Xinjie Li @Xuexin Yin"
+      ]
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "claim_id": "c:239cf7356543c829e79296f3",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Email received"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "claim_id": "c:398702693eb08fe5751b4479",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "The core requirement is that all accounts marked as `ACCOUNT_STATUS_LOCKED` must be forcibly routed to the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy for frontend interaction"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "all accounts marked as `ACCOUNT_STATUS_LOCKED`"
+      ]
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "claim_id": "c:dcf7924ce501fcb48a6bea23",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "@Xinjie Li @Xuexin Yin, please assess the scope of impact on the backend"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "82db5705bd31ef3b677608e5",
+      "claim_id": "c:9d6e43d48777a76949e89abc",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The newly added policy code is `ERR_POLICY_LOCKED_ACCOUNT_V1`",
+        "defined as 'Explicit Status Alert Policy'"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "82db5705bd31ef3b677608e5",
+      "claim_id": "c:19346d92077c52c18286999e",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "It is mainly used for scenarios where an account is locked",
+        "requiring explicit interruption of user operations and guidance to manual channels"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "f3e4d9a3e84884e5abe2e967",
+      "claim_id": "c:5944eb7cf6cddb7f76f33b63",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Received",
+        "I've reviewed the document"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "f3e4d9a3e84884e5abe2e967",
+      "claim_id": "c:d7a4328c6b879434f50855d4",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "This strategy will be handled by `ExplicitStateAlertModule`",
+        "the parameter `halt_downstream_triggers` is set to `true`"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "f3e4d9a3e84884e5abe2e967",
+      "claim_id": "c:b1c707f60134216dc0ae0f13",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "after the backend triggers this strategy, all downstream automated notifications (emails, SMS) will be halted",
+        "right?"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "2f036a676a1e734b9821a11d",
+      "claim_id": "c:a975c1e474c3b53eafab8652",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "your understanding is completely correct",
+        "This is to avoid sending users redundant or potentially confusing automated messages"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_U_Top01_005",
+      "source_id": "2f036a676a1e734b9821a11d",
+      "claim_id": "c:a1666822516b35128ee602a8",
+      "stance": "unknown",
+      "basis_annotations": [
+        {
+          "quote": "your understanding is completely correct",
+          "unit_id": "u:4095b26f2b481060eaad3c39",
+          "kind": "inferred"
+        }
+      ],
+      "claim": [
+        "This is to avoid sending users redundant or potentially confusing automated messages"
+      ],
+      "condition": [],
+      "basis": [
+        "your understanding is completely correct"
+      ],
+      "time": [],
+      "subject": [
+        "users"
+      ]
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "claim_id": "c:fdbeb38592e20e32742b0a4f",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "I plan to complete the static data integration this morning to ensure the charts render correctly"
+      ],
+      "condition": [
+        "this morning"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "claim_id": "c:0aa2be525ebf1d32df277b8f",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "I'll start researching dynamic refresh solutions, initially considering WebSocket if the backend supports it"
+      ],
+      "condition": [
+        "if the backend supports it"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "claim_id": "c:22ce459425370e4784d920be",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Received, thanks a lot!"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "claim_id": "c:c801d2b0b827435760e85015",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The data structure looks very clear"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "claim_id": "c:3a5109e1e1a43968872cf9f8",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "I plan to complete the static data integration this morning to ensure the charts render correctly"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [
+        "this morning"
+      ],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "claim_id": "c:cdaf7df96d5a462a0157da4c",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "In the afternoon, I'll start researching dynamic refresh solutions",
+        "initially considering WebSocket if the backend supports it"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [
+        "In the afternoon"
+      ],
+      "subject": [
+        "the backend"
+      ]
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "claim_id": "c:547296dc71c08b60ccf7b0e4",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Great plan"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "claim_id": "c:f1f3521543b5f78024f97f36",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "WebSocket is the best solution"
+      ],
+      "condition": [
+        "our message push service isn't fully ready yet"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "claim_id": "c:84a9fbcaf8f8e0c729f7bc4f",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "This task can be implemented using polling for now"
+      ],
+      "condition": [
+        "by requesting the interface every 10 seconds"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "claim_id": "c:c392cf1c7d339d0faaf4846f",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "Once the WebSocket service is stable later",
+        "we can upgrade it uniformly"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "claim_id": "c:cf32e5a794d037428965f991",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "This way, we can avoid blocking your current task"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "claim_id": "c:7dea5a63b868666aafbe66aa",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "I'll use the polling solution for now"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "claim_id": "c:499cc5c920d0f9d32ba28891",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "I'll adjust the plan"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "claim_id": "c:19a885d4beefe1d10ddbea86",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Okay, Boss Li, understood"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "claim_id": "c:0d3195b6d63889b83b7fa8f9",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "I'll use the polling solution for now"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "MA_P_Top02_083",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "claim_id": "c:adf9dcbf4cd67b03b66c7096",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "I'll adjust the plan"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "version-defer",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "claim_id": "c:0e46dc584d6966da9aec5a38",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Version 4 permits one writer only"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "version-defer",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "claim_id": "c:eef462a04a6523cea2d794c4",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "We defer the throughput experiment for version 4"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "version-defer",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "claim_id": "c:fd523ecf00b78a72ada84bad",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Archive is Orion"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "version-defer",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "claim_id": "c:0c765271e9d3bc5384582c25",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "We defer the throughput experiment"
+      ],
+      "condition": [
+        "Version 4"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "version-defer",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "claim_id": "c:957d5db4fede5c025e442e98",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Version 4 permits one writer only"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "version-defer",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "claim_id": "c:fd523ecf00b78a72ada84bad",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Archive is Orion"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "version-defer",
+      "source_id": "70052b5dd1e070597977a5a3",
+      "claim_id": "c:8f868a9ab1fc04b9582ea104",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "permits four writers"
+      ],
+      "condition": [
+        "Version 5"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "version-defer",
+      "source_id": "70052b5dd1e070597977a5a3",
+      "claim_id": "c:141a70ba04c0fe3e12398e2e",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "does not replace the version 4 observation"
+      ],
+      "condition": [
+        "This report"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "version-defer",
+      "source_id": "70052b5dd1e070597977a5a3",
+      "claim_id": "c:b4b688dba671e9cc6a679069",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Version 5 permits four writers"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "version-defer",
+      "source_id": "70052b5dd1e070597977a5a3",
+      "claim_id": "c:290fe55a9d20ba0e596438c6",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "This report does not replace the version 4 observation"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "hypothesis",
+      "source_id": "9b3beb4415717cd7e733267b",
+      "claim_id": "c:7de366fc251413da0089f6fc",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "latency is 120ms"
+      ],
+      "condition": [
+        "Under profile A"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "hypothesis",
+      "source_id": "9b3beb4415717cd7e733267b",
+      "claim_id": "c:5843d1e706aca7e5e3107c23",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Owner is Hana"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "hypothesis",
+      "source_id": "9b3beb4415717cd7e733267b",
+      "claim_id": "c:7de366fc251413da0089f6fc",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "latency is 120ms"
+      ],
+      "condition": [
+        "Under profile A"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "hypothesis",
+      "source_id": "9b3beb4415717cd7e733267b",
+      "claim_id": "c:2515e297f18beb2e6576e3a4",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Owner is Hana"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "Owner"
+      ]
+    },
+    {
+      "arm": "revised",
+      "case_id": "hypothesis",
+      "source_id": "179a1f3807834e7e65309f43",
+      "claim_id": "c:47a007ebc35e9cfbac1ea076",
+      "stance": "proposal",
+      "basis_annotations": [
+        {
+          "quote": "This is an untested proposal; no measurement is available",
+          "unit_id": "u:c9ccbc8bf8745702c7dcd571",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "I suspect profile B may reach 90ms"
+      ],
+      "condition": [],
+      "basis": [
+        "This is an untested proposal; no measurement is available"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "hypothesis",
+      "source_id": "179a1f3807834e7e65309f43",
+      "claim_id": "c:1785996525082e4bd40feeca",
+      "stance": "uncertainty",
+      "basis_annotations": [],
+      "claim": [
+        "I suspect profile B may reach 90ms",
+        "This is an untested proposal",
+        "no measurement is available"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "reported-approval",
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "claim_id": "c:c79a1c314a9f70ee0abe6553",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The retry limit is 3"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "reported-approval",
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "claim_id": "c:c9a3e6f5e4286732035c05a9",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The maintainer is Hana"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "reported-approval",
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "claim_id": "c:c79a1c314a9f70ee0abe6553",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The retry limit is 3"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "reported-approval",
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "claim_id": "c:c9a3e6f5e4286732035c05a9",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The maintainer is Hana"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "reported-approval",
+      "source_id": "d369e9ea51b1a073ce9e4c3d",
+      "claim_id": "c:6621a225a25654e753db64bd",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Hana approved changing the retry limit to 4"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": [
+        "Hana"
+      ]
+    },
+    {
+      "arm": "control",
+      "case_id": "reported-approval",
+      "source_id": "d369e9ea51b1a073ce9e4c3d",
+      "claim_id": "c:36d21a7af2260a778c7df9a8",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "No authenticated review event is supplied here"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "far-condition",
+      "source_id": "d433c146841359d87b93fe53",
+      "claim_id": "c:bc7053cb0c61aeadc3b5cd8e",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "This experiment concerns version 4 on CPU only"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "far-condition",
+      "source_id": "d433c146841359d87b93fe53",
+      "claim_id": "c:81d13a9d64e50bed7aa47c12",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The archive reference remains unchanged"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "far-condition",
+      "source_id": "d433c146841359d87b93fe53",
+      "claim_id": "c:6b552fac5c7fc6a4a3da7af7",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "We defer the throughput experiment"
+      ],
+      "condition": [
+        "because only one writer is available"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "far-condition",
+      "source_id": "d433c146841359d87b93fe53",
+      "claim_id": "c:276dd6f3e0d1ca81d406bc0e",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "only one writer is available",
+          "unit_id": "u:a72b4d70731f563042665f47",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "We defer the throughput experiment"
+      ],
+      "condition": [
+        "version 4 on CPU only"
+      ],
+      "basis": [
+        "only one writer is available"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "far-condition",
+      "source_id": "d433c146841359d87b93fe53",
+      "claim_id": "c:81d13a9d64e50bed7aa47c12",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The archive reference remains unchanged"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "far-condition",
+      "source_id": "609abafedb0753176911d1c4",
+      "claim_id": "c:46d98fcadaeff9ba5457f7ef",
+      "stance": "observation",
+      "basis_annotations": [
+        {
+          "quote": "this has not been tested on version 4",
+          "unit_id": "u:65f556c0c4c2ce632b06c383",
+          "kind": "inferred"
+        }
+      ],
+      "claim": [
+        "allows four writers"
+      ],
+      "condition": [
+        "Version 5 on GPU"
+      ],
+      "basis": [
+        "this has not been tested on version 4"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "far-condition",
+      "source_id": "609abafedb0753176911d1c4",
+      "claim_id": "c:e0a20d82ae4c9c556d512ef6",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "Version 5 on GPU allows four writers",
+        "this has not been tested on version 4"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "causal",
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "claim_id": "c:39b5fa7e16722ecd30356c55",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "suspend acquisition until it cools"
+      ],
+      "condition": [
+        "Because the sensor is overheating"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "causal",
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "claim_id": "c:8e646c644628c94d6f1ce90a",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The backup log is green"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "causal",
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "claim_id": "c:68931c1b67a6d76a3bef0404",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "the sensor is overheating",
+          "unit_id": "u:e79a50982df734d09a26e4b1",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "suspend acquisition until it cools"
+      ],
+      "condition": [
+        "Because the sensor is overheating"
+      ],
+      "basis": [
+        "the sensor is overheating"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "causal",
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "claim_id": "c:8e646c644628c94d6f1ce90a",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The backup log is green"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "conditional",
+      "source_id": "28a51957eb949709dc372152",
+      "claim_id": "c:e69989edbd53783cd2fe34bc",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "use tray R"
+      ],
+      "condition": [
+        "If the sample is saline"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "conditional",
+      "source_id": "28a51957eb949709dc372152",
+      "claim_id": "c:03bdfa2086aad6306cd30beb",
+      "stance": "proposal",
+      "basis_annotations": [],
+      "claim": [
+        "use tray S"
+      ],
+      "condition": [
+        "If the sample is dry"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "conditional",
+      "source_id": "28a51957eb949709dc372152",
+      "claim_id": "c:c138ecaa64a77934028d1c01",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "use tray R"
+      ],
+      "condition": [
+        "If the sample is saline"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "conditional",
+      "source_id": "28a51957eb949709dc372152",
+      "claim_id": "c:4a179d2d84fc5994740c7f4c",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "use tray S"
+      ],
+      "condition": [
+        "If the sample is dry"
+      ],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "adjacent",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "claim_id": "c:a35d52311cc63e4235331fe3",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The printer is offline"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "adjacent",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "claim_id": "c:2e92f62e6a233216d53faa81",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "We retain the budget unchanged"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "adjacent",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "claim_id": "c:77796855bd4eda3ac0fd5041",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The roof was repaired"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "adjacent",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "claim_id": "c:a35d52311cc63e4235331fe3",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The printer is offline"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "adjacent",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "claim_id": "c:2e92f62e6a233216d53faa81",
+      "stance": "decision",
+      "basis_annotations": [],
+      "claim": [
+        "We retain the budget unchanged"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "adjacent",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "claim_id": "c:77796855bd4eda3ac0fd5041",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The roof was repaired"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "negation",
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "claim_id": "c:bf222b70ec7a960b71963101",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "the assay failed",
+          "unit_id": "u:0f0eb8e3e5d08ce04f1e4716",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "do not release the lot"
+      ],
+      "condition": [
+        "For contaminated batches"
+      ],
+      "basis": [
+        "the assay failed"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "negation",
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "claim_id": "c:59a5b2f8a1f94967c24210fb",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Clean batches remain eligible"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "negation",
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "claim_id": "c:eaecd3c558f90bc2d6754b83",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "the assay failed",
+          "unit_id": "u:0f0eb8e3e5d08ce04f1e4716",
+          "kind": "unspecified"
+        }
+      ],
+      "claim": [
+        "do not release the lot"
+      ],
+      "condition": [
+        "For contaminated batches"
+      ],
+      "basis": [
+        "the assay failed"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "negation",
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "claim_id": "c:59a5b2f8a1f94967c24210fb",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Clean batches remain eligible"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "interleaved",
+      "source_id": "5f206a25739987cca8005d1e",
+      "claim_id": "c:d5cd8e9a8c9c96cc7d358b29",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "its casing is cracked",
+          "unit_id": "u:74b4af9b7ee08a6e7531eb48",
+          "kind": "unspecified"
+        }
+      ],
+      "claim": [
+        "stop pump X"
+      ],
+      "condition": [
+        "At pressures above 8 bar"
+      ],
+      "basis": [
+        "its casing is cracked"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "interleaved",
+      "source_id": "5f206a25739987cca8005d1e",
+      "claim_id": "c:51933b9a8ed47c34e2496088",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The spare badge is orange"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "interleaved",
+      "source_id": "5f206a25739987cca8005d1e",
+      "claim_id": "c:7e3349257b271cba28d7ebc5",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "the reservoir needs refill",
+          "unit_id": "u:6e97aabd2fa2ec969e3ea9b7",
+          "kind": "unspecified"
+        }
+      ],
+      "claim": [
+        "start pump Y"
+      ],
+      "condition": [
+        "At pressures below 2 bar"
+      ],
+      "basis": [
+        "the reservoir needs refill"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "interleaved",
+      "source_id": "5f206a25739987cca8005d1e",
+      "claim_id": "c:21dc602bcaff420512eba60f",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "its casing is cracked",
+          "unit_id": "u:74b4af9b7ee08a6e7531eb48",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "stop pump X"
+      ],
+      "condition": [
+        "At pressures above 8 bar"
+      ],
+      "basis": [
+        "its casing is cracked"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "interleaved",
+      "source_id": "5f206a25739987cca8005d1e",
+      "claim_id": "c:d0fdd8d2b0772b84c63dad3c",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "the reservoir needs refill",
+          "unit_id": "u:6e97aabd2fa2ec969e3ea9b7",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "start pump Y"
+      ],
+      "condition": [
+        "At pressures below 2 bar"
+      ],
+      "basis": [
+        "the reservoir needs refill"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "interleaved",
+      "source_id": "5f206a25739987cca8005d1e",
+      "claim_id": "c:51933b9a8ed47c34e2496088",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The spare badge is orange"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "proposal",
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "claim_id": "c:7abf530f9a917b33d38931e3",
+      "stance": "proposal",
+      "basis_annotations": [
+        {
+          "quote": "no durability measurement exists",
+          "unit_id": "u:0eda86852bc3ace85797d247",
+          "kind": "inferred"
+        }
+      ],
+      "claim": [
+        "we might trial coating N next quarter"
+      ],
+      "condition": [
+        "coastal sites"
+      ],
+      "basis": [
+        "no durability measurement exists"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "proposal",
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "claim_id": "c:597cca8ee381fec49fc3891b",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "This is not approval to deploy it"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "control",
+      "case_id": "proposal",
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "claim_id": "c:b3a80e3a1edb62bce49becc4",
+      "stance": "unknown",
+      "basis_annotations": [],
+      "claim": [
+        "we might trial coating N",
+        "no durability measurement exists",
+        "This is not approval to deploy it"
+      ],
+      "condition": [
+        "For coastal sites"
+      ],
+      "basis": [],
+      "time": [
+        "next quarter"
+      ],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "far",
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "claim_id": "c:cd3b374437ff826baa5b7efd",
+      "stance": "decision",
+      "basis_annotations": [
+        {
+          "quote": "the mount is broken",
+          "unit_id": "u:bc2ba0552410f91b1f377779",
+          "kind": "stated"
+        }
+      ],
+      "claim": [
+        "Cancel the vibration trial"
+      ],
+      "condition": [
+        "turbine T9 in winter"
+      ],
+      "basis": [
+        "the mount is broken"
+      ],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "far",
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "claim_id": "c:bafe6089a24620122ff7e6c1",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The inventory shelf remains unchanged"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "coincidence",
+      "source_id": "2d361eea7c9853729f31dac7",
+      "claim_id": "c:3bde1905770df98a06f3a839",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "Rain began at 14:00"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "coincidence",
+      "source_id": "2d361eea7c9853729f31dac7",
+      "claim_id": "c:9a128e2a229da4f19649d881",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The valve closed at 14:00"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    },
+    {
+      "arm": "revised",
+      "case_id": "coincidence",
+      "source_id": "2d361eea7c9853729f31dac7",
+      "claim_id": "c:41eea3bcf48a673299bb19aa",
+      "stance": "observation",
+      "basis_annotations": [],
+      "claim": [
+        "The record does not establish a cause for the closure"
+      ],
+      "condition": [],
+      "basis": [],
+      "time": [],
+      "subject": []
+    }
+  ],
+  "transport": [
+    {
+      "arm": "control",
+      "source_id": "2532b1977fc260894d4d3a7e",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "revised",
+      "source_id": "2532b1977fc260894d4d3a7e",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "eeab452b3cb6dfffe3b2a655",
+      "stored_restarted": true,
+      "claim_packets": 4,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "stored_restarted": true,
+      "claim_packets": 4,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "ef3ed7f7d45447190441c6bf",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "control",
+      "source_id": "a3bb92bc6e953b07984eaa93",
+      "stored_restarted": true,
+      "claim_packets": 4,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "stored_restarted": true,
+      "claim_packets": 4,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "b9a2917d39af17f120e6fb74",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "cc0f8301e58ac1340b77a5ef",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "e736ba69ded95cdd2331a4e8",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "revised",
+      "source_id": "e736ba69ded95cdd2331a4e8",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "revised",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "fc8ef24a21781a9bc3026f2c",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "82db5705bd31ef3b677608e5",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "82db5705bd31ef3b677608e5",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "revised",
+      "source_id": "f3e4d9a3e84884e5abe2e967",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "control",
+      "source_id": "f3e4d9a3e84884e5abe2e967",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "2f036a676a1e734b9821a11d",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "2f036a676a1e734b9821a11d",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "ea426379076abc7e9d24ecbb",
+      "stored_restarted": true,
+      "claim_packets": 4,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "stored_restarted": true,
+      "claim_packets": 5,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "9279497ab46d95f158eeb6de",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "revised",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "b3a1426c132e34bf7819b9fd",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "d70dd6562091af5bc67b569e",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "70052b5dd1e070597977a5a3",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "70052b5dd1e070597977a5a3",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "9b3beb4415717cd7e733267b",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "9b3beb4415717cd7e733267b",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "179a1f3807834e7e65309f43",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "179a1f3807834e7e65309f43",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "db8b9c07461ab3d057d750c3",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "d369e9ea51b1a073ce9e4c3d",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "control",
+      "source_id": "d369e9ea51b1a073ce9e4c3d",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "d433c146841359d87b93fe53",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "d433c146841359d87b93fe53",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "609abafedb0753176911d1c4",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "609abafedb0753176911d1c4",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "ed1e2e70ef94c1cf2569530f",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "28a51957eb949709dc372152",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "28a51957eb949709dc372152",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "cda13f5cf2f903150b514ad6",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "2d7d337393ea90b5b9d3597c",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "5f206a25739987cca8005d1e",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "5f206a25739987cca8005d1e",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "e38588c0591d68f5e9d4b610",
+      "stored_restarted": true,
+      "claim_packets": 1,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    },
+    {
+      "arm": "revised",
+      "source_id": "a6acc320e1b46bb76cb1cefd",
+      "stored_restarted": true,
+      "claim_packets": 2,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "revised",
+      "source_id": "2d361eea7c9853729f31dac7",
+      "stored_restarted": true,
+      "claim_packets": 3,
+      "source_status": "annotated"
+    },
+    {
+      "arm": "control",
+      "source_id": "2d361eea7c9853729f31dac7",
+      "stored_restarted": true,
+      "claim_packets": 0,
+      "source_status": "failed"
+    }
+  ],
+  "default_adoption": "blocked_protected_link_regression"
+}

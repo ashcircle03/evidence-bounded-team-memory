@@ -58,7 +58,14 @@
           "minLength": 1
         },
         "record_graph": {
-          "$ref": "#/$defs/record_graph"
+          "oneOf": [
+            {
+              "$ref": "#/$defs/record_graph"
+            },
+            {
+              "$ref": "#/$defs/record_graph_v2"
+            }
+          ]
         }
       },
       "required": [
@@ -252,6 +259,168 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/record_graph_claim"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_edge"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "source_id",
+        "source_fingerprint",
+        "builder",
+        "model",
+        "status",
+        "units",
+        "claims",
+        "errors",
+        "edges"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_claim_v2": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "condition": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "basis": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "time": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "subject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "stance": {
+          "enum": [
+            "observation",
+            "decision",
+            "proposal",
+            "uncertainty",
+            "question",
+            "unknown"
+          ]
+        },
+        "qualification": {
+          "const": "model_extracted_unverified"
+        },
+        "basis_annotations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "unit_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "stated",
+                  "inferred",
+                  "unspecified"
+                ]
+              }
+            },
+            "required": [
+              "unit_id",
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "claim",
+        "condition",
+        "basis",
+        "time",
+        "subject",
+        "stance",
+        "qualification",
+        "basis_annotations"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_v2": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "records.graph/v2"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_fingerprint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "builder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "not_run",
+            "annotated",
+            "failed"
+          ]
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_unit"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_claim_v2"
           }
         },
         "errors": {

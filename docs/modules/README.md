@@ -125,3 +125,5 @@ factory는 **case 하나를 받아** 테스트용 저장소에 `case['setup']['s
 5. 필드 의미·권한·오류 의미를 바꾸면 새 계약 버전을 낸다. 내부 모델·프롬프트·검색기 교체는 포트 의미를 유지하면 가능하다.
 
 records 담당자의 데이터셋·상태 전이·성능 실험은 [records 실험 기준](records-experiments.md)에서 관리한다.
+
+추가 설계: [추출 계약과 이유 자격](records-extraction-contract.md), [서비스 저장·색인 수명주기 감사](../../results/service-storage/README.md).
