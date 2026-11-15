@@ -75,6 +75,23 @@ class RetrievalStageTests(unittest.TestCase):
         self.assertIn('review_state', [e['kind'] for e in first['data']['evidence']])
         self.assertEqual(self.calls, [])
 
+    def test_candidate_source_is_replaceable(self):
+        from llama_index.core.schema import NodeWithScore
+        from team_memory.readers.retrieval_stages import CandidateSource
+        service, index = self.catalogue()
+        chosen = next(n for n in index.docstore.docs.values() if 'keynumber13 ' in n.get_content())
+
+        class Fixed(CandidateSource):
+            name, version = 'fixed-test', '1'
+
+            def retrieve(self, query_bundle):
+                return {'dense': [NodeWithScore(node=chosen, score=1.0)]}
+
+        service.candidate_source = lambda _index: Fixed()
+        witnesses = service.ask('Anything at all?', retrieve_only=True)['witnesses']
+        self.assertEqual([w['source_id'] for w in witnesses], [chosen.metadata['source_id']])
+        self.assertEqual(self.calls, [])
+
 
 if __name__ == '__main__':
     unittest.main()

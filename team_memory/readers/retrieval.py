@@ -115,16 +115,19 @@ class ReferenceQA:
             helper = PromptHelper(context_window=self.context_window-256, num_output=self.num_output,
                 tokenizer=lambda text: self.tokenizer.encode(text, add_special_tokens=False))
             qa_template, refine_template = CITATION_QA_TEMPLATE, CITATION_REFINE_TEMPLATE
-            retriever = index.as_retriever(similarity_top_k=self.top_k)
+            from team_memory.readers import retrieval_stages as stages
+            team = self.profile == 'team'
+            # Stage 1 (candidates) is replaceable. The default is the prepared index
+            # plus, for the team profile, the BM25 that preparation persisted.
+            make_source = getattr(self, 'candidate_source', None)
+            source = make_source(index) if make_source else stages.LlamaIndexCandidates(
+                index, self.top_k, sparse=self.sparse, use_sparse=team)
+            # Stage 2. Retain the union: top4 dense + top4 sparse => at most8. Upstream
+            # RRF ranks the union; no extra query generation or answer-key terms.
+            retriever = stages.StagedRetriever(source, llm=self.llm,
+                fused_top_k=2*self.top_k if team else None)
             citation_splitter, metadata_mode = self.splitter, MetadataMode.NONE
-            if self.profile == 'team':
-                from llama_index.core.retrievers import QueryFusionRetriever
-                sparse = self.sparse
-                # Retain the union: top4 dense + top4 sparse => at most8. Upstream
-                # RRF ranks the union; no extra query generation or answer-key terms.
-                retriever = QueryFusionRetriever([retriever, sparse], llm=self.llm,
-                    similarity_top_k=2*self.top_k, num_queries=1,
-                    mode='reciprocal_rerank', use_async=False)
+            if team:
                 qa_template, refine_template = self._team_templates()
                 metadata_mode = MetadataMode.LLM
                 # A retrieval chunk plus its short source header is one citation.
@@ -133,36 +136,26 @@ class ReferenceQA:
                     include_metadata=False)
             selected_nodes = None
             if getattr(self, 'review_relations', None):
-                from team_memory.readers.context import expand_review_context, contextual_templates
-                selected_nodes, context = expand_review_context(
+                from team_memory.readers.context import contextual_templates
+                # Stage 3: follow proposal links from the retrieved sources.
+                selected_nodes, context = stages.expand_review(
                     retriever.retrieve(question), sources, self.review_relations,
                     getattr(self, 'temporal_scope', 'current'))
                 self.active_review_context = context
                 if context:
                     qa_template, refine_template = contextual_templates(
                         (qa_template, refine_template), context)
-                    from team_memory.readers.state_citations import review_sources
-                    from llama_index.core.schema import NodeWithScore, TextNode
-                    # Use CitationQueryEngine's existing numbered-source flow
+                    # Stage 4. Use CitationQueryEngine's existing numbered-source flow
                     # from initial generation onward, not only post-hoc repair.
-                    for witness in review_sources(self.store, context):
-                        metadata = dict(source_id=witness['source_id'],
-                            record_author=witness['speaker'], evidence_type='review_state',
-                            review_witness=witness)
-                        selected_nodes.append(NodeWithScore(node=TextNode(
-                            text=witness['quote'], metadata=metadata,
-                            excluded_embed_metadata_keys=list(metadata),
-                            excluded_llm_metadata_keys=['source_id','review_witness'])))
+                    selected_nodes.extend(stages.review_state_nodes(self.store, context))
             synthesizer = get_response_synthesizer(llm=self.llm, prompt_helper=helper,
                 text_qa_template=qa_template, refine_template=refine_template,
                 response_mode='compact')
             engine = CitationQueryEngine(retriever, llm=self.llm,
                 response_synthesizer=synthesizer, text_splitter=citation_splitter, metadata_mode=metadata_mode)
             if retrieve_only:
-                from llama_index.core.schema import QueryBundle
-                nodes=engine._create_citation_nodes(
-                    engine.retrieve(QueryBundle(question)) if selected_nodes is None else selected_nodes)
-                return dict(witnesses=[self._witness(n.node,sources,i) for i,n in enumerate(nodes,1)],
+                # Stage 5: citation nodes and verbatim offsets, stopped before generation.
+                return dict(witnesses=stages.citation_witnesses(self, engine, question, selected_nodes, sources),
                             context=self.active_review_context)
             if selected_nodes is None:
                 result = engine.query(question)
