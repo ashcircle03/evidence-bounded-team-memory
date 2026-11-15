@@ -14,11 +14,64 @@ its constant (k=60), duplicate rule (node hash, later object wins) and tie
 order stay byte-identical. The upstream class rewrites node scores in place,
 so each channel's ranks and scores are recorded before fusion.
 """
-from dataclasses import dataclass
+from contextlib import contextmanager, nullcontext
+from dataclasses import asdict, dataclass
 from importlib.metadata import version as package_version
+import time
 
 from llama_index.core.retrievers import BaseRetriever, QueryFusionRetriever
 from llama_index.core.schema import NodeWithScore, QueryBundle, TextNode
+
+
+class Trace:
+    """Diagnostics of one retrieval request.
+
+    Timings stay apart from the content, so the content is the same for the
+    same input. A failure records its stage and exception type only; messages
+    can carry secrets. The innermost failing stage is the one recorded.
+    """
+
+    def __init__(self):
+        self.data, self.timings_ms, self.failure = {}, {}, None
+
+    @contextmanager
+    def stage(self, name):
+        start = time.perf_counter()
+        try:
+            yield
+        except BaseException as exc:
+            if self.failure is None:
+                self.failure = dict(stage=name, exception=type(exc).__name__)
+            raise
+        finally:
+            spent = (time.perf_counter() - start) * 1000
+            self.timings_ms[name] = round(self.timings_ms.get(name, 0.0) + spent, 3)
+
+    def record(self, key, value):
+        self.data[key] = value
+
+
+class _NoTrace:
+    def stage(self, name):
+        return nullcontext()
+
+    def record(self, key, value):
+        pass
+
+
+NO_TRACE = _NoTrace()
+
+
+def plain(candidates):
+    """JSON form of candidates; scores become Python floats."""
+    return [dict(asdict(c), score=None if c.score is None else float(c.score)) for c in candidates]
+
+
+def expansion_record(retrieved_count, selected, context):
+    """What stage 3 added: linked proposals and the spans appended after the retrieved nodes."""
+    return dict(proposal_ids=[r['id'] for r in (context or {}).get('relations', [])],
+                added=[dict(source_id=n.node.metadata['source_id'], start=n.node.metadata['parent_start'],
+                            end=n.node.metadata['parent_end']) for n in selected[retrieved_count:]])
 
 
 @dataclass(frozen=True)
@@ -87,25 +140,31 @@ class StagedRetriever(BaseRetriever):
     the most recent call. A new instance is built for every question.
     """
 
-    def __init__(self, source, *, llm, fused_top_k=None):
+    def __init__(self, source, *, llm, fused_top_k=None, trace=None):
         super().__init__()
         self.source, self.llm, self.fused_top_k = source, llm, fused_top_k
+        self.trace = trace or NO_TRACE
         self.last = None
 
     def _retrieve(self, query_bundle):
-        channels = self.source.retrieve(query_bundle)
+        self.trace.record('candidate_source', dict(name=self.source.name, version=self.source.version))
+        with self.trace.stage('candidates'):
+            channels = self.source.retrieve(query_bundle)
         candidates = {name: describe(name, nodes) for name, nodes in channels.items()}
-        if len(channels) == 1:
-            fused = next(iter(channels.values()))
-        else:
-            if self.fused_top_k is None:
-                raise ValueError('Fusing several candidate channels needs fused_top_k')
-            fusion = QueryFusionRetriever([_Fixed(nodes) for nodes in channels.values()], llm=self.llm,
-                similarity_top_k=self.fused_top_k, num_queries=1,
-                mode='reciprocal_rerank', use_async=False)
-            fused = fusion.retrieve(query_bundle)
+        self.trace.record('candidates', {name: plain(items) for name, items in candidates.items()})
+        with self.trace.stage('fusion'):
+            if len(channels) == 1:
+                fused = next(iter(channels.values()))
+            else:
+                if self.fused_top_k is None:
+                    raise ValueError('Fusing several candidate channels needs fused_top_k')
+                fusion = QueryFusionRetriever([_Fixed(nodes) for nodes in channels.values()], llm=self.llm,
+                    similarity_top_k=self.fused_top_k, num_queries=1,
+                    mode='reciprocal_rerank', use_async=False)
+                fused = fusion.retrieve(query_bundle)
         self.last = dict(source=dict(name=self.source.name, version=self.source.version),
                          candidates=candidates, fused=describe('fused', fused))
+        self.trace.record('fused', plain(self.last['fused']))
         return fused
 
 

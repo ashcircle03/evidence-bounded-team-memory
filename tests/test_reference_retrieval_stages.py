@@ -47,6 +47,30 @@ class RetrievalStageTests(unittest.TestCase):
             self.assertEqual([(c.node_id, c.score) for c in record['candidates']['sparse']],
                              [(n.node.node_id, n.score) for n in sparse])
 
+    def test_trace_records_stages_and_only_the_exception_type(self):
+        import json
+        from team_memory.readers.retrieval_stages import CandidateSource, LlamaIndexCandidates, StagedRetriever, Trace
+        service, index = self.catalogue()
+        trace = Trace()
+        StagedRetriever(LlamaIndexCandidates(index, 4, sparse=service.sparse, use_sparse=True), llm=self.llm,
+                        fused_top_k=8, trace=trace).retrieve('preserved record')
+        self.assertEqual(set(trace.data), {'candidate_source', 'candidates', 'fused'})
+        self.assertEqual(set(trace.timings_ms), {'candidates', 'fusion'})
+        self.assertEqual(list(trace.data['candidates']), ['dense', 'sparse'])
+        self.assertIsNone(trace.failure)
+        json.dumps(trace.data)  # serialisable as written
+
+        class Broken(CandidateSource):
+            name, version = 'broken', '1'
+
+            def retrieve(self, query_bundle):
+                raise RuntimeError('secret-token-123')
+        failed = Trace()
+        with self.assertRaises(RuntimeError):
+            StagedRetriever(Broken(), llm=self.llm, trace=failed).retrieve('anything')
+        self.assertEqual(failed.failure, {'stage': 'candidates', 'exception': 'RuntimeError'})
+        self.assertNotIn('secret-token-123', json.dumps([failed.data, failed.failure]))
+
     def test_standard_profile_keeps_a_single_dense_channel(self):
         from team_memory.readers.retrieval_stages import LlamaIndexCandidates, StagedRetriever
         _, index = self.catalogue()
