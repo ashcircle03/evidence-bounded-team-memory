@@ -12,4 +12,18 @@ coverage는 hits / no_hits / incomplete다. 필요한 근거가 budget 밖에 �
 
 DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않는다. 검색 실패(error), 검색 결과 없음(ok/no_hits), 일부 조회(partial/incomplete), 충분한 근거인데 생성 실패를 별도 집계한다.
 
+## 검색 단계
+
+검색은 [`readers/retrieval_stages.py`](../../team_memory/readers/retrieval_stages.py)의 다섯 단계로 나뉜다. 단계를 나눠도 기존 출력은 바뀌지 않는다.
+
+| 단계 | 하는 일 | 구현 |
+|---|---|---|
+| ① 후보 | 채널별 순위 목록(dense, sparse). 각 후보의 순위·점수·source_id·원문 구간을 융합 전에 기록 | `CandidateSource`, 기본값 `LlamaIndexCandidates`(준비된 색인 + 준비된 BM25) |
+| ② 융합 | 상류 `QueryFusionRetriever` reciprocal_rerank를 그대로 사용 | `StagedRetriever` |
+| ③ 제안 따라가기 | 검색된 원문에 걸린 제안의 양쪽 구간 추가 | `expand_review_context` 재사용 |
+| ④ 상태 근거 | 제안마다 review_state 근거 1개를 목록 뒤에 추가 | `review_sources` 재사용 |
+| ⑤ 인용 | 인용 노드를 만들고 원문 위치 복원. 예산 처리는 adapter | `CitationQueryEngine`, `_witness` |
+
+①만 교체 대상이다. reader에 `candidate_source(index)`를 주면 기본 후보 대신 그 결과를 쓴다. 채널이 하나면 융합하지 않는다.
+
 공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).
