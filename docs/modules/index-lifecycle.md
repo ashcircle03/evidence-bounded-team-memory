@@ -16,7 +16,7 @@
 
 `evidence.prepare`는 `records:write`, `evidence.retrieve`는 `evidence:read`가 필요하다. 준비 응답은 `snapshot_id`, `index_key`, `source_count`, `prepared_documents`, `reused_documents`다. 앞의 두 문서 수를 더하면 snapshot 원문 수다. 이는 문서 수이며 긴 문서의 chunk 임베딩 호출 수와는 다르다.
 
-초기 적재에서 `record.append`를 직접 호출하는 팀원은 적재를 마친 snapshot으로 `evidence.prepare`를 한 번 호출한다. `gateway.ingest`를 사용하는 경우 이미 연결돼 있다. 기존 v2 저장소는 업그레이드 후 첫 질문 전에 `sync`를 호출한다. 준비되지 않은 원문/설정 조합에는 `INDEX_STALE`을 반환하며 질문으로 준비를 대신하지 않는다.
+초기 적재에서 `record.append`를 직접 호출하는 팀원은 적재를 마친 snapshot으로 `evidence.prepare`를 한 번 호출한다. `gateway.ingest`를 사용하는 경우 이미 연결돼 있다. 기존 v2 저장소는 업그레이드 후 첫 질문 전에 `sync`를 호출한다. 과거 lazy 색인의 node ID·manifest와 새 문서 캐시 형식이 다르므로 최초 전환은 전체 문서를 한 번 준비한다. 과거 색인을 삭제하지 않으며, 이후 변경 없는 원문은 재임베딩하지 않는다. 준비되지 않은 원문/설정 조합에는 `INDEX_STALE`을 반환하며 질문으로 준비를 대신하지 않는다.
 
 ```python
 ready = gateway.retrieval.handle(
@@ -61,3 +61,5 @@ Git에는 원문·주장/조건/근거 연결·승인 이벤트를 공유하고,
 ## 남은 비용
 
 변경 없는 문서는 다시 분할하거나 임베딩하지 않는다. 그러나 현재 SimpleVectorStore는 새 세대의 전체 벡터를 직렬화하고 BM25 corpus 통계도 다시 구성한다. 질문에서도 원장을 읽고 manifest를 비교하며, 첫 로드에는 색인을 읽는 비용이 있다. 따라서 **질문의 전체 임베딩/분할 재처리를 제거한 것**과 모든 I/O·CPU를 변경량에 비례하게 만든 것은 구분한다. 큰 서비스에서 필요한 ANN backend·증분 키워드 색인·중앙 DB는 별도 규모 측정으로 결정한다.
+
+실측에서도 최초 준비 비용 퇴행이 확인됐다. 7개 corpus의 초기 준비 합계685.52초에 비해 기존 첫 질문 묶음은20.10초였다. 질문 독립 준비 계약을 채택하되 파일별 cache backend의 대량 적재 성능까지 완료로 보지 않는다. [동일 근거·실측 비용](../../results/service-storage/v1/README.md).
