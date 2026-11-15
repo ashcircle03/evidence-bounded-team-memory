@@ -24,6 +24,8 @@ DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않
 | ④ 상태 근거 | 제안마다 review_state 근거 1개를 목록 뒤에 추가 | `review_sources` 재사용 |
 | ⑤ 인용 | 인용 노드를 만들고 원문 위치 복원. 예산 처리는 adapter | `CitationQueryEngine`, `_witness` |
 
+근거가 `max_evidence`를 넘으면 adapter가 고른다. 순서는 review_state 근거, 남긴 상태 근거가 가리키는 제안의 양쪽 원문(answering이 확인하는 `previous`·`incoming` 구간과 겹치는 근거), 나머지 검색 순위 순이다. 한 제안의 양쪽이 다 들어가지 않으면 그 제안의 원문은 넣지 않아 한쪽만 남지 않게 한다. 남긴 근거는 원래 순서와 ID를 유지하고 `incomplete` + `BUDGET_EXCEEDED`로 반환한다. gateway는 incomplete 묶음으로 답을 만들지 않는다. 예산 안이면 출력은 바뀌지 않는다.
+
 ①만 교체 대상이다. reader에 `candidate_source(index)`를 주면 기본 후보 대신 그 결과를 쓴다. 채널이 하나면 융합하지 않는다.
 
 공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).

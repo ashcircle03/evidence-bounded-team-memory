@@ -5,6 +5,36 @@ from .base import Adapter,Failure,issue
 from .reader_bridge import reader_for,evidence_from,query_text
 
 
+def overlaps(evidence,span):
+    return (evidence['kind']=='source' and evidence['source_id']==span['source_id'] and
+            max(evidence['start'],span['start'])<min(evidence['end'],span['end']))
+
+
+def within_budget(evidence,snapshot,limit):
+    """Choose what survives the evidence budget; (kept evidence, truncated).
+
+    Priority: review_state evidence, then the source evidence on both sides of
+    each kept state's proposal (the spans answering checks), then the rest in
+    retrieval order. If a proposal's sides do not all fit, none of them is
+    kept, so no lone side of a conflict or correction remains. The kept
+    evidence keeps its original order and IDs. Within budget nothing changes.
+    """
+    if len(evidence)<=limit:return evidence,False
+    proposals={p['id']:p for p in snapshot['proposals']}
+    states=[i for i,e in enumerate(evidence) if e['kind']=='review_state'][:limit]
+    chosen=list(states);withheld=set()
+    for i in states:
+        candidate=proposals[evidence[i]['state_record']['proposal_id']]['candidate']
+        sides=[j for j,e in enumerate(evidence) if j not in chosen and
+               any(overlaps(e,candidate[side]) for side in ('previous','incoming'))]
+        if len(chosen)+len(sides)<=limit:chosen+=sides
+        else:withheld.update(sides)
+    for j in range(len(evidence)):
+        if len(chosen)>=limit:break
+        if j not in chosen and j not in withheld:chosen.append(j)
+    return [evidence[j] for j in sorted(chosen)],True
+
+
 class RetrievalAdapter(Adapter):
     module='retrieval'
     capabilities={'evidence.retrieve':'evidence:read','evidence.prepare':'records:write'}
@@ -38,8 +68,7 @@ class RetrievalAdapter(Adapter):
                 a,b=linked_span(source,w['start'],w['end'])
                 w.update(start=a,end=b,quote=source['text'][a:b])
         evidence=[evidence_from(w,snapshot,i) for i,w in enumerate(prepared['witnesses'],1)]
-        truncated=len(evidence)>payload['max_evidence']
-        evidence=evidence[:payload['max_evidence']]
+        evidence,truncated=within_budget(evidence,snapshot,payload['max_evidence'])
         ids={e['state_record']['proposal_id'] for e in evidence if e['kind']=='review_state'}
         unresolved=[p['id'] for p in snapshot['proposals'] if p['id'] in ids and
                     (p['status'] in ('pending','review_conflict') or
