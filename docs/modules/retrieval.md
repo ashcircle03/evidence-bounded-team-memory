@@ -26,6 +26,10 @@ DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않
 
 근거가 `max_evidence`를 넘으면 adapter가 고른다. 순서는 review_state 근거, 남긴 상태 근거가 가리키는 제안의 양쪽 원문(answering이 확인하는 `previous`·`incoming` 구간과 겹치는 근거), 나머지 검색 순위 순이다. 한 제안의 양쪽이 다 들어가지 않으면 그 제안의 원문은 넣지 않아 한쪽만 남지 않게 한다. 남긴 근거는 원래 순서와 ID를 유지하고 `incomplete` + `BUDGET_EXCEEDED`로 반환한다. gateway는 incomplete 묶음으로 답을 만들지 않는다. 예산 안이면 출력은 바뀌지 않는다.
 
+요청마다 진단 기록을 `cache_root/traces/<입력 해시>.json`에 남긴다. 계약 응답에는 넣지 않는다. 같은 snapshot·질문·예산이면 같은 파일을 덮어쓴다. 기록 내용은 후보 소스 이름·버전, 채널별 후보(순위·점수·source_id·구간), 융합 결과(RRF 점수), 따라간 제안과 추가 구간, 상태 근거, 예산 때문에 뺀 근거와 이유, 최종 근거 ID, 결과 코드다. 단계별 소요 시간은 `timings_ms`에 따로 두므로 이를 빼면 같은 입력에 같은 기록이 나온다. 실패하면 실패 단계와 예외 종류만 남기고 메시지는 남기지 않는다. 기록을 쓰지 못하면 요청은 `IO_FAILURE`로 실패한다.
+
+오류 코드: snapshot 불일치 `EVIDENCE_INVALID`, 예산 초과 `BUDGET_EXCEEDED`(partial), 준비되지 않았거나 맞지 않는 색인 `INDEX_STALE`, 그 밖의 검색·인용·구간 실패 `RETRIEVAL_FAILED`. 실패를 `no_hits`로 바꾸지 않는다.
+
 ①만 교체 대상이다. reader에 `candidate_source(index)`를 주면 기본 후보 대신 그 결과를 쓴다. 채널이 하나면 융합하지 않는다.
 
 공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).
