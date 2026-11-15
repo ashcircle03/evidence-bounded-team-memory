@@ -4,7 +4,7 @@
 
 최신 비교기 선택은 [comparator-choice](comparator-choice/README.md), 현재 운영 코드의 입출력 검증은 [module-boundary](module-boundary/README.md), 이전 reader 비교는 [service-v3](service-v3/README.md)를 먼저 읽는다. 전체 판단 흐름은 [연구 이력](../docs/research-history.md)에 있다. 아래 폴더는 서로 다른 실험이며 수치를 합산하지 않는다.
 
-최신 저장·검색 경로: [질문 없는 준비와 변경 문서 임베딩](service-storage/v1/README.md).
+최신 저장·검색 경로: [질문 없는 준비·초기 비용 분해·변경 문서 임베딩](service-storage/v2b/README.md).
 
 | 보고서 | 위치 |
 |---|---|

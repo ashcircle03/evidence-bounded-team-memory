@@ -64,8 +64,8 @@ def sync_dir(path):
     finally:os.close(fd)
 
 
-def persist_document(path,key,nodes):
-    cache=IngestionCache();cache.put(key,nodes)
+def persist_cache(path,cache):
+    """Atomically publish the upstream multi-key cache once per preparation."""
     path.parent.mkdir(parents=True,exist_ok=True)
     fd,tmp=tempfile.mkstemp(prefix='.pending-',dir=path.parent);os.close(fd)
     try:
@@ -87,9 +87,20 @@ def document_nodes(reader,sid,envelope):
         if reader.profile=='team':
             node.metadata.update(record_author=envelope['source']['speaker'],recorded_at=envelope['observed_at'])
             node.excluded_embed_metadata_keys=list(node.metadata)
-    # Upstream embedding transformation populates node.embedding. The outer
-    # IngestionCache also preserves parsing/offsets, with one atomic file per doc.
-    return list(IngestionPipeline(transformations=[reader.embed_model],disable_cache=True).run(nodes=nodes))
+    return nodes
+
+
+def embed_documents(reader,parts):
+    """Batch only changed documents using the existing embedding transformation."""
+    nodes=[node for part in parts for node in part]
+    if not nodes:return parts
+    embedded=list(IngestionPipeline(transformations=[reader.embed_model],disable_cache=True).run(nodes=nodes))
+    if [n.node_id for n in embedded]!=[n.node_id for n in nodes] or any(n.embedding is None for n in embedded):
+        raise ValueError('Incomplete or reordered document embeddings')
+    result=[];offset=0
+    for part in parts:
+        result.append(embedded[offset:offset+len(part)]);offset+=len(part)
+    return result
 
 
 def prepare(reader,sources):
@@ -98,17 +109,35 @@ def prepare(reader,sources):
     with writer_lock(root):
         if (path/'complete.json').is_file():
             load(reader,sources);return dict(result,reused_documents=len(sources))
-        nodes=[]
+        # IngestionCache already supports many document keys. Keep its format;
+        # one atomic snapshot replaces one durable file transaction per document.
+        cache_path=root/'document-cache.json'
+        cache=IngestionCache.from_persist_path(str(cache_path)) if cache_path.is_file() else IngestionCache()
+        legacy_dir=root/'documents';has_legacy=legacy_dir.is_dir()
+        parts=[];missing=[];dirty=False
         for sid,envelope in sorted(sources.items()):
             key=digest(dict(version=VERSION,config=reader.index_config,source_id=sid,source=spec['sources'][sid]))
-            cached=root/'documents'/(key+'.json')
-            part=IngestionCache.from_persist_path(str(cached)).get(key) if cached.is_file() else None
+            part=cache.get(key)
+            if part is None:
+                # Read-only migration: reuse existing v1 vectors, never delete
+                # old files or force a re-embedding just to change cache layout.
+                cached=legacy_dir/(key+'.json')
+                if has_legacy and cached.is_file():
+                    part=IngestionCache.from_persist_path(str(cached)).get(key)
+                    if part is not None:cache.put(key,part);dirty=True
             if part is None:
                 part=document_nodes(reader,sid,envelope)
-                if any(n.embedding is None for n in part):raise ValueError('Incomplete document embeddings')
-                persist_document(cached,key,part);result['prepared_documents']+=1
+                missing.append(len(parts));result['prepared_documents']+=1
             else:result['reused_documents']+=1
-            nodes.extend(part)
+            parts.append((key,part))
+        for position,part in zip(missing,embed_documents(reader,[parts[i][1] for i in missing])):
+            key=parts[position][0];parts[position]=(key,part)
+            cache.put(key,part);dirty=True
+        # Commit only a complete changed-document set. A later index publish
+        # failure reuses it; an interrupted embedding/cache transaction retries
+        # that uncommitted set, while all previously committed keys remain intact.
+        if dirty:persist_cache(cache_path,cache)
+        nodes=[node for _,part in parts for node in part]
         # Stable source/chunk IDs preserve tie ordering between incremental and
         # clean builds. Upstream skips already embedded nodes.
         # SimpleVectorStore serialization and BM25 corpus statistics still cost

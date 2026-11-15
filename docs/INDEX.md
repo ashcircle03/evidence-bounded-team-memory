@@ -10,7 +10,7 @@
 
 검증: [평가·재현](evaluation-guide.md) · [기여/검사](../CONTRIBUTING.md) · [모든 결과](../results/README.md).
 
-[질문 독립 색인·Git 동기화 계약](modules/index-lifecycle.md) · [색인 수명주기 검증](../results/service-storage/v1/README.md).
+[질문 독립 색인·Git 동기화 계약](modules/index-lifecycle.md) · [색인 비용 분해·수명주기 검증](../results/service-storage/v2b/README.md).
 
 ## 설계·실험 문서 전체
 

@@ -163,3 +163,53 @@ def test_failed_initial_import_sync_does_not_compare_history(env):
     assert fixed['processed']==0 and not compares
     assert fixed['index_preparation']['prepared_documents']==0 and len(t.embed._texts)==2
     assert s.ask('What value?')['raw']=='The value is amber. [1]'
+
+
+def test_existing_v1_vectors_migrate_without_reembedding(env):
+    from evaluation.storage_cost import indexing_v1
+    t=env;root=Path(t.temp.name)/'migration';r=ReferenceQA(root,profile='team',**t.options)
+    r.import_history(documents(t),prepare=False)
+    indexing_v1.prepare(r,r.store.load('sources'))
+    old=list((r.index_dir/'documents').glob('*.json'));before={p:p.read_bytes() for p in old}
+    assert len(t.embed._texts)==2 and len(old)==2
+    again=ReferenceQA(root,profile='team',**t.options)
+    ready=again.import_history([t.source('The date is Friday.','test:extra')])['index_preparation']
+    assert ready['prepared_documents']==1 and ready['reused_documents']==2
+    assert len(t.embed._texts)==3 and (r.index_dir/'document-cache.json').is_file()
+    assert all(p.read_bytes()==raw for p,raw in before.items())
+    # A later change reads the bundled cache, not every legacy document file.
+    with patch.object(indexing_v1.IngestionCache,'from_persist_path',wraps=indexing_v1.IngestionCache.from_persist_path) as reads:
+        again.import_history([t.source('The release is Monday.','test:next')])
+    assert len(reads.call_args_list)==1
+    assert reads.call_args_list[0].args[0].endswith('document-cache.json')
+
+
+def test_failed_cache_commit_keeps_previous_cache_and_retries_only_new_docs(env):
+    t=env;r=ReferenceQA(Path(t.temp.name)/'cache-failure',**t.options);r.import_history(documents(t))
+    cached=r.index_dir/'document-cache.json';before=cached.read_bytes()
+    with patch('team_memory.readers.indexing.IngestionCache.persist',side_effect=OSError('disk full')):
+        with pytest.raises(OSError):r.import_history([t.source('The date is Friday.','test:extra')])
+    assert cached.read_bytes()==before and not list(r.index_dir.glob('.pending-*'))
+    with pytest.raises(IndexNotReady):r.ask('What value?')
+    ready=r.prepare_index()
+    assert ready['prepared_documents']==1 and ready['reused_documents']==2
+    # The new, uncommitted document is retried; the two committed documents aren't.
+    assert sorted(t.embed._texts[:2])==['The owner is Hana.','The value is amber.']
+    assert t.embed._texts[2:]==['The date is Friday.','The date is Friday.']
+
+
+def test_initial_import_batches_embeddings_and_commits_cache_once(env):
+    from pydantic import PrivateAttr
+    from team_memory.readers import indexing
+    class Batched(CountingEmbedding):
+        _batches:list=PrivateAttr(default_factory=list)
+        def _get_text_embeddings(self,texts):
+            self._batches.append(len(texts));return super()._get_text_embeddings(texts)
+    t=env;embed=Batched(embed_dim=8);options=dict(t.options,embed_model=embed)
+    r=ReferenceQA(Path(t.temp.name)/'batched',**options)
+    with patch.object(indexing,'persist_cache',wraps=indexing.persist_cache) as writes:
+        r.import_history(documents(t))
+    assert embed._batches==[2] and writes.call_count==1
+    with patch.object(indexing,'persist_cache',wraps=indexing.persist_cache) as writes:
+        r.import_history(documents(t));r.ask('What value?')
+    assert embed._batches==[2] and writes.call_count==0
