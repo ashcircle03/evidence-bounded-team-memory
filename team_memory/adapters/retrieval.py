@@ -1,9 +1,11 @@
 """Existing dense/BM25 RRF and review expansion, stopped before generation."""
+from collections import OrderedDict
 import hashlib
 import json
 import os
 from pathlib import Path
 import tempfile
+from threading import Lock
 
 from team_memory.contracts.validation import check_snapshot
 from team_memory.readers.retrieval import ReferenceQA
@@ -12,6 +14,7 @@ from .base import Adapter,Failure,issue
 from .reader_bridge import reader_for,evidence_from,query_text
 
 TRACE_VERSION='retrieval-trace/v1'
+READER_CACHE_SIZE=4
 
 
 def overlaps(evidence,span):
@@ -75,6 +78,25 @@ class RetrievalAdapter(Adapter):
             if value is not None and (isinstance(value,bool) or not isinstance(value,(int,float))):
                 raise ValueError('Score thresholds must be numbers or None')
         self.min_dense_score,self.min_sparse_score=min_dense_score,min_sparse_score
+        self._readers=OrderedDict();self._readers_lock=Lock()
+
+    def reader(self,snapshot):
+        """The bridged reader for a verified snapshot, built once per snapshot ID.
+
+        A snapshot is immutable and execute() has already compared it with the
+        authoritative records, so converting it to the v2 store again (envelope
+        and record_graph validation, vote reduction) would give the same reader.
+        The reader also keeps its loaded index. Only the latest few are kept.
+        """
+        key=snapshot['id']
+        with self._readers_lock:
+            if key in self._readers:
+                self._readers.move_to_end(key);return self._readers[key]
+        reader=reader_for(self.factory,self.cache_root,snapshot)
+        with self._readers_lock:
+            reader=self._readers.setdefault(key,reader);self._readers.move_to_end(key)
+            while len(self._readers)>READER_CACHE_SIZE:self._readers.popitem(last=False)
+        return reader
 
     def execute(self,operation,payload,context):
         snapshot=payload['snapshot'];check_snapshot(snapshot);self.verify_snapshot(snapshot)
@@ -104,22 +126,29 @@ class RetrievalAdapter(Adapter):
         return data,errors
 
     def retrieve(self,snapshot,query,limit,trace):
-        reader=reader_for(self.factory,self.cache_root,snapshot)
+        reader=self.reader(snapshot)
         thresholds=dict(dense=self.min_dense_score,sparse=self.min_sparse_score)
-        if any(value is not None for value in thresholds.values()):
+        gated=any(value is not None for value in thresholds.values())
+        from team_memory.readers.indexing import IndexNotReady
+        # The reader is shared by requests on the same snapshot: install this request's
+        # gate under the reader lock and remove it afterwards, so it never leaks.
+        with reader.lock:
             inner=getattr(reader,'candidate_source',None)
             def source(index):
                 # Same default stage 1 as ReferenceQA.ask, then the score gate.
                 base=inner(index) if inner else LlamaIndexCandidates(index,reader.top_k,sparse=reader.sparse,
                                                                       use_sparse=reader.profile=='team')
                 return ThresholdedCandidates(base,thresholds,trace=trace)
-            reader.candidate_source=source
-        from team_memory.readers.indexing import IndexNotReady
-        try:
-            prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True,trace=trace)
-        except IndexNotReady as exc:
-            raise Failure('INDEX_STALE',str(exc),retryable=True) from exc
-        except Exception:raise Failure('RETRIEVAL_FAILED','Retrieval or citation preparation failed')
+            if gated:reader.candidate_source=source
+            try:
+                prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True,trace=trace)
+            except IndexNotReady as exc:
+                raise Failure('INDEX_STALE',str(exc),retryable=True) from exc
+            except Exception:raise Failure('RETRIEVAL_FAILED','Retrieval or citation preparation failed')
+            finally:
+                if gated:
+                    if inner is None:del reader.candidate_source
+                    else:reader.candidate_source=inner
         from team_memory.records.graph import linked_span
         sources={s['id']:s for s in snapshot['sources']}
         try:
