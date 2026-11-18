@@ -22,13 +22,14 @@ def reader_for(factory,cache_root,snapshot):
     return reader
 
 
-def evidence_from(w,snapshot,number):
+def evidence_from(w,snapshot,number,sources=None):
+    """sources: optional {source_id: source} map of this snapshot, to avoid a scan per evidence."""
     if w.get('evidence_type')=='review_state':
         return dict(id=f'e{number}',kind='review_state',source_id=None,
                     state_record=dict(proposal_id=w['proposal_id'],snapshot_id=snapshot['id'],text=w['quote']),
                     start=0,end=len(w['quote']),quote=w['quote'],owner=None,speaker=None,
                     observed_at=None,location=None,conditions=[])
-    source=next(s for s in snapshot['sources'] if s['id']==w['source_id'])
+    source=sources[w['source_id']] if sources is not None else next(s for s in snapshot['sources'] if s['id']==w['source_id'])
     from team_memory.records.graph import describe
     description=describe(source,w['start'],w['end'])
     conditions=list(dict.fromkeys(u['quote'] for c in description['claims'] for u in c['condition'])) if description else []

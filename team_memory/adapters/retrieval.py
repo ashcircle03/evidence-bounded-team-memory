@@ -158,7 +158,7 @@ class RetrievalAdapter(Adapter):
                         source=sources[w['source_id']]
                         a,b=linked_span(source,w['start'],w['end'])
                         w.update(start=a,end=b,quote=source['text'][a:b])
-                found=[evidence_from(w,snapshot,i) for i,w in enumerate(prepared['witnesses'],1)]
+                found=[evidence_from(w,snapshot,i,sources) for i,w in enumerate(prepared['witnesses'],1)]
             with trace.stage('budget'):
                 evidence,dropped=within_budget(found,snapshot,limit)
         except Exception:raise Failure('RETRIEVAL_FAILED','Evidence spans or budget could not be prepared')
