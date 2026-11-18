@@ -113,11 +113,6 @@ class ReferenceQA:
                 return dict(status='insufficient', answers=[], citation_sources=[], raw='')
             with trace.stage('index'):
                 index = self._index(sources)
-            # Use the upstream packing algorithm with the REAL model tokenizer.
-            # Leave a chat-template margin; the HTTP boundary also counts the
-            # exact rendered chat before sending it. Compact may refine in >1 call.
-            helper = PromptHelper(context_window=self.context_window-256, num_output=self.num_output,
-                tokenizer=lambda text: self.tokenizer.encode(text, add_special_tokens=False))
             qa_template, refine_template = CITATION_QA_TEMPLATE, CITATION_REFINE_TEMPLATE
             team = self.profile == 'team'
             # Stage 1 (candidates) is replaceable. The default is the prepared index
@@ -149,24 +144,32 @@ class ReferenceQA:
                 trace.record('review_expansion', stages.expansion_record(len(retrieved), selected_nodes, context))
                 self.active_review_context = context
                 if context:
-                    qa_template, refine_template = contextual_templates(
-                        (qa_template, refine_template), context)
+                    if not retrieve_only:
+                        qa_template, refine_template = contextual_templates(
+                            (qa_template, refine_template), context)
                     # Stage 4. Use CitationQueryEngine's existing numbered-source flow
                     # from initial generation onward, not only post-hoc repair.
                     with trace.stage('review_state'):
                         state_nodes = stages.review_state_nodes(self.store, context)
                     trace.record('review_state', [n.node.metadata['review_witness']['proposal_id'] for n in state_nodes])
                     selected_nodes.extend(state_nodes)
+            if retrieve_only:
+                # Stage 5, stopped before generation: the citation split CitationQueryEngine
+                # would make and verbatim offsets, without building generation components.
+                with trace.stage('citations'):
+                    witnesses = stages.witnesses_from_nodes(self, retriever, citation_splitter, metadata_mode,
+                                                            question, selected_nodes, sources)
+                return dict(witnesses=witnesses, context=self.active_review_context)
+            # Use the upstream packing algorithm with the REAL model tokenizer.
+            # Leave a chat-template margin; the HTTP boundary also counts the
+            # exact rendered chat before sending it. Compact may refine in >1 call.
+            helper = PromptHelper(context_window=self.context_window-256, num_output=self.num_output,
+                tokenizer=lambda text: self.tokenizer.encode(text, add_special_tokens=False))
             synthesizer = get_response_synthesizer(llm=self.llm, prompt_helper=helper,
                 text_qa_template=qa_template, refine_template=refine_template,
                 response_mode='compact')
             engine = CitationQueryEngine(retriever, llm=self.llm,
                 response_synthesizer=synthesizer, text_splitter=citation_splitter, metadata_mode=metadata_mode)
-            if retrieve_only:
-                # Stage 5: citation nodes and verbatim offsets, stopped before generation.
-                with trace.stage('citations'):
-                    witnesses = stages.citation_witnesses(self, engine, question, selected_nodes, sources)
-                return dict(witnesses=witnesses, context=self.active_review_context)
             if selected_nodes is None:
                 result = engine.query(question)
             else:
