@@ -17,6 +17,7 @@ from llama_index.retrievers.bm25 import BM25Retriever
 from team_memory.storage.objects import digest
 
 VERSION='prepared-index/v1'
+RECORD_INDEX_UNIT='records-claims-v1'  # opt-in index unit; see record_index_spans
 
 
 class IndexNotReady(RuntimeError):
@@ -24,8 +25,13 @@ class IndexNotReady(RuntimeError):
 
 
 def specification(reader,sources):
-    return dict(version=VERSION,config=reader.index_config,
-        sources={sid:digest(dict(source=e['source'],observed_at=e['observed_at'])) for sid,e in sorted(sources.items())})
+    records=reader.index_config.get('index_unit')==RECORD_INDEX_UNIT
+    def entry(e):
+        item=dict(source=e['source'],observed_at=e['observed_at'])
+        # Record spans depend on the record_graph, so a changed graph needs a new index.
+        if records and 'record_graph' in e:item['record_graph']=e['record_graph']
+        return digest(item)
+    return dict(version=VERSION,config=reader.index_config,sources={sid:entry(e) for sid,e in sorted(sources.items())})
 
 
 def directory(reader,sources):
@@ -76,7 +82,51 @@ def persist_cache(path,cache):
         if os.path.exists(tmp):os.unlink(tmp)
 
 
+def record_index_spans(graph,text,count_tokens,max_tokens):
+    """Index spans from one source's record_graph, as (start, end) in the original text.
+
+    One span per claim group, from its first to its last claim, condition,
+    basis, time or subject sentence; then every sentence no claim uses. A claim
+    group longer than max_tokens is indexed as its separate sentences instead.
+    Spans are original text, never joined. Duplicates are dropped; the result is
+    in text order.
+    """
+    from team_memory.records.graph import ROLES
+    units={u['id']:u for u in graph['units']};used=set();spans=[]
+    for claim in graph['claims']:
+        ids=[uid for role in ROLES for uid in claim.get(role,[]) if uid in units]
+        if not ids:continue
+        used.update(ids)
+        start=min(units[i]['start'] for i in ids);end=max(units[i]['end'] for i in ids)
+        if count_tokens(text[start:end])<=max_tokens:spans.append((start,end))
+        else:spans.extend((units[i]['start'],units[i]['end']) for i in ids)
+    spans.extend((u['start'],u['end']) for u in graph['units'] if u['id'] not in used)
+    return sorted(set(spans))
+
+
+def record_nodes(reader,sid,envelope,graph):
+    """Nodes for record_index_spans with the same metadata as the chunk nodes below."""
+    from llama_index.core.schema import NodeRelationship,RelatedNodeInfo,TextNode
+    text=envelope['source']['text']
+    def count(value):return len(reader.tokenizer.encode(value,add_special_tokens=False))
+    nodes=[]
+    for i,(start,end) in enumerate(record_index_spans(graph,text,count,reader.index_config['chunk_size'])):
+        node=TextNode(id_='node:'+digest([sid,RECORD_INDEX_UNIT,i]),text=text[start:end],
+            start_char_idx=start,end_char_idx=end,metadata=dict(source_id=sid,parent_start=start,parent_end=end),
+            relationships={NodeRelationship.SOURCE:RelatedNodeInfo(node_id=sid)})
+        node.excluded_embed_metadata_keys=list(node.metadata)
+        node.excluded_llm_metadata_keys=list(node.metadata)
+        if reader.profile=='team':
+            node.metadata.update(record_author=envelope['source']['speaker'],recorded_at=envelope['observed_at'])
+            node.excluded_embed_metadata_keys=list(node.metadata)
+        nodes.append(node)
+    return nodes
+
+
 def document_nodes(reader,sid,envelope):
+    graph=envelope.get('record_graph')
+    if reader.index_config.get('index_unit')==RECORD_INDEX_UNIT and graph and graph.get('units'):
+        return record_nodes(reader,sid,envelope,graph)
     doc=Document(id_=sid,text=envelope['source']['text'],metadata={'source_id':sid},
         excluded_embed_metadata_keys=['source_id'],excluded_llm_metadata_keys=['source_id'])
     nodes=reader.splitter.get_nodes_from_documents([doc])
