@@ -32,6 +32,11 @@ DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않
 
 "DB에 없음" 판단 장치: retrieval adapter의 `min_dense_score`, `min_sparse_score`(기본 `None` = 꺼짐). 하나라도 주면 ①의 후보를 점수로 거른다. 기준을 준 채널에서 점수가 그 기준 이상인 후보만 남고, 기준이 없는 채널은 후보를 통과시킬 수 없다. 남은 후보는 모든 채널의 순위를 그대로 융합에 쓴다. 아무것도 남지 않으면 `coverage='no_hits'`, 근거는 빈 목록이다. 뺀 후보와 점수는 진단 기록의 `thresholds`에 남는다. 기준값은 records의 벡터 단위와 임베딩 모델이 정해진 뒤 개발용 데이터로 정하며, 꺼져 있으면 출력은 바뀌지 않는다.
 
+records 구조를 쓰는 두 설정(둘 다 기본 꺼짐, 검색 품질은 아직 측정하지 않음):
+
+- **색인 단위** `index_unit='records'`(reader factory 설정): `record_graph`가 있는 원문을 주장 묶음 단위로 색인한다. 주장마다 그 주장·조건·이유·시간·대상 문장을 덮는 원문 구간 하나, 그리고 어느 주장에도 쓰이지 않은 문장 하나씩이다. 묶음이 `chunk_size` 토큰을 넘으면 문장별로 색인한다. `record_graph`가 없는 원문은 512토큰 조각을 그대로 쓴다. 이때 `record_graph`도 색인 명세에 들어가므로 그래프가 바뀌면 다시 준비해야 한다. 기본값 `chunks`는 기존 색인 키와 출력을 바꾸지 않는다.
+- **조건 필터** `condition_filter=True`(retrieval adapter 설정): 질문에 `conditions`가 있으면 ① 후보를 records의 조건 구절과 비교한다. records에 조건이 적혀 있는데 요청 조건을 하나도 포함하지 않는 후보만 뺀다. 조건이 안 적힌 후보는 남긴다. 비교는 대소문자·공백만 무시하는 글자 포함이라 "v1"과 "version 1"은 다르게 본다. 뺀 후보는 진단 기록의 `condition_filter`에 남는다. 질문 문장 뒤에 조건을 붙이는 기존 동작은 그대로다.
+
 ①만 교체 대상이다. reader에 `candidate_source(index)`를 주면 기본 후보 대신 그 결과를 쓴다. 채널이 하나면 융합하지 않는다.
 
 공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).

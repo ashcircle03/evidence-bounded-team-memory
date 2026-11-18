@@ -149,6 +149,48 @@ class ThresholdedCandidates(CandidateSource):
         return {name: [n for n in nodes if n.node.node_id in passing] for name, nodes in channels.items()}
 
 
+def normalized(text):
+    return ' '.join(str(text).split()).casefold()
+
+
+class ConditionFilteredCandidates(CandidateSource):
+    """Stage 1 filter by the query's conditions against records' condition spans.
+
+    recorded(source_id, start, end) returns the condition quotes records links
+    to claims inside a candidate's span. A candidate is kept when records shows
+    no condition for it, or when one of those quotes contains one of the
+    requested conditions (case and spacing ignored). It is removed only when
+    records shows conditions and none contains a requested one; an unstated
+    condition is never treated as a mismatch. Matching is lexical: "v1" and
+    "version 1" do not match. Removed candidates go to the trace.
+    """
+
+    def __init__(self, inner, requested, recorded, *, trace=None):
+        self.inner, self.recorded, self.trace = inner, recorded, trace or NO_TRACE
+        self.requested = [c for c in requested if normalized(c)]
+        if not self.requested:
+            raise ValueError('At least one requested condition is required')
+        self.name, self.version = f'{inner.name}+conditions', inner.version
+
+    def retrieve(self, query_bundle):
+        channels = self.inner.retrieve(query_bundle)
+        wanted = [normalized(c) for c in self.requested]
+        keep, excluded = {}, []
+        for nodes in channels.values():
+            for n in nodes:
+                node_id = n.node.node_id
+                if node_id in keep:
+                    continue
+                meta = n.node.metadata
+                found = self.recorded(meta.get('source_id'), meta.get('parent_start'), meta.get('parent_end'))
+                keep[node_id] = not found or any(w in normalized(q) for q in found for w in wanted)
+                if not keep[node_id]:
+                    excluded.append(dict(node_id=node_id, source_id=meta.get('source_id'), start=meta.get('parent_start'),
+                                         end=meta.get('parent_end'), conditions=list(found)))
+        self.trace.record('condition_filter', dict(requested=list(self.requested), excluded=excluded))
+        return {name: [n for n in nodes if keep[n.node.node_id]] for name, nodes in channels.items()}
+
+
 class _Fixed(BaseRetriever):
     """Hand an already retrieved list to the upstream fusion class."""
 

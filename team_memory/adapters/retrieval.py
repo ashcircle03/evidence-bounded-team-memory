@@ -9,7 +9,7 @@ from threading import Lock
 
 from team_memory.contracts.validation import check_snapshot
 from team_memory.readers.retrieval import ReferenceQA
-from team_memory.readers.retrieval_stages import LlamaIndexCandidates,ThresholdedCandidates,Trace
+from team_memory.readers.retrieval_stages import ConditionFilteredCandidates,LlamaIndexCandidates,ThresholdedCandidates,Trace
 from .base import Adapter,Failure,issue
 from .reader_bridge import reader_for,evidence_from,query_text
 
@@ -50,6 +50,14 @@ def within_budget(evidence,snapshot,limit):
     return [evidence[j] for j in sorted(chosen)],dropped
 
 
+def record_conditions(source,start,end):
+    """Condition quotes records links to claims inside [start,end), as evidence_from reports them."""
+    if source is None:return []
+    from team_memory.records.graph import describe
+    description=describe(source,start,end)
+    return list(dict.fromkeys(u['quote'] for c in description['claims'] for u in c['condition'])) if description else []
+
+
 def trace_key(snapshot,query,limit):
     blob=json.dumps(dict(snapshot_id=snapshot['id'],query=query,max_evidence=limit),ensure_ascii=False,sort_keys=True)
     return hashlib.sha256(blob.encode('utf-8')).hexdigest()[:24]
@@ -71,13 +79,17 @@ class RetrievalAdapter(Adapter):
     module='retrieval'
     capabilities={'evidence.retrieve':'evidence:read','evidence.prepare':'records:write'}
 
-    def __init__(self,workspace_id,reader_factory,cache_root,*,snapshot_loader,min_dense_score=None,min_sparse_score=None):
+    def __init__(self,workspace_id,reader_factory,cache_root,*,snapshot_loader,min_dense_score=None,min_sparse_score=None,
+                 condition_filter=False):
         super().__init__(workspace_id);self.factory=reader_factory;self.cache_root=cache_root;self.snapshot_loader=snapshot_loader
         # "Not in the records" gate, off by default. Values are set later from development data.
         for value in (min_dense_score,min_sparse_score):
             if value is not None and (isinstance(value,bool) or not isinstance(value,(int,float))):
                 raise ValueError('Score thresholds must be numbers or None')
         self.min_dense_score,self.min_sparse_score=min_dense_score,min_sparse_score
+        # Records condition filter for query.conditions, off by default (not yet measured).
+        if not isinstance(condition_filter,bool):raise ValueError('condition_filter must be True or False')
+        self.condition_filter=condition_filter
         self._readers=OrderedDict();self._readers_lock=Lock()
 
     def reader(self,snapshot):
@@ -127,19 +139,26 @@ class RetrievalAdapter(Adapter):
 
     def retrieve(self,snapshot,query,limit,trace):
         reader=self.reader(snapshot)
+        sources={s['id']:s for s in snapshot['sources']}
         thresholds=dict(dense=self.min_dense_score,sparse=self.min_sparse_score)
-        gated=any(value is not None for value in thresholds.values())
+        scored=any(value is not None for value in thresholds.values())
+        conditions=[c for c in query['conditions'] if c.strip()] if self.condition_filter else []
+        gated=scored or bool(conditions)
         from team_memory.readers.indexing import IndexNotReady
         # The reader is shared by requests on the same snapshot: install this request's
         # gate under the reader lock and remove it afterwards, so it never leaks.
         with reader.lock:
             inner=getattr(reader,'candidate_source',None)
-            def source(index):
-                # Same default stage 1 as ReferenceQA.ask, then the score gate.
+            def candidates(index):
+                # Same default stage 1 as ReferenceQA.ask, then the score gate and the condition filter.
                 base=inner(index) if inner else LlamaIndexCandidates(index,reader.top_k,sparse=reader.sparse,
                                                                       use_sparse=reader.profile=='team')
-                return ThresholdedCandidates(base,thresholds,trace=trace)
-            if gated:reader.candidate_source=source
+                if scored:base=ThresholdedCandidates(base,thresholds,trace=trace)
+                if conditions:
+                    base=ConditionFilteredCandidates(base,conditions,
+                        lambda sid,start,end:record_conditions(sources.get(sid),start,end),trace=trace)
+                return base
+            if gated:reader.candidate_source=candidates
             try:
                 prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True,trace=trace)
             except IndexNotReady as exc:
@@ -150,7 +169,6 @@ class RetrievalAdapter(Adapter):
                     if inner is None:del reader.candidate_source
                     else:reader.candidate_source=inner
         from team_memory.records.graph import linked_span
-        sources={s['id']:s for s in snapshot['sources']}
         try:
             with trace.stage('spans'):
                 for w in prepared['witnesses']:

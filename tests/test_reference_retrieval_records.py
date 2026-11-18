@@ -77,6 +77,81 @@ class RecordIndexTests(unittest.TestCase):
         reader.index_config['index_unit'] = RECORD_INDEX_UNIT
         self.assertNotEqual(specification(reader, one), specification(reader, two))
 
+    # B1 through the adapters, with index_unit='records' in the reader factory.
+
+    def make_records(self, path):
+        from team_memory.adapters.runtime import connect_v2
+        from team_memory.readers.attribution import AttributedQA
+        g = connect_v2(path, workspace_id='demo', generate=self.compare,
+                       reader_factory=lambda store: AttributedQA(store, index_unit='records', **self.options))
+        if not hasattr(self, 'preparers'):
+            self.preparers = {}
+        self.preparers[g.records] = g.retrieval
+        return g
+
+    def append(self, g, source, key):
+        result = self.call(g.records, 'record.append', dict(source=source, expected_revision=g.records.snapshot()['revision'],
+                                                             idempotency_key=key))
+        self.assertEqual(result['status'], 'ok', result)
+
+    def retrieve(self, g, text, conditions=()):
+        return self.call(g.retrieval, 'evidence.retrieve', dict(snapshot=g.records.snapshot(),
+            query=dict(text=text, time_scope='current', as_of=None, conditions=list(conditions)), max_evidence=10))
+
+    def test_records_unit_is_opt_in_and_retrieves_claim_spans(self):
+        from team_memory.reference_qa import ReferenceQA
+        self.assertNotIn('index_unit', ReferenceQA(Path(self.temp.name) / 'plain', **self.options).index_config)
+        with self.assertRaises(ValueError):
+            ReferenceQA(Path(self.temp.name) / 'bad', index_unit='words', **self.options)
+        g = self.make_records(Path(self.temp.name) / 'records')
+        self.append(g, self.graph_source(), 'graph')
+        self.append(g, self.source('A note without records structure.', location='test:plain'), 'plain')
+        reader = g.retrieval.reader(g.records.snapshot())
+        index = reader._index(reader.store.load('sources'))
+        self.assertEqual(sorted(n.get_content() for n in index.docstore.docs.values()),
+                         sorted(['Only with dataset v1. The tuned lr is 0.01.', 'Archive is Orion.', 'We meet weekly.',
+                                 'A note without records structure.']))
+        result = self.retrieve(g, 'What is the tuned lr?')
+        self.assertEqual(result['status'], 'ok', result)
+        self.assertTrue(result['data']['evidence'])
+        self.assertEqual(self.calls, [])
+
+    # B2: the condition filter on the default chunk index.
+
+    def conditioned(self):
+        g = self.make(Path(self.temp.name) / 'conditions')
+        self.append(g, self.graph_source(), 'v1')
+        self.append(g, self.graph_source('With dataset v2. The tuned lr is 0.1.', location='test:v2'), 'v2')
+        self.append(g, self.source('Archive is Orion.', location='test:plain'), 'plain')
+        return g
+
+    @staticmethod
+    def locations(result):
+        return sorted({e['location'] for e in result['data']['evidence'] if e['kind'] == 'source'})
+
+    def test_condition_filter_drops_only_explicitly_different_conditions(self):
+        g = self.conditioned()
+        off = self.retrieve(g, 'What is the tuned lr?', ['dataset v1'])
+        self.assertEqual(self.locations(off), ['test:old', 'test:plain', 'test:v2'])
+        g.retrieval.condition_filter = True
+        on = self.retrieve(g, 'What is the tuned lr?', ['Dataset  V1'])
+        self.assertEqual(on['status'], 'ok', on)
+        self.assertEqual(self.locations(on), ['test:old', 'test:plain'])  # v2 states another condition
+        traces = [json.loads(p.read_text(encoding='utf-8')) for p in (Path(g.retrieval.cache_root) / 'traces').glob('*.json')]
+        [trace] = [t for t in traces if 'condition_filter' in t]
+        self.assertEqual(trace['condition_filter']['requested'], ['Dataset  V1'])
+        self.assertEqual({item['source_id'] for item in trace['condition_filter']['excluded']},
+                         {s['id'] for s in g.records.snapshot()['sources'] if s['location'] == 'test:v2'})
+
+    def test_condition_filter_without_conditions_changes_nothing(self):
+        g = self.conditioned()
+        off = self.retrieve(g, 'What is the tuned lr?')
+        g.retrieval.condition_filter = True
+        self.assertEqual(self.retrieve(g, 'What is the tuned lr?'), off)
+        with self.assertRaises(ValueError):
+            from team_memory.adapters.retrieval import RetrievalAdapter
+            RetrievalAdapter('demo', None, self.temp.name, snapshot_loader=None, condition_filter='yes')
+
 
 if __name__ == '__main__':
     unittest.main()
