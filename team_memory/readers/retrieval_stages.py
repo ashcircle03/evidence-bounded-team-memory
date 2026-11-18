@@ -241,10 +241,3 @@ def witnesses_from_nodes(reader, retriever, splitter, metadata_mode, question, s
     nodes = retriever.retrieve(QueryBundle(question)) if selected_nodes is None else selected_nodes
     return [reader._witness(n.node, sources, i)
             for i, n in enumerate(citation_nodes(splitter, metadata_mode, nodes), 1)]
-
-
-def citation_witnesses(reader, engine, question, selected_nodes, sources):
-    """Stage 5: CitationQueryEngine's own split, then offsets via reader._witness."""
-    nodes = engine._create_citation_nodes(
-        engine.retrieve(QueryBundle(question)) if selected_nodes is None else selected_nodes)
-    return [reader._witness(n.node, sources, i) for i, n in enumerate(nodes, 1)]

@@ -22,7 +22,7 @@ DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않
 | ② 융합 | 상류 `QueryFusionRetriever` reciprocal_rerank를 그대로 사용 | `StagedRetriever` |
 | ③ 제안 따라가기 | 검색된 원문에 걸린 제안의 양쪽 구간 추가 | `expand_review_context` 재사용 |
 | ④ 상태 근거 | 제안마다 review_state 근거 1개를 목록 뒤에 추가 | `review_sources` 재사용 |
-| ⑤ 인용 | 인용 노드를 만들고 원문 위치 복원. 예산 처리는 adapter | `CitationQueryEngine`, `_witness` |
+| ⑤ 인용 | 인용 노드를 만들고 원문 위치 복원. 검색 전용 요청은 생성 부품 없이 `CitationQueryEngine`과 같은 분할을 쓴다. 예산 처리는 adapter | `citation_nodes`, `_witness` |
 
 근거가 `max_evidence`를 넘으면 adapter가 고른다. 순서는 review_state 근거, 남긴 상태 근거가 가리키는 제안의 양쪽 원문(answering이 확인하는 `previous`·`incoming` 구간과 겹치는 근거), 나머지 검색 순위 순이다. 한 제안의 양쪽이 다 들어가지 않으면 그 제안의 원문은 넣지 않아 한쪽만 남지 않게 한다. 남긴 근거는 원래 순서와 ID를 유지하고 `incomplete` + `BUDGET_EXCEEDED`로 반환한다. gateway는 incomplete 묶음으로 답을 만들지 않는다. 예산 안이면 출력은 바뀌지 않는다.
 
