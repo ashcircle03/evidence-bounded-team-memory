@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-11-15T13:08:49.606606+00:00",
+  "original_sha256": "410a66dca1c7a59aaf6b2347288b6f7672c9c55d7ef0ee1a7abcb720af016ebe",
+  "corrected_sha256": "df4857cb0730ecb554efe3a2f6811c75e7efc2a48460ccd6097a2c329f35b967",
+  "reason": "Frozen score() returns tuple edges in memory; historical JSON has arrays/lists. Normalize only Python tuple/list serialization for exact historical-score equality. No scoring, gold, metric aggregation, model output or adoption gate change.",
+  "observed_first_difference": {
+    "id": "e01-full",
+    "arm": "simple",
+    "field": "missing_edges",
+    "current_python_type": "list of tuples",
+    "historical_json_type": "list of lists"
+  }
+}

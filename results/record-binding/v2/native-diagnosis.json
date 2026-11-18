@@ -1,0 +1,3391 @@
+{
+  "semantic_outputs_reproduced": 136,
+  "bytewise_prediction_dicts_equal": 69,
+  "note": "Confidence values can differ numerically across executions; all spans and edges agree. Covering candidates can be oversized. Exact candidates are reported separately. Recorded anchor subset includes selected native and exact original Qwen anchors; absent unselected anchors were not exhaustively instrumented. The trace truncated=false field is a default marker, not a measured truncation check.",
+  "gold_used_only_after_inference": true,
+  "counts": [
+    {
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "nodes": 54,
+      "any_covering_candidate": 54,
+      "exact_gold_span_candidate": 47,
+      "any_covering_candidate_above_threshold": 27,
+      "selected_matching_anchor": 21
+    },
+    {
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "nodes": 54,
+      "any_covering_candidate": 54,
+      "exact_gold_span_candidate": 52,
+      "any_covering_candidate_above_threshold": 43,
+      "selected_matching_anchor": 53
+    },
+    {
+      "panel": "natural_audit",
+      "arm": "native",
+      "nodes": 13,
+      "any_covering_candidate": 13,
+      "exact_gold_span_candidate": 7,
+      "any_covering_candidate_above_threshold": 0,
+      "selected_matching_anchor": 0
+    },
+    {
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "nodes": 13,
+      "any_covering_candidate": 13,
+      "exact_gold_span_candidate": 11,
+      "any_covering_candidate_above_threshold": 4,
+      "selected_matching_anchor": 4
+    }
+  ],
+  "rows": [
+    {
+      "id": "e01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "chilled parcels",
+      "covering_candidates": 22,
+      "exact_candidates": [
+        {
+          "quote": "chilled parcels",
+          "candidate_probability": 0.9201011061668396,
+          "anchor_assignments": [
+            {
+              "quote": "use liner K6",
+              "selected": true,
+              "anchor_probability": 0.5001996159553528,
+              "assignment_probability": 0.4174274206161499
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9201011061668396,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the foam prevents condensation",
+      "covering_candidates": 20,
+      "exact_candidates": [
+        {
+          "quote": "the foam prevents condensation",
+          "candidate_probability": 0.019049882888793945,
+          "anchor_assignments": [
+            {
+              "quote": "use liner K6",
+              "selected": true,
+              "anchor_probability": 0.5001996159553528,
+              "assignment_probability": 0.000125281119835563
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.2291436493396759,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "chilled parcels",
+      "covering_candidates": 12,
+      "exact_candidates": [
+        {
+          "quote": "chilled parcels",
+          "candidate_probability": 0.9562351107597351,
+          "anchor_assignments": [
+            {
+              "quote": "use liner K6",
+              "selected": false,
+              "anchor_probability": 0.12896063923835754,
+              "assignment_probability": 0.2325536459684372
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9562351107597351,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "e02-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the hinge needs repair",
+      "covering_candidates": 16,
+      "exact_candidates": [
+        {
+          "quote": "the hinge needs repair",
+          "candidate_probability": 0.15212538838386536,
+          "anchor_assignments": [
+            {
+              "quote": "close gate R8 on Thursday",
+              "selected": true,
+              "anchor_probability": 0.704390823841095,
+              "assignment_probability": 0.0012759427772834897
+            },
+            {
+              "quote": "close gate R8",
+              "selected": false,
+              "anchor_probability": 0.10488280653953552,
+              "assignment_probability": 0.0002767617697827518
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9238728880882263,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the hinge needs repair",
+      "covering_candidates": 12,
+      "exact_candidates": [
+        {
+          "quote": "the hinge needs repair",
+          "candidate_probability": 0.15022432804107666,
+          "anchor_assignments": [
+            {
+              "quote": "close gate R8",
+              "selected": true,
+              "anchor_probability": 0.6081020832061768,
+              "assignment_probability": 0.0016226301668211818
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.7559695243835449,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "cracked containers",
+      "covering_candidates": 26,
+      "exact_candidates": [
+        {
+          "quote": "cracked containers",
+          "candidate_probability": 0.9724492430686951,
+          "anchor_assignments": [
+            {
+              "quote": "do not ship kit M3",
+              "selected": true,
+              "anchor_probability": 0.6650683283805847,
+              "assignment_probability": 0.5036231279373169
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9724492430686951,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the seal failed inspection",
+      "covering_candidates": 24,
+      "exact_candidates": [
+        {
+          "quote": "the seal failed inspection",
+          "candidate_probability": 0.07718890905380249,
+          "anchor_assignments": [
+            {
+              "quote": "do not ship kit M3",
+              "selected": true,
+              "anchor_probability": 0.6650683283805847,
+              "assignment_probability": 0.001029645442031324
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9815847873687744,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "cracked containers",
+      "covering_candidates": 16,
+      "exact_candidates": [
+        {
+          "quote": "cracked containers",
+          "candidate_probability": 0.9851880073547363,
+          "anchor_assignments": [
+            {
+              "quote": "do not ship kit M3",
+              "selected": true,
+              "anchor_probability": 0.586414098739624,
+              "assignment_probability": 0.8311230540275574
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9851880073547363,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e04-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "inland stations",
+      "covering_candidates": 28,
+      "exact_candidates": [
+        {
+          "quote": "inland stations",
+          "candidate_probability": 0.9982407093048096,
+          "anchor_assignments": [
+            {
+              "quote": "we might trial paint Q9",
+              "selected": false,
+              "anchor_probability": 0.03719836100935936,
+              "assignment_probability": 0.7054063081741333
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9982407093048096,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "e05-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "firmware 6",
+      "covering_candidates": 28,
+      "exact_candidates": [
+        {
+          "quote": "firmware 6",
+          "candidate_probability": 0.026248250156641006,
+          "anchor_assignments": [
+            {
+              "quote": "the sensor check is complete for firmware 6",
+              "selected": false,
+              "anchor_probability": 0.012132863514125347,
+              "assignment_probability": 0.0003315557260066271
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.026248250156641006,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "e06-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "dry rooms",
+      "covering_candidates": 32,
+      "exact_candidates": [
+        {
+          "quote": "dry rooms",
+          "candidate_probability": 0.9919479489326477,
+          "anchor_assignments": [
+            {
+              "quote": "I suspect relay P4 may last 80 days",
+              "selected": false,
+              "anchor_probability": 0.02695126086473465,
+              "assignment_probability": 0.6009956002235413
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9919479489326477,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "sector D2",
+      "covering_candidates": 62,
+      "exact_candidates": [
+        {
+          "quote": "sector D2",
+          "candidate_probability": 0.0072583649307489395,
+          "anchor_assignments": [
+            {
+              "quote": "we postpone the gravel survey",
+              "selected": false,
+              "anchor_probability": 0.02258959971368313,
+              "assignment_probability": 4.155050191911869e-06
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.0072583649307489395,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the access bridge is closed",
+      "covering_candidates": 32,
+      "exact_candidates": [
+        {
+          "quote": "the access bridge is closed",
+          "candidate_probability": 0.0005207262001931667,
+          "anchor_assignments": [
+            {
+              "quote": "we postpone the gravel survey",
+              "selected": false,
+              "anchor_probability": 0.02258959971368313,
+              "assignment_probability": 0.0001644687436055392
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.007181449793279171,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "sector D2",
+      "covering_candidates": 80,
+      "exact_candidates": [
+        {
+          "quote": "sector D2",
+          "candidate_probability": 0.9307247400283813,
+          "anchor_assignments": [
+            {
+              "quote": "we postpone the gravel survey",
+              "selected": false,
+              "anchor_probability": 0.013816328719258308,
+              "assignment_probability": 0.010604094713926315
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9307247400283813,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m02-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the battery is leaking",
+      "covering_candidates": 38,
+      "exact_candidates": [
+        {
+          "quote": "the battery is leaking",
+          "candidate_probability": 0.11898815631866455,
+          "anchor_assignments": [
+            {
+              "quote": "switch the beacon to standby",
+              "selected": true,
+              "anchor_probability": 0.9507684111595154,
+              "assignment_probability": 0.0012950714444741607
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9209401607513428,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the battery is leaking",
+      "covering_candidates": 28,
+      "exact_candidates": [
+        {
+          "quote": "the battery is leaking",
+          "candidate_probability": 0.2166541963815689,
+          "anchor_assignments": [
+            {
+              "quote": "switch the beacon to standby",
+              "selected": true,
+              "anchor_probability": 0.8976505398750305,
+              "assignment_probability": 0.0016698661493137479
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9187865853309631,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "saline batches",
+      "covering_candidates": 74,
+      "exact_candidates": [
+        {
+          "quote": "saline batches",
+          "candidate_probability": 0.3701575696468353,
+          "anchor_assignments": [
+            {
+              "quote": "do not release batch U5",
+              "selected": false,
+              "anchor_probability": 0.007215408142656088,
+              "assignment_probability": 0.008184866048395634
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.3701575696468353,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the residue test failed",
+      "covering_candidates": 77,
+      "exact_candidates": [
+        {
+          "quote": "the residue test failed",
+          "candidate_probability": 0.13575789332389832,
+          "anchor_assignments": [
+            {
+              "quote": "do not release batch U5",
+              "selected": false,
+              "anchor_probability": 0.007215408142656088,
+              "assignment_probability": 0.0003964355564676225
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9674368500709534,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "saline batches",
+      "covering_candidates": 83,
+      "exact_candidates": [
+        {
+          "quote": "saline batches",
+          "candidate_probability": 0.935660183429718,
+          "anchor_assignments": [
+            {
+              "quote": "do not release batch U5",
+              "selected": false,
+              "anchor_probability": 0.0030962435994297266,
+              "assignment_probability": 0.147111177444458
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.935660183429718,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m04-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "remote clinics",
+      "covering_candidates": 53,
+      "exact_candidates": [
+        {
+          "quote": "remote clinics",
+          "candidate_probability": 0.012432663701474667,
+          "anchor_assignments": [
+            {
+              "quote": "we could pilot filter J2",
+              "selected": false,
+              "anchor_probability": 0.0012037812266498804,
+              "assignment_probability": 0.00021741211821790785
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.012432663701474667,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m05-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "bench T7",
+      "covering_candidates": 29,
+      "exact_candidates": [
+        {
+          "quote": "bench T7",
+          "candidate_probability": 0.23667360842227936,
+          "anchor_assignments": [
+            {
+              "quote": "the valve calibration finished on bench T7",
+              "selected": false,
+              "anchor_probability": 0.006107928231358528,
+              "assignment_probability": 0.017104418948292732
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.23667360842227936,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "m06-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "under reduced load",
+      "covering_candidates": 36,
+      "exact_candidates": [
+        {
+          "quote": "under reduced load",
+          "candidate_probability": 0.05190509185194969,
+          "anchor_assignments": [
+            {
+              "quote": "I suspect drive L4 may reach 70 cycles",
+              "selected": false,
+              "anchor_probability": 0.039059117436409,
+              "assignment_probability": 0.002447348553687334
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.05190509185194969,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "pressure above 9 bar",
+      "covering_candidates": 22,
+      "exact_candidates": [
+        {
+          "quote": "pressure above 9 bar",
+          "candidate_probability": 0.014197584241628647,
+          "anchor_assignments": [
+            {
+              "quote": "halt compressor Z4",
+              "selected": true,
+              "anchor_probability": 0.742276668548584,
+              "assignment_probability": 0.0003437622799538076
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.06550703942775726,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "its casing has fractured",
+      "covering_candidates": 78,
+      "exact_candidates": [
+        {
+          "quote": "its casing has fractured",
+          "candidate_probability": 0.6767575144767761,
+          "anchor_assignments": [
+            {
+              "quote": "halt compressor Z4",
+              "selected": true,
+              "anchor_probability": 0.742276668548584,
+              "assignment_probability": 0.024034498259425163
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.6767575144767761,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "below 1 bar",
+      "covering_candidates": 49,
+      "exact_candidates": [
+        {
+          "quote": "below 1 bar",
+          "candidate_probability": 0.025211850181221962,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": false,
+              "anchor_probability": 0.47307950258255005,
+              "assignment_probability": 0.0008943057619035244
+            },
+            {
+              "quote": "below 1 bar, start pump B2",
+              "selected": true,
+              "anchor_probability": 0.5020512342453003,
+              "assignment_probability": 0.0048681702464818954
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.025211850181221962,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the buffer is empty",
+      "covering_candidates": 26,
+      "exact_candidates": [
+        {
+          "quote": "the buffer is empty",
+          "candidate_probability": 0.785988450050354,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": false,
+              "anchor_probability": 0.47307950258255005,
+              "assignment_probability": 0.015740396454930305
+            },
+            {
+              "quote": "below 1 bar, start pump B2",
+              "selected": true,
+              "anchor_probability": 0.5020512342453003,
+              "assignment_probability": 0.021606912836432457
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.785988450050354,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "pressure above 9 bar",
+      "covering_candidates": 21,
+      "exact_candidates": [
+        {
+          "quote": "pressure above 9 bar",
+          "candidate_probability": 0.03226814046502113,
+          "anchor_assignments": [
+            {
+              "quote": "halt compressor Z4",
+              "selected": true,
+              "anchor_probability": 0.6626110076904297,
+              "assignment_probability": 0.0005585100152529776
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.03371153771877289,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "below 1 bar",
+      "covering_candidates": 65,
+      "exact_candidates": [
+        {
+          "quote": "below 1 bar",
+          "candidate_probability": 0.05579450726509094,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": false,
+              "anchor_probability": 0.47458645701408386,
+              "assignment_probability": 0.004178045783191919
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.05579450726509094,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the buffer is empty",
+      "covering_candidates": 44,
+      "exact_candidates": [
+        {
+          "quote": "the buffer is empty",
+          "candidate_probability": 0.20306390523910522,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": false,
+              "anchor_probability": 0.47458645701408386,
+              "assignment_probability": 0.006496611051261425
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.30107149481773376,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h01-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "below 1 bar",
+      "covering_candidates": 74,
+      "exact_candidates": [
+        {
+          "quote": "below 1 bar",
+          "candidate_probability": 0.12711280584335327,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": false,
+              "anchor_probability": 0.24201573431491852,
+              "assignment_probability": 0.0621856190264225
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.12711280584335327,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h01-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the buffer is empty",
+      "covering_candidates": 35,
+      "exact_candidates": [
+        {
+          "quote": "the buffer is empty",
+          "candidate_probability": 0.0918893963098526,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": false,
+              "anchor_probability": 0.24201573431491852,
+              "assignment_probability": 0.0025081709027290344
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.0918893963098526,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h02-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the replacement mount passed inspection",
+      "covering_candidates": 85,
+      "exact_candidates": [
+        {
+          "quote": "the replacement mount passed inspection",
+          "candidate_probability": 0.6955376267433167,
+          "anchor_assignments": [
+            {
+              "quote": "resume the compass test because the replacement mount passed inspection",
+              "selected": false,
+              "anchor_probability": 0.027840156108140945,
+              "assignment_probability": 0.04971066489815712
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9431071281433105,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h02-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "its lens is clean",
+      "covering_candidates": 33,
+      "exact_candidates": [
+        {
+          "quote": "its lens is clean",
+          "candidate_probability": 0.8267278075218201,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.8267278075218201,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the replacement mount passed inspection",
+      "covering_candidates": 83,
+      "exact_candidates": [
+        {
+          "quote": "the replacement mount passed inspection",
+          "candidate_probability": 0.6554398536682129,
+          "anchor_assignments": [
+            {
+              "quote": "resume the compass test",
+              "selected": true,
+              "anchor_probability": 0.6029985547065735,
+              "assignment_probability": 0.008062540553510189
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9270398020744324,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "its lens is clean",
+      "covering_candidates": 29,
+      "exact_candidates": [
+        {
+          "quote": "its lens is clean",
+          "candidate_probability": 0.757114052772522,
+          "anchor_assignments": [
+            {
+              "quote": "camera check begins at 14:20",
+              "selected": true,
+              "anchor_probability": 0.6468845009803772,
+              "assignment_probability": 0.0045948754996061325
+            },
+            {
+              "quote": "the camera check begins at 14:20",
+              "selected": false,
+              "anchor_probability": 0.3162771761417389,
+              "assignment_probability": 0.02907681092619896
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.757114052772522,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "its lens is clean",
+      "covering_candidates": 39,
+      "exact_candidates": [
+        {
+          "quote": "its lens is clean",
+          "candidate_probability": 0.20953993499279022,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.4329622983932495,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "commercial reuse",
+      "covering_candidates": 41,
+      "exact_candidates": [
+        {
+          "quote": "commercial reuse",
+          "candidate_probability": 0.007814801298081875,
+          "anchor_assignments": [
+            {
+              "quote": "do not publish the terrain map because the licence excludes commercial distribution",
+              "selected": false,
+              "anchor_probability": 0.005683799274265766,
+              "assignment_probability": 2.038324737441144e-06
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.007814801298081875,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the licence excludes commercial distribution",
+      "covering_candidates": 100,
+      "exact_candidates": [
+        {
+          "quote": "the licence excludes commercial distribution",
+          "candidate_probability": 0.04233647882938385,
+          "anchor_assignments": [
+            {
+              "quote": "do not publish the terrain map because the licence excludes commercial distribution",
+              "selected": false,
+              "anchor_probability": 0.005683799274265766,
+              "assignment_probability": 0.05380726605653763
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.5421174764633179,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "for classroom teaching",
+      "covering_candidates": 81,
+      "exact_candidates": [
+        {
+          "quote": "for classroom teaching",
+          "candidate_probability": 0.06816231459379196,
+          "anchor_assignments": [
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.007267217617481947,
+              "assignment_probability": 0.01422270480543375
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.5970445871353149,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the teacher granted permission",
+      "covering_candidates": 29,
+      "exact_candidates": [
+        {
+          "quote": "the teacher granted permission",
+          "candidate_probability": 0.1526346653699875,
+          "anchor_assignments": [
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.007267217617481947,
+              "assignment_probability": 0.37421438097953796
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9590284824371338,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "commercial reuse",
+      "covering_candidates": 35,
+      "exact_candidates": [
+        {
+          "quote": "commercial reuse",
+          "candidate_probability": 0.003322917502373457,
+          "anchor_assignments": [
+            {
+              "quote": "do not publish the terrain map",
+              "selected": false,
+              "anchor_probability": 0.22653286159038544,
+              "assignment_probability": 3.6733938486577244e-06
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.003322917502373457,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "for classroom teaching",
+      "covering_candidates": 87,
+      "exact_candidates": [
+        {
+          "quote": "for classroom teaching",
+          "candidate_probability": 0.18378695845603943,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.623023509979248,
+              "assignment_probability": 0.0035271921660751104
+            },
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch",
+              "selected": false,
+              "anchor_probability": 0.044204480946063995,
+              "assignment_probability": 0.14701224863529205
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.7884760499000549,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the teacher granted permission",
+      "covering_candidates": 31,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.9430100321769714,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "for classroom teaching",
+      "covering_candidates": 92,
+      "exact_candidates": [
+        {
+          "quote": "for classroom teaching",
+          "candidate_probability": 0.2826932370662689,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.8652653098106384,
+              "assignment_probability": 0.004193698056042194
+            },
+            {
+              "quote": "for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.01136694848537445,
+              "assignment_probability": 0.04806743934750557
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.7935632467269897,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the teacher granted permission",
+      "covering_candidates": 36,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.9716508984565735,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h04-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "desert depots",
+      "covering_candidates": 23,
+      "exact_candidates": [
+        {
+          "quote": "desert depots",
+          "candidate_probability": 0.21369631588459015,
+          "anchor_assignments": [
+            {
+              "quote": "we might trial pack G8",
+              "selected": false,
+              "anchor_probability": 0.0163031667470932,
+              "assignment_probability": 0.0006215163157321513
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.21369631588459015,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h05-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "rig C9",
+      "covering_candidates": 25,
+      "exact_candidates": [
+        {
+          "quote": "rig C9",
+          "candidate_probability": 0.03854464367032051,
+          "anchor_assignments": [
+            {
+              "quote": "pressure audit ended",
+              "selected": true,
+              "anchor_probability": 0.5730964541435242,
+              "assignment_probability": 0.001633045612834394
+            },
+            {
+              "quote": "pressure audit ended",
+              "selected": true,
+              "anchor_probability": 0.5395406484603882,
+              "assignment_probability": 0.00015501902089454234
+            },
+            {
+              "quote": "The pressure audit ended",
+              "selected": false,
+              "anchor_probability": 0.18008238077163696,
+              "assignment_probability": 0.0012852124636992812
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.03854464367032051,
+      "matching_recorded_anchors": 3,
+      "selected_matching_anchors": 2
+    },
+    {
+      "id": "h05-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "on rig B7",
+      "covering_candidates": 5,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.05384274199604988,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h05-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "on rig B7",
+      "covering_candidates": 36,
+      "exact_candidates": [
+        {
+          "quote": "on rig B7",
+          "candidate_probability": 0.06682229787111282,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.13856354355812073,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h05-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "on rig B7",
+      "covering_candidates": 41,
+      "exact_candidates": [
+        {
+          "quote": "on rig B7",
+          "candidate_probability": 0.04449926316738129,
+          "anchor_assignments": [
+            {
+              "quote": "the noise audit starts at 16:40 on rig B7",
+              "selected": false,
+              "anchor_probability": 0.0052712904289364815,
+              "assignment_probability": 0.00524568697437644
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.08654215931892395,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h06-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "in nitrogen",
+      "covering_candidates": 36,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.22607113420963287,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h06-full",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "in air",
+      "covering_candidates": 24,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.23445220291614532,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h06-partial",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "in air",
+      "covering_candidates": 28,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.09088771045207977,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h06-none",
+      "panel": "balanced_synthetic",
+      "arm": "native",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "in air",
+      "covering_candidates": 35,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.051777251064777374,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n03",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:basis1",
+      "role": "basis",
+      "expected_quote": "our system will need to store a large number of supporting documents, reports, etc. in the future",
+      "covering_candidates": 39,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.0004682153812609613,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n04",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:condition1",
+      "role": "condition",
+      "expected_quote": "From the perspective of cost and ecosystem integration",
+      "covering_candidates": 52,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 3.873757304972969e-05,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "forgot password",
+      "covering_candidates": 19,
+      "exact_candidates": [
+        {
+          "quote": "forgot password",
+          "candidate_probability": 0.0007438701577484608,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.0007438701577484608,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:condition1",
+      "role": "condition",
+      "expected_quote": "forgot password",
+      "covering_candidates": 19,
+      "exact_candidates": [
+        {
+          "quote": "forgot password",
+          "candidate_probability": 0.0007438701577484608,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.0007438701577484608,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:condition2",
+      "role": "condition",
+      "expected_quote": "regardless of whether the email entered by the user exists or not",
+      "covering_candidates": 47,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 3.757322338060476e-05,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:basis1",
+      "role": "basis",
+      "expected_quote": "prevent \"user enumeration attacks.\"",
+      "covering_candidates": 54,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.014082602225244045,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n08",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "all accounts marked as `ACCOUNT_STATUS_LOCKED`",
+      "covering_candidates": 49,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.004445637576282024,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n09",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:condition1",
+      "role": "condition",
+      "expected_quote": "where an account is locked",
+      "covering_candidates": 56,
+      "exact_candidates": [
+        {
+          "quote": "where an account is locked",
+          "candidate_probability": 0.04881458729505539,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.10666128247976303,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n10",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r4:condition1",
+      "role": "condition",
+      "expected_quote": "after the backend triggers this strategy",
+      "covering_candidates": 40,
+      "exact_candidates": [
+        {
+          "quote": "after the backend triggers this strategy",
+          "candidate_probability": 0.025284944102168083,
+          "anchor_assignments": [
+            {
+              "quote": "after the backend triggers this strategy, all downstream automated notifications (emails, SMS) will be halted",
+              "selected": false,
+              "anchor_probability": 2.143112760677468e-05,
+              "assignment_probability": 0.00850826594978571
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.025284944102168083,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n12",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r2:basis1",
+      "role": "basis",
+      "expected_quote": "to ensure the charts render correctly",
+      "covering_candidates": 69,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.006181022152304649,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n12",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r4:condition1",
+      "role": "condition",
+      "expected_quote": "if the backend supports it",
+      "covering_candidates": 49,
+      "exact_candidates": [
+        {
+          "quote": "if the backend supports it",
+          "candidate_probability": 0.01540311798453331,
+          "anchor_assignments": [
+            {
+              "quote": "initially considering WebSocket if the backend supports it",
+              "selected": false,
+              "anchor_probability": 0.00045133597450330853,
+              "assignment_probability": 0.07966722548007965
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.020750006660819054,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n13",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r3:basis1",
+      "role": "basis",
+      "expected_quote": "avoid blocking your current task",
+      "covering_candidates": 13,
+      "exact_candidates": [
+        {
+          "quote": "avoid blocking your current task",
+          "candidate_probability": 0.0015290741575881839,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.0015290741575881839,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n13",
+      "panel": "natural_audit",
+      "arm": "native",
+      "node": "r4:condition1",
+      "role": "condition",
+      "expected_quote": "Once the WebSocket service is stable later",
+      "covering_candidates": 54,
+      "exact_candidates": [
+        {
+          "quote": "Once the WebSocket service is stable later",
+          "candidate_probability": 0.0424996018409729,
+          "anchor_assignments": [
+            {
+              "quote": "we can upgrade it uniformly",
+              "selected": false,
+              "anchor_probability": 0.011035826988518238,
+              "assignment_probability": 0.05779721960425377
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.0424996018409729,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "e01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "chilled parcels",
+      "covering_candidates": 22,
+      "exact_candidates": [
+        {
+          "quote": "chilled parcels",
+          "candidate_probability": 0.9981946349143982,
+          "anchor_assignments": [
+            {
+              "quote": "use liner K6",
+              "selected": true,
+              "anchor_probability": 0.9793689250946045,
+              "assignment_probability": 0.9658487439155579
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9981946349143982,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the foam prevents condensation",
+      "covering_candidates": 20,
+      "exact_candidates": [
+        {
+          "quote": "the foam prevents condensation",
+          "candidate_probability": 0.9927453398704529,
+          "anchor_assignments": [
+            {
+              "quote": "use liner K6",
+              "selected": true,
+              "anchor_probability": 0.9793689250946045,
+              "assignment_probability": 0.9769493937492371
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9927453398704529,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "chilled parcels",
+      "covering_candidates": 12,
+      "exact_candidates": [
+        {
+          "quote": "chilled parcels",
+          "candidate_probability": 0.9915896058082581,
+          "anchor_assignments": [
+            {
+              "quote": "use liner K6",
+              "selected": true,
+              "anchor_probability": 0.932876467704773,
+              "assignment_probability": 0.9604897499084473
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9915896058082581,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e02-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the hinge needs repair",
+      "covering_candidates": 16,
+      "exact_candidates": [
+        {
+          "quote": "the hinge needs repair",
+          "candidate_probability": 0.9974844455718994,
+          "anchor_assignments": [
+            {
+              "quote": "close gate R8 on Thursday",
+              "selected": true,
+              "anchor_probability": 0.9981659054756165,
+              "assignment_probability": 0.9901462197303772
+            },
+            {
+              "quote": "close gate R8",
+              "selected": false,
+              "anchor_probability": 0.22132769227027893,
+              "assignment_probability": 0.9857878684997559
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9974844455718994,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the hinge needs repair",
+      "covering_candidates": 12,
+      "exact_candidates": [
+        {
+          "quote": "the hinge needs repair",
+          "candidate_probability": 0.9956480860710144,
+          "anchor_assignments": [
+            {
+              "quote": "close gate R8",
+              "selected": true,
+              "anchor_probability": 0.9964964985847473,
+              "assignment_probability": 0.990486204624176
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9956480860710144,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "cracked containers",
+      "covering_candidates": 26,
+      "exact_candidates": [
+        {
+          "quote": "cracked containers",
+          "candidate_probability": 0.9968205690383911,
+          "anchor_assignments": [
+            {
+              "quote": "do not ship kit M3",
+              "selected": true,
+              "anchor_probability": 0.9976938366889954,
+              "assignment_probability": 0.9844450354576111
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9968205690383911,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the seal failed inspection",
+      "covering_candidates": 24,
+      "exact_candidates": [
+        {
+          "quote": "the seal failed inspection",
+          "candidate_probability": 0.9930471777915955,
+          "anchor_assignments": [
+            {
+              "quote": "do not ship kit M3",
+              "selected": true,
+              "anchor_probability": 0.9976938366889954,
+              "assignment_probability": 0.8755966424942017
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9930471777915955,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "cracked containers",
+      "covering_candidates": 16,
+      "exact_candidates": [
+        {
+          "quote": "cracked containers",
+          "candidate_probability": 0.9955968260765076,
+          "anchor_assignments": [
+            {
+              "quote": "do not ship kit M3",
+              "selected": true,
+              "anchor_probability": 0.9960803389549255,
+              "assignment_probability": 0.9961870312690735
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9955968260765076,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e04-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "inland stations",
+      "covering_candidates": 28,
+      "exact_candidates": [
+        {
+          "quote": "inland stations",
+          "candidate_probability": 0.9985058307647705,
+          "anchor_assignments": [
+            {
+              "quote": "we might trial paint Q9",
+              "selected": true,
+              "anchor_probability": 0.9858012795448303,
+              "assignment_probability": 0.9951999187469482
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9985058307647705,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "e05-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "firmware 6",
+      "covering_candidates": 28,
+      "exact_candidates": [
+        {
+          "quote": "firmware 6",
+          "candidate_probability": 0.0372372642159462,
+          "anchor_assignments": [
+            {
+              "quote": "the sensor check is complete",
+              "selected": true,
+              "anchor_probability": 0.9135007262229919,
+              "assignment_probability": 0.0003793597861658782
+            },
+            {
+              "quote": "the sensor check is complete for firmware 6",
+              "selected": true,
+              "anchor_probability": 0.5162308216094971,
+              "assignment_probability": 0.00037797214463353157
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.0372372642159462,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 2
+    },
+    {
+      "id": "e06-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "dry rooms",
+      "covering_candidates": 32,
+      "exact_candidates": [
+        {
+          "quote": "dry rooms",
+          "candidate_probability": 0.9979097247123718,
+          "anchor_assignments": [
+            {
+              "quote": "I suspect relay P4 may last 80 days",
+              "selected": true,
+              "anchor_probability": 0.9953475594520569,
+              "assignment_probability": 0.9942336678504944
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9979097247123718,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "sector D2",
+      "covering_candidates": 83,
+      "exact_candidates": [
+        {
+          "quote": "sector D2",
+          "candidate_probability": 0.9685982465744019,
+          "anchor_assignments": [
+            {
+              "quote": "we postpone the gravel survey",
+              "selected": true,
+              "anchor_probability": 0.9936548471450806,
+              "assignment_probability": 0.025206267833709717
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9685982465744019,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the access bridge is closed",
+      "covering_candidates": 29,
+      "exact_candidates": [
+        {
+          "quote": "the access bridge is closed",
+          "candidate_probability": 0.9930011034011841,
+          "anchor_assignments": [
+            {
+              "quote": "we postpone the gravel survey",
+              "selected": true,
+              "anchor_probability": 0.9936548471450806,
+              "assignment_probability": 0.825314998626709
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9930011034011841,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "sector D2",
+      "covering_candidates": 80,
+      "exact_candidates": [
+        {
+          "quote": "sector D2",
+          "candidate_probability": 0.9616015553474426,
+          "anchor_assignments": [
+            {
+              "quote": "we postpone the gravel survey",
+              "selected": true,
+              "anchor_probability": 0.9987253546714783,
+              "assignment_probability": 0.01888127252459526
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9616015553474426,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m02-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the battery is leaking",
+      "covering_candidates": 33,
+      "exact_candidates": [
+        {
+          "quote": "the battery is leaking",
+          "candidate_probability": 0.9656286239624023,
+          "anchor_assignments": [
+            {
+              "quote": "switch the beacon to standby",
+              "selected": true,
+              "anchor_probability": 0.9966611862182617,
+              "assignment_probability": 0.8310877084732056
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9656286239624023,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the battery is leaking",
+      "covering_candidates": 28,
+      "exact_candidates": [
+        {
+          "quote": "the battery is leaking",
+          "candidate_probability": 0.9946953654289246,
+          "anchor_assignments": [
+            {
+              "quote": "switch the beacon to standby",
+              "selected": true,
+              "anchor_probability": 0.9995361566543579,
+              "assignment_probability": 0.9683741331100464
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9946953654289246,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "saline batches",
+      "covering_candidates": 81,
+      "exact_candidates": [
+        {
+          "quote": "saline batches",
+          "candidate_probability": 0.996707558631897,
+          "anchor_assignments": [
+            {
+              "quote": "do not release batch U5",
+              "selected": true,
+              "anchor_probability": 0.9937471151351929,
+              "assignment_probability": 0.9325810670852661
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.996707558631897,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the residue test failed",
+      "covering_candidates": 75,
+      "exact_candidates": [
+        {
+          "quote": "the residue test failed",
+          "candidate_probability": 0.9799928069114685,
+          "anchor_assignments": [
+            {
+              "quote": "do not release batch U5",
+              "selected": true,
+              "anchor_probability": 0.9937471151351929,
+              "assignment_probability": 0.7623080015182495
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9799928069114685,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "saline batches",
+      "covering_candidates": 86,
+      "exact_candidates": [
+        {
+          "quote": "saline batches",
+          "candidate_probability": 0.9964579939842224,
+          "anchor_assignments": [
+            {
+              "quote": "do not release batch U5",
+              "selected": true,
+              "anchor_probability": 0.9909148216247559,
+              "assignment_probability": 0.9389974474906921
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9964579939842224,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m04-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "remote clinics",
+      "covering_candidates": 73,
+      "exact_candidates": [
+        {
+          "quote": "remote clinics",
+          "candidate_probability": 0.9866929650306702,
+          "anchor_assignments": [
+            {
+              "quote": "we could pilot filter J2",
+              "selected": true,
+              "anchor_probability": 0.9923277497291565,
+              "assignment_probability": 0.4829411208629608
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9866929650306702,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m05-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "bench T7",
+      "covering_candidates": 26,
+      "exact_candidates": [
+        {
+          "quote": "bench T7",
+          "candidate_probability": 2.2658043235423975e-05,
+          "anchor_assignments": [
+            {
+              "quote": "the valve calibration finished on bench T7",
+              "selected": true,
+              "anchor_probability": 0.9964712858200073,
+              "assignment_probability": 3.997574840597373e-13
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 2.2658043235423975e-05,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "m06-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "under reduced load",
+      "covering_candidates": 48,
+      "exact_candidates": [
+        {
+          "quote": "under reduced load",
+          "candidate_probability": 0.11292727291584015,
+          "anchor_assignments": [
+            {
+              "quote": "I suspect drive L4 may reach 70 cycles",
+              "selected": true,
+              "anchor_probability": 0.9912541508674622,
+              "assignment_probability": 0.00045155436964705586
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.11292727291584015,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "pressure above 9 bar",
+      "covering_candidates": 25,
+      "exact_candidates": [
+        {
+          "quote": "pressure above 9 bar",
+          "candidate_probability": 0.9769259095191956,
+          "anchor_assignments": [
+            {
+              "quote": "halt compressor Z4",
+              "selected": true,
+              "anchor_probability": 0.9737213253974915,
+              "assignment_probability": 0.013142825104296207
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9769259095191956,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "its casing has fractured",
+      "covering_candidates": 88,
+      "exact_candidates": [
+        {
+          "quote": "its casing has fractured",
+          "candidate_probability": 0.984825074672699,
+          "anchor_assignments": [
+            {
+              "quote": "halt compressor Z4",
+              "selected": true,
+              "anchor_probability": 0.9737213253974915,
+              "assignment_probability": 0.06023525819182396
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.984825074672699,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "below 1 bar",
+      "covering_candidates": 76,
+      "exact_candidates": [
+        {
+          "quote": "below 1 bar",
+          "candidate_probability": 0.962833821773529,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": true,
+              "anchor_probability": 0.7237973213195801,
+              "assignment_probability": 0.0074090780690312386
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.962833821773529,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the buffer is empty",
+      "covering_candidates": 22,
+      "exact_candidates": [
+        {
+          "quote": "the buffer is empty",
+          "candidate_probability": 0.992483913898468,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": true,
+              "anchor_probability": 0.7237973213195801,
+              "assignment_probability": 0.019552331417798996
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.992483913898468,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "pressure above 9 bar",
+      "covering_candidates": 36,
+      "exact_candidates": [
+        {
+          "quote": "pressure above 9 bar",
+          "candidate_probability": 0.9697802662849426,
+          "anchor_assignments": [
+            {
+              "quote": "halt compressor Z4",
+              "selected": true,
+              "anchor_probability": 0.9096170663833618,
+              "assignment_probability": 0.009701061993837357
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9697802662849426,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "below 1 bar",
+      "covering_candidates": 85,
+      "exact_candidates": [
+        {
+          "quote": "below 1 bar",
+          "candidate_probability": 0.9514586925506592,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": true,
+              "anchor_probability": 0.601391613483429,
+              "assignment_probability": 0.006093315780162811
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9514586925506592,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the buffer is empty",
+      "covering_candidates": 30,
+      "exact_candidates": [
+        {
+          "quote": "the buffer is empty",
+          "candidate_probability": 0.9530051946640015,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": true,
+              "anchor_probability": 0.601391613483429,
+              "assignment_probability": 0.04347093030810356
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9530051946640015,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "below 1 bar",
+      "covering_candidates": 87,
+      "exact_candidates": [
+        {
+          "quote": "below 1 bar",
+          "candidate_probability": 0.8461498022079468,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": true,
+              "anchor_probability": 0.5756056308746338,
+              "assignment_probability": 0.00027874467195943
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.8461498022079468,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h01-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the buffer is empty",
+      "covering_candidates": 32,
+      "exact_candidates": [
+        {
+          "quote": "the buffer is empty",
+          "candidate_probability": 0.9855602383613586,
+          "anchor_assignments": [
+            {
+              "quote": "start pump B2",
+              "selected": true,
+              "anchor_probability": 0.5756056308746338,
+              "assignment_probability": 0.07580123841762543
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9855602383613586,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the replacement mount passed inspection",
+      "covering_candidates": 84,
+      "exact_candidates": [
+        {
+          "quote": "the replacement mount passed inspection",
+          "candidate_probability": 0.9958181977272034,
+          "anchor_assignments": [
+            {
+              "quote": "resume the compass test",
+              "selected": true,
+              "anchor_probability": 0.9942845702171326,
+              "assignment_probability": 0.09783703088760376
+            },
+            {
+              "quote": "resume the compass test because the replacement mount passed inspection",
+              "selected": false,
+              "anchor_probability": 0.009225072339177132,
+              "assignment_probability": 0.0638340637087822
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9958181977272034,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "its lens is clean",
+      "covering_candidates": 27,
+      "exact_candidates": [
+        {
+          "quote": "its lens is clean",
+          "candidate_probability": 0.9955333471298218,
+          "anchor_assignments": [
+            {
+              "quote": "the camera check begins at 14:20",
+              "selected": true,
+              "anchor_probability": 0.9757664799690247,
+              "assignment_probability": 0.18871425092220306
+            },
+            {
+              "quote": "Independently, the camera check begins at 14:20",
+              "selected": false,
+              "anchor_probability": 0.18500062823295593,
+              "assignment_probability": 0.02149275690317154
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9955333471298218,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the replacement mount passed inspection",
+      "covering_candidates": 84,
+      "exact_candidates": [
+        {
+          "quote": "the replacement mount passed inspection",
+          "candidate_probability": 0.9969220757484436,
+          "anchor_assignments": [
+            {
+              "quote": "resume the compass test",
+              "selected": true,
+              "anchor_probability": 0.993084192276001,
+              "assignment_probability": 0.07191634178161621
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9969220757484436,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "its lens is clean",
+      "covering_candidates": 27,
+      "exact_candidates": [
+        {
+          "quote": "its lens is clean",
+          "candidate_probability": 0.997241735458374,
+          "anchor_assignments": [
+            {
+              "quote": "the camera check begins at 14:20",
+              "selected": true,
+              "anchor_probability": 0.9963613152503967,
+              "assignment_probability": 0.3806057870388031
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.997241735458374,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h02-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "its lens is clean",
+      "covering_candidates": 30,
+      "exact_candidates": [
+        {
+          "quote": "its lens is clean",
+          "candidate_probability": 0.9943585991859436,
+          "anchor_assignments": [
+            {
+              "quote": "the camera check begins at 14:20",
+              "selected": true,
+              "anchor_probability": 0.99244225025177,
+              "assignment_probability": 0.6624251008033752
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9943585991859436,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "commercial reuse",
+      "covering_candidates": 47,
+      "exact_candidates": [
+        {
+          "quote": "commercial reuse",
+          "candidate_probability": 0.9676382541656494,
+          "anchor_assignments": [
+            {
+              "quote": "do not publish the terrain map",
+              "selected": true,
+              "anchor_probability": 0.9927080273628235,
+              "assignment_probability": 0.09588104486465454
+            },
+            {
+              "quote": "do not publish the terrain map because the licence excludes commercial distribution",
+              "selected": false,
+              "anchor_probability": 0.014014593325555325,
+              "assignment_probability": 0.031820330768823624
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9676382541656494,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:basis1",
+      "role": "basis",
+      "expected_quote": "the licence excludes commercial distribution",
+      "covering_candidates": 85,
+      "exact_candidates": [
+        {
+          "quote": "the licence excludes commercial distribution",
+          "candidate_probability": 0.9930991530418396,
+          "anchor_assignments": [
+            {
+              "quote": "do not publish the terrain map",
+              "selected": true,
+              "anchor_probability": 0.9927080273628235,
+              "assignment_probability": 0.14550882577896118
+            },
+            {
+              "quote": "do not publish the terrain map because the licence excludes commercial distribution",
+              "selected": false,
+              "anchor_probability": 0.014014593325555325,
+              "assignment_probability": 0.08286596834659576
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9930991530418396,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "for classroom teaching",
+      "covering_candidates": 77,
+      "exact_candidates": [
+        {
+          "quote": "for classroom teaching",
+          "candidate_probability": 0.43128618597984314,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.9309123754501343,
+              "assignment_probability": 0.0271625779569149
+            },
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.0049670361913740635,
+              "assignment_probability": 0.0226603951305151
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9811362624168396,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the teacher granted permission",
+      "covering_candidates": 27,
+      "exact_candidates": [
+        {
+          "quote": "the teacher granted permission",
+          "candidate_probability": 0.989772379398346,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.9309123754501343,
+              "assignment_probability": 0.2103889435529709
+            },
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.0049670361913740635,
+              "assignment_probability": 0.023577192798256874
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.989772379398346,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "commercial reuse",
+      "covering_candidates": 48,
+      "exact_candidates": [
+        {
+          "quote": "commercial reuse",
+          "candidate_probability": 0.9313616752624512,
+          "anchor_assignments": [
+            {
+              "quote": "do not publish the terrain map",
+              "selected": true,
+              "anchor_probability": 0.9733160138130188,
+              "assignment_probability": 0.0354001484811306
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9313616752624512,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "for classroom teaching",
+      "covering_candidates": 93,
+      "exact_candidates": [
+        {
+          "quote": "for classroom teaching",
+          "candidate_probability": 0.3092663884162903,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.948567271232605,
+              "assignment_probability": 0.011571553535759449
+            },
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch",
+              "selected": false,
+              "anchor_probability": 0.007805571425706148,
+              "assignment_probability": 0.2973872423171997
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.995966911315918,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the teacher granted permission",
+      "covering_candidates": 31,
+      "exact_candidates": [
+        {
+          "quote": "the teacher granted permission",
+          "candidate_probability": 0.9829120635986328,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.948567271232605,
+              "assignment_probability": 0.5298488736152649
+            },
+            {
+              "quote": "Separate instruction: for classroom teaching, publish the sketch",
+              "selected": false,
+              "anchor_probability": 0.007805571425706148,
+              "assignment_probability": 0.11893005669116974
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9829120635986328,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "for classroom teaching",
+      "covering_candidates": 91,
+      "exact_candidates": [
+        {
+          "quote": "for classroom teaching",
+          "candidate_probability": 0.32528257369995117,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.9371199011802673,
+              "assignment_probability": 0.00573426578193903
+            },
+            {
+              "quote": "for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.008270877413451672,
+              "assignment_probability": 0.0138948243111372
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9931989312171936,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h03-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:basis1",
+      "role": "basis",
+      "expected_quote": "the teacher granted permission",
+      "covering_candidates": 30,
+      "exact_candidates": [
+        {
+          "quote": "the teacher granted permission",
+          "candidate_probability": 0.9888484477996826,
+          "anchor_assignments": [
+            {
+              "quote": "publish the sketch",
+              "selected": true,
+              "anchor_probability": 0.9371199011802673,
+              "assignment_probability": 0.619519829750061
+            },
+            {
+              "quote": "for classroom teaching, publish the sketch because the teacher granted permission",
+              "selected": false,
+              "anchor_probability": 0.008270877413451672,
+              "assignment_probability": 0.3028506636619568
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9888484477996826,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h04-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "desert depots",
+      "covering_candidates": 42,
+      "exact_candidates": [
+        {
+          "quote": "desert depots",
+          "candidate_probability": 0.9929313659667969,
+          "anchor_assignments": [
+            {
+              "quote": "we might trial pack G8",
+              "selected": true,
+              "anchor_probability": 0.9672130942344666,
+              "assignment_probability": 0.593512773513794
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9929313659667969,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h05-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "rig C9",
+      "covering_candidates": 58,
+      "exact_candidates": [
+        {
+          "quote": "rig C9",
+          "candidate_probability": 0.12294613569974899,
+          "anchor_assignments": [
+            {
+              "quote": "The pressure audit ended at 16:40",
+              "selected": true,
+              "anchor_probability": 0.9556307792663574,
+              "assignment_probability": 0.0011597112752497196
+            },
+            {
+              "quote": "the pressure audit ended",
+              "selected": true,
+              "anchor_probability": 0.6551636457443237,
+              "assignment_probability": 7.02164979884401e-05
+            },
+            {
+              "quote": "The pressure audit ended",
+              "selected": false,
+              "anchor_probability": 0.357324481010437,
+              "assignment_probability": 0.0008951524505391717
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.12294613569974899,
+      "matching_recorded_anchors": 3,
+      "selected_matching_anchors": 2
+    },
+    {
+      "id": "h05-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "on rig B7",
+      "covering_candidates": 22,
+      "exact_candidates": [
+        {
+          "quote": "on rig B7",
+          "candidate_probability": 0.027108851820230484,
+          "anchor_assignments": [
+            {
+              "quote": "the noise audit starts at 16:40 on rig B7",
+              "selected": true,
+              "anchor_probability": 0.9064152836799622,
+              "assignment_probability": 3.2167335461963376e-07
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.061499323695898056,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h05-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "on rig B7",
+      "covering_candidates": 32,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.0006746220751665533,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h05-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "on rig B7",
+      "covering_candidates": 25,
+      "exact_candidates": [
+        {
+          "quote": "on rig B7",
+          "candidate_probability": 9.253047755919397e-05,
+          "anchor_assignments": [
+            {
+              "quote": "the noise audit starts at 16:40 on rig B7",
+              "selected": true,
+              "anchor_probability": 0.9492297172546387,
+              "assignment_probability": 2.5602272038516283e-11
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.000170741681358777,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h06-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "in nitrogen",
+      "covering_candidates": 54,
+      "exact_candidates": [
+        {
+          "quote": "in nitrogen",
+          "candidate_probability": 0.12215228378772736,
+          "anchor_assignments": [
+            {
+              "quote": "I suspect coil N8 may handle 18 amperes",
+              "selected": true,
+              "anchor_probability": 0.9768980741500854,
+              "assignment_probability": 6.144252324702393e-07
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.4486929476261139,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h06-full",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "in air",
+      "covering_candidates": 29,
+      "exact_candidates": [
+        {
+          "quote": "in air",
+          "candidate_probability": 0.0012986900983378291,
+          "anchor_assignments": [
+            {
+              "quote": "A separate steel cable was measured at 12 amperes in air",
+              "selected": false,
+              "anchor_probability": 0.4661238491535187,
+              "assignment_probability": 4.425148691922232e-09
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.00485927565023303,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "h06-partial",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "in air",
+      "covering_candidates": 25,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.00010783937614178285,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "h06-none",
+      "panel": "balanced_synthetic",
+      "arm": "adapted",
+      "node": "r6:condition1",
+      "role": "condition",
+      "expected_quote": "in air",
+      "covering_candidates": 26,
+      "exact_candidates": [
+        {
+          "quote": "in air",
+          "candidate_probability": 1.985679591598455e-05,
+          "anchor_assignments": [
+            {
+              "quote": "A separate steel cable was measured at 12 amperes in air",
+              "selected": true,
+              "anchor_probability": 0.5008708834648132,
+              "assignment_probability": 1.572420145479203e-11
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 4.015625745523721e-05,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "n03",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:basis1",
+      "role": "basis",
+      "expected_quote": "our system will need to store a large number of supporting documents, reports, etc. in the future",
+      "covering_candidates": 55,
+      "exact_candidates": [
+        {
+          "quote": "our system will need to store a large number of supporting documents, reports, etc. in the future",
+          "candidate_probability": 0.680725634098053,
+          "anchor_assignments": [
+            {
+              "quote": "I will focus on comparing Azure Blob and AWS S3",
+              "selected": true,
+              "anchor_probability": 0.9516470432281494,
+              "assignment_probability": 4.7322655518655665e-06
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.680725634098053,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "n04",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:condition1",
+      "role": "condition",
+      "expected_quote": "From the perspective of cost and ecosystem integration",
+      "covering_candidates": 57,
+      "exact_candidates": [
+        {
+          "quote": "From the perspective of cost and ecosystem integration",
+          "candidate_probability": 5.606620447906607e-07,
+          "anchor_assignments": [
+            {
+              "quote": "From the perspective of cost and ecosystem integration, AWS S3 has a slight advantage",
+              "selected": false,
+              "anchor_probability": 1.3990148545417469e-05,
+              "assignment_probability": 1.2621935638890136e-05
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 1.9200351744075306e-06,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "forgot password",
+      "covering_candidates": 21,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.00011391798761906102,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:condition1",
+      "role": "condition",
+      "expected_quote": "forgot password",
+      "covering_candidates": 21,
+      "exact_candidates": [],
+      "covering_candidate_max_probability": 0.00011391798761906102,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:condition2",
+      "role": "condition",
+      "expected_quote": "regardless of whether the email entered by the user exists or not",
+      "covering_candidates": 63,
+      "exact_candidates": [
+        {
+          "quote": "regardless of whether the email entered by the user exists or not",
+          "candidate_probability": 0.01617773249745369,
+          "anchor_assignments": [
+            {
+              "quote": "the feedback message should be consistent",
+              "selected": false,
+              "anchor_probability": 0.0017495770007371902,
+              "assignment_probability": 0.004743941128253937
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.01617773249745369,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n07",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:basis1",
+      "role": "basis",
+      "expected_quote": "prevent \"user enumeration attacks.\"",
+      "covering_candidates": 87,
+      "exact_candidates": [
+        {
+          "quote": "prevent \"user enumeration attacks.\"",
+          "candidate_probability": 0.34197983145713806,
+          "anchor_assignments": [
+            {
+              "quote": "the feedback message should be consistent",
+              "selected": false,
+              "anchor_probability": 0.0017495770007371902,
+              "assignment_probability": 4.842487669520779e-06
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.9746596217155457,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n08",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r1:condition1",
+      "role": "condition",
+      "expected_quote": "all accounts marked as `ACCOUNT_STATUS_LOCKED`",
+      "covering_candidates": 97,
+      "exact_candidates": [
+        {
+          "quote": "all accounts marked as `ACCOUNT_STATUS_LOCKED`",
+          "candidate_probability": 7.14310008333996e-05,
+          "anchor_assignments": [
+            {
+              "quote": "The core requirement is that all accounts marked as `ACCOUNT_STATUS_LOCKED` must be forcibly routed to the `ERR_POLICY_LOCKED_ACCOUNT_V1` policy for frontend interaction",
+              "selected": false,
+              "anchor_probability": 0.016053931787610054,
+              "assignment_probability": 7.741110530368189e-11
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 7.14310008333996e-05,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n09",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:condition1",
+      "role": "condition",
+      "expected_quote": "where an account is locked",
+      "covering_candidates": 70,
+      "exact_candidates": [
+        {
+          "quote": "where an account is locked",
+          "candidate_probability": 0.23116526007652283,
+          "anchor_assignments": []
+        }
+      ],
+      "covering_candidate_max_probability": 0.5360274910926819,
+      "matching_recorded_anchors": 0,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n10",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r4:condition1",
+      "role": "condition",
+      "expected_quote": "after the backend triggers this strategy",
+      "covering_candidates": 63,
+      "exact_candidates": [
+        {
+          "quote": "after the backend triggers this strategy",
+          "candidate_probability": 0.7917230129241943,
+          "anchor_assignments": [
+            {
+              "quote": "all downstream automated notifications (emails, SMS) will be halted",
+              "selected": true,
+              "anchor_probability": 0.6136946678161621,
+              "assignment_probability": 0.023773333057761192
+            },
+            {
+              "quote": "after the backend triggers this strategy, all downstream automated notifications (emails, SMS) will be halted",
+              "selected": false,
+              "anchor_probability": 0.07085530459880829,
+              "assignment_probability": 0.0331987589597702
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.7917230129241943,
+      "matching_recorded_anchors": 2,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "n12",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r2:basis1",
+      "role": "basis",
+      "expected_quote": "to ensure the charts render correctly",
+      "covering_candidates": 81,
+      "exact_candidates": [
+        {
+          "quote": "to ensure the charts render correctly",
+          "candidate_probability": 0.1805206686258316,
+          "anchor_assignments": [
+            {
+              "quote": "I plan to complete the static data integration this morning",
+              "selected": true,
+              "anchor_probability": 0.9627195596694946,
+              "assignment_probability": 5.473487362905871e-06
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.38360849022865295,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    },
+    {
+      "id": "n12",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r4:condition1",
+      "role": "condition",
+      "expected_quote": "if the backend supports it",
+      "covering_candidates": 47,
+      "exact_candidates": [
+        {
+          "quote": "if the backend supports it",
+          "candidate_probability": 0.2086547166109085,
+          "anchor_assignments": [
+            {
+              "quote": "initially considering WebSocket if the backend supports it",
+              "selected": false,
+              "anchor_probability": 0.011995318345725536,
+              "assignment_probability": 0.005101645365357399
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.2086547166109085,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n13",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r3:basis1",
+      "role": "basis",
+      "expected_quote": "avoid blocking your current task",
+      "covering_candidates": 17,
+      "exact_candidates": [
+        {
+          "quote": "avoid blocking your current task",
+          "candidate_probability": 0.016600679606199265,
+          "anchor_assignments": [
+            {
+              "quote": "This task can be implemented using polling for now",
+              "selected": false,
+              "anchor_probability": 0.07409854233264923,
+              "assignment_probability": 3.7571896882582223e-07
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.05280953645706177,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 0
+    },
+    {
+      "id": "n13",
+      "panel": "natural_audit",
+      "arm": "adapted",
+      "node": "r4:condition1",
+      "role": "condition",
+      "expected_quote": "Once the WebSocket service is stable later",
+      "covering_candidates": 55,
+      "exact_candidates": [
+        {
+          "quote": "Once the WebSocket service is stable later",
+          "candidate_probability": 0.18578499555587769,
+          "anchor_assignments": [
+            {
+              "quote": "we can upgrade it uniformly",
+              "selected": true,
+              "anchor_probability": 0.9796978235244751,
+              "assignment_probability": 0.00024621360353194177
+            }
+          ]
+        }
+      ],
+      "covering_candidate_max_probability": 0.18578499555587769,
+      "matching_recorded_anchors": 1,
+      "selected_matching_anchors": 1
+    }
+  ]
+}

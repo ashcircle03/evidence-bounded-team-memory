@@ -1,0 +1,117 @@
+{
+  "status": "complete",
+  "job": "124307",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "rows": [
+    {
+      "id": "10_31_2008_PROVISIONS_OPEN_SESSION_TRANSCRIPT.pdf266",
+      "request": {
+        "model": "Qwen3-8B",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Classify how the given utterance responds to the question. Choose direct if it explicitly supplies the requested answer without a condition, indirect_or_conditional if it answers by implication or makes the answer depend on a condition, or no_answer if it does not supply an answer. Use only the question and utterance."
+          },
+          {
+            "role": "user",
+            "content": "Question: & SPEAKER_0: Are there any other changes or corrections to the minutes of August 1?\nUtterance: Move the adoption of the minutes as amended."
+          }
+        ],
+        "temperature": 0,
+        "seed": 42,
+        "max_tokens": 512,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "guided_choice": [
+          "direct",
+          "indirect_or_conditional",
+          "no_answer"
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-78e9ed13413742f983e4eb06022a6414",
+        "object": "chat.completion",
+        "created": 1795014376,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "indirect_or_conditional",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 115,
+          "total_tokens": 121,
+          "completion_tokens": 6,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "label": "indirect_or_conditional"
+    },
+    {
+      "id": "ES2003d7610",
+      "request": {
+        "model": "Qwen3-8B",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Classify how the given utterance responds to the question. Choose direct if it explicitly supplies the requested answer without a condition, indirect_or_conditional if it answers by implication or makes the answer depend on a condition, or no_answer if it does not supply an answer. Use only the question and utterance."
+          },
+          {
+            "role": "user",
+            "content": "Question: & SPEAKER_0: are people really gon na shell out twenty five Euros for something that's only marginally good?\nUtterance: it depends who your who's what the target people are,"
+          }
+        ],
+        "temperature": 0,
+        "seed": 42,
+        "max_tokens": 512,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "guided_choice": [
+          "direct",
+          "indirect_or_conditional",
+          "no_answer"
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-e71d00ddf98d41089f9e3c1ac8a0cf36",
+        "object": "chat.completion",
+        "created": 1795014379,
+        "model": "Qwen3-8B",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "reasoning_content": null,
+              "content": "indirect_or_conditional",
+              "tool_calls": []
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 122,
+          "total_tokens": 128,
+          "completion_tokens": 6,
+          "prompt_tokens_details": null
+        },
+        "prompt_logprobs": null
+      },
+      "label": "indirect_or_conditional"
+    }
+  ]
+}

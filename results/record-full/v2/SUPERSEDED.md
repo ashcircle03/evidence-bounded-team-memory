@@ -1,0 +1,1 @@
+v2 preserved for audit. The same quoted value matching duplicated gold references could produce multiple false edges for a single wrong target attachment. v3 deduplicates equal material-anchor values per predicted target/role; gold unchanged. See PROTOCOL.md and v3 results.

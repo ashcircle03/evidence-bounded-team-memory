@@ -6,7 +6,7 @@
 
 [팀 개발 계약](docs/modules/README.md) · [모듈 지도](docs/architecture.md) · [시작하기](#시작하기) · [JSONL API](docs/service-v2.md) · [개발 안내](CONTRIBUTING.md) · [평가 결과](results/README.md) · [전체 문서](docs/INDEX.md)
 
-**v0.2.1** · records 담당자는 [단일 추출 진입점과 연결 예시](team_memory/records/README.md)에서 시작한다. [68문서 연결·근거 전달 검증](results/records/v0.2.1.csv) · [변경 기록](CHANGELOG.md)
+**v0.2.1** · records 담당자는 [단일 추출 진입점과 연결 예시](team_memory/records/README.md)에서 시작한다. [68문서 연결·근거 전달 검증](results/records/v0.2.1.csv) · [변경 기록](CHANGELOG.md) [Records 실험별 채택 여부와 MeeQA 결과](docs/modules/records-experiments.md)
 
 ## 할 수 있는 일
 
