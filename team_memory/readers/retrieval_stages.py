@@ -122,6 +122,33 @@ class LlamaIndexCandidates(CandidateSource):
         return {name: retriever.retrieve(query_bundle) for name, retriever in self.channels.items()}
 
 
+class ThresholdedCandidates(CandidateSource):
+    """Stage 1 filter for "not in the records": drop candidates no threshold vouches for.
+
+    thresholds maps channel name to a minimum score or None. A candidate passes
+    if, in some channel that has a threshold, its score is at least that value.
+    Channels without a threshold cannot make a candidate pass. Passing
+    candidates keep their place in every channel, so fusion still sees both
+    ranks. If nothing passes, retrieval has no hits. The excluded candidates,
+    with their original ranks and scores, go to the trace.
+    """
+
+    def __init__(self, inner, thresholds, *, trace=None):
+        if all(value is None for value in thresholds.values()):
+            raise ValueError('At least one score threshold is required')
+        self.inner, self.thresholds, self.trace = inner, dict(thresholds), trace or NO_TRACE
+        self.name, self.version = f'{inner.name}+thresholds', inner.version
+
+    def retrieve(self, query_bundle):
+        channels = self.inner.retrieve(query_bundle)
+        passing = {n.node.node_id for name, nodes in channels.items() if self.thresholds.get(name) is not None
+                   for n in nodes if n.score is not None and n.score >= self.thresholds[name]}
+        self.trace.record('thresholds', dict(minimum=self.thresholds, excluded=[
+            item for name, nodes in channels.items() for item in plain(describe(name, nodes))
+            if item['node_id'] not in passing]))
+        return {name: [n for n in nodes if n.node.node_id in passing] for name, nodes in channels.items()}
+
+
 class _Fixed(BaseRetriever):
     """Hand an already retrieved list to the upstream fusion class."""
 

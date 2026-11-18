@@ -7,7 +7,7 @@ import tempfile
 
 from team_memory.contracts.validation import check_snapshot
 from team_memory.readers.retrieval import ReferenceQA
-from team_memory.readers.retrieval_stages import Trace
+from team_memory.readers.retrieval_stages import LlamaIndexCandidates,ThresholdedCandidates,Trace
 from .base import Adapter,Failure,issue
 from .reader_bridge import reader_for,evidence_from,query_text
 
@@ -68,8 +68,13 @@ class RetrievalAdapter(Adapter):
     module='retrieval'
     capabilities={'evidence.retrieve':'evidence:read','evidence.prepare':'records:write'}
 
-    def __init__(self,workspace_id,reader_factory,cache_root,*,snapshot_loader):
+    def __init__(self,workspace_id,reader_factory,cache_root,*,snapshot_loader,min_dense_score=None,min_sparse_score=None):
         super().__init__(workspace_id);self.factory=reader_factory;self.cache_root=cache_root;self.snapshot_loader=snapshot_loader
+        # "Not in the records" gate, off by default. Values are set later from development data.
+        for value in (min_dense_score,min_sparse_score):
+            if value is not None and (isinstance(value,bool) or not isinstance(value,(int,float))):
+                raise ValueError('Score thresholds must be numbers or None')
+        self.min_dense_score,self.min_sparse_score=min_dense_score,min_sparse_score
 
     def execute(self,operation,payload,context):
         snapshot=payload['snapshot'];check_snapshot(snapshot);self.verify_snapshot(snapshot)
@@ -100,6 +105,15 @@ class RetrievalAdapter(Adapter):
 
     def retrieve(self,snapshot,query,limit,trace):
         reader=reader_for(self.factory,self.cache_root,snapshot)
+        thresholds=dict(dense=self.min_dense_score,sparse=self.min_sparse_score)
+        if any(value is not None for value in thresholds.values()):
+            inner=getattr(reader,'candidate_source',None)
+            def source(index):
+                # Same default stage 1 as ReferenceQA.ask, then the score gate.
+                base=inner(index) if inner else LlamaIndexCandidates(index,reader.top_k,sparse=reader.sparse,
+                                                                      use_sparse=reader.profile=='team')
+                return ThresholdedCandidates(base,thresholds,trace=trace)
+            reader.candidate_source=source
         from team_memory.readers.indexing import IndexNotReady
         try:
             prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True,trace=trace)

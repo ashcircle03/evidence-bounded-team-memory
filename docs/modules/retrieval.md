@@ -30,6 +30,8 @@ DB에 정답 근거가 있는지의 gold label은 검색기 입력에 넣지 않
 
 오류 코드: snapshot 불일치 `EVIDENCE_INVALID`, 예산 초과 `BUDGET_EXCEEDED`(partial), 준비되지 않았거나 맞지 않는 색인 `INDEX_STALE`, 그 밖의 검색·인용·구간 실패 `RETRIEVAL_FAILED`. 실패를 `no_hits`로 바꾸지 않는다.
 
+"DB에 없음" 판단 장치: retrieval adapter의 `min_dense_score`, `min_sparse_score`(기본 `None` = 꺼짐). 하나라도 주면 ①의 후보를 점수로 거른다. 기준을 준 채널에서 점수가 그 기준 이상인 후보만 남고, 기준이 없는 채널은 후보를 통과시킬 수 없다. 남은 후보는 모든 채널의 순위를 그대로 융합에 쓴다. 아무것도 남지 않으면 `coverage='no_hits'`, 근거는 빈 목록이다. 뺀 후보와 점수는 진단 기록의 `thresholds`에 남는다. 기준값은 records의 벡터 단위와 임베딩 모델이 정해진 뒤 개발용 데이터로 정하며, 꺼져 있으면 출력은 바뀌지 않는다.
+
 ①만 교체 대상이다. reader에 `candidate_source(index)`를 주면 기본 후보 대신 그 결과를 쓴다. 채널이 하나면 융합하지 않는다.
 
 공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).
