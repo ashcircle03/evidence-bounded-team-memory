@@ -1,0 +1,3 @@
+# Failed before QA — empty-clone branch behavior
+
+Slurm122930 FAILED/1:0,536 seconds with2 GPUs (17.87 GPU-minutes). Both Qwen servers started. SourceStore persisted all1,276 historical objects, but Git2.25.1 created `master` for the empty clone despite the bare remote's symbolic HEAD `main`; the first `push origin main` failed. No QA calls ran. Preserve these records and the original packet/log. Recovery122931 clones this committed source-only repository, explicitly renames `main`, sets the new remote and verifies all source objects against the frozen inputs before fresh QA. No indexes, receipts, or answers are reused. A zero-second diagnostic step ran inside the existing allocation; it did not allocate additional GPUs.

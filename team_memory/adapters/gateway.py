@@ -73,7 +73,7 @@ class GatewayAdapter(Adapter):
             progress['plan']=plan;progress['errors']=errors;save()
         errors=deepcopy(progress.get('errors',[]))
         graph=progress.get('prepared_source',{}).get('record_graph')
-        if graph and graph['status']=='failed':errors.append(issue('MODEL_OUTPUT_INVALID','Record extraction failed; original source remains available'))
+        if graph and graph['status'] in ('failed','partial'):errors.append(issue('MODEL_OUTPUT_INVALID','Record extraction '+graph['status']+'; original source and accepted annotations remain available'))
         for index,c in enumerate(progress['plan']['candidates']):
             if index<len(progress['done']):continue
             if index==len(progress['steps']):

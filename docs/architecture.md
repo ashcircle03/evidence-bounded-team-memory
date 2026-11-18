@@ -2,6 +2,8 @@
 
 **팀의 새 개발 기준:** [다섯 모듈의 계약 v1](modules/README.md). 아래 표는 현재 구현 파일의 배치이며, 협업 계약의 완료 여부·전환 책임은 새 문서의 전환표를 따른다.
 
+2026-11-15 records 보완: [개별 상태를 보존하는 저장 경로](modules/records-preserving.md)는 기존 grouped 추출을 재사용하고 `record_builder`로 주입한다. 부분 복구는 옵션이다. [원인별 검증과 적용 판단](../results/record-causal/v1/README.md)을 따르며, 이 변경이 모든 서비스 설정을 자동 교체하거나 QA 성능을 검증했다는 뜻은 아니다.
+
 2026-11-14. 모듈 위치와 import를 정리한 변경이다. 모델·프롬프트·상태 전이·평가 기준은 유지한다. 모델 효과 검증은 [레퍼런스 연결 감사](reference-composition-audit.md)의 별도 동결 실행을 따른다.
 
 ```mermaid

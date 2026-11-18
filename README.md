@@ -6,6 +6,8 @@
 
 [팀 개발 계약](docs/modules/README.md) · [모듈 지도](docs/architecture.md) · [시작하기](#시작하기) · [JSONL API](docs/service-v2.md) · [개발 안내](CONTRIBUTING.md) · [평가 결과](results/README.md) · [전체 문서](docs/INDEX.md)
 
+**v0.2.1** · records 담당자는 [단일 추출 진입점과 연결 예시](team_memory/records/README.md)에서 시작한다. [68문서 연결·근거 전달 검증](results/records/v0.2.1.csv) · [변경 기록](CHANGELOG.md) [Records 실험별 채택 여부와 MeeQA 결과](docs/modules/records-experiments.md)
+
 ## 할 수 있는 일
 
 - 원문·작성자·시간을 보존하고, 질문에 대한 답과 원문 근거를 반환한다.
@@ -45,7 +47,7 @@ docs/                     # 설계 의도·입출력·개발·연구 이력
 | API 연결·오류 반환 | [service.py](team_memory/service.py) | [요청·응답 명세](docs/service-v2.md) |
 | 새로운 실험 후보 | [experiments/](team_memory/experiments/) | [기본 경로와의 경계](team_memory/experiments/README.md) |
 
-최근 records 작업: [추출 계약·같은 모델 비교](results/record-contract/README.md), [질문 독립 저장·벡터화 감사](results/service-storage/README.md). 새 입력의 부분 점수는 올랐지만 보호 연결 퇴행으로 기본 채택하지 않았다. 저장·색인 준비는 질문 경로에서 분리했다. [수명주기 계약](docs/modules/index-lifecycle.md)과 [변경·회귀 검증](results/service-storage/v1/README.md)을 참고한다.
+최근 records 작업: [추출 계약·같은 모델 비교](results/record-contract/README.md), [질문 독립 저장·벡터화 감사](results/service-storage/README.md). 새 입력의 부분 점수는 올랐지만 보호 연결 퇴행으로 기본 채택하지 않았다. 저장·색인 준비는 질문 경로에서 분리했다. [수명주기 계약](docs/modules/index-lifecycle.md)과 [비용 분해·변경 문서 처리·QA 보존](results/service-storage/v2b/README.md)을 참고한다.
 
 기존 `team_memory.reference_*`, `timeline`, `source_store` import와 실행 명령은 호환 경로로 유지한다. 새 코드는 위 경로를 사용한다. `store.py`는 과거 데이터셋의 해시 검증에 묶인 원본이므로 그대로 보존한다. [호환·과거 경로 안내](docs/architecture.md).
 

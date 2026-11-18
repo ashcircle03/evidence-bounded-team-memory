@@ -63,7 +63,18 @@ def build_schema():
     d['record_graph_claim_v2']['required'].append('basis_annotations')
     d['record_graph_v2']=deepcopy(d['record_graph'])
     d['record_graph_v2']['properties'].update(version={'const':'records.graph/v2'},claims=arr(ref('record_graph_claim_v2')))
-    d["source"]["properties"]["record_graph"] = {'oneOf':[ref('record_graph'),ref('record_graph_v2')]}
+    d['record_graph_claim_v3']=deepcopy(d['record_graph_claim_v2'])
+    d['record_graph_claim_v3']['properties']['assertions']=arr(obj(unit_ids=arr(S),stance=enum('observation','decision','proposal','uncertainty','question','unknown'),kind=enum('assertion','qualification','method','continuation')))
+    d['record_graph_claim_v3']['required'].append('assertions')
+    d['record_graph_v3']=deepcopy(d['record_graph_v2'])
+    d['record_graph_v3']['properties'].update(version={'const':'records.graph/v3'},claims=arr(ref('record_graph_claim_v3')),status=enum('not_run','annotated','partial','failed'),diagnostics=arr(obj(path=S,reason=S)),excluded=arr(obj(start=N,end=N,quote=S,kind=enum('salutation','acknowledgement','formatting'))))
+    d['record_graph_v3']['required'].extend(['diagnostics','excluded'])
+    d['record_context_binding']=obj(id=S,target_start=N,target_end=N,context_start=N,context_end=N,
+        role=enum('condition','basis'),basis_kind=enum('stated','unspecified'))
+    d['record_graph_v4']=deepcopy(d['record_graph_v3'])
+    d['record_graph_v4']['properties'].update(version={'const':'records.graph/v4'},context_bindings=arr(ref('record_context_binding')))
+    d['record_graph_v4']['required'].append('context_bindings')
+    d["source"]["properties"]["record_graph"] = {'oneOf':[ref('record_graph'),ref('record_graph_v2'),ref('record_graph_v3'),ref('record_graph_v4')]}
     d["candidate"] = obj(
         kind=enum("coexist", "conflict", "correction", "reconsider"),
         previous=ref("span"), incoming=ref("span"), reason=S,

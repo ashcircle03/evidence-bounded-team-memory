@@ -64,6 +64,12 @@
             },
             {
               "$ref": "#/$defs/record_graph_v2"
+            },
+            {
+              "$ref": "#/$defs/record_graph_v3"
+            },
+            {
+              "$ref": "#/$defs/record_graph_v4"
             }
           ]
         }
@@ -448,6 +454,447 @@
         "claims",
         "errors",
         "edges"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_claim_v3": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "condition": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "basis": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "time": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "subject": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "stance": {
+          "enum": [
+            "observation",
+            "decision",
+            "proposal",
+            "uncertainty",
+            "question",
+            "unknown"
+          ]
+        },
+        "qualification": {
+          "const": "model_extracted_unverified"
+        },
+        "basis_annotations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "unit_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "stated",
+                  "inferred",
+                  "unspecified"
+                ]
+              }
+            },
+            "required": [
+              "unit_id",
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "unit_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "stance": {
+                "enum": [
+                  "observation",
+                  "decision",
+                  "proposal",
+                  "uncertainty",
+                  "question",
+                  "unknown"
+                ]
+              },
+              "kind": {
+                "enum": [
+                  "assertion",
+                  "qualification",
+                  "method",
+                  "continuation"
+                ]
+              }
+            },
+            "required": [
+              "unit_ids",
+              "stance",
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "claim",
+        "condition",
+        "basis",
+        "time",
+        "subject",
+        "stance",
+        "qualification",
+        "basis_annotations",
+        "assertions"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_v3": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "records.graph/v3"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_fingerprint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "builder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "not_run",
+            "annotated",
+            "partial",
+            "failed"
+          ]
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_unit"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_claim_v3"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_edge"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "salutation",
+                  "acknowledgement",
+                  "formatting"
+                ]
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "quote",
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "version",
+        "source_id",
+        "source_fingerprint",
+        "builder",
+        "model",
+        "status",
+        "units",
+        "claims",
+        "errors",
+        "edges",
+        "diagnostics",
+        "excluded"
+      ],
+      "additionalProperties": false
+    },
+    "record_context_binding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target_end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "context_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "context_end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "role": {
+          "enum": [
+            "condition",
+            "basis"
+          ]
+        },
+        "basis_kind": {
+          "enum": [
+            "stated",
+            "unspecified"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "target_start",
+        "target_end",
+        "context_start",
+        "context_end",
+        "role",
+        "basis_kind"
+      ],
+      "additionalProperties": false
+    },
+    "record_graph_v4": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "records.graph/v4"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_fingerprint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "builder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "not_run",
+            "annotated",
+            "partial",
+            "failed"
+          ]
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_unit"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_claim_v3"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_graph_edge"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "salutation",
+                  "acknowledgement",
+                  "formatting"
+                ]
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "quote",
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "context_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record_context_binding"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "source_id",
+        "source_fingerprint",
+        "builder",
+        "model",
+        "status",
+        "units",
+        "claims",
+        "errors",
+        "edges",
+        "diagnostics",
+        "excluded",
+        "context_bindings"
       ],
       "additionalProperties": false
     },
