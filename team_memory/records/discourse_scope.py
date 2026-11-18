@@ -1,7 +1,7 @@
 """Match the relation classifier's sentence channel and observed endpoint geometry."""
 from copy import deepcopy
 from nltk.tokenize import PunktTokenizer
-from team_memory.records import discourse_roles
+from team_memory.records import preserving
 
 
 def sentence_pairs(source, pairs):
@@ -35,8 +35,17 @@ def supported_decisions(pairs, decisions, training_counts):
             for pair,decision in zip(pairs,decisions)]
 
 
-def construct(source, generate, predict, training_counts, *, model):
+def scoped_predictor(source, predict, training_counts, parse=None):
+    """Adapt the model decision to its observed geometry and optional policy syntax."""
     def adapted(pairs):
-        localized=sentence_pairs(source,pairs)
-        return supported_decisions(localized,predict(localized),training_counts)
-    return discourse_roles.construct(source,generate,adapted,model=model)
+        local = sentence_pairs(source, pairs)
+        roles = supported_decisions(local, predict(local), training_counts)
+        if parse is not None:
+            from . import policy_scope
+            roles = policy_scope.merge(roles, [policy_scope.restriction(p, parse) for p in local])
+        return roles
+    return adapted
+
+
+def construct(source, generate, predict, training_counts, *, model):
+    return preserving.construct(source, generate, predict=predict, training_counts=training_counts, model=model)

@@ -26,3 +26,31 @@ def test_single_target_membership_survives_overlapping_roles():
     assert h==unchanged['claims'][1] and unchanged['units']==graph['units']
     with pytest.raises(ValueError,match='Invalid discourse role'):
         discourse_roles.apply(source,raw,lambda _:[],model='fixture')
+
+
+def test_changed_role_reuses_alignment_and_units(monkeypatch):
+    from langextract import resolver
+    from team_memory.records import grouped, preserving
+    from unittest.mock import patch
+
+    text = 'Inspect the door because the hinge is loose.'
+    src = dict(id='s', text=text, owner='owner', speaker='writer', location='lab',
+               observed_at='2026-01-01T00:00:00Z')
+    raw = json.dumps({'extractions': [
+        {'claim': 'Inspect the door', 'claim_attributes': {'claim_group': 'a', 'stance': 'decision'}},
+        {'condition': 'because the hinge is loose', 'condition_attributes': {'claim_group': 'a', 'stance': 'unknown'}},
+    ]})
+    aligned = []
+    original = resolver.Resolver.align
+
+    def count(self, extractions, *args, **kwargs):
+        aligned.extend(e.extraction_text for e in extractions)
+        return original(self, extractions, *args, **kwargs)
+
+    monkeypatch.setattr(resolver.Resolver, 'align', count)
+    with patch.object(grouped, 'partition_units', wraps=grouped.partition_units) as partition:
+        record = preserving.construct(src, lambda *_: raw, model='test', predict=lambda _: ['basis'])
+    assert aligned == ['Inspect the door', 'because the hinge is loose']
+    partition.assert_called_once()
+    claim = record['record_graph']['claims'][0]
+    assert claim['condition'] == [] and claim['basis_annotations'][0]['kind'] == 'stated'

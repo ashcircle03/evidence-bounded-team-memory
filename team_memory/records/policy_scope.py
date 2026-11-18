@@ -54,11 +54,6 @@ def merge(decisions, restrictions):
 
 
 def construct(source, generate, predict, training_counts, *, model, parse):
-    from . import discourse_roles, discourse_scope
-
-    def adapted(pairs):
-        local = discourse_scope.sentence_pairs(source, pairs)
-        decisions = discourse_scope.supported_decisions(local, predict(local), training_counts)
-        return merge(decisions, [restriction(p, parse) for p in local])
-
-    return discourse_roles.construct(source, generate, adapted, model=model)
+    from . import preserving
+    return preserving.construct(source, generate, model=model, predict=predict,
+                                training_counts=training_counts, parse=parse)

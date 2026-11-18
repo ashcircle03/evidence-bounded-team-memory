@@ -87,7 +87,6 @@ def compile_graph(source,raw,*,canonical=False,basis_types=False):
     """
     import jsonschema
     from langextract.core.data import AlignmentStatus
-    from .graph import sentence_units
     parsed=json.loads(raw);jsonschema.validate(parsed,output_schema(basis_types=basis_types))
     _,resolver=components();extractions=resolver.resolve(raw)
     groups=defaultdict(list);spans=[]
@@ -104,6 +103,17 @@ def compile_graph(source,raw,*,canonical=False,basis_types=False):
         if basis_types:span['basis_kind']=e.attributes.get('basis_kind','unspecified')
         if span['role']!='claim' and span['stance']!='unknown':raise ValueError('Context has claim stance')
         groups[span['group']].append(span);spans.append(span)
+    units = partition_units(source, spans)
+    claims = [claim_fields(source, rows, units, canonical=canonical, basis_types=basis_types)
+              for rows in groups.values()]
+    graph=dict(version='records.graph/v2' if basis_types else VERSION,source_id=source['id'],source_fingerprint=source_fingerprint(source),
+        builder='langextract-1.7.2-claim-groups-'+('canonical-v2' if canonical else 'v1'),model='unspecified',status='annotated',units=units,
+        claims=claims,errors=[],edges=edges_for(source['id'],units,claims))
+    validate_graph(source,graph);return graph
+
+
+def partition_units(source, spans):
+    from .graph import sentence_units
     windows=sentence_units(source)
     bounds=sorted({0,len(source['text']),*(u[k] for u in windows for k in ('start','end')),
                    *(s[k] for s in spans for k in ('start','end'))})
@@ -113,29 +123,28 @@ def compile_graph(source,raw,*,canonical=False,basis_types=False):
         touched=[u for u in windows if max(a,u['start'])<min(b,u['end'])]
         units.append(dict(id='u:'+digest([source['id'],[a,b]]),index=len(units),start=a,end=b,quote=source['text'][a:b],
                           window_start=min(a,*(u['window_start'] for u in touched)),window_end=max(b,*(u['window_end'] for u in touched))))
-    claims=[]
-    for rows in groups.values():
-        claim_rows=[s for s in rows if s['role']=='claim']
-        if not claim_rows:raise ValueError('Orphaned context group')
-        stances={s['stance'] for s in claim_rows}
-        if len(stances)!=1 and not canonical:raise ValueError('Conflicting stances in one claim group')
-        fields={role:[u['id'] for u in units if any(s['role']==role and s['start']<=u['start'] and u['end']<=s['end'] for s in rows)] for role in ROLES}
-        # Different per-span labels are not an authoritative group state. Preserve
-        # every original span and explicitly leave the group's stance unknown.
-        fields.update(stance=next(iter(stances)) if len(stances)==1 else 'unknown',qualification='model_extracted_unverified')
-        if basis_types:
-            annotations=[]
-            for u in units:
-                if u['id'] not in fields['basis']:continue
-                modes={r['basis_kind'] for r in rows if r['role']=='basis' and r['start']<=u['start'] and u['end']<=r['end']}
-                if len(modes)!=1:raise ValueError('Ambiguous basis qualification')
-                annotations.append(dict(unit_id=u['id'],kind=next(iter(modes))))
-            fields['basis_annotations']=annotations
-        fields['id']='c:'+digest([source['id'],fields]);claims.append(fields)
-    graph=dict(version='records.graph/v2' if basis_types else VERSION,source_id=source['id'],source_fingerprint=source_fingerprint(source),
-        builder='langextract-1.7.2-claim-groups-'+('canonical-v2' if canonical else 'v1'),model='unspecified',status='annotated',units=units,
-        claims=claims,errors=[],edges=edges_for(source['id'],units,claims))
-    validate_graph(source,graph);return graph
+    return units
+
+
+def claim_fields(source, rows, units, *, canonical, basis_types):
+    claim_rows=[s for s in rows if s['role']=='claim']
+    if not claim_rows:raise ValueError('Orphaned context group')
+    stances={s['stance'] for s in claim_rows}
+    if len(stances)!=1 and not canonical:raise ValueError('Conflicting stances in one claim group')
+    fields={role:[u['id'] for u in units if any(s['role']==role and s['start']<=u['start'] and u['end']<=s['end'] for s in rows)] for role in ROLES}
+    # Different per-span labels are not an authoritative group state. Preserve
+    # every original span and explicitly leave the group's stance unknown.
+    fields.update(stance=next(iter(stances)) if len(stances)==1 else 'unknown',qualification='model_extracted_unverified')
+    if basis_types:
+        annotations=[]
+        for u in units:
+            if u['id'] not in fields['basis']:continue
+            modes={r['basis_kind'] for r in rows if r['role']=='basis' and r['start']<=u['start'] and u['end']<=r['end']}
+            if len(modes)!=1:raise ValueError('Ambiguous basis qualification')
+            annotations.append(dict(unit_id=u['id'],kind=next(iter(modes))))
+        fields['basis_annotations']=annotations
+    fields['id'] = 'c:' + digest([source['id'], fields])
+    return fields
 
 
 def construct(source,generate,*,model,canonical=False):

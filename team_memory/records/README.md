@@ -8,10 +8,14 @@
 
 ```python
 from functools import partial
+from team_memory.adapters.runtime import connect_v2
 from team_memory.records import preserving
 
 record_builder = partial(preserving.construct, generate=generate, model=model_id)
-# connect_v2(..., record_builder=record_builder)
+gateway = connect_v2(
+    root, workspace_id=workspace_id, reader_factory=reader_factory,
+    generate=generate, record_builder=record_builder,
+)
 ```
 
 | 작업 | 수정하거나 확인할 코드 |
@@ -23,7 +27,7 @@ record_builder = partial(preserving.construct, generate=generate, model=model_id
 | 정책 대상 명사구의 제한절을 적용 조건으로 연결 | [policy_scope.py](policy_scope.py) |
 | 명시적 대상 구절을 가진 실험 v4 그래프 호환 | [pair_binding.py](pair_binding.py) |
 
-역할 보정을 평가할 때는 `policy_scope.construct(source, generate, predict, training_counts, model=model_id, parse=parse)`를 사용한다. `predict`는 후보 순서대로 keep/condition/basis를 반환하고, `training_counts`는 학습에 관측된 구절 위치 관계별 빈도다. `parse`는 영어 의존 구문 분석 callback이다. 측정에는 spaCy 3.7.5와 en_core_web_sm 3.7.1을 사용했다. 학습 체크포인트와 비공개 실행 경로는 릴리스에 포함하지 않았다. 추출 구절의 원문 일치, 모델 판단, 검토 승인은 각각 별개다.
+기본 추출과 역할 보정은 모두 `preserving.construct`를 사용한다. 역할 보정을 켜려면 같은 함수에 `predict=predict, training_counts=training_counts, parse=parse`를 전달한다. 이전 `discourse_roles.construct`, `discourse_scope.construct`, `policy_scope.construct`도 이 경로를 호출한다. 각 추출 행의 원문 위치를 한 번 정렬한 뒤 같은 위치로 후보와 저장 그래프를 구성한다. 역할이 바뀌면 해당 주장 그룹의 필드와 그래프 연결을 갱신한다. `predict`는 후보 순서대로 keep/condition/basis를 반환하고, `training_counts`는 학습에 관측된 구절 위치 관계별 빈도다. `parse`는 영어 의존 구문 분석 callback이다. 측정에는 spaCy 3.7.5와 en_core_web_sm 3.7.1을 사용했다. 학습 체크포인트와 비공개 실행 경로는 릴리스에 포함하지 않았다. 추출 구절의 원문 일치, 모델 판단, 검토 승인은 각각 별개다.
 
 ## v0.2.0의 평가 범위
 
@@ -36,3 +40,7 @@ python -m pytest -q tests/test_record_preservation.py tests/test_discourse_roles
 ```
 
 구문 분석 모델이 있는 Python 환경에서는 `python -m evaluation.record_binding.discourse.check_policy_scope`로 RFC 5049 예시와 여섯 대조 사례를 확인한다.
+
+### v0.2.1 검증 결과
+
+동일한 68개 입력으로 태그의 policy_scope.construct와 통합된 preserving.construct를 각각 실행했다. 저장 후 다시 읽은 records 전체, reader에 전달한 근거 묶음 192개, 문서별 정답 연결 51개와 오연결 19개의 식별자가 일치했다. LangExtract 정렬에 전달된 추출 행은 1,431→294개, 원문에서 그래프 단위를 만들기 위한 문장 분할은 136→68회였다. 고정 모델 출력을 재사용한 구조 회귀 검사다. 최종 QA 응답 생성은 이번 검증 범위 밖이다. [문서별 비교표](../../results/records/v0.2.1.csv)에서 before는 v0.2.0, after는 v0.2.1이다. 각 SHA-256 열은 문서별로 정렬한 정답·오연결 식별자, 저장 기록 전체 또는 reader에 전달된 근거 묶음을 비교한다.
