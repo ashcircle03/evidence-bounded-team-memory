@@ -71,6 +71,30 @@ class RetrievalStageTests(unittest.TestCase):
         self.assertEqual(failed.failure, {'stage': 'candidates', 'exception': 'RuntimeError'})
         self.assertNotIn('secret-token-123', json.dumps([failed.data, failed.failure]))
 
+    def test_citation_split_matches_the_upstream_engine(self):
+        from llama_index.core.node_parser import SentenceSplitter
+        from llama_index.core.query_engine import CitationQueryEngine
+        from llama_index.core.schema import MetadataMode, NodeWithScore, TextNode
+        from team_memory.readers.retrieval_stages import citation_nodes
+        service, index = self.catalogue()
+        nodes = index.as_retriever(similarity_top_k=4).retrieve('preserved record')
+        long_text = ' '.join(f'Sentence {i} keeps a long record going.' for i in range(400))
+        nodes.append(NodeWithScore(node=TextNode(text=long_text, metadata=dict(record_author='a', source_id='x')), score=0.5))
+        nodes.append(NodeWithScore(node=TextNode(text='State text.', metadata=dict(record_author='r', evidence_type='review_state'),
+                                                 excluded_llm_metadata_keys=['source_id']), score=None))
+        for mode, chunk in ((MetadataMode.LLM, 1024), (MetadataMode.NONE, 64)):
+            splitter = SentenceSplitter(chunk_size=chunk, chunk_overlap=0, include_metadata=False,
+                                        tokenizer=lambda t: self.tokenizer.encode(t, add_special_tokens=False))
+            engine = CitationQueryEngine(index.as_retriever(), llm=self.llm, text_splitter=splitter, metadata_mode=mode)
+            expected = engine._create_citation_nodes(nodes)
+            actual = citation_nodes(splitter, mode, nodes)
+            self.assertGreater(len(actual), len(nodes))  # the long node is split
+            self.assertEqual(
+                [(n.score, n.node.get_content(metadata_mode=MetadataMode.NONE), n.node.metadata,
+                  n.node.start_char_idx, n.node.end_char_idx, n.node.get_metadata_str(mode=MetadataMode.LLM)) for n in actual],
+                [(n.score, n.node.get_content(metadata_mode=MetadataMode.NONE), n.node.metadata,
+                  n.node.start_char_idx, n.node.end_char_idx, n.node.get_metadata_str(mode=MetadataMode.LLM)) for n in expected])
+
     def test_standard_profile_keeps_a_single_dense_channel(self):
         from team_memory.readers.retrieval_stages import LlamaIndexCandidates, StagedRetriever
         _, index = self.catalogue()

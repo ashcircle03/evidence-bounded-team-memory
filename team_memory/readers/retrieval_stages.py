@@ -214,6 +214,35 @@ def review_state_nodes(store, context):
     return nodes
 
 
+def citation_nodes(splitter, metadata_mode, nodes):
+    """Stage 5 split without a query engine.
+
+    The same as CitationQueryEngine._create_citation_nodes in llama-index-core
+    0.14.25 for text nodes: split each node's content, drop its id and offsets,
+    and number the chunks "Source N:". Retrieval-only requests need this split
+    but none of the engine's generation components.
+    """
+    result = []
+    for node in nodes:
+        chunks = splitter.split_text(node.node.get_content(metadata_mode=metadata_mode))
+        data = node.node.model_dump()
+        data.pop('id_', None)
+        data['start_char_idx'] = None
+        data['end_char_idx'] = None
+        for chunk in chunks:
+            item = NodeWithScore(node=TextNode.model_validate(data), score=node.score)
+            item.node.set_content(f'Source {len(result) + 1}:\n{chunk}\n')
+            result.append(item)
+    return result
+
+
+def witnesses_from_nodes(reader, retriever, splitter, metadata_mode, question, selected_nodes, sources):
+    """Stage 5 for retrieval-only requests: citation split, then offsets via reader._witness."""
+    nodes = retriever.retrieve(QueryBundle(question)) if selected_nodes is None else selected_nodes
+    return [reader._witness(n.node, sources, i)
+            for i, n in enumerate(citation_nodes(splitter, metadata_mode, nodes), 1)]
+
+
 def citation_witnesses(reader, engine, question, selected_nodes, sources):
     """Stage 5: CitationQueryEngine's own split, then offsets via reader._witness."""
     nodes = engine._create_citation_nodes(
