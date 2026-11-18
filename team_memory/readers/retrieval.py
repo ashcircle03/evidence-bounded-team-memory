@@ -23,9 +23,11 @@ from team_memory.storage.objects import Store, capture, digest, source_envelope
 class ReferenceQA:
     def __init__(self, store, *, llm, embed_model, tokenizer, top_k=4,
                  chunk_size=512, chunk_overlap=64, context_window=32768,
-                 num_output=1024, index_dir=None, profile='standard'):
+                 num_output=1024, index_dir=None, profile='standard', index_unit='chunks'):
         if profile not in ('standard', 'team'):
             raise ValueError('Unknown source-QA profile')
+        if index_unit not in ('chunks', 'records'):
+            raise ValueError('Unknown index unit')
         self.profile = profile
         if not 0 <= chunk_overlap < chunk_size or top_k < 1:
             raise ValueError('Positive retrieval and valid chunk bounds required')
@@ -46,6 +48,11 @@ class ReferenceQA:
             tokenizer_sha256=sha256(tokenizer.backend_tokenizer.to_str().encode()).hexdigest())
         if profile == 'team':
             self.index_config['metadata_profile'] = 'author-recorded-at-v1'
+        if index_unit == 'records':
+            # Opt-in: index records' claim spans where a record_graph exists (readers.indexing).
+            # The default adds nothing, so existing index keys and output stay the same.
+            from .indexing import RECORD_INDEX_UNIT
+            self.index_config['index_unit'] = RECORD_INDEX_UNIT
         self.index = None
         self.index_key = None
         self.sparse = None
