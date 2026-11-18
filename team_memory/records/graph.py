@@ -124,15 +124,34 @@ def build(source,generate=None,*,model='none'):
 
 
 def validate_graph(source,graph):
-    if set(graph)!={'version','source_id','source_fingerprint','builder','model','status','units','claims','errors','edges'}:
+    if graph.get('version')=='records.graph/v4':
+        from .pair_binding import binding_id
+        prior=deepcopy(graph);bindings=prior.pop('context_bindings')
+        prior['version']='records.graph/v3';validate_graph(source,prior)
+        units={u['id']:u for u in graph['units']}
+        anchors={(units[a['unit_ids'][0]]['start'],units[a['unit_ids'][-1]]['end']) for c in graph['claims'] for a in c['assertions']}
+        seen=set()
+        for b in bindings:
+            if set(b)!={'id','target_start','target_end','context_start','context_end','role','basis_kind'}:raise ValueError('Invalid context binding')
+            a,z,s,e=(b[k] for k in ('target_start','target_end','context_start','context_end'))
+            if any(type(x) is not int for x in (a,z,s,e)) or (a,z) not in anchors or not 0<=s<e<=len(source['text']):raise ValueError('Context binding outside source assertion')
+            if b['role'] not in ('condition','basis') or b['basis_kind']!=('stated' if b['role']=='basis' else 'unspecified'):raise ValueError('Invalid relation type')
+            if s<=a and z<=e:raise ValueError('Context contains target assertion')
+            if b['id']!=binding_id(source['id'],b) or b['id'] in seen:raise ValueError('Invalid binding identity')
+            seen.add(b['id'])
+        return
+    expected_graph={'version','source_id','source_fingerprint','builder','model','status','units','claims','errors','edges'}
+    v3=graph.get('version')=='records.graph/v3'
+    if v3:expected_graph.update(('diagnostics','excluded'))
+    if set(graph)!=expected_graph:
         raise ValueError('Invalid graph fields')
-    if graph['version'] not in (VERSION,'records.graph/v2') or graph['source_id']!=source['id'] or graph['source_fingerprint']!=source_fingerprint(source):
+    if graph['version'] not in (VERSION,'records.graph/v2','records.graph/v3') or graph['source_id']!=source['id'] or graph['source_fingerprint']!=source_fingerprint(source):
         raise ValueError('Graph belongs to different source content')
-    if graph['status'] not in ('not_run','annotated','failed'):raise ValueError('Invalid extraction status')
+    if graph['status'] not in (('not_run','annotated','failed','partial') if v3 else ('not_run','annotated','failed')):raise ValueError('Invalid extraction status')
     if not all(isinstance(graph[k],str) and graph[k] for k in ('builder','model')):raise ValueError('Missing producer')
     if not isinstance(graph['errors'],list) or any(not isinstance(e,str) for e in graph['errors']):raise ValueError('Invalid errors')
-    if (graph['status']=='failed')!=bool(graph['errors']):raise ValueError('Failure status differs from errors')
-    if graph['status']!='annotated' and graph['claims']:raise ValueError('Failed extraction has accepted claims')
+    if (graph['status'] in ('failed','partial'))!=bool(graph['errors']):raise ValueError('Failure status differs from errors')
+    if graph['status'] not in ('annotated','partial') and graph['claims']:raise ValueError('Failed extraction has accepted claims')
     text=source['text'];prior=0;units={}
     for i,u in enumerate(graph['units']):
         if set(u)!={'id','index','start','end','quote','window_start','window_end'}:raise ValueError('Invalid unit')
@@ -145,12 +164,23 @@ def validate_graph(source,graph):
     seen=set()
     for c in graph['claims']:
         expected_fields=set(ROLES)|{'id','stance','qualification'}
-        if graph['version']=='records.graph/v2':expected_fields.add('basis_annotations')
+        if graph['version'] in ('records.graph/v2','records.graph/v3'):expected_fields.add('basis_annotations')
+        if v3:expected_fields.add('assertions')
         if set(c)!=expected_fields:raise ValueError('Invalid claim fields')
-        if graph['version']=='records.graph/v2':
+        if graph['version'] in ('records.graph/v2','records.graph/v3'):
             annotations=c['basis_annotations']
             if any(set(a)!={'unit_id','kind'} or a['kind'] not in ('stated','inferred','unspecified') for a in annotations):raise ValueError('Invalid basis qualification')
             if [a['unit_id'] for a in annotations]!=c['basis']:raise ValueError('Every basis span needs exactly one qualification')
+        if v3:
+            assertions=c['assertions']
+            if not assertions:raise ValueError('Missing assertion attributes')
+            covered=set()
+            for a in assertions:
+                if set(a)!={'unit_ids','stance','kind'} or a['stance'] not in ('observation','decision','proposal','uncertainty','question','unknown') or a['kind'] not in ('assertion','qualification','method','continuation'):raise ValueError('Invalid assertion attributes')
+                if not a['unit_ids'] or len(set(a['unit_ids']))!=len(a['unit_ids']) or not set(a['unit_ids'])<=set(c['claim']):raise ValueError('Assertion outside claim')
+                if a['unit_ids']!=sorted(a['unit_ids'],key=lambda uid:units[uid]['index']):raise ValueError('Unordered assertion spans')
+                covered.update(a['unit_ids'])
+            if covered!=set(c['claim']) or assertions[0]['kind']!='assertion' or c['stance']!=assertions[0]['stance']:raise ValueError('Lost assertion stance')
         if c['qualification']!='model_extracted_unverified':raise ValueError('Annotation promoted to fact')
         index_data={role:[units[uid]['index'] for uid in c[role]] for role in ROLES}
         Extraction.model_validate({'claims':[dict(index_data,stance=c['stance'])]})
@@ -159,6 +189,13 @@ def validate_graph(source,graph):
         expected='c:'+digest([source['id'],{k:v for k,v in c.items() if k!='id'}])
         if c['id']!=expected or c['id'] in seen:raise ValueError('Changed claim identity')
         seen.add(c['id'])
+    if v3:
+        if bool(graph['diagnostics'])!=bool(graph['errors']):raise ValueError('Unreported rejected item')
+        for d in graph['diagnostics']:
+            if set(d)!={'path','reason'} or not all(isinstance(v,str) and v for v in d.values()):raise ValueError('Invalid diagnostic')
+        for x in graph['excluded']:
+            if set(x)!={'start','end','quote','kind'} or x['kind'] not in ('salutation','acknowledgement','formatting') or type(x['start']) is not int or type(x['end']) is not int or not 0<=x['start']<x['end']<=len(text) or text[x['start']:x['end']]!=x['quote']:raise ValueError('Invalid excluded provenance')
+        if graph['status']=='partial' and not graph['claims']:raise ValueError('Partial requires accepted claims')
     if graph['edges']!=edges_for(source['id'],graph['units'],graph['claims']):raise ValueError('Changed graph links')
 
 
@@ -185,7 +222,8 @@ def linked_span(source,start,end):
             needed.update(uid for role in ROLES for uid in c[role])
     units=[u for u in graph['units'] if u['id'] in needed]
     if not units:return start,end
-    return min(start,min(u['window_start'] for u in units)),max(end,max(u['window_end'] for u in units))
+    contexts=[b for b in graph.get('context_bindings',[]) if max(start,b['target_start'])<min(end,b['target_end'])]
+    return min(start,*(u['window_start'] for u in units),*(b['context_start'] for b in contexts)),max(end,*(u['window_end'] for u in units),*(b['context_end'] for b in contexts))
 
 
 def describe(source,start,end):
@@ -198,9 +236,12 @@ def describe(source,start,end):
         if all(start<=by_id[uid]['start'] and by_id[uid]['end']<=end for role in ROLES for uid in c[role]):
             claims.append({**{k:c[k] for k in ('id','stance','qualification')},
                 **{role:[{k:by_id[uid][k] for k in ('id','start','end','quote')} for uid in c[role]] for role in ROLES},
-                **({'basis_annotations':deepcopy(c['basis_annotations'])} if 'basis_annotations' in c else {})})
+                **({'basis_annotations':deepcopy(c['basis_annotations'])} if 'basis_annotations' in c else {}),
+                **({'assertions':[{**a,'spans':[{k:by_id[uid][k] for k in ('id','start','end','quote')} for uid in a['unit_ids']]} for a in c['assertions']]} if 'assertions' in c else {})})
     return dict(source_id=source['id'],record_author=source['speaker'],location=source['location'],
+                **({'context_bindings':[dict(b,target_quote=source['text'][b['target_start']:b['target_end']],context_quote=source['text'][b['context_start']:b['context_end']],qualification='model_extracted_unverified') for b in graph['context_bindings'] if start<=min(b['target_start'],b['context_start']) and max(b['target_end'],b['context_end'])<=end]} if 'context_bindings' in graph else {}),
                 observed_at=source['observed_at'],extraction_status=graph['status'],
+                **({'diagnostics':deepcopy(graph['diagnostics'])} if 'diagnostics' in graph else {}),
                 annotation_completeness='not_proven',
                 unassigned_unit_ids=[u['id'] for u in graph['units'] if start<=u['start'] and u['end']<=end and not any(u['id'] in c['claim'] for c in graph['claims'])],
                 interpretation='Unverified reading aid, not independent evidence or approval. Raw source and explicit review state take precedence.',claims=claims)

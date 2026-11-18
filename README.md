@@ -6,6 +6,8 @@
 
 [팀 개발 계약](docs/modules/README.md) · [모듈 지도](docs/architecture.md) · [시작하기](#시작하기) · [JSONL API](docs/service-v2.md) · [개발 안내](CONTRIBUTING.md) · [평가 결과](results/README.md) · [전체 문서](docs/INDEX.md)
 
+**v0.2.0** · records 담당자는 [저장 진입점과 선택적 역할 보정](team_memory/records/README.md)에서 시작한다. [68문서별 연결 비교](results/records/v0.2.0.csv) · [변경 기록](CHANGELOG.md)
+
 ## 할 수 있는 일
 
 - 원문·작성자·시간을 보존하고, 질문에 대한 답과 원문 근거를 반환한다.

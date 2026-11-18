@@ -5,7 +5,8 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 REFERENCE_FILES={"test_service.py", "test_comparator_choice.py", "test_comparison_contract.py",
-                 "test_source_patch.py", "test_decision_patch.py"}
+                 "test_source_patch.py", "test_decision_patch.py",
+                 "test_record_preservation.py", "test_discourse_roles.py", "test_discourse_scope.py"}
 
 
 def selected(suite):
