@@ -1,0 +1,125 @@
+{
+  "job": "124652",
+  "elapsed": "00:10:32",
+  "input_documents": 3,
+  "requests": 30,
+  "ingest_calls": 3,
+  "answering_calls": 27,
+  "relations_llm_calls": 0,
+  "relations_prompt_tokens_reconstructed": [
+    56727,
+    65305
+  ],
+  "relations_reserved_output": 1024,
+  "context_window": 32768,
+  "rows": [
+    {
+      "id": "t01",
+      "first_divergence": "records extraction: truncated, zero linked claims/conditions",
+      "retrieved_witness_ids": [
+        [
+          "e7"
+        ],
+        [
+          "e7"
+        ]
+      ],
+      "scope_pass": false,
+      "outcome": "answered",
+      "expected": "answered",
+      "status": "partial",
+      "full_pass": false,
+      "notes": "Both include zero; the detailed interval sentences are unattributed in the official response."
+    },
+    {
+      "id": "t02",
+      "first_divergence": "records extraction: truncated, zero linked claims/conditions",
+      "retrieved_witness_ids": [
+        [
+          "e1",
+          "e2"
+        ],
+        [
+          "e1",
+          "e2"
+        ]
+      ],
+      "scope_pass": false,
+      "outcome": "answered",
+      "expected": "conditional",
+      "status": "ok",
+      "full_pass": false,
+      "notes": "Correct dual/flat completion text; dual timeout is cited to e3, which ends before the timeout line. Wrong outcome."
+    },
+    {
+      "id": "t03",
+      "first_divergence": "records extraction: truncated, zero linked claims/conditions",
+      "retrieved_witness_ids": [
+        [],
+        []
+      ],
+      "scope_pass": false,
+      "outcome": "answered",
+      "expected": "conditional",
+      "status": "partial",
+      "full_pass": false,
+      "notes": "Neither target row was retrieved; output uses Trackman values instead of the two JH treatments. The standalone question omits their IDs."
+    },
+    {
+      "id": "t04",
+      "first_divergence": "records extraction: truncated, zero linked claims/conditions",
+      "retrieved_witness_ids": [
+        [
+          "e3"
+        ],
+        [
+          "e3"
+        ]
+      ],
+      "scope_pass": false,
+      "outcome": "answered",
+      "expected": "conditional",
+      "status": "ok",
+      "full_pass": false,
+      "notes": "Correct directions and supporting e3; empty structured scopes and wrong outcome."
+    },
+    {
+      "id": "t05",
+      "first_divergence": "records extraction: truncated, zero linked claims/conditions",
+      "retrieved_witness_ids": [
+        [
+          "e1",
+          "e2"
+        ],
+        [
+          "e1",
+          "e2"
+        ]
+      ],
+      "scope_pass": false,
+      "outcome": "answered",
+      "expected": "answered",
+      "status": "partial",
+      "full_pass": false,
+      "notes": "Both attempts correctly described with support in e1, but repeated attribution to unrelated sources and an unattributed sentence."
+    },
+    {
+      "id": "t06",
+      "first_divergence": "records extraction: truncated, zero linked claims/conditions",
+      "retrieved_witness_ids": [
+        [
+          "e6"
+        ],
+        [
+          "e6"
+        ]
+      ],
+      "scope_pass": false,
+      "outcome": "answered",
+      "expected": "answered",
+      "status": "partial",
+      "full_pass": false,
+      "notes": "e6 contains both target rows; response enumerates 18 experiments. Original question provides no identifiers for the target pair."
+    }
+  ]
+}

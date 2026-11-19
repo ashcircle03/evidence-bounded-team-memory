@@ -173,6 +173,10 @@ class ReferenceQA:
             witnesses = [self._witness(n.node, sources, i) for i, n in enumerate(result.source_nodes, 1)]
             return self._format_response(question, raw, witnesses)
 
+    def generate_scoped(self, query, evidence):
+        from team_memory.readers.scoped import generate_scoped
+        return generate_scoped(self.llm, query, evidence)
+
     def generate_evidence(self, question, witnesses, context=None):
         """Synthesize over fixed citation spans without retrieval or state writes.
 
@@ -191,6 +195,8 @@ class ReferenceQA:
                 if w.get('evidence_type')=='review_state':metadata['evidence_type']='review_state'
                 else:
                     metadata['recorded_at']=w['observed_at']
+                    if w.get('conditions'):
+                        metadata['evidence_conditions']=json.dumps(w['conditions'],ensure_ascii=False)
                     if context:
                         from team_memory.readers.context import assertion_reviews
                         reviews=assertion_reviews(w,context)

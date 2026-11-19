@@ -1,0 +1,114 @@
+{
+  "job": 124656,
+  "elapsed": "00:25:32",
+  "extraction_calls": 238,
+  "answer_calls": 23,
+  "docs": [
+    {
+      "id": "jihun",
+      "claims": 199,
+      "claims_with_condition": 14,
+      "failed_blocks": 31
+    },
+    {
+      "id": "seonghun",
+      "claims": 58,
+      "claims_with_condition": 4,
+      "failed_blocks": 4
+    },
+    {
+      "id": "yeongil",
+      "claims": 47,
+      "claims_with_condition": 0,
+      "failed_blocks": 2
+    }
+  ],
+  "rows": [
+    {
+      "id": "t01",
+      "ambiguous": false,
+      "returned": "answered",
+      "expected": "answered",
+      "status": "ok",
+      "gold_quote_hits": [
+        [],
+        []
+      ],
+      "joint": false,
+      "note": "구간 둘 다 0을 포함한다는 요약은 검색했으나 점추정치 두 개를 신뢰구간이라고 설명했다."
+    },
+    {
+      "id": "t02",
+      "ambiguous": false,
+      "returned": "answered",
+      "expected": "conditional",
+      "status": "ok",
+      "gold_quote_hits": [
+        [
+          "e2"
+        ],
+        [
+          "e1"
+        ]
+      ],
+      "joint": false,
+      "note": "두 구절을 별개로 찾아 두 결과를 설명했다. 조건이 없어 answered로 반환했다."
+    },
+    {
+      "id": "t03",
+      "ambiguous": true,
+      "returned": "answered",
+      "expected": "conditional",
+      "status": "partial",
+      "gold_quote_hits": [
+        [],
+        []
+      ],
+      "joint": false,
+      "note": "실험 ID가 질문에 없다. Trackman 결과를 다른 실험의 결과로 답했다."
+    },
+    {
+      "id": "t04",
+      "ambiguous": false,
+      "returned": "answered",
+      "expected": "conditional",
+      "status": "ok",
+      "gold_quote_hits": [
+        [],
+        []
+      ],
+      "joint": false,
+      "note": "반올림 수치가 있는 요약으로 SEL 상승과 CONF 하락을 답했다. 조건이 없어 answered로 반환했다."
+    },
+    {
+      "id": "t05",
+      "ambiguous": false,
+      "returned": "answered",
+      "expected": "answered",
+      "status": "partial",
+      "gold_quote_hits": [
+        [
+          "e4"
+        ],
+        [
+          "e1"
+        ]
+      ],
+      "joint": false,
+      "note": "두 ZIP 근거를 찾았지만 조건 필드가 비고 일부 문장 인용 검증이 실패했다."
+    },
+    {
+      "id": "t06",
+      "ambiguous": true,
+      "returned": "answered",
+      "expected": "answered",
+      "status": "partial",
+      "gold_quote_hits": [
+        [],
+        []
+      ],
+      "joint": false,
+      "note": "실험 ID가 질문에 없다. 목표 행을 검색하지 못하고 채택으로 일반화했다."
+    }
+  ]
+}

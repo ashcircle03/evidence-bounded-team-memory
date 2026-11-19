@@ -180,12 +180,35 @@ def build():
                      time_scope='current',as_of=None,conditions=['hook invocation'])
     rb['evidence'][0]['conditions']=['v1','parallel hook invocation']
     rb['evidence'][1]['conditions']=['v2','parallel hook invocation']
-    ra=dict(snapshot_id=reconsider['id'],outcome='conditional',reason=None,claims=[
+    ra=dict(snapshot_id=reconsider['id'],outcome='answered',reason=None,claims=[
         claim('Review is authorized; no changed execution decision or successful experiment is recorded.',
               ['e-s-old','e-s-new','e-state'],'state')])
     ra['claims'][0]['conditions']=['hook invocation']
     case('answer-reconsider-is-not-correction','answer.generate',{'bundle':rb},ra,seed=reconsider,
-         expect=[equals('/data/outcome','conditional'),equals('/data/claims',ra['claims'])])
+         expect=[equals('/data/outcome','answered'),equals('/data/claims',ra['claims'])])
+
+    # Same snapshot, evidence, review state and structured query filters. Only question text varies.
+    outcomes = [
+        ('answer-hook-v1', 'What happens with parallel hooks in v1?', 'answered', [0]),
+        ('answer-hook-by-version', 'How does the reported behavior of parallel hooks depend on version?',
+         'conditional', [0, 1]),
+    ]
+    observations = [
+        ('Parallel hooks crash in v1.', 'e-s-old', 'v1'),
+        ('The parallel hook issue is fixed in v2.', 'e-s-new', 'v2'),
+    ]
+    for name, question, outcome, indices in outcomes:
+        packet = copy(rb)
+        packet['query']['text'] = question
+        claims = []
+        for index in indices:
+            text, eid, version = observations[index]
+            scoped = claim(text, [eid], cid=f'c{index + 1}')
+            scoped['conditions'] = [version, 'parallel hook invocation']
+            claims.append(scoped)
+        expected = dict(snapshot_id=reconsider['id'], outcome=outcome, reason=None, claims=claims)
+        case(name, 'answer.generate', {'bundle':packet}, expected, seed=reconsider,
+             expect=[equals('/data/outcome',outcome),equals('/data/claims',claims)])
     case('gateway-read-only-ask','gateway.ask',dict(query=query,snapshot_id=snapshot['id']),
          dict(bundle=bundle,answer=answer),expect=[equals('/data/answer/claims',answer['claims'])])
     case('gateway-rejects-unauthorized-review','gateway.review',

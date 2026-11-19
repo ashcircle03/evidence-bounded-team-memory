@@ -1,0 +1,330 @@
+[
+  {
+    "case": "answer-reconsider-is-not-correction",
+    "draft": "Review is authorized; no changed execution decision or successful experiment is recorded [1][2][3].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "parallel hook invocation"
+      ],
+      [
+        "v2",
+        "parallel hook invocation"
+      ],
+      []
+    ],
+    "raw_preserved": true,
+    "outcome": "answered",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "Review is authorized; no changed execution decision or successful experiment is recorded [1][2][3].",
+        "kind": "state",
+        "evidence_ids": [
+          "e-s-old",
+          "e-s-new",
+          "e-state"
+        ],
+        "conditions": [],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 0,
+          "end": 99
+        }
+      }
+    ]
+  },
+  {
+    "case": "answer-hook-v1",
+    "draft": "Parallel hooks crash in v1 [1].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "parallel hook invocation"
+      ],
+      [
+        "v2",
+        "parallel hook invocation"
+      ],
+      []
+    ],
+    "raw_preserved": true,
+    "outcome": "answered",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "Parallel hooks crash in v1 [1].",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-old"
+        ],
+        "conditions": [
+          "v1",
+          "parallel hook invocation"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 0,
+          "end": 31
+        }
+      }
+    ]
+  },
+  {
+    "case": "answer-hook-by-version",
+    "draft": "Parallel hooks crash in v1 [1]. The parallel hook issue is fixed in v2 [2].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "parallel hook invocation"
+      ],
+      [
+        "v2",
+        "parallel hook invocation"
+      ],
+      []
+    ],
+    "raw_preserved": true,
+    "outcome": "conditional",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "Parallel hooks crash in v1 [1]. ",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-old"
+        ],
+        "conditions": [
+          "v1",
+          "parallel hook invocation"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 0,
+          "end": 32
+        }
+      },
+      {
+        "id": "c2",
+        "text": "The parallel hook issue is fixed in v2 [2].",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-new"
+        ],
+        "conditions": [
+          "v2",
+          "parallel hook invocation"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 32,
+          "end": 75
+        }
+      }
+    ]
+  },
+  {
+    "case": "answer-unrelated-conflict-does-not-block",
+    "draft": "Hana owns the report [1].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "CPU"
+      ],
+      [
+        "v1",
+        "CPU"
+      ],
+      []
+    ],
+    "raw_preserved": true,
+    "outcome": "answered",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "Hana owns the report [1].",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-old"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 0,
+          "end": 25
+        }
+      }
+    ]
+  },
+  {
+    "case": "answer-pending-keeps-current",
+    "draft": "The recorded latency is 120ms [1]. The 90ms correction is pending and has not replaced 120ms [2][3].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "CPU"
+      ],
+      [
+        "v1",
+        "CPU"
+      ],
+      []
+    ],
+    "raw_preserved": true,
+    "outcome": "answered",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "The recorded latency is 120ms [1]. ",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-old"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 0,
+          "end": 35
+        }
+      },
+      {
+        "id": "c2",
+        "text": "The 90ms correction is pending and has not replaced 120ms [2][3].",
+        "kind": "state",
+        "evidence_ids": [
+          "e-s-new",
+          "e-state"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 35,
+          "end": 100
+        }
+      }
+    ]
+  },
+  {
+    "case": "answer-conflict-both-alternatives",
+    "draft": "Hana reports 120ms [1]. Jun reports 90ms [2].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "CPU"
+      ],
+      [
+        "v1",
+        "CPU"
+      ],
+      []
+    ],
+    "raw_preserved": true,
+    "outcome": "conflict",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "Hana reports 120ms [1]. ",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-old"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": "p-correction",
+        "answer_span": {
+          "start": 0,
+          "end": 24
+        }
+      },
+      {
+        "id": "c2",
+        "text": "Jun reports 90ms [2].",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "e-s-new"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": "p-correction",
+        "answer_span": {
+          "start": 24,
+          "end": 45
+        }
+      }
+    ]
+  },
+  {
+    "case": "disjoint-quotes",
+    "draft": "Hana owns the report [4]. The measurement was repeated [5].",
+    "conditions_at_generation": [
+      [
+        "v1",
+        "CPU"
+      ],
+      [
+        "v1",
+        "CPU"
+      ],
+      [],
+      [
+        "v1",
+        "CPU"
+      ],
+      [
+        "v1",
+        "CPU"
+      ]
+    ],
+    "raw_preserved": true,
+    "outcome": "answered",
+    "claims": [
+      {
+        "id": "c1",
+        "text": "Hana owns the report [4]. ",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "detail-previous"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 0,
+          "end": 26
+        }
+      },
+      {
+        "id": "c2",
+        "text": "The measurement was repeated [5].",
+        "kind": "reported_fact",
+        "evidence_ids": [
+          "detail-incoming"
+        ],
+        "conditions": [
+          "v1",
+          "CPU"
+        ],
+        "alternative_group": null,
+        "answer_span": {
+          "start": 26,
+          "end": 59
+        }
+      }
+    ]
+  }
+]

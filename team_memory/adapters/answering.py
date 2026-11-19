@@ -7,6 +7,7 @@ from copy import deepcopy
 import re
 from nltk.tokenize import PunktTokenizer
 from team_memory.storage.objects import Store
+from team_memory.readers.scoped import public_answer
 from team_memory.readers.attribution import AttributedQA,ConflictCheckedQA,repair_omitted_answer,attach_citations
 from team_memory.readers.fallback import preserve_answer
 from .base import Adapter,Failure,issue
@@ -58,6 +59,17 @@ class AnsweringAdapter(Adapter):
         question=query_text(bundle['query']);review=context_from(bundle,reader)
         try:
             with reader.lock:
+                # Corrections and unresolved relations retain the dedicated state path.
+                scopes = {frozenset(e['conditions']) for e in bundle['evidence'] if e['kind']=='source' and e['conditions']}
+                review_only = all(r['kind']=='reconsider' for r in (review or {}).get('relations', []))
+                if len(scopes)>1 and review_only and not bundle['unresolved_proposal_ids'] and hasattr(reader, 'generate_scoped'):
+                    draft = reader.generate_scoped(bundle['query'], bundle['evidence'])
+                    response = public_answer(draft, bundle)
+                    try:
+                        self.diagnostics.put('answer_diagnostics', dict(bundle=bundle, scoped_draft=draft.model_dump()))
+                    except OSError:
+                        return response,[issue('IO_FAILURE','Answer preserved but diagnostic persistence failed')]
+                    return response,[]
                 result=reader.generate_evidence(question,witnesses,review)
                 if isinstance(reader,ConflictCheckedQA):
                     result=preserve_answer(result,'document_review',lambda:reader._review(question,result))
@@ -72,6 +84,7 @@ class AnsweringAdapter(Adapter):
         # Existing repairs may add a state witness. It must already be in the
         # received packet; the answering port cannot add hidden evidence.
         evidence=bundle['evidence'];errors=diagnostic_errors;claims=[];unattributed=[]
+        by_id = {e['id']: e for e in evidence}
         raw=result['raw']
         spans=list(PunktTokenizer('english').span_tokenize(raw))
         for index,(start,end) in enumerate(spans):
@@ -94,7 +107,11 @@ class AnsweringAdapter(Adapter):
                 unattributed.append(dict(start=0 if index==0 else start,end=stop,text=text))
                 errors.append(issue('UNSUPPORTED_CLAIM','Sentence has no citation in the supplied packet',cid));continue
             kind='state' if any(e['kind']=='review_state' and e['id'] in owned for e in evidence) else 'reported_fact'
-            claims.append(dict(id=cid,text=text,kind=kind,evidence_ids=owned,conditions=[],alternative_group=None,
+            # Retain requested scope only when every cited source carries it.
+            sources = [by_id[eid] for eid in owned if by_id[eid]['kind'] == 'source']
+            conditions = [scope for scope in bundle['query']['conditions']
+                          if sources and all(scope in src['conditions'] for src in sources)]
+            claims.append(dict(id=cid,text=text,kind=kind,evidence_ids=owned,conditions=conditions,alternative_group=None,
                                answer_span=dict(start=0 if index==0 else start,end=stop)))
         if claims:
             answer.update(claims=claims,outcome='answered',reason=None)
@@ -103,8 +120,10 @@ class AnsweringAdapter(Adapter):
                 if proposal['id'] not in bundle['unresolved_proposal_ids'] or proposal['candidate']['kind']!='conflict':continue
                 sides=[]
                 for side in ('previous','incoming'):
-                    sid=proposal['candidate'][side]['source_id']
-                    eids={e['id'] for e in evidence if e['source_id']==sid}
+                    span = proposal['candidate'].get(side + '_assertion') or proposal['candidate'][side]
+                    eids = {e['id'] for e in evidence if e['kind'] == 'source'
+                            and e['source_id'] == span['source_id']
+                            and max(e['start'], span['start']) < min(e['end'], span['end'])}
                     sides.append([c for c in claims if eids.intersection(c['evidence_ids'])])
                 if sides[0] and sides[1] and any(a['id']!=b['id'] and a['evidence_ids']!=b['evidence_ids'] for a in sides[0] for b in sides[1]):
                     for c in sides[0]+sides[1]:c['alternative_group']=proposal['id']

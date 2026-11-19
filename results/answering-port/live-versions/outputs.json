@@ -1,0 +1,1557 @@
+{
+  "status": "complete",
+  "job": "124326",
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "input_sha256": "2ba6ac74f526fc82cffc05ffd4ea73ccb45bf22497c10ee280e5b27843153b9f",
+  "code_digest": "8ef07a00881b72f0967f50ce0d9008b60cec0e1b5e12596c2570371cbb004dcb",
+  "rows": [
+    {
+      "id": "panel-1-q1",
+      "response": {
+        "contract_version": "team-memory.modules/v1.2",
+        "request_id": "panel-1-q1",
+        "workspace_id": "versions",
+        "operation": "answer.generate",
+        "module": "answering",
+        "status": "partial",
+        "data": {
+          "snapshot_id": "snap-1",
+          "outcome": "answered",
+          "claims": [
+            {
+              "id": "c2",
+              "text": "In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e1",
+                "e2"
+              ],
+              "conditions": [],
+              "alternative_group": null,
+              "answer_span": {
+                "start": 54,
+                "end": 187
+              }
+            }
+          ],
+          "reason": null,
+          "original_text": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+          "unattributed": [
+            {
+              "start": 0,
+              "end": 54,
+              "text": "The outcome of a parallel hook run varies by version. "
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "UNSUPPORTED_CLAIM",
+            "message": "Sentence has no citation in the supplied packet",
+            "retryable": false,
+            "item_id": "c1"
+          },
+          {
+            "code": "UNSUPPORTED_CLAIM",
+            "message": "Legacy reader reports incomplete or unverified attribution",
+            "retryable": false,
+            "item_id": null
+          }
+        ]
+      },
+      "calls": [
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "The record_author metadata identifies who wrote a record; @mentions are recipients or references.\nPlease provide an answer based solely on the provided sources. When referencing information from a source, cite the appropriate source(s) using their corresponding numbers. Every answer should include at least one source citation. Only cite a source when you are explicitly referencing it. If none of the sources are helpful, you should indicate that. For example:\nSource 1:\nThe sky is red in the evening and blue in the morning.\nSource 2:\nWater is wet when the sky is red.\nQuery: When is water wet?\nAnswer: Water will be wet when the sky is red [2], which occurs in the evening [1].\nNow it's your turn. Below are several numbered sources of information:\n------\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nIn v1, a parallel hook run terminates with an error.\n\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nExecution of parallel hooks in v2 ends unsuccessfully.\n------\nQuery: How does the outcome of a parallel hook run vary by version?\nAnswer: "
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 1024,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 393,
+            "total_tokens": 436,
+            "completion_tokens": 43,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nHow does the outcome of a parallel hook run vary by version?\n\n# Claim to evaluate\nThe outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\n\n# Document to evaluate against\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nIn v1, a parallel hook run terminates with an error.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document provides information about v1 but does not mention v2. Since the claim includes information about both versions and the document only supports part of the claim, it provides partial support for the claim.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 746,
+            "total_tokens": 872,
+            "completion_tokens": 126,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nHow does the outcome of a parallel hook run vary by version?\n\n# Claim to evaluate\nThe outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\n\n# Document to evaluate against\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nExecution of parallel hooks in v2 ends unsuccessfully.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends unsuccessfully.\",\n  \"reasoning\": \"The document provides information about v2, stating that the execution of parallel hooks ends unsuccessfully. This supports the claim that the outcome varies by version, as the claim also mentions v2 ending unsuccessfully. However, the document does not mention v1, so it does not fully support the claim about v1. Since it supports part of the claim, it is labeled as SUPPORTS.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 742,
+            "total_tokens": 901,
+            "completion_tokens": 159,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a world class algorithm to answer questions with correct and exact citations."
+              },
+              {
+                "role": "user",
+                "content": "Attach evidence to the existing answer using the context. Preserve every fact exactly as supplied. Read the full answer to resolve references such as \"this variable\". Each quote must support the corresponding fact about the same subject and conditions. Return no quote when the context does not support it. Do not rewrite the answer.\n\nContext:\nSource 1:\nIn v1, a parallel hook run terminates with an error.\n\nSource 2:\nExecution of parallel hooks in v2 ends unsuccessfully.\n\nQuestion: How does the outcome of a parallel hook run vary by version?\nExisting answer:\nThe outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\n\nFacts requiring attribution:\n[\"The outcome of a parallel hook run varies by version.\"]\n\nTips: Make sure to cite your sources, and use the exact words from the context.\nReturn only JSON matching this schema. Include every requested fact once; substring_quote may be empty. Quotes are literal substrings from Source text, without Source labels.\n{\"$defs\": {\"FactWithEvidence\": {\"properties\": {\"fact\": {\"description\": \"Body of the sentence, as part of a response\", \"title\": \"Fact\", \"type\": \"string\"}, \"substring_quote\": {\"description\": \"Each source should be a direct quote from the context, as a substring of the original content\", \"items\": {\"type\": \"string\"}, \"title\": \"Substring Quote\", \"type\": \"array\"}}, \"required\": [\"fact\", \"substring_quote\"], \"title\": \"FactWithEvidence\", \"type\": \"object\"}}, \"properties\": {\"question\": {\"title\": \"Question\", \"type\": \"string\"}, \"answer\": {\"items\": {\"$ref\": \"#/$defs/FactWithEvidence\"}, \"title\": \"Answer\", \"type\": \"array\"}}, \"required\": [\"question\", \"answer\"], \"title\": \"QuestionAnswer\", \"type\": \"object\"}"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 1024,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"question\": \"How does the outcome of a parallel hook run vary by version?\",\n  \"answer\": [\n    {\n      \"fact\": \"The outcome of a parallel hook run varies by version.\",\n      \"substring_quote\": []\n    }\n  ]\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 442,
+            "total_tokens": 496,
+            "completion_tokens": 54,
+            "prompt_tokens_details": null
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "bundle": {
+            "coverage": "hits",
+            "evidence": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "id": "e1",
+                "kind": "source",
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Hana",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0,
+                "state_record": null
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 54,
+                "id": "e2",
+                "kind": "source",
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Jun",
+                "quote": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0,
+                "state_record": null
+              }
+            ],
+            "query": {
+              "as_of": null,
+              "conditions": [],
+              "text": "How does the outcome of a parallel hook run vary by version?",
+              "time_scope": "current"
+            },
+            "snapshot": {
+              "as_of": "2026-11-02T00:00:00Z",
+              "id": "snap-1",
+              "proposals": [],
+              "revision": 2,
+              "sources": [
+                {
+                  "id": "s1",
+                  "location": "run-1.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Hana",
+                  "speaker": "Hana",
+                  "text": "In v1, a parallel hook run terminates with an error."
+                },
+                {
+                  "id": "s2",
+                  "location": "run-2.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Jun",
+                  "speaker": "Jun",
+                  "text": "Execution of parallel hooks in v2 ends unsuccessfully."
+                }
+              ]
+            },
+            "unresolved_proposal_ids": []
+          },
+          "result": {
+            "alce": {
+              "docs": [
+                {
+                  "text": "In v1, a parallel hook run terminates with an error.",
+                  "title": "run-1.md"
+                },
+                {
+                  "text": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                  "title": "run-2.md"
+                }
+              ],
+              "output": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+              "question": "How does the outcome of a parallel hook run vary by version?"
+            },
+            "answers": [
+              {
+                "evidence": [
+                  {
+                    "conditions": [
+                      "v1",
+                      "parallel hooks"
+                    ],
+                    "end": 52,
+                    "location": "run-1.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "In v1, a parallel hook run terminates with an error.",
+                    "source_id": "s1",
+                    "speaker": "Hana",
+                    "start": 0
+                  },
+                  {
+                    "conditions": [
+                      "v2",
+                      "parallel hooks"
+                    ],
+                    "end": 54,
+                    "location": "run-2.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                    "source_id": "s2",
+                    "speaker": "Jun",
+                    "start": 0
+                  }
+                ],
+                "text": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2]."
+              }
+            ],
+            "attribution_status": "partial",
+            "citation_entailment_verified": false,
+            "citation_method": "LangChain FactWithEvidence exact-quote attribution; full answer context; additive, no overwrite",
+            "citation_sources": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 54,
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0
+              }
+            ],
+            "cited_numbers": [
+              1,
+              2
+            ],
+            "document_judgments": [
+              {
+                "citation_numbers": [
+                  1
+                ],
+                "label": "SUPPORTS",
+                "raw": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document provides information about v1 but does not mention v2. Since the claim includes information about both versions and the document only supports part of the claim, it provides partial support for the claim.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "source_id": "s1"
+              },
+              {
+                "citation_numbers": [
+                  2
+                ],
+                "label": "SUPPORTS",
+                "raw": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends unsuccessfully.\",\n  \"reasoning\": \"The document provides information about v2, stating that the execution of parallel hooks ends unsuccessfully. This supports the claim that the outcome varies by version, as the claim also mentions v2 ending unsuccessfully. However, the document does not mention v1, so it does not fully support the claim about v1. Since it supports part of the claim, it is labeled as SUPPORTS.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "source_id": "s2"
+              }
+            ],
+            "draft_raw": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+            "pipeline_status": "degraded",
+            "posthoc_citations": [],
+            "pre_citation_raw": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+            "quote_attribution_error": null,
+            "quote_attribution_raw": "{\n  \"question\": \"How does the outcome of a parallel hook run vary by version?\",\n  \"answer\": [\n    {\n      \"fact\": \"The outcome of a parallel hook run varies by version.\",\n      \"substring_quote\": []\n    }\n  ]\n}",
+            "quote_citation_reviews": [
+              {
+                "end": 53,
+                "evidence": [],
+                "proposed_quotes": [],
+                "sentence": "The outcome of a parallel hook run varies by version.",
+                "start": 0
+              }
+            ],
+            "raw": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks also ends unsuccessfully [2].",
+            "revised": false,
+            "stage_failures": [
+              {
+                "error_type": "IncompleteAttribution",
+                "stage": "quote_attribution"
+              }
+            ],
+            "status": "partial",
+            "unattributed_sentences": [
+              {
+                "end": 53,
+                "sentence": "The outcome of a parallel hook run varies by version.",
+                "start": 0
+              }
+            ],
+            "verification": "Verbatim source/offset checks only; entailment is NOT verified",
+            "warnings": [
+              "quote_attribution incomplete (IncompleteAttribution); available answer and evidence preserved"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "panel-1-q2",
+      "response": {
+        "contract_version": "team-memory.modules/v1.2",
+        "request_id": "panel-1-q2",
+        "workspace_id": "versions",
+        "operation": "answer.generate",
+        "module": "answering",
+        "status": "ok",
+        "data": {
+          "snapshot_id": "snap-1",
+          "outcome": "answered",
+          "claims": [
+            {
+              "id": "c1",
+              "text": "In v1, a parallel hook run terminates with an error [1]. ",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e1"
+              ],
+              "conditions": [
+                "v1",
+                "parallel hooks"
+              ],
+              "alternative_group": null,
+              "answer_span": {
+                "start": 0,
+                "end": 57
+              }
+            },
+            {
+              "id": "c2",
+              "text": "In v2, execution of parallel hooks also ends unsuccessfully [2].",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e2"
+              ],
+              "conditions": [
+                "v2",
+                "parallel hooks"
+              ],
+              "alternative_group": null,
+              "answer_span": {
+                "start": 57,
+                "end": 121
+              }
+            }
+          ],
+          "reason": null,
+          "original_text": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].",
+          "unattributed": []
+        },
+        "errors": []
+      },
+      "calls": [
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "The record_author metadata identifies who wrote a record; @mentions are recipients or references.\nPlease provide an answer based solely on the provided sources. When referencing information from a source, cite the appropriate source(s) using their corresponding numbers. Every answer should include at least one source citation. Only cite a source when you are explicitly referencing it. If none of the sources are helpful, you should indicate that. For example:\nSource 1:\nThe sky is red in the evening and blue in the morning.\nSource 2:\nWater is wet when the sky is red.\nQuery: When is water wet?\nAnswer: Water will be wet when the sky is red [2], which occurs in the evening [1].\nNow it's your turn. Below are several numbered sources of information:\n------\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nIn v1, a parallel hook run terminates with an error.\n\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nExecution of parallel hooks in v2 ends unsuccessfully.\n------\nQuery: What happens when parallel hooks run in v1 and in v2?\nAnswer: "
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 1024,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 394,
+            "total_tokens": 424,
+            "completion_tokens": 30,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nWhat happens when parallel hooks run in v1 and in v2?\n\n# Claim to evaluate\nIn v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\n\n# Document to evaluate against\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nIn v1, a parallel hook run terminates with an error.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document only addresses the v1 scenario and confirms the claim about v1. It provides no information about v2, so it does not contradict the claim but also does not fully support it. However, since the document attempts to answer the question about v1, it supports the part of the claim related to v1.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 721,
+            "total_tokens": 859,
+            "completion_tokens": 138,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nWhat happens when parallel hooks run in v1 and in v2?\n\n# Claim to evaluate\nIn v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\n\n# Document to evaluate against\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nExecution of parallel hooks in v2 ends unsuccessfully.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends unsuccessfully.\",\n  \"reasoning\": \"The document provides a direct answer to the question about v2, stating that execution of parallel hooks ends unsuccessfully, which matches the claim about v2. However, the document does not mention v1 at all, so it does not support the claim about v1. Since the document only addresses part of the claim and does not contradict it, the label is SUPPORTS for the part about v2.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 717,
+            "total_tokens": 867,
+            "completion_tokens": 150,
+            "prompt_tokens_details": null
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "bundle": {
+            "coverage": "hits",
+            "evidence": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "id": "e1",
+                "kind": "source",
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Hana",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0,
+                "state_record": null
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 54,
+                "id": "e2",
+                "kind": "source",
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Jun",
+                "quote": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0,
+                "state_record": null
+              }
+            ],
+            "query": {
+              "as_of": null,
+              "conditions": [],
+              "text": "What happens when parallel hooks run in v1 and in v2?",
+              "time_scope": "current"
+            },
+            "snapshot": {
+              "as_of": "2026-11-02T00:00:00Z",
+              "id": "snap-1",
+              "proposals": [],
+              "revision": 2,
+              "sources": [
+                {
+                  "id": "s1",
+                  "location": "run-1.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Hana",
+                  "speaker": "Hana",
+                  "text": "In v1, a parallel hook run terminates with an error."
+                },
+                {
+                  "id": "s2",
+                  "location": "run-2.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Jun",
+                  "speaker": "Jun",
+                  "text": "Execution of parallel hooks in v2 ends unsuccessfully."
+                }
+              ]
+            },
+            "unresolved_proposal_ids": []
+          },
+          "result": {
+            "alce": {
+              "docs": [
+                {
+                  "text": "In v1, a parallel hook run terminates with an error.",
+                  "title": "run-1.md"
+                },
+                {
+                  "text": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                  "title": "run-2.md"
+                }
+              ],
+              "output": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].",
+              "question": "What happens when parallel hooks run in v1 and in v2?"
+            },
+            "answers": [
+              {
+                "evidence": [
+                  {
+                    "conditions": [
+                      "v1",
+                      "parallel hooks"
+                    ],
+                    "end": 52,
+                    "location": "run-1.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "In v1, a parallel hook run terminates with an error.",
+                    "source_id": "s1",
+                    "speaker": "Hana",
+                    "start": 0
+                  },
+                  {
+                    "conditions": [
+                      "v2",
+                      "parallel hooks"
+                    ],
+                    "end": 54,
+                    "location": "run-2.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                    "source_id": "s2",
+                    "speaker": "Jun",
+                    "start": 0
+                  }
+                ],
+                "text": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2]."
+              }
+            ],
+            "citation_sources": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 54,
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "Execution of parallel hooks in v2 ends unsuccessfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0
+              }
+            ],
+            "cited_numbers": [
+              1,
+              2
+            ],
+            "document_judgments": [
+              {
+                "citation_numbers": [
+                  1
+                ],
+                "label": "SUPPORTS",
+                "raw": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document only addresses the v1 scenario and confirms the claim about v1. It provides no information about v2, so it does not contradict the claim but also does not fully support it. However, since the document attempts to answer the question about v1, it supports the part of the claim related to v1.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "source_id": "s1"
+              },
+              {
+                "citation_numbers": [
+                  2
+                ],
+                "label": "SUPPORTS",
+                "raw": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends unsuccessfully.\",\n  \"reasoning\": \"The document provides a direct answer to the question about v2, stating that execution of parallel hooks ends unsuccessfully, which matches the claim about v2. However, the document does not mention v1 at all, so it does not support the claim about v1. Since the document only addresses part of the claim and does not contradict it, the label is SUPPORTS for the part about v2.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "source_id": "s2"
+              }
+            ],
+            "draft_raw": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].",
+            "raw": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks also ends unsuccessfully [2].",
+            "revised": false,
+            "status": "ok",
+            "verification": "Verbatim source/offset checks only; entailment is NOT verified",
+            "warnings": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "panel-2-q1",
+      "response": {
+        "contract_version": "team-memory.modules/v1.2",
+        "request_id": "panel-2-q1",
+        "workspace_id": "versions",
+        "operation": "answer.generate",
+        "module": "answering",
+        "status": "partial",
+        "data": {
+          "snapshot_id": "snap-2",
+          "outcome": "answered",
+          "claims": [
+            {
+              "id": "c2",
+              "text": "In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e1",
+                "e2"
+              ],
+              "conditions": [],
+              "alternative_group": null,
+              "answer_span": {
+                "start": 54,
+                "end": 180
+              }
+            }
+          ],
+          "reason": null,
+          "original_text": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+          "unattributed": [
+            {
+              "start": 0,
+              "end": 54,
+              "text": "The outcome of a parallel hook run varies by version. "
+            }
+          ]
+        },
+        "errors": [
+          {
+            "code": "UNSUPPORTED_CLAIM",
+            "message": "Sentence has no citation in the supplied packet",
+            "retryable": false,
+            "item_id": "c1"
+          },
+          {
+            "code": "UNSUPPORTED_CLAIM",
+            "message": "Legacy reader reports incomplete or unverified attribution",
+            "retryable": false,
+            "item_id": null
+          }
+        ]
+      },
+      "calls": [
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "The record_author metadata identifies who wrote a record; @mentions are recipients or references.\nPlease provide an answer based solely on the provided sources. When referencing information from a source, cite the appropriate source(s) using their corresponding numbers. Every answer should include at least one source citation. Only cite a source when you are explicitly referencing it. If none of the sources are helpful, you should indicate that. For example:\nSource 1:\nThe sky is red in the evening and blue in the morning.\nSource 2:\nWater is wet when the sky is red.\nQuery: When is water wet?\nAnswer: Water will be wet when the sky is red [2], which occurs in the evening [1].\nNow it's your turn. Below are several numbered sources of information:\n------\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nIn v1, a parallel hook run terminates with an error.\n\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nExecution of parallel hooks in v2 ends successfully.\n------\nQuery: How does the outcome of a parallel hook run vary by version?\nAnswer: "
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 1024,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 393,
+            "total_tokens": 435,
+            "completion_tokens": 42,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nHow does the outcome of a parallel hook run vary by version?\n\n# Claim to evaluate\nThe outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\n\n# Document to evaluate against\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nIn v1, a parallel hook run terminates with an error.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document provides information about v1, which matches part of the claim. However, it does not mention v2 or its outcome, so it does not fully support the claim. Since the document attempts to answer the question about v1, it is not irrelevant, but it does not fully support the claim about both versions.\",\n  \"answer\": \"IRRELEVANT\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 744,
+            "total_tokens": 895,
+            "completion_tokens": 151,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nHow does the outcome of a parallel hook run vary by version?\n\n# Claim to evaluate\nThe outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\n\n# Document to evaluate against\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nExecution of parallel hooks in v2 ends successfully.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends successfully.\",\n  \"reasoning\": \"The document provides information about v2, stating that the execution of parallel hooks ends successfully. This supports the claim's assertion that the outcome varies by version, as it confirms the successful outcome in v2. However, the document does not mention v1, so it does not fully support the claim about v1. Since it supports part of the claim, it is labeled as SUPPORTS.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 740,
+            "total_tokens": 900,
+            "completion_tokens": 160,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "system",
+                "content": "You are a world class algorithm to answer questions with correct and exact citations."
+              },
+              {
+                "role": "user",
+                "content": "Attach evidence to the existing answer using the context. Preserve every fact exactly as supplied. Read the full answer to resolve references such as \"this variable\". Each quote must support the corresponding fact about the same subject and conditions. Return no quote when the context does not support it. Do not rewrite the answer.\n\nContext:\nSource 1:\nIn v1, a parallel hook run terminates with an error.\n\nSource 2:\nExecution of parallel hooks in v2 ends successfully.\n\nQuestion: How does the outcome of a parallel hook run vary by version?\nExisting answer:\nThe outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\n\nFacts requiring attribution:\n[\"The outcome of a parallel hook run varies by version.\"]\n\nTips: Make sure to cite your sources, and use the exact words from the context.\nReturn only JSON matching this schema. Include every requested fact once; substring_quote may be empty. Quotes are literal substrings from Source text, without Source labels.\n{\"$defs\": {\"FactWithEvidence\": {\"properties\": {\"fact\": {\"description\": \"Body of the sentence, as part of a response\", \"title\": \"Fact\", \"type\": \"string\"}, \"substring_quote\": {\"description\": \"Each source should be a direct quote from the context, as a substring of the original content\", \"items\": {\"type\": \"string\"}, \"title\": \"Substring Quote\", \"type\": \"array\"}}, \"required\": [\"fact\", \"substring_quote\"], \"title\": \"FactWithEvidence\", \"type\": \"object\"}}, \"properties\": {\"question\": {\"title\": \"Question\", \"type\": \"string\"}, \"answer\": {\"items\": {\"$ref\": \"#/$defs/FactWithEvidence\"}, \"title\": \"Answer\", \"type\": \"array\"}}, \"required\": [\"question\", \"answer\"], \"title\": \"QuestionAnswer\", \"type\": \"object\"}"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 1024,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"question\": \"How does the outcome of a parallel hook run vary by version?\",\n  \"answer\": [\n    {\n      \"fact\": \"The outcome of a parallel hook run varies by version.\",\n      \"substring_quote\": []\n    }\n  ]\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 441,
+            "total_tokens": 495,
+            "completion_tokens": 54,
+            "prompt_tokens_details": null
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "bundle": {
+            "coverage": "hits",
+            "evidence": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "id": "e1",
+                "kind": "source",
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Hana",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0,
+                "state_record": null
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "id": "e2",
+                "kind": "source",
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Jun",
+                "quote": "Execution of parallel hooks in v2 ends successfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0,
+                "state_record": null
+              }
+            ],
+            "query": {
+              "as_of": null,
+              "conditions": [],
+              "text": "How does the outcome of a parallel hook run vary by version?",
+              "time_scope": "current"
+            },
+            "snapshot": {
+              "as_of": "2026-11-02T00:00:00Z",
+              "id": "snap-2",
+              "proposals": [],
+              "revision": 2,
+              "sources": [
+                {
+                  "id": "s1",
+                  "location": "run-1.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Hana",
+                  "speaker": "Hana",
+                  "text": "In v1, a parallel hook run terminates with an error."
+                },
+                {
+                  "id": "s2",
+                  "location": "run-2.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Jun",
+                  "speaker": "Jun",
+                  "text": "Execution of parallel hooks in v2 ends successfully."
+                }
+              ]
+            },
+            "unresolved_proposal_ids": []
+          },
+          "result": {
+            "alce": {
+              "docs": [
+                {
+                  "text": "In v1, a parallel hook run terminates with an error.",
+                  "title": "run-1.md"
+                },
+                {
+                  "text": "Execution of parallel hooks in v2 ends successfully.",
+                  "title": "run-2.md"
+                }
+              ],
+              "output": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+              "question": "How does the outcome of a parallel hook run vary by version?"
+            },
+            "answers": [
+              {
+                "evidence": [
+                  {
+                    "conditions": [
+                      "v1",
+                      "parallel hooks"
+                    ],
+                    "end": 52,
+                    "location": "run-1.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "In v1, a parallel hook run terminates with an error.",
+                    "source_id": "s1",
+                    "speaker": "Hana",
+                    "start": 0
+                  },
+                  {
+                    "conditions": [
+                      "v2",
+                      "parallel hooks"
+                    ],
+                    "end": 52,
+                    "location": "run-2.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "Execution of parallel hooks in v2 ends successfully.",
+                    "source_id": "s2",
+                    "speaker": "Jun",
+                    "start": 0
+                  }
+                ],
+                "text": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2]."
+              }
+            ],
+            "attribution_status": "partial",
+            "citation_entailment_verified": false,
+            "citation_method": "LangChain FactWithEvidence exact-quote attribution; full answer context; additive, no overwrite",
+            "citation_sources": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "Execution of parallel hooks in v2 ends successfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0
+              }
+            ],
+            "cited_numbers": [
+              1,
+              2
+            ],
+            "document_judgments": [
+              {
+                "citation_numbers": [
+                  1
+                ],
+                "label": "IRRELEVANT",
+                "raw": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document provides information about v1, which matches part of the claim. However, it does not mention v2 or its outcome, so it does not fully support the claim. Since the document attempts to answer the question about v1, it is not irrelevant, but it does not fully support the claim about both versions.\",\n  \"answer\": \"IRRELEVANT\"\n}",
+                "source_id": "s1"
+              },
+              {
+                "citation_numbers": [
+                  2
+                ],
+                "label": "SUPPORTS",
+                "raw": "{\n  \"claim\": \"The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends successfully.\",\n  \"reasoning\": \"The document provides information about v2, stating that the execution of parallel hooks ends successfully. This supports the claim's assertion that the outcome varies by version, as it confirms the successful outcome in v2. However, the document does not mention v1, so it does not fully support the claim about v1. Since it supports part of the claim, it is labeled as SUPPORTS.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "source_id": "s2"
+              }
+            ],
+            "draft_raw": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+            "pipeline_status": "degraded",
+            "posthoc_citations": [],
+            "pre_citation_raw": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+            "quote_attribution_error": null,
+            "quote_attribution_raw": "{\n  \"question\": \"How does the outcome of a parallel hook run vary by version?\",\n  \"answer\": [\n    {\n      \"fact\": \"The outcome of a parallel hook run varies by version.\",\n      \"substring_quote\": []\n    }\n  ]\n}",
+            "quote_citation_reviews": [
+              {
+                "end": 53,
+                "evidence": [],
+                "proposed_quotes": [],
+                "sentence": "The outcome of a parallel hook run varies by version.",
+                "start": 0
+              }
+            ],
+            "raw": "The outcome of a parallel hook run varies by version. In v1, a parallel hook run terminates with an error [1], whereas in v2, the execution of parallel hooks ends successfully [2].",
+            "revised": false,
+            "stage_failures": [
+              {
+                "error_type": "IncompleteAttribution",
+                "stage": "quote_attribution"
+              }
+            ],
+            "status": "partial",
+            "unattributed_sentences": [
+              {
+                "end": 53,
+                "sentence": "The outcome of a parallel hook run varies by version.",
+                "start": 0
+              }
+            ],
+            "verification": "Verbatim source/offset checks only; entailment is NOT verified",
+            "warnings": [
+              "quote_attribution incomplete (IncompleteAttribution); available answer and evidence preserved"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "panel-2-q2",
+      "response": {
+        "contract_version": "team-memory.modules/v1.2",
+        "request_id": "panel-2-q2",
+        "workspace_id": "versions",
+        "operation": "answer.generate",
+        "module": "answering",
+        "status": "ok",
+        "data": {
+          "snapshot_id": "snap-2",
+          "outcome": "answered",
+          "claims": [
+            {
+              "id": "c1",
+              "text": "In v1, a parallel hook run terminates with an error [1]. ",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e1"
+              ],
+              "conditions": [
+                "v1",
+                "parallel hooks"
+              ],
+              "alternative_group": null,
+              "answer_span": {
+                "start": 0,
+                "end": 57
+              }
+            },
+            {
+              "id": "c2",
+              "text": "In v2, execution of parallel hooks ends successfully [2].",
+              "kind": "reported_fact",
+              "evidence_ids": [
+                "e2"
+              ],
+              "conditions": [
+                "v2",
+                "parallel hooks"
+              ],
+              "alternative_group": null,
+              "answer_span": {
+                "start": 57,
+                "end": 114
+              }
+            }
+          ],
+          "reason": null,
+          "original_text": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].",
+          "unattributed": []
+        },
+        "errors": []
+      },
+      "calls": [
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "The record_author metadata identifies who wrote a record; @mentions are recipients or references.\nPlease provide an answer based solely on the provided sources. When referencing information from a source, cite the appropriate source(s) using their corresponding numbers. Every answer should include at least one source citation. Only cite a source when you are explicitly referencing it. If none of the sources are helpful, you should indicate that. For example:\nSource 1:\nThe sky is red in the evening and blue in the morning.\nSource 2:\nWater is wet when the sky is red.\nQuery: When is water wet?\nAnswer: Water will be wet when the sky is red [2], which occurs in the evening [1].\nNow it's your turn. Below are several numbered sources of information:\n------\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v1\", \"parallel hooks\"]\n\nIn v1, a parallel hook run terminates with an error.\n\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nevidence_conditions: [\"v2\", \"parallel hooks\"]\n\nExecution of parallel hooks in v2 ends successfully.\n------\nQuery: What happens when parallel hooks run in v1 and in v2?\nAnswer: "
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 1024,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 394,
+            "total_tokens": 423,
+            "completion_tokens": 29,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nWhat happens when parallel hooks run in v1 and in v2?\n\n# Claim to evaluate\nIn v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\n\n# Document to evaluate against\nSource 1:\nrecord_author: Hana\nrecorded_at: 2026-11-01T09:00:00Z\nIn v1, a parallel hook run terminates with an error.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document directly addresses the claim by confirming the outcome for v1, which matches the claim. However, it does not mention v2, so the claim about v2 is not addressed by the document.\",\n  \"answer\": \"IRRELEVANT\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 719,
+            "total_tokens": 833,
+            "completion_tokens": 114,
+            "prompt_tokens_details": null
+          }
+        },
+        {
+          "request": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "# Document-Claim Conflict Detection\nYou are a careful fact-checking assistant specializing in identifying conflicts between claims and evidence in documents.\n\nDecide one of the following labels for how the document relates to the claim, with respect to the question being asked:\n1. SUPPORTS – The document provides evidence that directly answers the question AND supports the claim. This includes partial support - if a claim contains hedged statements or balanced perspectives (e.g., \"Coffee consumption can improve alertness but may also cause sleep disruption in some individuals\"), then documents that support any part of that claim should be labeled as SUPPORTS.\n2. CONTRADICTS – The document provides evidence that directly answers the question BUT contradicts the claim. This includes cases where the document gives a DIFFERENT answer to the same question that is incompatible with the claim (e.g., different profession/role, different date/location/quantity/polarity/name), even if it does not explicitly say the claim is false.\n3. IRRELEVANT – Either the document does not attempt to answer the question at all (no statement bearing on the specific attribute asked by the question), or it discusses the same key entities/topic but does not provide enough information to conclusively support or contradict the claim.\n\nDecision rules:\n- First ask: does the document attempt to answer the question? “Attempts” means it asserts a value for the same attribute the question asks (who/what/when/where/how many/etc.).\n- If the document provides a different answer that is not matching the claim, choose CONTRADICTS (do NOT choose IRRELEVANT).\n- If the document provides a matching answer OR partial support for any part of a hedged claim, choose SUPPORTS.\n- If the document does not attempt to answer the question, or it is related but insufficient/uncertain, choose IRRELEVANT.\n- If both supporting and contradicting statements appear, choose CONTRADICTS.\n\nExample (contradiction via incompatible attribute):\n- Question: \"Who was Frédéric Chopin?\"\n- Claim: \"Frédéric Chopin was a famous musician.\"\n- Document: \"Polish scientists born in Warsaw include … Frédéric Chopin.\"\n- Label: CONTRADICTS (The document attempts to answer “who” by assigning a conflicting profession.)\n\nNow evaluate the following:\n\n# Question\nWhat happens when parallel hooks run in v1 and in v2?\n\n# Claim to evaluate\nIn v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\n\n# Document to evaluate against\nSource 2:\nrecord_author: Jun\nrecorded_at: 2026-11-01T09:00:00Z\nExecution of parallel hooks in v2 ends successfully.\n\n# Output format\nReturn ONLY a single JSON object with these fields:\n{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"<the most relevant snippet from the document that relates to the claim>\",\n  \"reasoning\": \"<a brief justification that explains your decision>\",\n    \"answer\": \"<SUPPORTS|CONTRADICTS|IRRELEVANT>\"\n}\n\nPlease be precise and follow the decision rules. Do not include any additional text or explanations and only output in the json format specified above.\n"
+              }
+            ],
+            "model": "Qwen3-8B",
+            "max_tokens": 4096,
+            "stream": false,
+            "temperature": 0.0,
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          },
+          "model": "Qwen3-8B",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "reasoning_content": null,
+                "content": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends successfully.\",\n  \"reasoning\": \"The document provides a direct answer to the question about v2, stating that execution of parallel hooks ends successfully, which matches the claim about v2. However, it does not mention v1 at all, so it does not support the claim about v1. Since the document only addresses part of the claim and does not contradict it, it is considered as providing partial support for the v2 part of the claim.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "tool_calls": []
+              },
+              "logprobs": null,
+              "finish_reason": "stop",
+              "stop_reason": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 715,
+            "total_tokens": 867,
+            "completion_tokens": 152,
+            "prompt_tokens_details": null
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "bundle": {
+            "coverage": "hits",
+            "evidence": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "id": "e1",
+                "kind": "source",
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Hana",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0,
+                "state_record": null
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "id": "e2",
+                "kind": "source",
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "owner": "Jun",
+                "quote": "Execution of parallel hooks in v2 ends successfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0,
+                "state_record": null
+              }
+            ],
+            "query": {
+              "as_of": null,
+              "conditions": [],
+              "text": "What happens when parallel hooks run in v1 and in v2?",
+              "time_scope": "current"
+            },
+            "snapshot": {
+              "as_of": "2026-11-02T00:00:00Z",
+              "id": "snap-2",
+              "proposals": [],
+              "revision": 2,
+              "sources": [
+                {
+                  "id": "s1",
+                  "location": "run-1.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Hana",
+                  "speaker": "Hana",
+                  "text": "In v1, a parallel hook run terminates with an error."
+                },
+                {
+                  "id": "s2",
+                  "location": "run-2.md",
+                  "observed_at": "2026-11-01T09:00:00Z",
+                  "owner": "Jun",
+                  "speaker": "Jun",
+                  "text": "Execution of parallel hooks in v2 ends successfully."
+                }
+              ]
+            },
+            "unresolved_proposal_ids": []
+          },
+          "result": {
+            "alce": {
+              "docs": [
+                {
+                  "text": "In v1, a parallel hook run terminates with an error.",
+                  "title": "run-1.md"
+                },
+                {
+                  "text": "Execution of parallel hooks in v2 ends successfully.",
+                  "title": "run-2.md"
+                }
+              ],
+              "output": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].",
+              "question": "What happens when parallel hooks run in v1 and in v2?"
+            },
+            "answers": [
+              {
+                "evidence": [
+                  {
+                    "conditions": [
+                      "v1",
+                      "parallel hooks"
+                    ],
+                    "end": 52,
+                    "location": "run-1.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "In v1, a parallel hook run terminates with an error.",
+                    "source_id": "s1",
+                    "speaker": "Hana",
+                    "start": 0
+                  },
+                  {
+                    "conditions": [
+                      "v2",
+                      "parallel hooks"
+                    ],
+                    "end": 52,
+                    "location": "run-2.md",
+                    "observed_at": "2026-11-01T09:00:00Z",
+                    "quote": "Execution of parallel hooks in v2 ends successfully.",
+                    "source_id": "s2",
+                    "speaker": "Jun",
+                    "start": 0
+                  }
+                ],
+                "text": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2]."
+              }
+            ],
+            "citation_sources": [
+              {
+                "conditions": [
+                  "v1",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "location": "run-1.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "In v1, a parallel hook run terminates with an error.",
+                "source_id": "s1",
+                "speaker": "Hana",
+                "start": 0
+              },
+              {
+                "conditions": [
+                  "v2",
+                  "parallel hooks"
+                ],
+                "end": 52,
+                "location": "run-2.md",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "quote": "Execution of parallel hooks in v2 ends successfully.",
+                "source_id": "s2",
+                "speaker": "Jun",
+                "start": 0
+              }
+            ],
+            "cited_numbers": [
+              1,
+              2
+            ],
+            "document_judgments": [
+              {
+                "citation_numbers": [
+                  1
+                ],
+                "label": "IRRELEVANT",
+                "raw": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"In v1, a parallel hook run terminates with an error.\",\n  \"reasoning\": \"The document directly addresses the claim by confirming the outcome for v1, which matches the claim. However, it does not mention v2, so the claim about v2 is not addressed by the document.\",\n  \"answer\": \"IRRELEVANT\"\n}",
+                "source_id": "s1"
+              },
+              {
+                "citation_numbers": [
+                  2
+                ],
+                "label": "SUPPORTS",
+                "raw": "{\n  \"claim\": \"In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].\",\n  \"document_snippet\": \"Execution of parallel hooks in v2 ends successfully.\",\n  \"reasoning\": \"The document provides a direct answer to the question about v2, stating that execution of parallel hooks ends successfully, which matches the claim about v2. However, it does not mention v1 at all, so it does not support the claim about v1. Since the document only addresses part of the claim and does not contradict it, it is considered as providing partial support for the v2 part of the claim.\",\n  \"answer\": \"SUPPORTS\"\n}",
+                "source_id": "s2"
+              }
+            ],
+            "draft_raw": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].",
+            "raw": "In v1, a parallel hook run terminates with an error [1]. In v2, execution of parallel hooks ends successfully [2].",
+            "revised": false,
+            "status": "ok",
+            "verification": "Verbatim source/offset checks only; entailment is NOT verified",
+            "warnings": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -49,6 +49,8 @@ def witnesses_from(bundle):
         if e['kind']=='source':
             from team_memory.records.graph import describe
             source=next(s for s in bundle['snapshot']['sources'] if s['id']==e['source_id'])
+            if e['conditions']:
+                w['conditions']=list(e['conditions'])
             description=describe(source,e['start'],e['end'])
             if description is not None:w['record_context']=description
         output.append(w)

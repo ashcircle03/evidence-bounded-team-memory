@@ -17,6 +17,18 @@ v1.1 실제 어댑터는 original_text, unattributed, claim별 answer_span도 �
 
 outcome: answered / conditional / conflict / abstained / needs_clarification. 상충이면 같은 alternative_group 안에 양쪽 답과 서로 구분되는 근거가 있어야 한다. 미승인 정정은 현재값을 교체하지 않는다. 재검토 승인은 재실험 성공이나 새 결정 확정이 아니다. 질문에 무관한 상충은 해당 답을 차단하지 않는다. evidence가 없을 때는 이유를 가진 abstained가 정상이다.
 
+### 직접 답과 조건부 답의 판정
+
+질문이 요구하는 결론을 먼저 정한다. 질문이 적용 조건을 이미 지정했거나, 기록된 조건들에서 결론이 하나로 정해지면 `answered`다. 직접 답에도 적용 범위와 상태 근거는 남긴다. 질문 범위 안에서 어떤 조건을 적용하느냐에 따라 지지되는 결론이 달라지면 `conditional`이다. 각 분기의 조건·결론·근거를 함께 반환한다. 조건 단어의 개수, 인용 수, 문장의 완곡한 표현은 판정 기준이 아니다. 같은 조건에서 근거가 양립 불가능하면 기존 `conflict` 계약을 적용한다.
+
+[공통 예제](../../examples/contracts/build_examples.py)는 같은 v1·v2 발언과 같은 재검토 승인 이벤트에서 질문 텍스트만 바꾼다.
+
+| 질문 | outcome | 근거 있는 결론 |
+|---|---|---|
+| 재검토 승인이 곧 병렬 실행 채택인가? | answered | 아니다. 승인 효과는 재검토 허가로 확정돼 있다. |
+| v1에서 병렬 훅을 호출하면 어떻게 되는가? | answered | v1에서는 충돌한다. v1 원문을 인용한다. |
+| 병렬 훅의 보고된 동작은 버전에 따라 어떻게 달라지는가? | conditional | v1은 충돌, v2는 해당 문제 수정. 서로 다른 원문을 각 분기에 인용한다. |
+
 원문 구절 일치 검사는 인용 조작을 막지만 의미 지지를 보장하지 않는다. 문서 ID 집합이 겹친다고 두 주장 모두 지지된 것으로 처리하지 않는다. 여러 값을 묶은 claim이 조건을 잃으면 별도 claim으로 분리한다. 내부 지원/반박 판단·문구 수정·대안 보완 결과는 진단으로 기록하고 주장별 지지 정확도와 별도로 평가한다.
 
 공통 검사: pending/current, approved correction/owner 유지, conflict 양쪽, unrelated conflict, reconsideration 효과 제한, no-evidence 보류, 없는 인용·source/state 혼동 거절. 실제 Qwen 입력/출력, 문장 의미와 인용 entailment, 기존 QA20·상태/인용8·EverMem은 별도 실행이다. 이번 계약 작업에서 재추론했다고 보고하지 않는다.

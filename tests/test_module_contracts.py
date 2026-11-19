@@ -186,3 +186,16 @@ def test_lossless_answer_keeps_unattributed_text_without_borrowed_citations():
     check_answer(answer,c['request']['payload']['bundle'])
     answer['unattributed']=[]
     with pytest.raises(ContractError,match='lost'):check_answer(answer,c['request']['payload']['bundle'])
+
+def test_answer_labels_vary_with_question_on_identical_evidence():
+    names = ['answer-reconsider-is-not-correction', 'answer-hook-v1', 'answer-hook-by-version']
+    examples = [case(name) for name in names]
+    bundles = [item['request']['payload']['bundle'] for item in examples]
+    questions = [bundle['query'].pop('text') for bundle in bundles]
+    assert len(set(questions)) == 3
+    assert bundles[0] == bundles[1] == bundles[2]
+    answers = [item['response']['data'] for item in examples]
+    assert [a['outcome'] for a in answers] == ['answered', 'answered', 'conditional']
+    assert answers[1]['claims'] == answers[2]['claims'][:1]
+    assert [(c['conditions'][0], c['evidence_ids']) for c in answers[2]['claims']] == [
+        ('v1', ['e-s-old']), ('v2', ['e-s-new'])]

@@ -3780,7 +3780,7 @@
       "status": "ok",
       "data": {
         "snapshot_id": "snap-4",
-        "outcome": "conditional",
+        "outcome": "answered",
         "reason": null,
         "claims": [
           {
@@ -3808,7 +3808,7 @@
       },
       {
         "path": "/data/outcome",
-        "equals": "conditional"
+        "equals": "answered"
       },
       {
         "path": "/data/claims",
@@ -3824,6 +3824,532 @@
             ],
             "conditions": [
               "hook invocation"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-hook-v1",
+    "setup": {
+      "snapshot": {
+        "id": "snap-4",
+        "revision": 4,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 crashes with parallel hooks; keep single-threaded execution."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "reconsider",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 63,
+                "quote": "v1 crashes with parallel hooks; keep single-threaded execution."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 82,
+                "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+              },
+              "reason": "Changed version may remove the premise behind the earlier decision.",
+              "previous_assertion": null,
+              "incoming_assertion": null
+            },
+            "reviewer": "hana",
+            "status": "approved",
+            "effect": "authorize_reconsideration",
+            "decided_at": "2026-11-02T10:00:00Z"
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1.2",
+      "request_id": "answer-hook-v1",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-4",
+            "revision": 4,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 crashes with parallel hooks; keep single-threaded execution."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "reconsider",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 63,
+                    "quote": "v1 crashes with parallel hooks; keep single-threaded execution."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 82,
+                    "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+                  },
+                  "reason": "Changed version may remove the premise behind the earlier decision.",
+                  "previous_assertion": null,
+                  "incoming_assertion": null
+                },
+                "reviewer": "hana",
+                "status": "approved",
+                "effect": "authorize_reconsideration",
+                "decided_at": "2026-11-02T10:00:00Z"
+              }
+            ]
+          },
+          "query": {
+            "text": "What happens with parallel hooks in v1?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "hook invocation"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 63,
+              "quote": "v1 crashes with parallel hooks; keep single-threaded execution.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "parallel hook invocation"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 82,
+              "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v2",
+                "parallel hook invocation"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-4",
+                "text": "snapshot=snap-4; proposal=p-correction; kind=reconsider; status=approved; effect=authorize_reconsideration; reviewer=hana; decided_at=2026-11-02T10:00:00Z"
+              },
+              "start": 0,
+              "end": 154,
+              "quote": "snapshot=snap-4; proposal=p-correction; kind=reconsider; status=approved; effect=authorize_reconsideration; reviewer=hana; decided_at=2026-11-02T10:00:00Z",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": []
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1.2",
+      "request_id": "answer-hook-v1",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-4",
+        "outcome": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Parallel hooks crash in v1.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "parallel hook invocation"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/outcome",
+        "equals": "answered"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "Parallel hooks crash in v1.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "parallel hook invocation"
+            ],
+            "alternative_group": null
+          }
+        ]
+      }
+    ],
+    "state_unchanged": true,
+    "retry_identically": false
+  },
+  {
+    "name": "answer-hook-by-version",
+    "setup": {
+      "snapshot": {
+        "id": "snap-4",
+        "revision": 4,
+        "as_of": "2026-11-02T10:00:00Z",
+        "sources": [
+          {
+            "id": "s-old",
+            "owner": "hana",
+            "speaker": "Hana",
+            "observed_at": "2026-11-01T09:00:00Z",
+            "location": "report.md#L1",
+            "text": "v1 crashes with parallel hooks; keep single-threaded execution."
+          },
+          {
+            "id": "s-new",
+            "owner": "jun",
+            "speaker": "Jun",
+            "observed_at": "2026-11-02T09:00:00Z",
+            "location": "correction.md#L1",
+            "text": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+          }
+        ],
+        "proposals": [
+          {
+            "id": "p-correction",
+            "candidate": {
+              "kind": "reconsider",
+              "previous": {
+                "source_id": "s-old",
+                "start": 0,
+                "end": 63,
+                "quote": "v1 crashes with parallel hooks; keep single-threaded execution."
+              },
+              "incoming": {
+                "source_id": "s-new",
+                "start": 0,
+                "end": 82,
+                "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+              },
+              "reason": "Changed version may remove the premise behind the earlier decision.",
+              "previous_assertion": null,
+              "incoming_assertion": null
+            },
+            "reviewer": "hana",
+            "status": "approved",
+            "effect": "authorize_reconsideration",
+            "decided_at": "2026-11-02T10:00:00Z"
+          }
+        ]
+      }
+    },
+    "context": {
+      "workspace_id": "demo",
+      "principal_id": "hana",
+      "capabilities": [
+        "records:read",
+        "records:write",
+        "review:vote",
+        "relations:compare",
+        "evidence:read",
+        "answer:generate"
+      ]
+    },
+    "request": {
+      "contract_version": "team-memory.modules/v1.2",
+      "request_id": "answer-hook-by-version",
+      "workspace_id": "demo",
+      "operation": "answer.generate",
+      "payload": {
+        "bundle": {
+          "snapshot": {
+            "id": "snap-4",
+            "revision": 4,
+            "as_of": "2026-11-02T10:00:00Z",
+            "sources": [
+              {
+                "id": "s-old",
+                "owner": "hana",
+                "speaker": "Hana",
+                "observed_at": "2026-11-01T09:00:00Z",
+                "location": "report.md#L1",
+                "text": "v1 crashes with parallel hooks; keep single-threaded execution."
+              },
+              {
+                "id": "s-new",
+                "owner": "jun",
+                "speaker": "Jun",
+                "observed_at": "2026-11-02T09:00:00Z",
+                "location": "correction.md#L1",
+                "text": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+              }
+            ],
+            "proposals": [
+              {
+                "id": "p-correction",
+                "candidate": {
+                  "kind": "reconsider",
+                  "previous": {
+                    "source_id": "s-old",
+                    "start": 0,
+                    "end": 63,
+                    "quote": "v1 crashes with parallel hooks; keep single-threaded execution."
+                  },
+                  "incoming": {
+                    "source_id": "s-new",
+                    "start": 0,
+                    "end": 82,
+                    "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision."
+                  },
+                  "reason": "Changed version may remove the premise behind the earlier decision.",
+                  "previous_assertion": null,
+                  "incoming_assertion": null
+                },
+                "reviewer": "hana",
+                "status": "approved",
+                "effect": "authorize_reconsideration",
+                "decided_at": "2026-11-02T10:00:00Z"
+              }
+            ]
+          },
+          "query": {
+            "text": "How does the reported behavior of parallel hooks depend on version?",
+            "time_scope": "current",
+            "as_of": null,
+            "conditions": [
+              "hook invocation"
+            ]
+          },
+          "evidence": [
+            {
+              "id": "e-s-old",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-old",
+              "start": 0,
+              "end": 63,
+              "quote": "v1 crashes with parallel hooks; keep single-threaded execution.",
+              "owner": "hana",
+              "speaker": "Hana",
+              "observed_at": "2026-11-01T09:00:00Z",
+              "location": "report.md#L1",
+              "conditions": [
+                "v1",
+                "parallel hook invocation"
+              ]
+            },
+            {
+              "id": "e-s-new",
+              "kind": "source",
+              "state_record": null,
+              "source_id": "s-new",
+              "start": 0,
+              "end": 82,
+              "quote": "v2 fixes parallel hook invocation. Please reconsider the single-threaded decision.",
+              "owner": "jun",
+              "speaker": "Jun",
+              "observed_at": "2026-11-02T09:00:00Z",
+              "location": "correction.md#L1",
+              "conditions": [
+                "v2",
+                "parallel hook invocation"
+              ]
+            },
+            {
+              "id": "e-state",
+              "kind": "review_state",
+              "source_id": null,
+              "state_record": {
+                "proposal_id": "p-correction",
+                "snapshot_id": "snap-4",
+                "text": "snapshot=snap-4; proposal=p-correction; kind=reconsider; status=approved; effect=authorize_reconsideration; reviewer=hana; decided_at=2026-11-02T10:00:00Z"
+              },
+              "start": 0,
+              "end": 154,
+              "quote": "snapshot=snap-4; proposal=p-correction; kind=reconsider; status=approved; effect=authorize_reconsideration; reviewer=hana; decided_at=2026-11-02T10:00:00Z",
+              "owner": null,
+              "speaker": null,
+              "observed_at": null,
+              "location": null,
+              "conditions": []
+            }
+          ],
+          "coverage": "hits",
+          "unresolved_proposal_ids": []
+        }
+      }
+    },
+    "response": {
+      "contract_version": "team-memory.modules/v1.2",
+      "request_id": "answer-hook-by-version",
+      "workspace_id": "demo",
+      "module": "answering",
+      "operation": "answer.generate",
+      "status": "ok",
+      "data": {
+        "snapshot_id": "snap-4",
+        "outcome": "conditional",
+        "reason": null,
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Parallel hooks crash in v1.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "parallel hook invocation"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The parallel hook issue is fixed in v2.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-new"
+            ],
+            "conditions": [
+              "v2",
+              "parallel hook invocation"
+            ],
+            "alternative_group": null
+          }
+        ]
+      },
+      "errors": []
+    },
+    "expect": [
+      {
+        "path": "/status",
+        "equals": "ok"
+      },
+      {
+        "path": "/data/outcome",
+        "equals": "conditional"
+      },
+      {
+        "path": "/data/claims",
+        "equals": [
+          {
+            "id": "c1",
+            "text": "Parallel hooks crash in v1.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-old"
+            ],
+            "conditions": [
+              "v1",
+              "parallel hook invocation"
+            ],
+            "alternative_group": null
+          },
+          {
+            "id": "c2",
+            "text": "The parallel hook issue is fixed in v2.",
+            "kind": "reported_fact",
+            "evidence_ids": [
+              "e-s-new"
+            ],
+            "conditions": [
+              "v2",
+              "parallel hook invocation"
             ],
             "alternative_group": null
           }
