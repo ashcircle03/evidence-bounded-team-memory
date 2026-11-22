@@ -28,6 +28,20 @@ export HF_HUB_OFFLINE=1 HF_HUB_DISABLE_IMPLICIT_TOKEN=1 HF_HUB_DISABLE_TELEMETRY
 export VLLM_USE_V1=1 VLLM_WORKER_MULTIPROC_METHOD=spawn
 export RECORD_INPUTS="$input"
 export RECORDS_VARIANT="$variant"
+# records splits sentences with NLTK punkt_tab. Use the first folder that really has it,
+# and stop before starting vLLM when none does (job 125230 failed on this).
+nltk_dir=""
+for candidate in ${NLTK_DATA_DIR:-} "$root/nltk_data" \
+    /local_datasets/pjw031003/capstone-shared-knowledge/reference-nltk "/data/$USER/harness/nltk_data"; do
+  if [[ -d "$candidate/tokenizers/punkt_tab/english" ]]; then nltk_dir=$(realpath "$candidate"); break; fi
+done
+if [[ -z $nltk_dir ]]; then
+  echo "NLTK punkt_tab not found. Download it once, e.g.:" >&2
+  echo "  python -m nltk.downloader -d /data/$USER/harness/nltk_data punkt_tab stopwords" >&2
+  exit 2
+fi
+export NLTK_DATA="$nltk_dir"
+echo "NLTK_DATA=$NLTK_DATA"
 "$env_prefix/bin/python" - "$root" "$work" "$repo" <<'PY'
 import json, os, sys
 from pathlib import Path
@@ -59,9 +73,10 @@ path.write_text(json.dumps(cfg, indent=2))
 (work/'service.py').write_text(
     'import os, sys\n'
     f'os.environ["PYTHONPATH"] = {":".join((str(repo), str(root/"client-packages"), cfg["reference_extras"]))!r}\n'
+    # Pass NLTK data to the client explicitly, whatever environment serve.py gives it.
+    f'os.environ["NLTK_DATA"] = {os.environ["NLTK_DATA"]!r}\n'
     'os.execv(sys.executable, [sys.executable, "-u", "client.py"])\n'
 )
 PY
-if [[ -d "$root/nltk_data" ]]; then export NLTK_DATA="$root/nltk_data"; fi
 cd "$work"
 "$env_prefix/bin/python" -u serve.py
