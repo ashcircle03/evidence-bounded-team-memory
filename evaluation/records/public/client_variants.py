@@ -6,6 +6,9 @@ the role predictor. The others change only the builder call:
   source     same, plus alignment='source'
   nopredict  preserving.construct(...) without the role predictor
   staged     staged.construct(...) two-stage builder (no role predictor support)
+  repair         default + repair_conditions=True
+  repair-source  default + repair_conditions=True + alignment='source'
+  staged-repair  staged + repair_conditions=True
 Select with RECORDS_VARIANT. Output rows keep the 124911 format, so the teammate's
 score.sh scores them unchanged: {id, graph, calls: [{output, usage}]}.
 """
@@ -18,7 +21,7 @@ import subprocess
 import httpx
 from team_memory.records import grouped, preserving
 
-VARIANTS = ('default', 'source', 'nopredict', 'staged')
+VARIANTS = ('default', 'source', 'nopredict', 'staged', 'repair', 'repair-source', 'staged-repair')
 
 
 def main():
@@ -58,17 +61,16 @@ def main():
             return json.loads(proc.stdout)[0]
 
         generate = generator(grouped.writer_kwargs(basis_types=True)["extra_body"])
-        if variant == 'default':
+        extra = dict(source=dict(alignment='source'), repair=dict(repair_conditions=True),
+                     **{'repair-source': dict(alignment='source', repair_conditions=True)})
+        if variant in ('default', 'source', 'repair', 'repair-source'):
             result = preserving.construct(src, generate, model=cfg["model_revision"], predict=predict,
-                                          training_counts={"disjoint":11974})
-        elif variant == 'source':
-            result = preserving.construct(src, generate, model=cfg["model_revision"], predict=predict,
-                                          training_counts={"disjoint":11974}, alignment='source')
+                                          training_counts={"disjoint":11974}, **extra.get(variant, {}))
         elif variant == 'nopredict':
             result = preserving.construct(src, generate, model=cfg["model_revision"])
         else:
             from team_memory.records import staged
-            result = staged.construct(src, model=cfg["model_revision"],
+            result = staged.construct(src, model=cfg["model_revision"], repair_conditions=variant == 'staged-repair',
                                       generate_claims=generator(staged.claims_writer_kwargs()["extra_body"]),
                                       generate_roles=generator(staged.roles_writer_kwargs()["extra_body"]))
         return dict(id=doc["id"],graph=result["record_graph"],calls=calls)

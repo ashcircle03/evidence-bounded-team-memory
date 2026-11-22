@@ -12,6 +12,7 @@ import re
 MODE_TOKEN = 'token'    # historical LangExtract alignment (default)
 MODE_SOURCE = 'source'  # this module
 MODES = (MODE_TOKEN, MODE_SOURCE)
+_TOKEN = re.compile(r"\w+(?:['’]\w+)*|[^\w\s]")
 
 
 class Ambiguous(ValueError):
@@ -50,7 +51,16 @@ def occurrences(text, quote):
     if not words:
         return []
     loose = r'\s+'.join(map(re.escape, words))
-    for pattern, flags in ((re.escape(quote), 0), (loose, 0), (loose, re.IGNORECASE)):
+    # Tokenized sources put spaces around punctuation ("Success , then"); a model
+    # copies "Success, then". Allow any spacing between word and punctuation tokens.
+    tokens = _TOKEN.findall(quote)
+    spaced = re.escape(tokens[0]) if tokens else ''
+    for prev, tok in zip(tokens, tokens[1:]):
+        # Two words still need whitespace between them; punctuation may attach.
+        gap = r'\s+' if prev[-1].isalnum() and tok[0].isalnum() else r'\s*'
+        spaced += gap + re.escape(tok)
+    for pattern, flags in ((re.escape(quote), 0), (loose, 0), (spaced, 0),
+                           (loose, re.IGNORECASE), (spaced, re.IGNORECASE)):
         found = _matches(text, pattern, flags)
         if found:
             return found

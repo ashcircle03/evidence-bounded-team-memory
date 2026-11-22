@@ -175,9 +175,10 @@ def _failed(source, model, builder, reason):
 
 
 def extract_block(source, context, generate_claims, generate_roles, *, model,
-                  isolate_invalid=False, alignment=MODE_TOKEN):
+                  isolate_invalid=False, alignment=MODE_TOKEN, repair_conditions=False):
     """Two calls for one block (or the whole single-block source)."""
-    builder = BUILDER + (preserving.SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else '')
+    builder = (BUILDER + (preserving.SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else '')
+               + (preserving.REPAIR_SUFFIX if repair_conditions else ''))
     problems = []
     try:
         claims = parse_claims(generate_claims(CLAIMS_DESCRIPTION, _payload(source, context)),
@@ -195,7 +196,8 @@ def extract_block(source, context, generate_claims, generate_roles, *, model,
             # Keep the stage-1 claims without roles rather than losing them.
             problems.append(dict(path='stage2', reason=f'{type(exc).__name__}: {exc}'))
     part = preserving.compile_graph(source, to_rows(claims, roles), model=model,
-                                    isolate_invalid=isolate_invalid, alignment=alignment)
+                                    isolate_invalid=isolate_invalid, alignment=alignment,
+                                    repair_conditions=repair_conditions)
     part['builder'] = builder
     part = _with_problems(source, part, problems)
     graph.validate_graph(source, part)
@@ -203,7 +205,8 @@ def extract_block(source, context, generate_claims, generate_roles, *, model,
 
 
 def construct(source, generate=None, *, model, generate_claims=None, generate_roles=None,
-              isolate_invalid=True, alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None):
+              isolate_invalid=True, alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None,
+              repair_conditions=False):
     """record_builder for the two-stage extractor.
 
     generate_claims / generate_roles default to generate. Give each its own
@@ -218,11 +221,13 @@ def construct(source, generate=None, *, model, generate_claims=None, generate_ro
     generate_roles = generate_roles or generate
     if (generate_claims is None) != (generate_roles is None):
         raise ValueError('Both stages need a generator')
-    suffix = preserving.SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else ''
+    suffix = ((preserving.SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else '')
+              + (preserving.REPAIR_SUFFIX if repair_conditions else ''))
 
     def extract(local, context):
         return extract_block(local, context, generate_claims, generate_roles, model=model,
-                             isolate_invalid=isolate_invalid, alignment=alignment)
+                             isolate_invalid=isolate_invalid, alignment=alignment,
+                             repair_conditions=repair_conditions)
 
     result = preserving.build_blocks(source, extract if generate_claims is not None else None, model=model,
                                      segmentation=segmentation, max_block_chars=max_block_chars,

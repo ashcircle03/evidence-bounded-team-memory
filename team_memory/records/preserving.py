@@ -15,6 +15,7 @@ from team_memory.storage.objects import digest
 
 BUILDER = 'langextract-preserving-v1'
 SOURCE_ALIGN_SUFFIX = '+source-align'
+REPAIR_SUFFIX = '+repair'
 
 
 def _check_alignment(alignment):
@@ -100,7 +101,7 @@ def _narrow_repeated(source, spans, diagnostics, isolate_invalid):
     return kept
 
 
-def _prepare(source, raw, model, isolate_invalid, alignment=MODE_TOKEN):
+def _prepare(source, raw, model, isolate_invalid, alignment=MODE_TOKEN, repair_conditions=False):
     diagnostics = []
     groups = defaultdict(list)
     identities = []
@@ -123,6 +124,9 @@ def _prepare(source, raw, model, isolate_invalid, alignment=MODE_TOKEN):
             spans.append(span)
         if alignment == MODE_SOURCE:
             spans = _narrow_repeated(source, spans, diagnostics, isolate_invalid)
+        if repair_conditions:
+            from .repair import repair_spans
+            spans = repair_spans(source['text'], spans)
         rooted = {s['group'] for s in spans if s['role'] == 'claim'}
         accepted = []
         for span in spans:
@@ -149,14 +153,15 @@ def _prepare(source, raw, model, isolate_invalid, alignment=MODE_TOKEN):
         result = graph.build(source)
         result.update(status='failed', errors=[type(exc).__name__])
         diagnostics.append(dict(path='root', reason=f'{type(exc).__name__}: {exc}'))
-    builder = BUILDER + (SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else '')
+    builder = BUILDER + (SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else '') + (REPAIR_SUFFIX if repair_conditions else '')
     result.update(version='records.graph/v3', builder=builder, model=model,
                   diagnostics=diagnostics, excluded=[])
     graph.validate_graph(source, result)
     return result, groups, identities
 
 
-def compile_graph(source, raw, *, model='unspecified', isolate_invalid=False, predict=None, alignment=MODE_TOKEN):
+def compile_graph(source, raw, *, model='unspecified', isolate_invalid=False, predict=None, alignment=MODE_TOKEN,
+                  repair_conditions=False):
     """Align once, then update only the claim groups whose context role changed.
 
     alignment='source' is opt-in: unique character positions, Korean particles,
@@ -165,7 +170,7 @@ def compile_graph(source, raw, *, model='unspecified', isolate_invalid=False, pr
     from .discourse_roles import pairs_from_groups
 
     _check_alignment(alignment)
-    result, groups, identities = _prepare(source, raw, model, isolate_invalid, alignment)
+    result, groups, identities = _prepare(source, raw, model, isolate_invalid, alignment, repair_conditions)
     if predict is None or result['status'] != 'annotated':
         return result
     pairs = pairs_from_groups(source, groups, result['units'])
@@ -196,7 +201,7 @@ def compile_graph(source, raw, *, model='unspecified', isolate_invalid=False, pr
 
 
 def construct(source, generate, *, model, isolate_invalid=True, predict=None, training_counts=None, parse=None,
-              alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None):
+              alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None, repair_conditions=False):
     """Drop-in record_builder with unchanged prompt and adopted attribute fix.
 
     Partial recovery is the default (2026-11-22): one ungrounded or ambiguous row
@@ -219,8 +224,9 @@ def construct(source, generate, *, model, isolate_invalid=True, predict=None, tr
         raise ValueError('Discourse scope requires a role predictor')
     _check_alignment(alignment)
     options = dict(model=model, isolate_invalid=isolate_invalid, predict=predict,
-                   training_counts=training_counts, parse=parse, alignment=alignment)
-    suffix = SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else ''
+                   training_counts=training_counts, parse=parse, alignment=alignment,
+                   repair_conditions=repair_conditions)
+    suffix = (SOURCE_ALIGN_SUFFIX if alignment == MODE_SOURCE else '') + (REPAIR_SUFFIX if repair_conditions else '')
 
     def extract(local, context):
         return _extract(local, generate, context=context, **options)
@@ -319,7 +325,7 @@ def _extract_or_raw(local, extract, context):
 
 
 def _extract(source, generate, model, isolate_invalid, predict, training_counts, parse, context=None,
-             alignment=MODE_TOKEN):
+             alignment=MODE_TOKEN, repair_conditions=False):
     if training_counts is not None:
         if predict is None:
             raise ValueError('Discourse scope requires a role predictor')
@@ -347,4 +353,4 @@ def _extract(source, generate, model, isolate_invalid, predict, training_counts,
                'actor from the author. Leave unexpressed arguments empty and copy original spans.')
     raw = generate(system, prompt)
     return compile_graph(source, raw, model=model, isolate_invalid=isolate_invalid, predict=predict,
-                         alignment=alignment)
+                         alignment=alignment, repair_conditions=repair_conditions)
