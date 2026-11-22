@@ -206,7 +206,7 @@ def extract_block(source, context, generate_claims, generate_roles, *, model,
 
 def construct(source, generate=None, *, model, generate_claims=None, generate_roles=None,
               isolate_invalid=True, alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None,
-              repair_conditions=False):
+              repair_conditions=True):
     """record_builder for the two-stage extractor.
 
     generate_claims / generate_roles default to generate. Give each its own

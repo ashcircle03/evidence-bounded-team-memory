@@ -201,7 +201,7 @@ def compile_graph(source, raw, *, model='unspecified', isolate_invalid=False, pr
 
 
 def construct(source, generate, *, model, isolate_invalid=True, predict=None, training_counts=None, parse=None,
-              alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None, repair_conditions=False):
+              alignment=MODE_TOKEN, segmentation='legacy', max_block_chars=None, repair_conditions=True):
     """Drop-in record_builder with unchanged prompt and adopted attribute fix.
 
     Partial recovery is the default (2026-11-22): one ungrounded or ambiguous row
@@ -209,6 +209,11 @@ def construct(source, generate, *, model, isolate_invalid=True, predict=None, tr
     It also exposes rows of documents previously rejected wholesale; the 68-document
     no-added-false-links check is pending. isolate_invalid=False restores the old
     all-or-nothing behaviour (compile_graph keeps False as its default).
+
+    Condition repair is the default (2026-11-22): on the public development set it
+    raised condition recovery from 29/49 to 44/49 and precision from 67.4% to 83.0%
+    (role F1 4.3% -> 4.2%); see records/repair.py. repair_conditions=False restores
+    the previous spans. compile_graph keeps False so stored-output replays are unchanged.
 
     Opt-in, defaults unchanged:
     alignment='source'      unique character positions (see alignment.py)
