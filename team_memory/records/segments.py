@@ -46,7 +46,76 @@ def blocks(text):
         yield paragraph, pos, heading, '', False
 
 
-def assemble(source, pieces, model):
+SEGMENT_LEGACY = 'legacy'    # one block per paragraph, heading and bullet line (default)
+SEGMENT_COMPACT = 'compact'  # opt-in, see compact()
+SEGMENTATIONS = (SEGMENT_LEGACY, SEGMENT_COMPACT)
+MAX_BLOCK_CHARS = 2000
+PRECEDING_SENTENCES = 2
+_HEADING = re.compile(r'^\s*#{1,6}\s+')
+_BULLET = re.compile(r'^\s*(?:[-*+]|\d+[.)])\s+')
+
+
+def compact(text, spans, max_chars=MAX_BLOCK_CHARS):
+    """Regroup blocks() output for extraction. Offsets are unchanged.
+
+    Returns (start, end, heading, header, formatting, kind) with kind:
+    'table'   - table header, delimiter or data row: no model call
+    'heading' - a heading line alone: no model call, already passed as section
+    'bullets' - a run of consecutive bullet items: one model call for the run
+    'text'    - a paragraph, split at sentence ends when longer than max_chars
+    """
+    merged = []
+    for start, end, heading, header, formatting in spans:
+        piece = text[start:end]
+        if header or formatting:
+            kind = 'table'
+        elif _HEADING.match(piece) and '\n' not in piece.strip():
+            kind = 'heading'
+        elif _BULLET.match(piece):
+            kind = 'bullets'
+            last = merged[-1] if merged else None
+            if last and last[5] == 'bullets' and last[2] == heading and not text[last[1]:start].strip():
+                last[1] = end
+                continue
+        else:
+            kind = 'text'
+        merged.append([start, end, heading, header, formatting, kind])
+    result = []
+    for block in merged:
+        if block[5] in ('text', 'bullets') and block[1] - block[0] > max_chars:
+            result.extend(_split_long(text, block, max_chars))
+        else:
+            result.append(tuple(block))
+    return result
+
+
+def _split_long(text, block, max_chars):
+    from .alignment import sentence_bounds
+    start, end = block[0], block[1]
+    cuts = [start + b for _, b in sentence_bounds(text[start:end])]
+    pieces, a = [], start
+    for i, cut in enumerate(cuts):
+        last = i == len(cuts) - 1
+        # Close the piece before it would exceed the limit; one long sentence stays whole.
+        if last or (cut - a >= max_chars) or (cuts[i + 1] - a > max_chars):
+            b = end if last else cut
+            if text[a:b].strip():
+                pieces.append((a, b, *block[2:]))
+            a = b
+    return pieces
+
+
+def preceding(text, start, sentences=PRECEDING_SENTENCES, reach=600):
+    """Last sentences before start: reference context for the model, never quoted."""
+    from .alignment import sentence_bounds
+    window = text[max(0, start - reach):start]
+    if not window.strip():
+        return ''
+    bounds = sentence_bounds(window)[-sentences:]
+    return window[bounds[0][0]:].strip()
+
+
+def assemble(source, pieces, model, builder='langextract-preserving-blocks-v1'):
     units, claims, diagnostics = [], [], []
     for start, end, part in pieces:
         ids = {}
@@ -72,7 +141,7 @@ def assemble(source, pieces, model):
         for issue in part.get('diagnostics', []):
             diagnostics.append(dict(path=f"source[{start}:{end}].{issue['path']}",reason=issue['reason']))
     status = ('partial' if claims else 'failed') if diagnostics else 'annotated'
-    result = dict(version='records.graph/v3', builder='langextract-preserving-blocks-v1',
+    result = dict(version='records.graph/v3', builder=builder,
                   model=model, source_id=source['id'], source_fingerprint=graph.source_fingerprint(source),
                   units=units, claims=claims, edges=graph.edges_for(source['id'],units,claims),
                   diagnostics=diagnostics, status=status, errors=['BLOCK_FAILURE'] if diagnostics else [], excluded=[])
