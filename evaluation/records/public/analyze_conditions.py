@@ -71,6 +71,19 @@ def analyze_case(case, row):
                         hit = True
             elif s < y and x < e:
                 overlapping.append(text[s:e])
+    # Every (assertion, condition) pair the scorer counts; all but one hit are false positives.
+    pairs = set()
+    for c in claims:
+        conds = spans_of(graph, c['condition'])
+        for s in (c.get('assertions') or [dict(unit_ids=c['claim'])]):
+            if not s['unit_ids']:
+                continue
+            asr = (units[s['unit_ids'][0]]['start'], units[s['unit_ids'][-1]]['end'])
+            for cs, ce in conds:
+                pairs.add((asr, (cs, ce)))
+    detail['condition_pairs'] = [dict(assertion=text[a0:a1], condition=text[c0:c1],
+                                      correct=(c0, c1) == (x, y) and a <= a0 < a1 <= b)
+                                 for (a0, a1), (c0, c1) in sorted(pairs)]
     if hit:
         category = 'hit'
     elif not claims:
