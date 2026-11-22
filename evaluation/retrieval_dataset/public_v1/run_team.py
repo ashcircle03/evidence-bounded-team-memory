@@ -19,7 +19,7 @@ def source(d):
 def run(args):
     parts = local_components(args.tokenizer, args.model, 'http://127.0.0.1:1/v1')
     def factory(store):
-        return ReferenceQA(store, profile='team', **parts)
+        return ReferenceQA(store, profile='team', rerank_turns=not args.rrf_only, **parts)
     previous = None
     args.cache.mkdir(parents=True, exist_ok=True)
     with args.output.open('w') as output:
@@ -47,7 +47,7 @@ def run(args):
                     query = dict(text=c['query'],time_scope='current',as_of=None,conditions=[])
                     data,_ = adapter.execute('evidence.retrieve',dict(snapshot=snapshot,query=query,max_evidence=256),None)
                     trace = json.loads((path/'traces'/(trace_key(snapshot,query,256)+'.json')).read_text())
-                    ranked = [s['source_id'] for s in trace['fused']][:5]
+                    ranked = [s['source_id'] for s in trace['fused' if args.rrf_only else 'reranked']][:5]
                     delivered = list(dict.fromkeys(e['source_id'] for e in data['evidence']))[:5]
                 lengths={d['id']:len(d['text']) for d in docs}
                 final=[];total=0
@@ -66,6 +66,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser()
     for key in ('tokenizer','model'):
         p.add_argument('--'+key,required=True)
+    p.add_argument('--rrf-only',action='store_true',help='Reproduce the archived pre-reranking baseline')
     p.add_argument('--task', choices=['F02','F05'], required=True)
     for key in ('cache','output'):
         p.add_argument('--'+key,type=Path,required=True)

@@ -54,8 +54,10 @@ diff -qr data /tmp/rebuilt-public
 ```sh
 export PYTHONPATH="$(git rev-parse --show-toplevel)"
 python3 run_team.py --task F02 --cache /tmp/public-team-index --model "$MODEL_DIR" --tokenizer "$TOKENIZER_DIR" --output /tmp/f02.jsonl
-python3 run_team.py --task F05 --cache /tmp/public-team-index --model "$MODEL_DIR" --tokenizer "$TOKENIZER_DIR" --output /tmp/f05.jsonl
+python3 run_team.py --task F05 --rrf-only --cache /tmp/public-team-index --model "$MODEL_DIR" --tokenizer "$TOKENIZER_DIR" --output /tmp/f05.jsonl
 cat /tmp/f02.jsonl /tmp/f05.jsonl > /tmp/team.jsonl
 python3 evaluate.py score /tmp/team.jsonl
 python3 compare.py /tmp/team.jsonl
 ```
+
+F05 팀 기본 재정렬과 전체 분할 실측은 [QMSum 팀 Retrieval 검증](qmsum_team/README.md)에 정리했다.
