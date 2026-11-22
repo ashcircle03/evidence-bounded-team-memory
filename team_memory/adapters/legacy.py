@@ -13,11 +13,17 @@ def envelope(source):
         from team_memory.records.graph import validate_graph
         validate_graph(source,source['record_graph'])
         result['record_graph']=deepcopy(source['record_graph'])
+    if "record_arguments" in source:
+        from team_memory.records.arguments import validate_arguments
+        validate_arguments(source)
+        result["record_arguments"] = deepcopy(source["record_arguments"])
     return result
 
 
 def public_source(env, sid=None):
     result=dict(id=sid or digest(env),owner=env['owner'],observed_at=env['observed_at'],**env['source'])
+    if "record_arguments" in env:
+        result["record_arguments"] = deepcopy(env["record_arguments"])
     if 'record_graph' in env:result['record_graph']=deepcopy(env['record_graph'])
     return result
 

@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 import json
+from team_memory.records.arguments import visible_arguments
 from team_memory.review import state
 from team_memory.contracts.validation import check_bundle
 from .legacy import FrozenStore,native_objects,state_witness
@@ -38,6 +39,54 @@ def evidence_from(w,snapshot,number,sources=None):
                 **{k:source[k] for k in ('owner','speaker','observed_at','location')},conditions=conditions)
 
 
+def claim_views(evidence, snapshot):
+    """Resolve source-local claim references from the immutable snapshot.
+
+    Views are private generation inputs. Public citations retain the retrieval ID
+    and, for a claim-specific view, its exact stored claim ID.
+    """
+    from team_memory.records.graph import describe, ROLES
+
+    sources = {s['id']: s for s in snapshot['sources']}
+    views = []
+    used = {e['id'] for e in evidence}
+    for hit in evidence:
+        if hit['kind'] != 'source':
+            views.append(hit)
+            continue
+        source = sources[hit['source_id']]
+        hit = dict(hit, **visible_arguments(source, hit['start'], hit['end']))
+        context = describe(source, hit['start'], hit['end'])
+        claims = context['claims'] if context else []
+        if not claims:
+            views.append(hit)
+            continue
+        delivered = []
+        for claim in claims:
+            spans = [span for role in ROLES for span in claim[role]]
+            start = min(s['start'] for s in spans)
+            end = max(s['end'] for s in spans)
+            key = hit['id'] + '/' + claim['id']
+            while key in used:
+                key += '/'
+            used.add(key)
+            from team_memory.records.layout import visible_layout
+            structure = visible_layout(source, hit['start'], hit['end'])
+            rows = [r for r in structure if r['start'] < end and start < r['end']]
+            arguments = visible_arguments(source, max(hit["start"], start), min(hit["end"], end))
+            delivered.extend(arguments.get("record_arguments", {}).get("links", []))
+            views.append(dict(hit, **arguments, layout=rows, id=key, evidence_id=hit['id'], record_claim=claim,
+                              start=start, end=end, quote=source['text'][start:end],
+                              conditions=list(dict.fromkeys(s['quote'] for s in claim['condition']))))
+        # Retain the retrieved passage for unstructured content, without
+        # attributing the pooled conditions to everything in that passage.
+        represented = {s['id'] for c in claims for role in ROLES for s in c[role]}
+        missing_arguments = any(link not in delivered for link in hit.get('record_arguments', {}).get('links', []))
+        if missing_arguments or set(context['unassigned_unit_ids']) - represented or context['extraction_status'] != 'annotated':
+            views.append(dict(hit, conditions=[]))
+    return views
+
+
 def witnesses_from(bundle):
     check_bundle(bundle)
     props={p['id']:p for p in bundle['snapshot']['proposals']}
@@ -50,9 +99,10 @@ def witnesses_from(bundle):
         if e['kind']=='source':
             from team_memory.records.graph import describe
             source=next(s for s in bundle['snapshot']['sources'] if s['id']==e['source_id'])
-            if e['conditions']:
-                w['conditions']=list(e['conditions'])
+            w.update(visible_arguments(source,e['start'],e['end']))
             description=describe(source,e['start'],e['end'])
+            if e['conditions'] and not (description and len(description['claims']) > 1):
+                w['conditions']=list(e['conditions'])
             if description is not None:w['record_context']=description
         output.append(w)
     return output

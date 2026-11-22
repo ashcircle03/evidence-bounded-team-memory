@@ -57,6 +57,101 @@
           "type": "string",
           "minLength": 1
         },
+        "record_arguments": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "const": "records.arguments/v1"
+            },
+            "producer": {
+              "type": "string",
+              "minLength": 1
+            },
+            "skipped": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "qualification": {
+              "const": "model_extracted_unverified"
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "predicate": {
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "end": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "quote": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "start",
+                      "end",
+                      "quote"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "role_question": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "argument": {
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "end": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "quote": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "start",
+                      "end",
+                      "quote"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "role_template": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "predicate",
+                  "role_question",
+                  "argument"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "version",
+            "producer",
+            "skipped",
+            "qualification",
+            "links"
+          ],
+          "additionalProperties": false
+        },
         "record_graph": {
           "oneOf": [
             {
@@ -699,6 +794,158 @@
             ],
             "additionalProperties": false
           }
+        },
+        "layout": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "table"
+                  },
+                  "start": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "end": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "cells": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "quote": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "start",
+                        "end",
+                        "quote"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "headers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "quote": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "start",
+                        "end",
+                        "quote"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "kind",
+                  "start",
+                  "end",
+                  "cells",
+                  "headers"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "list"
+                  },
+                  "start": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "end": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "cells": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "quote": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "start",
+                        "end",
+                        "quote"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "label": {
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "end": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "quote": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "start",
+                      "end",
+                      "quote"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "kind",
+                  "start",
+                  "end",
+                  "cells",
+                  "label"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -872,6 +1119,158 @@
               "kind"
             ],
             "additionalProperties": false
+          }
+        },
+        "layout": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "table"
+                  },
+                  "start": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "end": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "cells": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "quote": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "start",
+                        "end",
+                        "quote"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "headers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "quote": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "start",
+                        "end",
+                        "quote"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "kind",
+                  "start",
+                  "end",
+                  "cells",
+                  "headers"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "list"
+                  },
+                  "start": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "end": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "cells": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "quote": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "start",
+                        "end",
+                        "quote"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "label": {
+                    "type": "object",
+                    "properties": {
+                      "start": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "end": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "quote": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "start",
+                      "end",
+                      "quote"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "kind",
+                  "start",
+                  "end",
+                  "cells",
+                  "label"
+                ],
+                "additionalProperties": false
+              }
+            ]
           }
         },
         "context_bindings": {
@@ -1343,6 +1742,10 @@
               "type": "null"
             }
           ]
+        },
+        "record_claim_id": {
+          "type": "string",
+          "minLength": 1
         },
         "answer_span": {
           "type": "object",

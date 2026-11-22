@@ -151,13 +151,55 @@ def construct(source, generate, *, model, isolate_invalid=False, predict=None, t
         raise ValueError('Do not overwrite immutable extraction')
     if parse is not None and training_counts is None:
         raise ValueError('Policy scope requires discourse training counts')
+    if training_counts is not None and predict is None:
+        raise ValueError('Discourse scope requires a role predictor')
+    from .segments import blocks, assemble
+    spans = list(blocks(source['text']))
+    if generate is not None and len(spans) <= 1 and not any(header or formatting for _,_,_,header,formatting in spans):
+        result = _extract(source, generate, model, isolate_invalid, predict, training_counts, parse)
+    else:
+        pieces = []
+        for a, b, heading, header, formatting in spans:
+            local = dict(source, text=source['text'][a:b])
+            if formatting or header or generate is None:
+                part = graph.build(local)
+            else:
+                try:
+                    part = _extract(local, generate, model, isolate_invalid, predict, training_counts,
+                                    parse, dict(section=heading, columns=header))
+                except Exception as exc:
+                    part = graph.build(local)
+                    part['diagnostics'] = [dict(path='root', reason=type(exc).__name__+': '+str(exc))]
+            pieces.append((a,b,part))
+        result = assemble(source, pieces, model)
+    from .layout import layout
+    rows = layout(source['text'])
+    if rows:
+        result['layout'] = rows
+        graph.validate_graph(source, result)
+    return dict(deepcopy(source), record_graph=result)
+
+
+def _extract(source, generate, model, isolate_invalid, predict, training_counts, parse, context=None):
     if training_counts is not None:
         if predict is None:
             raise ValueError('Discourse scope requires a role predictor')
         from .discourse_scope import scoped_predictor
         predict = scoped_predictor(source, predict, training_counts, parse)
     generator, _ = grouped.components()
-    prompt = generator.render(source['text'], additional_context=json.dumps(
-        {k: source[k] for k in ('id', 'owner', 'speaker', 'observed_at', 'location')}, ensure_ascii=False))
-    raw = generate('Extract grounded records using the supplied format and examples.', prompt)
-    return dict(deepcopy(source), record_graph=compile_graph(source, raw, model=model, isolate_invalid=isolate_invalid, predict=predict))
+    metadata = {k: source[k] for k in ('id', 'owner', 'speaker', 'observed_at', 'location')}
+    if context:
+        metadata.update(context)
+    prompt = generator.render(source['text'], additional_context=json.dumps(metadata, ensure_ascii=context is None))
+    system = 'Extract grounded records using the supplied format and examples.'
+    if context:
+        system += (' Extract only from the current row or paragraph. Use section and column labels for interpretation. '
+
+                   'Keep distinct results and their scopes together; quote only text present in this block.')
+    system += (' Use one group per action or reported result. Ask: who performed it, what was acted '
+               'on, and under what explicit circumstances? Keep an explicit actor with its action '
+               'in the claim. Use subject for the affected object or measured entity, condition for '
+               'an explicit applicability restriction, basis for a stated reason. Do not infer the '
+               'actor from the author. Leave unexpressed arguments empty and copy original spans.')
+    raw = generate(system, prompt)
+    return compile_graph(source, raw, model=model, isolate_invalid=isolate_invalid, predict=predict)

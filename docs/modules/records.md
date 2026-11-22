@@ -2,6 +2,8 @@
 
 [공통 계약](README.md) · 구현 소유: `records/*`, `storage/*`, `review/state.py` · [실제 adapter](../../team_memory/adapters/records.py) · [전환 범위](runtime.md)
 
+[records 저장 보장·공개 평가·알려진 오류](../../results/record-layout/records-v1-evaluation.md) · [저장·재조회 예제](../../examples/records_argument_roundtrip.py)
+
 **records의 연구 책임은 DB에 쌓이는 지식의 품질이다.** 원문 저장뿐 아니라, 이후 비교·검색·답변이 사용할 주장·조건·출처·상태를 충실하게 구성하고 보존하는 것까지 포함한다. LLM이 추출한 내용은 출처가 연결된 추출/추론 기록으로 남기며, 그 자체를 사람의 승인이나 확정 사실로 승격하지 않는다.
 
 **v1.2에 원문에서 주장 후보·조건·이유·시간·대상 구절을 연결하는 opt-in 구성 경로를 추가했다.** [record graph 설계와 코드](records-graph.md)를 참조한다. 기본값은 기존 원문 경로이며, 773개 보존·46개 상태 검사 통과는 지식 구성의 의미 성능이 아니다. 독립된 사람의 정답셋과 대규모 일반화 검증은 아직 없다.

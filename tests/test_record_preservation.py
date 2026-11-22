@@ -83,7 +83,7 @@ def test_spans_can_cross_sentence_tokenizer_boundary(tmp_path):
     transport(dict(s, record_graph=new), tmp_path)
 
 
-def test_prompt_is_byte_identical_to_original():
+def test_action_contract_preserves_source_prompt_and_examples():
     s = source('The timer stopped yesterday.')
     output = raw(('claim', 'The timer stopped', 'a', 'observation'))
     prompts = []
@@ -92,7 +92,8 @@ def test_prompt_is_byte_identical_to_original():
         return output
     grouped.construct_aligned(deepcopy(s), generate, model='test')
     preserving.construct(deepcopy(s), generate, model='test')
-    assert prompts[0] == prompts[1]
+    assert prompts[0][1] == prompts[1][1]
+    assert 'who performed it' in prompts[1][0]
 
 
 def test_default_does_not_silently_enable_partial_recovery():
@@ -103,3 +104,15 @@ def test_default_does_not_silently_enable_partial_recovery():
     opted_in = preserving.construct(s, lambda *_: output, model='test', isolate_invalid=True)
     assert default['record_graph']['status'] == 'failed'
     assert opted_in['record_graph']['status'] == 'partial'
+
+
+def test_table_rows_retain_repeated_cells_at_distinct_offsets():
+    text = '| Scope | Result |\r\n|---|---|\r\n| Lab A | Passed |\r\n| Lab B | Pending |\r\n| Lab A | Passed |\r\n'
+    s = source(text)
+    def unexpected(*args):
+        raise AssertionError('Table issued model request')
+    result = preserving.construct(s, unexpected, model='test')['record_graph']
+    assert [r['cells'][1]['quote'] for r in result['layout']] == ['Passed','Pending','Passed']
+    assert [r['cells'][0]['start'] for r in result['layout']] == [
+        text.index('Lab A'), text.index('Lab B'), text.rindex('Lab A')]
+    graph.validate_graph(s, result)
