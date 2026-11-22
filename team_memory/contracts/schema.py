@@ -49,6 +49,13 @@ def build_schema():
     d["span"] = obj(source_id=S, start=N, end=N, quote=S)
     d["source"] = obj(id=S, owner=S, speaker=S, observed_at=TIME,
                       location=S, text=S)
+    argument_span = obj(start=N, end=N, quote=S)
+    argument_link = obj(predicate=argument_span, role_question=S, argument=argument_span)
+    argument_link["properties"]["role_template"] = S
+    d["source"]["properties"]["record_arguments"] = obj(
+        version={"const": "records.arguments/v1"}, producer=S, skipped=N,
+        qualification={"const": "model_extracted_unverified"},
+        links=arr(argument_link))
     d['record_graph_unit']=obj(id=S,index=N,start=N,end=N,quote=S,window_start=N,window_end=N)
     d['record_graph_claim']=obj(id=S,claim=arr(S),condition=arr(S),basis=arr(S),time=arr(S),subject=arr(S),
         stance=enum('observation','decision','proposal','uncertainty','question','unknown'),
@@ -68,6 +75,10 @@ def build_schema():
     d['record_graph_claim_v3']['required'].append('assertions')
     d['record_graph_v3']=deepcopy(d['record_graph_v2'])
     d['record_graph_v3']['properties'].update(version={'const':'records.graph/v3'},claims=arr(ref('record_graph_claim_v3')),status=enum('not_run','annotated','partial','failed'),diagnostics=arr(obj(path=S,reason=S)),excluded=arr(obj(start=N,end=N,quote=S,kind=enum('salutation','acknowledgement','formatting'))))
+    cell = obj(start=N,end=N,quote=TEXT)
+    d['record_graph_v3']['properties']['layout'] = arr({'oneOf': [
+        obj(kind={'const':'table'}, start=N,end=N,cells=arr(cell),headers=arr(cell)),
+        obj(kind={'const':'list'}, start=N,end=N,cells=arr(cell),label=cell)]})
     d['record_graph_v3']['required'].extend(['diagnostics','excluded'])
     d['record_context_binding']=obj(id=S,target_start=N,target_end=N,context_start=N,context_end=N,
         role=enum('condition','basis'),basis_kind=enum('stated','unspecified'))
@@ -110,6 +121,7 @@ def build_schema():
     d["claim"] = obj(
         id=S, text=S, kind=enum("reported_fact", "state", "inference", "uncertainty"),
         evidence_ids=arr(S), conditions=arr(S), alternative_group=nullable(S))
+    d['claim']['properties']['record_claim_id'] = S
     d['claim']['properties']['answer_span']=obj(start=N,end=N)
     d["answer"] = obj(
         snapshot_id=S, outcome=enum("answered", "conditional", "conflict", "abstained", "needs_clarification"),

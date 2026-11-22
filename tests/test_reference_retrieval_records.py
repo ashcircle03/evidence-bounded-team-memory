@@ -65,13 +65,11 @@ class RecordIndexTests(unittest.TestCase):
             self.assertEqual(TEXT[node.metadata['parent_start']:node.metadata['parent_end']], node.get_content())
 
     def test_index_key_follows_the_graph_only_in_records_mode(self):
-        from copy import deepcopy
         from team_memory.adapters.legacy import envelope
         from team_memory.readers.indexing import RECORD_INDEX_UNIT, specification
         reader = self.team_reader()
         source = self.graph_source()
-        changed = deepcopy(source)
-        changed['record_graph']['claims'] = []
+        changed = self.graph_source(claims=())
         one, two = {source['id']: envelope(source)}, {source['id']: envelope(changed)}
         self.assertEqual(specification(reader, one), specification(reader, two))
         reader.index_config['index_unit'] = RECORD_INDEX_UNIT
@@ -115,6 +113,29 @@ class RecordIndexTests(unittest.TestCase):
         self.assertEqual(result['status'], 'ok', result)
         self.assertTrue(result['data']['evidence'])
         self.assertEqual(self.calls, [])
+
+    def test_record_arguments_survive_condition_filtered_record_retrieval(self):
+        from team_memory.adapters.reader_bridge import claim_views
+        from team_memory.records.arguments import with_arguments
+
+        gateway = self.make_records(Path(self.temp.name) / 'roles')
+        for version, actor in [('v1', 'Petr'), ('v2', 'Hana')]:
+            text = f'Only with dataset {version}. {actor} approved the draft.'
+            source = self.graph_source(text, location=f'test:{version}')
+            start = text.index('approved')
+            roles = [dict(predicate=[start, start + len('approved')], qas=[
+                dict(question='who approved something ?', answers=[actor])])]
+            self.append(gateway, with_arguments(source, roles, 'fixture'), version)
+
+        gateway.retrieval.condition_filter = True
+        result = self.retrieve(gateway, 'Who approved the draft?', ['dataset v1'])
+        self.assertEqual(result['status'], 'ok', result)
+        self.assertEqual(self.locations(result), ['test:v1'])
+        bundle = result['data']
+        views = claim_views(bundle['evidence'], bundle['snapshot'])
+        links = [link for view in views for link in view.get('record_arguments', {}).get('links', [])]
+        self.assertEqual([(link['predicate']['quote'], link['argument']['quote']) for link in links],
+                         [('approved', 'Petr')])
 
     # B2: the condition filter on the default chunk index.
 

@@ -11,7 +11,7 @@ from team_memory.readers.scoped import public_answer
 from team_memory.readers.attribution import AttributedQA,ConflictCheckedQA,repair_omitted_answer,attach_citations
 from team_memory.readers.fallback import preserve_answer
 from .base import Adapter,Failure,issue
-from .reader_bridge import reader_for,witnesses_from,context_from,query_text
+from .reader_bridge import reader_for,witnesses_from,context_from,query_text,claim_views
 
 
 class AnsweringAdapter(Adapter):
@@ -60,11 +60,12 @@ class AnsweringAdapter(Adapter):
         try:
             with reader.lock:
                 # Corrections and unresolved relations retain the dedicated state path.
-                scopes = {frozenset(e['conditions']) for e in bundle['evidence'] if e['kind']=='source' and e['conditions']}
+                views = claim_views(bundle['evidence'], bundle['snapshot'])
+                scopes = {frozenset(e['conditions']) for e in views if e['kind']=='source' and e['conditions']}
                 review_only = all(r['kind']=='reconsider' for r in (review or {}).get('relations', []))
                 if len(scopes)>1 and review_only and not bundle['unresolved_proposal_ids'] and hasattr(reader, 'generate_scoped'):
-                    draft = reader.generate_scoped(bundle['query'], bundle['evidence'])
-                    response = public_answer(draft, bundle)
+                    draft = reader.generate_scoped(bundle['query'], views)
+                    response = public_answer(draft, bundle, views)
                     try:
                         self.diagnostics.put('answer_diagnostics', dict(bundle=bundle, scoped_draft=draft.model_dump()))
                     except OSError:
@@ -110,7 +111,8 @@ class AnsweringAdapter(Adapter):
             # Retain requested scope only when every cited source carries it.
             sources = [by_id[eid] for eid in owned if by_id[eid]['kind'] == 'source']
             conditions = [scope for scope in bundle['query']['conditions']
-                          if sources and all(scope in src['conditions'] for src in sources)]
+                          if sources and all(scope in v['conditions'] for src in sources for v in views
+                                          if v.get('evidence_id', v['id']) == src['id'])]
             claims.append(dict(id=cid,text=text,kind=kind,evidence_ids=owned,conditions=conditions,alternative_group=None,
                                answer_span=dict(start=0 if index==0 else start,end=stop)))
         if claims:

@@ -143,6 +143,11 @@ def validate_graph(source,graph):
     expected_graph={'version','source_id','source_fingerprint','builder','model','status','units','claims','errors','edges'}
     v3=graph.get('version')=='records.graph/v3'
     if v3:expected_graph.update(('diagnostics','excluded'))
+    if v3 and 'layout' in graph:
+        from .layout import layout
+        if layout(source['text']) != graph['layout']:
+            raise ValueError('Layout differs from original source')
+        expected_graph.add('layout')
     if set(graph)!=expected_graph:
         raise ValueError('Invalid graph fields')
     if graph['version'] not in (VERSION,'records.graph/v2','records.graph/v3') or graph['source_id']!=source['id'] or graph['source_fingerprint']!=source_fingerprint(source):
@@ -238,7 +243,11 @@ def describe(source,start,end):
                 **{role:[{k:by_id[uid][k] for k in ('id','start','end','quote')} for uid in c[role]] for role in ROLES},
                 **({'basis_annotations':deepcopy(c['basis_annotations'])} if 'basis_annotations' in c else {}),
                 **({'assertions':[{**a,'spans':[{k:by_id[uid][k] for k in ('id','start','end','quote')} for uid in a['unit_ids']]} for a in c['assertions']]} if 'assertions' in c else {})})
-    return dict(source_id=source['id'],record_author=source['speaker'],location=source['location'],
+    layout_fields = {}
+    if 'layout' in graph:
+        from .layout import visible_layout
+        layout_fields['layout'] = visible_layout(source,start,end)
+    return dict(**layout_fields,source_id=source['id'],record_author=source['speaker'],location=source['location'],
                 **({'context_bindings':[dict(b,target_quote=source['text'][b['target_start']:b['target_end']],context_quote=source['text'][b['context_start']:b['context_end']],qualification='model_extracted_unverified') for b in graph['context_bindings'] if start<=min(b['target_start'],b['context_start']) and max(b['target_end'],b['context_end'])<=end]} if 'context_bindings' in graph else {}),
                 observed_at=source['observed_at'],extraction_status=graph['status'],
                 **({'diagnostics':deepcopy(graph['diagnostics'])} if 'diagnostics' in graph else {}),

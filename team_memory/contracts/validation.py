@@ -82,6 +82,9 @@ def check_candidate(candidate, snapshot):
 def check_snapshot(snapshot):
     validate("snapshot", snapshot)
     for source in snapshot['sources']:
+        if 'record_arguments' in source:
+            from team_memory.records.arguments import validate_arguments
+            validate_arguments(source)
         if 'record_graph' in source:
             from team_memory.records.graph import validate_graph
             validate_graph(source,source['record_graph'])
@@ -171,6 +174,18 @@ def check_answer(answer, bundle):
         citations = claim["evidence_ids"]
         require(len(citations) == len(set(citations)), "duplicate claim citation")
         require(all(cid in evidence for cid in citations), "claim cites absent evidence")
+        if 'record_claim_id' in claim:
+            from team_memory.records.graph import describe
+            require(len(citations) == 1, 'record claim requires one containing passage')
+            hit = evidence[citations[0]]
+            require(hit['kind'] == 'source', 'record claim requires a source')
+            source = sources(bundle['snapshot'])[hit['source_id']]
+            context = describe(source, hit['start'], hit['end'])
+            selected = next((c for c in (context or {}).get('claims', [])
+                             if c['id'] == claim['record_claim_id']), None)
+            require(selected is not None, 'record claim outside cited passage')
+            require(claim['conditions'] == list(dict.fromkeys(s['quote'] for s in selected['condition'])),
+                    'conditions differ from cited record claim')
         if claim["kind"] != "uncertainty":
             require(bool(citations), "claim has no evidence")
         if claim["kind"] == "reported_fact":
