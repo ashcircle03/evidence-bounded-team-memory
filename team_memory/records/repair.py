@@ -20,7 +20,7 @@ _LEADING_COND = re.compile(rf'\s*{_COND}\b', re.I)
 _TRAILING_COND = re.compile(rf'\s{_COND}\b', re.I)
 _LEADING_CONNECTIVE = re.compile(r'\s*(?:and then|then|so|thus|hence)\b[\s,]*', re.I)
 _TRAILING_NOISE = re.compile(r'(?:\s*\[\s*[\w.,\s-]{1,12}\]|\s*[.;:,])+\s*$')
-_CONDITION_TAIL = re.compile(r'(?:\s*,|\s+then)+\s*$', re.I)
+_CONDITION_TAIL = re.compile(r'(?:\s*[,.;:]|\s+then)+\s*$', re.I)
 _THEN = re.compile(r'then\b\s*', re.I)
 
 

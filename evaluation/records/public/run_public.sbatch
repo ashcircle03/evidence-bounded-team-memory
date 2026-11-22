@@ -36,6 +36,8 @@ if [[ ${RUN_MAIN:-0} == 1 ]]; then
 fi
 
 # Scoring (no inference): the 124911 baseline and every new run, with the teammate's score.sh.
+# score.sh calls `python` from PATH; do not depend on the submitting shell's conda env.
+export PATH=${SCORE_PYTHON_BIN:-/data/$USER/anaconda3/envs/team-memory/bin}:$PATH
 bash "$BUNDLE/score.sh" > "$OUT/score-124911.json" 2> "$OUT/score-124911.err"
 for f in "$OUT"/*/results/records-current-*.jsonl; do
   [[ -e $f ]] || continue
