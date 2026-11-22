@@ -1,105 +1,67 @@
-# Evidence-Bounded Team Memory
+# records 모듈 (Evidence-Bounded Team Memory)
 
-[![Tests](https://github.com/ashcircle03/evidence-bounded-team-memory/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ashcircle03/evidence-bounded-team-memory/actions/workflows/tests.yml)
+이 브랜치에는 **records 모듈과 실행에 필요한 의존 파일만** 있다. 팀원 모듈(retrieval, answering, relations,
+gateway, readers), 평가·테스트·문서·결과는 `main`에 있다. 이 브랜치는 main으로 그대로 합치는 용도가 아니다.
 
-**팀이 Git으로 공유하는 기록에서 조건·출처·승인 상태를 보존하며 답하고, 과거 결정의 재검토를 제안하는 연구 프로토타입.**
+records는 팀 기록의 **원문·출처·위치를 그대로 보존**하고, 원문 구절 위치로 **주장·조건·이유·시간·대상**을
+연결해 저장한다. 모델이 뽑은 연결은 모두 `model_extracted_unverified`이며 승인으로 취급하지 않는다.
 
-[팀 개발 계약](docs/modules/README.md) · [모듈 지도](docs/architecture.md) · [시작하기](#시작하기) · [JSONL API](docs/service-v2.md) · [개발 안내](CONTRIBUTING.md) · [평가 결과](results/README.md) · [전체 문서](docs/INDEX.md)
-
-**v0.2.1** · records 담당자는 [단일 추출 진입점과 연결 예시](team_memory/records/README.md)에서 시작한다. [68문서 연결·근거 전달 검증](results/records/v0.2.1.csv) · [변경 기록](CHANGELOG.md) [Records 실험별 채택 여부와 MeeQA 결과](docs/modules/records-experiments.md)
-
-## 할 수 있는 일
-
-- 원문·작성자·시간을 보존하고, 질문에 대한 답과 원문 근거를 반환한다.
-- 새 기록을 과거 기록과 비교해 정정·재검토·상충 후보를 만든다.
-- 제안과 작성자 승인을 구분하고, 원문과 검토 상태를 각각 인용한다.
-- 각 checkout에서 독립적으로 동작한다. Git 전송, 인증, MCP와 UI는 호출자가 맡는다.
-
-**자동 지식 병합이 완성된 시스템은 아니다.** 재검토를 정정으로 오분류하거나 불필요한 제안을 만드는 문제가 남아 있다. 답변의 `ok`와 정확한 인용 위치가 의미 정답을 보장하지 않는다.
-
-## 모듈 구조
-
-팀 협업은 **records / relations / retrieval / answering / gateway** 다섯 책임으로 나눈다. [입출력·권한·실패 계약 v1.2](docs/modules/README.md), [실제 v2 연결·사용법](docs/modules/runtime.md), [공통 예제와 독립 테스트](examples/contracts/README.md)를 먼저 읽는다. 어댑터는 opt-in으로 연결됐으며 기존 v2 API도 유지한다. 새 경로의 분기 Git 자동 병합은 아직 지원하지 않는다.
-
+## 구성 (38개 파일)
 ```text
 team_memory/
-├── service.py            # 공개 JSONL API와 전체 흐름 조정
-├── contracts/            # 협업용 schema·ports·검증·conformance (v2와 구분)
-├── adapters/             # 기존 v2를 다섯 포트로 연결하는 실제 구현
-├── storage/              # 불변 객체·원문 저장
-├── records/              # 질문 없는 주장·조건·이유 구성과 원문 구절 연결
-├── review/               # 관계 비교·근거 결합·제안·작성자 검토 상태
-├── readers/              # 검색·QA·상태 문맥·인용
-├── experiments/          # 별도 평가한 reader와 패치 후보
-└── _vendor/              # 재사용한 외부 구현·프롬프트·라이선스
-evaluation/               # 데이터 구성·동결 기준·재생·채점
-results/                  # 측정 결과·실패·원출력·판정 기록
-tests/                    # 저장·상태·모듈 연결·전송·회귀 계약
-docs/                     # 설계 의도·입출력·개발·연구 이력
+├── records/        추출·정렬·검증·보정
+│   ├── preserving.py   construct() 진입점, build_blocks() 블록 처리
+│   ├── grouped.py      LangExtract 프롬프트·예시 (한글 원문엔 한국어 예시)
+│   ├── graph.py        record_graph 형식·검증(validate_graph)·출력(describe, linked_span)
+│   ├── repair.py       조건 보정 (기본값)
+│   ├── alignment.py    선택 정렬 alignment='source'
+│   ├── segments.py, layout.py   블록 분할, 표·목록 좌표
+│   ├── staged.py       선택 2단계 추출 builder
+│   ├── compact.py      선택 압축 저장
+│   ├── view.py         공통 주장 표현 claims_view()
+│   ├── arguments.py    선택 QA-SRL 역할 레이어
+│   └── discourse_roles.py, discourse_scope.py, policy_scope.py, pair_binding.py   선택 역할 보정·v4 호환
+├── storage/, store.py  불변 객체 저장 (store.py는 과거 해시에 묶인 고정 파일)
+├── review/state.py     제안·승인·거절 상태
+├── adapters/           records 포트 (records.py), 저장↔공개 변환 (legacy.py), 공통 요청 처리 (base.py)
+└── contracts/          팀 공통 스키마·검증·포트
 ```
 
-| 수정할 대상 | 구현 진입점 | 책임과 계약 |
+## 설치
+Python 3.11 이상. records에 필요한 외부 패키지는 jsonschema, pydantic, langextract, llama-index-core, nltk이다.
+```sh
+pip install -e '.[reference,dev]'
+python -m nltk.downloader punkt_tab
+```
+NLTK 3.10 이상은 다른 계정이 소유한 데이터 폴더를 읽지 않는다. 본인 소유 폴더(예: `~/nltk_data`)를 쓴다.
+`adapters/records.py`는 `fcntl`을 쓰므로 Linux에서 실행한다.
+
+## 사용
+```python
+from functools import partial
+from team_memory.records import preserving
+from team_memory.adapters.records import RecordsAdapter
+
+source = dict(id='src-A', owner='petr', speaker='secretary', observed_at='2026-11-20T09:00:00Z',
+              location='minutes.md#L3', text='In dataset v1, Petr approved the draft.')
+record = preserving.construct(source, generate, model='Qwen3-8B')   # generate(system, prompt) -> str
+# 또는 RecordsAdapter(root, workspace_id, record_builder=partial(preserving.construct, generate=generate, model=...))
+```
+| 옵션 | 기본값 | 의미 |
 |---|---|---|
-| 주장·조건·이유 구성 | [records/](team_memory/records/) | [레퍼런스 기반 그룹 연결](docs/modules/records-grouped.md) |
-| 원문·저장 형식 | [storage/](team_memory/storage/) | [저장소 계약](team_memory/storage/README.md) |
-| 정정·재검토·작성자 검토 | [review/](team_memory/review/) | [관계와 상태 계약](team_memory/review/README.md) |
-| 검색·답변·인용 | [readers/](team_memory/readers/) | [reader 단계별 입출력](team_memory/readers/README.md) |
-| API 연결·오류 반환 | [service.py](team_memory/service.py) | [요청·응답 명세](docs/service-v2.md) |
-| 새로운 실험 후보 | [experiments/](team_memory/experiments/) | [기본 경로와의 경계](team_memory/experiments/README.md) |
+| `repair_conditions` | **True** | 조건절을 claim으로 저장한 경우·`then`·문헌 번호·한 결과절의 조각 중복을 원문 규칙으로 보정 |
+| `isolate_invalid` | **True** | 잘못된 행만 빼고 사유를 diagnostics에 남김 |
+| `alignment` | `'token'` | `'source'`: 글자 단위 고유 위치 정렬 (한국어 조사, 문장부호 공백) |
+| `segmentation` | `'legacy'` | `'compact'`: 제목·표 행은 호출 생략, 불릿 묶기, 긴 문단 분할 |
+| `RecordsAdapter(storage=)` | `'full'` | `'compact'`: quote·edges를 저장하지 않고 읽을 때 복원 |
 
-최근 records 작업: [추출 계약·같은 모델 비교](results/record-contract/README.md), [질문 독립 저장·벡터화 감사](results/service-storage/README.md). 새 입력의 부분 점수는 올랐지만 보호 연결 퇴행으로 기본 채택하지 않았다. 저장·색인 준비는 질문 경로에서 분리했다. [수명주기 계약](docs/modules/index-lifecycle.md)과 [비용 분해·변경 문서 처리·QA 보존](results/service-storage/v2b/README.md)을 참고한다.
+## 검증 (공개 개발셋, 팀원 Slurm 124911과 같은 입력·모델·채점, 2026-11-22)
+| 지표 | 팀원 기준선 | 이 코드 |
+|---|---|---|
+| 원문·출처·위치 보존 (1,049건 저장→재시작) | — | 1,049 / 1,049 (전체·압축 저장) |
+| 조건 정밀도 | 67.4% | 88.0% |
+| 조건 복구 | 29 / 49 | 44 / 49 |
+| QA 20문항 답·근거 유지 | 20 / 20 | 20 / 20 |
+| 저장 후 역할 정밀도 | 16.2% | 15.8% |
 
-기존 `team_memory.reference_*`, `timeline`, `source_store` import와 실행 명령은 호환 경로로 유지한다. 새 코드는 위 경로를 사용한다. `store.py`는 과거 데이터셋의 해시 검증에 묶인 원본이므로 그대로 보존한다. [호환·과거 경로 안내](docs/architecture.md).
-
-## 시작하기
-
-Python3.11 이상과 Git이 필요하다. 모델 없이 공유·검토 과정을 확인하는 **고정 응답 데모**:
-
-```sh
-git clone https://github.com/ashcircle03/evidence-bounded-team-memory.git
-cd evidence-bounded-team-memory
-python3 -m team_memory demo
-python3 -m team_memory demo --followup
-```
-
-실제 QA 개발 환경:
-
-```sh
-python3.11 -m venv .venv
-.venv/bin/python -m pip install -e '.[reference,dev]'
-```
-
-모델·tokenizer·임베딩·NLTK 자료는 [환경 안내](docs/evaluation-guide.md)에 따라 별도로 준비한다. 패키지 설치가 모델을 내려받거나 GPU 작업을 제출하지 않는다.
-
-```sh
-.venv/bin/python -m team_memory.service \
-  --store /path/to/checkout/shared-records \
-  --model-path /path/to/Qwen3-8B \
-  --embedding-path /path/to/embedding \
-  --api-base http://127.0.0.1:PORT/v1 \
-  --reader attributed < requests.jsonl > responses.jsonl
-```
-
-기본 reader는 `attributed`, 단순 비교 경로는 `direct`다. 설치 후 `team-memory` 명령도 같은 API를 실행한다. [API 명세와 요청 예제](docs/service-v2.md)를 참고한다. Aurora 계산은 Slurm 할당에서 수행하며 로그인 노드에서는 실행하지 않는다.
-
-## 검증과 현재 한계
-
-기존 개발20문항의 핵심 답·필요 근거는 마지막 완료된 실행에서20/20 유지됐다. 하지만 알려진 재검토 양성2건의 관계 분류는0/2이며, 무관한 보고2건에도 불필요한 제안을 만들었다. 이는 소규모 개발 결과이며 독립 벤치마크 성능이 아니다.
-
-- [최근 완료된 구현·상태 검증](results/module-boundary/README.md)
-- [비교기8B/14B의 채택 판단](results/comparator-choice/README.md)
-- [원형과 현재 모듈 연결 감사](docs/reference-composition-audit.md): 후속 동일근거 비교는 별도 실행 기록으로 관리한다.
-- [실험 결과 상세와 이전 비교](docs/status-2026-11-08.md)
-
-```sh
-.venv/bin/python scripts/check.py core
-.venv/bin/python scripts/check.py reference --fail-on-skip
-```
-
-reference 검사는 캐시된 tokenizer와 NLTK 자료, stub 모델·로컬 HTTP 서버를 사용한다. 실제 모델 추론 점수와 구분한다. 준비물과 전체 검사는 [기여 안내](CONTRIBUTING.md)에 있다.
-
-## 기여와 라이선스
-
-변경할 모듈의 책임과 실패 사례부터 확인하고, 기존 답·근거와 상태 계약을 유지하는지 검증해 주세요. [개발 절차](CONTRIBUTING.md) · [평가 재현](evaluation/README.md).
-
-**팀 코드의 재사용 라이선스는 아직 결정 전이다.** 공개 저장소를 오픈소스 라이선스 부여로 해석하지 않는다. 외부 구현·자료의 LICENSE/NOTICE는 각각 유지한다. 모델 가중치와 인증정보는 포함하지 않는다.
+평가 도구와 상세 결과는 이 브랜치에서 제외했다. 68문서 회귀(팀원 정답 51개 유지)는 아직 확인하지 않았다.

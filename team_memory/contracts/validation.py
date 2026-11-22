@@ -240,7 +240,13 @@ def validate_exchange(request, response):
                     "mutation must advance exactly one revision")
         if operation == 'record.append':
             require(data['object_id'] == payload['source']['id'], 'append receipt has wrong object ID')
-            require(payload['source'] in data['snapshot']['sources'], 'append receipt lost the source')
+            stored = next((s for s in data['snapshot']['sources'] if s['id'] == payload['source']['id']), None)
+            require(stored is not None, 'append receipt lost the source')
+            if 'record_graph' not in payload['source'] and 'record_graph' in stored:
+                # Records may run its configured extractor (record_builder); every field
+                # the caller sent must still be unchanged.
+                stored = {k: v for k, v in stored.items() if k != 'record_graph'}
+            require(stored == payload['source'], 'append receipt lost the source')
         else:
             proposals = {p['id']:p for p in data['snapshot']['proposals']}
             require(data['object_id'] in proposals, 'receipt refers to absent proposal')

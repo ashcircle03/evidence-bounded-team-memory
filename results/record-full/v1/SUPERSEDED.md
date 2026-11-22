@@ -1,1 +1,0 @@
-v1 is preserved for evaluation audit only. Legitimate same-group split claims were counted as extra rows. Corrected scorer and gold-derived invariance tests are frozen in ../v2/. The v1 source snapshots under frozen/ match the original freeze hashes. Gold/source inputs were not changed.
