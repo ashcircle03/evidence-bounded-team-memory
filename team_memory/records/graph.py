@@ -144,8 +144,9 @@ def validate_graph(source,graph):
     v3=graph.get('version')=='records.graph/v3'
     if v3:expected_graph.update(('diagnostics','excluded'))
     if v3 and 'layout' in graph:
-        from .layout import layout
-        if layout(source['text']) != graph['layout']:
+        from .layout import layout, LAYOUT_RULES
+        # Any supported rule: records written under the v1 rule stay valid.
+        if all(layout(source['text'], rule) != graph['layout'] for rule in LAYOUT_RULES):
             raise ValueError('Layout differs from original source')
         expected_graph.add('layout')
     if set(graph)!=expected_graph:

@@ -18,7 +18,25 @@ def _cells(text, start, end):
     return [_span(text, a+1, b) for a,b in zip(cuts,cuts[1:])]
 
 
-def layout(text):
+LAYOUT_V1 = 'v1'  # every "- label: value" item is a list row, values split at commas
+LAYOUT_V2 = 'v2'  # an item whose value is an utterance ("- 민수: 내일 배포하겠습니다.") is not a row
+LAYOUT_RULE = LAYOUT_V2
+LAYOUT_RULES = (LAYOUT_V1, LAYOUT_V2)
+_SENTENCE_END = re.compile(r'(?:[.!?。…]|(?:다|요|죠|까|니다|습니다|세요))[\s"\'”’)\]]*$')
+_MAX_VALUE_WORDS = 8
+
+
+def _utterance(value):
+    """A spoken or written sentence, not a short value list."""
+    value = value.strip()
+    return bool(_SENTENCE_END.search(value)) or len(value.split()) > _MAX_VALUE_WORDS
+
+
+def layout(text, rule=LAYOUT_RULE):
+    """Coordinates of table rows and "- label: value" items. Stored rows are
+    validated against both rules so records made under v1 stay readable."""
+    if rule not in LAYOUT_RULES:
+        raise ValueError(f'Unknown layout rule: {rule}')
     rows = []
     columns = []
     for start,end,heading,header,formatting in blocks(text):
@@ -32,6 +50,8 @@ def layout(text):
         else:
             columns = []
             match = re.match(r'\s*[-*+]\s+([^:\n]{1,80}):[ \t]+', text[start:end])
+            if match and rule == LAYOUT_V2 and _utterance(text[start+match.end():end]):
+                match = None  # a speaker's statement: left to claim extraction
             if match:
                 label = _span(text,start+match.start(1),start+match.end(1))
                 # Commas inside an interval, code span or parenthesis are literal.
