@@ -12,7 +12,15 @@
 | answering | 기존 synthesize → ConflictScore → 필요시 수정/AQA → 인용 보완 | 고정 bundle만 사용, 문장별 명시 인용 연결, 무인용 구절도 원문 그대로 보존 |
 | gateway | v2의 명시적 ingest/review/ask 흐름 | ask에서 sync 제거, 명령 전송 전 intent 저장, ingest 부분 실패·재시도 연결 |
 
-기본 경로에는 새 분류 모델·판단 프롬프트·추가 검사 모델이 없다. v1.2의 선택적 record_builder는 [record graph writer](records-graph.md)를 호출한다. 상태 근거는 새 계약의 canonical rendering을 사용하므로 기존 v2의 상태 문맥과 바이트가 같다고 주장하지 않는다. source-only QA는 고정 근거에서 실제 모델 요청130개가 기존 기록과 정확히 일치했다.
+v1.2의 선택적 record_builder는 [record graph writer](records-graph.md)를 호출한다. 상태 근거는 새 계약의 canonical rendering을 사용하므로 기존 v2의 상태 문맥과 바이트가 같다고 주장하지 않는다. source-only QA는 고정 근거에서 실제 모델 요청130개가 기존 기록과 정확히 일치했다.
+
+### 회의 발화 재정렬
+
+팀 프로필의 F05는 RRF 상위 5개에 회의 발화가 있으면 질문과 각 후보를 MS MARCO MiniLM-L6 교차 인코더로 채점한다. 입력은 같은 회의의 직전 발화와 중앙 발화이며, 중앙 발화에 토큰 예산을 먼저 할당한다. 6위 이후 순서와 중복 청크를 보존한다. 문맥은 순위 계산에만 쓰고 인용은 원래 청크에서 가져온다. trace의 `fused`는 RRF 원순위, `reranked`는 근거 확장 직전 순위다. 두 목록의 score는 원래의 RRF 점수다.
+
+원문 `location`에 `minutes/<회의 ID>#turn=<발화 번호>`를 기록하면 저장 순서와 무관하게 바로 앞 번호를 찾는다. 기존 QMSum의 `meeting-<번호>-<발화 번호>`도 읽는다. 직전 번호가 없거나 해당 위치에 원문이 여러 개면 중앙 발화만 쓴다. 회의 위치가 없는 후보로만 구성된 상위 5개에는 기존 RRF를 사용한다.
+
+로컬 Hugging Face 캐시에 `cross-encoder/ms-marco-MiniLM-L-6-v2`의 고정 revision `233902d25c440f23af6f7d6e94d2946bac0bee0a`를 준비하거나 같은 체크포인트 디렉터리를 `TEAM_MEMORY_RERANKER_PATH`로 지정한다. 모델은 첫 재정렬에서 로드해 프로세스 안에서 재사용한다.
 
 ## 연결 방법
 

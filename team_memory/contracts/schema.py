@@ -38,7 +38,7 @@ B = {"type": "boolean"}
 OPERATIONS = {
     "record.append": "records", "proposal.submit": "records",
     "review.apply": "records", "snapshot.get": "records",
-    "relations.compare": "relations", "evidence.retrieve": "retrieval", "evidence.prepare": "retrieval",
+    "relations.compare": "relations", "evidence.retrieve": "retrieval", "evidence.prepare": "retrieval", "history.search": "retrieval",
     "answer.generate": "answering", "gateway.ask": "gateway",
     "gateway.ingest": "gateway", "gateway.review": "gateway",
 }
@@ -146,6 +146,7 @@ def build_schema():
         "snapshot.get": obj(snapshot_id=nullable(S)),
         "relations.compare": obj(snapshot=ref("snapshot"), incoming_source_id=S,
                                  history_source_ids=arr(S)),
+        "history.search": obj(snapshot=ref("snapshot"), incoming_source_id=S, limit={"type":"integer","minimum":1}),
         "evidence.prepare": obj(snapshot=ref("snapshot")),
         "evidence.retrieve": obj(snapshot=ref("snapshot"), query=ref("query"),
                                  max_evidence={"type": "integer", "minimum": 1}),
@@ -154,10 +155,12 @@ def build_schema():
         "gateway.ingest": obj(source=ref("source"), **mutation),
         "gateway.review": obj(proposal_id=S, choice=enum("approve", "reject"), **mutation),
     }
+    requests["relations.compare"]["properties"]["history_spans"] = arr(ref("span"))
     results = {
         "record.append": ref("receipt"), "proposal.submit": ref("receipt"),
         "review.apply": ref("receipt"), "snapshot.get": ref("snapshot"),
         "relations.compare": obj(snapshot_id=S, candidates=arr(ref("candidate"))),
+        "history.search": obj(snapshot_id=S, candidates=arr(ref("span"))),
         "evidence.prepare": obj(snapshot_id=S,index_key=S,source_count=N,prepared_documents=N,reused_documents=N),
         "evidence.retrieve": ref("bundle"), "answer.generate": ref("answer"),
         "gateway.ask": obj(bundle=ref("bundle"), answer=ref("answer")),

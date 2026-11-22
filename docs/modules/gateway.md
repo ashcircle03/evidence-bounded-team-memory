@@ -7,7 +7,7 @@ MCP·JSONL·HTTP는 이 포트 바깥의 transport다. gateway는 모델 판단�
 | operation | 입력 | 호출 흐름 / 출력 |
 |---|---|---|
 | `gateway.ask` | query, snapshot_id(nullable) | records snapshot.get → retrieval → answering; bundle + answer |
-| `gateway.ingest` | source, idempotency_key, expected_revision | records append → 고정 snapshot에서 relations → records proposal.submit; 원문 receipt + proposal_ids |
+| `gateway.ingest` | source, idempotency_key, expected_revision | records append → 색인 준비 → history.search → 선택된 후보에 대해 relations → records proposal.submit; 원문 receipt + proposal_ids |
 | `gateway.review` | proposal_id, choice, idempotency_key, expected_revision | records review.apply; receipt |
 
 ask는 sync·ingest·투표를 호출하지 않는다. 호출 중 새 기록이 들어와도 처음 snapshot으로 답하며 다른 버전을 몰래 섞지 않는다. 검증용 전체 snapshot을 LLM 프롬프트에 보내지 않는다. 사용자가 최신 snapshot으로 다시 묻는 것은 별도 요청이다.

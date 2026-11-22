@@ -23,11 +23,12 @@ from team_memory.storage.objects import Store, capture, digest, source_envelope
 class ReferenceQA:
     def __init__(self, store, *, llm, embed_model, tokenizer, top_k=4,
                  chunk_size=512, chunk_overlap=64, context_window=32768,
-                 num_output=1024, index_dir=None, profile='standard', index_unit='chunks'):
+                 num_output=1024, index_dir=None, profile='standard', index_unit='chunks', rerank_turns=True):
         if profile not in ('standard', 'team'):
             raise ValueError('Unknown source-QA profile')
         if index_unit not in ('chunks', 'records'):
             raise ValueError('Unknown index unit')
+        self.rerank_turns = rerank_turns
         self.profile = profile
         if not 0 <= chunk_overlap < chunk_size or top_k < 1:
             raise ValueError('Positive retrieval and valid chunk bounds required')
@@ -130,7 +131,8 @@ class ReferenceQA:
             # Stage 2. Retain the union: top4 dense + top4 sparse => at most8. Upstream
             # RRF ranks the union; no extra query generation or answer-key terms.
             retriever = stages.StagedRetriever(source, llm=self.llm,
-                fused_top_k=2*self.top_k if team else None, trace=trace)
+                fused_top_k=2*self.top_k if team else None, trace=trace,
+                turn_sources=sources if team and self.rerank_turns else None)
             citation_splitter, metadata_mode = self.splitter, MetadataMode.NONE
             if team:
                 qa_template, refine_template = self._team_templates()

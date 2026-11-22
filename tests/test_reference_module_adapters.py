@@ -92,6 +92,32 @@ class ModuleFlowTests(unittest.TestCase):
         self.assertEqual(g.records.snapshot()['proposals'][0]['effect'],'authorize_reconsideration')
         self.assertTrue(any('authorize_reconsideration' in str(c['messages']) for c in self.calls))
 
+    def test_ingest_only_compares_ranked_prior_spans(self):
+        gateway = self.make(Path(self.temp.name) / 'ranked')
+        def ingest(text, rev):
+            return self.call(gateway, 'gateway.ingest', dict(source=self.source(text),
+                             expected_revision=rev, idempotency_key='ingest-' + str(rev)))
+        self.assertEqual(ingest('Initial inventory.', 0)['status'], 'ok')
+        self.assertEqual(self.compare_calls, [])
+        for n in range(6):
+            saved = self.call(gateway.records, 'record.append', dict(source=self.source(f'Inventory count is {n}.'),
+                              expected_revision=n + 1, idempotency_key=str(n)))
+            self.assertEqual(saved['status'], 'ok')
+        incoming = 'The updated inventory count is seven.'
+        result = ingest(incoming, 7)
+        self.assertEqual(result['status'], 'ok', result)
+        compared = json.loads(self.compare_calls[-1])
+        spans = compared['history_spans']
+        ids = [hit['source_id'] for hit in spans]
+        self.assertGreater(len(ids), 0)
+        self.assertLessEqual(len(ids), 5)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(set(ids), {s['id'] for s in compared['earlier']})
+        self.assertNotIn(self.source(incoming)['id'], ids)
+        texts = {s['id']: s['text'] for s in gateway.records.snapshot()['sources']}
+        for hit in spans:
+            self.assertEqual(hit['quote'], texts[hit['source_id']][hit['start']:hit['end']])
+
     def test_ingest_failure_preserves_source_and_explicit_retry_resumes(self):
         g=self.make(Path(self.temp.name)/'partial')
         self.call(g.records,'record.append',dict(source=self.source('Archive is Orion.'),expected_revision=0,idempotency_key='old'))

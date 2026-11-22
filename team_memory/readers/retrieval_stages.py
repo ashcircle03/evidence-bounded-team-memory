@@ -1,7 +1,8 @@
-"""Retrieval split into stages without changing what ReferenceQA returns.
+"""Team retrieval from candidate channels to citation witnesses.
 
 1. candidates        CandidateSource -> named ranked lists (dense, sparse)
 2. fusion            upstream QueryFusionRetriever reciprocal_rerank, unchanged
+   turn reranking    reorder only the first five fused hits with transcript candidates
 3. review expansion  readers.context.expand_review_context, unchanged
 4. review state      readers.state_citations.review_sources as typed nodes
 5. citations         CitationQueryEngine citation nodes -> verbatim witnesses
@@ -209,10 +210,11 @@ class StagedRetriever(BaseRetriever):
     the most recent call. A new instance is built for every question.
     """
 
-    def __init__(self, source, *, llm, fused_top_k=None, trace=None):
+    def __init__(self, source, *, llm, fused_top_k=None, trace=None, turn_sources=None):
         super().__init__()
         self.source, self.llm, self.fused_top_k = source, llm, fused_top_k
         self.trace = trace or NO_TRACE
+        self.turn_sources = turn_sources
         self.last = None
 
     def _retrieve(self, query_bundle):
@@ -234,6 +236,11 @@ class StagedRetriever(BaseRetriever):
         self.last = dict(source=dict(name=self.source.name, version=self.source.version),
                          candidates=candidates, fused=describe('fused', fused))
         self.trace.record('fused', plain(self.last['fused']))
+        if self.turn_sources is not None:
+            from .turn_reranking import previous_turn_order
+            with self.trace.stage('turn_reranking'):
+                fused = previous_turn_order(query_bundle.query_str, fused, self.turn_sources)
+            self.trace.record('reranked', plain(describe('reranked', fused)))
         return fused
 
 
