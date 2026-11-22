@@ -9,7 +9,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 from llama_index.core import PromptTemplate
 from llama_index.core.llms import ChatMessage
-from team_memory.readers.retrieval import ReferenceQA
+from team_memory.retrieval.search import ReferenceQA
 from team_memory.experiments.readers.format import locate_quote, parse_model_json
 from team_memory.readers.fallback import stage_failure
 from team_memory._vendor.langchain_citation.quoted_answer import Citation

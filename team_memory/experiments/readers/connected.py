@@ -149,7 +149,7 @@ def answer_from_sources(question, sources, llm, search=None):
 
 class ConnectedQA(ContextualQA):
     def ask(self, question):
-        from team_memory.experiments.readers.retrieval import FeedbackRetriever
+        from team_memory.retrieval.feedback import FeedbackRetriever
         if not isinstance(question, str) or not question.strip():
             raise ValueError('Nonempty question required')
         with self.lock:

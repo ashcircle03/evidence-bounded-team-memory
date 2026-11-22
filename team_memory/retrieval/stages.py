@@ -108,7 +108,7 @@ class CandidateSource:
 class LlamaIndexCandidates(CandidateSource):
     """Default stage 1: dense search over the prepared index, plus the prepared BM25.
 
-    Both come from readers.indexing; nothing is rebuilt per question. With
+    Both come from retrieval.indexing; nothing is rebuilt per question. With
     use_sparse the sparse channel is used as given, exactly as ask did before.
     """
     name = 'llama-index-dense-bm25'
@@ -237,7 +237,7 @@ class StagedRetriever(BaseRetriever):
                          candidates=candidates, fused=describe('fused', fused))
         self.trace.record('fused', plain(self.last['fused']))
         if self.turn_sources is not None:
-            from .turn_reranking import previous_turn_order
+            from .reranking import previous_turn_order
             with self.trace.stage('turn_reranking'):
                 fused = previous_turn_order(query_bundle.query_str, fused, self.turn_sources)
             self.trace.record('reranked', plain(describe('reranked', fused)))

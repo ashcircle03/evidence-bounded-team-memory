@@ -16,7 +16,7 @@ from llama_index.core.indices.prompt_helper import PromptHelper
 from llama_index.core.response_synthesizers.accumulate import Accumulate
 from llama_index.core.query_engine.citation_query_engine import CITATION_QA_TEMPLATE, CITATION_REFINE_TEMPLATE
 from team_memory._vendor.conflictscore.eval_all_calibration import evaluate_document_support
-from team_memory.readers.retrieval import ReferenceQA, format_response, source_text
+from team_memory.retrieval.search import ReferenceQA, format_response, source_text
 from team_memory.readers.prompts import RECORD_QA_CONTRACT
 from team_memory.readers.fallback import preserve_answer, stage_failure
 

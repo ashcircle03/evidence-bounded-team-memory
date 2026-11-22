@@ -50,7 +50,7 @@ class ReferenceQA:
         if profile == 'team':
             self.index_config['metadata_profile'] = 'author-recorded-at-v1'
         if index_unit == 'records':
-            # Opt-in: index records' claim spans where a record_graph exists (readers.indexing).
+            # Opt-in: index records' claim spans where a record_graph exists (retrieval.indexing).
             # The default adds nothing, so existing index keys and output stay the same.
             from .indexing import RECORD_INDEX_UNIT
             self.index_config['index_unit'] = RECORD_INDEX_UNIT
@@ -110,8 +110,8 @@ class ReferenceQA:
     def ask(self, question, *, retrieve_only=False, trace=None):
         if not isinstance(question, str) or not question.strip():
             raise ValueError('Nonempty question required')
-        from team_memory.readers import retrieval_stages as stages
-        # Optional per-request diagnostics (readers.retrieval_stages.Trace); none by default.
+        from team_memory.retrieval import stages
+        # Optional per-request diagnostics (retrieval.stages.Trace); none by default.
         trace = trace or stages.NO_TRACE
         with self.lock:
             self.active_review_context = None

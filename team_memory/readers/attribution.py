@@ -11,7 +11,7 @@ from llama_index.core.llms import ChatMessage
 from nltk.tokenize import PunktTokenizer
 from team_memory._vendor.alce.searcher import SearcherWithinDocs
 from team_memory.readers.checking import ConflictCheckedQA, missing_opposing_sources
-from team_memory.readers.retrieval import format_response, source_text
+from team_memory.retrieval.search import format_response, source_text
 from team_memory.readers.fallback import preserve_answer, carry_diagnostics
 
 
@@ -130,7 +130,7 @@ def attach_citations(reader, question, result):
     return add_quote_citations(question, result, reader.llm, review_witnesses=witnesses)
 
 
-from team_memory.readers.retrieval import ReferenceQA
+from team_memory.retrieval.search import ReferenceQA
 
 
 class CitedSourceQA(ReferenceQA):

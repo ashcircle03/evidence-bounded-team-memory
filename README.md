@@ -11,16 +11,17 @@ answering·relations·gateway 포트, 평가·테스트·문서·결과는 `main
 ```text
 team_memory/
 ├── records/                 records 모듈 (추출·정렬·검증·조건 보정, 2단계·압축·공통 표현은 선택)
+├── retrieval/               retrieval 모듈 (search.py 검색기, stages.py 검색 단계, reranking.py 앞 발화 재순위,
+│                            indexing.py 색인, feedback.py 실험 검색) — 지도: team_memory/retrieval/README.md
+├── adapters/                포트: records.py, retrieval.py / 공용: legacy.py, reader_bridge.py, base.py
 ├── storage/, store.py       불변 저장 (store.py는 과거 해시에 묶인 고정 파일)
 ├── review/                  state.py 제안·승인 상태, policy.py 검토 정책
-├── readers/                 retrieval 검색기 (retrieval.py, retrieval_stages.py, turn_reranking.py, indexing.py)
-│                            + 검색기가 import하는 답변·인용 리더 (attribution, checking, citations, scoped, fallback 등)
-├── experiments/readers/     검색기가 import하는 실험 리더
+├── readers/                 retrieval 검색기가 import하는 답변·인용 리더 (answering 쪽 코드)
+├── experiments/readers/     검색기·리더가 import하는 실험 리더
 ├── _vendor/                 외부 구현 (alce, attribute_first, conflictscore, langchain_citation) + LICENSE·NOTICE
-├── adapters/                records.py, retrieval.py 포트, legacy.py, reader_bridge.py, base.py
 └── contracts/               팀 공통 스키마·검증·포트 (main 최신본 + records 영수증 검사 수정)
 ```
-readers의 답변용 파일과 experiments, _vendor는 retrieval 검색기(`readers/retrieval.py`)가 import해서 포함했다.
+retrieval 파일은 main의 `readers/`에서 `retrieval/`로 옮겼다 (main과 경로가 다름, 원래 위치는 retrieval/README.md).
 
 ## 설치
 Python 3.11 이상, Linux (`adapters/records.py`가 `fcntl`을 쓴다).

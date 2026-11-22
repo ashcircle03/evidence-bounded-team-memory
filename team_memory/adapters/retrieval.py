@@ -8,8 +8,8 @@ import tempfile
 from threading import Lock
 
 from team_memory.contracts.validation import check_snapshot
-from team_memory.readers.retrieval import ReferenceQA
-from team_memory.readers.retrieval_stages import ConditionFilteredCandidates,LlamaIndexCandidates,ThresholdedCandidates,Trace
+from team_memory.retrieval.search import ReferenceQA
+from team_memory.retrieval.stages import ConditionFilteredCandidates,LlamaIndexCandidates,ThresholdedCandidates,Trace
 from .base import Adapter,Failure,issue
 from .reader_bridge import reader_for,evidence_from,query_text
 
@@ -141,7 +141,7 @@ class RetrievalAdapter(Adapter):
 
     def search_history(self, snapshot, incoming_id, limit):
         """Rank distinct prior sources; sparse corpus statistics exclude the incoming text."""
-        from team_memory.readers.retrieval_stages import StagedRetriever
+        from team_memory.retrieval.stages import StagedRetriever
         sources = {s['id']: s for s in snapshot['sources']}
         if incoming_id not in sources:
             raise Failure('INVALID_INPUT', 'Unknown incoming record')
@@ -178,7 +178,7 @@ class RetrievalAdapter(Adapter):
         scored=any(value is not None for value in thresholds.values())
         conditions=[c for c in query['conditions'] if c.strip()] if self.condition_filter else []
         gated=scored or bool(conditions)
-        from team_memory.readers.indexing import IndexNotReady
+        from team_memory.retrieval.indexing import IndexNotReady
         # The reader is shared by requests on the same snapshot: install this request's
         # gate under the reader lock and remove it afterwards, so it never leaks.
         with reader.lock:

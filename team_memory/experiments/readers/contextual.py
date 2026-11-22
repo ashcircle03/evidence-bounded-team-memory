@@ -11,7 +11,7 @@ from llama_index.core.llms import ChatMessage
 from team_memory.experiments.readers.claims import Selection, selection_template
 from team_memory.experiments.readers.format import locate_quote, parse_model_json
 from team_memory.experiments.readers.joint import SourceAnswers, format_joint
-from team_memory.readers.retrieval import ReferenceQA
+from team_memory.retrieval.search import ReferenceQA
 
 
 FUSION = '''Answer the question using the highlighted source records below.
@@ -108,7 +108,7 @@ class ContextualQA(ReferenceQA):
         self.feedback_index_key = None
 
     def ask(self, question):
-        from team_memory.experiments.readers.retrieval import FeedbackRetriever
+        from team_memory.retrieval.feedback import FeedbackRetriever
         if not isinstance(question, str) or not question.strip():
             raise ValueError('Nonempty question required')
         with self.lock:
