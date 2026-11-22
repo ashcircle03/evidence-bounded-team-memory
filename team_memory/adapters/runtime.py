@@ -7,10 +7,11 @@ from .answering import AnsweringAdapter
 from .gateway import GatewayAdapter
 
 
-def connect_v2(root,*,workspace_id,reader_factory,generate,cache_root=None,record_builder=None):
+def connect_v2(root,*,workspace_id,reader_factory,generate,cache_root=None,record_builder=None,records_storage='full'):
     root=Path(root)
     cache=Path(cache_root) if cache_root else root.parent/('.module-cache-'+root.name)
-    records=RecordsAdapter(root,workspace_id)
+    # Extraction runs inside Records (spec 7, Gateway reduction); Gateway only orders calls.
+    records=RecordsAdapter(root,workspace_id,storage=records_storage,record_builder=record_builder)
     return GatewayAdapter(workspace_id,records,RelationsAdapter(workspace_id,generate,snapshot_loader=records.snapshot,cache_root=cache/'relations'),
         RetrievalAdapter(workspace_id,reader_factory,cache/'retrieval',snapshot_loader=records.snapshot),
-        AnsweringAdapter(workspace_id,reader_factory,cache/'answering',snapshot_loader=records.snapshot),journal_root=cache/'gateway',record_builder=record_builder)
+        AnsweringAdapter(workspace_id,reader_factory,cache/'answering',snapshot_loader=records.snapshot),journal_root=cache/'gateway')

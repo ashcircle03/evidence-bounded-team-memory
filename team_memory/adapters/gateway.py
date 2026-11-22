@@ -15,6 +15,7 @@ class GatewayAdapter(Adapter):
         super().__init__(workspace_id)
         self.records,self.relations,self.retrieval,self.answering=records,relations,retrieval,answering
         self.journal=Store(journal_root);self.journal.root.mkdir(parents=True,exist_ok=True)
+        # Deprecated: pass record_builder to RecordsAdapter (connect_v2 does). Kept for old callers.
         self.max_evidence=max_evidence;self.record_builder=record_builder
 
     def call(self,port,operation,payload,context):
@@ -73,6 +74,10 @@ class GatewayAdapter(Adapter):
             progress['plan']=plan;progress['errors']=errors;save()
         errors=deepcopy(progress.get('errors',[]))
         graph=progress.get('prepared_source',{}).get('record_graph')
+        if graph is None:
+            # Extraction now runs inside Records; read its outcome from the receipt snapshot.
+            stored=next((s for s in receipt['snapshot']['sources'] if s['id']==payload['source']['id']),{})
+            graph=stored.get('record_graph')
         if graph and graph['status'] in ('failed','partial'):errors.append(issue('MODEL_OUTPUT_INVALID','Record extraction '+graph['status']+'; original source and accepted annotations remain available'))
         for index,c in enumerate(progress['plan']['candidates']):
             if index<len(progress['done']):continue
