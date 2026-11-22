@@ -12,6 +12,10 @@ substring, keeps its group, and no new group or claim is invented.
   3. split   a claim "B if A" (antecedent at the end)  ->  claim "B" + condition "if A"
   4. trim    claims: leading "then"/"so"/"thus", trailing citation "[ 9 ]" and
              punctuation; conditions: trailing comma or "then"
+  5. merge   in a group that has a condition, adjacent claim pieces of the same
+             stance separated only by spaces or punctuation become one claim span
+             (the condition applies to the whole consequent; job 125321 counted
+             6 of 9 condition errors as one condition on several pieces)
 """
 import re
 
@@ -130,6 +134,33 @@ def repair_spans(text, spans):
             out.append(_trim_claim(text, part) if part['role'] == 'claim' else _trim_condition(text, part))
     # Never leave a group without a claim: undo a relabel that removed its last claim.
     rooted = {s['group'] for s in out if s['role'] == 'claim'}
-    if all(g in rooted for g in claims_per_group):
-        return out
-    return [s for s in spans]
+    if not all(g in rooted for g in claims_per_group):
+        return [s for s in spans]
+    return _merge_adjacent_claims(text, out)
+
+
+_GAP = re.compile(r'[\s,;:()\-–—]*')
+
+
+def _merge_adjacent_claims(text, spans):
+    """Rule 5: one consequent split into pieces -> one claim span, only under a condition."""
+    conditioned = {s['group'] for s in spans if s['role'] == 'condition'}
+    merged, replaced = {}, set()
+    for group in conditioned:
+        pieces = sorted((s for s in spans if s['role'] == 'claim' and s['group'] == group),
+                        key=lambda s: (s['start'], s['end']))
+        runs = []
+        for piece in pieces:
+            last = runs[-1][-1] if runs else None
+            if (last is not None and piece['stance'] == last['stance'] and last['end'] <= piece['start']
+                    and _GAP.fullmatch(text, last['end'], piece['start'])):
+                runs[-1].append(piece)
+            else:
+                runs.append([piece])
+        for run in runs:
+            if len(run) > 1:
+                merged[id(run[0])] = dict(run[0], start=run[0]['start'], end=run[-1]['end'])
+                replaced.update(id(p) for p in run[1:])
+    if not merged:
+        return spans
+    return [merged.get(id(s), s) for s in spans if id(s) not in replaced]
