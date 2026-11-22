@@ -21,7 +21,12 @@ def envelope(source):
 
 
 def public_source(env, sid=None):
-    result=dict(id=sid or digest(env),owner=env['owner'],observed_at=env['observed_at'],**env['source'])
+    from team_memory.records.compact import hydrate_record, is_compact
+    sid=sid or digest(env)
+    if is_compact(env):
+        # Compact storage: rebuild quotes and edges from the immutable text.
+        env=hydrate_record(env,env['source']['text'],sid)
+    result=dict(id=sid,owner=env['owner'],observed_at=env['observed_at'],**env['source'])
     if "record_arguments" in env:
         result["record_arguments"] = deepcopy(env["record_arguments"])
     if 'record_graph' in env:result['record_graph']=deepcopy(env['record_graph'])
