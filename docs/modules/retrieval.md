@@ -40,3 +40,9 @@ records 구조를 쓰는 두 설정(둘 다 기본 꺼짐, 검색 품질은 아�
 ①만 교체 대상이다. reader에 `candidate_source(index)`를 주면 기본 후보 대신 그 결과를 쓴다. 채널이 하나면 융합하지 않는다.
 
 공통 검사: 원문·날짜·작성자·상태 전달, snapshot 불변, max_evidence, no_hits와 실패 구분. 담당자 추가 검사: Recall@k, 조건/시간/상태 포함률, 인덱스 갱신 경쟁, 질문에 무관한 상충 제거, prompt 렌더링 시 전체 snapshot이 아닌 evidence만 사용. `retrieve_only` 경계로 생성 호출 없이 실제 검색 결과를 반환한다. [연결 검사](../../tests/test_reference_module_adapters.py).
+
+## 등록 시 과거 비교 후보 검색
+
+Gateway는 원문 등록 영수증에 담긴 snapshot, incoming_source_id, limit=5를 history.search에 전달한다. 이 쓰기 경로는 records:write 권한을 요구한다. snapshot에서 신규 원문을 제외한 기록으로 색인을 준비하거나 기존 세대를 재사용하고, 신규 원문 텍스트로 기존 reader의 후보 검색과 순위 결합을 실행한다. 같은 문서의 여러 구절은 가장 먼저 나온 구절로 대표한다. 응답 candidates 배열 순서가 순위이며, 각 구절은 source_id, start, end, quote를 담는다. 첫 등록에서는 빈 목록을 반환한다.
+
+Relations는 선정된 문서의 원문과 순위대로 정렬된 history_spans를 받는다. 비교에 실패하면 Gateway는 원문 영수증을 보존하고 동일 등록 키로 재개한다. 과거의 기준은 지정한 등록 snapshot이다. 이전 등록을 재생할 때도 해당 등록 시점의 영수증을 사용한다.

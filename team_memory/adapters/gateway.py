@@ -67,8 +67,10 @@ class GatewayAdapter(Adapter):
         if progress['plan'] is None:
             snapshot=receipt['snapshot'];sid=payload['source']['id']
             try:
+                history,_=self.call(self.retrieval,'history.search',dict(snapshot=snapshot,incoming_source_id=sid,limit=5),context)
+                spans=history['candidates']
                 plan,errors=self.call(self.relations,'relations.compare',dict(snapshot=snapshot,
-                    incoming_source_id=sid,history_source_ids=[s['id'] for s in snapshot['sources'] if s['id']!=sid]),context)
+                    incoming_source_id=sid,history_source_ids=[s['source_id'] for s in spans],history_spans=spans),context)
             except Failure as exc:return out,[exc.issue]
             progress['plan']=plan;progress['errors']=errors;save()
         errors=deepcopy(progress.get('errors',[]))

@@ -3,7 +3,7 @@ import json
 from team_memory.storage.objects import digest,Store
 from team_memory.review.comparison import compare_sources
 from team_memory.review.state import decode,prepare_relation
-from team_memory.contracts.validation import check_snapshot,check_candidate
+from team_memory.contracts.validation import check_snapshot,check_candidate,check_span
 from .base import Adapter,Failure,issue
 from .legacy import envelope,candidate,FrozenStore,native_objects
 from team_memory.review.state import view
@@ -26,6 +26,13 @@ class RelationsAdapter(Adapter):
         prior=view(FrozenStore(self.diagnostics.root,native_objects(snapshot)),visible=history)
         content=dict(earlier=prior['sources'],incoming=dict(id=incoming['id'],**envelope(incoming)),
                      earlier_relations=prior['relations'])
+        if 'history_spans' in payload:
+            spans = payload['history_spans']
+            if [s['source_id'] for s in spans] != history:
+                raise Failure('INVALID_INPUT', 'History spans must follow ranked source IDs')
+            for span in spans:
+                check_span(span, src)
+            content['history_spans'] = spans
         if not history:return dict(snapshot_id=snapshot['id'],candidates=[]),[]
         try:
             raw=compare_sources(self.generate,json.dumps(content,ensure_ascii=False))

@@ -1,0 +1,119 @@
+{
+  "corpora": [
+    {
+      "id": "aimers-excerpts",
+      "split": "diagnostic",
+      "documents": [
+        {
+          "id": "excerpt-07f8ba8868ed1253",
+          "text": "- `ig12flat.zip`은 챔피언 W2와 row-local decoder를 병렬로 겹치고, DUAL recipe·model·확률을\n  보존했다. 이 ZIP이 실제 LB를 생성했으므로 10분 실행 계약을 통과한 계보다."
+        },
+        {
+          "id": "excerpt-2bf6cef66ef6a770",
+          "text": "- `ig12dual.zip`은 nested anchor를 순차 실행해 평가 서버에서 시간 초과했다."
+        },
+        {
+          "id": "excerpt-41c534f827bd5390",
+          "text": "- SEL: `+10.538`, 95% CI `[-5.207, +25.415]`"
+        },
+        {
+          "id": "excerpt-578a1ce89afef186",
+          "text": "| JH-20260820-04 | 08-20 | 정수 count-lattice 9열 | 3시드 +5.7 후 8시드 FULL +1.6, SEL +1.8, CONF +1.5; CI 모두 0 포함 | — | ❌ 초기 양성 붕괴; 현 설정 튜닝 금지 |"
+        },
+        {
+          "id": "excerpt-7d36d00d52cedff2",
+          "text": "- CONF: `-11.951`, 95% CI `[-28.264, +4.322]`"
+        },
+        {
+          "id": "excerpt-f7bda9c086421bf0",
+          "text": "| JH-20260820-07 | 08-20~21 | Multi-Horizon Predictive-State Pretraining | 8시드 replace8: real SEL +12.74 / CONF −0.11, placebo SEL +10.70, scratch SEL +8.52 | — | ❌ placebo·scratch가 이득 대부분을 재현, CONF 미전이 → 기각(미제출) |"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "aimers-t01",
+      "corpus": "aimers-excerpts",
+      "task": "F05",
+      "query": "Trackman 추가 효과의 95% 신뢰구간은 각 평가 구간에서 0을 포함했나?"
+    },
+    {
+      "id": "aimers-t02",
+      "corpus": "aimers-excerpts",
+      "task": "F05",
+      "query": "각 ZIP이 대회 평가 서버의 제한 시간 안에 실행을 마쳤나?"
+    },
+    {
+      "id": "aimers-t03",
+      "corpus": "aimers-excerpts",
+      "task": "F05",
+      "query": "두 실험에서 실제 처치의 8시드 CONF 점수 변화는 각각 어느 방향이었나?"
+    }
+  ],
+  "gold": [
+    {
+      "id": "aimers-t01",
+      "required": [
+        [
+          {
+            "source_id": "excerpt-41c534f827bd5390",
+            "start": 0,
+            "end": 44,
+            "quote": "- SEL: `+10.538`, 95% CI `[-5.207, +25.415]`"
+          }
+        ],
+        [
+          {
+            "source_id": "excerpt-7d36d00d52cedff2",
+            "start": 0,
+            "end": 45,
+            "quote": "- CONF: `-11.951`, 95% CI `[-28.264, +4.322]`"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "aimers-t02",
+      "required": [
+        [
+          {
+            "source_id": "excerpt-2bf6cef66ef6a770",
+            "start": 0,
+            "end": 56,
+            "quote": "- `ig12dual.zip`은 nested anchor를 순차 실행해 평가 서버에서 시간 초과했다."
+          }
+        ],
+        [
+          {
+            "source_id": "excerpt-07f8ba8868ed1253",
+            "start": 0,
+            "end": 124,
+            "quote": "- `ig12flat.zip`은 챔피언 W2와 row-local decoder를 병렬로 겹치고, DUAL recipe·model·확률을\n  보존했다. 이 ZIP이 실제 LB를 생성했으므로 10분 실행 계약을 통과한 계보다."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "aimers-t03",
+      "required": [
+        [
+          {
+            "source_id": "excerpt-f7bda9c086421bf0",
+            "start": 0,
+            "end": 214,
+            "quote": "| JH-20260820-07 | 08-20~21 | Multi-Horizon Predictive-State Pretraining | 8시드 replace8: real SEL +12.74 / CONF −0.11, placebo SEL +10.70, scratch SEL +8.52 | — | ❌ placebo·scratch가 이득 대부분을 재현, CONF 미전이 → 기각(미제출) |"
+          }
+        ],
+        [
+          {
+            "source_id": "excerpt-578a1ce89afef186",
+            "start": 0,
+            "end": 137,
+            "quote": "| JH-20260820-04 | 08-20 | 정수 count-lattice 9열 | 3시드 +5.7 후 8시드 FULL +1.6, SEL +1.8, CONF +1.5; CI 모두 0 포함 | — | ❌ 초기 양성 붕괴; 현 설정 튜닝 금지 |"
+          }
+        ]
+      ]
+    }
+  ]
+}

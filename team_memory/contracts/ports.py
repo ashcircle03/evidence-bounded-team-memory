@@ -36,7 +36,7 @@ class RelationsPort(Port, Protocol):
 
 
 class RetrievalPort(Port, Protocol):
-    """evidence.prepare: derived-index write; evidence.retrieve: prepared read."""
+    """history.search: ingestion candidates; evidence.prepare: index write; evidence.retrieve: prepared read."""
 
 
 class AnsweringPort(Port, Protocol):

@@ -77,7 +77,7 @@ def write_trace(directory,key,content):
 
 class RetrievalAdapter(Adapter):
     module='retrieval'
-    capabilities={'evidence.retrieve':'evidence:read','evidence.prepare':'records:write'}
+    capabilities={'evidence.retrieve':'evidence:read','evidence.prepare':'records:write','history.search':'records:write'}
 
     def __init__(self,workspace_id,reader_factory,cache_root,*,snapshot_loader,min_dense_score=None,min_sparse_score=None,
                  condition_filter=False):
@@ -112,6 +112,8 @@ class RetrievalAdapter(Adapter):
 
     def execute(self,operation,payload,context):
         snapshot=payload['snapshot'];check_snapshot(snapshot);self.verify_snapshot(snapshot)
+        if operation=='history.search':
+            return self.search_history(snapshot,payload['incoming_source_id'],payload['limit']),[]
         if operation=='evidence.prepare':
             reader=reader_for(self.factory,self.cache_root,snapshot)
             try:prepared=reader.prepare_index()
@@ -136,6 +138,38 @@ class RetrievalAdapter(Adapter):
             content.update(trace.data,failure=trace.failure)
             write_trace(Path(self.cache_root)/'traces',trace_key(snapshot,query,limit),dict(content,timings_ms=trace.timings_ms))
         return data,errors
+
+    def search_history(self, snapshot, incoming_id, limit):
+        """Rank distinct prior sources; sparse corpus statistics exclude the incoming text."""
+        from team_memory.readers.retrieval_stages import StagedRetriever
+        sources = {s['id']: s for s in snapshot['sources']}
+        if incoming_id not in sources:
+            raise Failure('INVALID_INPUT', 'Unknown incoming record')
+        incoming = sources.pop(incoming_id)
+        spans = []
+        if sources:
+            # Reuse the prior generation by source/config key; reviews never enter candidate search.
+            history = dict(snapshot, sources=list(sources.values()), proposals=[])
+            reader = reader_for(self.factory, self.cache_root, history)
+            try:
+                reader.prepare_index()
+                source = LlamaIndexCandidates(reader.index, reader.top_k, sparse=reader.sparse,
+                                              use_sparse=reader.profile == 'team')
+                ranked = StagedRetriever(source, llm=reader.llm, fused_top_k=2 * reader.top_k)
+                seen = set()
+                for hit in ranked.retrieve(incoming['text']):
+                    meta = hit.node.metadata
+                    sid = meta['source_id']
+                    if sid in seen:
+                        continue
+                    seen.add(sid)
+                    a, b = meta['parent_start'], meta['parent_end']
+                    spans.append(dict(source_id=sid, start=a, end=b, quote=sources[sid]['text'][a:b]))
+                    if len(spans) == limit:
+                        break
+            except Exception as exc:
+                raise Failure('RETRIEVAL_FAILED', 'History candidate search failed', retryable=True) from exc
+        return dict(snapshot_id=snapshot['id'], candidates=spans)
 
     def retrieve(self,snapshot,query,limit,trace):
         reader=self.reader(snapshot)

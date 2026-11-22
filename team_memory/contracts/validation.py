@@ -265,6 +265,15 @@ def validate_exchange(request, response):
             require(candidate['previous']['source_id'] in payload['history_source_ids'] and
                     candidate['incoming']['source_id'] == payload['incoming_source_id'],
                     "candidate outside requested comparison pairs")
+    elif operation == "history.search":
+        snapshot = payload["snapshot"]
+        available = sources(snapshot)
+        require(data["snapshot_id"] == snapshot["id"], "wrong history snapshot")
+        ids = [span["source_id"] for span in data["candidates"]]
+        require(payload["incoming_source_id"] in available and payload["incoming_source_id"] not in ids, "invalid incoming source")
+        require(len(ids) == len(set(ids)) <= payload["limit"], "invalid ranked history")
+        for span in data["candidates"]:
+            check_span(span, available)
     elif operation == "evidence.prepare":
         require(data["snapshot_id"] == payload["snapshot"]["id"], "preparation uses wrong snapshot")
         require(data["source_count"] == len(payload["snapshot"]["sources"]), "preparation lost sources")
