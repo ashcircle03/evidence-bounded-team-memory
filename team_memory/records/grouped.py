@@ -51,6 +51,36 @@ def examples():
             e('claim','I suspect the seal may last 60 days','c','uncertainty'),e('claim','this is untested','c','uncertainty')])]
 
 
+KOREAN_NOTE='''
+KOREAN: copy whole space-separated words exactly as written, including attached particles
+and endings (업데이트를, 모바일 앱에서는). Never strip a particle from a noun.'''
+
+
+def korean_examples():
+    """Not from any evaluation set or the functional-spec acceptance cases."""
+    from langextract.core import data
+    def e(role,text,group,stance='unknown'):
+        return data.Extraction(extraction_class=role,extraction_text=text,attributes={'claim_group':group,'stance':stance})
+    return [data.ExampleData(
+        text='모바일 앱에서는 결제 오류가 사라지면 업데이트를 다음 주에 배포한다. 서버 비용 때문에 야간 테스트를 줄였다. 지수가 어제 로그를 정리했다.',
+        extractions=[e('condition','모바일 앱에서는','a'),e('condition','결제 오류가 사라지면','a'),
+            e('claim','업데이트를 다음 주에 배포한다','a','decision'),e('subject','업데이트를','a'),e('time','다음 주에','a'),
+            e('basis','서버 비용 때문에','b'),e('claim','야간 테스트를 줄였다','b','observation'),e('subject','야간 테스트를','b'),
+            e('claim','지수가 어제 로그를 정리했다','c','observation'),e('time','어제','c')])]
+
+
+def has_hangul(text):
+    return any('가'<=c<='힣' or 'ㄱ'<=c<='ㆎ' for c in text)
+
+
+def prompt_parts(text):
+    """(description, samples) for this source. Non-Korean sources get the unchanged
+    default prompt, so stored English outputs still replay byte-for-byte."""
+    if not has_hangul(text):
+        return DESCRIPTION,None
+    return DESCRIPTION+KOREAN_NOTE,examples()+korean_examples()
+
+
 def components(description=DESCRIPTION,samples=None):
     from langextract import prompting,resolver
     from langextract.core import format_handler
