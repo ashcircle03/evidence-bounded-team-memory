@@ -9,8 +9,8 @@ import re
 from llama_index.core.llms import ChatMessage
 from nltk.tokenize import PunktTokenizer
 from team_memory._vendor.langchain_citation import QuestionAnswer
-from team_memory.retrieval.search import format_response
-from team_memory.readers.fallback import preserve_answer, carry_diagnostics, stage_failure
+from team_memory.answering.generation import format_response
+from team_memory.answering.fallback import preserve_answer, carry_diagnostics, stage_failure
 
 
 def quote_span(quote,context):

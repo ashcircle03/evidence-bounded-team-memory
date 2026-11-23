@@ -11,7 +11,7 @@ from llama_index.core.llms import ChatMessage
 from team_memory.experiments.readers.claims import Selection, selection_template
 from team_memory.experiments.readers.format import locate_quote, parse_model_json
 from team_memory.experiments.readers.joint import SourceAnswers, format_joint
-from team_memory.retrieval.search import ReferenceQA
+from team_memory.answering.generation import ReferenceQA
 
 
 FUSION = '''Answer the question using the highlighted source records below.

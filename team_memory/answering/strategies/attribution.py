@@ -10,9 +10,9 @@ import re
 from llama_index.core.llms import ChatMessage
 from nltk.tokenize import PunktTokenizer
 from team_memory._vendor.alce.searcher import SearcherWithinDocs
-from team_memory.readers.checking import ConflictCheckedQA, missing_opposing_sources
-from team_memory.retrieval.search import format_response, source_text
-from team_memory.readers.fallback import preserve_answer, carry_diagnostics
+from team_memory.answering.strategies.checking import ConflictCheckedQA, missing_opposing_sources
+from team_memory.answering.generation import format_response, source_text
+from team_memory.answering.fallback import preserve_answer, carry_diagnostics
 
 
 # Paraphrase of AQA figure1, disjoint from the evaluated Git/PEP/chat questions.
@@ -44,7 +44,7 @@ def _repair_omitted_answer(question, result, llm, *, context=None):
     if not missing:return deepcopy(result)
     messages = aqa_messages(question,result['citation_sources'])
     if context:
-        from team_memory.readers.context import contextual_messages
+        from team_memory.answering.context import contextual_messages
         messages = contextual_messages(messages, context)
     raw=llm.chat(messages).message.content
     candidate=format_response(question,raw,result['citation_sources'],allow_source_labels=True)
@@ -120,7 +120,7 @@ def attribute_answer(question,result,llm,nli=None):
 
 def attach_citations(reader, question, result):
     """Shared citation boundary for both the simple and checked reader."""
-    from team_memory.readers.citations import add_quote_citations
+    from team_memory.answering.strategies.citations import add_quote_citations
     from team_memory.retrieval.review_evidence import review_sources
     context = getattr(reader, 'active_review_context', None)
     witnesses = review_sources(reader.store, context) if context else None
@@ -130,7 +130,7 @@ def attach_citations(reader, question, result):
     return add_quote_citations(question, result, reader.llm, review_witnesses=witnesses)
 
 
-from team_memory.retrieval.search import ReferenceQA
+from team_memory.answering.generation import ReferenceQA
 
 
 class CitedSourceQA(ReferenceQA):

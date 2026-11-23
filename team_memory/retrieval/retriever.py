@@ -1,7 +1,7 @@
 """Retrieval only: index records snapshots and return verbatim evidence (witnesses).
 
 Split out of ReferenceQA (retrieval/search.py) so retrieval needs no answer model
-and imports nothing from answering (team_memory.readers). ReferenceQA now extends
+and imports nothing from answering (team_memory.answering). ReferenceQA now extends
 Retriever and adds generation; its constructor and ask() behave as before.
 
 Stages (retrieval/stages.py): candidates -> reciprocal-rank fusion -> optional

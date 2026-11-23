@@ -7,7 +7,7 @@ import json
 from copy import deepcopy
 from pydantic import BaseModel, Field
 from llama_index.core import PromptTemplate
-from team_memory.retrieval.search import ReferenceQA
+from team_memory.answering.generation import ReferenceQA
 from team_memory.experiments.readers.format import locate_quote, parse_model_json
 from team_memory._vendor.langchain_citation.quoted_answer import QuotedAnswer
 

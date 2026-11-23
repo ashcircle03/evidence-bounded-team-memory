@@ -13,7 +13,7 @@ records가 발행한 snapshot을 색인하고, 질문에 맞는 **근거 묶음*
 | `history.search` | 새 기록 + snapshot → 비교할 과거 기록 후보 (등록 시, 기능명세서 F02) |
 
 ## 이 폴더
-**이 폴더(검색 쪽)는 답변 모델이나 `team_memory/readers`(answering)를 import하지 않는다.**
+**이 폴더(검색 쪽)는 답변 모델이나 `team_memory/answering`을 import하지 않는다.**
 
 | 파일 | 원래 위치 (main) | 역할 |
 |---|---|---|
@@ -23,10 +23,9 @@ records가 발행한 snapshot을 색인하고, 질문에 맞는 **근거 묶음*
 | `review_evidence.py` | `readers/context.py` 일부 + `readers/state_citations.py` | 정정·상충에 걸린 기록이면 **상대편 기록과 검토 상태를 근거로 추가** (F05) |
 | `indexing.py` | `readers/indexing.py` | 색인 준비·캐시·잠금, records 주장 범위 단위 색인 |
 | `feedback.py` | `experiments/readers/retrieval.py` | 실험용 피드백 검색 (`FeedbackRetriever`) |
-| `search.py` | `readers/retrieval.py` | **호환용 `ReferenceQA(Retriever)`**: 검색은 `Retriever`에서 물려받고 답변 생성만 한다. answering 리더들이 이 클래스를 상속한다. 생성자와 `ask()` 동작은 main과 같다 |
 
 ## 함께 쓰는 곳
 - `adapters/reader_bridge.py`: records 그래프 → 근거 묶음(조건·역할 포함) 변환. records와 retrieval이 공유한다.
-- `readers/`: 답변·인용 리더(answering 쪽 코드). `search.ReferenceQA`를 확장하고, 검색기가 답변 형식에 이 리더들을 쓴다.
+- `answering/generation.py`: `ReferenceQA(Retriever)` — 검색은 `Retriever`에서 물려받고 답변 생성만 한다 (main의 `readers/retrieval.py`). answering 쪽이다.
 
 `main`과 경로가 다르다 (develop에서 정리). main에 합칠 때는 위 "원래 위치"로 되돌리거나 main 쪽을 함께 옮긴다.

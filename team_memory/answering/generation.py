@@ -25,7 +25,7 @@ class ReferenceQA(Retriever):
     """Retrieval (inherited from Retriever) plus answer generation.
 
     Constructor and ask() are unchanged; ask(retrieve_only=True) is Retriever.retrieve.
-    Answering readers (team_memory.readers) extend this class.
+    Answering strategies (team_memory.answering.strategies) extend this class.
     """
 
     def __init__(self, store, *, llm, embed_model, tokenizer, top_k=4,
@@ -61,7 +61,7 @@ class ReferenceQA(Retriever):
             if self.profile == 'team':
                 qa_template, refine_template = self._team_templates()
             if plan['context']:
-                from team_memory.readers.context import contextual_templates
+                from team_memory.answering.context import contextual_templates
                 qa_template, refine_template = contextual_templates((qa_template, refine_template), plan['context'])
             # Use the upstream packing algorithm with the REAL model tokenizer.
             # Leave a chat-template margin; the HTTP boundary also counts the
@@ -83,7 +83,7 @@ class ReferenceQA(Retriever):
             return self._format_response(question, raw, witnesses)
 
     def generate_scoped(self, query, evidence):
-        from team_memory.readers.scoped import generate_scoped
+        from team_memory.answering.scoped import generate_scoped
         return generate_scoped(self.llm, query, evidence)
 
     def generate_evidence(self, question, witnesses, context=None):
@@ -123,7 +123,7 @@ class ReferenceQA(Retriever):
             nodes.append(NodeWithScore(node=node))
         templates=self._team_templates() if self.profile=='team' else (CITATION_QA_TEMPLATE,CITATION_REFINE_TEMPLATE)
         if context:
-            from team_memory.readers.context import contextual_templates
+            from team_memory.answering.context import contextual_templates
             templates=contextual_templates(templates,context)
         helper=PromptHelper(context_window=self.context_window-256,num_output=self.num_output,
                             tokenizer=lambda t:self.tokenizer.encode(t,add_special_tokens=False))
@@ -136,7 +136,7 @@ class ReferenceQA(Retriever):
         return format_response(question,raw,witnesses,allow_source_labels=self.profile=='team')
 
     def _team_templates(self):
-        from team_memory.readers.prompts import TEAM_QA_TEMPLATE, TEAM_REFINE_TEMPLATE
+        from team_memory.answering.prompts import TEAM_QA_TEMPLATE, TEAM_REFINE_TEMPLATE
         return TEAM_QA_TEMPLATE, TEAM_REFINE_TEMPLATE
 
 
@@ -241,10 +241,10 @@ def main():
             from team_memory.experiments.readers.joint import JointSourceQA
             service = JointSourceQA(args.store,**parts)
         elif args.profile == 'attributed':
-            from team_memory.readers.attribution import AttributedQA
+            from team_memory.answering.strategies.attribution import AttributedQA
             service = AttributedQA(args.store,**parts)
         elif args.profile == 'checked':
-            from team_memory.readers.checking import ConflictCheckedQA
+            from team_memory.answering.strategies.checking import ConflictCheckedQA
             service = ConflictCheckedQA(args.store, **parts)
         else:
             service = ReferenceQA(args.store, profile=args.profile, **parts)

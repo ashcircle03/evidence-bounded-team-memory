@@ -16,9 +16,9 @@ from llama_index.core.indices.prompt_helper import PromptHelper
 from llama_index.core.response_synthesizers.accumulate import Accumulate
 from llama_index.core.query_engine.citation_query_engine import CITATION_QA_TEMPLATE, CITATION_REFINE_TEMPLATE
 from team_memory._vendor.conflictscore.eval_all_calibration import evaluate_document_support
-from team_memory.retrieval.search import ReferenceQA, format_response, source_text
-from team_memory.readers.prompts import RECORD_QA_CONTRACT
-from team_memory.readers.fallback import preserve_answer, stage_failure
+from team_memory.answering.generation import ReferenceQA, format_response, source_text
+from team_memory.answering.prompts import RECORD_QA_CONTRACT
+from team_memory.answering.fallback import preserve_answer, stage_failure
 
 
 def parse_judgment(raw):
@@ -123,7 +123,7 @@ class _LocalJudgeClient:
         # Bounded local-model substitution; no provider discovery or paid fallback.
         adapted = [ChatMessage(**m) for m in messages]
         if self.review_context:
-            from team_memory.readers.context import judgment_messages
+            from team_memory.answering.context import judgment_messages
             adapted = judgment_messages(adapted, self.review_context)
         # Honor the author's completion budget instead of silently forcing384
         # tokens and cutting off the final decision field. No retry/escalation.
@@ -168,7 +168,7 @@ class ConflictCheckedQA(ReferenceQA):
                 group['numbers'].append(number)
                 visible_text = w['quote']
                 if getattr(self, 'active_review_context', None):
-                    from team_memory.readers.context import current_judge_text
+                    from team_memory.answering.context import current_judge_text
                     visible_text = current_judge_text(w, self.active_review_context)
                 group['parts'].append(source_text(number,w,text=visible_text))
             client = _LocalJudgeClient(self.llm, getattr(self,'active_review_context',None))
@@ -191,7 +191,7 @@ class ConflictCheckedQA(ReferenceQA):
                 # replaced by the user's record-preservation QA contract.
                 messages = review_messages(question,draft['raw'],witnesses,judgments)
                 if getattr(self, 'active_review_context', None):
-                    from team_memory.readers.context import contextual_messages
+                    from team_memory.answering.context import contextual_messages
                     messages = contextual_messages(messages, self.active_review_context)
                 response = self.llm.chat(messages)
                 result = format_response(question, response.message.content, witnesses, allow_source_labels=True)

@@ -4,7 +4,7 @@ import re
 from pathlib import PurePosixPath
 from pydantic import ValidationError
 
-from team_memory.readers.citations import quote_span
+from team_memory.answering.strategies.citations import quote_span
 
 
 _FENCE = re.compile(r'^```(?:json)?\s*|\s*```$')
