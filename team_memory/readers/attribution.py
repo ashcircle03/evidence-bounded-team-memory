@@ -121,7 +121,7 @@ def attribute_answer(question,result,llm,nli=None):
 def attach_citations(reader, question, result):
     """Shared citation boundary for both the simple and checked reader."""
     from team_memory.readers.citations import add_quote_citations
-    from team_memory.readers.state_citations import review_sources
+    from team_memory.retrieval.review_evidence import review_sources
     context = getattr(reader, 'active_review_context', None)
     witnesses = review_sources(reader.store, context) if context else None
     if witnesses:

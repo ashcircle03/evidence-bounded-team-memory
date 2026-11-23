@@ -8,7 +8,7 @@ import tempfile
 from threading import Lock
 
 from team_memory.contracts.validation import check_snapshot
-from team_memory.retrieval.search import ReferenceQA
+from team_memory.retrieval.retriever import Retriever
 from team_memory.retrieval.stages import ConditionFilteredCandidates,LlamaIndexCandidates,ThresholdedCandidates,Trace
 from .base import Adapter,Failure,issue
 from .reader_bridge import reader_for,evidence_from,query_text
@@ -184,7 +184,7 @@ class RetrievalAdapter(Adapter):
         with reader.lock:
             inner=getattr(reader,'candidate_source',None)
             def candidates(index):
-                # Same default stage 1 as ReferenceQA.ask, then the score gate and the condition filter.
+                # Same default stage 1 as Retriever.retrieve, then the score gate and the condition filter.
                 base=inner(index) if inner else LlamaIndexCandidates(index,reader.top_k,sparse=reader.sparse,
                                                                       use_sparse=reader.profile=='team')
                 if scored:base=ThresholdedCandidates(base,thresholds,trace=trace)
@@ -194,7 +194,7 @@ class RetrievalAdapter(Adapter):
                 return base
             if gated:reader.candidate_source=candidates
             try:
-                prepared=ReferenceQA.ask(reader,query_text(query),retrieve_only=True,trace=trace)
+                prepared=Retriever.retrieve(reader,query_text(query),trace=trace)
             except IndexNotReady as exc:
                 raise Failure('INDEX_STALE',str(exc),retryable=True) from exc
             except Exception:raise Failure('RETRIEVAL_FAILED','Retrieval or citation preparation failed')

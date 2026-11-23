@@ -3,8 +3,8 @@
 1. candidates        CandidateSource -> named ranked lists (dense, sparse)
 2. fusion            upstream QueryFusionRetriever reciprocal_rerank, unchanged
    turn reranking    reorder only the first five fused hits with transcript candidates
-3. review expansion  readers.context.expand_review_context, unchanged
-4. review state      readers.state_citations.review_sources as typed nodes
+3. review expansion  review_evidence.expand_review_context, unchanged
+4. review state      review_evidence.review_sources as typed nodes
 5. citations         CitationQueryEngine citation nodes -> verbatim witnesses
 
 The evidence budget stays in adapters/retrieval.py.
@@ -246,13 +246,13 @@ class StagedRetriever(BaseRetriever):
 
 def expand_review(nodes, sources, relations, temporal_scope):
     """Stage 3: follow validated proposal links from retrieved sources."""
-    from team_memory.readers.context import expand_review_context
+    from .review_evidence import expand_review_context
     return expand_review_context(nodes, sources, relations, temporal_scope)
 
 
 def review_state_nodes(store, context):
     """Stage 4: one typed review_state citation per linked proposal."""
-    from team_memory.readers.state_citations import review_sources
+    from .review_evidence import review_sources
     nodes = []
     for witness in review_sources(store, context):
         metadata = dict(source_id=witness['source_id'], record_author=witness['speaker'],

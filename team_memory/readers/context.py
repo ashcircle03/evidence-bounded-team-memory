@@ -12,6 +12,8 @@ from llama_index.core.schema import NodeWithScore, TextNode
 
 from team_memory.review.policy import TEMPORAL_POLICY
 from team_memory.review.state import valid_witness, relation_span, valid_assertion_spans
+# Evidence assembly moved to retrieval; names kept for answering callers.
+from team_memory.retrieval.review_evidence import assertion_reviews, expand_review_context  # noqa: F401
 
 
 POLICY = TEMPORAL_POLICY + '''
@@ -107,20 +109,6 @@ SUPPORTS/CONTRADICTS/IRRELEVANT labels and the requested JSON output format.'''
             *messages]
 
 
-def assertion_reviews(witness, context):
-    """Expose exact assertion status; never mark the entire document obsolete."""
-    from team_memory.review.state import assertion_status
-    rows = []
-    for relation in (context or {}).get('relations', []):
-        if relation['kind'] != 'correction':
-            continue
-        for side in ('previous', 'incoming'):
-            span = relation_span(relation,side)
-            if span['source_id'] == witness['source_id'] and max(span['start'],witness['start']) < min(span['end'],witness['end']):
-                rows.append(dict(span, proposal_id=relation['id'], side=side,
-                    status=assertion_status(span,span['quote'],context['relations']),
-                    review_status=relation['status']))
-    return rows
 
 
 def current_judge_text(witness, context):
@@ -146,51 +134,3 @@ def current_judge_text(witness, context):
     for lo,hi in reversed(merged):
         text=text[:lo]+'[This reviewed assertion is not established current-fact evidence; consult its exact review status.]'+text[hi:]
     return text
-
-
-def expand_review_context(nodes, sources, relations, temporal_scope):
-    """Follow validated links from retrieved sources, preserving both endpoints.
-
-    Retrieval remains upstream dense/BM25 RRF. Expanding linked originals is the
-    existing practical _packet rule, restricted here to exact reviewed spans.
-    """
-    selected = deepcopy(list(nodes))
-    visible = {n.node.metadata['source_id'] for n in selected}
-    candidates = [r for r in relations
-                  if all(valid_witness(r.get(k, {}), sources) for k in ('previous', 'incoming'))
-                  and valid_assertion_spans(r, sources)]
-    linked = []
-    while True:
-        added = [r for r in candidates if r not in linked and
-                 {r['previous']['source_id'], r['incoming']['source_id']} & visible]
-        if not added:
-            break
-        linked.extend(added)
-        for r in added:
-            for key in ('previous', 'incoming'):
-                w = r[key]
-                visible.add(w['source_id'])
-                if any(n.node.metadata['source_id'] == w['source_id'] and
-                       n.node.metadata['parent_start'] <= w['start'] and
-                       w['end'] <= n.node.metadata['parent_end'] for n in selected):
-                    continue
-                env = sources[w['source_id']]
-                metadata = dict(source_id=w['source_id'], parent_start=w['start'], parent_end=w['end'],
-                                record_author=env['source']['speaker'], recorded_at=env['observed_at'])
-                node = TextNode(text=w['quote'], metadata=metadata,
-                    excluded_embed_metadata_keys=list(metadata),
-                    excluded_llm_metadata_keys=['source_id', 'parent_start', 'parent_end'])
-                selected.append(NodeWithScore(node=node, score=None))
-    context = dict(temporal_scope=temporal_scope, relations=deepcopy(linked)) if linked else None
-    if context:
-        for item in selected:
-            node = item.node
-            w = dict(source_id=node.metadata['source_id'], start=node.metadata['parent_start'],
-                     end=node.metadata['parent_end'])
-            reviews = assertion_reviews(w, context)
-            if reviews:
-                node.metadata['reviewed_assertions'] = json.dumps([
-                    dict(quote=r['quote'], status=r['status'], review_status=r['review_status'])
-                    for r in reviews], ensure_ascii=False)
-                node.excluded_embed_metadata_keys = list(node.metadata)
-    return selected, context

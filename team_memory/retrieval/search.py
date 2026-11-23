@@ -18,9 +18,16 @@ from llama_index.core.response_synthesizers import get_response_synthesizer
 from llama_index.core.schema import MetadataMode
 
 from team_memory.storage.objects import Store, capture, digest, source_envelope
+from team_memory.retrieval.retriever import Retriever
 
 
-class ReferenceQA:
+class ReferenceQA(Retriever):
+    """Retrieval (inherited from Retriever) plus answer generation.
+
+    Constructor and ask() are unchanged; ask(retrieve_only=True) is Retriever.retrieve.
+    Answering readers (team_memory.readers) extend this class.
+    """
+
     def __init__(self, store, *, llm, embed_model, tokenizer, top_k=4,
                  chunk_size=512, chunk_overlap=64, context_window=32768,
                  num_output=1024, index_dir=None, profile='standard', index_unit='chunks', rerank_turns=True):
@@ -28,147 +35,34 @@ class ReferenceQA:
             raise ValueError('Unknown source-QA profile')
         if index_unit not in ('chunks', 'records'):
             raise ValueError('Unknown index unit')
-        self.rerank_turns = rerank_turns
-        self.profile = profile
         if not 0 <= chunk_overlap < chunk_size or top_k < 1:
             raise ValueError('Positive retrieval and valid chunk bounds required')
         if num_output <= 0 or context_window <= num_output + 512:
             raise ValueError('Insufficient context budget')
         if llm.metadata.num_output != num_output or llm.metadata.context_window < context_window:
             raise ValueError('LLM metadata and requested token budget must agree')
-        self.store = store if isinstance(store, Store) else Store(store)
-        self.llm, self.embed_model, self.tokenizer = llm, embed_model, tokenizer
-        self.top_k, self.context_window, self.num_output = top_k, context_window, num_output
-        self.index_dir = Path(index_dir) if index_dir else self.store.root / 'reference-index'
-        self.lock = RLock()
-        self.splitter = SentenceSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap,
-            id_func=lambda i,doc: "node:"+digest([doc.id_,i]),
-            tokenizer=lambda text: tokenizer.encode(text, add_special_tokens=False), include_metadata=False)
-        self.index_config = dict(backend='llama-index-core/0.14.25', node_ids='source-chunk/v1', chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap, embedding=embed_model.to_dict(),
-            tokenizer_sha256=sha256(tokenizer.backend_tokenizer.to_str().encode()).hexdigest())
-        if profile == 'team':
-            self.index_config['metadata_profile'] = 'author-recorded-at-v1'
-        if index_unit == 'records':
-            # Opt-in: index records' claim spans where a record_graph exists (retrieval.indexing).
-            # The default adds nothing, so existing index keys and output stay the same.
-            from .indexing import RECORD_INDEX_UNIT
-            self.index_config['index_unit'] = RECORD_INDEX_UNIT
-        self.index = None
-        self.index_key = None
-        self.sparse = None
-
-    def import_history(self, records, *, prepare=True):
-        # Validate the complete input before capturing anything. This operation
-        # does not invoke either an LLM or CUPMem. Indexing can be retried later.
-        validate = getattr(self.store, 'source_envelope', source_envelope)
-        envs = [validate(e) for e in records]
-        with self.lock:
-            ids = [self.store.put('sources', e) for e in envs]
-        prepared=self.prepare_index() if prepare else None
-        return dict(status='ok', source_ids=ids, llm_calls=0, index_preparation=prepared)
-
-    def prepare_index(self):
-        """Explicit write-side preparation, never called by ask()."""
-        from .indexing import prepare
-        with self.lock:return prepare(self,self.store.load('sources'))
-
-    def _index(self, sources):
-        """Load only. A missing/stale generation must not trigger ingestion."""
-        from .indexing import load
-        return load(self,sources)
-
-    @staticmethod
-    def _witness(node, sources, number):
-        text = node.get_content(metadata_mode=MetadataMode.NONE)
-        prefix = f'Source {number}:\n'
-        if not text.startswith(prefix) or not text.endswith('\n'):
-            raise ValueError('Unexpected upstream citation format')
-        quote = text[len(prefix):-1]
-        if 'record_author' in node.metadata:
-            header = node.get_metadata_str(mode=MetadataMode.LLM) + '\n\n'
-            if not quote.startswith(header):
-                raise ValueError('Citation split its provenance header; cannot map it safely')
-            quote = quote[len(header):]
-        sid = node.metadata['source_id']
-        if 'review_witness' in node.metadata:
-            # State is a separately typed, immutable citation source. It is not
-            # an original report, and its offset belongs to the snapshot render.
-            witness = dict(node.metadata['review_witness'])
-            start = witness['quote'].find(quote)
-            if not quote or start < 0:
-                raise ValueError('Review citation is not verbatim in its snapshot')
-            return dict(witness, quote=quote, start=start, end=start+len(quote))
-        src = sources[sid]['source']
-        start = src['text'].find(quote, node.metadata['parent_start'], node.metadata['parent_end'])
-        if not quote or start < 0:
-            raise ValueError('Citation text is not verbatim inside its original parent chunk')
-        return dict(source_id=sid, quote=quote, start=start, end=start+len(quote),
-                    location=src['location'], speaker=src['speaker'],
-                    observed_at=sources[sid]['observed_at'])
+        super().__init__(store, embed_model=embed_model, tokenizer=tokenizer, llm=llm, top_k=top_k,
+                         chunk_size=chunk_size, chunk_overlap=chunk_overlap, index_dir=index_dir,
+                         profile=profile, index_unit=index_unit, rerank_turns=rerank_turns)
+        self.context_window, self.num_output = context_window, num_output
 
     def ask(self, question, *, retrieve_only=False, trace=None):
+        if retrieve_only:
+            return self.retrieve(question, trace=trace)
         if not isinstance(question, str) or not question.strip():
             raise ValueError('Nonempty question required')
         from team_memory.retrieval import stages
-        # Optional per-request diagnostics (retrieval.stages.Trace); none by default.
         trace = trace or stages.NO_TRACE
         with self.lock:
-            self.active_review_context = None
-            sources = self.store.load('sources')
-            if not sources:
-                if retrieve_only:return dict(witnesses=[],context=None)
+            plan = self._plan(question, trace)
+            if plan is None:
                 return dict(status='insufficient', answers=[], citation_sources=[], raw='')
-            with trace.stage('index'):
-                index = self._index(sources)
             qa_template, refine_template = CITATION_QA_TEMPLATE, CITATION_REFINE_TEMPLATE
-            team = self.profile == 'team'
-            # Stage 1 (candidates) is replaceable. The default is the prepared index
-            # plus, for the team profile, the BM25 that preparation persisted.
-            make_source = getattr(self, 'candidate_source', None)
-            source = make_source(index) if make_source else stages.LlamaIndexCandidates(
-                index, self.top_k, sparse=self.sparse, use_sparse=team)
-            # Stage 2. Retain the union: top4 dense + top4 sparse => at most8. Upstream
-            # RRF ranks the union; no extra query generation or answer-key terms.
-            retriever = stages.StagedRetriever(source, llm=self.llm,
-                fused_top_k=2*self.top_k if team else None, trace=trace,
-                turn_sources=sources if team and self.rerank_turns else None)
-            citation_splitter, metadata_mode = self.splitter, MetadataMode.NONE
-            if team:
+            if self.profile == 'team':
                 qa_template, refine_template = self._team_templates()
-                metadata_mode = MetadataMode.LLM
-                # A retrieval chunk plus its short source header is one citation.
-                citation_splitter = SentenceSplitter(chunk_size=1024, chunk_overlap=0,
-                    tokenizer=lambda t: self.tokenizer.encode(t, add_special_tokens=False),
-                    include_metadata=False)
-            selected_nodes = None
-            if getattr(self, 'review_relations', None):
+            if plan['context']:
                 from team_memory.readers.context import contextual_templates
-                # Stage 3: follow proposal links from the retrieved sources.
-                retrieved = retriever.retrieve(question)
-                with trace.stage('review_expansion'):
-                    selected_nodes, context = stages.expand_review(
-                        retrieved, sources, self.review_relations,
-                        getattr(self, 'temporal_scope', 'current'))
-                trace.record('review_expansion', stages.expansion_record(len(retrieved), selected_nodes, context))
-                self.active_review_context = context
-                if context:
-                    if not retrieve_only:
-                        qa_template, refine_template = contextual_templates(
-                            (qa_template, refine_template), context)
-                    # Stage 4. Use CitationQueryEngine's existing numbered-source flow
-                    # from initial generation onward, not only post-hoc repair.
-                    with trace.stage('review_state'):
-                        state_nodes = stages.review_state_nodes(self.store, context)
-                    trace.record('review_state', [n.node.metadata['review_witness']['proposal_id'] for n in state_nodes])
-                    selected_nodes.extend(state_nodes)
-            if retrieve_only:
-                # Stage 5, stopped before generation: the citation split CitationQueryEngine
-                # would make and verbatim offsets, without building generation components.
-                with trace.stage('citations'):
-                    witnesses = stages.witnesses_from_nodes(self, retriever, citation_splitter, metadata_mode,
-                                                            question, selected_nodes, sources)
-                return dict(witnesses=witnesses, context=self.active_review_context)
+                qa_template, refine_template = contextual_templates((qa_template, refine_template), plan['context'])
             # Use the upstream packing algorithm with the REAL model tokenizer.
             # Leave a chat-template margin; the HTTP boundary also counts the
             # exact rendered chat before sending it. Compact may refine in >1 call.
@@ -177,15 +71,15 @@ class ReferenceQA:
             synthesizer = get_response_synthesizer(llm=self.llm, prompt_helper=helper,
                 text_qa_template=qa_template, refine_template=refine_template,
                 response_mode='compact')
-            engine = CitationQueryEngine(retriever, llm=self.llm,
-                response_synthesizer=synthesizer, text_splitter=citation_splitter, metadata_mode=metadata_mode)
-            if selected_nodes is None:
+            engine = CitationQueryEngine(plan['retriever'], llm=self.llm, response_synthesizer=synthesizer,
+                text_splitter=plan['citation_splitter'], metadata_mode=plan['metadata_mode'])
+            if plan['selected_nodes'] is None:
                 result = engine.query(question)
             else:
                 from llama_index.core.schema import QueryBundle
-                result = engine.synthesize(QueryBundle(question), selected_nodes)
+                result = engine.synthesize(QueryBundle(question), plan['selected_nodes'])
             raw = str(result)
-            witnesses = [self._witness(n.node, sources, i) for i, n in enumerate(result.source_nodes, 1)]
+            witnesses = [self._witness(n.node, plan['sources'], i) for i, n in enumerate(result.source_nodes, 1)]
             return self._format_response(question, raw, witnesses)
 
     def generate_scoped(self, query, evidence):
@@ -213,7 +107,7 @@ class ReferenceQA:
                     if w.get('conditions'):
                         metadata['evidence_conditions']=json.dumps(w['conditions'],ensure_ascii=False)
                     if context:
-                        from team_memory.readers.context import assertion_reviews
+                        from team_memory.retrieval.review_evidence import assertion_reviews
                         reviews=assertion_reviews(w,context)
                         if reviews:metadata['reviewed_assertions']=json.dumps([
                             dict(quote=r['quote'],status=r['status'],review_status=r['review_status'])
