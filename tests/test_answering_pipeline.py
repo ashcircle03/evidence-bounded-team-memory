@@ -56,3 +56,46 @@ def test_passage_level_conflict_is_not_checked():
     # Without assertion spans a cited passage may support an unrelated fact in it.
     answer, issues = case('Retention is 30 days [1].', [0], assertions=False)
     assert answer['outcome'] == 'answered' and not issues
+
+
+# ---- strategy selection in run_strategies (S0 / S1 / S2 of the evaluation plan) ----
+def _reader(cls):
+    """An instance without the index/model constructor; only generate_evidence is used."""
+    from threading import Lock
+    r = object.__new__(cls)
+    r.generate_evidence = lambda question, witnesses, review: dict(raw='draft [1].', citation_sources=[])
+    r.lock = Lock()
+    return r
+
+
+def test_plain_reference_reader_skips_citation_repair(monkeypatch):
+    from team_memory.answering import pipeline
+    from team_memory.answering.generation import ReferenceQA
+    calls = []
+    monkeypatch.setattr(pipeline, 'attach_citations', lambda reader, q, result: calls.append(reader) or result)
+    result = pipeline.run_strategies(_reader(ReferenceQA), 'q', [], None)
+    assert result['raw'] == 'draft [1].' and calls == []
+
+
+def test_cited_reader_keeps_citation_repair(monkeypatch):
+    from team_memory.answering import pipeline
+    from team_memory.answering.strategies.attribution import CitedSourceQA
+    calls = []
+    monkeypatch.setattr(pipeline, 'attach_citations', lambda reader, q, result: calls.append(reader) or result)
+    reader = _reader(CitedSourceQA)
+    pipeline.run_strategies(reader, 'q', [], None)
+    assert calls == [reader]
+
+
+def test_non_reference_readers_keep_previous_behaviour(monkeypatch):
+    """Readers that are not ReferenceQA (test decoders, adapters) still get citation repair."""
+    from team_memory.answering import pipeline
+    calls = []
+    monkeypatch.setattr(pipeline, 'attach_citations', lambda reader, q, result: calls.append(reader) or result)
+
+    class Decoder:
+        def generate_evidence(self, question, witnesses, review):
+            return dict(raw='x', citation_sources=[])
+    reader = Decoder()
+    pipeline.run_strategies(reader, 'q', [], None)
+    assert calls == [reader]

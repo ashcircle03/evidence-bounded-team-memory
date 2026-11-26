@@ -17,7 +17,8 @@ import re
 from nltk.tokenize import PunktTokenizer
 
 from team_memory.answering.fallback import preserve_answer
-from team_memory.answering.strategies.attribution import AttributedQA, ConflictCheckedQA, repair_omitted_answer, attach_citations
+from team_memory.answering.generation import ReferenceQA
+from team_memory.answering.strategies.attribution import AttributedQA, CitedSourceQA, ConflictCheckedQA, repair_omitted_answer, attach_citations
 
 
 def _issue(code, message, item_id=None):
@@ -65,8 +66,16 @@ def use_scoped(reader, bundle, views, review):
 
 
 def run_strategies(reader, question, witnesses, review):
-    """Generation, then each strategy the reader class enables (unchanged order)."""
+    """Generation, then each strategy the reader class enables (unchanged order).
+
+    A plain ReferenceQA enables none (S0 in the evaluation plan): its draft is
+    returned without the citation repair. CitedSourceQA adds citation repair,
+    AttributedQA adds review and AQA repair before it. Readers that are not
+    ReferenceQA keep the previous behaviour (citation repair always applied).
+    """
     result=reader.generate_evidence(question,witnesses,review)
+    if isinstance(reader,ReferenceQA) and not isinstance(reader,(CitedSourceQA,ConflictCheckedQA)):
+        return result
     if isinstance(reader,ConflictCheckedQA):
         result=preserve_answer(result,'document_review',lambda:reader._review(question,result))
     if isinstance(reader,AttributedQA):
