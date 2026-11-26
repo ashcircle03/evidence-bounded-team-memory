@@ -7,7 +7,9 @@
   run_strategies      generation, then the optional strategies the reader enables
                       (ConflictScore review, AQA repair, citation repair)
   claims_from_result  sentence-local citation ownership, uncited text kept apart,
-                      conflict only when both sides are cited separately
+                      conflict only when both sides are cited separately; an
+                      answer stating one side of an unresolved conflict
+                      (evidence inside its assertion span) is flagged
 No step retrieves, approves or adds evidence.
 """
 import re
@@ -72,6 +74,21 @@ def run_strategies(reader, question, witnesses, review):
     return attach_citations(reader,question,result)
 
 
+def one_side_stated(proposal, evidence, claims):
+    """True when a claim cites evidence lying inside one conflicting assertion.
+
+    Only assertion-level proposals are checked: a passage that merely overlaps
+    a side may be cited for an unrelated fact in the same passage.
+    """
+    candidate = proposal['candidate']
+    spans = [candidate.get(side + '_assertion') for side in ('previous', 'incoming')]
+    if not all(spans):
+        return False
+    inside = {e['id'] for e in evidence for s in spans if e['kind'] == 'source'
+              and e['source_id'] == s['source_id'] and s['start'] <= e['start'] and e['end'] <= s['end']}
+    return any(inside.intersection(c['evidence_ids']) for c in claims)
+
+
 def claims_from_result(answer, bundle, witnesses, views, result, errors):
     """Fill answer claims from the generated text; returns (answer, errors).
 
@@ -124,6 +141,10 @@ def claims_from_result(answer, bundle, witnesses, views, result, errors):
             if sides[0] and sides[1] and any(a['id']!=b['id'] and a['evidence_ids']!=b['evidence_ids'] for a in sides[0] for b in sides[1]):
                 for c in sides[0]+sides[1]:c['alternative_group']=proposal['id']
                 answer['outcome']='conflict'
+            elif one_side_stated(proposal, evidence, claims):
+                # F04/F06: an unresolved conflict presents both sides in separate
+                # claims. Otherwise it is flagged; no side is picked or added.
+                errors.append(_issue('UNSUPPORTED_CLAIM','Answer does not cite both sides of an unresolved conflict separately',proposal['id']))
     if result.get('status')=='partial' or result.get('aqa_candidate_accepted'):
         errors.append(_issue('UNSUPPORTED_CLAIM','Legacy reader reports incomplete or unverified attribution'))
     if not claims:answer['reason']='No answer sentence has valid citations in the supplied packet.'
