@@ -17,7 +17,7 @@ import re
 from nltk.tokenize import PunktTokenizer
 
 from team_memory.answering.fallback import preserve_answer
-from team_memory.answering.generation import ReferenceQA
+from team_memory.answering.generation import ReferenceQA, citation_numbers
 from team_memory.answering.strategies.attribution import AttributedQA, CitedSourceQA, ConflictCheckedQA, repair_omitted_answer, attach_citations
 
 
@@ -98,6 +98,42 @@ def one_side_stated(proposal, evidence, claims):
     return any(inside.intersection(c['evidence_ids']) for c in claims)
 
 
+def attach_review_states(claims, bundle):
+    """A claim citing a record under review also cites that review's state, when the packet has it.
+
+    Models tend to cite the reviewed record and not the separate state source. The
+    state witness is already in the received packet; nothing outside it is added.
+    The claim kind stays as the model's own citations made it.
+    """
+    evidence=bundle['evidence']
+    state_of={e['state_record']['proposal_id']:e['id'] for e in evidence if e['kind']=='review_state'}
+    for proposal in bundle['snapshot']['proposals']:
+        sid=state_of.get(proposal['id'])
+        if sid is None or proposal['candidate']['kind']=='coexist':
+            continue
+        sides=[proposal['candidate'][side] for side in ('previous','incoming')]
+        reviewed={e['id'] for e in evidence if e['kind']=='source' and any(
+            e['source_id']==s['source_id'] and max(e['start'],s['start'])<min(e['end'],s['end']) for s in sides)}
+        for c in claims:
+            if sid not in c['evidence_ids'] and reviewed.intersection(c['evidence_ids']):
+                c['evidence_ids']=c['evidence_ids']+[sid]
+
+
+def claim_scopes(claims, views):
+    """Distinct non-empty record conditions shared by each claim's cited sources."""
+    conditions={}
+    for v in views:
+        if v['kind']=='source':
+            conditions.setdefault(v.get('evidence_id', v['id']),set()).update(v['conditions'])
+    scopes=set()
+    for c in claims:
+        cited=[conditions[eid] for eid in c['evidence_ids'] if eid in conditions]
+        shared=frozenset(set.intersection(*cited)) if cited else frozenset()
+        if shared:
+            scopes.add(shared)
+    return scopes
+
+
 def claims_from_result(answer, bundle, witnesses, views, result, errors):
     """Fill answer claims from the generated text; returns (answer, errors).
 
@@ -112,9 +148,7 @@ def claims_from_result(answer, bundle, witnesses, views, result, errors):
         # Preserve whitespace and original answer bytes across claim units.
         stop=spans[index+1][0] if index+1<len(spans) else len(raw)
         text=raw[0 if index==0 else start:stop]
-        numbers=set()
-        numbers.update(int(n) for n in re.findall(r'\[(\d+)\]',text))
-        numbers.update(int(n) for n in re.findall(r'\bSource\s+(\d+)\b',text,re.I))
+        numbers=set(citation_numbers(text))
         owned=[]
         for number in sorted(numbers):
             if not 1<=number<=len(result['citation_sources']):continue
@@ -154,6 +188,9 @@ def claims_from_result(answer, bundle, witnesses, views, result, errors):
                 # F04/F06: an unresolved conflict presents both sides in separate
                 # claims. Otherwise it is flagged; no side is picked or added.
                 errors.append(_issue('UNSUPPORTED_CLAIM','Answer does not cite both sides of an unresolved conflict separately',proposal['id']))
+        attach_review_states(claims, bundle)
+        if answer['outcome']=='answered' and len(claim_scopes(claims, views))>=2:
+            answer['outcome']='conditional'
     if result.get('status')=='partial' or result.get('aqa_candidate_accepted'):
         errors.append(_issue('UNSUPPORTED_CLAIM','Legacy reader reports incomplete or unverified attribution'))
     if not claims:answer['reason']='No answer sentence has valid citations in the supplied packet.'

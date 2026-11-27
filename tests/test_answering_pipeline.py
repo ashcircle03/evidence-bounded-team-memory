@@ -99,3 +99,90 @@ def test_non_reference_readers_keep_previous_behaviour(monkeypatch):
     reader = Decoder()
     pipeline.run_strategies(reader, 'q', [], None)
     assert calls == [reader]
+
+
+# ---- citation numbers (pilot: "[1,4,5,7]" was read as uncited) ----
+def test_citation_numbers_accept_lists_and_labels():
+    from team_memory.answering.generation import citation_numbers, has_citation
+    assert citation_numbers('A [1]. B [2, 3]. C [1,4,5]. D [Source 6].') == [1, 2, 3, 1, 4, 5, 6]
+    assert citation_numbers('x [2; 7]', source_labels=False) == [2, 7]
+    assert has_citation('A penitentiary [2,3,6].') and not has_citation('No citation here.')
+    assert citation_numbers('[a] [1-2] (3)') == []   # only numbers and number lists
+
+
+def test_list_citation_owns_its_sentence():
+    answer, issues = case('One record says 30 days [1, 2].', [0, 1])
+    assert answer['claims'] and set(answer['claims'][0]['evidence_ids']) == {'e1', 'e2'}
+
+
+# ---- scoped answer falls back to the regular path when its draft fails a check ----
+def test_scoped_rejection_falls_back_to_regular_answer(monkeypatch, tmp_path):
+    from threading import Lock
+    from team_memory.adapters import answering as port
+    calls = []
+    monkeypatch.setattr(port, 'use_scoped', lambda *a: True)
+    def reject(*a):
+        raise ValueError('Conditional answer requires at least two grounded scopes')
+    monkeypatch.setattr(port, 'public_answer', reject)
+    monkeypatch.setattr(port, 'run_strategies', lambda reader, q, w, r: calls.append('regular') or dict(raw='', citation_sources=[]))
+    monkeypatch.setattr(port, 'claims_from_result', lambda answer, *a: (dict(answer, outcome='answered'), []))
+    monkeypatch.setattr(port, 'claim_views', lambda *a: [])
+    class Reader:
+        lock = Lock()
+        def generate_scoped(self, query, views):
+            return None
+    monkeypatch.setattr(port, 'reader_for', lambda *a: Reader())
+    monkeypatch.setattr(port, 'witnesses_from', lambda b: [dict(source_id='s', start=0, end=1, quote='x')])
+    monkeypatch.setattr(port, 'context_from', lambda *a: None)
+    monkeypatch.setattr(port.AnsweringAdapter, 'verify_snapshot', lambda self, s: None)
+    adapter = port.AnsweringAdapter('w', None, tmp_path, snapshot_loader=lambda sid: None)
+    bundle = dict(snapshot=dict(id='snap', sources=[], proposals=[]), query=dict(text='q', time_scope='current', conditions=[]),
+                  evidence=[], coverage='hits', unresolved_proposal_ids=[])
+    monkeypatch.setattr(port, 'evidence_problem', lambda b: None)
+    data, errors = adapter.execute('answer.generate', dict(bundle=bundle), None)
+    assert calls == ['regular'] and data['outcome'] == 'answered'
+
+
+def test_team_prompt_states_the_answer_format():
+    from team_memory.answering.strategies.checking import ConflictCheckedQA, ANSWER_FORMAT
+    qa, refine = ConflictCheckedQA._team_templates(object.__new__(ConflictCheckedQA))
+    assert ANSWER_FORMAT in qa.template and ANSWER_FORMAT in refine.template
+
+
+# ---- review-state attachment and condition-scoped outcome ----
+def _review_bundle(status='approved'):
+    old, new = 'Retention is 30 days.', 'Retention is corrected to 90 days.'
+    evidence = [dict(id='e1', kind='source', source_id='s1', start=0, end=len(old), quote=old, conditions=[]),
+                dict(id='e2', kind='source', source_id='s2', start=0, end=len(new), quote=new, conditions=[]),
+                dict(id='e3', kind='review_state', source_id=None, start=0, end=5, quote='state',
+                     state_record=dict(proposal_id='p1'), conditions=[])]
+    proposal = dict(id='p1', status=status, candidate=dict(kind='correction',
+        previous=dict(source_id='s1', start=0, end=len(old)), incoming=dict(source_id='s2', start=0, end=len(new))))
+    bundle = dict(evidence=evidence, snapshot=dict(proposals=[proposal]), unresolved_proposal_ids=[], query=dict(conditions=[]))
+    witnesses = [dict(source_id=e['source_id'], start=e['start'], end=e['end'], quote=e['quote']) for e in evidence]
+    return bundle, witnesses, evidence
+
+
+def test_claim_on_reviewed_record_also_cites_its_state():
+    bundle, witnesses, evidence = _review_bundle()
+    result = dict(raw='Retention is 90 days after the correction [2].', citation_sources=witnesses)
+    answer, _ = claims_from_result(dict(snapshot_id='s', outcome='abstained', claims=[], reason='x'),
+                                   bundle, witnesses, evidence, result, [])
+    c = answer['claims'][0]
+    assert c['evidence_ids'] == ['e2', 'e3'] and c['kind'] == 'reported_fact'
+
+
+def test_claims_with_different_record_conditions_make_a_conditional_answer():
+    a, b = 'v1: latency 120ms.', 'v2: latency 90ms.'
+    evidence = [dict(id='e1', kind='source', source_id='s1', start=0, end=len(a), quote=a, conditions=['v1']),
+                dict(id='e2', kind='source', source_id='s2', start=0, end=len(b), quote=b, conditions=['v2'])]
+    bundle = dict(evidence=evidence, snapshot=dict(proposals=[]), unresolved_proposal_ids=[], query=dict(conditions=[]))
+    witnesses = [dict(source_id=e['source_id'], start=0, end=e['end'], quote=e['quote']) for e in evidence]
+    result = dict(raw='For v1 the latency is 120ms [1]. For v2 it is 90ms [2].', citation_sources=witnesses)
+    answer, _ = claims_from_result(dict(snapshot_id='s', outcome='abstained', claims=[], reason='x'),
+                                   bundle, witnesses, evidence, result, [])
+    assert answer['outcome'] == 'conditional'
+    same = dict(result, raw='The latency is 120ms [1].')
+    answer, _ = claims_from_result(dict(snapshot_id='s', outcome='abstained', claims=[], reason='x'),
+                                   bundle, witnesses, evidence, same, [])
+    assert answer['outcome'] == 'answered'

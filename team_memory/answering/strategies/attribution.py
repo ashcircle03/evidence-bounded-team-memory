@@ -11,7 +11,7 @@ from llama_index.core.llms import ChatMessage
 from nltk.tokenize import PunktTokenizer
 from team_memory._vendor.alce.searcher import SearcherWithinDocs
 from team_memory.answering.strategies.checking import ConflictCheckedQA, missing_opposing_sources
-from team_memory.answering.generation import format_response, source_text
+from team_memory.answering.generation import format_response, has_citation, source_text
 from team_memory.answering.fallback import preserve_answer, carry_diagnostics
 
 
@@ -80,7 +80,7 @@ def add_missing_citations(result, nli=None):
     operations=[];reviews=[];unattributed=[]
     for start,end in PunktTokenizer('english').span_tokenize(raw):
         sentence=raw[start:end]
-        if re.search(r'\[\d+\]|\bSource\s+\d+\b',sentence,re.IGNORECASE):continue
+        if has_citation(sentence):continue
         if not re.search(r'[A-Za-z0-9]',sentence):continue
         number=int(searcher.search(sentence))+1
         if nli is not None:

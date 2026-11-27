@@ -9,7 +9,7 @@ import re
 from llama_index.core.llms import ChatMessage
 from nltk.tokenize import PunktTokenizer
 from team_memory._vendor.langchain_citation import QuestionAnswer
-from team_memory.answering.generation import format_response
+from team_memory.answering.generation import format_response, has_citation
 from team_memory.answering.fallback import preserve_answer, carry_diagnostics, stage_failure
 
 
@@ -30,7 +30,7 @@ def uncited_sentences(raw):
     return [dict(start=a,end=b,sentence=raw[a:b])
             for a,b in PunktTokenizer('english').span_tokenize(raw)
             if re.search(r'[A-Za-z0-9]',raw[a:b])
-            and not re.search(r'\[\d+\]|\bSource\s+\d+\b',raw[a:b],re.I)]
+            and not has_citation(raw[a:b])]
 
 
 def quote_messages(question,raw,witnesses,sentences):

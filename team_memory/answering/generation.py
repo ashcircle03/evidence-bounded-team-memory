@@ -148,14 +148,29 @@ def source_text(number, witness, *, text=None):
     return header + (witness['quote'] if text is None else text)
 
 
+# One bracket may hold one number or a list: [2], [1, 3], [1,4,5].
+CITATION = re.compile(r'\[\s*(\d+(?:\s*[,;]\s*\d+)*)\s*\]')
+SOURCE_LABEL = re.compile(r'\bSource\s+(\d+)\b', re.IGNORECASE)
+
+
+def citation_numbers(text, *, source_labels=True):
+    """Every cited source number in text, in order of appearance (duplicates kept)."""
+    numbers = [int(n) for group in CITATION.findall(text) for n in re.split(r'\s*[,;]\s*', group)]
+    if source_labels:
+        numbers += [int(n) for n in SOURCE_LABEL.findall(text)]
+    return numbers
+
+
+def has_citation(text):
+    return bool(CITATION.search(text) or SOURCE_LABEL.search(text))
+
+
 def format_response(question, raw, witnesses, *, allow_source_labels=False):
-    numbers = re.findall(r'\[(\d+)\]', raw)
-    if allow_source_labels:
-        # Representation glue only: preserve the physical model text and map its
-        # explicit Source N labels to the same numbered source table. No claims,
-        # citations, or evidence are invented when no label is present.
-        numbers += re.findall(r'\bSource\s+(\d+)\b', raw, re.IGNORECASE)
-    cited = sorted({int(n) for n in numbers})
+    # Source N labels: representation glue only. The physical model text is kept
+    # and its explicit labels map to the same numbered source table. No claims,
+    # citations, or evidence are invented when no label is present.
+    numbers = citation_numbers(raw, source_labels=allow_source_labels)
+    cited = sorted(set(numbers))
     valid = [i for i in cited if 1 <= i <= len(witnesses)]
     warnings = []
     if not cited:

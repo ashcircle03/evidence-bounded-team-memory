@@ -142,6 +142,22 @@ class _LocalJudgeClient:
         return SimpleNamespace(choices=[SimpleNamespace(message=response.message)])
 
 
+# Output format for the team readers (S0/S1/S2). The upstream example shows
+# "Source N:" blocks and its refine step says to repeat the existing answer; models
+# copied both (pilot 127859/127908: source dumps, two "Answer:" blocks).
+ANSWER_FORMAT = ('Write the answer in your own words, once. Do not copy or list the sources and do not '
+                 'write "Source N:" headings. End each sentence with the numbers of the sources it uses '
+                 'in brackets, for example [1] or [1][3].\n'
+                 'Use only sources about the same subject, team or project and the same version or condition '
+                 'that the question names, and ignore sources about others. If no source matches, say that the '
+                 'sources do not answer the question.\n'
+                 'When the value depends on a condition such as a version or environment, give one sentence per '
+                 'condition. When sources about the same subject disagree, state each side in its own sentence '
+                 'with its own citation. When you say that a value was corrected, is pending review, was rejected '
+                 'or is being reconsidered, also cite the source that records that review state.\n'
+                 'When refining, return one revised answer that replaces the existing one instead of repeating it.\n')
+
+
 class ConflictCheckedQA(ReferenceQA):
     def __init__(self, store, **kwargs):
         super().__init__(store, profile='team', **kwargs)
@@ -150,7 +166,7 @@ class ConflictCheckedQA(ReferenceQA):
         # R-RAG begins with an ordinary draft, then checks it. Hedging the draft
         # before the upstream partial-support judge can conceal its disagreement.
         author = 'The record_author metadata identifies who wrote a record; @mentions are recipients or references.\n'
-        return tuple(PromptTemplate(author+t.template) for t in (CITATION_QA_TEMPLATE,CITATION_REFINE_TEMPLATE))
+        return tuple(PromptTemplate(author+ANSWER_FORMAT+t.template) for t in (CITATION_QA_TEMPLATE,CITATION_REFINE_TEMPLATE))
 
     def ask(self, question):
         with self.lock:
